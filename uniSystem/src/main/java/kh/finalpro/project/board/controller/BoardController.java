@@ -40,11 +40,18 @@ public class BoardController {
 		return "board/freeBoardInsert";
 	}
 	
+
 	// �옄�쑀寃뚯떆�뙋 �벑濡� �뿰寃�
 	@GetMapping("/freeBoardUpdate")
 	public String selectFreeBoardUpdate() {
 		
 		return "board/freeBoardUpdate";
+
+	// 자료실 목록 연결
+	@GetMapping("/boardData")
+	public String boardData() {
+		return "board/boardData";
+
 	}
 	
 }

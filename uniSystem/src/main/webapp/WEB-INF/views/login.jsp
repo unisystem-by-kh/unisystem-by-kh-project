@@ -9,6 +9,10 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/login.css">
 
     <title>로그인</title>
@@ -16,6 +20,11 @@
 <body>
     
     <main>
+
+        <!-- 오시는 길 -->
+        <a href="#" class="come-on-area">
+            <i class="fa-solid fa-flag fa-2x"></i>
+        </a>
 
         <!-- 로고 부분 -->
         <section class="logo-area">
@@ -74,6 +83,6 @@
         </div>
     </div>
 
-    <script src="/resources/js/login.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 </html>

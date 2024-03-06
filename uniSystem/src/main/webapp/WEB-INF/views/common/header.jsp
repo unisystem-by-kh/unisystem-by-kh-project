@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="/resources/css/style-main.css">
-
 <!-- font awesome 라이브러리 추가 + key 등록 -->
 <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 
@@ -17,7 +15,7 @@
             <div class="navigation1-row1">
                 <a href="/board/comeMap">오시는길</a>
                 <a href="#">공지사항</a>
-                <a href="#">자료실</a>
+                <a href="/board/boardData">자료실</a>
             </div>
     
             <!-- 로그인 안했을 경우 -->
@@ -84,12 +82,12 @@
 
             <!-- 교과목을 올렸을 경우 -->
             <div class="navigation3-subject">
-                <a href="#">교과목 조회</a>
+                <a href="/admin/subjectList">교과목 조회</a>
             </div>
 
             <!-- 과제를 올렸을 경우 -->
             <div class="navigation3-exam">
-                <a href="#">과제 등록</a>
+                <a href="/professor/taskWrite">과제 등록</a>
                 <a href="#">과제 수정</a>
                 <a href="#">제출된 과제 조회</a>
             </div>
