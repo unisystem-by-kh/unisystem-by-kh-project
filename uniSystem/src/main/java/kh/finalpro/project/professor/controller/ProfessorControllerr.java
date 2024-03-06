@@ -40,5 +40,11 @@ public class ProfessorControllerr {
 		return "professor/professorPageStudentGradeInsert";
 
 	}
+	
+	// 과제 등록
+	@GetMapping("/taskWrite")
+	public String taskWrite() {
+		return "professor/taskWrite";
+	}
 
 }
