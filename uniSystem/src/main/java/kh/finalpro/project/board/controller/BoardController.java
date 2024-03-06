@@ -46,6 +46,8 @@ public class BoardController {
 	public String selectFreeBoardUpdate() {
 		
 		return "board/freeBoardUpdate";
+		
+	}
 
 	// 자료실 목록 연결
 	@GetMapping("/boardData")
