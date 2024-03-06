@@ -1,38 +1,97 @@
-.mainContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 1000px;
-    height: 500px;
-}
-
-.map-area{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 900px;
-    height: 300px;
-
-    border: 1px solid #ddd;
-}
-.map-area > img{
-    width: 900px;
-    height: 300px;
-}
-
-.info-area{
+.mainContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px; /* 전체 영역의 안쪽 여백 설정 */
 
-    width: 900px;
-    height: 100px;
+    margin-top: 5px;
+    margin-top: -50px;
+}
+
+.map-area {
+    width: 120%;
+    max-width: 600px; /* 최대 너비 설정 */
+    height: 300px;
+    background-color: #f0f0f0; /* 배경색 설정 */
+    border-radius: 10px; /* 테두리 둥글게 설정 */
+    margin-bottom: 20px; /* 아래쪽 여백 설정 */
+}
+
+.info-area {
+    width: 100%;
+    max-width: 600px; /* 최대 너비 설정 */
+    background-color: #ffffff; /* 배경색 설정 */
+    border-radius: 10px; /* 테두리 둥글게 설정 */
+    padding: 20px; /* 안쪽 여백 설정 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+.info-area div {
+    margin-bottom: 10px; /* 각 정보 아래 여백 추가 */
+}
+
+.info-area div:first-child {
+    font-weight: bold; /* 첫 번째 정보를 굵게 표시 */
+}
+
+.info-area div:nth-child(odd) {
+    color: #6c5ce7; /* 홀수 번째 정보의 글자색 변경 */
+}
+
+.info-area {
+    font-family: 'Arial', sans-serif; /* 폰트 설정 */
+    font-size: 16px; /* 폰트 크기 설정 */
+    line-height: 1.6; /* 줄 높이 설정 */
+    color: #333; /* 글자색 설정 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.info-area div {
+    margin-bottom: 10px; /* 각 정보 아래 여백 추가 */
+}
+
+.info-area div:first-child {
+    font-weight: bold; /* 첫 번째 정보를 굵게 표시 */
+}
+
+.info-area div:nth-child(odd) {
+    color: #6c5ce7; /* 홀수 번째 정보의 글자색 변경 */
+}
+
+
+/* 인포윈도우 스타일 */
+.info-window {
+    width: 200px; /* 인포윈도우 너비 */
+    background-color: #fff; /* 배경색 */
+    border-radius: 5px; /* 테두리 둥글기 */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
+    border: 2px solid #007bff;
 
     font-size: 0.8em;
-
-    border: 1px solid #ddd;
 }
+
+.info-title {
+    font-weight: bold; /* 제목 굵게 */
+    padding: 10px; /* 내부 여백 */
+    background-color: #007bff; /* 제목 배경색 */
+    border-bottom: 1px solid #ccc; /* 제목과 내용 구분선 */
+    border-radius: 5px 5px 0 0; /* 상단 둥글기 */
+    color: white;
+    font-weight: bold;
+}
+
+.info-content {
+    padding: 10px; /* 내부 여백 */
+}
+
+#address-link {
+    color: #007bff; /* 링크 색상 */
+    text-decoration: none; /* 밑줄 없앰 */
+}
+
+#address-link:hover {
+    text-decoration: underline; /* 호버 시 밑줄 표시 */
+}
+
+
