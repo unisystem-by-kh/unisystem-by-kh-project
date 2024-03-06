@@ -1,0 +1,656 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 1300px;
+}
+
+.row1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 1400px;
+    height: 65px;
+
+    margin-top: 50px;
+}
+
+/* 게시판 종류 영역 */
+.row1 > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 65px;
+
+    font-size: 1.8em;
+    font-weight: bold;
+
+    color: crimson;
+}
+/* 게시판 정보 영역 */
+.row1 > :nth-child(2){
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    width: 1100px;
+    height: 65px;
+
+    padding-right: 35px;
+
+    color: gray;
+}
+
+/* 게시판 정보 각 하나씩 영역 */
+.row1 > :nth-child(2) > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 160px;
+    height: 25px;
+
+    font-size: 0.9em;
+
+    padding: 0 10px;
+
+    border-right: 1px solid gray;
+}
+.row1 > :nth-child(2) > :nth-child(5){
+    border: none;
+}
+
+
+
+/* 게시글 제목 영역 */
+.row2{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+
+    font-size: 1.4em;
+    font-weight: bold;
+
+    padding-left: 35px;
+
+    background-color: crimson;
+    color: whitesmoke;
+
+    width: 1350px;
+    height: 50px;
+}
+
+
+
+/* 게시글 내용 영역 */
+.row3{
+    display: flex;
+
+    width: 1350px;
+    height: 550px;
+
+    padding: 0 10px;
+    margin-top: 10px;
+
+    border-top: 2px solid crimson;
+    border-bottom: 2px solid crimson;
+}
+.row3 > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1350px;
+    height: 550px;
+}
+/* 이미지영역 */
+.row3 > div > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 350px;
+    height: 500px;
+}
+/* 이미지 */
+.row3 > div > img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 350px;
+    height: 500px;
+
+    /* border: 2px solid #ccc; */
+    border-radius: 3px;
+    margin-right: 10px;
+}
+/* 글씨영역 */
+.row3 > div > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    text-align: start;
+
+    width: 1000px;
+    height: 500px;
+
+    margin-bottom: 13px;
+
+    word-break: break-all;
+}
+
+
+
+
+/* 수정 삭제 목록 버튼 영역 */
+.row4{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    margin-top: 10px;
+
+    width: 1390px;
+    height: 35px;
+}
+
+.row4 > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* 수정 삭제 버튼 */
+.row4 > :nth-child(1) > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 100px;
+    height: 30px;
+
+    border: 1px solid crimson;
+    border-radius: 10px;
+
+    background-color: white;
+
+    color: crimson;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin: 0 20px;
+}
+.row4 > :nth-child(1) > button:hover{
+    color: white;
+    background-color: crimson;
+    font-size: 1.1em;
+}
+
+/* 목록으로버튼 */
+.row4 > :nth-child(2) > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 100px;
+    height: 30px;
+
+    border: 1px solid crimson;
+    border-radius: 10px;
+
+    background-color: white;
+
+    color: crimson;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin: 0 20px;
+}
+.row4 > :nth-child(2) > button:hover{
+    color: white;
+    background-color: crimson;
+    font-size: 1.1em;
+}
+
+.row5{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+
+    width: 1250px;
+    height: 40px;
+
+    font-size: 1.1em;
+    font-weight: bold;
+
+    margin-top: 30px;
+    padding-left: 30px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    border-top: 2px solid crimson;
+    border-bottom: 2px solid crimson;
+}
+
+
+.row6{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 1250px;
+    height: 60px;
+
+    margin: 25px;
+}
+
+.row6 > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 60px;
+}
+
+.row6 > div > img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 50px;
+    height: 50px;
+
+    border: 2px solid crimson;
+    border-radius: 50%;
+}
+
+.row6 > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1050px;
+    height: 60px;
+}
+
+.row6 > :nth-child(2) > textarea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: auto;
+
+    padding: 5px;
+
+    font-weight: bold;
+
+    width: 1050px;
+    height: 60px;
+
+    border: 2px solid crimson;
+    border-radius: 10px;
+
+    resize: none;
+}
+
+.row6 > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 60px;
+
+    margin-right: 20px;
+    margin-left: 10px;
+
+    border: 2px solid crimson;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.row6 > :nth-child(3) > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    color: black;
+    
+    border: 0;
+
+    font-size: 1.1em;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.row7{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 1350px;
+    height: 40px;
+
+    border: 2px solid gray;
+
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.row7 > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 150px;
+    height: 40px;
+
+    border: 1px solid gray;
+}
+
+.row7 > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 100px;
+    height: 40px;
+
+    border: 1px solid gray;
+}
+
+.row7 > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 150px;
+    height: 40px;
+
+    border: 1px solid gray;
+}
+
+.row7 > :nth-child(4){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 850px;
+    height: 40px;
+
+    border: 1px solid gray;
+}
+
+.row7 > :nth-child(5){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 100px;
+    height: 40px;
+
+    border: 1px solid gray;
+}
+
+.row8-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 1350px;
+}
+
+.row8{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    margin: 5px;
+
+    width: 1350px;
+    height: 55px;
+
+    font-size: 0.9em;
+}
+
+.row8 > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 150px;
+    height: 55px;
+}
+
+.row8 > :nth-child(1) > :nth-child(1){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 80px;
+    height: 55px;
+}
+.row8 > :nth-child(1) > :nth-child(1) > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80px;
+    height: 55px;
+
+    cursor: pointer;
+}
+.btnArea > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: cadetblue;
+    color: white;
+    font-weight: bold;
+
+    border: 0;
+}
+.btnArea > :nth-child(1):hover{
+    color: cadetblue;
+    background-color: white;
+    border: 2px solid cadetblue;
+    font-size: 1.1em;
+}
+.btnArea > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: crimson;
+    color: white;
+    font-weight: bold;
+
+    border: 0;
+}
+.btnArea > :nth-child(2):hover{
+    color: crimson;
+    background-color: white;
+    border: 2px solid crimson;
+    font-size: 1.1em;
+}
+.profileImg-reply > img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 45px;
+    height: 45px;
+
+    border: 2px solid crimson;
+    border-radius: 50%;
+}
+
+.row8 > :nth-child(1) > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70px;
+    height: 55px;
+}
+
+.row8 > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 55px;
+}
+
+.row8 > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 150px;
+    height: 55px;
+}
+
+.row8 > :nth-child(4){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 850px;
+    height: 55px;
+
+    padding: 5px;
+}
+
+.row8 > :nth-child(5){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 55px;
+}
+
+
+
+
+/* 페이지네이션영역 */
+.paginations-area{
+    width: 1400px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* 페이지네이션 영역 2 */
+#paginations{
+    width: 300px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paginations-area > :nth-child(1) , .paginations-area > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid crimson;
+    border-radius: 15px;
+    color: crimson;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+.paginations-area > :nth-child(1):hover , .paginations-area > :nth-child(3):hover{
+    background-color: crimson;
+    color: white;
+}
+
+/* 각 페이지 네이션 하나 영역 */
+#paginations > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid crimson;
+    border-radius: 15px;
+    color: crimson;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+/* 버튼 클릭 효과 */
+#paginations div:hover {
+    background-color: crimson;
+    color: white;
+}
+#paginations div.active {
+    background-color: crimson;
+    color: white;
+    border: 3px solid #ddd;
+}
