@@ -431,6 +431,9 @@ animation-iteration-count: infinite;
     background-color: crimson;
     color: white;
 }
+.button-area > button > a:hover{
+    color: white;
+}
 
 
 /* 게시판 정보 전체 영역 */

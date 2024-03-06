@@ -21,7 +21,7 @@
 
         <div class="mainContainer">
 
-            <form action="#">
+            <form action="#" >
                 
                 <div class="row1">
                     <div><a href="/board/freeBoardList" style="color: crimson;">자유게시판</a></div>
@@ -38,9 +38,13 @@
                             </label>
                             <input type="file" name="images" class="inputImage" id="img0" accept="image/*">
                         </div>
-                        <textarea placeholder="게시글 내용을 입력해주세요."></textarea>
+                        <textarea placeholder="게시글 내용을 입력해주세요." maxlength="1400"></textarea>
                     </div>
                 </div>
+
+                <div class="row4">게시글 글자수 확인(최대 1400자) : 현재 <span class="inputCount"> 1234 </span>글자 입력 중...</div>
+
+                <div class="row5"><button>게시글 작성 완료</button></div>
 
             </form>
 

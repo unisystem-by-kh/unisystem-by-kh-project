@@ -4,9 +4,7 @@
     justify-content: center;
     align-items: center;
 
-    height: 1000px;
-
-    border: 1px solid #ddd;
+    height: 830px;
 }
 
 .row1{
@@ -19,8 +17,6 @@
     height: 60px;
 
     padding: 0 100px;
-
-    border: 1px solid #ddd;
 }
 
 .row1 > :nth-child(1){
@@ -148,4 +144,71 @@ textarea::placeholder{
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.row4{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    width: 1400px;
+    height: 50px;
+
+    font-size: 12px;
+    font-weight: lighter;
+
+    margin-top: -15px;
+    padding-right: 5px;
+
+    color: gray;
+}
+.inputCount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    margin: 0 5px;
+
+    font-size: 13px;
+}
+
+
+.row5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1400px;
+    height: 50px;
+
+    margin-top: 0px;
+
+    border-top: 2px solid crimson;
+    border-bottom: 2px solid crimson;
+}
+
+.row5 > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 0;
+
+    width: 150px;
+    height: 40px;
+
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+
+    background-color: white;
+
+    color: crimson;
+}
+
+.row5 > button:hover{
+    background-color: crimson;
+    color: white;
+    cursor: pointer;
 }
