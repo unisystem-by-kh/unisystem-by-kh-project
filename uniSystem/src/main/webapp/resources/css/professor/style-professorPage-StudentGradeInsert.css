@@ -1,0 +1,437 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+/* 강의정보 , 강의세부정보 영역 */
+.row1{
+    width: 1400px;
+    height: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    margin-top: 50px;
+}
+.row1-area{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+/* 강의정보 영역 */
+.class-info-area{
+    width: 280px;
+    height: 190px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    border: 2px solid gray;
+    border-radius: 120px;
+}
+/* 강의정보 글씨 */
+.class-info-area > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 40px;
+
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.class-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.class-info > div{
+    width: 100px;
+}
+.class-info > :nth-child(1) > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
+    margin-left: 18px;
+}
+.class-info > :nth-child(2) > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 115px;
+    height: 30px;
+
+    margin-left: 5px;
+}
+
+
+
+/* 강의 세부 정보 */
+.class-detail-info-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    width: 1100px;
+    height: 200px;
+
+    margin-left: 10px;
+}
+/* 강의 세부 정보 글씨 */
+.class-detail-info-area > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1097px;
+    height: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+
+    border-top: 2px solid gray;
+    border-right: 2px solid gray;
+    border-left: 2px solid gray;
+}
+
+/* 세부정보 내용 영역 */
+.class-detail-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 세부정보 구분 */
+.class-detail-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid gray;
+}
+.class-detail-title > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 182.5px;
+    height: 45px;
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 1px solid gray;
+}
+
+.class-detail-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid gray;
+}
+.class-detail-content > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 182.5px;
+    height: 45px;
+    
+    border: 1px solid gray;
+}
+
+
+/* 학점등록 전체 영역 */
+.row2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row2-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.objectClass-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 550px;
+}
+
+/* 강의선택 셀렉트 */
+#objectClass{
+    width: 200px;
+    height: 60px;
+
+    font-size: 1.1em;
+    font-weight: bold;
+
+    padding-left: 30px;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+/* 선택된 교과목 영역 */
+.objectClass-view{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 250px;
+    height: 100px;
+
+    font-size: 1.1em;
+    font-weight: bold;
+
+    margin-top: 20px;
+
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+.objectClass-view > :nth-child(3){
+    font-size: 1.2em;
+    font-weight: bold;
+    color: blueviolet;
+}
+/* 교과목 영역 크기 */
+.objectClass-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 250px;
+    height: 300px;
+    border-radius: 10px;
+
+    margin-top: 15px;
+}
+/* 교과목 이미지 크기 */
+.objectClass-img > img{
+    width: 250px;
+    height: 300px;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+
+/* 학생 학점 삽입 영역 */
+.student-grade-insert-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1100px;
+    height: 550px;
+}
+/* 학기선택, 제목, 등록버튼 영역 */
+.student-grade-insert-info{
+    width: 1100px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 학기 버튼 영역 */
+.student-grade-insert-info > :nth-child(1){
+    width: 200px;
+    height: 45px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/* 학기 버튼 개당 영역 */
+.student-grade-insert-info > :nth-child(1) > div{
+    width: 100px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 1학기 버튼 */
+.student-grade-insert-info > :nth-child(1) > :nth-child(1){
+    width: 80px;
+    height: 35px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid cornflowerblue;
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
+/* 2학기 버튼 */
+.student-grade-insert-info > :nth-child(1) > :nth-child(2){
+    width: 80px;
+    height: 35px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid palevioletred;
+    color: palevioletred;
+    cursor: pointer;
+}
+/* 학기 버튼 클릭 효과 */
+.semester-button {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.semester-button:hover {
+    background-color: #ddd;
+}
+  
+.semester-button.active {
+    background-color: black;
+    border-color: black;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 1);
+}
+
+/* 성적등록글씨영역 */
+.student-grade-insert-info > :nth-child(2){
+    width: 750px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+/* 등록버튼영역 */
+.student-grade-insert-info > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 150px;
+    height: 45px;
+}
+
+/* 등록버튼 */
+.student-grade-insert-info > :nth-child(3) > button{
+    width: 120px;
+    height: 35px;
+    font-size: 1.0em;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid blueviolet;
+    color: blueviolet;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+
+.objectClass-detail{
+    width: 1100px;
+    height: 450px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+/* 학번 학년 이름 성적 영역 */
+.objectClass-detail-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 1080px;
+    height: 45px;
+    
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+/* 학번 학년 이름 성적 각각 영역 */
+.objectClass-detail-title > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 275px;
+    height: 45px;
+
+    font-size: 1.1em;
+    font-weight: bold;
+
+    border: 2px solid gray;
+}
+
+/* 학생 정보 및 수정할수있는 영역 */
+.objectClass-detail-content-area{
+    overflow: auto;
+
+    width: 1100px;
+    height: 400px;
+
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+}
+
+/* 학점 입력 영역 */
+.objectClass-detail-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1080px;
+    height: 35px;
+
+    border: 2px solid #ddd;
+}
+
+/* 학점 입력 영역 개당 */
+.objectClass-detail-content > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 275px;
+    height: 35px;
+
+    border: 0.5px solid #ddd;
+}
+
+/* 학점 입력 인풋 */
+.objectClass-detail-content > :nth-child(4) > input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 260px;
+    height: 30px;
+
+    background-color: white;
+    color: black;
+    border: none;
+}

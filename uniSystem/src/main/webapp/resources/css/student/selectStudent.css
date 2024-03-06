@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+header, footer {
+    height: 20%;
+    background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width: 80%;
+    margin: auto;
+}
+
+.search-container {
+    margin-top: 20px; 
+    display: flex;
+    justify-content: flex-start;
+}
+
+input[type="text"], select {
+    padding: 8px;
+    margin-right: 10px;
+    width: 200px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 2px solid crimson;
+    border-bottom: 2px solid crimson;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-right: 0;
+    border-left: 0;
+}
+
+th {
+    background-color: lightgray;
+}
+
+.search-container input[type="text"] {
+    padding: 8px 30px 8px 10px; /* 상하좌우 padding 설정 */
+    margin-right: 10px;
+    width: 200px;
+    border-radius: 20px; /* 둥근 테두리 설정 */
+    border: 1px solid #ccc;
+    font-size: 15px;
+}

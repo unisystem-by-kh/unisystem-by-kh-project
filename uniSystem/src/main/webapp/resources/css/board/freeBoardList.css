@@ -1,0 +1,394 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 검색창 게시글작성버튼 영역 */
+.search-insertBtn-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1400px;
+    height: 45px;
+
+    margin-top: 50px;
+
+    border: 1px solid #ddd;
+}
+
+/* 검색창 영역 */
+.search-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1150px;
+    height: 45px;
+
+    border: 1px solid #ddd;
+}
+.search-area > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-top: 1px solid crimson;
+    border-bottom: 1px solid crimson;
+}
+
+/* select 태그 */
+.search-area > form > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 45px;
+
+    color: gray;
+    font-size: 1.0em;
+    font-weight: bold;
+    text-align: center;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    border: none;
+    cursor: pointer;
+}
+.search-area > form > :nth-child(2):focus{
+    outline: none;
+}
+
+/* input 검색창태그 */
+.search-area > form > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 650px;
+    height: 45px;
+
+    color: gray;
+    font-size: 1.0em;
+    font-weight: bold;
+    text-align: center;
+
+    border: none;
+}
+
+/* 검색 버튼 */
+.search-area > form > :nth-child(4){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 45px;
+
+    color: gray;
+    font-size: 1.0em;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+
+    border: none;
+    cursor: pointer;
+}
+.search-area > form > :nth-child(4):hover{
+    color: black;
+    font-size: 1.1em;
+}
+
+
+
+/* 게시글작성버튼영역 */
+.board-insert-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 250px;
+    height: 47px;
+
+    border-top: 1px solid crimson;
+    border-bottom: 1px solid crimson;
+    border-left: 3px solid crimson;
+}
+
+.board-insert-area > div > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 250px;
+    height: 45px;
+
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: none;
+    background-color: white;
+    color: gray;
+
+    cursor: pointer;
+}
+.board-insert-area > div > button:hover{
+    color: black;
+    font-size: 1.1em;    
+}
+
+
+
+/* 게시글 목록 목차 영역 */
+.boardList-nav-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1400px;
+    height: 35px;
+
+    margin-top: 5px;
+}
+/* 각각하나의 영역 */
+.boardList-nav-area > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ddd;
+    border-left: 3px solid whitesmoke;
+    color: black;
+    font-size: 1.0em;
+    font-weight: bold;
+
+    height: 35px;
+}
+
+/* 각 영역 가로 폭 설정 */
+/* No. */
+.boardList-nav-area > :nth-child(1){
+    width: 100px;
+}
+.boardList-nav-area > :nth-child(2){
+    width: 200px;
+}
+.boardList-nav-area > :nth-child(3){
+    width: 260px;
+}
+.boardList-nav-area > :nth-child(4){
+    width: 500px;
+}
+.boardList-nav-area > :nth-child(5){
+    width: 100px;
+}
+.boardList-nav-area > :nth-child(6){
+    width: 100px;
+}
+.boardList-nav-area > :nth-child(7){
+    width: 70px;
+}
+.boardList-nav-area > :nth-child(8){
+    width: 70px;
+}
+
+
+
+
+
+
+.boardList{
+    width: 1400px;
+    height: 750px;
+}
+
+/* 게시글 목록 영역 */
+.boardList-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1400px;
+    height: 120px;
+
+    margin-top: 5px;
+
+    border-bottom: 1px solid gray;
+    transition-duration: 0.3s;
+}
+.boardList-area:hover{
+    border-bottom: 1px solid crimson;
+}
+
+.boardList-area > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 120px;
+}
+
+.boardList-area > :nth-child(1){
+    width: 100px;
+}
+.boardList-area > :nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 960px;
+}
+.boardList-area > :nth-child(2) > a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: normal;
+}
+.boardList-area > :nth-child(2) > a > div:hover{
+    color: crimson;
+    font-weight: bolder;
+}
+.boardList-area > :nth-child(2) > a > :nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    width: 200px;
+    height: 110px;
+    border-radius: 5px;
+}
+.boardList-area > :nth-child(2) > a > :nth-child(1) > img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    margin-bottom: 5px;
+
+    width: 190px;
+    height: 110px;
+    border-radius: 5px;
+}
+.boardList-area > :nth-child(2) > a > :nth-child(2){
+    width: 260px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.boardList-area > :nth-child(2) > a > :nth-child(3){
+    width: 500px;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+.boardList-area > :nth-child(3){
+    width: 100px;
+}
+.boardList-area > :nth-child(4){
+    width: 100px;
+}
+.boardList-area > :nth-child(5){
+    width: 70px;
+}
+.boardList-area > :nth-child(6){
+    width: 70px;
+}
+
+
+/* 페이지네이션영역 */
+.paginations-area{
+    width: 1400px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 45px;
+}
+
+/* 페이지네이션 영역 2 */
+#paginations{
+    width: 300px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paginations-area > :nth-child(1) , .paginations-area > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid crimson;
+    border-radius: 15px;
+    color: crimson;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+.paginations-area > :nth-child(1):hover , .paginations-area > :nth-child(3):hover{
+    background-color: crimson;
+    color: white;
+}
+
+/* 각 페이지 네이션 하나 영역 */
+#paginations > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid crimson;
+    border-radius: 15px;
+    color: crimson;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+/* 버튼 클릭 효과 */
+#paginations div:hover {
+    background-color: crimson;
+    color: white;
+}
+#paginations div.active {
+    background-color: crimson;
+    color: white;
+    border: 3px solid #ddd;
+}

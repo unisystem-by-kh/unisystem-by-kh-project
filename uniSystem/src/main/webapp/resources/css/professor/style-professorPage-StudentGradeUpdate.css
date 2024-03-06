@@ -1,0 +1,378 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 학기 버튼 및 제목 영역 */
+.title-area{
+    width: 1400px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 40px;
+}
+
+/* 1학기 버튼 영역 */
+.title-area > :nth-child(1){
+    width: 115px;
+    height: 35px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 1학기 버튼 */
+.title-area > :nth-child(1) > button{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid cornflowerblue;
+    color: cornflowerblue;
+    cursor: pointer;
+
+    width: 80px;
+    height: 35px;
+}
+.title-area > :nth-child(1) > button:hover{
+    background-color: cornflowerblue;
+    color: white;
+
+    font-size: 1.0em;
+    font-weight: bold;
+}
+/* 2학기 버튼 영역 */
+.title-area > :nth-child(2){
+    width: 115px;
+    height: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title-area > :nth-child(2) > button{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid palevioletred;
+    color: palevioletred;
+    cursor: pointer;
+
+    width: 80px;
+    height: 35px;
+}
+.title-area > :nth-child(2) > button:hover{
+    background-color: palevioletred;
+    color: white;
+
+    font-size: 1.0em;
+    font-weight: bold;
+}
+/* 제목 영역 */
+.title-area > :nth-child(3){
+    width: 1100px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-right: 550px;
+
+    font-size: 1.4em;
+    font-weight: bold;
+    color: crimson;
+    color: black;
+}
+
+/* form태그 영역 */
+.student-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1400px;
+    height: 530px;
+}
+
+/* 학생 정보 영역 */
+.student-info-area{
+    width: 1000px;
+    height: 525px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-left: 2px solid crimson;
+    border-right: 2px solid crimson;
+    border-bottom: 2px solid crimson;
+}
+
+/* 학과 학번 이름 성적 수정(입력란) 영역 */
+.student-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 1000px;
+    height: 55px;
+
+    font-size: 1.1em;
+    font-weight: bold;
+
+    border: 2px solid crimson;
+}
+/* 학과 학번 이름 성적 수정(입력란) 하나씩 영역 */
+.student-title > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 1000px;
+    height: 50px;
+
+    border-left: 1px solid crimson;
+    border-right: 1px solid crimson;
+}
+
+/* 학생 정보 노출 영역 */
+.student-info{
+    display: flex;
+    justify-content: center;
+    
+    width: 1000px;
+    height: 475px;
+
+    border: 3px solid crimson;
+}
+/* 학생 정보 노출 하나씩 영역 */
+.student-info > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 249px;
+    height: 35px;
+
+    border: 1px solid #ddd;
+}
+/* 학생 성적 수정 input */
+.student-info > div > input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 240px;
+    height: 34px;
+
+    border: none;
+    background-color: white;
+    color: black;
+
+    font-weight: bold;
+}
+
+/* 버튼 및 페이지 네이션영역 */
+.button-pagination-area{
+    width: 300px;
+    height: 525px;
+
+    margin-left: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 과목선택 영역 */
+.objectClass-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 80px;
+}
+
+/* select태그 과목선택 */
+#objectClass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 40px;
+
+    padding-left: 10px;
+
+    border: 2px solid cadetblue;
+    border-radius: 10px;
+
+    background-color: white;
+
+    color: cadetblue;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+/* 선택된 과목 노출 영역 */
+.objectClass-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 80px;
+}
+
+/* 선택된 과목 노출 글씨 */
+.objectClass-name > div{
+    width: 200px;
+    height: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid cadetblue;
+    border-radius: 10px;
+    
+    background-color: white;
+    color: cadetblue;
+    
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+
+/* 수정완료 수정취소 학생조회 돌아가기 버튼 영역 */
+.buttons-area{
+    width: 300px;
+    height: 400px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* 수정완료 수정취소 학생조회 돌아가기 각각 버튼 영역 */
+.buttons-area > div{
+    width: 300px;
+    height: 82px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 각각 버튼 (수정완료 수정취소 학생조회 돌아가기) */
+.buttons-area > div > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 50px;
+
+    border-radius: 10px;
+    border: 2px solid crimson;
+
+    background-color: white;
+    
+    color: crimson;
+    font-size: 1.1em;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+.buttons-area > div > button:hover{
+    background-color: crimson;
+    color: white;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+
+/* 페이지네이션 영역 1 */
+.paginations-area{
+    width: 300px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 페이지네이션 영역 2 */
+#paginations{
+    width: 300px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paginations-area > :nth-child(1) , .paginations-area > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 60px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid cadetblue;
+    border-radius: 15px;
+    color: cadetblue;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+.paginations-area > :nth-child(1):hover , .paginations-area > :nth-child(3):hover{
+    background-color: cadetblue;
+    color: white;
+}
+
+/* 각 페이지 네이션 하나 영역 */
+#paginations > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid cadetblue;
+    border-radius: 15px;
+    color: cadetblue;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+/* 버튼 클릭 효과 */
+#paginations div:hover {
+    background-color: cadetblue;
+    color: white;
+}
+#paginations div.active {
+    background-color: cadetblue;
+    color: white;
+    border: 3px solid gray;
+}
