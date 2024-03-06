@@ -1,0 +1,160 @@
+.container{
+    width: 1200px;
+    margin: auto;
+}
+
+/* 공지사항 */
+.announcement > h2{
+    font-size: 50px;
+    text-align: center;
+    border-bottom: 5px solid gainsboro;
+    padding-bottom: 10px;
+    color: #5e5e5e;
+}
+
+
+
+/* 제목 */
+
+.title{
+
+    display: flex;
+    align-items: center;
+    border-bottom: 5px solid gainsboro;
+    margin-top: -35px;
+}
+
+.title p, .title span {
+    margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
+    font-size: 20px;
+}
+
+.title p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+
+
+/* 작성자 */
+
+.writer{
+    display: flex;
+    align-items: center;
+    border-bottom: 5px solid gainsboro;
+}
+
+.writer p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+.writer p, .writer span {
+    margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
+    font-size: 20px;
+}
+
+/* 내용출력 */
+
+.content{
+    display: flex;
+    align-items: center;
+    border-bottom: 5px solid gainsboro;
+}
+
+.content p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.content p, .content span{
+    margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
+}
+
+.content span{
+    width: 80%;
+    height: 400px;
+    margin: 10px 0;
+    border: 2px solid gainsboro;
+    border-radius: 5px;
+}
+
+/* 첨부파일 */
+
+.uploadFile{
+    display: flex;
+    align-items: center;
+    border-bottom: 5px solid gainsboro;
+}
+
+
+.uploadFile p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.uploadFile span{
+    font-size: 18px;
+}
+
+.uploadFile input{
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e1e1e2;
+}
+
+/* 댓글 */
+.comment{
+    display: flex;
+    align-items: center;
+    border-bottom: 5px solid gainsboro;
+}
+
+.comment p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.comment p, .comment input, .comment button{
+    margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
+}
+
+.comment input{
+    width: 70%;
+    height: 50px;
+    border: 2px solid gainsboro;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.comment button{
+    width: 10%;
+    height: 55px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #e1e1e2;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.comment button:hover {
+    background-color: #ccc;
+}
+

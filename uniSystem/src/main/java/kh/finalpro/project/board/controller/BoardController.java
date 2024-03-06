@@ -56,4 +56,23 @@ public class BoardController {
 
 	}
 	
+	//공지사항 목록
+	@GetMapping("/noticeBoardList")
+	public String noticeBoard() {
+		return "board/noticeBoardList";
+	}
+	
+	//공지사항 작성페이지
+	@GetMapping("/noticeBoardWrite")
+	public String noticeWrite() {
+		return "board/noticeBoardWrite";
+	}
+	
+	//공지사항 상세페이지
+	@GetMapping("/noticeBoardDetail")
+	public String noticeDetail() {
+		return "board/noticeBoardDetail";
+	}
+	
+	
 }
