@@ -5,7 +5,6 @@ body{
     background-size : cover;
 }
 
-
 main{
     width: 1200px;
     height: 900px;
@@ -18,6 +17,16 @@ main{
     align-items: center;
 
     min-height: 500px;
+}
+
+/* 오시는 길 아이콘 */
+.come-on-area{
+    position: relative;
+    top: 50px;
+    left: 67px;
+
+    text-decoration: none;
+    color: black;
 }
 
 /* 로고 영역 */
