@@ -1,0 +1,49 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+header, footer {
+    height: 10%;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+main {
+    width: 80%;
+    margin: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 2px solid crimson;
+    border-bottom: 2px solid crimson;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    border-right: 0;
+    border-left: 0;
+}
+
+th {
+    background-color: lightgray;
+}
+
+.tableTr{
+    transition: 0.2s;
+}
+
+.tableTr:hover{
+    background-color: crimson;
+    color: white;
+}

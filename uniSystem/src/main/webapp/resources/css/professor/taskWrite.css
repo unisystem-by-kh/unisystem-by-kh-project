@@ -1,0 +1,84 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+header, footer {
+    height: 20%;
+    background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    width: 90%;
+    margin: 0 auto;
+    background-color: beige;
+    height: 60%;
+    position: relative;
+}
+
+.title{
+    margin: 0;
+    padding: 20px 0;
+}
+
+.task-title{
+    position: relative;
+    background-color: gray;
+}
+
+.task-title > h1{
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.task-title > select{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    width: 150px;
+}
+
+#floatingTextarea2{
+    height: 300px;
+    resize: none;
+}
+
+/* #plusButton{
+    position: absolute;
+    bottom: 35px;
+    left: 10px;
+    display: inline;
+} 
+
+.plusTask{
+    position: relative;
+    height: 110px;
+    margin-top: 20px;
+    margin-left: 10px;
+} */
+
+.remove-space{
+    display: inline-block;
+    width: 200px;
+    margin-top: 30px;
+}
+
+.right-space{
+    text-align: right;
+    float: right;
+    margin-right: 20px;
+}
