@@ -1,0 +1,207 @@
+/* ------------------------------------------------------------------- */
+* { 
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+main{
+    width: 100%;
+    height: 1000px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    min-height: 500px;
+}
+
+/* 검색 영역 */
+#searchFrm{
+    /* position: absolute;
+    top: 250px;
+    left: 150px;
+    padding: 10px; */
+
+    width: 1400px;
+    height: 60px;
+
+    /* border: 1px solid #ddd; */
+
+    display: flex;
+    justify-content: start;
+
+    padding-left: 160px;
+    align-items: center;
+    text-align: center;
+}
+
+/* select 박스 */
+#subjectKey{
+    width: 130px;
+    height: 40px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 20px;
+    outline: none;
+}
+
+#subjectKey:focus{
+    border: 2px solid crimson;
+}
+
+/* 검색어 input태그 */
+#subjectQuery{
+    width: 300px;
+    height: 40px;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#subjectQuery:focus{
+    border: 2px solid crimson;
+}
+
+/* 검색 버튼 */
+#searchBtn{
+    width: 65px;
+    height: 35px;
+    margin-left: 10px;
+    font-weight: bold;
+
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#searchBtn:hover{
+    background-color: crimson;
+    color: white;
+}
+
+/* 테이블 영역 */
+/* .list-table, th, td { border: 1px solid black; } */
+.list-table{
+    width: 1080px;
+    height: 700px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.list-table>thead{ 
+    background-color: crimson;
+    color: white;
+}
+
+.list-table tr{ height: 60px; }
+
+.list-table > tbody > tr{ border-bottom: 1px solid gray;}
+
+.list-table tr > *:nth-of-type(1){ width: 10%; }
+.list-table tr > td:nth-of-type(2){ width: 15%;}
+.list-table tr > td:nth-of-type(3){ width: 20%;}
+.list-table tr > td:nth-of-type(4){ width: 10%;}
+.list-table tr > td:nth-of-type(5){ width: 20%;}
+.list-table tr > td:nth-of-type(6){ width: 15%;}
+
+td>button{
+    /* width: 100%; */
+    /* height: 100%; */
+    background-color: white;
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+td>button:hover{
+    color: crimson;
+    cursor: pointer;
+}
+
+
+/* 페이지네이션영역 */
+.paginations-area{
+    width: 1400px;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 45px;
+}
+
+/* 페이지네이션 영역 2 */
+#paginations{
+    width: 300px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paginations-area > :nth-child(1) , .paginations-area > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid crimson;
+    border-radius: 15px;
+    color: crimson;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+.paginations-area > :nth-child(1):hover , .paginations-area > :nth-child(3):hover{
+    background-color: crimson;
+    color: white;
+}
+
+/* 각 페이지 네이션 하나 영역 */
+#paginations > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 1.0em;
+    font-weight: bold;
+
+    border: 2px solid crimson;
+    border-radius: 15px;
+    color: crimson;
+
+    margin: 0 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+/* 버튼 클릭 효과 */
+#paginations div:hover {
+    background-color: crimson;
+    color: white;
+}
+#paginations div.active {
+    background-color: crimson;
+    color: white;
+    border: 3px solid #ddd;
+}

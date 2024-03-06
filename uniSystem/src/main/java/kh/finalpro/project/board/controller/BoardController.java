@@ -12,25 +12,46 @@ import kh.finalpro.project.board.model.service.FreeBoardService;
 public class BoardController {
 
 	
-	// 자유게시판 목록 연결
+	// 오시는길
+	@GetMapping("/comeMap")
+	public String comeMap() {
+		
+		return "board/comeMap";
+	}
+	
+	// �옄�쑀寃뚯떆�뙋 紐⑸줉 �뿰寃�ㅁㄴㅇ
 	@GetMapping("/freeBoardList")
 	public String selectFreeBoardList() {
 		
 		return "board/freeBoardList";
 	}
 	
-	// 자유게시판 상세 연결
+	// �옄�쑀寃뚯떆�뙋 �긽�꽭 �뿰寃�
 	@GetMapping("/freeBoardDetail")
 	public String selectFreeBoardDetail() {
 		
 		return "board/freeBoardDetail";
 	}
 	
-	// 자유게시판 등록 연결
+	// �옄�쑀寃뚯떆�뙋 �벑濡� �뿰寃�
 	@GetMapping("/freeBoardInsert")
 	public String selectFreeBoardInsert() {
 		
 		return "board/freeBoardInsert";
+	}
+	
+
+	// �옄�쑀寃뚯떆�뙋 �벑濡� �뿰寃�
+	@GetMapping("/freeBoardUpdate")
+	public String selectFreeBoardUpdate() {
+		
+		return "board/freeBoardUpdate";
+
+	// 자료실 목록 연결
+	@GetMapping("/boardData")
+	public String boardData() {
+		return "board/boardData";
+
 	}
 	
 }

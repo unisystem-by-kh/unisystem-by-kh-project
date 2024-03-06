@@ -229,6 +229,12 @@
     background-color: crimson;
     font-size: 1.1em;
 }
+#updateBtn{
+    color: crimson;
+}
+#updateBtn:hover{
+    color: white;
+}
 
 .row5{
     display: flex;

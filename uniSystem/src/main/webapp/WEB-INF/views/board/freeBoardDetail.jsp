@@ -46,7 +46,7 @@
 
             <div class="row4">
                 <div>
-                    <button>수정</button>
+                    <button><a href="/board/freeBoardUpdate" id="updateBtn">수정</a></button>
                     <button>삭제</button>
                 </div>
                 <div>

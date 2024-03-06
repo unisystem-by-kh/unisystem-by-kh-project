@@ -125,6 +125,47 @@ if(btn1 != null){
             });
         }
 
+    })
+}
+
+// 비밀번호 찾기 버튼 클릭시
+const btn2 = document.getElementById("btn2");
+const pwUserName = document.getElementById("pwUserName");
+const pwUserEmail = document.getElementById("pwUserEmail");
+const pwUserId = document.getElementById("pwUserId");
+
+if(btn2 != null){
+    btn2.addEventListener("click", ()=>{
+
+        if(pwUserId.value.trim().length == 0){
+            swal({
+                title : "아이디를 입력해주세요.",
+                    icon  : "error",
+                    closeOnClickOutside : false
+            }).then(function(){
+                pwUserId.focus();
+            });
+        }
+
+        if(pwUserEmail.value.trim().length == 0){
+            swal({
+                title : "이메일을 입력해주세요.",
+                    icon  : "error",
+                    closeOnClickOutside : false
+            }).then(function(){
+                pwUserEmail.focus();
+            });
+        }
+        
+        if(pwUserName.value.trim().length == 0){
+            swal({
+                title : "이름을 입력해주세요.",
+                    icon  : "error",
+                    closeOnClickOutside : false
+            }).then(function(){
+                pwUserName.focus();
+            });
+        }
 
     })
 }
