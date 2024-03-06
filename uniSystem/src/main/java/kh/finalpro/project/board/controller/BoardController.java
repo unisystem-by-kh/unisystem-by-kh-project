@@ -33,4 +33,10 @@ public class BoardController {
 		return "board/freeBoardInsert";
 	}
 	
+	// 자료실 목록 연결
+	@GetMapping("/boardData")
+	public String boardData() {
+		return "board/boardData";
+	}
+	
 }
