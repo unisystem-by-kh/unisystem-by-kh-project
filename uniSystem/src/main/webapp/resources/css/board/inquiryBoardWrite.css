@@ -1,0 +1,223 @@
+.boardName{
+    width: 1200px;
+    margin: auto;
+    border-bottom: 1px solid black;
+}
+
+.boardTop{
+    width: 1200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+.boardTop > div:nth-of-type(1){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    border-right: 1px solid black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.boardTop > div:nth-of-type(2){
+    width: 50%;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    border-right: 1px solid black;
+}
+
+.boardTop > div:nth-of-type(3){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    border-right: 1px solid black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.boardTop > div:nth-of-type(4){
+    width: 20%;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.boardEmail{
+    width: 1200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.boardEmail > div:nth-of-type(1){
+    width: 178px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    border-right: 1px solid black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.boardEmail > div:nth-of-type(2){
+    width: 85%;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.boardTitle{
+    width: 1200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.boardTitle > div{
+    width: 208px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    border-right: 1px solid black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.boardTitle > input{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+}
+
+.boardContent{
+    width: 1200px;
+    height: 400px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.boardContent > div:nth-of-type(1){
+    width: 208px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    border-right: 1px solid black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.boardContent > textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.boardFile{
+    width: 1200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.boardFile > div:nth-of-type(1){
+    width: 178px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    border-right: 1px solid black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.boardFile > div:nth-of-type(2){
+    width: 85%;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+#file{
+    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.boardOpen{
+    width: 1200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.boardOpen > div:nth-of-type(1){
+    width: 178px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    border-right: 1px solid black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.boardOpen > div:nth-of-type(2){
+    width: 85%;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.boardOpen > div:nth-of-type(2) > div:nth-of-type(2){
+    margin-left: 10px;
+    font-weight: bold;
+    color: red;
+}
+
+
+.btnArea{
+    width: 1200px;
+    height: 200px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnArea > button{
+    background-color: white;
+    color: black;
+    width: 130px;
+    height: 50px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.btnArea > button:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 3px;
+}
+
+
