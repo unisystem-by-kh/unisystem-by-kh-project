@@ -62,7 +62,7 @@
     </div>
 
 
-    <jsp:include page="댓글.html"></jsp:include>
+    <%-- <jsp:include page="댓글.html"></jsp:include> --%>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 </main>

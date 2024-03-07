@@ -1,0 +1,169 @@
+#writeForm{
+    width: 1200px;
+    height:1000px;
+    border: 1px solid #ddd;
+    margin: auto;
+}
+
+.depart-top{
+    width: 90%;
+    margin: auto;
+    border-bottom: 1px solid black;
+}
+
+.depart-title-write{
+    width: 90%;
+    height: 50px;
+    margin: 20px auto;
+    display: flex;
+}
+
+.depart-title-write > div:nth-of-type(1){
+    width: 10%;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.depart-title-write > div:nth-of-type(2){
+    width: 90%;
+    display: flex;
+}
+
+.depart-title-write > div:nth-of-type(2) > input{
+    border: none;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    outline: none;
+}
+
+.depart-title-write > div:nth-of-type(2) > input:focus{
+    border-bottom: 1px solid black;
+}
+
+.depart-file-area{
+    width: 90%;
+    height: 50px;
+    margin: auto;
+    display: flex;
+}
+
+.depart-file-area > div:nth-of-type(1){
+    width: 10%;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.depart-file-area > div:nth-of-type(2){
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+
+.depart-file-area > div:nth-of-type(2) > select{
+    margin-left: 15px;
+    width: 200px;
+    height: 30px;
+    outline: none;
+}
+
+.depart-file-area > div:nth-of-type(3){
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+.depart-file-area > div:nth-of-type(4){
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+.depart-file-area > div:nth-of-type(4) > input{
+    margin-left: 15px;
+}
+
+.image-area{
+    width: 80%;
+    height: 150px;
+    margin: 30px auto;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.depart-content-area{
+    width: 80%;
+    height: 400px;
+    margin: auto;
+}
+.depart-content-area > textarea{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    resize: none;
+    border: 1px solid #ddd;
+}
+
+.depart-content-area > textarea:focus{
+    border: 1px solid black;
+}
+
+.email-shoot{
+    width: 80%;
+    height: 50px;
+    margin: 20px auto;
+    display: flex;
+}
+
+.email-shoot > div:nth-of-type(1){
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.email-shoot > div:nth-of-type(2){
+    width: 80%;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.email-shoot > div:nth-of-type(2) > input{
+    margin: 0 20px;
+}
+
+.departButton{
+    width: 90%;
+    height: 50px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.departButton > button{
+    width: 150px;
+    height: 100%;
+    margin: 0 20px;
+    background-color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.departButton > button:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 3px;
+}

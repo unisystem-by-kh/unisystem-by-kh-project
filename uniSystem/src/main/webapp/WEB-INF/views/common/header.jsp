@@ -67,9 +67,9 @@
             <!-- 홈을 올렸을 경우 -->
             <div class="navigation3-home">
                 <a href="#">학사일정</a>
-                <a href="#">학과공지</a>
+                <a href="/board/departmentBoardList">학과공지</a>
                 <a href="/board/freeBoardList">자유게시판</a>
-                <a href="#">1:1문의</a>
+                <a href="/board/inquiryBoardList">1:1문의</a>
             </div>
 
             <!-- 학생을 올렸을 경우 -->
