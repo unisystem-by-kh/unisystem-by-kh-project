@@ -14,7 +14,7 @@
             <!-- 공통 -->
             <div class="navigation1-row1">
                 <a href="/board/comeMap">오시는길</a>
-                <a href="#">공지사항</a>
+                <a href="/board/noticeBoardList">공지사항</a>
                 <a href="/board/boardData">자료실</a>
             </div>
     

@@ -1,0 +1,180 @@
+.container{
+    width: 1200px;
+    margin: auto;
+}
+
+/* 공지사항 */
+.announcement{
+    margin-bottom: 50px;
+}
+.announcement > h2{
+
+    font-size: 50px;
+    text-align: center;
+
+}
+
+/* 제목입력 */
+
+.title{
+
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid gainsboro;
+    margin-bottom: 10px;
+   
+}
+
+.title p, .title input[type="text"] {
+    margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
+    
+    margin-bottom: 10px;
+}
+
+.title p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.title input{
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    border-color: gainsboro;
+    border: 1px solid gainsboro ;
+    font-size: 15px;
+    outline: none;
+    
+}
+
+
+/* 구 분 */
+
+.division{
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid gainsboro;
+}
+
+.division p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding-right: 5px;
+    
+}
+
+.division select{
+    height: 30px;
+    width: 100px; /* 선택 상자의 너비를 조정합니다 */
+    padding: 0 10px;
+    border-color: gainsboro;
+    border-radius: 5px;
+}
+
+.division p, .division select {
+    margin-right: 5px; /* 요소들 사이의 간격을 조정합니다. */
+    margin-bottom: 10px;
+}
+
+/* 내용입력 */
+
+.content{
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid gainsboro;
+}
+
+.content p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.content textarea{
+    width: 80%;
+    height: 400px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+    resize: none;
+    font-size: 15px;
+    outline: none;
+}
+
+.content p, .content input[type="text"]{
+    margin-right: 5px; /* 요소들 사이의 간격을 조정합니다. */
+    
+}
+
+
+/* 첨부파일 */
+
+.uploadFile{
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid gainsboro;
+    margin-bottom: 10px;
+}
+
+
+.uploadFile p{
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.uploadFile input[type="button"]{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e1e1e2;
+}
+
+.uploadFile span{
+    margin-left: 50px;
+    font-size: 15px;
+}
+
+.uploadFile p, .uploadFile input[type="button"], .uploadFile span{
+    margin-right: 5px;
+    margin : 10px 0 10px 0;
+}
+
+
+/* 등록 취소 버튼 */
+
+.saveCancle {
+    text-align: center; /* Center-align the buttons */
+    margin-top: 50px;
+}
+
+.saveCancle input {
+    margin: 0 20px; /* Add space between buttons */
+    width: 100px; /* Set the width of the buttons */
+    height: 40px; /* Set the height of the buttons */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e1e1e2;
+ 
+}
+
+
+input[type="button"]{
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s;
+
+}
+input[type="button"]:hover {
+    background-color: #ccc;
+    font-weight: bold;
+}
