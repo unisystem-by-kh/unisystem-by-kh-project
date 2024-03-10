@@ -89,7 +89,7 @@
             <div class="navigation3-exam">
                 <a href="/professor/taskWrite">과제 등록</a>
                 <a href="#">과제 수정</a>
-                <a href="#">제출된 과제 조회</a>
+                <a href="/professor/taskList">과제 목록 조회</a>
             </div>
 
             <!-- 교수에 올렸을 경우 -->

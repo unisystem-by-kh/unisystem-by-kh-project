@@ -110,6 +110,8 @@ public class BoardController {
 	public String departmentBoardWrite() {
 		return "board/departmentBoardWrite";
 	}
+	
+	
 
 
 
