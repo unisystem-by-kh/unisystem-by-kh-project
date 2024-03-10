@@ -46,5 +46,11 @@ public class ProfessorControllerr {
 	public String taskWrite() {
 		return "professor/taskWrite";
 	}
+	
+	// 과제 목록
+	@GetMapping("/taskList")
+	public String taskList() {
+		return "professor/taskList";
+	}
 
 }
