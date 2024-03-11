@@ -1,0 +1,156 @@
+.depart-area{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+.depart-area > div:nth-of-type(1){
+    width: 90%;
+}
+
+.depart-area > div:nth-of-type(2){
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.depart-area a{
+    text-decoration: none;
+    width: 130px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.depart-area a:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 3px;
+}
+
+.select-search-area{
+    width: 1200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.select-search-area > div:nth-of-type(1){
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.select-search-area select{
+    outline: none;
+    width: 200px;
+    height: 30px;
+}
+
+.select-search-area > div:nth-of-type(2){
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.select-search-area input{
+    width: 300px;
+    outline: none;
+    height: 30px;
+}
+
+.depart-table{
+    width: 1200px;
+    margin: auto;
+    
+}
+
+.depart-table  th{
+    border-bottom: 1px solid black;
+}
+
+.depart-table  td{
+    border-bottom: 1px solid #ddd;
+}
+
+.depart-table > thead{
+    height: 50px;
+}
+
+.depart-table > tbody > tr{
+    height: 40px;
+    
+}
+
+.depart-table > tbody > tr > td:nth-of-type(1){
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+
+.depart-table > tbody > tr > td:nth-of-type(2){
+    border-right: 1px solid #ddd;
+    margin-left: 5px;
+}
+
+.depart-table > tbody > tr > td:nth-of-type(2):hover{
+    color: crimson;
+    cursor: pointer;
+}
+
+.depart-table > tbody > tr > td:nth-of-type(3){
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+
+.depart-table > tbody > tr > td:nth-of-type(4){
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+
+.depart-table > tbody > tr > td:nth-of-type(5){
+    text-align: center;
+}
+.pagi{
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.pagi > ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.pagi li{
+    width: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 30px;
+    text-align: center;
+}
+
+.pagi li:hover{
+    cursor: pointer;
+}
+
+#current{
+    color: crimson;
+}
+
+
+
+
+
+
+
