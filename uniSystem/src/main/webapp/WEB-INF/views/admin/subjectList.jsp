@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>교과목 조회</title>
-
+    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/admin/subjectList.css">
 
 </head>
@@ -15,7 +16,7 @@
 
     
     <main>
-		<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
         <form action="search" id="searchFrm">
             <select name="key" id="subjectKey">
