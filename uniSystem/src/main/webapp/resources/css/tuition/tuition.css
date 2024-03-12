@@ -1,0 +1,302 @@
+.main-title{
+    width: 1200px;
+    margin: auto;
+    border-bottom: 1px solid black;
+}
+
+.pay-main{
+    width: 750px;
+    height: 300px;
+    margin: 30px auto;
+    border: 1px solid #ddd;
+}
+
+
+.pay-one{
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.pay-one > div:nth-of-type(1){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.pay-one > div:nth-of-type(2){
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #ddd;
+}
+
+.pay-one > div:nth-of-type(3){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.pay-one > div:nth-of-type(4){
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #ddd;
+}
+
+.pay-one > div:nth-of-type(5){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.pay-one > div:nth-of-type(6){
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.pay-two{
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.pay-two > div:nth-of-type(1){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.pay-two > div:nth-of-type(2){
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #ddd;
+}
+
+.pay-two > div:nth-of-type(3){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.pay-two > div:nth-of-type(4){
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #ddd;
+}
+
+.pay-two > div:nth-of-type(5){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.pay-two > div:nth-of-type(6){
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay-three{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background-color: #ddd;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.pay-three > div{
+    margin-left: 20px;
+}
+
+.pay-four{
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.pay-four > div:nth-of-type(1){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.pay-four > div:nth-of-type(2){
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.pay-five{
+    width: 100%;
+    height: 77px;
+    margin: auto;
+    display: flex;
+}
+
+
+.pay-five > div:nth-of-type(1){
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.pay-five > div:nth-of-type(2){
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pay-button{
+    width: 750px;
+    height: 150px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay-button > button{
+    margin: 0 20px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.pay-button > button:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 5px;
+}
+
+.pay-clear{
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: auto;
+}
+.pay-clear > div:nth-of-type(1){
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#checkImage{
+    width: 100px;
+}
+
+.pay-clear > div:nth-of-type(2){
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pay-clear-button{
+    width: 1200px;
+    height: 100px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid black;
+}
+
+.pay-clear-button > a{
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 20px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+.pay-clear-button > a:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 5px;
+}

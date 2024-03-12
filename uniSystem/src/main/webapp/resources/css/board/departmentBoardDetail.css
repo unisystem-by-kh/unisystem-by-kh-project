@@ -1,0 +1,160 @@
+.depart-detail{
+    width: 1200px;
+    height: 100px;
+    margin: auto;
+}
+
+.date-con{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: end;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+.date-con > div{
+   margin: 0 15px;
+}
+
+.title-con{
+    width: 1200px;
+    height: 50px;
+    margin: auto;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+.image-con{
+    width: 1000px;
+    height: 200px;
+    margin: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.content-con{
+    width: 1200px;
+    height: 400px;
+    margin: auto;
+    border-bottom: 1px solid black;
+}
+
+.file-button{
+    width: 1200px;
+    margin: 10px auto;
+    display: flex;
+}
+.file-button > div:nth-of-type(1){
+    width: 10%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.file-button > div:nth-of-type(2){
+    width: 70%;
+    color: crimson;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.file-button > div:nth-of-type(3){
+    width: 20%;
+}
+
+.file-button > div:nth-of-type(3) > button{
+    margin: 0 10px;
+    background-color: white;
+    border: none;
+    width: 80px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.file-button > div:nth-of-type(3) > button:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 3px;
+} 
+
+.reply-con{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.reply-content-con{
+    width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+.reply-content-con > textarea {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    margin-top: 20px;
+}
+
+.reply-content-con > button{
+    width: 150px;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    outline: none;
+}
+
+.reply-content-con > button:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 3px;
+}
+
+.dat-con{
+    width: 1000px;
+    height: 150px;
+    margin: auto;
+    margin-top: 30px;
+    border: 1px solid #ddd;
+}
+
+.dat-info{
+    width: 1000px;
+    height: 30px;
+    margin: auto;
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+    justify-content: end;
+}
+
+.dat-info > div {
+    margin: 0 10px;
+}
+
+
+.goto{
+    width: 1200px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.goto > button{
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.goto > button:hover{
+    background-color: crimson;
+    color: white;
+    border-radius: 3px;
+}

@@ -55,7 +55,7 @@
                 |
                 <a class="btn-open-modal-pw">비밀번호 찾기</a>
                 |
-                <a href="#">회원가입</a>
+                <a href="signUp">회원가입</a>
             </p>
         </form>
     </main>

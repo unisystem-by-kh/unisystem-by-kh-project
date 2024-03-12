@@ -14,7 +14,7 @@
             <!-- 공통 -->
             <div class="navigation1-row1">
                 <a href="/board/comeMap">오시는길</a>
-                <a href="#">공지사항</a>
+                <a href="/board/noticeBoardList">공지사항</a>
                 <a href="/board/boardData">자료실</a>
             </div>
     
@@ -50,7 +50,10 @@
 
 
                 <!-- 로그인(조건:학생,교수,교직원) 전 과 후로 메뉴 표시 다르게 -->
-                
+
+                <!-- 교직원 전용 -->
+                <a href="/admin/UniqueNo" id="uniqueNo">교번/학번 발급</a>
+
                 <!-- 교수전용 -->
                 <a href="#" id="student">학생</a>
                 <a href="#" id="subject">교과목</a>
@@ -67,9 +70,9 @@
             <!-- 홈을 올렸을 경우 -->
             <div class="navigation3-home">
                 <a href="#">학사일정</a>
-                <a href="#">학과공지</a>
+                <a href="/board/departmentBoardList">학과공지</a>
                 <a href="/board/freeBoardList">자유게시판</a>
-                <a href="#">1:1문의</a>
+                <a href="/board/inquiryBoardList">1:1문의</a>
             </div>
 
             <!-- 학생을 올렸을 경우 -->
@@ -89,7 +92,7 @@
             <div class="navigation3-exam">
                 <a href="/professor/taskWrite">과제 등록</a>
                 <a href="#">과제 수정</a>
-                <a href="#">제출된 과제 조회</a>
+                <a href="/professor/taskList">과제 목록 조회</a>
             </div>
 
             <!-- 교수에 올렸을 경우 -->

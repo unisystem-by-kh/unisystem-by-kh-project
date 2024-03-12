@@ -1,0 +1,110 @@
+/*div{
+    border: 1px solid black;
+}
+*/
+.container{
+    width: 1200px;
+    margin: auto;
+}
+
+/* 공지사항 */
+
+.announcement{
+    margin-bottom: 50px;
+}
+.announcement > h2{
+
+    font-size: 50px;
+    text-align: center;
+
+}
+
+
+/* 검색 */
+.select{
+    display: flex;
+    justify-content: right;
+}
+
+.select select {
+    height: 30px;
+    width: 120px; /* 선택 상자의 너비를 조정합니다 */
+    padding: 0 10px;
+    font-size: 15px;
+}
+
+.select input[type="text"] {
+    height: 30px;
+    width: 200px; /* 입력 상자의 너비를 조정합니다 */
+    padding: 0 10px;
+    font-size: 15px;
+}
+
+.select button {
+    height: 30px;
+    padding: 0  10px ;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* 목록 */
+.post table{
+    width: 1200px;
+}
+
+
+thead th {
+   font-size: 20px; /* 여기에 원하는 스타일을 추가하세요 */
+   font-weight: bold;
+   border-bottom: 1px solid rgba(230, 221, 221, 0.815);
+   padding: 20px;
+}
+
+tbody th{
+    border-bottom: 1px solid rgba(230, 221, 221, 0.815);
+    padding: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+.pagination li {
+    margin: 0 5px;
+    
+}
+.pagination li a {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #333;
+    font-size: 15px;
+}
+.pagination li a:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+/* 글쓰기 버튼 */
+#writeBtn {
+    position: absolute;
+    right:450px;
+    bottom: 5px; /* 원하는 위치로 조정하세요 */
+    
+    border: none;
+    background-color: white;
+    font-size: 15px;
+    transition: background-color 0.5s;
+    cursor: pointer;
+}
+
+#writeBtn a:hover{
+    color: gainsboro;
+}
+
+
