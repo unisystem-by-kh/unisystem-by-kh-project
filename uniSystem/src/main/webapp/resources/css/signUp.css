@@ -1,0 +1,411 @@
+.top{
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logo{
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+    height: 200pxs;
+}
+
+#main-logo > div:nth-of-type(1){
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#main-logo > div:nth-of-type(2){
+    font-size: 14px;
+}
+
+#main-logo > div:nth-of-type(3){
+    font-size: 14px;
+}
+
+.number{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.number > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.number > span{
+    margin-left: 15px;
+    color: red;
+}
+
+#inputNo{
+    width: 1000px;
+    margin: auto;
+}
+
+#inputNo > input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+input:focus{
+    outline: none;
+}
+
+.pw{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.pw > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.pw > span{
+    margin-left: 15px;
+    color: red;
+}
+
+#inputPw{
+    width: 1000px;
+    margin: auto;
+}
+
+#inputPw > input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+.pw2{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.pw2 > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.pw2 > span{
+    margin-left: 15px;
+    color: red;
+}
+
+#inputPw2{
+    width: 1000px;
+    margin: auto;
+}
+
+#inputPw2 > input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+
+.name{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.name > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.name > span{
+    margin-left: 15px;
+    color: red;
+}
+
+#inputName{
+    width: 1000px;
+    margin: auto;
+}
+
+#inputName > input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+
+.addr{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.addr > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#inputAddr{
+    width: 1000px;
+    display: flex;
+    margin: auto;
+}
+
+#addrBtn{
+    width: 30%;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+#addrBtn:hover{
+    background-color: crimson;
+    color: white;
+}
+
+#inputAddr > input{
+    width: 70%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+
+#inputAddr2{
+    width: 1000px;
+    margin: auto;
+}
+
+
+#inputAddr2 > input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+
+.email{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.email > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.email > span{
+    margin-left: 15px;
+    color: red;
+}
+
+#inputEmail{
+    width: 1000px;
+    display: flex;
+    margin: auto;
+}
+
+#emailBtn{
+    width: 30%;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+#emailBtn:hover{
+    background-color: crimson;
+    color: white;
+}
+
+#inputEmail > input{
+    width: 70%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+.check{
+    display: none;
+}
+
+
+.emailcheck{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.emailcheck > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#inputEmail2{
+    width: 1000px;
+    display: flex;
+    margin: auto;
+}
+
+#emailBtn2{
+    width: 30%;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+#emailBtn2:hover{
+    background-color: crimson;
+    color: white;
+}
+
+#inputEmail2 > input{
+    width: 70%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+.tel{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.tel > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tel > span{
+    margin-left: 15px;
+    color: red;
+}
+
+#inputTel{
+    width: 1000px;
+    margin: auto;
+}
+
+#inputTel > input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+
+.birth{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.birth> p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+#inputBirth{
+    width: 1000px;
+    margin: auto;
+}
+
+#inputBirth > input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+
+
+.fm{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.fm > input{
+    margin-left: 25px;
+}
+
+
+.type{
+    width: 1200px;
+    margin: auto;
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+}
+
+
+
+.type > div{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    align-items: center;
+}
+
+.type input{
+    margin-left: 100px;
+}
+
+.type p{
+    font-size: 24px;
+}
+
+.type span{
+    margin-left: 15px;
+    color: red;
+}
+
+.frmBtn{
+    width: 1200px;
+    height: 200px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.frmBtn > button{
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+}
+
+.frmBtn > button:hover{
+    color: white;
+    background-color: crimson;
+}
+

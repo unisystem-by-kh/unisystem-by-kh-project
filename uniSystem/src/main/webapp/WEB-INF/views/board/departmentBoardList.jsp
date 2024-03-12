@@ -1,7 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
@@ -48,77 +51,77 @@
         <tbody>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>
             </tr>
             <tr>
                 <td>2004</td>
-                <a href="/board/departmentBoardDetail"><td>[공지]공지입니다.</td></a>
+                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
                 <td>경영학과</td>
                 <td>2024.02.22</td>
                 <td>20</td>

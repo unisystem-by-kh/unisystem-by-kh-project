@@ -1,11 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="pay.css">
+    <link rel="stylesheet" href="/resources/css/style-main.css">
+    <link rel="stylesheet" href="/resources/css/tuition/tuition.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -56,8 +60,8 @@
     </div>
 
     <div class="pay-clear-button">
-        <button>메인 페이지로</button>
-        <button>이전 페이지로</button>
+        <a href="#">메인 페이지로</a>
+        <a href="#">이전 페이지로</a>
     </div>
 
 

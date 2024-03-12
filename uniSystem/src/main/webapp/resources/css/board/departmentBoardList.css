@@ -70,6 +70,7 @@
 .depart-table{
     width: 1200px;
     margin: auto;
+    border-collapse: collapse;
     
 }
 
@@ -77,8 +78,9 @@
     border-bottom: 1px solid black;
 }
 
-.depart-table  td{
+.depart-table  tr{
     border-bottom: 1px solid #ddd;
+  
 }
 
 .depart-table > thead{
@@ -100,7 +102,7 @@
     margin-left: 5px;
 }
 
-.depart-table > tbody > tr > td:nth-of-type(2):hover{
+.depart-table > tbody > tr > td >  a:hover{
     color: crimson;
     cursor: pointer;
 }
@@ -120,7 +122,7 @@
 }
 .pagi{
     width: 1200px;
-    margin: auto;
+    margin: 70px auto;
     text-align: center;
 }
 

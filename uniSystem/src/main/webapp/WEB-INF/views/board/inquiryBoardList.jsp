@@ -1,7 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1:1 문의</title>
 
@@ -34,49 +37,49 @@
         <tbody>
             <tr>
                 <td>100</td>
-                <td>유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></td>
+                <td><a href="/board/inquiryBoardDetail">유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></a></td>
                 <td>유저일</td>
                 <td>2024.02.22</td>
                 <td>[답변완료]</td>
             </tr>
             <tr>
                 <td>100</td>
-                <td>유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></td>
+                <td><a href="/board/inquiryBoardDetail">유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></a></td>
                 <td>유저일</td>
                 <td>2024.02.22</td>
                 <td>[답변완료]</td>
             </tr>
             <tr>
                 <td>100</td>
-                <td>유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></td>
+                <td><a href="/board/inquiryBoardDetail">유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></a></td>
                 <td>유저일</td>
                 <td>2024.02.22</td>
                 <td>[답변완료]</td>
             </tr>
             <tr>
                 <td>100</td>
-                <td>유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></td>
+                <td><a href="/board/inquiryBoardDetail">유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></a></td>
                 <td>유저일</td>
                 <td>2024.02.22</td>
                 <td>[답변완료]</td>
             </tr>
             <tr>
                 <td>100</td>
-                <td>유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></td>
+                <td><a href="/board/inquiryBoardDetail">유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></a></td>
                 <td>유저일</td>
                 <td>2024.02.22</td>
                 <td>[답변완료]</td>
             </tr>
             <tr>
                 <td>100</td>
-                <td>유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></td>
+                <td><a href="/board/inquiryBoardDetail">유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></a></td>
                 <td>유저일</td>
                 <td>2024.02.22</td>
                 <td>[답변완료]</td>
             </tr>
             <tr>
                 <td>100</td>
-                <td>유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></td>
+                <td><a href="/board/inquiryBoardDetail">유저일님의 문의내용입니다<img src="/resources/images/board/lock.png" id="rock"></a></td>
                 <td>유저일</td>
                 <td>2024.02.22</td>
                 <td>[답변완료]</td>
@@ -99,7 +102,7 @@
         </ul>
     </div>
     <div class="btn-area">
-        <button id="btn">문의하기</button>
+        <a href="/board/inquiryBoardWrite" id="btn">문의하기</a>
     </div>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />

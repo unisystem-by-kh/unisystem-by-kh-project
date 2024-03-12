@@ -1,5 +1,8 @@
 package kh.finalpro.project.student.controller;
 
-public class StudentController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class StudentController {
+	
 }
