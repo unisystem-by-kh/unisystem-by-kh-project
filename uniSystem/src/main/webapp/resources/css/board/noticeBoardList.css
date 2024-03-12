@@ -28,7 +28,7 @@
 
 .select select {
     height: 30px;
-    width: 100px; /* 선택 상자의 너비를 조정합니다 */
+    width: 120px; /* 선택 상자의 너비를 조정합니다 */
     padding: 0 10px;
     font-size: 15px;
 }

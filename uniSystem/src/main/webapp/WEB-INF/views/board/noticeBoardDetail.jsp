@@ -20,7 +20,7 @@
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
      <div class="container">
         <div class="announcement">
-            <h2>공지사항</h2>
+            <h2>공 지 사 항</h2>
         </div>
 
         <div class="title">
@@ -49,9 +49,10 @@
             <button id="commentBtn">등 록</button>
         </div>
 
-        <div class="commentList">
-            
-        </div>
+
+        <button id="listBtn"><a href="/board/noticeBoardList"> 목 록</a> </button>
+
+        
         
 
 

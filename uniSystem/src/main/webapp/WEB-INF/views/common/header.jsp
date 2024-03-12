@@ -50,7 +50,10 @@
 
 
                 <!-- 로그인(조건:학생,교수,교직원) 전 과 후로 메뉴 표시 다르게 -->
-                
+
+                <!-- 교직원 전용 -->
+                <a href="/admin/UniqueNo" id="uniqueNo">교번/학번 발급</a>
+
                 <!-- 교수전용 -->
                 <a href="#" id="student">학생</a>
                 <a href="#" id="subject">교과목</a>
