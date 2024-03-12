@@ -14,4 +14,9 @@ public class AdminController {
 		return "admin/subjectList";
 	}
 
+	//교직원  교번/학번 번호생성 페이지
+	@GetMapping("/UniqueNo")
+	public String uniqueNo() {
+		return "admin/UniqueNo";
+	}
 }

@@ -4,12 +4,15 @@
 }
 
 /* 공지사항 */
+
+.announcement{
+    margin-bottom: 50px;
+}
+
 .announcement > h2{
     font-size: 50px;
     text-align: center;
-    border-bottom: 5px solid gainsboro;
     padding-bottom: 10px;
-    color: #5e5e5e;
 }
 
 
@@ -20,13 +23,14 @@
 
     display: flex;
     align-items: center;
-    border-bottom: 5px solid gainsboro;
-    margin-top: -35px;
+    border-bottom: 2px solid gainsboro;
 }
 
 .title p, .title span {
     margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
     font-size: 20px;
+    margin-bottom: 10px;
+    
 }
 
 .title p{
@@ -38,12 +42,13 @@
 
 
 
-/* 작성자 */
+/* 구분 */
 
 .writer{
     display: flex;
     align-items: center;
-    border-bottom: 5px solid gainsboro;
+    border-bottom: 2px solid gainsboro;
+    margin-top: 10px;
 }
 
 .writer p{
@@ -56,6 +61,7 @@
 .writer p, .writer span {
     margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 /* 내용출력 */
@@ -63,7 +69,7 @@
 .content{
     display: flex;
     align-items: center;
-    border-bottom: 5px solid gainsboro;
+    border-bottom: 2px solid gainsboro;
 }
 
 .content p{
@@ -82,7 +88,7 @@
     width: 80%;
     height: 400px;
     margin: 10px 0;
-    border: 2px solid gainsboro;
+    border: 1px solid gainsboro;
     border-radius: 5px;
 }
 
@@ -91,7 +97,9 @@
 .uploadFile{
     display: flex;
     align-items: center;
-    border-bottom: 5px solid gainsboro;
+    border-bottom: 2px solid gainsboro;
+    margin-top: 10px;
+
 }
 
 
@@ -103,7 +111,8 @@
 }
 
 .uploadFile span{
-    font-size: 18px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
 .uploadFile input{
@@ -115,11 +124,17 @@
     background-color: #e1e1e2;
 }
 
+.uploadFile p, .uploadFile span, .uploadFile input{
+    margin-bottom: 10px;
+}
+
+
 /* 댓글 */
 .comment{
     display: flex;
     align-items: center;
-    border-bottom: 5px solid gainsboro;
+    border-bottom: 2px solid gainsboro;
+    margin-top: 10px;
 }
 
 .comment p{
@@ -132,21 +147,21 @@
 
 .comment p, .comment input, .comment button{
     margin-right: 10px; /* 요소들 사이의 간격을 조정합니다. */
+    margin-bottom: 10px;
 }
 
 .comment input{
     width: 70%;
-    height: 50px;
-    border: 2px solid gainsboro;
+    height: 40px;
+    border: 1px solid gainsboro;
     border-radius: 5px;
     font-size: 18px;
 }
 
 .comment button{
     width: 10%;
-    height: 55px;
+    height: 40px;
     font-size: 18px;
-    font-weight: bold;
     border: none;
     border-radius: 5px;
     background-color: #e1e1e2;
@@ -158,3 +173,21 @@
     background-color: #ccc;
 }
 
+
+#listBtn {
+    display: block; /* 블록 요소로 설정하여 가로폭을 차지하도록 함 */
+    margin: 20px auto; /* 가운데 정렬 */
+    width: 100px; /* Set the width of the buttons */
+    height: 40px; /* Set the height of the buttons */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e1e1e2;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+#listBtn:hover {
+    background-color: #ccc;
+    font-weight: bold;
+}
