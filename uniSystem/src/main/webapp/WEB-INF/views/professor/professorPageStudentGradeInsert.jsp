@@ -101,19 +101,36 @@
                     <div class="student-grade-insert-area">
                         <form action="#" method="post">
                             <div class="student-grade-insert-info">
-                                <div>
-                                  <div class="semester-button" id="semester-1">1학기</div>
-                                  <div class="semester-button" id="semester-2">2학기</div>
-                                  <input type="hidden" name="semester" value="1">
+
+                                <div class="object-select-area">
+                                    <select name="objectList" id="objectList">
+                                        <option value="1학년">1학년</option>
+                                        <option value="2학년">2학년</option>
+                                        <option value="3학년">3학년</option>
+                                        <option value="4학년">4학년</option>
+                                    </select>
                                 </div>
+
+                                <div class="object-select-area">
+                                    <select name="objectList" id="objectList">
+                                        <option value="1학기">1학기</option>
+                                        <option value="2학기">2학기</option>
+                                    </select>
+                                </div>
+
+                                <input type="hidden" name="semester" value="1">
+
                                 <div id="semester-text"></div>
+                                <div><button>조회</button></div>
                                 <div><button>등록</button></div>
+
                             </div>
     
                             <div class="objectClass-detail">
                                 <div class="objectClass-detail-title">
                                     <div>학번</div>
                                     <div>학년</div>
+                                    <div>학기</div>
                                     <div>이름</div>
                                     <div>성적</div>
                                 </div>
@@ -123,6 +140,7 @@
                                     <div class="objectClass-detail-content">
                                         <div>123456</div>
                                         <div>N학년</div>
+                                        <div>N학기</div>
                                         <div>홍길동</div>
                                         <div><input type="text" placeholder="  학점을 입력해주세요."></div>
                                     </div>
