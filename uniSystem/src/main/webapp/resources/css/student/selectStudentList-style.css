@@ -1,0 +1,160 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+header > h1{
+    height: 100%;
+    margin: 0 auto;
+}
+
+main{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.table-body{
+    overflow: auto;
+    max-height: 300px;
+}
+
+.search-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+input[type="text"], select, button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+input[type="text"] {
+    width: 200px;
+}
+select {
+    width: 150px;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th {
+    background-color: #f2f2f2;
+}
+.highlight {
+    background-color: rgb(232, 240, 247) !important;
+}
+label{
+    display: inline-block;
+    width: 100%;
+    display: flex;
+}
+input[type="checkbox"]{
+    margin-left: auto;
+}
+
+/* 모달 영역 */
+#modal{
+    position: absolute;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.modal-header,
+.modal-footer {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body img {
+    display: block;
+    margin: 0 auto;
+}
+
+.modal-footer button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #ff5555;
+    color: white;
+    border: none;
+}
+
+.cancel-btn:hover {
+    background-color: #ff0000;
+}
+
+.approve-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.approve-btn:hover {
+    background-color: #45a049;
+}
+
+/* 재학 상태 CSS */
+.std-status:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
