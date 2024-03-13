@@ -1,44 +1,270 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>전체 학생 조회</title>
-<link rel="stylesheet" href="../../css/student/selectStudent.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNI-SYSTEM</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+        }
+
+        header > h1 {
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        main {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .table-body {
+            overflow: auto;
+            max-height: 300px;
+        }
+
+        .search-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .search-area > div {
+            flex: 1;
+        }
+
+        input[type="text"],
+        select,
+        button {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            max-width: 200px;
+        }
+
+        select {
+            max-width: 150px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: auto;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-header {
+            display: flex;
+            background-color: #f2f2f2;
+        }
+
+        .table-cell {
+            flex: 1;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .highlight {
+            background-color: rgb(232, 240, 247) !important;
+        }
+
+        .label {
+            display: flex;
+        }
+
+        .checkbox {
+            margin-left: auto;
+        }
+
+        /* 모달 영역 */
+        #modal {
+            position: absolute;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .modal-header,
+        .modal-footer {
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .modal-footer button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background-color: #ff5555;
+            color: white;
+            border: none;
+        }
+
+        .cancel-btn:hover {
+            background-color: #ff0000;
+        }
+
+        .approve-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .approve-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* 재학 상태 CSS */
+        .std-status:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+    </style>
+    <script src="https://kit.fontawesome.com/9cd918496e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <h1>전체 학생 조회</h1>
-    </header>
+
     <main>
-        <div class="search-container">
-            <input type="text" placeholder="학생 검색">
-            <select>
-                <option>학번으로 검색</option>
-                <option>학생 이름으로 검색</option>
-            </select>
+
+
+        <div class="container">
+            <div class="search-area">
+                <div>
+                    <input type="text" placeholder="검색어 입력">
+                </div>
+                <div>
+                    <select name="first_select">
+                        <option value="status">재적 상태</option>
+                        <option value="name">이름</option>
+                        <option value="department">학과</option>
+                    </select>
+                    <select name="second_select">
+                        <option value="completion">이수여부</option>
+                        <option value="completion">이수</option>
+                        <option value="incomplete">학점 미달</option>
+                    </select>
+                    <button id="allSelect">전체 선택</button>
+                    <button onclick="openModal()">일괄 진급</button>
+                </div>
+            </div>
+            <div class="table">
+                <div class="table-header">
+                    <div class="table-cell">학번</div>
+                    <div class="table-cell">이름</div>
+                    <div class="table-cell">학년</div>
+                    <div class="table-cell">학과</div>
+                    <div class="table-cell">재적 상태</div>
+                    <div class="table-cell">이수 여부</div>
+                </div>
+                <div class="table-body">
+                    <div class="table-row">
+                        <div class="table-cell">
+                            <label>
+                                학번1
+                                <input type="checkbox" class="select-row">
+                            </label>
+                        </div>
+                        <div class="table-cell">이름1</div>
+                        <div class="table-cell">학년1</div>
+                        <div class="table-cell">학과1</div>
+                        <div class="table-cell std-status">재학중<input type="checkbox" hidden></div>
+                        <div class="table-cell">이수 여부1</div>
+                    </div>
+                    <!-- 나머지 학생 정보 추가 -->
+                </div>
+            </div>
+
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://via.placeholder.com/150" alt="이미지 영역">
+                        <div style="font-size: 20px;">진급 N개를 처리하시겠습니까?</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="cancel-btn" onclick="closeModal()">취소</button>
+                        <button class="approve-btn" onclick="confirmModal()">승인</button>
+                        <!-- <button class="confirm-btn" onclick="closeModal()" style="display:none">확인</button> -->
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>학번</th>
-                    <th>이름</th>
-                    <th>생년월일</th>
-                    <th>학과</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>20190001</td>
-                    <td>홍길동</td>
-                    <td>1990년 1월 1일</td>
-                    <td>컴퓨터공학과</td>
-                </tr>
-            </tbody>
-        </table>
+
+
     </main>
-    <footer>
-        <p>Footer 영역</p>
-    </footer>
+
+    <script src="../../js/student/selectStudentList.js"></script>
+
 </body>
 </html>

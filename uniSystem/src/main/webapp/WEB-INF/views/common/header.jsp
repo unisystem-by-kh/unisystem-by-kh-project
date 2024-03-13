@@ -16,6 +16,7 @@
                 <a href="/board/comeMap">오시는길</a>
                 <a href="/board/noticeBoardList">공지사항</a>
                 <a href="/board/boardData">자료실</a>
+                <a href="/student/selectStudentList">테스트용 교직원 학생 조회</a>
             </div>
     
             <!-- 로그인 안했을 경우 -->
