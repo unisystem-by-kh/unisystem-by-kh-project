@@ -124,9 +124,11 @@
     background-color: #e1e1e2;
 }
 
-.uploadFile p, .uploadFile span, .uploadFile input{
+.uploadFile p, .uploadFile span, .uploadFile input, .uploadFile img{
     margin-bottom: 10px;
 }
+
+
 
 
 /* 댓글 */
@@ -174,9 +176,18 @@
 }
 
 
-#listBtn {
-    display: block; /* 블록 요소로 설정하여 가로폭을 차지하도록 함 */
-    margin: 20px auto; /* 가운데 정렬 */
+
+
+/* 버튼 */
+
+.noticeBtn{
+    text-align: center;
+}
+
+.noticeBtn button {
+    display: inline-block; /* 요소들을 인라인 블록 요소로 표시하여 일렬로 정렬 */
+    margin: 20px 5px; /* 요소 사이의 간격을 좁게 만듭니다. */
+
     width: 100px; /* Set the width of the buttons */
     height: 40px; /* Set the height of the buttons */
     font-size: 16px;
@@ -187,7 +198,9 @@
     transition: background-color 0.5s;
 }
 
-#listBtn:hover {
+
+
+.noticeBtn button:hover {
     background-color: #ccc;
     font-weight: bold;
 }
