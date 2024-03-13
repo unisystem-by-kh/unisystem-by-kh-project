@@ -212,7 +212,7 @@
 .objectClass-view > :nth-child(3){
     font-size: 1.2em;
     font-weight: bold;
-    color: blueviolet;
+    color: cadetblue;
 }
 /* 교과목 영역 크기 */
 .objectClass-img{
@@ -250,12 +250,20 @@
     height: 45px;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 /* 학기 버튼 영역 */
 .student-grade-insert-info > :nth-child(1){
-    width: 200px;
+    width: 275px;
+    height: 45px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.student-grade-insert-info > :nth-child(2){
+    width: 275px;
     height: 45px;
 
     display: flex;
@@ -263,22 +271,32 @@
     align-items: center;
 }
 /* 학기 버튼 개당 영역 */
-.student-grade-insert-info > :nth-child(1) > div{
+/* .student-grade-insert-info > :nth-child(1) > div{
     width: 100px;
     height: 45px;
 
     display: flex;
     justify-content: center;
     align-items: center;
-}
-/* 1학기 버튼 */
+} */
+/* 학년 버튼 */
 .student-grade-insert-info > :nth-child(1) > :nth-child(1){
-    width: 80px;
+    width: 150px;
     height: 35px;
     background-color: white;
     border-radius: 10px;
-    border: 1px solid cornflowerblue;
-    color: cornflowerblue;
+    border: 1px solid gray;
+    color: gray;
+    cursor: pointer;
+}
+/* 학기 버튼 */
+.student-grade-insert-info > :nth-child(2) > :nth-child(1){
+    width: 150px;
+    height: 35px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+    color: gray;
     cursor: pointer;
 }
 
@@ -288,31 +306,13 @@
     height: 35px;
     background-color: white;
     border-radius: 10px;
-    border: 1px solid palevioletred;
-    color: palevioletred;
+    border: 1px solid gray;
+    color: gray;
     cursor: pointer;
-}
-/* 학기 버튼 클릭 효과 */
-.semester-button {
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.semester-button:hover {
-    background-color: #ddd;
-}
-  
-.semester-button.active {
-    background-color: black;
-    border-color: black;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 1);
 }
 
-/* 성적등록글씨영역 */
 .student-grade-insert-info > :nth-child(2){
-    width: 750px;
+    width: 275px;
     height: 45px;
 
     display: flex;
@@ -323,26 +323,48 @@
     font-weight: bold;
 }
 
-/* 등록버튼영역 */
-.student-grade-insert-info > :nth-child(3){
+/* .student-grade-insert-info > :nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.student-grade-insert-info > :nth-child(4){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.student-grade-insert-info > :nth-child(5) , .student-grade-insert-info > :nth-child(6){
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 150px;
-    height: 45px;
+    width: 275px;
+    height: 35px;
 }
 
 /* 등록버튼 */
-.student-grade-insert-info > :nth-child(3) > button{
-    width: 120px;
+.student-grade-insert-info > :nth-child(5) > button{
+    width: 100px;
     height: 35px;
-    font-size: 1.0em;
+    font-size: 0.9em;
     font-weight: bold;
     background-color: white;
     border-radius: 10px;
-    border: 1px solid blueviolet;
-    color: blueviolet;
+    border: 1px solid gray;
+    color: gray;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.student-grade-insert-info > :nth-child(6) > button{
+    width: 100px;
+    height: 35px;
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+    color: gray;
     cursor: pointer;
     margin-right: 10px;
 }

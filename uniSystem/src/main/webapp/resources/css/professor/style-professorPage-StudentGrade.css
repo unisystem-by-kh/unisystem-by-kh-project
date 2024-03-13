@@ -10,20 +10,19 @@
     justify-content: center;
     align-items: center;
 
-    margin: auto 0;
-    border: 1px solid #ddd;
+    /* margin: auto 0; */
+    margin-top: 40px;
 }
 
 /* 검색 영역 */
 .search-area{
-    border: 1px solid #ddd;
-    
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 400px;
     height: 50px;
+    
 }
 /* 검색 폼 태그 */
 #searchFrm{
@@ -91,7 +90,6 @@
     width: 600px;
     height: 50px;
 
-    border: 1px solid #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,7 +103,6 @@
     width: 300px;
     height: 50px;
 
-    border: 1px solid #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,10 +110,45 @@
 /* 학과 선택 select 박스 */
 .object-select-area > select{
     border: 1px solid crimson;
-    width: 200px;
+    width: 150px;
     height: 40px;
     border-radius: 10px;
     padding-left: 20px;
+
+    margin-right: -90px;
+}
+
+#searchBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid white;
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+
+    background-color: crimson;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+
+    margin-right: -100px;
+
+    cursor: pointer;
+
+}
+
+#searchBtn:hover{
+    font-weight: bold;
+    color: crimson;
+    background-color: white;
+    border: 1px solid crimson;
+    text-decoration: underline;
+}
+#searchBtn:active{
+    border: 2px solid gray;
+    color: crimson;
 }
 
 /* 스크롤바 제거 */
