@@ -28,6 +28,11 @@
 
 #radio1 {
     margin-right: 100px;
+    margin-top: 5px;
+}
+
+#radio2 {
+    margin-top: 5px;
 }
 
 .checkList label, .checkList input[type="radio"] {
