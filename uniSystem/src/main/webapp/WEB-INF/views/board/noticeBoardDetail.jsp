@@ -62,7 +62,8 @@
 
     </div>
 
-    <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/> 
+    <%-- <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/>  --%>
+    <!-- 오류나서 주석처리함 -->
      <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>

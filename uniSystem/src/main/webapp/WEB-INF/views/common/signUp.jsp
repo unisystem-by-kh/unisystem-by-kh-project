@@ -19,9 +19,11 @@
     </section>
     <section class="logo">
         <div id="main-logo">
-            <div>UNI-SYSTEM</div>
-            <div>KH  INFORMATION EDUCATION CENTER</div>
-            <div>UNIVERSITY</div>
+            <a href="/" class="logoText">
+                <div>UNI-SYSTEM</div>
+                <div>KH INFORMATION EDUCATION CENTER</div>
+                <div>UNIVERSITY</div>
+            </a>
         </div>
     </section>
 
