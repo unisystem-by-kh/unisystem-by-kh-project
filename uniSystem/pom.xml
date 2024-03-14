@@ -110,6 +110,43 @@
 		    <version>2.14.2</version>
 		</dependency>
       
+      <!-- 구글 API 사용을 위한 모듈 -->
+      <!-- Spring Boot Starter Web -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.springframework.boot</groupId> -->
+<!-- 		    <artifactId>spring-boot-starter-web</artifactId> -->
+<!-- 		</dependency> -->
+		
+		<!-- Google Calendar API -->
+		<dependency>
+		    <groupId>com.google.api-client</groupId>
+		    <artifactId>google-api-client</artifactId>
+		    <version>1.32.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.oauth-client</groupId>
+		    <artifactId>google-oauth-client-jetty</artifactId>
+		    <version>1.32.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.apis/google-api-services-calendar -->
+		<dependency>
+		    <groupId>com.google.apis</groupId>
+		    <artifactId>google-api-services-calendar</artifactId>
+		    <version>v3-rev411-1.25.0</version>
+		</dependency>
+		
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.google.apis</groupId> -->
+<!-- 		    <artifactId>google-api-services-calendar</artifactId> -->
+<!-- 		    <version>v3-rev305-1.32.1</version> -->
+<!-- 		</dependency> -->
+		
+		
+		
+      
+      
+      
+      
 
 		<!-- Spring 모듈 -->
 		<dependency>
