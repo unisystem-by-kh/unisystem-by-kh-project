@@ -41,6 +41,7 @@
             <!-- 학과 입력 -->
             <label for="department">학 과</label>
             <select id="department" name="department">
+                <option value="">------ 선  택 ------</option>
                 <option value="computer_science">컴퓨터 공학</option>
                 <option value="electrical_engineering">전기 공학</option>
                 <option value="mechanical_engineering">기계 공학</option>
@@ -51,7 +52,8 @@
         <div class="input-group">
             <!-- 교과목 선택 -->
             <label for="course">교과목</label>
-            <select id="course" name="course">
+            <select id="course" name="course" >
+                <option value="">------ 선  택 ------</option>
                 <option value="math">수학</option>
                 <option value="physics">물리학</option>
                 <option value="chemistry">화학</option>
@@ -70,8 +72,8 @@
         
         <button>번 호 생 성</button>
 
-        <span id="complete">생성완료</span>
-        <span id="completeNo">01-24******</span>
+        <span id="complete"></span>
+        <span id="completeNo"></span>
 
     </div>
 
@@ -79,6 +81,7 @@
  
     </main>
 
+    <script src="/resources/js/admin/UniqueNo.js"></script>
     <script src="/resources/js/header.js"></script>
     
 </body>
