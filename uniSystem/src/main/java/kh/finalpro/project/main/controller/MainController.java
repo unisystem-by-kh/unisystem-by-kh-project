@@ -19,7 +19,7 @@ public class MainController {
 	private MemberService service;
 		
 		// 로그인 / 메인페이지 이동
-		@RequestMapping("/")
+		@GetMapping("/")
 		public String main() {
 	
 			 return "common/main"; // 메인페이지 확인
@@ -29,26 +29,27 @@ public class MainController {
 		
 		
 		
+		
+		
 		// 회원가입 페이지 이동
 		@GetMapping("/signUp")
 		public String signUp(){
 			return "common/signUp";
 		}
 		
-		
-		
 		// 회원가입 진행
-		@PostMapping("/singUp")
+		@PostMapping("/signUp")
 		public String signUp(Member inputMember
-							,String[] memberAddr // 주소 정리 예정 사용 매개변수
-							,RedirectAttributes ra
+							
 				) {
 			
 			
 			int result = service.signUp(inputMember);
 			
-			System.out.println(result);
-			System.out.println(inputMember);
+			System.out.println("Contoller : " + result);
+			System.out.println("Contoller : " + inputMember);
+			System.out.println("--------------------------------------------------------------------------");
+			
 			
 			return "redirect:/";
 		}

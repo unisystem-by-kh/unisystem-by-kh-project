@@ -3,7 +3,30 @@
 
 <mapper namespace="memberMapper">
 
+	<resultMap type="Member" id="member_rm">
+   
+      <!-- DB의 기본 키(복합키면 여러 개 작성) -->
+      <id property="memberNo" column="MEMBER_NO" />
+
+      <!-- DB의 일반 컬럼들 -->
+      <result property="memberPw" column="MEMBER_PW" />
+      <result property="memberAddress" column="MEMBER_ADDR" />
+      <result property="memberEmail" column="MEMBER_EMAIL" />
+      <result property="memberPhone" column="MEMBER_PHONE" />
+      <result property="memberGen" column="MEMBER_GEN" />
+      <result property="memberName" column="MEMBER_NAME" />
+      <result property="memberName" column="MEMBER_NAME" />
+      
+      
+   </resultMap>
+
+
+	<insert id="signUp">
 	
+		INSERT INTO MEMBER (MEMBER_NO, MEMBER_PW, MEMBER_ADDR, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_GEN, MEMBER_NAME, DEPARTMENT_NO, MEMBER_BIRTH)
+		VALUES (#{memberNo}, #{memberPw}, #{memberAddr}, #{memberEmail}, #{memberPhone}, #{memberGen}, #{memberName}, 2, SYSDATE)
+		
+	</insert>
 	
 	
 

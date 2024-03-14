@@ -14,11 +14,13 @@
 	<!--VO클래스의패키지명+ 클래스명작성하는것이불편하기때문에짧은별칭부여 -->
 	<typeAliases>
 		<typeAlias type="kh.finalpro.project.student.model.dto.Student" alias="Student" />
+		<typeAlias type="kh.finalpro.project.main.model.dto.Member" alias="Member" />
 	</typeAliases>
 	
 	<!--mapper 파일(SQL 작성되는파일) 위치등록부분 -->
 	<mappers>
 		<mapper resource="/mappers/student-mapper.xml" />
+		<mapper resource="/mappers/member-mapper.xml" />
 	</mappers>		
 
 </configuration>
