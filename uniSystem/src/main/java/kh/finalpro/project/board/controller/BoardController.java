@@ -44,16 +44,16 @@ public class BoardController {
 										@RequestParam Map<String, Object> paramMap
 										) {
 		
-		Map<String, Object> map = null;
-		
-		map = service.selectFreeBoardList(boardCode, cp);
-		
-		model.addAttribute("map" , map);
-		
-		System.out.println("Controller-boardCode : " + boardCode);
-		System.out.println("Controller-cp : " + cp);
-		System.out.println("Controller-model : " + model);
-		System.out.println("Controller-paramMap : " + paramMap);
+//		Map<String, Object> map = null;
+//		
+//		map = service.selectFreeBoardList(boardCode, cp);
+//		
+//		model.addAttribute("map" , map);
+//		
+//		System.out.println("Controller-boardCode : " + boardCode);
+//		System.out.println("Controller-cp : " + cp);
+//		System.out.println("Controller-model : " + model);
+//		System.out.println("Controller-paramMap : " + paramMap);
 		
 		
 
