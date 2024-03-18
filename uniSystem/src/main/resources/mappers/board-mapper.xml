@@ -11,6 +11,7 @@
       <result property="boardContent" column="BOARD_CONTENT" />
       <result property="boardCDate" column="BOARD_C_DATE" />
       <result property="boardUDate" column="BOARD_U_DATE" />
+
       <result property="boardCount" column="BOARD_COUNT" />
       <result property="boardSt" column="BOARD_ST" />
       <result property="replyCount" column="REPLY_COUNT" />
@@ -18,11 +19,6 @@
       <result property="memberNo" column="MEMBER_NO" />
       <result property="memberName" column="MEMBER_NAME" />
       <result property="categoryNo" column="CATEGORY_NO" />
-
-      <!-- <collection property="boardFileList" select="selectImageList" column="BOARD_NO" javaType="java.util.ArrayList" ofType="BoardFile">
-      
-      </collection> -->
-
 
    </resultMap>
 
@@ -71,9 +67,33 @@
 		ORDER BY BOARD_NO DESC
 		
    </select>
+	
+	<select id="selectinquiryBoardList" resultMap="board_rm">
+		 SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_ST,
+         
+		<![CDATA[
+		CASE  
+		   WHEN SYSDATE - BOARD_C_DATE < 1/24/60
+		   THEN FLOOR( (SYSDATE - BOARD_C_DATE) * 24 * 60 * 60 ) || '초 전'
+		   WHEN SYSDATE - BOARD_C_DATE < 1/24
+		   THEN FLOOR( (SYSDATE - BOARD_C_DATE) * 24 * 60) || '분 전'
+		   WHEN SYSDATE - BOARD_C_DATE < 1
+		   THEN FLOOR( (SYSDATE - BOARD_C_DATE) * 24) || '시간 전'
+		   ELSE TO_CHAR(BOARD_C_DATE, 'YYYY-MM-DD')
+		END BOARD_C_DATE,
+		]]>
+		
+      (SELECT COUNT(*) FROM "REPLY" C
+      WHERE C.BOARD_NO = B.BOARD_NO
+      AND C.REPLY_ST = 'N') REPLY_COUNT
 
 
-
+      FROM "BOARD" B
+      JOIN "MEMBER" USING(MEMBER_NO)
+      WHERE (BOARD_ST = 'N' OR BOARD_ST = 'D')
+      AND CATEGOTY_NO = ${boardCode}
+      ORDER BY BOARD_NO DESC
+	</select>
 
 
 </mapper>

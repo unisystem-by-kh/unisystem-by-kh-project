@@ -28,4 +28,11 @@ public interface BoardService {
 	 */
 	Map<String, Object> searchFreeBoardList(Map<String, Object> paramMap, int cp);
 
+	/** 1 : 1 문의 목록조회
+	 * @param boardCode
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selectinquiryBoardList(int boardCode, int cp);
+
 }
