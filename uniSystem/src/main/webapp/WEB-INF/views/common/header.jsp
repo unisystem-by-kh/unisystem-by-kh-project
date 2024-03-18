@@ -73,7 +73,7 @@
             <div class="navigation3-home">
                 <a href="#">학사일정</a>
                 <a href="/board/departmentBoardList">학과공지</a>
-                <a href="/board/2">자유게시판</a>
+                <a href="/board/3">자유게시판</a>
                 <a href="/board/inquiryBoardList">1:1문의</a>
             </div>
 

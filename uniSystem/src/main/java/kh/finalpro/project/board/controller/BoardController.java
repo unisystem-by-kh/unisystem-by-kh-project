@@ -29,9 +29,15 @@ public class BoardController {
 		return "board/comeMap";
 	}
 	
+	
+	
+	
+	
+	
+	
+	// ---------------------------------------------------------------------------
 	// ---------------------------------- 게시판 ----------------------------------
-	
-	
+	// ---------------------------------------------------------------------------
 	
 	// ---------------------------------- 자유게시판 ---------------------------------- 
 
@@ -44,22 +50,23 @@ public class BoardController {
 										@RequestParam Map<String, Object> paramMap
 										) {
 		
-//		Map<String, Object> map = null;
-//		
-//		map = service.selectFreeBoardList(boardCode, cp);
-//		
-//		model.addAttribute("map" , map);
-//		
-//		System.out.println("Controller-boardCode : " + boardCode);
-//		System.out.println("Controller-cp : " + cp);
-//		System.out.println("Controller-model : " + model);
-//		System.out.println("Controller-paramMap : " + paramMap);
+		Map<String, Object> map = null;
+		
+		map = service.selectFreeBoardList(boardCode, cp);
+		
+		model.addAttribute("map" , map);
+		
+		System.out.println("Controller-boardCode : " + boardCode);
+		System.out.println("Controller-cp : " + cp);
+		System.out.println("Controller-model : " + model);
+		System.out.println("Controller-paramMap : " + paramMap);
 		
 		
 
 		return "board/freeBoardList";
 	}
 
+	
 	// 자유게시판 상세
 	@GetMapping("/freeBoardDetail")
 	public String selectFreeBoardDetail() {
@@ -67,6 +74,7 @@ public class BoardController {
 		return "board/freeBoardDetail";
 	}
 
+	
 	// 자유게시판 삽입
 	@GetMapping("/freeBoardInsert")
 	public String selectFreeBoardInsert() {
