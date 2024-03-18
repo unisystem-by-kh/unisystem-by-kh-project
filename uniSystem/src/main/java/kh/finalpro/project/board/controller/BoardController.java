@@ -77,6 +77,9 @@ public class BoardController {
 	// 1:1문의 목록
 	@GetMapping("/inquiryBoardList")
 	public String inquiryBoard() {
+		
+		
+		
 		return "board/inquiryBoardList";
 	}
 
