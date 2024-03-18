@@ -26,7 +26,7 @@
 
             <!-- 로그인 정보 영역 -->
             <!-- *로그인 되었을 때 노출 -->
-            <div class="loginMember-Info-Area">
+            <%-- <div class="loginMember-Info-Area">
                 <div><img src="https://play-lh.googleusercontent.com/38AGKCqmbjZ9OuWx4YjssAz3Y0DTWbiM5HB0ove1pNBq_o9mtWfGszjZNxZdwt_vgHo" id="profileImg"></div>
                 <div class="info-area">
                     <div>ㅇㅇㅇ 교수</div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="logoutBtn"><button><a href="login">로그아웃</a></button></div>
                 <div class="recode-area">학적상태 : 재학중</div>
-            </div>
+            </div> --%>
 
 
 
@@ -45,7 +45,7 @@
                 <div class="button-area">
                     <button><a href="#">학사 일정</a></button>
                     <button><a href="#">학과 공지</a></button>
-                    <button><a href="board/freeBoardList">자유 게시판</a></button>
+                    <button><a href="board/3">자유 게시판</a></button>
                     <button><a href="#">1:1 문의</a></button>
                 </div>
     

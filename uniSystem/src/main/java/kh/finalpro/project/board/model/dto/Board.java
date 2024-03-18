@@ -14,23 +14,19 @@ public class Board {
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
-	private String boardCreateDate;
-	private String boardUpdateDate;
-	private int readCount;
-	private int boardCode;
-	private int commentCount;
-	private int likeCount;
-	private String memberNickname;
+	private String boardCDate;
+	private String boardUDate;
+	private int boardCount;
+	private int boardSt;
+	
 	private int memberNo;
-	private String profileImage;
-	private String thumbnail;
+	private int category;
 
 	
 	// 이미지 목록
 	private List<BoardImage> imageList;
 
-//	추후 사용 예졍
 	// 댓글 목록
-//	private List<Comment> commentList;
+	private List<Reply> commentList;
 
 }
