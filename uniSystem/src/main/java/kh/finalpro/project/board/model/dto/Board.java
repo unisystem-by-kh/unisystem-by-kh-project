@@ -17,16 +17,17 @@ public class Board {
 	private String boardCDate;
 	private String boardUDate;
 	private int boardCount;
-	private int boardSt;
-	
+	private String boardSt;
+	private int replyCount;
 	private int memberNo;
+	private String memberName;
 	private int category;
 
 	
 	// 이미지 목록
-	private List<BoardImage> imageList;
+	private List<BoardFile> fileList;
 
 	// 댓글 목록
-	private List<Reply> commentList;
+	private List<Reply> replyList;
 
 }

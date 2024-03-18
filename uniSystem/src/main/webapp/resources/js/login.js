@@ -125,6 +125,29 @@ if(btn1 != null){
             });
         }
 
+        fetch("findMemberId?memberName=" + idUserName.value + "&memberEmail=" + idUserEmail.value)
+        .then( resp => resp.text())
+        .then( memberNo => {
+
+            if(memberNo.length != 0){
+                swal({
+                    title : "아이디 찾기 결과",
+                    text : `회원님의 학번은 ${memberNo} 입니다.`,
+                    icon : "success",
+                    closeOnClickOutside : false
+                });
+
+            } else {
+                swal({
+                    title : "일치하는 회원이 없습니다.",
+                    text : "이름또는 이메일을 확인해주세요.",
+                    icon : "error",
+                    closeOnClickOutside : false
+                });
+            }
+        })
+        .catch( e => console.log(e) );
+
     })
 }
 
@@ -167,5 +190,25 @@ if(btn2 != null){
             });
         }
 
+        const data = {"memberNo" : pwUserId.value,
+                      "memberName" : pwUserName.value,
+                      "memberEmail" : pwUserEmail.value};
+    
+        fetch("/findMemberPw",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(data)
+        })
+        .then( resp => resp.text())
+        .then( result => {
+            console.log(result);
+        })
+        .catch( e=>{console.log(e);})
+
+
+
     })
+
+
+
 }

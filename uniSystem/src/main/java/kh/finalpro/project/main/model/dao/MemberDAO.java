@@ -1,5 +1,7 @@
 package kh.finalpro.project.main.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,8 +36,27 @@ public class MemberDAO {
 	 * @return loginMember
 	 */
 	public Member login(Member inputMember) {
-		System.out.println(inputMember.getMemberNo());
 		return sqlSession.selectOne("memberMapper.login", inputMember);
+	}
+
+
+
+	/** 아이디 찾기 DAO
+	 * @param inputMember
+	 * @return memberId
+	 */
+	public String findMemberId(Member inputMember) {
+		return sqlSession.selectOne("memberMapper.findMemberId", inputMember);
+	}
+
+
+
+	/** 비밀번호 찾기 DAO
+	 * @param map
+	 * @return memberEmail
+	 */
+	public String findMemberPw(Map<String, Object> map) {
+		return sqlSession.selectOne("memberMapper.findMemberPw", map);
 	}
 
 }
