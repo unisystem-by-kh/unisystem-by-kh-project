@@ -74,7 +74,7 @@
                 <a href="#">학사일정</a>
                 <a href="/board/departmentBoardList">학과공지</a>
                 <a href="/board/3">자유게시판</a>
-                <a href="/board/inquiryBoardList">1:1문의</a>
+                <a href="/board/4">1:1문의</a>
             </div>
 
             <!-- 학생을 올렸을 경우 -->
