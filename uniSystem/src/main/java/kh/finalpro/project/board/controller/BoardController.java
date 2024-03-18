@@ -42,9 +42,9 @@ public class BoardController {
 	// ---------------------------------- 자유게시판 ---------------------------------- 
 
 	// 자유게시판 목록
-	@GetMapping("/{boardCode:[0-9]+}")
+	@GetMapping("/{categoryNo:[0-9]+}")
 	public String selectFreeBoardList(
-										@PathVariable("boardCode") int boardCode,
+										@PathVariable("categoryNo") int categoryNo,
 										@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
 										Model model,
 										@RequestParam Map<String, Object> paramMap
@@ -52,16 +52,31 @@ public class BoardController {
 		
 		Map<String, Object> map = null;
 		
-		map = service.selectFreeBoardList(boardCode, cp);
+		if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색 X)
+			
+			// 게시글 목록조회 서비스 호출
+			map = service.selectFreeBoardList(categoryNo, cp);
+			
+			// 조회 결과를 request scope에 세팅 후 forward
+			model.addAttribute("map" , map);
+			
+		}else { // 검색어가 있을 때 (검색 O)
+			
+			paramMap.put("categoryNo", categoryNo);
+			
+			map = service.searchFreeBoardList(paramMap, cp);
+			
+			model.addAttribute("map" , map);
+		}
+		
+		
 		
 		model.addAttribute("map" , map);
 		
-		System.out.println("Controller-boardCode : " + boardCode);
+		System.out.println("Controller-boardCode : " + categoryNo);
 		System.out.println("Controller-cp : " + cp);
 		System.out.println("Controller-model : " + model);
 		System.out.println("Controller-paramMap : " + paramMap);
-		
-		
 
 		return "board/freeBoardList";
 	}
@@ -70,6 +85,8 @@ public class BoardController {
 	// 자유게시판 상세
 	@GetMapping("/freeBoardDetail")
 	public String selectFreeBoardDetail() {
+		
+		
 
 		return "board/freeBoardDetail";
 	}
