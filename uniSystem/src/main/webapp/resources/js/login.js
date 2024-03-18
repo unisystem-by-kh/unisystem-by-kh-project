@@ -201,14 +201,60 @@ if(btn2 != null){
         })
         .then( resp => resp.text())
         .then( result => {
-            console.log(result);
+
+            if(result.length != 0){
+                
+                sendEmail(result);
+
+            } else {
+                swal({
+                    title : "일치하는 회원이 없습니다.",
+                    text : "학번,이름또는 이메일을 확인해주세요.",
+                    icon : "error",
+                    closeOnClickOutside : false
+                });
+            }
         })
         .catch( e=>{console.log(e);})
 
-
-
     })
 
+    function sendEmail(email) {
 
+        showLoadingSpinner(); // 로딩창 시작
 
+        fetch("/sendEmail/findPw?email=" + email)
+        .then(resp => resp.text())
+        .then( result => {
+
+            if(result > 0){
+                swal({
+                    title : "비밀번호 찾기",
+                    text : `${email} 로 임시비밀번호 발급해드렸습니다.`,
+                    icon : "success",
+                    closeOnClickOutside : false
+                });
+
+            } else{
+                alert("임시 비밀번호 전송 실패...");
+            }
+            
+        })
+        .catch(e => console.log(e))
+        .finally(() => {
+            hideLoadingSpinner(); // 로딩창 끝
+        })
+
+    }
+
+}
+
+function showLoadingSpinner() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    loadingSpinner.style.display = 'block';
+}
+
+function hideLoadingSpinner() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    loadingSpinner.style.display = 'none';
 }

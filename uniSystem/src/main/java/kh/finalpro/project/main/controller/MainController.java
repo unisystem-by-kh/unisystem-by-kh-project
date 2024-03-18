@@ -125,10 +125,7 @@ public class MainController {
 	@PostMapping(value = "/findMemberPw", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String findMemberPw(@RequestBody Member inputMember) {
-		
-		System.out.println(inputMember);
-		
-		return null;
+		return service.findMemberPw(inputMember);
 	}
 	
 
