@@ -1,5 +1,7 @@
 package kh.finalpro.project.main.model.service;
 
+import java.util.Map;
+
 import kh.finalpro.project.main.model.dto.Member;
 
 public interface MemberService {
@@ -17,5 +19,18 @@ public interface MemberService {
 	 * @return loginMember
 	 */
 	Member login(Member inputMember);
+
+	/** 아이디 찾기 비동기
+	 * @param inputMember
+	 * @return memberId
+	 */
+	String findMemberId(Member inputMember);
+
+	/** 비밀번호 찾기 비동기
+	 * @param map
+	 * @return memberEmail
+	 */
+	String findMemberPw(Map<String, Object> map);
+
 
 }
