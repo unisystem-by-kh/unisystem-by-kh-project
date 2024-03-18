@@ -82,8 +82,6 @@ public class BoardController {
 			model.addAttribute("map" , map);
 		}
 		
-		
-		
 		model.addAttribute("map" , map);
 		
 		System.out.println("Controller-boardCode : " + categoryNo);
