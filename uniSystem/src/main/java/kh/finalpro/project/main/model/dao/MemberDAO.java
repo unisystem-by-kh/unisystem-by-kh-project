@@ -52,11 +52,11 @@ public class MemberDAO {
 
 
 	/** 비밀번호 찾기 DAO
-	 * @param map
+	 * @param inputMember
 	 * @return memberEmail
 	 */
-	public String findMemberPw(Map<String, Object> map) {
-		return sqlSession.selectOne("memberMapper.findMemberPw", map);
+	public String findMemberPw(Member inputMember) {
+		return sqlSession.selectOne("memberMapper.findMemberPw", inputMember);
 	}
 
 }
