@@ -16,8 +16,6 @@
 		<typeAlias type="kh.finalpro.project.student.model.dto.Student" alias="Student" />
 		<typeAlias type="kh.finalpro.project.main.model.dto.Member" alias="Member" />
 		<typeAlias type="kh.finalpro.project.board.model.dto.Board" alias="Board" />
-		<typeAlias type="kh.finalpro.project.board.model.dto.BoardImage" alias="BoardImage" />
-		<typeAlias type="kh.finalpro.project.board.model.dto.Comment" alias="Comment" />
 	</typeAliases>
 	
 	<!--mapper 파일(SQL 작성되는파일) 위치등록부분 -->
