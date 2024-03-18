@@ -47,7 +47,7 @@
 
                 <!-- 검색창 -->
                 <div class="search-area">
-                    <form action="#" method="get" id="boardSearch" onsubmit="">
+                    <form action="${categoryNo}" method="get" id="boardSearch" onsubmit="">
                         <input type="hidden" name="type" value="${param.type}">
                         <select name="key" id="search-key">
                             <option value="">검색 조건 선택</option>
