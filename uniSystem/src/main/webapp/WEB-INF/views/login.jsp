@@ -35,7 +35,7 @@
         <form action="login" method="post" id="loginFrm">
             <fieldset class="id-pw-area">
                 <section>
-                    <input type="text" name="memberNo" id="userId" placeholder="학번" >
+                    <input type="text" name="memberNo" id="userId" placeholder="학번" value="${cookie.saveId.value}" >
                     <input type="password" name="memberPw" id="userPw" placeholder="비밀번호">      
                 </section>
                 <section>
@@ -43,9 +43,13 @@
                 </section>
             </fieldset>
 
+            <c:if test="${ !empty cookie.saveId.value}">
+                <c:set var="chk" value="checked"/>
+            </c:if>
+
             <!-- 아이디 저장 부분 -->
             <div class="saveId-area">
-                <input type="checkbox" name="saveId" id="saveId">
+                <input type="checkbox" name="saveId" ${save}  id="saveId" ${chk}>
                 <label for="saveId"><i class="fas fa-check"></i>아이디 저장</label>
             </div>
 
@@ -77,7 +81,7 @@
             <h2>비밀번호 찾기</h2>
             <input type="text" name="memberName" id="pwUserName" placeholder="이름을 입력해주세요.">
             <input type="email" name="memberEmail" id="pwUserEmail" placeholder="이메일을 입력해주세요.">
-            <input type="text" name="memberNo" id="pwUserId" placeholder="아이디를 입력해주세요.">
+            <input type="text" name="memberNo" id="pwUserId" placeholder="학번을 입력해주세요.">
             <br>
             <button class="btn" id="btn2">비밀번호 찾기</button>
         </div>
@@ -86,12 +90,9 @@
     <script src="/resources/js/login.js"></script>
 
     <c:if test="${!empty message}">
-
-    <script>
-        // EL/JSTL 구문이 먼저 해석되는데
-        // 문자열의 경우 따옴표가 없는 상태이니 붙여줘야한다!!!
-        swal("${message}", "", "success");
-    </script>
-</c:if>
+        <script>
+            swal("${message}", "", "success");
+        </script>
+    </c:if>
 </body>
 </html>

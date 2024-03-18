@@ -1,5 +1,7 @@
 package kh.finalpro.project.main.model.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +37,17 @@ public class MemberServiceImpl implements MemberService{
 		return loginMember;
 	}
 	
+	// 아이디 찾기 서비스
+	@Override
+	public String findMemberId(Member inputMember) {
+		return dao.findMemberId(inputMember);
+	}
+	
+	// 비번 찾기 서비스
+	@Override
+	public String findMemberPw(Map<String, Object> map) {
+		return dao.findMemberPw(map);
+	}
 	
 
 }
