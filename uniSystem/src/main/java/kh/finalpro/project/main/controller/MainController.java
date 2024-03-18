@@ -124,9 +124,11 @@ public class MainController {
 	// 비밀번호 찾기
 	@PostMapping(value = "/findMemberPw", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String findMemberPw(@RequestBody Map<String, Object> map) {
+	public String findMemberPw(@RequestBody Member inputMember) {
 		
-		return service.findMemberPw(map);
+		System.out.println(inputMember);
+		
+		return null;
 	}
 	
 

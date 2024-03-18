@@ -189,22 +189,26 @@ if(btn2 != null){
                 pwUserName.focus();
             });
         }
+
+        const data = {"memberNo" : pwUserId.value,
+                      "memberName" : pwUserName.value,
+                      "memberEmail" : pwUserEmail.value};
+    
+        fetch("/findMemberPw",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(data)
+        })
+        .then( resp => resp.text())
+        .then( result => {
+            console.log(result);
+        })
+        .catch( e=>{console.log(e);})
+
+
+
     })
 
-    console.log("pwUserEmail::"+pwUserEmail.value);
-
-    fetch("/findMemberPw",{
-        method : "POST",
-        headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify({"memberNo" : pwUserId.value,
-                               "memberName" : pwUserName.value,
-                               "memberEmail" : pwUserEmail.value})
-    })
-    .then( resp => resp.text())
-    .then( result => {
-        console.log(result);
-    })
-    .catch( e=>{console.log(e);})
 
 
 }
