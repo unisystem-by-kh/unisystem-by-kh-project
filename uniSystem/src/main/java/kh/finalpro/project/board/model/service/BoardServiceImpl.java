@@ -48,13 +48,13 @@ public class BoardServiceImpl implements BoardService{
 
 	// 1:1 문의 목록조회
 	@Override
-	public Map<String, Object> selectinquiryBoardList(int boardCode, int cp) {
+	public Map<String, Object> selectinquiryBoardList(int categoryNo, int cp) {
 
-		int listCount = dao.getListCount(boardCode);
+		int listCount = dao.getListCount(categoryNo);
 
 		Pagination pagination = new Pagination(cp, listCount);
 
-		List<BoardDAO> boardList = dao.selectinquiryBoardList(pagination, boardCode);
+		List<BoardDAO> boardList = dao.selectinquiryBoardList(pagination, categoryNo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 

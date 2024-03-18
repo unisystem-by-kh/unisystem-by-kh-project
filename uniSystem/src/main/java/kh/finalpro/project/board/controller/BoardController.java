@@ -55,7 +55,7 @@ public class BoardController {
 
 
 	// 자유게시판 목록
-	@GetMapping("/{categoryNo:[0-9]+}")
+	@GetMapping("/{categoryNo:3}")
 	public String selectFreeBoardList(
 										@PathVariable("categoryNo") int categoryNo,
 										@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
@@ -161,14 +161,14 @@ public class BoardController {
 	}
 
 	// 1:1문의 목록
-	@GetMapping("/{boardCode:[0-9]+}")
-	public String inquiryBoard(@PathVariable("boardCode") int boardCode,
+	@GetMapping("/{categoryNo:4}")
+	public String inquiryBoard(@PathVariable("categoryNo") int categoryNo,
 			@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
 			Model model,
 			@RequestParam Map<String, Object> paramMap) {
 
 		// 게시글 목록 조회 서비스 호출
-		Map<String, Object> map = service.selectinquiryBoardList(boardCode,cp);
+		Map<String, Object> map = service.selectinquiryBoardList(categoryNo,cp);
 
 		// 조회 결과를 request scope에 세팅 후 forward
 		model.addAttribute("map", map);

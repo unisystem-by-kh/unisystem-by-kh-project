@@ -84,12 +84,13 @@ public class BoardDAO {
 	 * @param boardCode
 	 * @return map
 	 */
-	public List<BoardDAO> selectinquiryBoardList(Pagination pagination, int boardCode) {
+	public List<BoardDAO> selectinquiryBoardList(Pagination pagination, int categoryNo) {
 
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		return sqlSession.selectList("boardMapper.selectinquiryBoardList", boardCode, rowBounds);
+		
+		return sqlSession.selectList("boardMapper.selectinquiryBoardList", categoryNo, rowBounds);
 
 	}
 
