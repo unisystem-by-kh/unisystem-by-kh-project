@@ -27,4 +27,15 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.signUp" , inputMember);
 	}
 
+
+
+	/** 로그인 DAO
+	 * @param inputMember
+	 * @return loginMember
+	 */
+	public Member login(Member inputMember) {
+		System.out.println(inputMember.getMemberNo());
+		return sqlSession.selectOne("memberMapper.login", inputMember);
+	}
+
 }
