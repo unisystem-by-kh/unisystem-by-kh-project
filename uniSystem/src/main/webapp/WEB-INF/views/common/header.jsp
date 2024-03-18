@@ -30,7 +30,7 @@
             <div class="navigation1-row2-professor">
                 <div>컴퓨터학과 <a href="#">홍길동 </a> 교수</div>
                 <div class="quickMenu">
-                    <div id="quickMenu-easy"><a href="#">로그아웃</a></div>
+                    <div id="quickMenu-easy"><a href="/logout">로그아웃</a></div>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
         <nav class="navigation2">
             <!-- 클릭 시 메인 페이지로 이동하는 문구 -->
             <div class="logoArea">
-                <a href="/" class="logoText">
+                <a href="/main" class="logoText">
                     <div>UNI-SYSTEM</div>
                     <div>KH INFORMATION EDUCATION CENTER</div>
                     <div>UNIVERSITY</div>

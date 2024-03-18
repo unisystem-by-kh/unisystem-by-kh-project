@@ -2,6 +2,7 @@ package kh.finalpro.project.main.controller;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.finalpro.project.main.model.dto.Member;
@@ -23,11 +25,9 @@ public class MainController {
 	@Autowired
 	private MemberService service;
 
-	// 로그인 / 메인페이지 이동
+	// 첫화면 (로그인 페이지)
 	@GetMapping("/")
-	public String main() {
-
-		//return "common/main"; // 메인페이지 확인
+	public String login() {
 
 		return "login"; // 로그인 페이지
 	}
@@ -36,6 +36,12 @@ public class MainController {
 	@GetMapping("/signUp")
 	public String signUp(){
 		return "common/signUp";
+	}
+	
+	// 메인 페이지 이동
+	@GetMapping("/main")
+	public String main() {
+		return "common/main";
 	}
 
 	// 회원가입 진행
@@ -55,6 +61,7 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	// 로그인
 	@PostMapping("/login")
 	public String login(Member inputMember
 						,Model model
@@ -67,7 +74,8 @@ public class MainController {
 		String path = "";
 		
 		if(loginMember != null) {
-			path += "common/main";
+			
+			path += "redirect:main";
 			
 			model.addAttribute("loginMember", loginMember);
 			
@@ -85,10 +93,21 @@ public class MainController {
 			
 		}else {
 			path += "redirect:/";
+			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 		
 		
 		return path;
+	}
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logout(SessionStatus status, HttpSession session) {
+		
+		status.setComplete();
+		
+		return "redirect:/";
+		
 	}
 	
 
