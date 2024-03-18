@@ -1,0 +1,492 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* { font-family: 'Pretendard-Regular'; }
+
+
+.main{
+    display: flex;
+    width: 1400px;
+    margin: 10px 0;
+    justify-content: center;
+}
+
+main * {
+    box-sizing: border-box;
+}
+
+
+
+.stu-board > table{
+    border: none;
+}
+
+.stu-board > table tr:nth-child(1){
+    background-color: #ccc;
+}
+
+
+/* 좌 네비 영역 */
+.stu-nav{
+    width: 250px;
+    margin-right: 40px;
+    padding: 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 490px;
+}
+
+.stu-nav  a{
+    color: rgb(85, 84, 84);
+    text-decoration: none;
+}
+
+/* 1차 단락 대 단위 */
+.stu-nav > ul > li{
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 1차 단락 */
+.stu-nav ul{
+    text-decoration: none;
+    list-style: none;
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* 2차 단락 */
+.stu-nav ul ul{
+    margin-top: 10px;
+}
+
+/* 중 분류 */
+.stu-nav ul ul li{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    justify-content: space-between;
+}
+
+.stu-nav ul ul li:hover{
+    color: black;
+}
+
+
+/* 중 분류 이미지 */
+.stu-nav ul ul img{
+    margin-right: 5px;
+    padding: 2px 0;
+}
+
+
+/* 게시판 영역 */
+
+.stu-container{
+    width: 1200px;
+    padding-right: 40px;
+}
+
+.stu-header{
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.stu-header h2{
+    margin-bottom: 5px;
+}
+
+
+
+
+/* 게시판 검색 영역 */
+
+.search-area select{
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.search-area > form span{
+    margin-right: 10px;
+}
+
+.search-area > form > input{
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.search-area > form > input:nth-child(6){
+    margin-right: 150px;
+}
+select[name="type"]{
+    margin-right: 100px;
+}
+
+.search-area {
+    text-align: center;
+}
+
+.query-label{
+    position: relative;
+    margin-left: 200px;
+}
+
+.query-label input{
+    height: 40px;
+    padding-left: 30px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.query-label button{
+    position: absolute;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    left: 5px;
+    top: -1px;
+    width: 25px;
+    border: none;
+    background-color: white ;
+    cursor: pointer;
+}
+
+.query-label img{
+    width: 100%;
+}
+
+
+/* 테이블 영역 */
+
+table{
+    
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 6px 15px;
+}
+th {
+    background: #42444e;
+    color: #fff;
+    text-align: left;
+}
+
+tr:first-child th:first-child {
+    border-top-left-radius: 6px;
+}
+tr:first-child th:last-child {
+    border-top-right-radius: 6px;
+}
+td {
+    border-right: 1px solid #c6c9cc;
+    border-bottom: 1px solid #c6c9cc;
+}
+td:first-child {
+    border-left: 1px solid #c6c9cc;
+}
+tr:nth-child(even) td {
+    background: #eaeaed;
+}
+tr:last-child td:first-child {
+    border-bottom-left-radius: 6px;
+}
+tr:last-child td:last-child {
+    border-bottom-right-radius: 6px;
+}
+
+/* 시간표 테이블 */
+
+.schedule-area{
+    display: flex;
+    justify-content: center;
+}
+
+.schedule{
+    width: 900px;
+}
+
+.schedule th{
+    margin: 0;
+    text-align: center;
+    background: #006600;
+    height: 40px;
+    border-right: 1px solid #c6c9cc;
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+.schedule td{
+    text-align: center;
+    height: 60px;
+    width: 18%;
+}
+
+.schedule tr td:nth-child(1){
+    width: 10%;
+}
+
+.schedule-btn-area{
+    display: flex;
+    height: 40px;
+    justify-content: end;
+    width: 950px;
+}
+
+#schedule-btn{
+    margin-bottom: 5px;
+    width: 70px;
+    background-color: #006600;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+/* 신청 테이블 */
+
+.stu-board{
+    margin-top: 20px;
+    min-height: 200px;
+}
+
+.select-class th{
+    background-color: #402142;
+}
+
+.select-class{
+
+    min-height: 0;
+    border-top: 2px solid #ddd;
+    position: relative;
+
+}
+
+.stu-container > h2{
+    margin: 0;
+    margin-top: 50px;
+    margin-bottom: 5px;
+}
+
+#class-btn{
+    position: absolute;
+    top: -30px;
+    right: 0;
+
+    background-color: #402142;
+    color: #fff;
+
+    border: 0;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    padding: 5px;
+}
+
+
+/* 과제 제출 */
+
+.task-notice h3{
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.stu-container > h4{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 0;
+}
+
+
+/* 학적 변동 신청 */
+
+.change-area textarea{
+    resize: none;
+}
+
+.change-area span{
+    font-size: 15px;
+    padding: 10px;
+}
+
+.first-line{
+    display: flex;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.first-line span:nth-child(1){
+    margin-left: 30px;
+    margin-right: 50px;
+    font-weight: bold;
+}
+
+.first-line input{
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: lightgray;
+    padding-left: 10px;
+    width: 130px;
+}
+
+.second-line{
+    display: flex;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.second-line > span:nth-child(1){
+    font-weight: bold;
+    margin-right: 25px;
+    margin-left: 5px;
+}
+
+.second-line label{
+    display: flex;
+}
+
+.second-line input{
+    height: 30px;
+}
+
+.third-line{
+    display: flex;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.third-line span{
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.third-line textarea{
+    padding: 10px;
+}
+
+#state-btn{
+    width: 90px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+
+    margin-left: 30px;
+    margin-top: 120px;
+}
+
+
+/* 학적 변동 신청 내역 */
+
+.state-list-area{
+    margin-top: 50px;
+}
+
+.list-header{
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.list-header h2{
+    margin: 10px 0;
+}
+
+.state-table table{
+    width: 1000px;
+    margin-left: 40px;
+}
+
+.state-table table th:nth-child(1){
+    width: 5%;
+    text-align: center;
+}
+.state-table table td:nth-child(1){
+    text-align: center;
+}
+.state-table table th:nth-child(2){
+    width: 9%;
+    text-align: center;
+}
+.state-table table td:nth-child(2){
+    text-align: center;
+}
+
+.state-table th:nth-child(3){
+    width: 55%;
+}
+
+.state-table th:nth-child(4){
+    width: 9%;
+    text-align: center;
+}
+.state-table th:nth-child(5){
+    width: 15%;
+    text-align: center;
+}
+
+.state-table td:nth-child(4){
+    width: 9%;
+    text-align: center;
+}
+.state-table td:nth-child(5){
+    text-align: center;
+}
+
+/* 페이지네이션 */
+
+.pagination-area{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 50px;
+}
+.pagination {
+    display: inline-block;
+  }
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+  }
+  .pagination a.active {
+    background-color: #42444e;
+    color: white;
+    border: 1px solid #42444e;
+  }
+  .pagination a:hover:not(.active) {background-color: #ddd;}
