@@ -13,10 +13,6 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDAO dao;
 	
-	
-	
-	
-	
 	// 회원 가입 서비스
 	@Override
 	@Transactional(rollbackFor = {Exception.class})
@@ -28,6 +24,15 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println("serviceImpl : " + result);
 		
 		return result;
+	}
+	
+	// 로그인 서비스
+	@Override
+	public Member login(Member inputMember) {
+		
+		Member loginMember = dao.login(inputMember);
+		
+		return loginMember;
 	}
 	
 	
