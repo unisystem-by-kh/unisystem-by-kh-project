@@ -17,12 +17,11 @@ public class Board {
 	private String boardCDate;
 	private String boardUDate;
 	private int boardCount;
-	private int boardSt;
+	private String boardSt;
 	private int replyCount;
 	private int memberNo;
 	private String memberName;
 	private int category;
-	private int replyCount;
 
 	
 	// 이미지 목록

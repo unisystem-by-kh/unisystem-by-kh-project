@@ -33,6 +33,6 @@ public interface BoardService {
 	 * @param cp
 	 * @return map
 	 */
-	Map<String, Object> selectinquiryBoardList(int boardCode, int cp);
+	Map<String, Object> selectinquiryBoardList(int categoryNo, int cp);
 
 }
