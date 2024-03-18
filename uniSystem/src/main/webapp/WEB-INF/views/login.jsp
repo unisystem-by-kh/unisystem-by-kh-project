@@ -35,8 +35,8 @@
         <form action="login" method="post" id="loginFrm">
             <fieldset class="id-pw-area">
                 <section>
-                    <input type="text" name="userId" id="userId" placeholder="아이디" autocomplete="off">
-                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호">                  
+                    <input type="text" name="memberNo" id="userId" placeholder="학번" >
+                    <input type="password" name="memberPw" id="userPw" placeholder="비밀번호">      
                 </section>
                 <section>
                     <button>로그인</button>
@@ -64,8 +64,8 @@
         <div class="modal_body">
             <div class="close-area">&times;</div>
             <h2>아이디 찾기</h2>
-            <input type="text" name="userName" id="idUserName" placeholder="이름을 입력해주세요.">
-            <input type="email" name="userEmail" id="idUserEmail" placeholder="이메일을 입력해주세요.">
+            <input type="text" name="memberName" id="idUserName" placeholder="이름을 입력해주세요.">
+            <input type="email" name="memberEmail" id="idUserEmail" placeholder="이메일을 입력해주세요.">
             <br>
             <button class="btn" id="btn1">아이디 찾기</button>
         </div>
@@ -75,14 +75,23 @@
         <div class="modal_body">
             <div class="close-area">&times;</div>
             <h2>비밀번호 찾기</h2>
-            <input type="text" name="userName" id="pwUserName" placeholder="이름을 입력해주세요.">
-            <input type="email" name="userEmail" id="pwUserEmail" placeholder="이메일을 입력해주세요.">
-            <input type="text" name="userId" id="pwUserId" placeholder="아이디를 입력해주세요.">
+            <input type="text" name="memberName" id="pwUserName" placeholder="이름을 입력해주세요.">
+            <input type="email" name="memberEmail" id="pwUserEmail" placeholder="이메일을 입력해주세요.">
+            <input type="text" name="memberNo" id="pwUserId" placeholder="아이디를 입력해주세요.">
             <br>
             <button class="btn" id="btn2">비밀번호 찾기</button>
         </div>
     </div>
 
-    <script src="/js/login.js"></script>
+    <script src="/resources/js/login.js"></script>
+
+    <c:if test="${!empty message}">
+
+    <script>
+        // EL/JSTL 구문이 먼저 해석되는데
+        // 문자열의 경우 따옴표가 없는 상태이니 붙여줘야한다!!!
+        swal("${message}", "", "success");
+    </script>
+</c:if>
 </body>
 </html>

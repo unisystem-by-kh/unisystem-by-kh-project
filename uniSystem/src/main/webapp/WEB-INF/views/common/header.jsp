@@ -16,6 +16,8 @@
                 <a href="/board/comeMap">오시는길</a>
                 <a href="/board/noticeBoardList">공지사항</a>
                 <a href="/board/boardData">자료실</a>
+                <a href="/student/selectStudentList">테스트용 교직원 학생 조회</a>
+                <a href="/signUp">회원가입 테스트</a>
             </div>
     
             <!-- 로그인 안했을 경우 -->
@@ -28,7 +30,7 @@
             <div class="navigation1-row2-professor">
                 <div>컴퓨터학과 <a href="#">홍길동 </a> 교수</div>
                 <div class="quickMenu">
-                    <div id="quickMenu-easy"><a href="#">로그아웃</a></div>
+                    <div id="quickMenu-easy"><a href="/logout">로그아웃</a></div>
                 </div>
             </div>
 
@@ -38,7 +40,7 @@
         <nav class="navigation2">
             <!-- 클릭 시 메인 페이지로 이동하는 문구 -->
             <div class="logoArea">
-                <a href="/" class="logoText">
+                <a href="/main" class="logoText">
                     <div>UNI-SYSTEM</div>
                     <div>KH INFORMATION EDUCATION CENTER</div>
                     <div>UNIVERSITY</div>
@@ -71,7 +73,7 @@
             <div class="navigation3-home">
                 <a href="#">학사일정</a>
                 <a href="/board/departmentBoardList">학과공지</a>
-                <a href="/board/freeBoardList">자유게시판</a>
+                <a href="/board/3">자유게시판</a>
                 <a href="/board/inquiryBoardList">1:1문의</a>
             </div>
 

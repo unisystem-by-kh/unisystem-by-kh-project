@@ -40,7 +40,8 @@
 
         <div class="uploadFile">
             <p>첨부파일</p>
-            <span id="uploadName" value>선택된 파일 없음</span>
+            <img src="/resources/images/board/downloadIMG.png" width="30" height="30">
+            <span id="uploadName" value> 파일 없음</span>
         </div>
 
         <div class="comment">
@@ -49,15 +50,21 @@
             <button id="commentBtn">등 록</button>
         </div>
 
-
-        <button id="listBtn"><a href="/board/noticeBoardList"> 목 록</a> </button>
-
+        <div class="noticeBtn">
+            <button id="listBtn">수정</button>
+            <button id="listBtn">삭제</button>
+            <button id="listBtn">취소</button>
+            <button id="listBtn"><a href="/board/noticeBoardList"> 목 록</a> </button>
+        </div>
         
         
 
 
     </div>
 
+    <%-- <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/>  --%>
+    <!-- 오류나서 주석처리함 -->
+     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
 

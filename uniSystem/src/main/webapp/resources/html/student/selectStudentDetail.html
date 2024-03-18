@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 정보 및 수업 정보</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            height: 20%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer {
+            height: 10%;
+            background-color: #f0f0f0;
+            text-align: center;
+            line-height: 50px;
+        }
+        main {
+            padding: 20px;
+            width: 80%;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>학생 정보</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>생년월일</th>
+                    <th>학년</th>
+                    <th>학기</th>
+                    <th>학적</th>
+                    <th>이수한 학점</th>
+                    <th>등록금 납부 여부</th>
+                    <th>진급</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01-2412345</td>
+                    <td>홍길동</td>
+                    <td>2001-01-01</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>
+                        <select>
+                            <option value="재학중">재학중</option>
+                            <option value="휴학중">휴학중</option>
+                            <option value="졸업">졸업</option>
+                        </select>
+                    </td>
+                    <td>10/30</td>
+                    <td>납부 완료</td>
+                    <td><button>승인</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>과목명</th>
+                    <th>강의 학점</th>
+                    <th>담당 교수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>JAVA</td>
+                    <td>3</td>
+                    <td>고길동</td>
+                </tr>
+                <tr>
+                    <td>HTML</td>
+                    <td>3</td>
+                    <td>신원하</td>
+                </tr>
+                <tr>
+                    <td>보건통계학</td>
+                    <td>2</td>
+                    <td>조경숙</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer>Footer 영역</footer>
+</body>
+</html>

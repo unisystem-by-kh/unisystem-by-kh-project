@@ -42,8 +42,25 @@
                     </form>
                 </div>
     
-                <!-- 학과이름 데이터 전달 -->
-                <div class="object-area">경영학과</div>
+                <%-- <div class="object-area">경영학과</div> --%>
+
+                <div class="object-select-area">
+                    <select name="objectList" id="objectList">
+                        <option value="1학년">1학년</option>
+                        <option value="2학년">2학년</option>
+                        <option value="3학년">3학년</option>
+                        <option value="4학년">4학년</option>
+                    </select>
+                </div>
+
+
+                <div class="object-select-area">
+                    <select name="objectList" id="objectList">
+                        <option value="1학기">1학기</option>
+                        <option value="2학기">2학기</option>
+                    </select>
+                </div>
+
 
                 <div class="object-select-area">
                     <select name="objectList" id="objectList">
@@ -52,7 +69,13 @@
                         <option value="심리학과">심리학과</option>
                     </select>
                 </div>
+
+                <div class="object-select-area">
+                    <button id="searchBtn">조회하기</button>
+                </div>
             </div>
+
+            
 
             <!-- 정보영역 -->
             <div class="grade-area" title="스크롤해서 더보기">

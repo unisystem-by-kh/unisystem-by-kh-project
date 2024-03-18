@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="memberMapper">
+
+	<resultMap type="Member" id="member_rm">
+   
+      <!-- DB의 기본 키(복합키면 여러 개 작성) -->
+      <id property="memberNo" column="MEMBER_NO" />
+
+      <!-- DB의 일반 컬럼들 -->
+      <result property="memberPw" column="MEMBER_PW" />
+      <result property="memberAddr" column="MEMBER_ADDR" />
+      <result property="memberEmail" column="MEMBER_EMAIL" />
+      <result property="memberPhone" column="MEMBER_PHONE" />
+      <result property="memberGen" column="MEMBER_GEN" />
+      <result property="memberDate" column="MEMBER_DATE" />
+      <result property="memberGrade" column="MEMBER_GRADE" />
+      <result property="memberTerm" column="MEMBER_TERM" />
+      <result property="memberStatus" column="MEMBER_STATUS" />
+      <result property="memberName" column="MEMBER_NAME" />
+      <result property="memberProfile" column="MEMBER_PROFILE" />
+      <result property="memberSsn" column="MEMBER_SSN" />
+      
+      
+      <result property="departmentNo" column="DEPARTMENT_NO" />
+      
+      
+   </resultMap>
+
+
+	<insert id="signUp">
+	
+		INSERT INTO MEMBER (MEMBER_NO, MEMBER_PW, MEMBER_ADDR, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_GEN, MEMBER_NAME, DEPARTMENT_NO, MEMBER_BIRTH)
+		VALUES (#{memberNo}, #{memberPw}, #{memberAddr}, #{memberEmail}, #{memberPhone}, #{memberGen}, #{memberName}, 2, SYSDATE)
+		
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="Member" resultMap="member_rm">
+		SELECT MEMBER_NO, MEMBER_ADDR, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_GEN,
+		    TO_CHAR(MEMBER_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_DATE,
+		    MEMBER_GRADE, MEMBER_TERM, MEMBER_STATUS, MEMBER_NAME, MEMBER_PROFILE, MEMBER_SSN, DEPARTMENT_NO
+		FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+		AND MEMBER_PW = #{memberPw}
+	</select>
+	
+	
+
+</mapper>

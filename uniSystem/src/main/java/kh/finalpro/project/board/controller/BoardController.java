@@ -1,39 +1,81 @@
 package kh.finalpro.project.board.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import kh.finalpro.project.board.model.service.FreeBoardService;
+import kh.finalpro.project.board.model.service.BoardService;
 
+@SessionAttributes({"loginMember"})
 @RequestMapping("/board")
 @Controller
 public class BoardController {
 
-
+	@Autowired
+	private BoardService service;
+	
+	
 	// 오시는길
 	@GetMapping("/comeMap")
 	public String comeMap() {
 
 		return "board/comeMap";
 	}
+	
+	
+	
+	
+	
+	
+	
+	// ---------------------------------------------------------------------------
+	// ---------------------------------- 게시판 ----------------------------------
+	// ---------------------------------------------------------------------------
+	
+	// ---------------------------------- 자유게시판 ---------------------------------- 
 
-	// �옄�쑀寃뚯떆�뙋 紐⑸줉 �뿰寃�ㅁㄴㅇ
-	@GetMapping("/freeBoardList")
-	public String selectFreeBoardList() {
+	// 자유게시판 목록
+	@GetMapping("/{boardCode:[0-9]+}")
+	public String selectFreeBoardList(
+										@PathVariable("boardCode") int boardCode,
+										@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
+										Model model,
+										@RequestParam Map<String, Object> paramMap
+										) {
+		
+		Map<String, Object> map = null;
+		
+		map = service.selectFreeBoardList(boardCode, cp);
+		
+		model.addAttribute("map" , map);
+		
+		System.out.println("Controller-boardCode : " + boardCode);
+		System.out.println("Controller-cp : " + cp);
+		System.out.println("Controller-model : " + model);
+		System.out.println("Controller-paramMap : " + paramMap);
+		
+		
 
 		return "board/freeBoardList";
 	}
 
-	// �옄�쑀寃뚯떆�뙋 �긽�꽭 �뿰寃�
+	
+	// 자유게시판 상세
 	@GetMapping("/freeBoardDetail")
 	public String selectFreeBoardDetail() {
 
 		return "board/freeBoardDetail";
 	}
 
-	// �옄�쑀寃뚯떆�뙋 �벑濡� �뿰寃�
+	
+	// 자유게시판 삽입
 	@GetMapping("/freeBoardInsert")
 	public String selectFreeBoardInsert() {
 
@@ -41,13 +83,27 @@ public class BoardController {
 	}
 
 
-	// �옄�쑀寃뚯떆�뙋 �벑濡� �뿰寃�
+	// 자유게시판 수정
 	@GetMapping("/freeBoardUpdate")
 	public String selectFreeBoardUpdate() {
 
 		return "board/freeBoardUpdate";
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 자료실 목록 연결
 	@GetMapping("/boardData")
@@ -77,6 +133,9 @@ public class BoardController {
 	// 1:1문의 목록
 	@GetMapping("/inquiryBoardList")
 	public String inquiryBoard() {
+		
+		
+		
 		return "board/inquiryBoardList";
 	}
 
