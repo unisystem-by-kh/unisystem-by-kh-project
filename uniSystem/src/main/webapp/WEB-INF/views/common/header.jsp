@@ -14,7 +14,7 @@
             <!-- 공통 -->
             <div class="navigation1-row1">
                 <a href="/board/comeMap">오시는길</a>
-                <a href="/board/noticeBoardList">공지사항</a>
+                <a href="/board/1">공지사항</a>
                 <a href="/board/boardData">자료실</a>
                 <a href="/student/selectStudentList">테스트용 교직원 학생 조회</a>
                 <a href="/signUp">회원가입 테스트</a>
@@ -87,7 +87,8 @@
 
             <!-- 교과목을 올렸을 경우 -->
             <div class="navigation3-subject">
-                <a href="/admin/subjectList">교과목 조회</a>
+                <a href="/staff/subjectList">교과목 조회</a>
+                <a href="/staff/insert">교과목 등록</a>
             </div>
 
             <!-- 과제를 올렸을 경우 -->

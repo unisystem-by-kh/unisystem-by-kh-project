@@ -19,11 +19,13 @@ public class Board {
 	private int boardCount;
 	private String boardSt;
 	private int replyCount;
+	private int readCount;
 	
 	private String memberNo;
 	private String memberName;
 	private int categoryNo;
 
+	private String departmentName;
 	
 	// 이미지 목록
 	private List<BoardFile> fileList;

@@ -69,8 +69,8 @@
 							<tr>
 								<td>${board.boardNo}</td>
 								<td>
-									<!-- ${boardCode} : @PathVariable로 request scope에 추가된 값 --> <a
-									href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}">${board.boardTitle}</a>
+									<!-- ${boardCode} : @PathVariable로 request scope에 추가된 값 --> 
+									<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}">${board.boardTitle}</a>
 									<c:choose>
 										<c:when test="${board.boardSt == 'D' }">
 

@@ -135,11 +135,51 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.updateReadCount" , boardNo);
 	}
 
+
 	public List<String> selectFileList(int boardNo) {
 		return sqlSession.selectList("boardMapper.selectImageListAll", boardNo);
 	}
 
-	
+	/** 1:1문의 상세 조회
+	 * @param map
+	 * @return board
+	 */
+	public Board selectInquiryBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.selectInquiryBoard", map);
+	}
+
+
+	/** 공지사항 목록 조회
+	 * @param pagination
+	 * @param boardCode
+	 * @return
+	 */
+	public List<Board> selectNoticeBoardList(Pagination pagination, int categoryNo) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		// 3) selectList
+
+		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
+	}
+
+	/** 공지사항 목록 조회(검색)
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Board> selectNoticeBoardList(Pagination pagination, Map<String, Object> paramMap) {
+		// 1) offset 계산
+				int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+				// 2) RowBounds 객체 생성
+				RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+				
+				return sqlSession.selectList("boardMapper.selectNoticeBoardList_search", paramMap, rowBounds);
+	}
+
 
 
 }

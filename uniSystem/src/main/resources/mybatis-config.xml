@@ -17,6 +17,7 @@
 		<typeAlias type="kh.finalpro.project.main.model.dto.Member" alias="Member" />
 		<typeAlias type="kh.finalpro.project.board.model.dto.Board" alias="Board" />
 		<typeAlias type="kh.finalpro.project.board.model.dto.BoardFile" alias="BoardFile" />
+		<typeAlias type="kh.finalpro.project.admin.model.dto.Subject" alias="Subject" />
 	</typeAliases>
 	
 	<!--mapper 파일(SQL 작성되는파일) 위치등록부분 -->
@@ -24,6 +25,7 @@
 		<mapper resource="/mappers/student-mapper.xml" />
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/board-mapper.xml" />
+		<mapper resource="/mappers/subject-mapper.xml" />
 	</mappers>		
 
 </configuration>
