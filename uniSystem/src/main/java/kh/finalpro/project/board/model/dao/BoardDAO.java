@@ -78,6 +78,8 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.searchFreeBoardList" , paramMap, rowBounds);
 
 	}
+	
+	
 
 	/** 1:1 문의 목록조회
 	 * @param pagination
@@ -93,6 +95,88 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectinquiryBoardList", categoryNo, rowBounds);
 
 	}
+	/** 1:1문의 검색 게시글 갯수 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public int getListCountInquiry(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("boardMapper.getListCount_inquiry", paramMap);
+	}
+
+	/** 1:1문의 목록(검색)
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<BoardDAO> selectinquiryBoardList(Pagination pagination, Map<String, Object> paramMap) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("boardMapper.selectinquiryBoardList_search", paramMap, rowBounds);
+	}
+	
+	
+
+	/** 자유게시판 상세 조회
+	 * @param map
+	 * @return map
+	 */
+	public Board selectFreeBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.selectFreeBoard" , map);
+	}
+
+	/** 자유게시판 게시글 조회수 증가
+	 * @param boardNo
+	 * @return result
+	 */
+	public int updateReadCount(int boardNo) {
+		return sqlSession.update("boardMapper.updateReadCount" , boardNo);
+	}
+
+
+	/** 1:1문의 상세 조회
+	 * @param map
+	 * @return board
+	 */
+	public Board selectInquiryBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.selectInquiryBoard", map);
+	}
+
+
+	/** 공지사항 목록 조회
+	 * @param pagination
+	 * @param boardCode
+	 * @return
+	 */
+	public List<Board> selectNoticeBoardList(Pagination pagination, int categoryNo) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		// 3) selectList
+
+		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
+	}
+
+	/** 공지사항 목록 조회(검색)
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Board> selectNoticeBoardList(Pagination pagination, Map<String, Object> paramMap) {
+		// 1) offset 계산
+				int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+				// 2) RowBounds 객체 생성
+				RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+				
+				return sqlSession.selectList("boardMapper.selectNoticeBoardList_search", paramMap, rowBounds);
+	}
+
+
 
 	
 

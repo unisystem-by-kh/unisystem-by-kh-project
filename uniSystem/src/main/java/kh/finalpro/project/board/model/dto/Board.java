@@ -19,9 +19,12 @@ public class Board {
 	private int boardCount;
 	private String boardSt;
 	private int replyCount;
-	private int memberNo;
+	private int readCount;
+	
+	private String memberNo;
 	private String memberName;
-	private int category;
+	private int categoryNo;
+	private String departmentName;
 
 	
 	// 이미지 목록

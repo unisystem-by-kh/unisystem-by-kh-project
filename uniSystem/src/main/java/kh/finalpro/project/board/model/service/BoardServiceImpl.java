@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.finalpro.project.board.model.dao.BoardDAO;
 import kh.finalpro.project.board.model.dto.Board;
@@ -88,6 +89,89 @@ public class BoardServiceImpl implements BoardService{
 		
 		return map;
 		
+	}
+	
+	// 1:1문의 목록(검색)
+	@Override
+	public Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp) {
+		
+		int listCount = dao.getListCountInquiry(paramMap);
+
+		Pagination pagination = new Pagination(cp, listCount);
+
+		List<BoardDAO> boardList = dao.selectinquiryBoardList(pagination, paramMap);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		return map;
+	}
+
+	// 자유게시판 상세 조회
+	@Override
+	public Board selectFreeBoard(Map<String, Object> map) {
+		return dao.selectFreeBoard(map);
+	}
+
+	// 자유게시판 게시글 조회수 증가
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateReadCount(int boardNo) {
+		return dao.updateReadCount(boardNo);
+	}
+	
+	
+	//공지사항 목록 조회
+	@Override
+	public Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp){
+		
+		int listCount = dao.getListCount(categoryNo);
+		
+		
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		
+		
+		List<Board> boardList = dao.selectNoticeBoardList(pagination, categoryNo);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		
+		return map;
+		
+	}
+
+	//공지사항 목록 조회(검색)
+	@Override
+	public Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp) {
+				int listCount = dao.getListCount(paramMap);
+				Pagination pagination = new Pagination(cp, listCount);
+				
+				List<Board> boardList = dao.selectNoticeBoardList(pagination, paramMap);
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("pagination", pagination);
+				map.put("boardList", boardList);
+						
+				return map;
+	}
+
+	
+	
+
+	@Override
+	public Map<String, Object> selelctBoardList(int boardCode, int cp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	// 1:1문의 상세조회
+	@Override
+	public Board selectInquiryBoard(Map<String, Object> map) {
+		return dao.selectInquiryBoard(map);
 	}
 
 }

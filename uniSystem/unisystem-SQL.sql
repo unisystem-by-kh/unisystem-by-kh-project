@@ -111,7 +111,7 @@ INSERT INTO "MEMBER" (
     "DEPARTMENT_NO"
 )
 VALUES(
-    '01-2412345',
+    012412345,
     'pass01',
     '학생일',
     '주소 영역 ^^^ 상세주소 영역',
@@ -144,7 +144,7 @@ INSERT INTO "MEMBER" (
     "DEPARTMENT_NO"
 )
 VALUES(
-    '02-123456',
+    022412345,
     'pass02',
     '전혜선',
     '주소 영역 ^^^ 상세주소 영역',
@@ -175,7 +175,7 @@ INSERT INTO "MEMBER" (
     "DEPARTMENT_NO"
 )
 VALUES(
-    '03-2412345',
+    032412345,
     'pass03',
     '교직원일',
     '주소 영역 ^^^ 상세주소 영역',
