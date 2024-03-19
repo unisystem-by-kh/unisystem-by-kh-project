@@ -78,6 +78,8 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.searchFreeBoardList" , paramMap, rowBounds);
 
 	}
+	
+	
 
 	/** 1:1 문의 목록조회
 	 * @param pagination
@@ -93,6 +95,29 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectinquiryBoardList", categoryNo, rowBounds);
 
 	}
+	/** 1:1문의 검색 게시글 갯수 조회
+	 * @param paramMap
+	 * @return
+	 */
+	public int getListCountInquiry(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("boardMapper.getListCount_inquiry", paramMap);
+	}
+
+	/** 1:1문의 목록(검색)
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<BoardDAO> selectinquiryBoardList(Pagination pagination, Map<String, Object> paramMap) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("boardMapper.selectinquiryBoardList_search", paramMap, rowBounds);
+	}
+	
+	
 
 	/** 자유게시판 상세 조회
 	 * @param map

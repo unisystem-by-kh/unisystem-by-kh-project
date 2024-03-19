@@ -39,6 +39,14 @@ public interface BoardService {
 
 
 
+	/** 1 : 1 문의 목록(검색)
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp);
+
+
 	/** 자유게시판 상세 목록 조회
 	 * @param map
 	 * @return freeBoard
