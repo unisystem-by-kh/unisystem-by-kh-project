@@ -1,15 +1,16 @@
 package kh.finalpro.project.board.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.cookie.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.service.BoardService;
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.student.model.dto.Student;
 
 @SessionAttributes({"loginMember"})
@@ -94,12 +96,141 @@ public class BoardController {
 
 
 	// 자유게시판 상세
-	@GetMapping("/freeBoardDetail")
-	public String selectFreeBoardDetail() {
+	@GetMapping("/{categoryNo:3}/{boardNo}")
+	public String selectFreeBoardDetail(
+			@PathVariable("categoryNo") int categoryNo,
+			@PathVariable("boardNo") int boardNo,
+			Model model,
+			RedirectAttributes ra,
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			HttpServletRequest req,
+			HttpServletResponse resp
+			) throws ParseException {
+		
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println("Controller:::categoryNo : "+categoryNo);
+		System.out.println("Controller:::boardNo : "+boardNo);
+		System.out.println("Controller:::loginMember : "+loginMember);
+		System.out.println("---------------------------------------------------------------------------");
 		
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+		
+		Board board = service.selectFreeBoard(map);
+		
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println("Controller:::board : "+board);
+		System.out.println("---------------------------------------------------------------------------");
+		
+		String path = null;
+		
+		if(board != null) {
+			
+			if(loginMember != null) { // 로그인 상태인 경우
+				map.put("memberNo", loginMember.getMemberNo());
+			}
 
-		return "board/freeBoardDetail";
+			
+			// 쿠키를 이용한 조회수 증가 처리
+			
+			// 1) 비회원 또는 로그인한 회원의 글이 아닌 경우
+			if(loginMember == null || loginMember.getMemberNo() != board.getMemberNo()) {
+				
+				// 2) 쿠키 얻어오기
+				Cookie c = null;
+				
+				Cookie[] cookies = req.getCookies();
+				if(cookies != null) {
+					
+					for(Cookie cookie : cookies) {
+						if(cookie.getName().equals("readBoardNo")) {
+							c = cookie;
+							break;
+						}
+					}
+					
+				}
+				
+				// 3) 기존 쿠키가 없거나(c == null)
+				int result = 0;
+				
+				if(c == null) {
+					
+					// 쿠키가 존재 X -> 하나 새로 생성
+					c = new Cookie("readBoardNo" , "|" + boardNo + "|");
+					
+					// 조회수 증가 서비스 호출
+					result = service.updateReadCount(boardNo);
+					
+				}else {
+					
+					
+					// String.indexOf("문자열")
+					// : 찾는 문자열이 String 몇번 인덱스에 존재하는지 반환
+					//   단, 없으면 -1 반환
+					if(c.getValue().indexOf("|" + boardNo + "|") == -1) {
+						
+						// 기존 값에 게시글 번호 추가해서 다시 세팅
+						c.setValue(c.getValue() + "|" + boardNo + "|");
+						
+						// 조회수 증가 서비스 호출
+						result = service.updateReadCount(boardNo);
+					}
+					
+				}
+				
+				// 4) 조회수 증가 성공 시
+				// 쿠키가 적용되는 경로, 수명(당일 23시 59분 59초) 지정
+				
+				if(result > 0) {
+					
+					// 조회된 board 조회 수와 DB 조회 수 동기화
+					board.setBoardCount(board.getBoardCount() + 1);
+					
+					// 적용 경로 설정
+					c.setPath("/"); // "/" 이하 경로 요청 시 쿠키 서버로 전달
+					
+					// 수명 지정
+					Calendar cal = Calendar.getInstance();
+					cal.add(cal.DATE, 1);
+					
+					// 날짜 표기법 변경 객체 (DB의 TO_CHAR()와 비슷)
+					SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+					
+					// Java.util.Date
+					Date a = new Date(); // 현재 시간
+					
+					Date temp = new Date(cal.getTimeInMillis()); // 내일 (24시간 후)
+					
+					Date b = sdf.parse(sdf.format(temp)); // 내일 0시 0분 0초
+					
+					// -> 내일 0시 0분 0초 까지 남은 시간을 초단위로 반환
+					long diff = (b.getTime() - a.getTime()) / 1000;
+					
+					c.setMaxAge((int)diff); // 수명 설정
+					
+					resp.addCookie(c); 
+					
+				}
+				
+			}
+			
+			// ---------------------------------------------------------------------
+			
+			path = "board/freeBoardDetail"; // forward할 jsp 경로
+			model.addAttribute("board" , board);
+			
+		}else { // 조회 결과가 없을 경우
+			path = "redirect:/board/" + categoryNo;
+			// 게시판 첫 페이지로 리다이렉트
+			ra.addFlashAttribute("message" , "해당 게시글이 존재하지 않습니다."); // message는 푸터에 담겨있음
+		}
+		
+		return path;
+		
+//		return "board/freeBoardDetail";
 	}
 
 

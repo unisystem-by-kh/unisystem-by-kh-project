@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.finalpro.project.board.model.dao.BoardDAO;
 import kh.finalpro.project.board.model.dto.Board;
@@ -88,6 +89,19 @@ public class BoardServiceImpl implements BoardService{
 		
 		return map;
 		
+	}
+
+	// 자유게시판 상세 조회
+	@Override
+	public Board selectFreeBoard(Map<String, Object> map) {
+		return dao.selectFreeBoard(map);
+	}
+
+	// 자유게시판 게시글 조회수 증가
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateReadCount(int boardNo) {
+		return dao.updateReadCount(boardNo);
 	}
 
 }
