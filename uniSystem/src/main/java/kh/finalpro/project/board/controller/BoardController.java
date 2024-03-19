@@ -267,28 +267,22 @@ public class BoardController {
 
 	//공지사항 목록
 	@GetMapping("/{categoryNo:1}")
-	public String noticeBoard(@PathVariable("categoryNo") int categoryNo
+	public String selelctNoticeBoardList(
+			@PathVariable("categoryNo") int categoryNo
 			, @RequestParam(value="cp", required=false, defaultValue = "1") int cp
-			, Model model
-			, @RequestParam Map<String, Object> paramMap
-			) {
+			, Model model) {
+				
 		
-		if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색X)
-			
-			Map<String, Object> map = service.selelctNoticeBoardList(categoryNo, cp);
-			
-			model.addAttribute("map", map);
-			
-		} else { // 검색어가 있을 때 (검색 O)
-
-			paramMap.put("categoryNo", categoryNo);
-			Map<String, Object> map = service.selelctNoticeBoardList(paramMap, cp);
-			
-//			model.addAttribute("map", map);
-		}
+		// 게시글 목록 조회 서비스 호출
+		Map<String, Object> map = service.selelctNoticeBoardList(categoryNo, cp);
+		
+		// 조회 결과를 request scope에 세팅 후 forward
+		model.addAttribute("map", map);
 		
 		return "board/noticeBoardList";
 	}
+	
+	
 
 	//공지사항 작성페이지
 	@GetMapping("/noticeBoardWrite")
