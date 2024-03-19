@@ -70,12 +70,12 @@ idModal.addEventListener("click", () => {
 });
 
 // 모달영역이 아닌 부분 클릭시 모달창 닫기
-modalId.addEventListener("click", e => {
+/* modalId.addEventListener("click", e => {
     const evTarget = e.target
     if(evTarget.classList.contains("modal")) {
         modalId.style.display = "none"
     }
-})
+}) */
 
 // 모달창 켜기(비밀번호 찾기)
 pwModal.addEventListener("click", () => {
@@ -83,12 +83,12 @@ pwModal.addEventListener("click", () => {
 });
 
 // 모달영역이 아닌 부분 클릭시 모달창 닫기
-modalPw.addEventListener("click", e => {
+/* modalPw.addEventListener("click", e => {
     const evTarget = e.target
     if(evTarget.classList.contains("modal")) {
         modalPw.style.display = "none"
     }
-})
+}) */
 
 // x버튼 클릭시 모달창 닫기
 closeArea[0].addEventListener("click", ()=>{
@@ -124,6 +124,7 @@ if(btn1 != null){
                 idUserName.focus();
             });
         }
+
 
         fetch("findMemberId?memberName=" + idUserName.value + "&memberEmail=" + idUserEmail.value)
         .then( resp => resp.text())

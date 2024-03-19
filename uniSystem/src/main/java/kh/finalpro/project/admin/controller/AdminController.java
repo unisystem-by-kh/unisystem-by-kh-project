@@ -20,12 +20,6 @@ import kh.finalpro.project.admin.model.service.AdminService;
 public class AdminController {
 	
 	private AdminService adminService; // AdminService 서비스 변수;
-	
-	@GetMapping("/subjectList")
-	public String subjectList() {
-		// 교과목 조회 페이지
-		return "admin/subjectList";
-	}
 
 	//교직원  교번/학번 번호생성 페이지
 	@GetMapping("/UniqueNo")

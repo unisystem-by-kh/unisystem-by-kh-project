@@ -111,11 +111,11 @@ INSERT INTO "MEMBER" (
     "DEPARTMENT_NO"
 )
 VALUES(
-    '01-2412345',
+    012412345,
     'pass01',
     '학생일',
     '주소 영역 ^^^ 상세주소 영역',
-    'user01@naver.com',
+    'anycallshow@naver.com',
     '01012341234',
     'M',
     SYSDATE,
@@ -144,9 +144,9 @@ INSERT INTO "MEMBER" (
     "DEPARTMENT_NO"
 )
 VALUES(
-    '02-2412345',
+    022412345,
     'pass02',
-    '교수일',
+    '전혜선',
     '주소 영역 ^^^ 상세주소 영역',
     'professor01@naver.com',
     '01078947894',
@@ -175,7 +175,7 @@ INSERT INTO "MEMBER" (
     "DEPARTMENT_NO"
 )
 VALUES(
-    '03-2412345',
+    032412345,
     'pass03',
     '교직원일',
     '주소 영역 ^^^ 상세주소 영역',

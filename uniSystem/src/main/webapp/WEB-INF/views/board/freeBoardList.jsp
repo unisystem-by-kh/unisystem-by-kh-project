@@ -3,11 +3,12 @@
 
 <c:set var="pagination" value="${map.pagination}" />
 <c:set var="boardList" value="${map.boardList}" />
+<%-- <c:set var="categoryNo" value="${map.categoryNo}" /> --%>
 
 <%-- 수정 예정 --%>
-<%-- <c:forEach var="boardType" items="${boardTypeList}">
-    <c:if test="${boardType.BOARD_CODE == boardCode}">
-        <c:set var="boardName" value="${boardType.BOARD_NAME}" />
+<%-- <c:forEach var="categoryNo" items="${categoryNo}">
+    <c:if test="${categoryNo.CATEGORY_NO == categoryNo}">
+        <c:set var="categoryName" value="${categoryNo.CATEGORY_NAME}" />
     </c:if>
 </c:forEach> --%>
 
@@ -102,11 +103,11 @@
                         <div class="boardList-area">
                             <div>${board.boardNo}</div>
                             <div>
-                                <a href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}${sp}">
+                                <a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">
                                     <!-- 썸네일이 있을 경우 -->
                                     <c:if test="${!empty board.fileList}">
                                         <%-- 수정 필요 --%>
-                                        <div><img src="${board.fileList}" alt="#"></div>
+                                        <%-- <div><img src="${board.fileList}" alt="#"></div> --%>
                                     </c:if>
                                     <div><img src="https://iuc.cnu.ac.kr/_custom/cnu/resource/img/tmp_gallery.png" alt="#"></div>
                                     <div>${board.boardTitle}</div>
@@ -140,17 +141,17 @@
 
                     <!-- 페이지네이션 영역 -->
                     <div class="paginations-area">
-                        <div>&lt;</div>
-                        <div id="paginations">
-                            <div class="active">1</div>
-                            <div>2</div>
-                            <div>3</div>
-                            <div>4</div>
-                            <div>5</div>
-                        </div>
-                        <div>&gt;</div>
-                    </div>
+                        <a href="/board/${categoryNo}?cp=${pagination.prevPage}${sp}"><div>&lt;</div></a>
 
+                        <div id="paginations">
+                            <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                                <a href="/board/${categoryNo}?cp=${i}${sp}"><div>${i}</div></a>
+                            </c:forEach>
+                        </div>
+
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <a href="/board/${categoryNo}?cp=${pagination.nextPage}${sp}"><div>&gt;</div></a>
+                    </div>
 
                 </div>
 

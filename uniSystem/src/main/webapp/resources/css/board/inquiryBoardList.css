@@ -1,3 +1,9 @@
+main{
+	width: 1200px;
+	 margin: auto;
+	
+}
+
 .main-title{
     width: 1200px;
     margin: auto;
@@ -35,6 +41,17 @@ label input{
 
 input:focus {outline: none;}
 
+.search-area > h3{
+	 display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 800px;
+	height: 50px;
+    margin: 30px auto;
+}
+
+
+
 #search > button{
     width: 30px;
     height: 30px;
@@ -53,11 +70,13 @@ input:focus {outline: none;}
     width: 1200px;
     margin: auto;
     border-collapse: collapse
+    border-top: 1px solid #ddd;
 }
 
 .table > thead{
     height: 40px;
     border-bottom: 1px solid #ddd;
+	
 }
 
 .table > tbody{
