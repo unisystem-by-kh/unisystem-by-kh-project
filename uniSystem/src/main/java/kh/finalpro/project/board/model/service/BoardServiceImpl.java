@@ -177,12 +177,6 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Map<String, Object> selelctBoardList(int boardCode, int cp) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<String> selectFileList(int boardNo) {
 		return dao.selectFileList(boardNo);
 	}
