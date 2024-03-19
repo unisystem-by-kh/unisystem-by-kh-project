@@ -136,6 +136,10 @@ public class BoardDAO {
 	}
 
 
+	public List<String> selectFileList(int boardNo) {
+		return sqlSession.selectList("boardMapper.selectImageListAll", boardNo);
+	}
+
 	/** 1:1문의 상세 조회
 	 * @param map
 	 * @return board
@@ -176,9 +180,6 @@ public class BoardDAO {
 				return sqlSession.selectList("boardMapper.selectNoticeBoardList_search", paramMap, rowBounds);
 	}
 
-
-
-	
 
 
 }

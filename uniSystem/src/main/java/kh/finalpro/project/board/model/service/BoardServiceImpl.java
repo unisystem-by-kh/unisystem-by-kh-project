@@ -43,6 +43,7 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println(boardList);
 
 		System.out.println("Service ;; " + map);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@썸네일을 찾아라 : " + boardList);
 
 		return map;
 	}
@@ -105,6 +106,7 @@ public class BoardServiceImpl implements BoardService{
 
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
+		
 		return map;
 	}
 
@@ -172,6 +174,17 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board selectInquiryBoard(Map<String, Object> map) {
 		return dao.selectInquiryBoard(map);
+	}
+
+	@Override
+	public Map<String, Object> selelctBoardList(int boardCode, int cp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> selectFileList(int boardNo) {
+		return dao.selectFileList(boardNo);
 	}
 
 }

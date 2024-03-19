@@ -60,6 +60,14 @@ public interface BoardService {
 	 */
 	int updateReadCount(int boardNo);
 
+	Map<String, Object> selelctBoardList(int boardCode, int cp);
+	
+	
+	/** DB에 있는 이미지(파일) 목록 조회
+	 * @return dbImageList
+	 */
+	List<String> selectFileList(int boardNo);
+
 	/** 공지사항 목록 조회
 	 * @param boardCode
 	 * @param cp
@@ -81,6 +89,7 @@ public interface BoardService {
 	 * @return board
 	 */
 	Board selectInquiryBoard(Map<String, Object> map);
+
 
 
 }

@@ -24,8 +24,8 @@ public class Board {
 	private String memberNo;
 	private String memberName;
 	private int categoryNo;
-	private String departmentName;
 
+	private String departmentName;
 	
 	// 이미지 목록
 	private List<BoardFile> fileList;

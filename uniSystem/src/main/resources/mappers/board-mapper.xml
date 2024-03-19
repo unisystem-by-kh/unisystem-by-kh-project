@@ -19,8 +19,24 @@
       <result property="memberNo" column="MEMBER_NO" />
       <result property="memberName" column="MEMBER_NAME" />
       <result property="categoryNo" column="CATEGORY_NO" />
-      <result property="departmentName" column="DEPARTMENT_NAME" />
 
+      <result property="departmentName" column="DEPARTMENT_NAME" />
+     
+      <collection property="fileList" select="selectFileList"
+         column="BOARD_NO" javaType="java.util.ArrayList" ofType="BoardFile">
+      </collection>
+
+   </resultMap>
+   
+   <resultMap type="BoardFile" id="boardFile_rm">
+      <id property="boardFileNo" column="BOARD_FILE_NO" />
+
+      <result property="boardFilePath" column="BOARD_FILE_PATH" />
+      <result property="boardFileOriginal" column="BOARD_FILE_ORIGINAL" />
+      <result property="boardFileRename" column="BOARD_FILE_RENAME" />
+      
+      <result property="boardFileCategoryNo" column="BOARD_FILE_CATEGORY_NO" />
+      <result property="boardNo" column="BOARD_NO" />
    </resultMap>
 
    <!-- 게시판 종류 목록 조회 -->
@@ -39,7 +55,7 @@
 
    <!-- 게시글 목록 조회 -->
    <select id="selectFreeBoardList" resultMap="board_rm">
-      SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_CONTENT,
+      SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_CONTENT, BOARD_ST,
       
 		    <![CDATA[
 		        CASE  
@@ -188,6 +204,13 @@
    </update>
    
    
+
+   <!-- 특정 게시글 이미지 조회 -->
+   <select id="selectFileList" resultMap="boardFile_rm">
+      SELECT * FROM BOARD_FILE
+      WHERE BOARD_NO = #{boardNo}
+   </select>
+
    <!-- 1:1문의 상세 조회 -->
    <select id="selectInquiryBoard" resultMap="board_rm">
 		SELECT BOARD_NO, BOARD_TITLE,
@@ -203,13 +226,11 @@
 		AND BOARD_NO = ${boardNo}
    </select>
    
-   
-   
-   
+
    
 	<!-- 1:1문의 게시판 목록조회 -->
 	<select id="selectinquiryBoardList" resultMap="board_rm">
-		 SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_ST,
+	 SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_ST,
          
 		<![CDATA[
 		CASE  
@@ -227,8 +248,10 @@
       WHERE C.BOARD_NO = B.BOARD_NO
       AND C.REPLY_ST = 'N') REPLY_COUNT,
       
+
        (SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME FROM BOARD_FILE F
-		WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
+		    WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
+
 
 
       FROM "BOARD" B

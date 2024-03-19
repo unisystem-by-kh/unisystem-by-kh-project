@@ -86,10 +86,15 @@ public class BoardController {
 		
 		model.addAttribute("map" , map);
 		
-		System.out.println("Controller-boardCode : " + categoryNo);
+		System.out.println();
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println("Controller-categoryNo : " + categoryNo);
 		System.out.println("Controller-cp : " + cp);
 		System.out.println("Controller-model : " + model);
 		System.out.println("Controller-paramMap : " + paramMap);
+		System.out.println("Controller-map : " + map);
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println();
 
 		return "board/freeBoardList";
 	}
@@ -107,11 +112,13 @@ public class BoardController {
 			HttpServletResponse resp
 			) throws ParseException {
 		
+		System.out.println();
 		System.out.println("---------------------------------------------------------------------------");
 		System.out.println("Controller:::categoryNo : "+categoryNo);
 		System.out.println("Controller:::boardNo : "+boardNo);
 		System.out.println("Controller:::loginMember : "+loginMember);
 		System.out.println("---------------------------------------------------------------------------");
+		System.out.println();
 		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -273,10 +280,11 @@ public class BoardController {
 			model.addAttribute("map", map);
 			
 		} else { // 검색어가 있을 때 (검색 O)
+
 			paramMap.put("categoryNo", categoryNo);
 			Map<String, Object> map = service.selelctNoticeBoardList(paramMap, cp);
 			
-			model.addAttribute("map", map);
+//			model.addAttribute("map", map);
 		}
 		
 		return "board/noticeBoardList";
