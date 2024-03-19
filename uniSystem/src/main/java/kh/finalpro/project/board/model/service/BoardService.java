@@ -35,4 +35,7 @@ public interface BoardService {
 	 */
 	Map<String, Object> selectinquiryBoardList(int categoryNo, int cp);
 
+
+	Map<String, Object> selelctBoardList(int boardCode, int cp);
+
 }
