@@ -19,7 +19,8 @@ public class Board {
 	private int boardCount;
 	private String boardSt;
 	private int replyCount;
-	private int memberNo;
+	
+	private String memberNo;
 	private String memberName;
 	private int category;
 
