@@ -15,9 +15,7 @@
     
 </head>
 <body>
-
-	<c:set var="classList" value="${map.classList}"/>
-	<c:set var="pagination" value="${map.pagination}"/>
+	
 
 	 <main>
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -33,25 +31,23 @@
 	            <div class="search-area">
 	                <form action="">
 	                    <select name="major" id="">
-	                        <option value="10">컴퓨터과학과</option>
-	                        <option value="0">전체</option>
+	                        <option value="">컴퓨터과학과</option>
+	                        <option value="">전체</option>
 	                    </select>
 	                    <select name="grade" id="">
-	                        <option value="1">1학년</option>
-	                        <option value="2">2학년</option>
-	                        <option value="3">3학년</option>
-	                        <option value="4">4학년</option>
-	                        <option value="0">전체</option>
+	                        <option value="">1학년</option>
+	                        <option value="">2학년</option>
+	                        <option value="">전체</option>
 	                    </select>
 	                    <select name="step" id="">
-	                        <option value="1">1학기</option>
-	                        <option value="2">2학기</option>
-	                        <option value="0">전체</option>
+	                        <option value="">1학기</option>
+	                        <option value="">2학기</option>
+	                        <option value="">전체</option>
 	                    </select>
 	                    <select name="type" id="">
-	                        <option value="0">전체</option>
-	                        <option value="3">전공</option>
-	                        <option value="2">교양</option>
+	                        <option value="">전체</option>
+	                        <option value="">전공</option>
+	                        <option value="">교양</option>
 	                    </select>
 	                    <label for="" class="query-label">
 	                        <input type="text" name="query">
@@ -61,7 +57,7 @@
 	            </div>
 	
 	            <div class="stu-board">
-	                <table id="ajax-area">
+	                <table>
 	                    <tr>
 	                        <th>No.</th>
 	                        <th>학과명</th>
@@ -72,25 +68,57 @@
 	                        <th>학점</th>
 	                        <th>담당교수</th>
 	                    </tr>
-					
-						<c:forEach items="${classList}" var="cl">
-							<tr>
-								<td>${cl.classNo}</td>
-								<td>${cl.departmentName}</td>
-								<td>${cl.classGrade}학년</td>
-								<td>${cl.classTrem}학기</td>
-								<td>${cl.className}</td>
-								<c:if test="${cl.classPoint == 2}" >
-									<td>교양</td>
-								</c:if>
-								<c:if test="${cl.classPoint == 3}" >
-									<td>전공</td>
-								</c:if>
-								<td>${cl.classPoint}</td>
-								<td>${cl.memberName}</td>
-							</tr>
-						</c:forEach>
-						
+	
+	                    <tr>
+	                        <td>1</td>
+	                        <td>컴퓨터과학과</td>
+	                        <td>1학년</td>
+	                        <td>1학기</td>
+	                        <td>JAVA</td>
+	                        <td>전공</td>
+	                        <td>3</td>
+	                        <td>남궁성</td>
+	                    </tr>
+	                    <tr>
+	                        <td>1</td>
+	                        <td>컴퓨터과학과</td>
+	                        <td>1학년</td>
+	                        <td>1학기</td>
+	                        <td>JAVA</td>
+	                        <td>전공</td>
+	                        <td>3</td>
+	                        <td>남궁성</td>
+	                    </tr>
+	                    <tr>
+	                        <td>1</td>
+	                        <td>컴퓨터과학과</td>
+	                        <td>1학년</td>
+	                        <td>1학기</td>
+	                        <td>JAVA</td>
+	                        <td>전공</td>
+	                        <td>3</td>
+	                        <td>남궁성</td>
+	                    </tr>
+	                    <tr>
+	                        <td>1</td>
+	                        <td>컴퓨터과학과</td>
+	                        <td>1학년</td>
+	                        <td>1학기</td>
+	                        <td>JAVA</td>
+	                        <td>전공</td>
+	                        <td>3</td>
+	                        <td>남궁성</td>
+	                    </tr>
+	                    <tr>
+	                        <td>1</td>
+	                        <td>컴퓨터과학과</td>
+	                        <td>1학년</td>
+	                        <td>1학기</td>
+	                        <td>JAVA</td>
+	                        <td>전공</td>
+	                        <td>3</td>
+	                        <td>남궁성</td>
+	                    </tr>
 	                    
 	                </table>
             
@@ -100,19 +128,11 @@
 	            <div class="pagination-area">
 	                <div class="pagination">
 	                    <a href="#">&laquo;</a>
-						
-						<c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
-
-							<c:choose>
-								<c:when test="${i == pagination.currentPage}">
-									<a class="active">${i}</a>
-								</c:when>
-							   <c:otherwise>
-									<a href="#">{i}</a>
-							   </c:otherwise>
-							</c:choose> 
-						</c:forEach>
-
+	                    <a href="#">1</a>
+	                    <a href="#" class="active">2</a>
+	                    <a href="#">3</a>
+	                    <a href="#">4</a>
+	                    <a href="#">5</a>
 	                    <a href="#">&raquo;</a>
                 </div>
             </div>
@@ -126,7 +146,7 @@
     </main>
 
 
-	<script src="/resources/js/collegian/collegian.js"></script>
+
 </body>
 
 
