@@ -22,7 +22,7 @@ public class Board {
 	
 	private String memberNo;
 	private String memberName;
-	private int category;
+	private int categoryNo;
 
 	
 	// 이미지 목록

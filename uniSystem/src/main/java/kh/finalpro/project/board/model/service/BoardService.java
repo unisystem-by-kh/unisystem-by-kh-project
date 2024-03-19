@@ -61,6 +61,12 @@ public interface BoardService {
 	int updateReadCount(int boardNo);
 
 	Map<String, Object> selelctBoardList(int boardCode, int cp);
+	
+	
+	/** DB에 있는 이미지(파일) 목록 조회
+	 * @return dbImageList
+	 */
+	List<String> selectFileList(int boardNo);
 
 
 }

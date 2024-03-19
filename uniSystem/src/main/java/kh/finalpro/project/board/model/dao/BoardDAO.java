@@ -135,6 +135,10 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.updateReadCount" , boardNo);
 	}
 
+	public List<String> selectFileList(int boardNo) {
+		return sqlSession.selectList("boardMapper.selectImageListAll", boardNo);
+	}
+
 	
 
 
