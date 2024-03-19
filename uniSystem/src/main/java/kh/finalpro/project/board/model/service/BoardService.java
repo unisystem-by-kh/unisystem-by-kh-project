@@ -60,7 +60,20 @@ public interface BoardService {
 	 */
 	int updateReadCount(int boardNo);
 
-	Map<String, Object> selelctBoardList(int boardCode, int cp);
+	/** 공지사항 목록 조회
+	 * @param boardCode
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
+
+
+	/** 공지사항 목록 조회(검색)
+	 * @param paramMap
+	 * @param cp
+	 * @return boardList
+	 */
+	Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp);
 
 
 }
