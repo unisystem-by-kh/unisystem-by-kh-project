@@ -3,6 +3,8 @@ package kh.finalpro.project.board.model.service;
 import java.util.List;
 import java.util.Map;
 
+import kh.finalpro.project.board.model.dto.Board;
+
 public interface BoardService {
 
 	
@@ -36,11 +38,29 @@ public interface BoardService {
 	Map<String, Object> selectinquiryBoardList(int categoryNo, int cp);
 
 
+
 	/** 1 : 1 문의 목록(검색)
 	 * @param paramMap
 	 * @param cp
 	 * @return
 	 */
 	Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp);
+
+
+	/** 자유게시판 상세 목록 조회
+	 * @param map
+	 * @return freeBoard
+	 */
+	Board selectFreeBoard(Map<String, Object> map);
+
+
+	/** 자유게시판 조회수 증가
+	 * @param boardNo
+	 * @return result
+	 */
+	int updateReadCount(int boardNo);
+
+	Map<String, Object> selelctBoardList(int boardCode, int cp);
+
 
 }

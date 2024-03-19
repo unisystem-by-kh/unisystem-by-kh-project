@@ -119,6 +119,22 @@ public class BoardDAO {
 	
 	
 
+	/** 자유게시판 상세 조회
+	 * @param map
+	 * @return map
+	 */
+	public Board selectFreeBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.selectFreeBoard" , map);
+	}
+
+	/** 자유게시판 게시글 조회수 증가
+	 * @param boardNo
+	 * @return result
+	 */
+	public int updateReadCount(int boardNo) {
+		return sqlSession.update("boardMapper.updateReadCount" , boardNo);
+	}
+
 	
 
 
