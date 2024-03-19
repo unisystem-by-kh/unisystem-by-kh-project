@@ -19,30 +19,30 @@
 
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="container">
-
-        <div class="announcement">
-            <h2>공 지 사 항</h2>
-        </div>
-
-        <div class="select">
-            <div>
-               <select>
-                    <option>구분</option>
-                    <option>학사 공지</option>
-                    <option>인사 공지</option>
-               </select>
-               
-                <select>
-                    <option>제목</option>
-                    <option>내용</option>
-                    <option>제목+내용</option>
-                </select>
-
-                <input type="text" placeholder="검색어를 입력하세요.">
-                <button>검색</button>
+            <div class="announcement">
+                <h2>공 지 사 항</h2>
             </div>
-        </div>
-        
+
+        <form action="${categoryNo}" method="get" id="boardSearch" >
+            <div class="select">
+                <div>
+                <select name="noticea" id="searchKey">
+                        <option value="x">구분</option>
+                        <option value="y">학사 공지</option>
+                        <option value="z">인사 공지</option>
+                </select>
+                
+                    <select name="noticeb" id="titleKey">
+                        <option value="t">제목</option>
+                        <option value="c">내용</option>
+                        <option value="tc">제목+내용</option>
+                    </select>
+
+                    <input type="text" name="noticec" id="searchQuery" placeholder="검색어를 입력하세요.">
+                    <button>검색</button>
+                </div>
+            </div>
+        </form>
 
         <div class="post">
             <table>
@@ -97,6 +97,34 @@
                         <th>학사지원팀</th>
                         <th>2024. 02. 20</th>
                     </tr>
+
+                    <c:choose>
+                            <c:when test="${empty boardList}">
+                                <!-- 조회된 게시글 목록이 비어있거나 null인 경우 -->
+
+                                <!-- 게시글 목록 조회 결과가 비어있다면 -->
+                                <tr>
+                                    <th colspan="6">게시글이 존재하지 않습니다.</th>
+                                </tr>
+                            </c:when>
+
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach var="board" items="${boardList}">
+                                    <tr>
+                                        <td>${board.boardNo}</td>
+                                        <td> 
+                                        
+                                            <a href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a>   
+                                            [${board.commentCount}]                        
+                                        </td>
+                                        <td>${board.memberNickname}</td>
+                                        <td>${board.boardCreateDate}</td>
+                                    </tr>
+
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
 
 
                 </tbody>
