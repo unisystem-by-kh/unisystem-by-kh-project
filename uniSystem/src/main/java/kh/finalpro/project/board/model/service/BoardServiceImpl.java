@@ -120,5 +120,46 @@ public class BoardServiceImpl implements BoardService{
 	public int updateReadCount(int boardNo) {
 		return dao.updateReadCount(boardNo);
 	}
+	
+	
+	//공지사항 목록 조회
+	@Override
+	public Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp){
+		
+		int listCount = dao.getListCount(categoryNo);
+		
+		
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		
+		
+		List<Board> boardList = dao.selectNoticeBoardList(pagination, categoryNo);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		
+		return map;
+		
+	}
+
+	//공지사항 목록 조회(검색)
+	@Override
+	public Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp) {
+				int listCount = dao.getListCount(paramMap);
+				Pagination pagination = new Pagination(cp, listCount);
+				
+				List<Board> boardList = dao.selectNoticeBoardList(pagination, paramMap);
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("pagination", pagination);
+				map.put("boardList", boardList);
+						
+				return map;
+	}
+
+	
+	
 
 }
