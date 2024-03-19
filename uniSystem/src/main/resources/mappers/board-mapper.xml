@@ -19,6 +19,7 @@
       <result property="memberNo" column="MEMBER_NO" />
       <result property="memberName" column="MEMBER_NAME" />
       <result property="categoryNo" column="CATEGORY_NO" />
+      <result property="departmentName" column="DEPARTMENT_NAME" />
 
    </resultMap>
 
@@ -187,6 +188,24 @@
    </update>
    
    
+   <!-- 1:1문의 상세 조회 -->
+   <select id="selectInquiryBoard" resultMap="board_rm">
+		SELECT BOARD_NO, BOARD_TITLE,
+		BOARD_CONTENT, CATEGORY_NO,
+		BOARD_COUNT, MEMBER_NAME, MEMBER_NO, DEPARTMENT_NAME,
+		TO_CHAR(BOARD_C_DATE, 'YYYY"년" MM"월" DD"일" ') AS BOARD_C_DATE,
+		TO_CHAR(BOARD_U_DATE, 'YYYY"년" MM"월" DD"일" ') AS BOARD_U_DATE
+		FROM BOARD
+		JOIN MEMBER USING(MEMBER_NO)
+		JOIN DEPARTMENT USING(DEPARTMENT_NO)
+		WHERE (BOARD_ST = 'N' OR BOARD_ST = 'D')
+		AND CATEGORY_NO = ${categoryNo}
+		AND BOARD_NO = ${boardNo}
+   </select>
+   
+   
+   
+   
    
 	<!-- 1:1문의 게시판 목록조회 -->
 	<select id="selectinquiryBoardList" resultMap="board_rm">
@@ -206,7 +225,10 @@
 		
       (SELECT COUNT(*) FROM "REPLY" C
       WHERE C.BOARD_NO = B.BOARD_NO
-      AND C.REPLY_ST = 'N') REPLY_COUNT
+      AND C.REPLY_ST = 'N') REPLY_COUNT,
+      
+       (SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME FROM BOARD_FILE F
+		WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
 
 
       FROM "BOARD" B

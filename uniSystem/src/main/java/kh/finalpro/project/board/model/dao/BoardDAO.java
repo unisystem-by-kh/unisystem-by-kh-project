@@ -135,6 +135,14 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.updateReadCount" , boardNo);
 	}
 
+	/** 1:1문의 상세 조회
+	 * @param map
+	 * @return board
+	 */
+	public Board selectInquiryBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.selectInquiryBoard", map);
+	}
+
 	
 
 

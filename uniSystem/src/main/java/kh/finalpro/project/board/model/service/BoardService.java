@@ -63,4 +63,11 @@ public interface BoardService {
 	Map<String, Object> selelctBoardList(int boardCode, int cp);
 
 
+	/** 1:1문의 상세페이지
+	 * @param map
+	 * @return board
+	 */
+	Board selectInquiryBoard(Map<String, Object> map);
+
+
 }
