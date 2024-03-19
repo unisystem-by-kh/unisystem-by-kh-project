@@ -5,7 +5,7 @@
 <c:set var="boardList" value="${map.boardList}"/>
 
 <c:forEach var="boardType" items="${boardTypeList}">
-    <c:if test="${boardType.BOARD_CODE == boardCode}">
+    <c:if test="${boardType.CATEGORY_NO == categoryNo}">
         <c:set var="boardName" value="${boardType.BOARD_NAME}"/>
     </c:if>
 </c:forEach>
@@ -38,23 +38,23 @@
                 <h2>공 지 사 항</h2>
             </div>
 
-        <form action="${categoryNo}" method="get" id="boardSearch" >
+        <form action="#" method="get" id="boardSearch" >
             <div class="select">
                 <div>
-                <select name="noticea" id="searchKey">
-                        <option value="x">구분</option>
+                <select name="key" id="searchKey">
+                        <option value="">구분</option>
                         <option value="y">학사 공지</option>
                         <option value="z">인사 공지</option>
                 </select>
                 
-                    <select name="noticeb" id="titleKey">
+                    <select name="key" id="titleKey">
                         <option value="t">제목</option>
                         <option value="c">내용</option>
                         <option value="tc">제목+내용</option>
                     </select>
 
-                    <input type="text" name="noticec" id="searchQuery" placeholder="검색어를 입력하세요.">
-                    <button>검색</button>
+                    <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력하세요.">
+                    <button id="searchBtn">검색</button>
                 </div>
             </div>
         </form>
@@ -130,7 +130,7 @@
                                         <td>${board.boardNo}</td>
                                         <td> 
                                         
-                                            <a href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a>   
+                                            <a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a>   
                                             [${board.commentCount}]                        
                                         </td>
                                         <td>${board.memberNickname}</td>
@@ -153,10 +153,10 @@
           <ul class="pagination">
                 
                     <!-- 첫 페이지로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=1${sp}">&lt;&lt;</a></li>
+                    <li><a href="/board/${categoryNo}?cp=1${sp}">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.prevPage}${sp}">&lt;</a></li>
+                    <li><a href="/board/${categoryNo}?cp=${pagination.prevPage}${sp}">&lt;</a></li>
 
 					
                     <!-- 특정 페이지로 이동 -->
@@ -170,16 +170,16 @@
 
                             <c:otherwise>
                                 <!-- 현재 페이지를 제외한 나머지 -->
-                                <li><a href="/board/${boardCode}?cp=${i}${sp}">${i}</a></li>
+                                <li><a href="/board/${categoryNo}?cp=${i}${sp}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     
                     <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.nextPage}${sp}">&gt;</a></li>
+                    <li><a href="/board/${categoryNo}?cp=${pagination.nextPage}${sp}">&gt;</a></li>
 
                     <!-- 끝 페이지로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.maxPage}${sp}">&gt;&gt;</a></li>
+                    <li><a href="/board/${categoryNo}?cp=${pagination.maxPage}${sp}">&gt;&gt;</a></li>
 
                 </ul>
                 
@@ -200,7 +200,7 @@
     </main>
 
     <script src="/resources/js/header.js"></script>
-    <script src="/resources/js/board/freeBoard/freeBoardUpdate.js"></script>
+    <script src="/resources/js/board/noticeBoard/noticeBoardList.js"></script>
 
 </body>
 </html>

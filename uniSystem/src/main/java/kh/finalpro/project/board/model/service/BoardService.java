@@ -60,35 +60,27 @@ public interface BoardService {
 	 */
 	int updateReadCount(int boardNo);
 
-	Map<String, Object> selelctBoardList(int boardCode, int cp);
-	
 	
 	/** DB에 있는 이미지(파일) 목록 조회
 	 * @return dbImageList
 	 */
 	List<String> selectFileList(int boardNo);
 
-	/** 공지사항 목록 조회
-	 * @param boardCode
-	 * @param cp
-	 * @return map
-	 */
-	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
-
-
-	/** 공지사항 목록 조회(검색)
-	 * @param paramMap
-	 * @param cp
-	 * @return boardList
-	 */
-	Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp);
-
+	
 
 	/** 1:1문의 상세페이지
 	 * @param map
 	 * @return board
 	 */
 	Board selectInquiryBoard(Map<String, Object> map);
+
+
+	/** 공지사항 목록 조회
+	 * @param categoryNo
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
 
 
 
