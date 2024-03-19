@@ -162,4 +162,16 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 
+	@Override
+	public Map<String, Object> selelctBoardList(int boardCode, int cp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	// 1:1문의 상세조회
+	@Override
+	public Board selectInquiryBoard(Map<String, Object> map) {
+		return dao.selectInquiryBoard(map);
+	}
+
 }
