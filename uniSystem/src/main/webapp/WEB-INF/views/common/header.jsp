@@ -87,7 +87,8 @@
 
             <!-- 교과목을 올렸을 경우 -->
             <div class="navigation3-subject">
-                <a href="/admin/subjectList">교과목 조회</a>
+                <a href="/staff/subjectList">교과목 조회</a>
+                <a href="/staff/insert">교과목 등록</a>
             </div>
 
             <!-- 과제를 올렸을 경우 -->

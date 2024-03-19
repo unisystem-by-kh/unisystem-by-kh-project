@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 150px;
+}
+
+.container > h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+label {
+    font-weight: bold;
+    display: inline-block;
+    width: 150px;
+    margin-left: 20px;
+}
+
+input[type="text"] {
+    width: calc(80% - 160px);
+    padding: 10px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+input[type="text"]:focus{
+    border-bottom: 2px solid crimson;
+}
+
+input[name="classStart"]{
+    width: calc(40% - 160px);
+}
+input[name="classEnd"]{
+    width: calc(40% - 160px);
+}
+
+
+.form-group > select{
+    width: 25%;
+    height: 35px;
+
+    /* position: relative; */
+    /* left: 100px; */
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-area{
+    text-align: right;
+}
+
+button {
+    width: 150px;
+    background-color: crimson;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: auto;
+}
+
+button:hover {
+    background-color: skyblue;
+}
+
+#checkTime{
+    background-color: #ccc;
+}
+#checkTime:hover{
+    background-color: crimson;
+}
