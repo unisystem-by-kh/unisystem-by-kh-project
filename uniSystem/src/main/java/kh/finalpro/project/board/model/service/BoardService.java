@@ -38,6 +38,7 @@ public interface BoardService {
 	Map<String, Object> selectinquiryBoardList(int categoryNo, int cp);
 
 
+
 	/** 자유게시판 상세 목록 조회
 	 * @param map
 	 * @return freeBoard
@@ -50,5 +51,8 @@ public interface BoardService {
 	 * @return result
 	 */
 	int updateReadCount(int boardNo);
+
+	Map<String, Object> selelctBoardList(int boardCode, int cp);
+
 
 }

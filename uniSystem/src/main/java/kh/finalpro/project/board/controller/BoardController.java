@@ -30,7 +30,7 @@ import kh.finalpro.project.student.model.dto.Student;
 @SessionAttributes({"loginMember"})
 @RequestMapping("/board")
 @Controller
-public class BoardController {
+public class BoardController { 
 
 	@Autowired
 	private BoardService service;
@@ -251,19 +251,6 @@ public class BoardController {
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	// 자료실 목록 연결
 	@GetMapping("/boardData")
 	public String boardData() {
@@ -272,8 +259,26 @@ public class BoardController {
 	}
 
 	//공지사항 목록
-	@GetMapping("/noticeBoardList")
-	public String noticeBoard() {
+	@GetMapping("/{categoryNo:1}")
+	public String noticeBoard(@PathVariable("boardCode") int boardCode
+			, @RequestParam(value="cp", required=false, defaultValue = "1") int cp
+			, Model model
+			, @RequestParam Map<String, Object> paramMap
+			) {
+		
+		if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색X)
+			
+			Map<String, Object> map = service.selelctBoardList(boardCode, cp);
+			
+			model.addAttribute("map", map);
+			
+		} else { // 검색어가 있을 때 (검색 O)
+			paramMap.put("boardCode", boardCode);
+			Map<String, Object> map = service.selelctBoardList(paramMap, cp);
+			
+			model.addAttribute("map", map);
+		}
+		
 		return "board/noticeBoardList";
 	}
 
