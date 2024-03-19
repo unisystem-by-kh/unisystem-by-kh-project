@@ -89,5 +89,22 @@ public class BoardServiceImpl implements BoardService{
 		return map;
 		
 	}
+	
+	// 1:1문의 목록(검색)
+	@Override
+	public Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp) {
+		
+		int listCount = dao.getListCountInquiry(paramMap);
+
+		Pagination pagination = new Pagination(cp, listCount);
+
+		List<BoardDAO> boardList = dao.selectinquiryBoardList(pagination, paramMap);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		return map;
+	}
 
 }

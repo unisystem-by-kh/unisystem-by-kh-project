@@ -164,12 +164,23 @@ public class BoardController {
 			@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
 			Model model,
 			@RequestParam Map<String, Object> paramMap) {
-
-		// 게시글 목록 조회 서비스 호출
-		Map<String, Object> map = service.selectinquiryBoardList(categoryNo,cp);
-
-		// 조회 결과를 request scope에 세팅 후 forward
-		model.addAttribute("map", map);
+		
+		if(paramMap.get("query") == null) {
+			
+			// 게시글 목록 조회 서비스 호출
+			Map<String, Object> map = service.selectinquiryBoardList(categoryNo,cp);
+			
+			// 조회 결과를 request scope에 세팅 후 forward
+			model.addAttribute("map", map);
+		}else {
+			
+			paramMap.put("categoryNo", categoryNo);
+			
+		    Map<String, Object> map = service.selectinquiryBoardList(paramMap, cp);
+		    
+		    model.addAttribute("map", map);
+			
+		}
 
 		return "board/inquiryBoardList";
 	}

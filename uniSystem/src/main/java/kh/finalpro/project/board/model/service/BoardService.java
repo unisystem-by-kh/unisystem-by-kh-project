@@ -35,4 +35,12 @@ public interface BoardService {
 	 */
 	Map<String, Object> selectinquiryBoardList(int categoryNo, int cp);
 
+
+	/** 1 : 1 문의 목록(검색)
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp);
+
 }
