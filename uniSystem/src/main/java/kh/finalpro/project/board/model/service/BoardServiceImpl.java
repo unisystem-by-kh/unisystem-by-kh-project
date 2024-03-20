@@ -22,6 +22,7 @@ import kh.finalpro.project.board.model.dto.Pagination;
 @Service
 public class BoardServiceImpl implements BoardService{
 
+
 	@Autowired
 	private BoardDAO dao;
 
@@ -246,6 +247,18 @@ public class BoardServiceImpl implements BoardService{
 		return boardNo;
 	}
 	
+	// 자료실 상세 조회(미완)
+	@Override
+	public Board boardDataDetail(int boardNo) {
+		return dao.boardDataDetail(boardNo);
+	}
+
+	// 게시글에 존재하는 파일 조회
+	@Override
+	public List<BoardFile> selectBoardFile(int boardNo) {
+		
+		return dao.selectBoardFile(boardNo);
+	}
 	// 1:1문의 게시글 삭제
 	@Override
 	public int inquiryBoardDelete(int boardNo) {
