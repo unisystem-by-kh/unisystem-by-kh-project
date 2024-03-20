@@ -10,6 +10,31 @@ document.getElementById("searchBtn").addEventListener("click", function() {
 
 })
 
+const boardSearch = document.getElementById("boardSearch");
+const searchKey = document.getElementById("searchKey");
+const searchQuery = document.getElementById("searchQuery");
+
+const options = document.querySelectorAll('#searchKey > option');
+
+(()=>{
+    const params = new URL(location.href).searchParams;
+
+    const key = params.get("key"); // t, c, tc, w 중 하나
+    const query = params.get("query"); // 검색어
+
+    if(key != null){ // 검색을 했을 때
+        // 검색어를 화면에 출력
+        searchQuery.value = query; 
+
+        // option태그를 하나씩 순차 접근해서 value가 key랑 같으면
+        // seleced 속성 추가
+        for(let op of options){
+            if(op.value == key){
+                op.selected = true;
+            }
+        }
+    }
+})();
 
 
 

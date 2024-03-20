@@ -388,6 +388,50 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 	
+	<select id="selelctNoticeBoardList_search" resultMap="board_rm">
+    SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_CONTENT, BOARD_ST,
+    <![CDATA[
+        CASE  
+        WHEN SYSDATE - BOARD_C_DATE < 1/24/60
+        THEN FLOOR( (SYSDATE - BOARD_C_DATE) * 24 * 60 * 60 ) || '초 전'
+        WHEN SYSDATE - BOARD_C_DATE < 1/24
+        THEN FLOOR( (SYSDATE - BOARD_C_DATE) * 24 * 60) || '분 전'
+        WHEN SYSDATE - BOARD_C_DATE < 1
+        THEN FLOOR( (SYSDATE - BOARD_C_DATE) * 24) || '시간 전'
+        ELSE TO_CHAR(BOARD_C_DATE, 'YYYY-MM-DD')
+        END BOARD_C_DATE,
+    ]]>
+
+    (SELECT COUNT(*) FROM "REPLY" R
+    WHERE R.BOARD_NO = B.BOARD_NO
+    AND R.REPLY_ST = 'N') REPLY_COUNT
+
+    FROM "BOARD" B
+    JOIN "MEMBER" USING(MEMBER_NO)
+    JOIN "CATEGORY" USING(CATEGORY_NO)
+    WHERE BOARD_ST = 'N'
+    AND CATEGORY_NO = ${categoryNo}
+    <choose>
+        <!-- 제목 -->
+        <when test='key == "t"'>
+            AND BOARD_TITLE LIKE '%${query}%'
+        </when>
+
+        <!-- 내용 -->
+        <when test='key == "c"'>
+            AND BOARD_CONTENT LIKE '%${query}%'
+        </when>
+
+        <!-- 제목 + 내용 -->
+        <when test='key == "tc"'>
+            AND (BOARD_TITLE LIKE '%${query}%' OR BOARD_CONTENT LIKE '%${query}%')
+        </when>
+    </choose>
+    ORDER BY BOARD_NO DESC
+</select>
+		
+		
+	
 	
 	<select id="selectDataBoardList" resultMap="board_rm">
 		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_C_DATE, NVL(BOARD_U_DATE, BOARD_C_DATE) "BOARD_U_DATE",  BOARD_COUNT 
