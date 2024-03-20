@@ -71,76 +71,32 @@
 
                 <tbody>
 
-                    <tr>
-                        <th><a href="/board/noticeBoardDetail">2024학년도 정시모집 3차(최종) 총원합격자</a></th>
-                        <th>인사 공지</th>
-                        <th>2024. 02. 20</th>
-                    </tr>
-
-                    <tr>
-                        <th>2024학년도 정시모집 3차(최종) 총원합격자 선발 현황</th>
-                        <th>인사 공지</th>
-                        <th>2024. 02. 20</th>
-                    </tr>
-
-                    <tr>
-                        <th>2024학년도 정시모집 3차(최종) 총원합격자 선발 현황</th>
-                        <th>학사지원팀</th>
-                        <th>2024. 02. 20</th>
-                    </tr>
-
-                    <tr>
-                        <th>2024학년도 정시모집 3차(최종) 총원합격자 선발 현황</th>
-                        <th>학사지원팀</th>
-                        <th>2024. 02. 20</th>
-                    </tr>
-
-                    <tr>
-                        <th>2024학년도 정시모집 3차(최종) 총원합격자 선발 현황</th>
-                        <th>학사지원팀</th>
-                        <th>2024. 02. 20</th>
-                    </tr>
-
-                    <tr>
-                        <th>2024학년도 정시모집 3차(최종) 총원합격자 선발 현황</th>
-                        <th>학사지원팀</th>
-                        <th>2024. 02. 20</th>
-                    </tr>
-
-                    <tr>
-                        <th>2024학년도 정시모집 3차(최종) 총원합격자 선발 현황</th>
-                        <th>학사지원팀</th>
-                        <th>2024. 02. 20</th>
-                    </tr>
+              
 
                     <c:choose>
-                            <c:when test="${empty boardList}">
-                                <!-- 조회된 게시글 목록이 비어있거나 null인 경우 -->
 
-                                <!-- 게시글 목록 조회 결과가 비어있다면 -->
+                        <c:when test="${empty boardList}">
+
+                            <!-- 조회된 게시글 목록이 비어있거나 null인 경우 -->
+
+                            <!-- 게시글 목록 조회 결과가 비어있다면 -->
+                            <tr>
+                                <th colspan="6">게시글이 존재하지 않습니다.</th>
+                            </tr>
+                        </c:when>
+
+                        <c:otherwise>
+                            <!-- 게시글 목록 조회 결과가 있다면 -->
+                            <c:forEach var="board" items="${boardList}" begin="0" end="9">
                                 <tr>
-                                    <th colspan="6">게시글이 존재하지 않습니다.</th>
+                                    <th><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a>   
+                                                    [${board.replyCount}] </th>
+                                    <th>${board.memberName}</th>
+                                    <th>${board.boardCDate}</th>
                                 </tr>
-                            </c:when>
-
-                            <c:otherwise>
-                                <!-- 게시글 목록 조회 결과가 있다면 -->
-                                <c:forEach var="board" items="${boardList}">
-                                    <tr>
-                                        <td>${board.boardNo}</td>
-                                        <td> 
-                                        
-                                            <a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a>   
-                                            [${board.commentCount}]                        
-                                        </td>
-                                        <td>${board.memberNickname}</td>
-                                        <td>${board.boardCreateDate}</td>
-                                    </tr>
-
-                                </c:forEach>
-                            </c:otherwise>
-                        </c:choose>
-
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
 
                 </tbody>
 
@@ -185,7 +141,7 @@
                 
     <%-- 글쓰기 버튼 --%>
      <c:if test="${!empty loginMember}">
-        <button id="writeBtn"><a href="/board/noticeBoardWrite">작   성</a></button>
+        <button id="writeBtn">작   성</button>
      </c:if>
 
 
