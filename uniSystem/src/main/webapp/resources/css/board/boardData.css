@@ -17,8 +17,9 @@ main {
 /* 제목 */
 .dataTitle{
     color: crimson;
-    float: left;
+    /* float: left; */
     margin: 20px 10px;
+    border: 1px solid black;
 }
 
 /* 자료실 업로드 */
@@ -116,4 +117,58 @@ th, td {
 .pagi a:hover{
     background-color: crimson;
     color: white;
+}
+
+/* 자료실 상세 부분 CSS */
+
+/* 제목 */
+.detail-title{
+    width: 100%;
+    border-bottom: 1px solid crimson;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 수정, 삭제 버튼 */
+.detail-button{
+    width: 100px;
+    height: 40px;
+    margin: 20px 15px;
+    font-size: 17px;
+    background-color: white;
+    border: 1px solid crimson;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.update-btn{
+    background-color: white;
+}
+
+/* 게시글 내용 */
+.detail-content{
+    background-color: chocolate;
+    min-height: 200px;
+}
+
+/* 게시글 내용 머릿 부분 */
+.content-header{
+    text-align: left;
+    position: relative;
+}
+
+.content-header > *{
+    display: inline-block;
+    margin: 10px;
+}
+
+.file-download{
+    position: absolute;
+    right: 10px;
+}
+
+.content-header span:nth-of-type(2){
+    font-weight: bold;
 }
