@@ -38,16 +38,12 @@
                 <h2>공 지 사 항</h2>
             </div>
 
-        <form action="#" method="get" id="boardSearch" >
+        <form action="${categoryNo}" method="get" id="boardSearch" >
             <div class="select">
                 <div>
-                <select name="key" id="searchKey">
-                        <option value="">구분</option>
-                        <option value="y">학사 공지</option>
-                        <option value="z">인사 공지</option>
-                </select>
                 
-                    <select name="key" id="titleKey">
+                
+                    <select name="key" id="searchKey">
                         <option value="t">제목</option>
                         <option value="c">내용</option>
                         <option value="tc">제목+내용</option>
@@ -87,7 +83,7 @@
 
                         <c:otherwise>
                             <!-- 게시글 목록 조회 결과가 있다면 -->
-                            <c:forEach var="board" items="${boardList}" begin="0" end="9">
+                            <c:forEach var="board" items="${boardList}">
                                 <tr>
                                     <th><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a>   
                                                     [${board.replyCount}] </th>

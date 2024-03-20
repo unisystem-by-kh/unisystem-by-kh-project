@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.finalpro.project.board.model.dto.Board;
+import kh.finalpro.project.board.model.dto.Pagination;
 import kh.finalpro.project.board.model.service.BoardService;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.student.model.dto.Student;
@@ -285,14 +286,28 @@ public class BoardController {
 	public String selelctNoticeBoardList(
 			@PathVariable("categoryNo") int categoryNo
 			, @RequestParam(value="cp", required=false, defaultValue = "1") int cp
-			, Model model) {
+			, Model model
+			, @RequestParam Map<String, Object> paramMap) {
 				
+		if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색X)	
 		
-		// 게시글 목록 조회 서비스 호출
-		Map<String, Object> map = service.selelctNoticeBoardList(categoryNo, cp);
-		
-		// 조회 결과를 request scope에 세팅 후 forward
-		model.addAttribute("map", map);
+			// 게시글 목록 조회 서비스 호출
+			Map<String, Object> map = service.selelctNoticeBoardList(categoryNo, cp);
+			
+			        
+			// 조회 결과를 request scope에 세팅 후 forward
+			model.addAttribute("map", map);
+			
+		} else { // 검색어가 있을 때 (검색 O)
+			paramMap.put("categoryNo", categoryNo);
+			Map<String, Object> map = service.selelctNoticeBoardList(paramMap, cp);
+			
+			Pagination pagination = new Pagination(cp, (int) map.get("listCount"));
+	        pagination.setLimit(10); // 페이지당 보여지는 항목 수를 10으로 설정
+			
+			model.addAttribute("map", map);
+			model.addAttribute("pagination", pagination);
+		}
 		
 		return "board/noticeBoardList";
 	}
