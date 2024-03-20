@@ -138,7 +138,7 @@
 			</ul>
 		</div>
 		<div class="btn-area">
-			<a href="/board/inquiryBoardWrite" id="btn">문의하기</a>
+			<a href="/board/${categoryNo}/write" id="btn">문의하기</a>
 		</div>
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />

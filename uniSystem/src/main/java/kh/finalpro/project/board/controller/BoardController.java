@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -353,14 +354,21 @@ public class BoardController {
 		model.addAttribute("board", board);
 		
 		return path;
-}
+}	
+	
+	// 1:1문의 작성페이지
+	@GetMapping("/{categoryNo:4}/write")
+	public String inquiryBoardInsert(@PathVariable("categoryNo") int categoryNo) {
+		return "board/inquiryBoardWrite";
+	}
+
 	 
 	
 	// 1:1문의 작성페이지
 	@PostMapping("/{categoryNo:4}/write")
 	public String inquiryBoardWrite(
 			@PathVariable("categoryNo") int categoryNo
-	         , Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
+	         , @ModelAttribute Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
 	         , @RequestParam(value="file", required = false) List<MultipartFile> file
 	         , @SessionAttribute(value="loginMember") Member loginMember
 	         , RedirectAttributes ra
@@ -371,7 +379,7 @@ public class BoardController {
 	      
 	      // 2. boardCode도 board에 세팅
 	      board.setCategoryNo(categoryNo);
-	      
+	      System.out.println(board);
 	      // 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
 	      // + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
 	      String webPath = "/resources/images/board/";
@@ -390,7 +398,7 @@ public class BoardController {
 	         path += "/board/" + categoryNo + "/" + boardNo;
 	      }else {
 	         message= "게시글 등록 실패 ㅠㅠ";
-	         path += "insert";
+	         path += "write";
 	      }
 	      ra.addFlashAttribute("message",message);
 	      return path;

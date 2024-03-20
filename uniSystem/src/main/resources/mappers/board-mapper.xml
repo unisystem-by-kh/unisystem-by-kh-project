@@ -326,7 +326,40 @@
       ORDER BY BOARD_NO DESC
 	</select>
 	
+	<!-- 1:1문의 게시글 작성 -->
+	<insert id="inquiryBoardWrite" parameterType="Board"
+		useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int"
+			keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO BOARD
+		VALUES( #{boardNo},
+		#{boardTitle},
+		#{boardContent},
+		DEFAULT, NULL, DEFAULT, #{boardSt},
+		#{memberNo},
+		#{categoryNo}
+		)
+	</insert>
 	
+	<!-- 1:1문의 파일 삽입 -->
+	<insert id="insertInquiryFile" parameterType="list">
+		INSERT INTO BOARD_IMG
+		SELECT SEQ_IMG_NO.NEXTVAL, A.*
+		FROM (
+		<foreach collection="list" item="img" separator=" UNION ALL ">
+			SELECT
+			#{img.boardFilePath} IMG_PATH,
+			#{img.boardFileRename} IMG_RENAME,
+			#{img.boardFileOriginal} IMG_ORIGINAL,
+			#{img.boardFileCategoryNo} CATEGORY_NO,
+			#{img.boardNo} BOARD_NO
+			FROM DUAL
+		</foreach>
+
+		) A
+	</insert>
 	
 	<!-- 공지사항 목록 검색 조회 -->
 	<select id="selectNoticeBoardList" resultMap="board_rm">

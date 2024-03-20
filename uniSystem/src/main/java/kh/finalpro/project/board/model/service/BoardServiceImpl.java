@@ -1,5 +1,6 @@
 package kh.finalpro.project.board.model.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -163,8 +164,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 1:1문의 작성
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) {
+	public int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException{
 		// 0. XSS 방지 처리
 		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
 		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
@@ -194,7 +196,7 @@ public class BoardServiceImpl implements BoardService{
 					// img에 파일 정보를 담아서 uploadList에 추가
 					img.setBoardFilePath(webPath); // 웹 접근 경로
 					img.setBoardNo(boardNo); // 게시글 번호
-
+					img.setBoardFileCategoryNo(board.getCategoryNo());
 					// 파일 원본명
 					String fileName = file.get(i).getOriginalFilename(); // 원본명
 					img.setBoardFileOriginal(fileName); // 원본명
@@ -210,7 +212,7 @@ public class BoardServiceImpl implements BoardService{
 			if(!uploadList.isEmpty()) {
 
 				// BOARD_IMG 테이블에 INSERT하는 DAO 호출
-				int result = dao.insertImageList(uploadList);
+				int result = dao.insertInquiryFile(uploadList);
 				// result == 삽입된 행의 개수 == uploadList.size()
 
 				// 삽입된 행의 개수와 uploadList의 개수가 같다면
@@ -236,7 +238,7 @@ public class BoardServiceImpl implements BoardService{
 					// [결론]
 					// 예외를 강제로 발생기켜서 rollback 해야된다.
 					// -> 사용자 정의 예외 발생
-					throw new FileUploadException(); // 예외 강제 발생
+					// throw new FileUploadException(); // 예외 강제 발생
 
 				}
 			}
