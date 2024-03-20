@@ -313,7 +313,7 @@
 	
 	<!-- 공지사항 목록 검색 조회 -->
 	<select id="selectNoticeBoardList" resultMap="board_rm">
-		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_CONTENT, BOARD_ST,
+	SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_CONTENT, BOARD_ST,
 		 <![CDATA[
 		        CASE  
 		        WHEN SYSDATE - BOARD_C_DATE < 1/24/60
@@ -325,17 +325,16 @@
 		        ELSE TO_CHAR(BOARD_C_DATE, 'YYYY-MM-DD')
 		        END BOARD_C_DATE,
 		    ]]>
-		    
-		    (SELECT COUNT(*) FROM "REPLY" R
-		    WHERE R.BOARD_NO = B.BOARD_NO
-		    AND R.REPLY_ST = 'N') REPLY_COUNT
 
-			
+		       (SELECT COUNT(*) FROM "REPLY" R
+			    WHERE R.BOARD_NO = B.BOARD_NO
+				AND R.REPLY_ST = 'N') REPLY_COUNT
+
 		FROM "BOARD" B
 		JOIN "MEMBER" USING(MEMBER_NO)
 		JOIN "CATEGORY" USING(CATEGORY_NO)
 		WHERE BOARD_ST = 'N'
-		AND CATEGORY_NO = #{categoryNo}
+		AND CATEGORY_NO = ${categoryNo}
 		ORDER BY BOARD_NO DESC
 	</select>
 	
