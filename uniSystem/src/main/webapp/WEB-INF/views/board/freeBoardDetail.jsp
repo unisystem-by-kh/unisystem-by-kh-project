@@ -80,76 +80,29 @@
 
             <div class="row8-area">
 
-                <div class="row8">
-                    <div>
-                        <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
-                        <div class="btnArea">
-                            <button>수정</button>
-                            <button>삭제</button>
+                <c:forEach items="${board.replyList}" var="reply">
+                
+                    <div class="row8">
+                        <div class="btn-profile-area">
+                            <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
+                            <div class="btnArea">
+                                <button id='updateBtn'>수정</button>
+                                <button id='deleteBtn'>삭제</button>
+                            </div>
+                            <div class="profileImg-reply"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#" class="imgProfile"></div>
                         </div>
-                        <div class="profileImg-reply"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#"></div>
+                        <div class="replyMemberName">${reply.memberName}</div>
+
+                        <c:set var='replyDate' value='${reply.replyDate}' />
+                        <div class='replyDate'><c:out value="${fn:substring(replyDate, 0, 15)}"/></div>
+
+                        <div class='replyContnet'>${reply.replyContent}</div>
+                        <%-- 댓글 번호를 할지? 회원 아이디를 넣어줄지? --%>
+                        <div class='replyNo'>${reply.replyNo}</div>
                     </div>
-                    <div>김아무개야</div>
-                    <div>2024-03-04</div>
-                    <div>댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.</div>
-                    <div>1</div>
-                </div>
-                <div class="row8">
-                    <div>
-                        <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
-                        <div class="btnArea">
-                            <button>수정</button>
-                            <button>삭제</button>
-                        </div>
-                        <div class="profileImg-reply"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#"></div>
-                    </div>
-                    <div>김아무개야</div>
-                    <div>2024-03-04</div>
-                    <div>댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.</div>
-                    <div>1</div>
-                </div>
-                <div class="row8">
-                    <div>
-                        <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
-                        <!-- <div class="btnArea">
-                            <button>수정</button>
-                            <button>삭제</button>
-                        </div> -->
-                        <div class="profileImg-reply"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#"></div>
-                    </div>
-                    <div>김아무개야</div>
-                    <div>2024-03-04</div>
-                    <div>댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.</div>
-                    <div>1</div>
-                </div>
-                <div class="row8">
-                    <div>
-                        <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
-                        <!-- <div class="btnArea">
-                            <button>수정</button>
-                            <button>삭제</button>
-                        </div> -->
-                        <div class="profileImg-reply"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#"></div>
-                    </div>
-                    <div>김아무개야</div>
-                    <div>2024-03-04</div>
-                    <div>댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.</div>
-                    <div>1</div>
-                </div>
-                <div class="row8">
-                    <div>
-                        <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
-                        <div class="btnArea">
-                            <button>수정</button>
-                            <button>삭제</button>
-                        </div>
-                        <div class="profileImg-reply"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#"></div>
-                    </div>
-                    <div>김아무개야</div>
-                    <div>2024-03-04</div>
-                    <div>댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.</div>
-                    <div>1</div>
-                </div>
+                
+                </c:forEach>
+
 
             </div>
 
@@ -173,6 +126,16 @@
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
+
+    <script>
+        const boardNo = "${board.boardNo}";
+        // console.log(boardNo);
+
+        const loginMemberNo = "${board.memberNo}";
+        // console.log(loginMemberNo);
+
+        const categoryNo = "${categoryNo}";
+    </script>
 
     <script src="/resources/js/header.js"></script>
     <script src="/resources/js/board/freeBoard/freeBoardDetail.js"></script>
