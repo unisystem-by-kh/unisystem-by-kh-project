@@ -65,14 +65,47 @@ public class CollegianController {
 	// select 체크시 비동기 통신
 	@PostMapping(value = "/selectClassList", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> selectClassList(@RequestBody Map<String, Object> paramMap) {
-
-		return service.searchClassList(paramMap, 1);
+	public Map<String, Object> selectClassList(@RequestBody Map<String, Object> paramMap, 
+											@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		return service.searchClassList(paramMap, cp);
 	}
+	
 
 	// 수강신청 페이지 전환
-	@RequestMapping("/myClass")
-	public String myClass() {
+	@GetMapping("/myClass")
+	public String myClass(Model model, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+
+		// 테스트
+
+		int departmentNo = 10;
+		int memberGrade = 1;
+		int memberTerm = 1;
+		// 까지
+
+		Member mem = new Member();
+		
+		mem.setMemberNo("01-2412345");
+		mem.setDepartmentNo(departmentNo);
+		mem.setMemberGrade(memberGrade);
+		mem.setMemberTerm(memberTerm);
+
+		Map<String, Object> map = null;
+
+		if (paramMap.get("query") != null) {
+			paramMap.put("mem", mem);
+
+			paramMap.put("query", ((String) paramMap.get("query")).toUpperCase()); // 검색어 대문자로 변환
+
+			map = service.searchLecture(paramMap, cp);
+
+		} else {
+			map = service.selectLecture(mem, cp);
+		}
+		
+		System.out.println(map);
+
+		model.addAttribute("map", map);
 
 		return "/collegian/myClass";
 	}

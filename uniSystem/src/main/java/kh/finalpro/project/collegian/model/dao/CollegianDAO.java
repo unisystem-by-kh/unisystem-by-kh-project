@@ -64,6 +64,14 @@ public class CollegianDAO {
 	public List<Department> selectDepartmentList() {
 		return sqlSession.selectList("collegianMapper.selectDepartmentList");
 	}
+
+	public List<Class> selectLecture(Member mem, Pagination pagination) {
+		return sqlSession.selectList("collegianMapper.selectLecture");
+	}
+
+	public List<Class> searchLecture(Pagination pagination, Map<String, Object> paramMap) {
+		return null;
+	}
 	
 	
 	

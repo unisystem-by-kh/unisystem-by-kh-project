@@ -21,7 +21,7 @@ public class CollegianServiceImpl implements CollegianService{
 	
 	@Override
 	public Map<String, Object> selectClassList(Member mem, int cp) {
-		// 1. 특정 게시판의 삭제되지 않은 게시글 수 조회
+		// 1. 사용자 교과목 수 조회
 		int listCount = dao.getListCount(mem);
 
 		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
@@ -49,7 +49,7 @@ public class CollegianServiceImpl implements CollegianService{
 	@Override
 	public Map<String, Object> searchClassList(Map<String, Object> paramMap, int cp) {
 		
-		// 1. 특정 게시판의 삭제되지 않고 검색 조건이 일치하는 게시글 수 조회
+		// 1. 검색 조건이 일치하는 교과목 수 조회
 		int listCount = dao.getListCount(paramMap);
 
 		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
@@ -66,6 +66,56 @@ public class CollegianServiceImpl implements CollegianService{
 		map.put("pagination", pagination);
 		map.put("classList", classList);
 		
+		return map;
+	}
+	
+	// 수강 신청 검색
+	@Override
+	public Map<String, Object> searchLecture(Map<String, Object> paramMap, int cp) {
+		// 1. 검색 조건이 일치하는 교과목 수 조회
+		int listCount = dao.getListCount(paramMap);
+
+		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
+		// -> 내부 필드가 모두 계산되어 초기화됨
+		Pagination pagination = new Pagination(cp, listCount);
+
+		List<Class> classList = dao.searchLecture(pagination, paramMap);
+
+		List<Department> departmentList = dao.selectDepartmentList();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("departmentList", departmentList);
+		map.put("pagination", pagination);
+		map.put("classList", classList);
+
+		return map;
+	}
+
+	// 수강 신청 조회
+	@Override
+	public Map<String, Object> selectLecture(Member mem, int cp) {
+		// 1. 사용자 교과목 수 조회
+		int listCount = dao.getListCount(mem);
+
+		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
+		// -> 내부 필드가 모두 계산되어 초기화됨
+		Pagination pagination = new Pagination(cp, listCount);
+
+		// 3. 특정 게시판에서 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
+		// (어떤 게시판(boardCode)에서
+		// 몇 페이지(pagination.currentPage)에 대한 게시글 몇개(pagination.limit)조회
+		List<Class> lecture = dao.selectLecture(mem, pagination);
+
+		List<Department> departmentList = dao.selectDepartmentList();
+
+		// 4. pagination, boardList를 Map에 답아서 반환
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("departmentList", departmentList);
+		map.put("pagination", pagination);
+		map.put("lecture", lecture);
+
 		return map;
 	}
 	

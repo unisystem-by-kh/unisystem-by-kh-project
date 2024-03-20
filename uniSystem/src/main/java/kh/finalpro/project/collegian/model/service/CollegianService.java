@@ -12,4 +12,8 @@ public interface CollegianService {
 
 	Map<String, Object> searchClassList(Map<String, Object> paramMap, int cp);
 
+	Map<String, Object> searchLecture(Map<String, Object> paramMap, int cp);
+
+	Map<String, Object> selectLecture(Member mem, int cp);
+
 }
