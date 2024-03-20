@@ -25,6 +25,7 @@
 		<result property="memberName" column="MEMBER_NAME" />
 		
 		<result property="lectureFL" column="LECTURE_FL" />
+		<result property="lectureCount" column="LECTURE_COUNT" />
 		
 
 	</resultMap>
@@ -123,12 +124,15 @@
 		ORDER BY 1
 	</select>
 	
+	<!-- 수강 신청 조회  -->
 	<select id="selectLecture" resultMap="class_rm">
 	SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM,
-		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,
+		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,CLASS_MAX,
+        (SELECT COUNT(*) FROM LECTURE Z
+            WHERE A.CLASS_NO = Z.CLASS_NO) LECTURE_COUNT,
 		(SELECT COUNT(*) FROM LECTURE R
-		WHERE R.MEMBER_NO = #{memberNo}
-		AND R.CLASS_NO = A.CLASS_NO) LECTURE_FL
+			WHERE R.MEMBER_NO = #{memberNo}
+			AND R.CLASS_NO = A.CLASS_NO) LECTURE_FL
 	FROM CLASS A
 	JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
 	JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)

@@ -39,6 +39,22 @@ public class ReplyServiceImpl implements ReplyService{
 		return dao.insert(reply);
 	}
 
+	// 댓글 삭제
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int delete(int replyNo) {
+		return dao.delete(replyNo);
+	}
+	
+	// 댓글 수정
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int update(Reply reply) {
+		reply.setReplyContent(Util.XSSHandling(reply.getReplyContent()));
+		return dao.update(reply);
+	}
+	
+
 	
 	
 	

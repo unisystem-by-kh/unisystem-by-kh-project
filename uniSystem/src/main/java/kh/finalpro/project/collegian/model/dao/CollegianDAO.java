@@ -66,7 +66,14 @@ public class CollegianDAO {
 	}
 
 	public List<Class> selectLecture(Member mem, Pagination pagination) {
-		return sqlSession.selectList("collegianMapper.selectLecture");
+		
+		// 1) offset 계산
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("collegianMapper.selectLecture",mem,rowBounds);
 	}
 
 	public List<Class> searchLecture(Pagination pagination, Map<String, Object> paramMap) {

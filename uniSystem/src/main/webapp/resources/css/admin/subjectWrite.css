@@ -90,8 +90,8 @@ button:hover {
 
 
 #resultSet{
-    position: absolute;
-    margin-left: 180px;
+    position: relative;
+    left: 180px;
     z-index: 1001;
     background-color: white;
     list-style: none;
@@ -112,6 +112,10 @@ button:hover {
 }
 
 #resultSet>li:hover{
+    background-color: yellow;
+}
+
+#resultSet>li>b:hover{
     cursor: pointer;
 }
 

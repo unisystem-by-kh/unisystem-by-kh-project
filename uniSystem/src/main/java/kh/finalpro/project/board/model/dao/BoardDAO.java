@@ -219,9 +219,94 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.boardDataDetail", boardNo);
 	}
 
+	/** 1:1문의 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	public int inquiryBoardDelete(int boardNo) {
+		return sqlSession.update("boardMapper.inquiryBoardDelete", boardNo);
+	}
+
+	/** 1:1문의 게시글 수정
+	 * @param board
+	 * @return
+	 */
+	public int inquiryBoardUpdate(Board board) {
+		return sqlSession.update("boardMapper.inquiryBoardUpdate", board);
+	}
+
+	/** 1:1문의 파일 삭제
+	 * @param deleteMap
+	 * @return
+	 */
+	public int inquiryFileDelete(Map<String, Object> deleteMap) {
+		return sqlSession.delete("boardMapper.inquiryBoardDelete", deleteMap);
+	}
+
+	/** 1:1문의 파일 수정
+	 * @param img
+	 * @return
+	 */
+	public int inquiryFileUpdate(BoardFile img) {
+		return sqlSession.update("boardMapper.inquiryFileUpdate", img);
+	}
+
+	/** 1:1문의 파일 삽입
+	 * @param img
+	 * @return
+	 */
+	public int inquiryFileInsert(BoardFile img) {
+		return sqlSession.insert("boardMapper.inquiryFileInsert", img);
+	}
 
 
 
 
+	/** 공지사항 목록 조회
+	 * @param pagination
+	 * @param categoryNo
+	 * @return
+	 */
+	public List<Board> selectNoticeBoardList(Pagination pagination, int categoryNo) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		// 3) selectList
+		
+		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
+	}
+	
+	public List<Board> selectDataList(int categoryNo, Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds);
+	}
+	
+	
+	/** 공지사항 목록 검색
+	 * @param pagination
+	 * @param paramMap
+	 * @return boardList
+	 */
+	public List<Board> selelctNoticeBoardList(Pagination pagination, Map<String, Object> paramMap) {
+		// Rowbounds 객체
+		// - 마이바티스에서 페이징 처리를 위해 제동하는 객체
+		// - offset만큼 건너 뛰고
+		// 그 다음 지정된 행 개수(limit)만큼 조회
 
+		// 1) offset 계산
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit() + 5);
+		
+		return sqlSession.selectList("boardMapper.selelctNoticeBoardList_search", paramMap, rowBounds);
+	}
+	
 }

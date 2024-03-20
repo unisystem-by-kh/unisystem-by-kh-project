@@ -15,6 +15,10 @@
     
 </head>
 <body>
+
+    <c:set var="lecture" value="${map.lecture}"/>
+	<c:set var="pagination" value="${map.pagination}"/>
+	<c:set var="department" value="${map.departmentList}"/>
 	
 
 	 <main>
@@ -80,31 +84,42 @@
                         <th>수강정원</th>
                     </tr>
 
-                    <tr>
-                        <td>1</td>
-                        <td>컴퓨터과학과</td>
-                        <td>1학년</td>
-                        <td>1학기</td>
-                        <td>JAVA</td>
-                        <td>전공</td>
-                        <td>3</td>
-                        <td><button>신청하기</button></td>
-                        <td>남궁성</td>
-                        <td>남궁성</td>
-                        <td>남궁성</td>
-                    </tr> <tr>
-                        <td>1</td>
-                        <td>컴퓨터과학과</td>
-                        <td>1학년</td>
-                        <td>1학기</td>
-                        <td>JAVA</td>
-                        <td>전공</td>
-                        <td>3</td>
-                        <td><button>신청하기</button></td>
-                        <td>남궁성</td>
-                        <td>남궁성</td>
-                        <td>남궁성</td>
-                    </tr>
+                    <c:choose>
+                        <c:when test="${empty lecture}">
+                            <tr>
+                                <td colspan ="8" style="text-align: center;">과목이 존재하지 않습니다.</td>
+                            </tr>
+                        </c:when>
+
+                        <c:otherwise>
+                                <c:forEach items="${lecture}" var="lec">
+                                    <tr>
+                                        <td>${lec.classNo}</td>
+                                        <td>${lec.departmentName}</td>
+                                        <td>${lec.classGrade}학년</td>
+                                        <td>${lec.classTrem}학기</td>
+                                        <td>${lec.className}</td>
+                                        <c:if test="${lec.classPoint == 2}" >
+                                            <td>교양</td>
+                                        </c:if>
+                                        <c:if test="${lec.classPoint == 3}" >
+                                            <td>전공</td>
+                                        </c:if>
+                                        <td>${lec.classPoint}</td>
+                                        <c:if test="${lec.lectureFL > 0}" >
+                                            <td>신청 완료</td>
+                                        </c:if>
+
+                                        <c:if test="${lec.lectureFL == 0}" >
+                                            <td><button id="create-lecture" onclick=addToCart(this)>강의담기<button></td>
+                                        </c:if>
+                                        <td>${lec.classDay} (${lec.classStart}교시 ~ ${lec.classEnd}교시)</td>
+                                        <td>${lec.lectureCount}</td>
+                                        <td>${lec.classMax}
+                                    </tr>
+                                </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                     
                 </table>
 
@@ -139,19 +154,7 @@
                         <th>수강정원</th>
                     </tr>
 
-                    <tr>
-                        <td>1</td>
-                        <td>컴퓨터과학과</td>
-                        <td>1학년</td>
-                        <td>1학기</td>
-                        <td>JAVA</td>
-                        <td>전공</td>
-                        <td>3</td>
-                        <td><button>취소</button></td>
-                        <td>월(1~3교시)</td>
-                        <td>3</td>
-                        <td>50</td>
-                    </tr>
+                   
                     
                 </table>
 
@@ -171,6 +174,7 @@
     </main>
 
 
+    <script src="/resources/js/collegian/myClass.js"></script>
 
 </body>
 

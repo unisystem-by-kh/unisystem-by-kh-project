@@ -83,12 +83,6 @@ public interface BoardService {
 	Board selectInquiryBoard(Map<String, Object> map);
 
 
-	/** 공지사항 목록 조회
-	 * @param categoryNo
-	 * @param cp
-	 * @return map
-	 */
-	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
 
 
 	/** 자료실 목록 조회
@@ -106,6 +100,41 @@ public interface BoardService {
 	 * @return
 	 */
 	int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException;
+
+	
+	/** 공지사항 목록 조회
+	 * @param categoryNo
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
+	
+	
+
+	/** 공지사항 목록 검색
+	 * @param paramMap
+	 * @param cp
+	 * @return boardList
+	 */
+	Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp);
+
+
+	/** 1:1문의 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	int inquiryBoardDelete(int boardNo);
+
+ 
+	/** 1:1문의 게시글 수정
+	 * @param board
+	 * @param file
+	 * @param webPath
+	 * @param filePath
+	 * @param deleteList
+	 * @return
+	 */
+	int inquiryBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath, String deleteList) throws IllegalStateException, IOException;
 
 
 	/** 자료실 상세
