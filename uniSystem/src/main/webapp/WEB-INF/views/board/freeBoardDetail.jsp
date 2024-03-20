@@ -24,7 +24,7 @@
         <div class="mainContainer">
 
             <div class="row1">
-                <div><a href="/board/freeBoardList" style="color: crimson;">자유게시판</a></div>
+                <div><a href="/board/3" style="color: crimson;">자유게시판 목록</a></div>
 
                 <div>
                     <div>분류 : 자유게시판</div>
@@ -45,6 +45,7 @@
 
             <div class="row3">
                 <div>
+                    <%-- 주소부분 처리해야함 --%>
                     <img src="https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/02/a0002727/img/ko/a0002727_parts_5bea39afbf327.jpg?20201211115557&q=80&rw=686&rh=490" alt="#">
                     <div>
                         ${board.boardContent}
@@ -62,12 +63,13 @@
                 </div>
             </div>
 
-            <div class="row5">댓글 <span> [${board.replyCount}]</span></div>
+            <div class="row5">한줄 댓글 <span></span></div>
 
             <div class="row6">
-                <div><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#"></div>
-                <div><textarea name="#" id="#" cols="150" rows="3" placeholder="댓글을 입력해주세요."></textarea></div>
-                <div><button>작성</button></div>
+                <%-- 로그인한 회원의 프로필 이미지 넣기 --%>
+                <div><img src="/resources/images/memberImage.jpg" alt="#"></div>
+                <div><textarea id="replyContentInsert" cols="150" rows="3" placeholder="댓글을 입력해주세요." maxlength="100"></textarea></div>
+                <div><button id="replyAdd">작성</button></div>
             </div>
 
             <div class="row7">
@@ -77,8 +79,7 @@
                 <div>댓글 내용</div>
                 <div>번호</div>
             </div>
-
-            ${board.replyList}
+            <%-- ${board.replyList} 확인용 --%>
             <div class="row8-area">
 
                 <c:forEach items="${board.replyList}" var="reply">
@@ -87,10 +88,12 @@
                         <div class="btn-profile-area">
                             <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
                             <div class="btnArea">
-                                <button id='updateBtn'></button>
-                                <button id='deleteBtn'></button>
+                                <c:if test='${board.memberNo == reply.memberNo}'>
+                                    <button id='updateBtn' >수정</button>
+                                    <button id='deleteBtn' onclick="deleteReply(${reply.replyNo})">삭제</button>
+                                </c:if>
                             </div>
-                            <div class="profileImg-reply"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#" class="imgProfile"></div>
+                            <div class="profileImg-reply"><img src="/resources/images/memberImage.jpg" alt="#" class="imgProfile"></div>
                         </div>
                         <div class="replyMemberName">${reply.memberName}</div>
 
@@ -108,7 +111,7 @@
             </div>
 
             <!-- 페이지네이션 영역 -->
-            <div class="paginations-area">
+            <%-- <div class="paginations-area">
                 <div>&lt;</div>
                 <div id="paginations">
                     <div class="active">1</div>
@@ -118,7 +121,7 @@
                     <div>5</div>
                 </div>
                 <div>&gt;</div>
-            </div>
+            </div> --%>
 
 
 
