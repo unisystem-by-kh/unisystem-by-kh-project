@@ -25,4 +25,5 @@ public class Class {
 	private String memberName;
 	
 	private int lectureFL;
+	private int lectureCount;
 }

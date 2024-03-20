@@ -102,8 +102,6 @@ public class CollegianController {
 		} else {
 			map = service.selectLecture(mem, cp);
 		}
-		
-		System.out.println(map);
 
 		model.addAttribute("map", map);
 
