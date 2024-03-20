@@ -153,15 +153,12 @@
                         <th>신청인원</th>
                         <th>수강정원</th>
                     </tr>
-
-                   
                     
                 </table>
 
-                <form action="" style="display: hiiden;">
-                    <input type="hidden">
-                    <button id="class-btn" type="submit">신청하기</button>
-                </form>
+             
+                <button id="class-btn" type="button">신청하기</button>
+                
 
             </div>
         </div>

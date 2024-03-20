@@ -16,4 +16,6 @@ public interface CollegianService {
 
 	Map<String, Object> selectLecture(Member mem, int cp);
 
+	int insertMyClass(String[] classNoList, Member mem);
+
 }
