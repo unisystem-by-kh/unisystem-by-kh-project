@@ -89,7 +89,7 @@
                             <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
                             <div class="btnArea">
                                 <c:if test='${board.memberNo == reply.memberNo}'>
-                                    <button id='updateBtn' >수정</button>
+                                    <button id='updateBtn' onclick="showUpdateReply(${reply.replyNo}, this)" >수정</button>
                                     <button id='deleteBtn' onclick="deleteReply(${reply.replyNo})">삭제</button>
                                 </c:if>
                             </div>
