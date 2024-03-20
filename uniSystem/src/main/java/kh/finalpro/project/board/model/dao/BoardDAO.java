@@ -164,8 +164,7 @@ public class BoardDAO {
 		// 3) selectList
 
 		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
-	}
-	
+  }
 	
 	/** 자료실 목록 조회
 	 * @param categoryNo
@@ -261,6 +260,7 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.inquiryFileInsert", img);
 	}
 
+	
 	
 	/** 공지사항 목록 검색
 	 * @param pagination
