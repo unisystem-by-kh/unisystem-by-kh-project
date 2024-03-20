@@ -79,7 +79,7 @@ public class CollegianServiceImpl implements CollegianService{
 		// -> 내부 필드가 모두 계산되어 초기화됨
 		Pagination pagination = new Pagination(cp, listCount);
 
-		List<Class> classList = dao.searchLecture(pagination, paramMap);
+		List<Class> lecture = dao.searchLecture(pagination, paramMap);
 
 		List<Department> departmentList = dao.selectDepartmentList();
 
@@ -87,7 +87,7 @@ public class CollegianServiceImpl implements CollegianService{
 
 		map.put("departmentList", departmentList);
 		map.put("pagination", pagination);
-		map.put("classList", classList);
+		map.put("lecture", lecture);
 
 		return map;
 	}
