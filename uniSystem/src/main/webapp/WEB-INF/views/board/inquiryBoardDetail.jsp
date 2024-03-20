@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<c:forEach items="${categoryList}" var="categoryType">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:forEach items="${categoryType}" var="categoryType">
     <c:if test="${categoryType.CATEGORY_NO == categoryNo}" >
         <c:set var="categoryName" value="${categoryType.CATEGORY_NAME}"/>
     </c:if>
@@ -49,8 +49,11 @@
 			</c:if>
 	    </div>
 	    <div class="update-delete-btn">
-	        <button type="">수정</button>
-	        <button>삭제</button>
+		<c:if test="${loginMember.memberNo == board.memberNo}">
+	        <button id="updateBtn">수정</button>
+	        <button id="deleteBtn">삭제</button>
+		</c:if>
+			<button id="goToListBtn">목록으로</button>
 	    </div>
 	
 	    <div class="reply-area">
@@ -92,12 +95,12 @@
         // 게시글 번호 전역 변수로 선언
         const boardNo = "${board.boardNo}";
         
-        const categoryNo = "${categoryType.CATEGORY_NO}";
-       
-		console.log(categoryNo)
-		
+        const categoryNo = "${board.categoryNo}";
+
         const loginMemberNo = "${loginMember.memberNo}"
 
     </script>
+
+	<script src="/resources/js/board/inquiryBoard/inquiryBoardDetail.js"></script>
 </body>
 </html>

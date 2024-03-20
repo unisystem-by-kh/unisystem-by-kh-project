@@ -17,7 +17,7 @@
 	<main>
 
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-		<form action="/board/${categoryNo}/write" method="POST"  enctype="multipart/form-data">
+		<form action="/board/${categoryNo}/write" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
 
 			<div class="boardName">
 				<h1>1 : 1 문의</h1>
@@ -43,7 +43,7 @@
 			<div class="boardFile">
 				<div>첨부파일</div>
 				<div>
-					<input type="file" id="file" name="file" >
+                    <input type="file" id="file" name="file">
 				</div>
 			</div>
 			<div class="boardOpen">
@@ -59,13 +59,18 @@
 
 			<div class="btnArea">
 				<button type="submit">등록하기</button>
-				<button>취소</button>
 			</div>
 		</form>
+			<div class="btnArea">
+				<button id="goToListBtn">취소</button>
+			</div>
 
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
 
+
+	<script src="/resources/js/board/inquiryBoard/inquiryBoardDetail.js"></script>
+	<script src="/resources/js/board/inquiryBoard/inquiryBoardWrite.js"></script>
 </body>
 </html>

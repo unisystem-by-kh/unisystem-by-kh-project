@@ -265,6 +265,86 @@ public class BoardServiceImpl implements BoardService{
 		return boardNo;
 	}
 	
+	// 1:1문의 게시글 삭제
+	@Override
+	public int inquiryBoardDelete(int boardNo) {
+		return dao.inquiryBoardDelete(boardNo);
+	}
+	
+	// 1:1문의 게시글 수정
+	@Override
+	public int inquiryBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath,
+			String deleteList) throws IllegalStateException, IOException{
+		// 1. 게시글 제목/내용만 수정
+
+		// 1) XSS 방지 처리
+		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
+		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
+		// 2) DAO호출
+		int rowCount = dao.inquiryBoardUpdate(board);
+
+		// 2. 게시글 부분이 수정 성공 했을 때
+		if(rowCount > 0) {
+
+			if(!deleteList.equals("")) { // 삭제할 이미지가 있다면
+				// 3. deleteList에 작성된 이미지 모두 삭제
+				Map<String, Object> deleteMap = new HashMap<String, Object>();
+				deleteMap.put("boardNo", board.getBoardNo());
+				deleteMap.put("deleteList", deleteList);
+
+				rowCount = dao.inquiryFileDelete(deleteMap);
+
+				if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백
+					// 예외 강제로 발생
+					// throw new ImageDeleteException();
+				}
+			}
+
+			// 4. 새로 업로드된 이미지 분류 작업
+
+			// images : 실제 파일이 담긴 List
+			//				  -> input type="file" 개수만큼 요소가 조재
+			//				  -> 제출된 파일이 없어도 MultipartFile 객체는 존재
+
+			List<BoardFile> uploadList = new ArrayList<BoardFile>();
+
+			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
+
+			for(int i = 0; i < file.size(); i++) {
+
+				if(file.get(i).getSize() > 0) {
+
+					BoardFile img = new BoardFile();
+					img.setBoardFilePath(webPath);
+					img.setBoardNo(board.getBoardNo()); 
+
+					String fileName = file.get(i).getOriginalFilename(); 
+					img.setBoardFileOriginal(fileName); 
+					img.setBoardFileRename(Util.fileRename(fileName)); 
+
+					uploadList.add(img);
+					
+					// 오라클은 다중  UPDATE를 지원하지 않기 떄문에
+					// 하나씩 UPDATE 수행
+					
+					rowCount = dao.inquiryFileUpdate(img);
+					
+					if(rowCount == 0) {
+						// 수정 실패 == DB에 이미지가 없었다.
+						// -> 이미지를 삽입
+						rowCount = dao.inquiryFileInsert(img);
+					}
+				}
+
+
+
+			}
+			
+			
+		}
+		return rowCount;
+	}
+	
 	
 
 }
