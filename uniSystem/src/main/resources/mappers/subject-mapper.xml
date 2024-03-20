@@ -17,7 +17,9 @@
 		
 		<result property="departmentNo" column="DEPARTMENT_NO" />
 		<result property="memeberNo" column="MEMBER_NO" />
+		<result property="memberName" column="MEMBER_NAME" />
 	</resultMap>
+	
 	
 	<select id="selectProfessor" resultType="string">
 		SELECT MEMBER_NO FROM MEMBER
@@ -45,6 +47,13 @@
 		        #{memeberNo}
 		        )
 	</insert>
+	
+	<!-- 학과 목록 조회 -->
+	<select id="selectDeptCodeList" resultType="map">
+		SELECT * FROM 
+		DEPARTMENT ORDER BY 1
+	</select>
+	
 
 
 

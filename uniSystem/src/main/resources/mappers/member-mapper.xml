@@ -68,6 +68,13 @@
 		WHERE MEMBER_EMAIL = #{email}
 	</update>
 	
+	<!-- 담당교수 목록 조회 -->
+	<select id="searchProfessor" resultMap="member_rm">
+		SELECT MEMBER_NO, MEMBER_NAME FROM MEMBER
+		WHERE MEMBER_NO LIKE '02%'
+		AND DEPARTMENT_NO = #{deptCode}
+		ORDER BY 2
+	</select>
 	
 
 </mapper>

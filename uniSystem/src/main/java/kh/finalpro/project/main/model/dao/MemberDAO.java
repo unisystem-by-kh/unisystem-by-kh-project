@@ -1,5 +1,6 @@
 package kh.finalpro.project.main.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -58,5 +59,8 @@ public class MemberDAO {
 	public String findMemberPw(Member inputMember) {
 		return sqlSession.selectOne("memberMapper.findMemberPw", inputMember);
 	}
+
+
+
 
 }
