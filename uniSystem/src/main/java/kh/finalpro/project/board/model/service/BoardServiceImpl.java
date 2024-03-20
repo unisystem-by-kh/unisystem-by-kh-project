@@ -1,15 +1,20 @@
 package kh.finalpro.project.board.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import kh.finalpro.project.board.common.utility.Util;
 import kh.finalpro.project.board.model.dao.BoardDAO;
 import kh.finalpro.project.board.model.dto.Board;
+import kh.finalpro.project.board.model.dto.BoardFile;
 import kh.finalpro.project.board.model.dto.Pagination;
 
 
@@ -155,6 +160,90 @@ public class BoardServiceImpl implements BoardService{
 		map.put("boardList", boardList);
 		
 		return map;
+	}
+	
+	// 1:1문의 작성
+	@Override
+	public int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) {
+		// 0. XSS 방지 처리
+		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
+		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
+
+		// 1. BOARD 테이블 INSERT 하기(제목, 내용, 작성자, 게시판 코드)
+		// -> boardNo(시퀀스로 생성한 번호) 반환 받기
+		int boardNo = dao.inquiryBoardWrite(board);
+
+		// 2. 게시글 삽입 성공 시
+		//	업로드된 이미지가 있다면 BOARD_IMG 테이블에 삽입하는 DAO 호출
+		if(boardNo > 0) { // 게시글 삽입 성공 시
+
+			// List<MultipartFile> images
+			// -> 업로드된 파일이 담긴 객체 MultipartFile이 5개 존재
+			// -> 단, 업로드된 파일이 없어도 MultipartFile 객체는 존재
+
+			// 실제 업로드된 파일의 정보를 기록할 List
+			List<BoardFile> uploadList = new ArrayList<BoardFile>();
+
+			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
+			for(int i = 0; i < file.size(); i++) {
+
+				// i번째 요소에 업로드한 파일이 있다면
+				if(file.get(i).getSize() > 0) {
+
+					BoardFile img = new BoardFile();
+					// img에 파일 정보를 담아서 uploadList에 추가
+					img.setBoardFilePath(webPath); // 웹 접근 경로
+					img.setBoardNo(boardNo); // 게시글 번호
+
+					// 파일 원본명
+					String fileName = file.get(i).getOriginalFilename(); // 원본명
+					img.setBoardFileOriginal(fileName); // 원본명
+					img.setBoardFileRename(Util.fileRename(fileName)); // 변경명
+
+					uploadList.add(img);
+				}
+
+			} // 분류 for문 종료
+
+			// 분류 작업 후 uploadList가 비어있지 않은 경우
+			// == 업로드한 파일이 있다.
+			if(!uploadList.isEmpty()) {
+
+				// BOARD_IMG 테이블에 INSERT하는 DAO 호출
+				int result = dao.insertImageList(uploadList);
+				// result == 삽입된 행의 개수 == uploadList.size()
+
+				// 삽입된 행의 개수와 uploadList의 개수가 같다면
+				// == 전체 insert 성공
+				if(result == uploadList.size()) {
+
+					// 서버에 파일을 저장(transferTo())
+
+					// images      : 실제 파일이 담긴 객체 리스트
+					//				      (업로드 안된 인덱스 빈칸)
+
+					// uploadList : 업로드된 파일의 정보 리스트
+					//					  (원본명, 변경명, 순서, 경로, 게시글 번호)
+
+					// 순서 == images 업로드된 인덱스
+
+					
+				}else { // 일부 또는 전체 insert 실패
+
+					// ** 웹 서비스 수행 중 1개라도 실패하면 전체 실패 **
+					// -> rollback 필요
+
+					// [결론]
+					// 예외를 강제로 발생기켜서 rollback 해야된다.
+					// -> 사용자 정의 예외 발생
+					throw new FileUploadException(); // 예외 강제 발생
+
+				}
+			}
+
+
+		}
+		return boardNo;
 	}
 	
 	

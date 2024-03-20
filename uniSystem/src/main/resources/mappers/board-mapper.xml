@@ -25,6 +25,11 @@
       <collection property="fileList" select="selectFileList"
          column="BOARD_NO" javaType="java.util.ArrayList" ofType="BoardFile">
       </collection>
+      
+      <collection property="replyList"
+			select="selectCommentList" column="BOARD_NO"
+			javaType="java.util.ArrayList" ofType="Reply">
+		</collection>
 
    </resultMap>
    
@@ -38,6 +43,18 @@
       <result property="boardFileCategoryNo" column="BOARD_FILE_CATEGORY_NO" />
       <result property="boardNo" column="BOARD_NO" />
    </resultMap>
+   
+   
+   <resultMap type="Reply" id="reply_rm">
+		<id property="replyNo" column="REPLY_NO" />
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="replyDate" column="REPLY_DATE" />
+		<result property="boardNo" column="BOARD_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="replySt" column="REPLY_ST" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberProfile" column="MEMBER_PROFILE" />
+	</resultMap>
 
    <!-- 게시판 종류 목록 조회 -->
    <select id="selectCategory" resultType="map">
@@ -337,6 +354,23 @@
 		WHERE BOARD_ST = 'N'
 		AND CATEGORY_NO = #{categoryNo}
 		ORDER BY BOARD_NO DESC
+	</select>
+	
+	
+	<!-- 특정 게시글 댓글 조회 -->
+	<select id="selectCommentList" resultMap="reply_rm">
+		SELECT  C.* FROM
+		(SELECT REPLY_NO, REPLY_CONTENT,
+		TO_CHAR(REPLY_DATE, 'YYYY"년"
+		MM"월" DD"일" HH24"시" MI"분" SS"초"') REPLY_DATE,
+		BOARD_NO, MEMBER_NO,
+		MEMBER_NAME, MEMBER_PROFILE, REPLY_ST
+		FROM REPLY
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE BOARD_NO = #{boardNo} )C
+		WHERE
+		REPLY_ST = 'N'
+		ORDER  BY REPLY_NO
 	</select>
 	
 
