@@ -345,16 +345,16 @@
 	
 	<!-- 1:1문의 파일 삽입 -->
 	<insert id="insertInquiryFile" parameterType="list">
-		INSERT INTO BOARD_IMG
-		SELECT SEQ_IMG_NO.NEXTVAL, A.*
+		INSERT INTO BOARD_FILE
+		SELECT SEQ_FILE_NO.NEXTVAL, A.*
 		FROM (
-		<foreach collection="list" item="img" separator=" UNION ALL ">
+		<foreach collection="list" item="file" separator=" UNION ALL ">
 			SELECT
-			#{img.boardFilePath} IMG_PATH,
-			#{img.boardFileRename} IMG_RENAME,
-			#{img.boardFileOriginal} IMG_ORIGINAL,
-			#{img.boardFileCategoryNo} CATEGORY_NO,
-			#{img.boardNo} BOARD_NO
+			#{file.boardFilePath} BOARD_FILE_PATH,
+			#{file.boardFileRename} BOARD_FILE_RENAME,
+			#{file.boardFileOriginal} BOARD_FILE_ORIGINAL,
+			#{file.boardFileCategoryNo} CATEGORY_NO,
+			#{file.boardNo} BOARD_NO
 			FROM DUAL
 		</foreach>
 

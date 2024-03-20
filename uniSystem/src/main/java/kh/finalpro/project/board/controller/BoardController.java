@@ -368,7 +368,7 @@ public class BoardController {
 	@PostMapping("/{categoryNo:4}/write")
 	public String inquiryBoardWrite(
 			@PathVariable("categoryNo") int categoryNo
-	         , @ModelAttribute Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
+	         , Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
 	         , @RequestParam(value="file", required = false) List<MultipartFile> file
 	         , @SessionAttribute(value="loginMember") Member loginMember
 	         , RedirectAttributes ra
