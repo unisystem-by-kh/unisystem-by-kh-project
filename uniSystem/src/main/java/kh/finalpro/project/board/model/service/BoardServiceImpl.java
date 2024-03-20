@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import kh.finalpro.project.board.common.utility.Util;
+import kh.finalpro.project.common.util.Util;
 import kh.finalpro.project.board.model.dao.BoardDAO;
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.BoardFile;

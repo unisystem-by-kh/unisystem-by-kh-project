@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kh.finalpro.project.board.common.utility.Util;
+import kh.finalpro.project.common.util.Util;
 import kh.finalpro.project.board.model.dao.ReplyDAO;
 import kh.finalpro.project.board.model.dto.Reply;
 

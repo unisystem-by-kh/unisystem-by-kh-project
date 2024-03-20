@@ -1,4 +1,4 @@
-package kh.finalpro.project.board.common.utility;
+package kh.finalpro.project.common.util;
 
 import java.text.SimpleDateFormat;
 
