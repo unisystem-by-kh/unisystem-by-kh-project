@@ -310,7 +310,7 @@ public class BoardController {
 		
 		map.put("board", board);
 		
-		model.addAttribute("board", board);
+		model.addAttribute("map", map);
 		
 		return "board/boardDataDetail";
 	}

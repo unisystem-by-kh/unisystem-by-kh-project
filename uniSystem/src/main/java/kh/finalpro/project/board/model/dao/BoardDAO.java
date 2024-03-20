@@ -164,8 +164,7 @@ public class BoardDAO {
 		// 3) selectList
 
 		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
-	}
-
+  }
 	
 	/** 자료실 목록 조회
 	 * @param categoryNo
@@ -179,7 +178,9 @@ public class BoardDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit() + 5);
 		
 		return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds);
-  }
+	}
+	
+	
 	/** 1:1문의 작성
 	 * @param board
 	 * @return boardNo
@@ -259,37 +260,7 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.inquiryFileInsert", img);
 	}
 
-
-
-
-	/** 공지사항 목록 조회
-	 * @param pagination
-	 * @param categoryNo
-	 * @return
-	 */
-	/*
-	 * public List<Board> selectNoticeBoardList(Pagination pagination, int
-	 * categoryNo) {
-	 * 
-	 * int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-	 * 
-	 * // 2) RowBounds 객체 생성 RowBounds rowBounds = new RowBounds(offset,
-	 * pagination.getLimit());
-	 * 
-	 * // 3) selectList
-	 * 
-	 * return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo,
-	 * rowBounds); }
-	 * 
-	 * public List<Board> selectDataList(int categoryNo, Pagination pagination) {
-	 * 
-	 * int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-	 * 
-	 * RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-	 * 
-	 * return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo,
-	 * rowBounds); }
-	 */
+	
 	
 	/** 공지사항 목록 검색
 	 * @param pagination
