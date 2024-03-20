@@ -19,6 +19,8 @@
 		<typeAlias type="kh.finalpro.project.board.model.dto.BoardFile" alias="BoardFile" />
 		<typeAlias type="kh.finalpro.project.admin.model.dto.Subject" alias="Subject" />
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Class" alias="Class" />
+		
+		<typeAlias type="kh.finalpro.project.collegian.model.dto.Department" alias="Department" />
 
 	</typeAliases>
 	

@@ -11,6 +11,7 @@ import kh.finalpro.project.collegian.model.dao.CollegianDAO;
 import kh.finalpro.project.collegian.model.dto.Member;
 import kh.finalpro.project.collegian.model.dto.Pagination;
 import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.collegian.model.dto.Department;
 
 @Service
 public class CollegianServiceImpl implements CollegianService{
@@ -31,10 +32,13 @@ public class CollegianServiceImpl implements CollegianService{
 		// (어떤 게시판(boardCode)에서
 		// 몇 페이지(pagination.currentPage)에 대한 게시글 몇개(pagination.limit)조회
 		List<Class> classList = dao.selectClassList(mem, pagination);
+		
+		List<Department> departmentList = dao.selectDepartmentList();
 
 		// 4. pagination, boardList를 Map에 답아서 반환
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		map.put("departmentList", departmentList);
 		map.put("pagination", pagination);
 		map.put("classList", classList);
 
@@ -54,8 +58,11 @@ public class CollegianServiceImpl implements CollegianService{
 		
 		List<Class> classList = dao.selectClassList(pagination, paramMap);
 		
+		List<Department> departmentList = dao.selectDepartmentList();
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		map.put("departmentList", departmentList);
 		map.put("pagination", pagination);
 		map.put("classList", classList);
 		

@@ -98,7 +98,6 @@ main * {
 
 .stu-header{
     border-bottom: 2px solid #ccc;
-    margin-bottom: 10px;
 }
 
 .stu-header h2{
@@ -110,16 +109,24 @@ main * {
 
 /* 게시판 검색 영역 */
 
-.search-area select{
+/* .search-area select{
     width: 130px;
     height: 40px;
     border-radius: 5px;
     border: 1px solid #ddd;
     margin-right: 10px;
     margin-top: 10px;
+} */
+
+.search-area > form{
+    align-items: center;
 }
 
+
 .search-area > form span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 10px;
 }
 
@@ -129,19 +136,19 @@ main * {
     border-radius: 5px;
     border: 1px solid #ddd;
     margin-right: 10px;
-    margin-top: 10px;
     padding-left: 10px;
 }
 
 .search-area > form > input:nth-child(6){
     margin-right: 150px;
 }
-select[name="type"]{
+/* select[name="type"]{
     margin-right: 100px;
-}
+} */
 
 .search-area {
     text-align: center;
+    padding: 15px 0;
 }
 
 .query-label{
@@ -162,7 +169,7 @@ select[name="type"]{
     padding: 0;
     margin: 0;
     left: 5px;
-    top: -1px;
+    top: 10px;
     width: 25px;
     border: none;
     background-color: white ;
@@ -252,7 +259,7 @@ tr:last-child td:last-child {
     display: flex;
     height: 40px;
     justify-content: end;
-    width: 950px;
+    width: 990px;
 }
 
 #schedule-btn{
@@ -490,3 +497,64 @@ tr:last-child td:last-child {
     border: 1px solid #42444e;
   }
   .pagination a:hover:not(.active) {background-color: #ddd;}
+
+  
+
+  /* 셀렉트 박스 */
+
+  :root {
+    --background-gradient: linear-gradient(178deg, #ffff33 10%, #3333ff);
+    --gray: #42444e;
+    --darkgray: #eaeaed;
+  }
+  
+  .search-area > form {
+    display: flex;
+  }
+
+  select {
+    /* Reset Select */
+    appearance: none;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: black;
+    background-color: var(--darkgray);
+    background-image: none;
+    cursor: pointer;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select wrapper */
+  .select {
+    position: relative;
+    display: flex;
+    width: 170px;
+    height: 40px;
+    border-radius: .25em;
+    overflow: hidden;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+  }
+  /* Arrow */
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    font-size: 13px;
+    background-color: #42444e;
+    transition: .25s all ease;
+    pointer-events: none;
+    color: white;
+  }
+  /* Transition */
+  .select:hover::after {
+    color: black;
+  }
