@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +28,20 @@
                     <label for="departmentName">학과</label>
                     <select name="departmentNo" id="departmentNo">
                         <option value="0">전체</option>
-                        <option value="10">컴퓨터과학과</option>
+                        <c:forEach items="${deptCodeList}" var="deptCode">
+                            <option value="${deptCode.DEPARTMENT_NO}">${deptCode.DEPARTMENT_NAME}</option>
+                        </c:forEach>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="professor">담당 교수</label>
-                    <input type="text" id="professor" name="professor" placeholder="담당 교수님을 입력해주세요.">
+                    <input type="text" id="teacher" name="professor" placeholder="담당 교수님을 입력해주세요." >
+                    <ul id="resultSet">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
                 </div>
 
                 <div class="form-group">
@@ -95,9 +104,7 @@
         
     </main>
     
-    
-
-    <script src="/resources/js/admin/subjectList.js"></script>
+    <script src="/resources/js/admin/insertSubject.js"></script>
     
 </body>
 </html>
