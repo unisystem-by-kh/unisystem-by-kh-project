@@ -26,5 +26,5 @@ public class Member {
 	private String memberSsn;
 	
 	private int departmentNo; // 학과코드
-	
+	private String departmentName; // 학과이름
 }

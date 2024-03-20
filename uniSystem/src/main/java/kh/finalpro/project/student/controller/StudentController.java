@@ -8,15 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class StudentController {
 	
-	@GetMapping("/selectStudentList")
-	public String selectStudentList() {
-		return "student/selectStudentList";
-	}
 	
-	@GetMapping("/selectStudentDetail")
-	public String selectStudentDetail() {
-		
-		return "student/selectStudentDetail";
-	}
 	
 }

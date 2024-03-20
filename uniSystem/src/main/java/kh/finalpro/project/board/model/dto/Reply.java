@@ -13,9 +13,10 @@ public class Reply {
 	private String replyContent;
 	private String replyDate;
 	private String replySt;
-	
-	private int memberNo;
+	private String memberName;
+	private String memberNo;
 	private int boardNo;
+	private String memberProfile;
 	
 	
 	// REPLY_NO, REPLY_CONTENT, REPLY_DATE, REPLY_ST, BOARD_NO, MEMBER_NO

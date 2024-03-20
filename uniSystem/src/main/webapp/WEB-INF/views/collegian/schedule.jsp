@@ -37,16 +37,22 @@
 
 						<span>학번</span> <input type="text" value="201123421" readonly>
 
-						<span>성명</span> <input type="text" value="차준형" readonly> <select
-							name="grade" id="">
+						<span>성명</span> <input type="text" value="차준형" readonly> 
+						 <div class="select">
+						<select	name="grade" id="">
 							<option value="">1학년</option>
 							<option value="">2학년</option>
 							<option value="">전체</option>
-						</select> <select name="step" id="">
+						</select>
+						</div>
+
+						 <div class="select">
+						 <select name="step" id="">
 							<option value="">1학기</option>
 							<option value="">2학기</option>
 							<option value="">전체</option>
 						</select>
+						</div>
 
 					</form>
 				</div>

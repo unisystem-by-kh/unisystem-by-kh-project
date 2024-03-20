@@ -360,7 +360,7 @@
 }
 
 /* 각 페이지 네이션 하나 영역 */
-#paginations > div{
+#paginations > a{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -383,11 +383,11 @@
     transition: background-color 0.3s ease-in-out;
 }
 /* 버튼 클릭 효과 */
-#paginations div:hover {
+#paginations a:hover {
     background-color: crimson;
     color: white;
 }
-#paginations div.active {
+#paginations a.active {
     background-color: crimson;
     color: white;
     border: 3px solid #ddd;

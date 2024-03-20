@@ -14,7 +14,7 @@
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-    <form>
+    <form action="/board/${categoryNo}/update" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
 
         <div class="boardName">
             <h1>1 : 1 문의</h1>
@@ -31,22 +31,25 @@
         </div>
         <div class="boardTitle">
             <div>제목</div>
-            <input type="text" name="title">
+            <input type="text" name="boardTitle" value="${board.boardTitle}">
         </div>
         <div class="boardContent">
             <div>내용</div>
-            <textarea id=""></textarea>
+            <textarea name="boardContent" >${board.boardContent}</textarea>
         </div>
         <div class="boardFile">
             <div>첨부파일</div>
-            <div><input type="file" id="file"></div>
+            <div>   
+                    <input type="file" id="file" name="file" >
+                    ${board.fileList[0].boardFileRename}
+            </div>
         </div>
         <div class="boardOpen">
             <div>공개여부</div>
             <div>
                 <div>
-                    공개 <input type="radio" name="open" value="open">
-                    비공개 <input type="radio" name="open" value="notopen">
+                    공개 <input type="radio" name="boardSt" value="D">
+                    비공개 <input type="radio" name="boardSt" value="N">
                 </div>
                 <div>본인의 게시글을 타인에게 보이고 싶지 않을 경우에는 '비공개'를 선택하세요.</div>
             </div>
@@ -54,10 +57,12 @@
     
         <div class="btnArea">
             <button type="submit">등록하기</button>
-            <button>취소</button>
         </div>
+        <input type="hidden" name="cp" value="${param.cp}">
     </form>
-
+        <div>
+            <button id="goToListBtn">취소</button>
+        </div>
     
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />

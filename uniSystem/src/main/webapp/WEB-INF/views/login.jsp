@@ -22,7 +22,7 @@
     <main>
 
         <!-- 오시는 길 -->
-        <a href="#" class="come-on-area">
+        <a href="/board/comeMap" class="come-on-area">
             <i class="fa-solid fa-flag fa-2x"></i>
         </a>
 
@@ -86,6 +86,8 @@
             <button class="btn" id="btn2">비밀번호 찾기</button>
         </div>
     </div>
+
+    <div id="loadingSpinner"></div>
 
     <script src="/resources/js/login.js"></script>
 

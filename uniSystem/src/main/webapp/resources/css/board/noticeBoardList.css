@@ -84,32 +84,31 @@ tbody th{
     text-decoration: none;
     padding: 5px 10px;
     color: #333;
-    border: 1px solid black;
     font-size: 15px;
     transition: background-color 0.3s, color 0.3s;
 }
 .pagination a.pageno, .pagination a:hover {
-    background-color: #ddd;
+    background-color: rgba(221, 221, 221, 0.4);
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 2px;
 }
 
 
 
 /* 글쓰기 버튼 */
 #writeBtn {
-    position: absolute;
-    right:450px;
-    bottom: 5px; /* 원하는 위치로 조정하세요 */
-    
+  
     border: none;
     background-color: white;
     font-size: 15px;
     transition: background-color 0.5s;
     cursor: pointer;
+    text-decoration: underline;
 }
 
-#writeBtn a:hover{
-    color: gainsboro;
+#writeBtn:hover{
+    font-weight: bold;
+    transition: background-color 1s;
 }
-
 

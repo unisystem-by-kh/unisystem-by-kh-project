@@ -2,6 +2,7 @@ package kh.finalpro.project.admin.controller;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,27 +12,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.google.api.services.calendar.model.Event;
-
 import kh.finalpro.project.admin.model.service.AdminService;
+import kh.finalpro.project.main.model.dto.Member;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	
 	private AdminService adminService; // AdminService 서비스 변수;
-	
-	@GetMapping("/subjectList")
-	public String subjectList() {
-		// 교과목 조회 페이지
-		return "admin/subjectList";
-	}
 
 	//교직원  교번/학번 번호생성 페이지
 	@GetMapping("/UniqueNo")
 	public String uniqueNo() {
 		return "admin/UniqueNo";
 	}
+	
+	@GetMapping("/selectStudentList")
+	public String selectStudentList() {
+		return "admin/student/selectStudentList";
+	}
+	
+	@GetMapping("/selectStudentDetail")
+	public String selectStudentDetail() {
+		return "admin/student/selectStudentDetail";
+	}
+	
+	@GetMapping("/selectList")
+	public List<Member> selectList(@RequestBody String input) {
+		System.out.println(input);
+		return adminService.selectList(input);
+	}
+	
 	
 	
 	// 추후 수정 예정

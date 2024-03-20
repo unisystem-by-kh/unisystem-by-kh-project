@@ -54,6 +54,12 @@ table {
     
 }
 
+.tableHead th{
+    background-color: none;
+    color: crimson;
+    font-size: 20px;
+}
+
 .tableHead > th:first-child{
     width: 5%;
 }
@@ -67,9 +73,6 @@ th, td {
     border-right: 0;
     border-left: 0;
 }
-th {
-    background-color: lightgray;
-}
 
 /* tr */
 .tableTr{ 
@@ -80,4 +83,37 @@ th {
 }
 .tableTr:hover{ 
     color: crimson;
+}
+
+
+.pagi{
+    width: 100%;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.pagi ul,li{
+    list-style: none;
+}
+
+.pagi li {
+    display: inline-block;
+    border-radius: 15px;
+}
+.pagi a{
+    display: inline-block;
+    border: 1px solid crimson;
+    border-radius: 15px;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pagi a:hover{
+    background-color: crimson;
+    color: white;
 }
