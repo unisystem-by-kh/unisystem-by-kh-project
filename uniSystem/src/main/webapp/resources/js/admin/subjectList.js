@@ -54,7 +54,7 @@ for(i=1; i<rowList.length; i++){ // thead부분 제외.
         const modal = document.querySelector(".modal"); // 수정 모달창
 
         const inputDeptName = document.getElementById("departmentName");
-        const inputClassTime = document.getElementById("className");
+        const inputClassName = document.getElementById("className");
         const inputProfessor = document.getElementById("professor");
         const classStart = document.getElementById("classStart"); // 시작 시간
         const classEnd = document.getElementById("classEnd"); // 종료 시간
@@ -72,7 +72,7 @@ for(i=1; i<rowList.length; i++){ // thead부분 제외.
         modal.style.display="flex";
 
         inputDeptName.value = departmentName;
-        inputClassTime.value = className;
+        inputClassName.value = className;
         inputProfessor.value = professor;
         classStart.value = startPeriod;
         classEnd.value = endPeriod;

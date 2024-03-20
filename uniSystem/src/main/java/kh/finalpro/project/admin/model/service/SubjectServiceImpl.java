@@ -1,6 +1,7 @@
 package kh.finalpro.project.admin.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.finalpro.project.admin.model.dao.SubjectDAO;
 import kh.finalpro.project.admin.model.dto.Subject;
+import kh.finalpro.project.main.model.dto.Member;
 
 @Service
 public class SubjectServiceImpl implements SubjectService{
@@ -35,5 +37,18 @@ public class SubjectServiceImpl implements SubjectService{
 		
 		return dao.insertSubject(inputClass);
 	}
+	
+	// 학과코드 호출 서비스
+	@Override
+	public List<Map<String, Object>> selectDeptCodeList() {
+		return dao.selectDeptCodeList();
+	}
+	
+	// 담당 교수 목록 조회 서비스
+	@Override
+	public List<Member> searchProfessor(String deptCode) {
+		return dao.searchProfessor(deptCode);
+	}
+	
 
 }

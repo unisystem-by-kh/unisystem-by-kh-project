@@ -30,28 +30,36 @@
 
             <div class="search-area">
                 <form action="">
-                    <select name="major" id="">
-                        <option value="">컴퓨터과학과</option>
-                        <option value="">전체</option>
-                    </select>
+                    <div class="select">
+                        <select name="major" id="">
+                            <option value="">컴퓨터과학과</option>
+                            <option value="">전체</option>
+                        </select>
+                    </div>
+                     <div class="select">
                     <select name="grade" id="">
                         <option value="">1학년</option>
                         <option value="">2학년</option>
                         <option value="">전체</option>
                     </select>
+                    </div>
+                    <div class="select">
                     <select name="step" id="">
                         <option value="">1학기</option>
                         <option value="">2학기</option>
                         <option value="">전체</option>
                     </select>
+                    </div>
+                     <div class="select">
                     <select name="type" id="">
                         <option value="">전체</option>
                         <option value="">전공</option>
                         <option value="">교양</option>
                     </select>
+                    </div>
                     <label for="" class="query-label">
-                        <input type="text" name="query">
-                        <button type="submit"><img src="img/search.png" alt=""></button>
+                        <input type="text" name="query" placeholder="검색할 과목명을 입력해주세요.">
+                        <button type="submit"><img src="/resources/images/collegian/search.png" alt=""></button>
                     </label>
                 </form>
             </div>

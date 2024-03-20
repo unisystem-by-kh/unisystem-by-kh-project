@@ -9,3 +9,18 @@ document.getElementById("searchBtn").addEventListener("click", function() {
     }
 
 })
+
+
+
+
+
+
+
+
+// 글 작성 버튼 누르면
+
+document.getElementById('writeBtn').addEventListener('click', function() {
+    // 여기에 클릭 이벤트가 발생했을 때 실행할 코드를 작성합니다.
+    // 예시로 다른 JSP 페이지로 이동하는 코드를 작성합니다.
+    window.location.href = '/WEB-INF/views/board/noticeBoardWrite.jsp';
+});

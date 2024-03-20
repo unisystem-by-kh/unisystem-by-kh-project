@@ -1,3 +1,5 @@
+
+
 // select box 요소들
 const selectBoxes = document.querySelectorAll(".search-area select")
 
@@ -9,6 +11,7 @@ for (let i of selectBoxes) {
         const grade = document.getElementsByName("grade")[0];
         const step = document.getElementsByName("step")[0];
         const type = document.getElementsByName("type")[0];
+        
 
         const majorIndex = major.selectedIndex;
         const majorValue = major.options[majorIndex].value;
@@ -26,7 +29,7 @@ for (let i of selectBoxes) {
             'major' : majorValue,
             'grade' : gradeValue,
             'step'  : stepValue,
-            'type'  : typeValue
+            'type'  : typeValue,
         }
 
         fetch('/collegian/selectClassList' , {
@@ -38,6 +41,13 @@ for (let i of selectBoxes) {
         })
         .then(res => res.json())
         .then(searchList => {
+            
+            history.replaceState({}, null, location.pathname);
+            
+            document.getElementsByName("query")[0].value = '';
+
+            placeholer();
+
             const pagination = searchList.pagination;
 
             const classList = searchList.classList;
@@ -104,9 +114,9 @@ for (let i of selectBoxes) {
                 const departmentName = document.createElement("td");
                 departmentName.innerText = i.departmentName;
                 const classGrade = document.createElement("td");
-                classGrade.innerText = i.classGrade;
+                classGrade.innerText = i.classGrade+"학년";
                 const classTrem = document.createElement("td");
-                classTrem.innerText = i.classTrem;
+                classTrem.innerText = i.classTrem+"학기";
                 const className = document.createElement("td");
                 className.innerText = i.className;
                 const classPoint = document.createElement("td");
@@ -119,15 +129,53 @@ for (let i of selectBoxes) {
                 tr.append(classTd,departmentName,classGrade, classTrem, className, classPoint , classType , memberName);
                 
                 area.append(tr);
-
-
-
             }
 
         } )
         .catch(err => {console.log(err)})
-
-
     })
-
 }
+
+const placeholer = () => {
+    const urlParams = new URL(location.href).searchParams;
+
+    const major = urlParams.get('major');
+    const grade = urlParams.get('grade');
+    const step = urlParams.get('step');
+    const type = urlParams.get('type');
+    const query = urlParams.get('query');
+
+    if(query != null){
+        const majorSelect = document.getElementsByName("major")[0];
+        const gradeSelect = document.getElementsByName("grade")[0];
+        const stepSelect = document.getElementsByName("step")[0];
+        const typeSelect = document.getElementsByName("type")[0];
+        const queryInput = document.getElementsByName("query")[0];
+
+        for (const m of majorSelect.options) {
+            if(m.value == major){m.selected = true;}
+        }
+
+        for (const g of gradeSelect.options) {
+            if(g.value == grade){g.selected = true;}
+        }
+
+        for (const s of stepSelect.options) {
+            if(s.value == step){s.selected = true;}
+        }
+        for (const t of typeSelect.options) {
+            if(t.value == type){t.selected = true;}
+        }
+
+        queryInput.value = query;
+    }
+}
+
+placeholer();
+
+
+
+
+
+
+

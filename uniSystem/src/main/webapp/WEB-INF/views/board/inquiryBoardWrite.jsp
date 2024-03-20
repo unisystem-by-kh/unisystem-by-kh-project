@@ -17,41 +17,41 @@
 	<main>
 
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-		<form>
+		<form action="/board/${categoryNo}/write" method="POST"  enctype="multipart/form-data">
 
 			<div class="boardName">
 				<h1>1 : 1 문의</h1>
 			</div>
 			<div class="boardTop">
 				<div>신청인</div>
-				<div>유저일</div>
+				<div>${loginMember.memberName}</div>
 				<div>학과</div>
-				<div>경영학과</div>
+				<div>${loginMember.departmentName}</div>
 			</div>
 			<div class="boardEmail">
 				<div>이메일</div>
-				<div>user01@kh.or.kr</div>
+				<div>${loginMember.memberEmail}</div>
 			</div>
 			<div class="boardTitle">
 				<div>제목</div>
-				<input type="text" name="title">
+				<input type="text" name="boardTitle" >
 			</div>
 			<div class="boardContent">
 				<div>내용</div>
-				<textarea id=""></textarea>
+				<textarea name="boardContent" ></textarea>
 			</div>
 			<div class="boardFile">
 				<div>첨부파일</div>
 				<div>
-					<input type="file" id="file">
+					<input type="file" id="file" name="file" >
 				</div>
 			</div>
 			<div class="boardOpen">
 				<div>공개여부</div>
 				<div>
 					<div>
-						공개 <input type="radio" name="open" value="open"> 비공개 <input
-							type="radio" name="open" value="notopen">
+						공개 <input type="radio" name="boardSt" value="D"> 
+						비공개 <input type="radio" name="boardSt" value="N">
 					</div>
 					<div>본인의 게시글을 타인에게 보이고 싶지 않을 경우에는 '비공개'를 선택하세요.</div>
 				</div>

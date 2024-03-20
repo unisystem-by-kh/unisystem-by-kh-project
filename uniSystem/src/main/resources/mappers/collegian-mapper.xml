@@ -23,8 +23,19 @@
 
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="memberName" column="MEMBER_NAME" />
+		
+		<result property="lectureFL" column="LECTURE_FL" />
+		
 
 	</resultMap>
+	
+	<resultMap type="Department" id="department_rm">
+	
+		<id property="departmentNo" column="DEPARTMENT_NO"/>
+		<result property="departmentName"  column="DEPARTMENT_NAME"/>	
+			
+	</resultMap>
+	
 
 	<!-- 교과목 수 -->
 	<select id="getListCount" resultType="_int">
@@ -55,20 +66,23 @@
 			<when test='major != "0"'>
 				AND DEPARTMENT_NO = #{major}
 			</when>
-
-			<when test='grade != "0"'>
-				AND CLASS_GRADE = #{grade}
-			</when>
-
-			<when test='step != "0"'>
-				AND CLASS_TREM = #{step}
-			</when>
-
-			<when test='type != "0"'>
-				AND CLASS_POINT = #{type}
-			</when>
-
 		</choose>
+
+		<if test='grade != "0"'>
+			AND CLASS_GRADE = #{grade}
+		</if>
+
+		<if test='step != "0"'>
+			AND CLASS_TREM = #{step}
+		</if>
+
+		<if test='type != "0"'>
+			AND CLASS_POINT = #{type}
+		</if>
+		
+		<if test='query != null'>
+			AND CLASS_NM LIKE '%${query}%'
+		</if>		
 
 	</select>
 
@@ -96,6 +110,36 @@
 		<if test='type != "0"'>
 			AND CLASS_POINT = #{type}
 		</if>
+		
+		<if test='query != null'>
+			AND CLASS_NM LIKE '%${query}%'
+		</if>	
+		
+	</select>
+	
+	<select id="selectDepartmentList" resultMap="department_rm">
+		SELECT DEPARTMENT_NO , DEPARTMENT_NAME
+		FROM DEPARTMENT
+		ORDER BY 1
+	</select>
+	
+	<select id="selectLecture" resultMap="class_rm">
+	SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM,
+		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,
+		(SELECT COUNT(*) FROM LECTURE R
+		WHERE R.MEMBER_NO = #{memberNo}
+		AND R.CLASS_NO = A.CLASS_NO) LECTURE_FL
+	FROM CLASS A
+	JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+	JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
+	
+	WHERE A.DEPARTMENT_NO = #{departmentNo}
+	
+	AND CLASS_GRADE = #{memberGrade}
+	AND CLASS_TREM = #{memberTerm}
+	
+	ORDER BY 1
+		
 	</select>
 
 

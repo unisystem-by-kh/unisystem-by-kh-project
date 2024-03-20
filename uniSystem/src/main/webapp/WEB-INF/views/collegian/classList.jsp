@@ -18,6 +18,7 @@
 
 	<c:set var="classList" value="${map.classList}"/>
 	<c:set var="pagination" value="${map.pagination}"/>
+	<c:set var="department" value="${map.departmentList}"/>
 
 	 <main>
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -31,30 +32,39 @@
 	            </div>
 	
 	            <div class="search-area">
-	                <form action="">
-	                    <select name="major" id="">
-	                        <option value="10">컴퓨터과학과</option>
-	                        <option value="0">전체</option>
-	                    </select>
-	                    <select name="grade" id="">
-	                        <option value="1">1학년</option>
-	                        <option value="2">2학년</option>
-	                        <option value="3">3학년</option>
-	                        <option value="4">4학년</option>
-	                        <option value="0">전체</option>
-	                    </select>
-	                    <select name="step" id="">
-	                        <option value="1">1학기</option>
-	                        <option value="2">2학기</option>
-	                        <option value="0">전체</option>
-	                    </select>
-	                    <select name="type" id="">
-	                        <option value="0">전체</option>
-	                        <option value="3">전공</option>
-	                        <option value="2">교양</option>
-	                    </select>
+	                <form action="/collegian/classList">
+						<div class="select">
+							<select name="major" id="">
+								<c:forEach items="${department}" var="d">
+									<option value="${d.departmentNo}">${d.departmentName}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="select">
+							<select name="grade" id="">
+								<option value="1">1학년</option>
+								<option value="2">2학년</option>
+								<option value="3">3학년</option>
+								<option value="4">4학년</option>
+								<option value="0">전체</option>
+							</select>
+						</div>
+						<div class="select">
+							<select name="step" id="">
+								<option value="1">1학기</option>
+								<option value="2">2학기</option>
+								<option value="0">전체</option>
+							</select>
+						</div>
+						<div class="select">
+							<select name="type" id="">
+								<option value="0">전체</option>
+								<option value="3">전공</option>
+								<option value="2">교양</option>
+							</select>
+						</div>
 	                    <label for="" class="query-label">
-	                        <input type="text" name="query">
+	                        <input type="text" name="query" placeholder="검색할 과목명을 입력해주세요.">
 	                        <button type="submit"><img src="/resources/images/collegian/search.png" alt=""></button>
 	                    </label>
 	                </form>
@@ -72,24 +82,36 @@
 	                        <th>학점</th>
 	                        <th>담당교수</th>
 	                    </tr>
+
+						<c:choose>
+						   <c:when test="${empty classList}">
+								<tr>
+									<td colspan ="8" style="text-align: center;">과목이 존재하지 않습니다.</td>
+								</tr>
+						   </c:when>
+
+						   <c:otherwise>
+									<c:forEach items="${classList}" var="cl">
+										<tr>
+											<td>${cl.classNo}</td>
+											<td>${cl.departmentName}</td>
+											<td>${cl.classGrade}학년</td>
+											<td>${cl.classTrem}학기</td>
+											<td>${cl.className}</td>
+											<c:if test="${cl.classPoint == 2}" >
+												<td>교양</td>
+											</c:if>
+											<c:if test="${cl.classPoint == 3}" >
+												<td>전공</td>
+											</c:if>
+											<td>${cl.classPoint}</td>
+											<td>${cl.memberName}</td>
+										</tr>
+									</c:forEach>
+						   </c:otherwise>
+						</c:choose>
 					
-						<c:forEach items="${classList}" var="cl">
-							<tr>
-								<td>${cl.classNo}</td>
-								<td>${cl.departmentName}</td>
-								<td>${cl.classGrade}학년</td>
-								<td>${cl.classTrem}학기</td>
-								<td>${cl.className}</td>
-								<c:if test="${cl.classPoint == 2}" >
-									<td>교양</td>
-								</c:if>
-								<c:if test="${cl.classPoint == 3}" >
-									<td>전공</td>
-								</c:if>
-								<td>${cl.classPoint}</td>
-								<td>${cl.memberName}</td>
-							</tr>
-						</c:forEach>
+						
 						
 	                    
 	                </table>
@@ -119,13 +141,11 @@
         </div>
 	 	
 	 	</div>
-	 	
-	 	
-
         
     </main>
-
-
+	<script>
+		
+	</script>
 	<script src="/resources/js/collegian/collegian.js"></script>
 </body>
 

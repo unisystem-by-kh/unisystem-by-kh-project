@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:forEach items="${categoryList}" var="categoryType">
+    <c:if test="${categoryType.CATEGORY_NO == categoryNo}" >
+        <c:set var="categoryName" value="${categoryType.CATEGORY_NAME}"/>
+    </c:if>
+</c:forEach>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,7 +23,7 @@
 	
 	    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	    <div class="boardname-area">
-	        <h1>1 : 1 문의</h1>
+	        <h1>${categoryName}</h1>
 	    </div>
 	    <div class="title-date">
 	        <div>제목 : ${board.boardTitle}</div>
@@ -32,7 +38,15 @@
 	    </div>
 	    <div class="file-area">
 	        <div>첨부 파일 :</div>
-	        <div>첨부된 파일이 없습니다.</div>
+
+			<c:if test="${!empty board.fileList}">
+				  <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
+                                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileRename}</a> 
+			</c:if>
+			<c:if test="${empty board.fileList}">
+	        	<div>첨부된 파일이 없습니다.</div>
+
+			</c:if>
 	    </div>
 	    <div class="update-delete-btn">
 	        <button type="">수정</button>
@@ -66,5 +80,24 @@
 	
 	    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
+
+
+	 <script>
+
+        // JSP에서 작성 가능한 언어/라이브러리
+        // -> html, css, js, java, EL, JSTL
+
+        // JSP 해석 우선 순위 : java/EL/JSTL > HTML, CSS, JS
+
+        // 게시글 번호 전역 변수로 선언
+        const boardNo = "${board.boardNo}";
+        
+        const categoryNo = "${categoryType.CATEGORY_NO}";
+       
+		console.log(categoryNo)
+		
+        const loginMemberNo = "${loginMember.memberNo}"
+
+    </script>
 </body>
 </html>

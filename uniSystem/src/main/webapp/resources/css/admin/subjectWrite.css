@@ -87,3 +87,35 @@ button:hover {
 #checkTime:hover{
     background-color: crimson;
 }
+
+
+#resultSet{
+    position: absolute;
+    margin-left: 180px;
+    z-index: 1001;
+    background-color: white;
+    list-style: none;
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: scroll;
+    display: none;
+}
+
+#resultSet::-webkit-scrollbar {
+    display: none;
+}
+
+#resultSet>li{
+    padding: 2px 10px;
+}
+
+#resultSet>li:hover{
+    cursor: pointer;
+}
+
+#resultSet>li>span{
+    color: #ccc;
+    font-weight: normal;
+}

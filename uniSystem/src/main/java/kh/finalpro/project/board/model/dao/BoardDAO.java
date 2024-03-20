@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.board.model.dto.Board;
+import kh.finalpro.project.board.model.dto.BoardFile;
 import kh.finalpro.project.board.model.dto.Pagination;
 
 @Repository
@@ -172,6 +173,28 @@ public class BoardDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds);
+  }
+	/** 1:1문의 작성
+	 * @param board
+	 * @return boardNo
+	 */
+	public int inquiryBoardWrite(Board board) {
+		
+		int result = sqlSession.insert("boardMapper.inquiryBoardWrite", board);
+		
+		if(result > 0) {
+			result = board.getBoardNo();
+		}
+		
+		return result;
+	}
+
+	/** 1:1문의 파일 업로드
+	 * @param uploadList
+	 * @return
+	 */
+	public int insertInquiryFile(List<BoardFile> uploadList) {
+		return sqlSession.insert("boardMapper.insertInquiryFile", uploadList);
 	}
 
 
