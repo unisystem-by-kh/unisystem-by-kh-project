@@ -32,7 +32,15 @@
 	    </div>
 	    <div class="file-area">
 	        <div>첨부 파일 :</div>
-	        <div>첨부된 파일이 없습니다.</div>
+
+			<c:if test="${!empty board.fileList}">
+				  <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
+                                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileRename}</a> 
+			</c:if>
+			<c:if test="${empty board.fileList}">
+	        	<div>첨부된 파일이 없습니다.</div>
+
+			</c:if>
 	    </div>
 	    <div class="update-delete-btn">
 	        <button type="">수정</button>
