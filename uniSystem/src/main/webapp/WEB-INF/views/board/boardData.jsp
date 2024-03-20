@@ -53,62 +53,16 @@
                     <td>2024-03-05</td>
                     <td>150</td>
                 </tr>
-                <tr class="tableTr">
-                    <td>3</td>
-                    <td>샘플 제목3</td>
-                    <td>작성자3</td>
-                    <td>2024-03-04</td>
-                    <td>250</td>
-                </tr>
-                <tr class="tableTr">
-                    <td>4</td>
-                    <td>샘플 제목4</td>
-                    <td>작성자4</td>
-                    <td>2024-03-04</td>
-                    <td>80</td>
-                </tr>
-                <tr class="tableTr">
-                    <td>5</td>
-                    <td>샘플 제목5</td>
-                    <td>작성자5</td>
-                    <td>2024-03-04</td>
-                    <td>50</td>
-                </tr>
-                <tr class="tableTr">
-                    <td>6</td>
-                    <td>샘플 제목6</td>
-                    <td>작성자6</td>
-                    <td>2024-03-05</td>
-                    <td>50</td>
-                </tr>
-                <tr class="tableTr">
-                    <td>7</td>
-                    <td>샘플 제목7</td>
-                    <td>작성자7</td>
-                    <td>2024-03-04</td>
-                    <td>50</td>
-                </tr>
-                <tr class="tableTr">
-                    <td>8</td>
-                    <td>샘플 제목8</td>
-                    <td>작성자8</td>
-                    <td>2024-03-04</td>
-                    <td>30</td>
-                </tr>
-                <tr class="tableTr">
-                    <td>9</td>
-                    <td>샘플 제목9</td>
-                    <td>작성자9</td>
-                    <td>2024-03-04</td>
-                    <td>450</td>
-                </tr>
-                <tr class="tableTr">
-                    <td>10</td>
-                    <td>샘플 제목10</td>
-                    <td>작성자10</td>
-                    <td>2024-03-04</td>
-                    <td>1150</td>
-                </tr>
+                <c:forEach var="i" items="${map}">
+                    <tr>
+                        <td>${i.boardNo}</td>
+                        <td>${i.boardTitle}</td>
+                        <td>${i.memberName}</td>
+                        <td>${i.boardCDate}</td>
+                        <td>${i.boardUDate}</td>
+                        <td>${i.boardCount}</td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
 

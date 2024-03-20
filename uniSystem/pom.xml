@@ -156,12 +156,16 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		
-		
-      
-      
-      
-      
+		<!-- JSTL -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+
+
+
 
 		<!-- Spring 모듈 -->
 		<dependency>

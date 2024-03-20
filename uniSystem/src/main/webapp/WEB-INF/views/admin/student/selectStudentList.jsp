@@ -79,45 +79,8 @@
                             <td class="std-status">복학신청<input type="checkbox" hidden></td>
                             <td>이수 여부2</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    학번3
-                                    <input type="checkbox" class="select-row">
-                                </label>
-                            </td>
-                            <td><a href="/student/selectStudentDetail">이름3</a></td>
-                            <td>학년3</td>
-                            <td>학과3</td>
-                            <td class="std-status">휴학신청<input type="checkbox" hidden></td>
-                            <td>이수 여부3</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    학번4
-                                    <input type="checkbox" class="select-row">
-                                </label>
-                            </td>
-                            <td><a href="/student/selectStudentDetail">이름4</a></td>
-                            <td>학년4</td>
-                            <td>학과4</td>
-                            <td class="std-status">자퇴신청<input type="checkbox" hidden></td>
-                            <td>이수 여부4</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    학번5
-                                    <input type="checkbox" class="select-row">
-                                </label>
-                            </td>
-                            <td><a href="/student/selectStudentDetail">이름5</a></td>
-                            <td>학년5</td>
-                            <td>학과5</td>
-                            <td class="std-status">휴학중<input type="checkbox" hidden></td>
-                            <td>이수 여부5</td>
-                        </tr>
+                        
+
 
                         <tr>
                             <td>
@@ -160,7 +123,7 @@
     </main>
 
     <script src="/resources/js/header.js"></script>
-    <script src="/resources/js/student/selectStudentList.js"></script>
+    <script src="/resources/js/admin/student/selectStudentList.js"></script>
 
 </body>
 </html>

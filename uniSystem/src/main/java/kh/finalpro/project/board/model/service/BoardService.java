@@ -5,6 +5,10 @@ import java.util.Map;
 
 import kh.finalpro.project.board.model.dto.Board;
 
+/**
+ * @author user1
+ *
+ */
 public interface BoardService {
 
 	
@@ -81,6 +85,14 @@ public interface BoardService {
 	 * @return map
 	 */
 	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
+
+
+	/** 자료실 목록 조회
+	 * @param categoryNo
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selectDataBoardList(int categoryNo, int cp);
 
 
 
