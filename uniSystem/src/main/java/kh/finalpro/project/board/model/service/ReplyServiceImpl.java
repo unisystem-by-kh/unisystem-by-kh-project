@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kh.finalpro.project.board.common.utility.Util;
 import kh.finalpro.project.board.model.dao.ReplyDAO;
 import kh.finalpro.project.board.model.dto.Reply;
 
@@ -33,7 +34,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public int insert(Reply reply) {
 		// XSS 방지 처리
-		reply.setCommentContent(Util.XSSHandliing(reply.getReplyContent()));
+		reply.setReplyContent(Util.XSSHandling(reply.getReplyContent()));
 		
 		return dao.insert(reply);
 	}

@@ -29,6 +29,14 @@ public class ReplyDAO {
 		return sqlSession.selectList("boardMapper.selectCommentList", boardNo);
 	}
 
+	/** 댓글 삽입
+	 * @param comment
+	 * @return result
+	 */
+	public int insert(Reply reply) {
+		return sqlSession.insert("replyMapper.insert" , reply);
+	}
+
 	
 	
 	
