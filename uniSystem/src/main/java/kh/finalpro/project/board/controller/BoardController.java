@@ -265,8 +265,17 @@ public class BoardController {
 
 
 	// 자료실 목록 연결
-	@GetMapping("/boardData")
-	public String boardData() {
+	@GetMapping("/{categoryNo:5}")
+	public String boardData(
+			@PathVariable("categoryNo") int categoryNo
+			, @RequestParam(value="cp", required=false, defaultValue = "1") int cp
+			, Model model) {
+		
+		// 자료실 목록 조회 서비스
+		Map<String, Object> map = service.selectDataBoardList(categoryNo, cp);
+		
+		model.addAttribute("map", map);
+		
 		return "board/boardData";
 
 	}
@@ -423,6 +432,9 @@ public class BoardController {
 		return "board/departmentBoardWrite";
 	}
 
+
+	
+	
 
 
 

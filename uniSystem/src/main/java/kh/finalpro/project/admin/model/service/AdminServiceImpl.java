@@ -16,14 +16,28 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
+
+import kh.finalpro.project.admin.model.dao.AdminDAO;
+import kh.finalpro.project.main.model.dto.Member;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class AdminServiceImpl implements AdminService{
+
+	@Autowired
+	private AdminDAO dao;
+	
+	@Override
+	public List<Member> selectList(String input) {
+		return dao.selectList(input);
+	}
 
 	
 

@@ -389,6 +389,13 @@
 	</select>
 	
 	
+	<select id="selectDataBoardList" resultMap="board_rm">
+		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_C_DATE, NVL(BOARD_U_DATE, BOARD_C_DATE) "BOARD_U_DATE",  BOARD_COUNT 
+		FROM BOARD
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE CATEGORY_NO = #{categoryNo}
+	</select>
+
 	<!-- 특정 게시글 댓글 조회 -->
 	<select id="selectCommentList" resultMap="reply_rm">
 		SELECT  C.* FROM

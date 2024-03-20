@@ -8,6 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.board.model.dto.Board;
 
+/**
+ * @author user1
+ *
+ */
 public interface BoardService {
 
 	
@@ -86,6 +90,13 @@ public interface BoardService {
 	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
 
 
+	/** 자료실 목록 조회
+	 * @param categoryNo
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selectDataBoardList(int categoryNo, int cp);
+  
 	/** 1:1문의 작성
 	 * @param board
 	 * @param file

@@ -166,6 +166,14 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
 	}
 
+	public List<Board> selectDataList(int categoryNo, Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds);
+  }
 	/** 1:1문의 작성
 	 * @param board
 	 * @return boardNo
