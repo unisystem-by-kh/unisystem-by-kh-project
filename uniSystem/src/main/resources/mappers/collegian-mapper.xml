@@ -23,6 +23,9 @@
 
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="memberName" column="MEMBER_NAME" />
+		
+		<result property="lectureFL" column="LECTURE_FL" />
+		
 
 	</resultMap>
 	
@@ -118,6 +121,25 @@
 		SELECT DEPARTMENT_NO , DEPARTMENT_NAME
 		FROM DEPARTMENT
 		ORDER BY 1
+	</select>
+	
+	<select id="selectLecture" resultMap="class_rm">
+	SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM,
+		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,
+		(SELECT COUNT(*) FROM LECTURE R
+		WHERE R.MEMBER_NO = #{memberNo}
+		AND R.CLASS_NO = A.CLASS_NO) LECTURE_FL
+	FROM CLASS A
+	JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+	JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
+	
+	WHERE A.DEPARTMENT_NO = #{departmentNo}
+	
+	AND CLASS_GRADE = #{memberGrade}
+	AND CLASS_TREM = #{memberTerm}
+	
+	ORDER BY 1
+		
 	</select>
 
 

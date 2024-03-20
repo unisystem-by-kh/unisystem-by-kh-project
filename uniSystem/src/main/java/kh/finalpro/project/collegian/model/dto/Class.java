@@ -23,4 +23,6 @@ public class Class {
 	private int memberNo;
 	private String departmentName;
 	private String memberName;
+	
+	private int lectureFL;
 }
