@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="row5">댓글 <span> ${board.replyCount}</span></div>
+            <div class="row5">댓글 <span> [${board.replyCount}]</span></div>
 
             <div class="row6">
                 <div><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDFfMTIx/MDAxNjA0MjI5MTA4NzI3.yzCwf1e6qzFEThrElCICUzSLLlwmWPZBt2h_o4BCWccg.JeNepf4eBECV-hiBNC0mkeyRRpA8dh79Hf9fscBFadUg.JPEG.gambasg/%EC%9C%A0%ED%8A%9C%EB%B8%8C_%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84_BG.jpg?type=w400" alt="#"></div>
