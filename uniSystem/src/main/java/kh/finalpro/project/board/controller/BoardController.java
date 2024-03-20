@@ -427,6 +427,99 @@ public class BoardController {
 	      ra.addFlashAttribute("message",message);
 	      return path;
 	}
+	
+	
+	
+	// 1:1문의 게시글 삭제
+	 @GetMapping("/{categoryNo:4}/{boardNo}/delete")
+	   public String boardDelete(@PathVariable("categoryNo") int categoryNo
+		         ,@PathVariable("boardNo") int boardNo
+		         ,HttpSession session
+		         ,RedirectAttributes ra
+		     ) {
+		   
+		   
+		   int result = service.inquiryBoardDelete(boardNo);
+		   String path = "redirect:";
+		   String message = null;
+		   
+		   if(result > 0) {
+			   path += "/board/" + categoryNo;
+			   message = "게시글이 삭제되었습니다.";
+		   }else {
+			   path += "/board/" + categoryNo + "/" + boardNo;
+			   message = "게시글 삭제 실패";
+		   }
+		   
+		   ra.addFlashAttribute("message", message);
+		   
+		   
+		   return path;
+	   }
+	 
+	 // 게시글 수정 화면 전환
+	   @GetMapping("/{categoryNo:4}/{boardNo}/update")
+	   public String inquiryBoardUpdate(
+	         @PathVariable("categoryNo") int categoryNo
+	         ,@PathVariable("boardNo") int boardNo
+	         ,Model model // 데이터 전달용 객체 (기본 scope : requset)
+	         ) {
+	      
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("categoryNo", categoryNo);
+	      map.put("boardNo", boardNo);
+	      Board board = service.selectInquiryBoard(map);
+	      model.addAttribute("board", board);
+	      // forward(요청위임) -> requset scope 유지 
+	      
+	      return "board/inquiryBoardUpdate";
+	   }
+	 
+	
+	 
+	 // 1:1문의 게시글 수정
+	 @PostMapping("/{categoryNo:4}/{boardNo}/update")
+	   public String inquiryBoardUpdate(
+	         Board board // 커맨드 객체(name==필드 경우 필드에 파라미터 세팅
+	         ,@RequestParam(value="cp", required = false, defaultValue = "1") int cp // 쿼리스트링 유지
+	         ,@RequestParam(value="deleteList", required = false) String deleteList // 삭제할 이미지 순서
+	         ,@RequestParam(value="file", required = false) List<MultipartFile> file // 업로드된 파일 리스트
+	         ,@PathVariable("categoryNo") int categoryNo
+	         ,@PathVariable("boardNo") int boardNo
+	         ,HttpSession session // 서버 파일 저장 경로 얻어올 경로
+	         ,RedirectAttributes ra // 리다이렉트 시 값 전달용
+	         ) throws IllegalStateException, IOException {
+	      
+	      
+	      // 1) boardCode, boardNo를 커맨드 객체(board)에 세팅 
+	      board.setCategoryNo(categoryNo);
+	      board.setBoardNo(boardNo);
+	      
+	      // board(boardCode, boardNo , boardTitle, boardContent)
+	      
+	      // 2) 이미지 웹 접근 경로, 서버 저장 경로 
+	      String webPath = "/resources/images/board/";
+	      String filePath = session.getServletContext().getRealPath(webPath);
+	      
+	      // 3) 게시글 수정 서비스 호출 
+	      int rowCount = service.inquiryBoardUpdate(board, file, webPath, filePath, deleteList);
+	      
+	      // 4) 결과에 따라서 message, path 설정
+	      String message = null; 
+	      String path = "redirect:";
+	      
+	      if(rowCount > 0) {
+	         message = "게시글이 수정되었습니다.";
+	         path += "/board/" + categoryNo + "/" + boardNo + "?cp=" + cp; // 상세조회 페이지
+	      }else {
+	         message = "게시글이 수정 실패.";
+	         path += "update";
+	      }
+	      
+	      ra.addFlashAttribute("message",message);
+	      return path;
+	   }
+	   
 
 
 	// 학과공지 목록

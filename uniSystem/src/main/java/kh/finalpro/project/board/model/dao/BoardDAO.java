@@ -172,6 +172,46 @@ public class BoardDAO {
 		return sqlSession.insert("boardMapper.insertInquiryFile", uploadList);
 	}
 
+	/** 1:1문의 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	public int inquiryBoardDelete(int boardNo) {
+		return sqlSession.update("boardMapper.inquiryBoardDelete", boardNo);
+	}
+
+	/** 1:1문의 게시글 수정
+	 * @param board
+	 * @return
+	 */
+	public int inquiryBoardUpdate(Board board) {
+		return sqlSession.update("boardMapper.inquiryBoardUpdate", board);
+	}
+
+	/** 1:1문의 파일 삭제
+	 * @param deleteMap
+	 * @return
+	 */
+	public int inquiryFileDelete(Map<String, Object> deleteMap) {
+		return sqlSession.delete("boardMapper.inquiryBoardDelete", deleteMap);
+	}
+
+	/** 1:1문의 파일 수정
+	 * @param img
+	 * @return
+	 */
+	public int inquiryFileUpdate(BoardFile img) {
+		return sqlSession.update("boardMapper.inquiryFileUpdate", img);
+	}
+
+	/** 1:1문의 파일 삽입
+	 * @param img
+	 * @return
+	 */
+	public int inquiryFileInsert(BoardFile img) {
+		return sqlSession.insert("boardMapper.inquiryFileInsert", img);
+	}
+
 
 
 

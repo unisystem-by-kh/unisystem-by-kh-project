@@ -456,7 +456,51 @@
 		ORDER  BY REPLY_NO
 	</select>
 	
+	
+	<!-- 1:1문의 게시글 삭제 -->
+	<update id="inquiryBoardDelete">
+		UPDATE BOARD SET BOARD_ST = 'Y'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 1:1문의 게시글 수정 -->
+	<update id="inquiryBoardUpdate">
+		UPDATE BOARD SET BOARD_TITLE =
+		#{boardTitle},
+		BOARD_CONTENT = #{boardContent},
+		BOARD_U_DATE = SYSDATE
+		WHERE BOARD_NO
+		= #{boardNo}
+		AND CATEGORY_NO = #{categoryNo}
+	</update>
+	
+	<!-- 1:1문의 파일 삭제 -->
+	<delete id="inquiryFileDelete">
+		DELETE FROM BOARD_FILE
+		WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
+	<!-- 1:1문의 파일 수정 -->
+	<update id="inquiryFileUpdate">
+		UPDATE BOARD_FILE SET IMG_PATH = #{boardFilePath}
+		,IMG_RENAME = #{boardFileRename}
+		,IMG_ORIGINAL = #{boardFileOriginal}
+		WHERE
+		BOARD_NO = #{boardNo}
+		
+	</update>
+	<!-- 1:1문의 파일 삽입 -->
+	<insert id="inquiryFileInsert">
+		INSERT INTO BOARD_FILE
+		VALUES( SEQ_FILE_NO.NEXTVAL,
+		#{boardFilePath},
+		#{boardFileOriginal},
+		#{boardFileRename},
+		#{categoryNo},
+		#{boardNo}
+		)
 
+	</insert>
 </mapper>
 
 

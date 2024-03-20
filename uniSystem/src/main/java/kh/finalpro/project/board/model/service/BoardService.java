@@ -118,5 +118,23 @@ public interface BoardService {
 	Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp);
 
 
+	/** 1:1문의 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	int inquiryBoardDelete(int boardNo);
+
+ 
+	/** 1:1문의 게시글 수정
+	 * @param board
+	 * @param file
+	 * @param webPath
+	 * @param filePath
+	 * @param deleteList
+	 * @return
+	 */
+	int inquiryBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath, String deleteList) throws IllegalStateException, IOException;
+
+
 
 }
