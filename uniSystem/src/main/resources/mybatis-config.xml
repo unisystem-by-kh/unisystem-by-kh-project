@@ -33,6 +33,7 @@
 		<mapper resource="/mappers/board-mapper.xml" />
 		<mapper resource="/mappers/subject-mapper.xml" />
 		<mapper resource="/mappers/collegian-mapper.xml" />
+		<mapper resource="/mappers/reply-mapper.xml" />
 	</mappers>		
 
 </configuration>
