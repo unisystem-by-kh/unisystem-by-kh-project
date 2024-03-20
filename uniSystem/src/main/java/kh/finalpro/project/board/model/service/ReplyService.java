@@ -18,6 +18,12 @@ public interface ReplyService {
 	 */
 	List<Reply> select(int boardNo);
 	
+	/** 댓글 삽입
+	 * @param comment
+	 * @return reslt
+	 */
+	int insert(Reply reply);
+	
 	
 	
 	
