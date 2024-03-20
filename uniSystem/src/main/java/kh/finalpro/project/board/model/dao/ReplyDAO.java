@@ -1,8 +1,12 @@
 package kh.finalpro.project.board.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kh.finalpro.project.board.model.dto.Reply;
 
 @Repository
 public class ReplyDAO {
@@ -16,7 +20,15 @@ public class ReplyDAO {
 	
 	
 	
-	
+	/** 댓글 목록 조회
+	 * @param boardNo
+	 * @return cList
+	 */
+	public List<Reply> select(int boardNo) {
+												// board-mapper.xml에 작성된 select 이용
+		return sqlSession.selectList("boardMapper.selectCommentList", boardNo);
+	}
+
 	
 	
 	

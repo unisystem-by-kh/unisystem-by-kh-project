@@ -3,6 +3,8 @@ package kh.finalpro.project.board.model.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kh.finalpro.project.board.model.dto.Board;
 
 public interface BoardService {
@@ -81,6 +83,16 @@ public interface BoardService {
 	 * @return map
 	 */
 	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
+
+
+	/** 1:1문의 작성
+	 * @param board
+	 * @param file
+	 * @param webPath
+	 * @param filePath
+	 * @return
+	 */
+	int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath);
 
 
 
