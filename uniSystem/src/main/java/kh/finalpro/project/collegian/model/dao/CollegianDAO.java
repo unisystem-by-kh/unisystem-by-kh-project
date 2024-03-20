@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kh.finalpro.project.collegian.model.dto.Member;
 import kh.finalpro.project.collegian.model.dto.Pagination;
 import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.collegian.model.dto.Department;
 
 @Repository
 public class CollegianDAO {
@@ -58,6 +59,10 @@ public class CollegianDAO {
 		// 3) selectList("namespace.id" , 파라미터 , RowBounds) 호출
 		return sqlSession.selectList("collegianMapper.selectClassList_search", paramMap, rowBounds);
 		
+	}
+
+	public List<Department> selectDepartmentList() {
+		return sqlSession.selectList("collegianMapper.selectDepartmentList");
 	}
 	
 	
