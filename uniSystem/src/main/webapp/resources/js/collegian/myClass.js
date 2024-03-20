@@ -19,6 +19,25 @@ const addToCart = (th) => {
                     alert("이미 담겨 있는 과목 입니다.")
                     return;
                 }
+
+                let selectday = row[8].innerText.split(/[ ,(,),교시]/)[0];
+                let selectStart = row[8].innerText.split(/[ ,(,),교시]/)[2];
+                let selectEnd = row[8].innerText.split(/[ ,(,),교시]/)[6];
+                
+                let orginday = cell.innerText.split(/[ ,(,),교시]/)[0];
+                let orgStart = cell.innerText.split(/[ ,(,),교시]/)[2];
+                let orgEnd = cell.innerText.split(/[ ,(,),교시]/)[6];
+
+                if(orginday == selectday  ){ // 같은 요일
+                    if( orgStart <= selectStart && orgEnd >= selectStart ){ // 시작 교시 조건
+                        alert("강의 시간이 중복됩니다.");
+                        return;
+                    }
+                    if( orgStart <= selectEnd && orgEnd >= selectEnd){ // 끝 교시 조건
+                        alert("강의 시간이 중복됩니다.");
+                        return;
+                    }
+                };
             }
 
         }
@@ -36,7 +55,6 @@ const addToCart = (th) => {
         }else{
             td.innerHTML = row[i].innerHTML;
         }
-
         tr.append(td);
     }
 
@@ -50,3 +68,47 @@ const deleteClass = th => {
 
     row.remove();
 }
+
+
+
+// 수강 신청 버튼
+document.getElementById("class-btn").addEventListener("click", e => {
+    let classes = "";
+
+    // 수강 신청 화면
+    const selectClass = document.querySelector(".select-class table");
+
+    for(let ro of selectClass.rows){ // 수강 신청 내역의 테이블의 tr 요소들
+
+        let classNo = ro.cells[0].innerText;
+
+        if(classNo != 'No.'){
+            
+            classes +=classNo.trim()+"/";
+        }
+
+    }
+
+    fetch('/collegian/insertLecture',{
+
+        method: "POST",
+        headers: {
+            "Content-Type": "application/text",
+        },
+        body: classes
+    })
+    .then(res => res.text())
+    .then(result => {
+
+        if(result>0){
+            alert(result);
+        }else{
+            alert("수강 신청 실패");
+        }
+
+    })
+    .catch(err => {console.log(err)})
+
+    
+
+});

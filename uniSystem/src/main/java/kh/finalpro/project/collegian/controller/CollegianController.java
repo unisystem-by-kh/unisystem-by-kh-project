@@ -1,5 +1,7 @@
 package kh.finalpro.project.collegian.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -107,6 +109,37 @@ public class CollegianController {
 
 		return "/collegian/myClass";
 	}
+	
+	@PostMapping("/insertLecture")
+	@ResponseBody
+	public int insertMyClass(@RequestBody String classes) {
+		
+		String[] classNoList = classes.replace(" ","").split("\\s*/\\s*");
+		
+		System.out.println(Arrays.toString(classNoList));
+		
+		// 테스트
+
+		int departmentNo = 10;
+		int memberGrade = 1;
+		int memberTerm = 1;
+		// 까지
+
+		Member mem = new Member();
+
+		mem.setMemberNo("01-2412345");
+		mem.setDepartmentNo(departmentNo);
+		mem.setMemberGrade(memberGrade);
+		mem.setMemberTerm(memberTerm);
+		
+		
+		int result = service.insertMyClass(classNoList,mem);
+		
+		
+		return result;
+	}
+	
+	
 
 	// 시간표 페이지 전환
 	@RequestMapping("/schedule")

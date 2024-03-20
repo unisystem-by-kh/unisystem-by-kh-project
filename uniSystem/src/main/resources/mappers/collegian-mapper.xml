@@ -145,6 +145,10 @@
 	ORDER BY 1
 		
 	</select>
+	
+	<insert id="insertMyClass" parameterType="map">
+		INSERT INTO LECTURE VALUES( #{classNo} , #{mem.memberNo} , DEFAULT , #{mem.memberGrade} , #{mem.memberTerm} )
+	</insert>
 
 
 
