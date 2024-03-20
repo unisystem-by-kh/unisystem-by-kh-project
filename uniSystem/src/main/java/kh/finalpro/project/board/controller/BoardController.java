@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.finalpro.project.board.model.dto.Board;
+import kh.finalpro.project.board.model.dto.BoardFile;
 import kh.finalpro.project.board.model.service.BoardService;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.student.model.dto.Student;
@@ -279,6 +280,42 @@ public class BoardController {
 		return "board/boardData";
 
 	}
+ 	
+	/** 자료실 상세 페이지
+	 * @param boardNo
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/{categoryNo:5}/{boardNo}")
+	public String boardDataDetail(
+			@PathVariable("boardNo") int boardNo
+			, Model model
+			) {
+		
+		System.out.println("boardNo : "+boardNo);
+		
+		Board board = service.boardDataDetail(boardNo);
+		
+		List<BoardFile> boardFile = service.selectBoardFile(boardNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		if(boardFile.size() != 0) {
+			System.out.println("배열 길이가 0이 아닐 때"+boardFile);
+			
+			map.put("boardFile", boardFile);
+		}
+		
+		map.put("board", board);
+		
+		model.addAttribute("board", board);
+		
+		return "board/boardDataDetail";
+	}
+
+	
+	
 
 	//공지사항 목록
 	@GetMapping("/{categoryNo:1}")
@@ -432,7 +469,7 @@ public class BoardController {
 		return "board/departmentBoardWrite";
 	}
 
-
+	
 	
 	
 

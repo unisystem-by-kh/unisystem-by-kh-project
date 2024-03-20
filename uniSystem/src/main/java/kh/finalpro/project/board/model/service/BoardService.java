@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.board.model.dto.Board;
+import kh.finalpro.project.board.model.dto.BoardFile;
 
 /**
  * @author user1
@@ -105,6 +106,20 @@ public interface BoardService {
 	 * @return
 	 */
 	int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException;
+
+
+	/** 자료실 상세
+	 * @param boardNo
+	 * @return board
+	 */
+	Board boardDataDetail(int boardNo);
+
+
+	/** 게시글에 존재하는 파일
+	 * @param boardNo
+	 * @return boardFile
+	 */
+	List<BoardFile> selectBoardFile(int boardNo);
 
 
 

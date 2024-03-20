@@ -166,11 +166,17 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
 	}
 
+	
+	/** 자료실 목록 조회
+	 * @param categoryNo
+	 * @param pagination
+	 * @return
+	 */
 	public List<Board> selectDataList(int categoryNo, Pagination pagination) {
 		
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit() + 5);
 		
 		return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds);
   }
@@ -195,6 +201,22 @@ public class BoardDAO {
 	 */
 	public int insertInquiryFile(List<BoardFile> uploadList) {
 		return sqlSession.insert("boardMapper.insertInquiryFile", uploadList);
+	}
+
+	/** 게시글에 존재하는 파일 조회
+	 * @param boardNo
+	 * @return boardFile
+	 */
+	public List<BoardFile> selectBoardFile(int boardNo) {
+		return sqlSession.selectList("boardMapper.selectBoardFile", boardNo);
+	}
+
+	/** 자료실 상세
+	 * @param boardNo
+	 * @return board
+	 */
+	public Board boardDataDetail(int boardNo) {
+		return sqlSession.selectOne("boardMapper.boardDataDetail", boardNo);
 	}
 
 
