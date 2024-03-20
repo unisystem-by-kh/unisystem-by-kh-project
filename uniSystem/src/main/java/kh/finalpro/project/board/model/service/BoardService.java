@@ -1,5 +1,6 @@
 package kh.finalpro.project.board.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public interface BoardService {
 	 * @param filePath
 	 * @return
 	 */
-	int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath);
+	int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException;
 
 
 
