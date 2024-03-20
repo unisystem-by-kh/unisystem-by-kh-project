@@ -3,16 +3,32 @@
 
 <mapper namespace="replyMapper">
 
+	<!-- 자유게시판용 댓글~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- 댓글 삽입 -->
 	<insert id="insert">
 		INSERT INTO "REPLY"
 				VALUES(
 					SEQ_REPLY_NO.NEXTVAL, 
-					${replyContnet} , DEFAULT, DEFAULT, 
-					${boardNo}, 
-					${memberNo}
+					#{replyContent} , DEFAULT, DEFAULT, 
+					#{boardNo}, 
+					#{memberNo}
 				)
 	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="delete">
+		UPDATE "REPLY"
+		SET REPLY_ST = 'Y'
+		WHERE REPLY_NO = #{replyNo}
+	</update>
+	
+	<!-- 댓글 수정 -->
+	<update id="update">
+		UPDATE "REPLY"
+		SET REPLY_CONTENT = #{replyContent}
+		WHERE REPLY_NO = #{replyNo}
+	</update>
+	<!-- 자유게시판용 댓글~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </mapper>
 

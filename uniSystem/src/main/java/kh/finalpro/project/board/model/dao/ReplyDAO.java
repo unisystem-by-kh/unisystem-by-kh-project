@@ -30,14 +30,29 @@ public class ReplyDAO {
 	}
 
 	/** 댓글 삽입
-	 * @param comment
+	 * @param reply
 	 * @return result
 	 */
 	public int insert(Reply reply) {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + reply);
 		return sqlSession.insert("replyMapper.insert" , reply);
 	}
 
-	
+	/** 댓글 삭제
+	 * @param replyNo
+	 * @return result
+	 */
+	public int delete(int replyNo) {
+		return sqlSession.update("replyMapper.delete", replyNo);
+	}
+
+	/** 댓글 수정
+	 * @param comment
+	 * @return result
+	 */
+	public int update(Reply reply) {
+		return sqlSession.update("replyMapper.update", reply);
+	}
 	
 	
 	
