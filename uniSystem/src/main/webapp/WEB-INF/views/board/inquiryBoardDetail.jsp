@@ -78,10 +78,12 @@
 				asdasdasdsadasdsad
 			</div>
 		</div>
-		<div class="button-container">
-			<button id="replyUpBtn">수정</button>
-			<button id="replyDeBtn">삭제</button>
-		</div>
+		<c:if test="${board.replyCount != 0}">
+			<div class="button-container">
+				<button id="replyUpBtn">수정</button>
+				<button id="replyDeBtn">삭제</button>
+			</div>
+		</c:if>
 	
 	
 	    

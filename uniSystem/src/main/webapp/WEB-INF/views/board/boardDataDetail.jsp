@@ -41,11 +41,14 @@
                 <div class="content-header">
                     <span>작성자 : ${board.memberName} </span>
                     <span>${board.boardTitle} </span>
-                    <c:if test="${!empty board.fileList}">
-                        <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
-                                            download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileRename}</a> 
+                    <c:if test="${!empty boardFile}">
+                        <div class="write">
+                            <a href="${boardFile[0].boardFilePath}${boardFile[0].boardFileRename}"
+                                                download="${boardFile[0].boardFileOriginal}">${boardFile[0].boardFileOriginal}</a> 
+                            
+                        </div>
                     </c:if>
-                    <c:if test="${empty board.fileList}">
+                    <c:if test="${empty boardFile}">
                         <div class="write">첨부된 파일이 없습니다.</div>
 
                     </c:if>
@@ -59,13 +62,6 @@
                 </div>
 
             </div>
-            <c:if test="${!empty boardFile}" >
-                <div class="write">
-                    <a href="#">자료실 업로드</a>
-                </div>
-            </c:if>
-
-            
 
         </div>
 

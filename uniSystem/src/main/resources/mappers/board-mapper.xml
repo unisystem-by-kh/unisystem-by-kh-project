@@ -354,8 +354,8 @@
 		<foreach collection="list" item="file" separator=" UNION ALL ">
 			SELECT
 			#{file.boardFilePath} BOARD_FILE_PATH,
-			#{file.boardFileRename} BOARD_FILE_RENAME,
 			#{file.boardFileOriginal} BOARD_FILE_ORIGINAL,
+			#{file.boardFileRename} BOARD_FILE_RENAME,
 			
 			#{file.boardFileCategoryNo} CATEGORY_NO,
 			
