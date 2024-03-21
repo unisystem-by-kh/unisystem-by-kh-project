@@ -14,7 +14,7 @@
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-    <form action="/board/${categoryNo}/update" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
+    <form action="/board/${categoryNo}/${board.boardNo}/update" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
 
         <div class="boardName">
             <h1>1 : 1 문의</h1>
@@ -41,7 +41,7 @@
             <div>첨부파일</div>
             <div>   
                     <input type="file" id="file" name="file" >
-                    ${board.fileList[0].boardFileRename}
+                    ${board.fileList[0].boardFileOriginal}
             </div>
         </div>
         <div class="boardOpen">
@@ -58,6 +58,7 @@
         <div class="btnArea">
             <button type="submit">등록하기</button>
         </div>
+        <input type="hidden" name="deleteList" value="">
         <input type="hidden" name="cp" value="${param.cp}">
     </form>
         <div>

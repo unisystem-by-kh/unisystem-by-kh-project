@@ -447,7 +447,7 @@ public class BoardController {
 		
 		path = "board/inquiryBoardDetail"; // forward할 jsp 경로
 		model.addAttribute("board", board);
-		
+		System.out.println(board);
 		return path;
 }	
 	
@@ -565,13 +565,13 @@ public class BoardController {
 	      // 1) boardCode, boardNo를 커맨드 객체(board)에 세팅 
 	      board.setCategoryNo(categoryNo);
 	      board.setBoardNo(boardNo);
-	      
 	      // board(boardCode, boardNo , boardTitle, boardContent)
 	      
 	      // 2) 이미지 웹 접근 경로, 서버 저장 경로 
 	      String webPath = "/resources/images/board/";
 	      String filePath = session.getServletContext().getRealPath(webPath);
 	      
+	      System.out.println(board);
 	      // 3) 게시글 수정 서비스 호출 
 	      int rowCount = service.inquiryBoardUpdate(board, file, webPath, filePath, deleteList);
 	      

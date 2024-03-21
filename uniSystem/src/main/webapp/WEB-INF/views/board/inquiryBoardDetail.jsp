@@ -41,7 +41,7 @@
 
 			<c:if test="${!empty board.fileList}">
 				  <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
-                                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileRename}</a> 
+                                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileOriginal}</a> 
 			</c:if>
 			<c:if test="${empty board.fileList}">
 	        	<div>첨부된 파일이 없습니다.</div>
@@ -72,14 +72,15 @@
 	        </div>
 	    </div>
 	
-	    <form>
-	        <div class="reply-write">
-	            <textarea placeholder="답변을 작성해주세요.">
+	    <c:if test="${board.replyCount == 0}">
+			<div class="reply-write">
+				<textarea placeholder="답변을 작성해주세요.">
+		
+				</textarea>
+				<button >답변작성</button>
+			</div>
+		</c:if>
 	    
-	            </textarea>
-	            <button >답변작성</button>
-	        </div>
-	    </form>
 	
 	    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>

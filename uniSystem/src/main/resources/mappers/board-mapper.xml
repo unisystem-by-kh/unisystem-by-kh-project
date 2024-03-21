@@ -497,9 +497,9 @@
 	
 	<!-- 1:1문의 파일 수정 -->
 	<update id="inquiryFileUpdate">
-		UPDATE BOARD_FILE SET IMG_PATH = #{boardFilePath}
-		,IMG_RENAME = #{boardFileRename}
-		,IMG_ORIGINAL = #{boardFileOriginal}
+		UPDATE BOARD_FILE SET BOARD_FILE_PATH = #{boardFilePath}
+		,BOARD_FILE_RENAME = #{boardFileRename}
+		,BOARD_FILE_ORIGINAL = #{boardFileOriginal}
 		WHERE
 		BOARD_NO = #{boardNo}
 		
@@ -511,7 +511,7 @@
 		#{boardFilePath},
 		#{boardFileOriginal},
 		#{boardFileRename},
-		#{categoryNo},
+		2,
 		#{boardNo}
 		)
 
