@@ -54,13 +54,15 @@
             </div>
 
             <div class="row4">
-                <div>
-                    <button><a href="/board/freeBoardUpdate" id="updateBtn">수정</a></button>
-                    <button>삭제</button>
-                </div>
-                <div>
-                    <button>목록</button>
-                </div>
+                <c:if test="${loginMember.memberNo == board.memberNo}" >
+                    <div>
+                        <button><a href="#" id="updateBtn">수정</a></button>
+                        <button>삭제</button>
+                    </div>
+                </c:if>
+                    <div>
+                        <button>목록</button>
+                    </div>
             </div>
 
             <div class="row5">한줄 댓글 <span></span></div>

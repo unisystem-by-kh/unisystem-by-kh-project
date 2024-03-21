@@ -94,16 +94,6 @@ public class BoardController {
 		
 		model.addAttribute("map" , map);
 		
-		System.out.println();
-		System.out.println("---------------------------------------------------------------------------");
-		System.out.println("Controller-categoryNo : " + categoryNo);
-		System.out.println("Controller-cp : " + cp);
-		System.out.println("Controller-model : " + model);
-		System.out.println("Controller-paramMap : " + paramMap);
-		System.out.println("Controller-map : " + map);
-		System.out.println("---------------------------------------------------------------------------");
-		System.out.println();
-
 		return "board/freeBoardList";
 	}
 
@@ -120,24 +110,12 @@ public class BoardController {
 			HttpServletResponse resp
 			) throws ParseException {
 		
-		System.out.println();
-		System.out.println("---------------------------------------------------------------------------");
-		System.out.println("Controller:::categoryNo : "+categoryNo);
-		System.out.println("Controller:::boardNo : "+boardNo);
-		System.out.println("Controller:::loginMember : "+loginMember);
-		System.out.println("---------------------------------------------------------------------------");
-		System.out.println();
-		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("categoryNo", categoryNo);
 		map.put("boardNo", boardNo);
 		
 		Board board = service.selectFreeBoard(map);
-		
-		System.out.println("---------------------------------------------------------------------------");
-		System.out.println("Controller:::board : "+board);
-		System.out.println("---------------------------------------------------------------------------");
 		
 		String path = null;
 		
@@ -245,24 +223,80 @@ public class BoardController {
 		
 		return path;
 		
-//		return "board/freeBoardDetail";
 	}
 
 
 	// 자유게시판 삽입
 	@GetMapping("/freeBoardInsert")
 	public String selectFreeBoardInsert() {
+		
+		
 
 		return "board/freeBoardInsert";
 	}
 
 
-	// 자유게시판 수정
-	@GetMapping("/freeBoardUpdate")
-	public String selectFreeBoardUpdate() {
+	// 자유게시판 수정 화면
+	@GetMapping("/{categoryNo:3}/{boardNo}/update")
+	public String selectFreeBoardUpdate(
+				@PathVariable("categoryNo") int categoryNo,
+				@PathVariable("boardNo") int boardNo,
+				Model model
+			) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+		
+		Board board = service.selectFreeBoard(map);
+		
+		model.addAttribute("board", board);
 
 		return "board/freeBoardUpdate";
 
+	}
+	
+	// 자유게시판 수정 기능
+	@PostMapping("/{categoryNo:3}/{boardNo}/update")
+	public String boardUpdate(
+			 Board board // 커맨드 객체(name == 필드 경우 필드에 파라미터 세팅)
+			,@RequestParam(value="cp", required = false, defaultValue = "1") int cp // 쿼리스트링 유지
+			,@RequestParam(value = "deleteList", required = false) String deleteList // 삭제할 이미지 순서 ???
+			,@RequestParam(value = "images", required = false) List<MultipartFile> file // 업로드된 파일 리스트
+			,@PathVariable("categoryNo") int categoryNo
+			,@PathVariable("boardNo") int boardNo
+			,HttpSession session // 서버 파일 저장 경로 얻어올 용도
+			,RedirectAttributes ra // 리다이렉트 시 값 전달용
+			) throws IllegalStateException, IOException {
+		
+		// 1) boardCode, boardNo를 커맨드 객체(board)에 세팅
+		board.setCategoryNo(categoryNo);
+		board.setBoardNo(boardNo);
+		
+		// board(boardCode, boardNo, boardTitle, boardContent)
+		
+		// 2) 이미지 웹 접근 경로, 서버 저장 경로
+		String webPath = "/resources/images/board/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+		
+		// 3) 게시글 수정 서비스 호출
+		int rowCount = service.freeBoardUpdate(board, file, webPath, filePath, deleteList);
+		
+		// 4) 결과에 따라서 message, path 설정
+		String message = null;
+		String path = "redirect:";
+		
+		if(rowCount > 0) {
+			message = "게시글이 수정되었습니다.";
+			path += "/board/" + categoryNo + "/" + boardNo + "?cp" + cp; // 상세 조회 페이지
+		}else {
+			message = "게시글 수정 실패";
+			path += "update";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
 	}
 
 

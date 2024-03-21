@@ -151,5 +151,16 @@ public interface BoardService {
 	List<BoardFile> selectBoardFile(int boardNo);
 
 
+	/** 자유게시판 수정
+	 * @param board
+	 * @param images
+	 * @param webPath
+	 * @param filePath
+	 * @param deleteList
+	 * @return rowCount
+	 */
+	int freeBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath, String deleteList) throws IllegalStateException, IOException;
+
+
 
 }

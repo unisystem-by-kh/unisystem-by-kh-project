@@ -454,7 +454,7 @@
 		WHERE BOARD_NO = #{boardNo} )C
 		WHERE
 		REPLY_ST = 'N'
-		ORDER  BY REPLY_NO
+		ORDER BY REPLY_NO DESC
 	</select>
 	
 	<!-- 게시판에 있는 파일 조회 -->	
