@@ -281,5 +281,5 @@ public class BoardDAO {
 		
 		return sqlSession.selectList("boardMapper.selelctNoticeBoardList_search", paramMap, rowBounds);
 	}
-	
+
 }

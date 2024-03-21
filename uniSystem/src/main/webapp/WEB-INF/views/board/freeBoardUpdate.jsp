@@ -21,14 +21,14 @@
 
         <div class="mainContainer">
 
-            <form action="#" >
+            <form action="/board/${categoryNo}/update" method="POST" class="board-write" id="boardUpdateFrm" enctype="multipart/form-data">
                 
                 <div class="row1">
-                    <div><a href="/board/freeBoardList" style="color: crimson;">자유게시판</a></div>
+                    <div><%-- <a href="/board/freeBoardList" style="color: crimson;">자유게시판</a> --%></div>
                     <div>게 시 글 수 정 중 . . .</div>
                 </div>
     
-                <div class="row2"><input type="text" placeholder="게시글 제목을 입력해주세요."></div>
+                <div class="row2"><input type="text" placeholder="게시글 제목을 입력해주세요." value="${board.boardTitle}"></div>
 
                 <div class="row3">
                     <div>
