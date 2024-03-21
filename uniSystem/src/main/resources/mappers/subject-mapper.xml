@@ -54,6 +54,17 @@
 		DEPARTMENT ORDER BY 1
 	</select>
 	
+	<!-- 교수 강의 시간 체크 -->
+	<select id="timeCheck" resultType="_int">
+		SELECT COUNT(*) FROM CLASS
+		WHERE MEMBER_NO = (SELECT MEMBER_NO FROM MEMBER
+		                   WHERE MEMBER_NAME = #{professor})
+		AND CLASS_DAY = #{classDay}
+		<![CDATA[
+			AND ((CLASS_START <= #{classStart} AND CLASS_END >= #{classStart})  OR (CLASS_START <= #{classEnd} AND CLASS_END >= #{classEnd}))
+		]]>
+	</select>
+	
 
 
 

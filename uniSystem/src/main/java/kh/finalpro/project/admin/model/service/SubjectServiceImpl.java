@@ -50,5 +50,11 @@ public class SubjectServiceImpl implements SubjectService{
 		return dao.searchProfessor(deptCode);
 	}
 	
+	// 교수 강의 시간 조회 서비스
+	@Override
+	public int timeCheck(Map<String, Object> map) {
+		return dao.timeCheck(map);
+	}
+	
 
 }

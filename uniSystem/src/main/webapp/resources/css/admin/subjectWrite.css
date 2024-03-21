@@ -88,10 +88,28 @@ button:hover {
     background-color: crimson;
 }
 
+.resultSet-area{
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    right: 50px;
+    display: none;
+}
+
+.resultSet-area>p{
+    position: absolute;
+    z-index: 1002;
+    right: 10px;
+    width: 10px;
+    font-size: 20px;
+    display: none;
+    cursor: pointer;
+}
+
 
 #resultSet{
     position: relative;
-    left: 180px;
     z-index: 1001;
     background-color: white;
     list-style: none;
@@ -111,11 +129,8 @@ button:hover {
     padding: 2px 10px;
 }
 
-#resultSet>li:hover{
-    background-color: yellow;
-}
-
 #resultSet>li>b:hover{
+    background-color: yellow;
     cursor: pointer;
 }
 

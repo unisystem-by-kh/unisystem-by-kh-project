@@ -37,7 +37,10 @@
                 <div class="form-group">
                     <label for="professor">담당 교수</label>
                     <input type="text" id="teacher" name="professor" placeholder="담당 교수님을 입력해주세요." autocomplete="off">
-                    <ul id="resultSet" class="resultSet"></ul>
+                    <div class="resultSet-area">
+                        <p id="x-btn">&times;</p>
+                        <ul id="resultSet" class="resultSet"></ul>
+                    </div>
                 </div>
 
                 <div class="form-group">
