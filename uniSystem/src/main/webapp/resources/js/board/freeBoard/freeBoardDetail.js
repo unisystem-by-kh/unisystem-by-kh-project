@@ -248,3 +248,22 @@ if(updateBtn != null){
     })
 
 }
+
+
+
+// 게시글 삭제
+if(document.getElementById("deleteBtn") != null){
+    
+    document.getElementById("deleteBtn").addEventListener("click",() => {
+        if(confirm("정말 삭제하시겠습니까?")){
+            
+            
+            location.href = "/board/" + categoryNo +"/" + boardNo +  "/delete";
+    
+            
+            alert("삭제 되었습니다.")
+            
+        }
+    })
+
+}

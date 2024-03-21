@@ -46,7 +46,7 @@
 
             </div>
             <c:if test="${!empty boardFile}" >
-                <div class="write>"
+                <div class="write">
                     <a href="#">자료실 업로드</a>
                 </div>
             </c:if>
