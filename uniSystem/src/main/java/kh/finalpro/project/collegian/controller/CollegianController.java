@@ -104,6 +104,13 @@ public class CollegianController {
 		} else {
 			map = service.selectLecture(mem, cp);
 		}
+		
+		// 수강 신청 내역 조회
+		List<Class> myClassList = service.selectMyClasses(mem);
+		
+		System.out.println("수강 신청 내역"+myClassList);
+		
+		map.put("myClassList", myClassList);
 
 		model.addAttribute("map", map);
 
