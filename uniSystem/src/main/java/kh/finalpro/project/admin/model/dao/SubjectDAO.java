@@ -3,13 +3,19 @@ package kh.finalpro.project.admin.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.admin.model.dto.Subject;
+import kh.finalpro.project.collegian.model.dto.Pagination;
 import kh.finalpro.project.main.model.dto.Member;
 
+/**
+ * @author user1
+ *
+ */
 @Repository
 public class SubjectDAO {
 	
@@ -53,6 +59,35 @@ public class SubjectDAO {
 	 */
 	public int timeCheck(Map<String, Object> map) {
 		return sqlSession.selectOne("subjectMapper.timeCheck", map);
+	}
+
+	/** 교과목 테이블 갯수 카운트
+	 * @return listCount
+	 */
+	public int getListCount() {
+		return sqlSession.selectOne("subjectMapper.getListCount");
+	}
+
+	/** 교과목 목록 조회
+	 * @param pagination
+	 * @return subjectList
+	 */
+	public List<Subject> selectSubjectList(Pagination pagination) {
+		
+		// RowBounts 객체
+		// - 마이바티스에서 페이징 처리를 위해 제공하는 객체
+		// - offset만큼 건너 뛰고
+		// 그 다음 지정된 행 개수(limit) 만큼 조회
+
+		// 1) offset 계산
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		// 3) selectList("namespace.id", 파라미터, RowBounds) 호출 
+		return sqlSession.selectList("subjectMapper.selectSubjectList", offset, rowBounds);
 	}
 
 
