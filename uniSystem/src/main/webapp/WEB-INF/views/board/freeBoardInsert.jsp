@@ -24,7 +24,7 @@
             <form action="#" >
                 
                 <div class="row1">
-                    <div><a href="/board/freeBoardList" style="color: crimson;">자유게시판</a></div>
+                    <div></div>
                     <div>게 시 글 작 성 중 . . .</div>
                 </div>
     
@@ -33,12 +33,13 @@
                 <div class="row3">
                     <div>
                         <div class="row3-imgArea">
-                            <label for="img">
-                                <img src="https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/02/a0002727/img/ko/a0002727_parts_5bea39afbf327.jpg?20201211115557&q=80&rw=686&rh=490" alt="#">
+                            <label for="file">
+                                <img class="preview" src="#">
                             </label>
-                            <input type="file" name="images" class="inputImage" id="img0" accept="image/*">
+                            <input type="file" name="file" class="inputImage" id="file" accept="image/*">
                         </div>
-                        <textarea placeholder="게시글 내용을 입력해주세요." maxlength="1400"></textarea>
+                        ${board}
+                        <textarea placeholder="게시글 내용을 입력해주세요." maxlength="1400" name='boardContent'>${board.boardContent}</textarea>
                     </div>
                 </div>
 

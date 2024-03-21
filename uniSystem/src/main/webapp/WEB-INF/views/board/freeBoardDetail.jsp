@@ -46,7 +46,9 @@
             <div class="row3">
                 <div>
                     <%-- 주소부분 처리해야함 --%>
-                    <img src="https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/02/a0002727/img/ko/a0002727_parts_5bea39afbf327.jpg?20201211115557&q=80&rw=686&rh=490" alt="#">
+                    <c:set var="path" value="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"/>
+                    <img src="${path}">
+                    <%-- ${path} --%>
                     <div>
                         ${board.boardContent}
                     </div>
@@ -56,8 +58,8 @@
             <div class="row4">
                 <c:if test="${loginMember.memberNo == board.memberNo}" >
                     <div>
-                        <button><a href="#" id="updateBtn">수정</a></button>
-                        <button>삭제</button>
+                        <button id="updateBtn">수정</button>
+                        <button id="deleteBtn">삭제</button>
                     </div>
                 </c:if>
                     <div>

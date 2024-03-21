@@ -262,6 +262,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 1:1문의 게시글 수정
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int inquiryBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath,
 			String deleteList) throws IllegalStateException, IOException{
@@ -395,6 +396,8 @@ public class BoardServiceImpl implements BoardService{
 				board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
 				// 2) DAO호출
 				int rowCount = dao.inquiryBoardUpdate(board);
+				
+				System.out.println(rowCount);
 
 				// 2. 게시글 부분이 수정 성공 했을 때
 				if(rowCount > 0) {
@@ -412,6 +415,7 @@ public class BoardServiceImpl implements BoardService{
 							// throw new ImageDeleteException();
 						}
 					}
+					System.out.println(deleteList);
 
 					// 4. 새로 업로드된 이미지 분류 작업
 
@@ -448,6 +452,8 @@ public class BoardServiceImpl implements BoardService{
 								rowCount = dao.inquiryFileInsert(img);
 							}
 						}
+						
+						System.out.println(uploadList);
 
 
 
