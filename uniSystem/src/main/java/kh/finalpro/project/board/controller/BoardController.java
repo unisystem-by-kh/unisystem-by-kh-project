@@ -388,7 +388,6 @@ public class BoardController {
 			, Model model
 			) {
 
-		System.out.println("boardNo : "+boardNo);
 
 		Board board = service.boardDataDetail(boardNo);
 
@@ -415,37 +414,6 @@ public class BoardController {
 	public String writeBoardData(@PathVariable("categoryNo") int categoryNo) {
 		return "board/boardDataWrite";
 	}
-
-	// 자료실 등록
-	/*
-	 * @PostMapping("/{categoryNo:5}/write") public String writeBoardData(
-	 * 
-	 * @PathVariable("categoryNo") int categoryNo // 카테고리 번호 , Board board // 커맨드 객체
-	 * , @RequestParam(value="file", required = false) List<MultipartFile> file //
-	 * 파일 list로 가져옴 , @SessionAttribute(value="loginMember") Member loginMember //
-	 * 세션 스코프에 저장된 loginMember , RedirectAttributes ra // , HttpSession session )
-	 * throws IllegalStateException, IOException {
-	 * 
-	 * 
-	 * board.setMemberNo(loginMember.getMemberNo());
-	 * 
-	 * board.setCategoryNo(categoryNo);
-	 * 
-	 * 
-	 * String webPath = "/resources/file/board/"; String filePath =
-	 * session.getServletContext().getRealPath(webPath);
-	 * 
-	 * 
-	 * // 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 int boardNo =
-	 * service.inquiryBoardWrite(board, file, webPath, filePath); // 게시글 삽입 성공 시 //
-	 * -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트 // ->
-	 * /board/{boardCode}/{boardNo} @PathVariable String message = null; String path
-	 * = "redirect:"; if(boardNo > 0) { // 성공 시 message = "게시글이 등록되었습니다."; path +=
-	 * "/board/" + categoryNo + "/" + boardNo; }else { message= "게시글 등록 실패 ㅠㅠ"; path
-	 * += "write"; } ra.addFlashAttribute("message",message); return path;
-	 * 
-	 * }
-	 */
 
 
 	//공지사항 목록
