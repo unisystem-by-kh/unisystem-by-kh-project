@@ -147,7 +147,9 @@
 	</select>
 	
 	<insert id="insertMyClass" parameterType="map">
-		INSERT INTO LECTURE VALUES( #{classNo} , #{mem.memberNo} , DEFAULT , #{mem.memberGrade} , #{mem.memberTerm} )
+		INSERT INTO LECTURE VALUES( #{classNo} , #{memberNo} , DEFAULT ,
+		 (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo}) ,
+		  (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo}) )
 	</insert>
 	
 	<select id="selectMyClasses" resultMap="class_rm">
@@ -164,8 +166,8 @@
 	    
 	    WHERE A.DEPARTMENT_NO = #{departmentNo}
 	    
-	    AND CLASS_GRADE = #{memberGrade}
-		AND CLASS_TREM = #{memberTerm}
+	    AND L.LECTURE_GRADE = #{memberGrade}
+		AND L.LECTURE_TERM = #{memberTerm}
 		
 	    AND L.MEMBER_NO = #{memberNo}
 	    
@@ -173,9 +175,18 @@
 		
 	</select>
 
-
-
-
+	<delete id="deleteMyClass" parameterType="map">
+		
+		DELETE LECTURE
+		
+		WHERE CLASS_NO = #{classNo}
+		
+		AND LECTURE_GRADE = (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		AND LECTURE_TERM = (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		
+		AND MEMBER_NO = #{memberNo}
+	
+	</delete>
 
 
 </mapper>

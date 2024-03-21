@@ -200,7 +200,10 @@
     </main>
 
     <script>
-        const loginMember = '${loginMember}';
+        const memberNo = '${loginMember.memberNo}';
+        // const memberGrade = '${loginMember.memberGrade}';
+        // const memberTerm = '${loginMember.memberTerm}';
+        // const departmentNo = '${loginMember.departmentNo}';
     </script>
 
 
