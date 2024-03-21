@@ -327,6 +327,8 @@ public class BoardServiceImpl implements BoardService{
 
 					uploadList.add(img);
 					
+					
+					
 					// 오라클은 다중  UPDATE를 지원하지 않기 떄문에
 					// 하나씩 UPDATE 수행
 					
@@ -339,9 +341,11 @@ public class BoardServiceImpl implements BoardService{
 					}
 				}
 
-
+				
 
 			}
+			
+			
 			
 			
 		}

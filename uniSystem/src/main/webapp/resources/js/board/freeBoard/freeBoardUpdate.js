@@ -24,7 +24,6 @@ for(let i = 0; i < inputImage.length; i++){
 
         }else{
             preview[i].removeAttribute('src');
-            console.log(preview);
         }
 
     })
