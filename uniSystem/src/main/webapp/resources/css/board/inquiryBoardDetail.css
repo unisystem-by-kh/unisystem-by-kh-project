@@ -175,3 +175,26 @@ main{
     color: white;
     border-radius: 3px;
 }
+
+.button-container{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.button-container > button{
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.button-container > button:hover{
+    color: crimson;
+}
+
