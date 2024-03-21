@@ -45,7 +45,6 @@ main{
 .content-area{
     width: 1200px;
     margin: auto;
-    height: 500px;
     border-bottom: 1px solid #ddd;
 }
 .content-area > div{
@@ -137,7 +136,6 @@ main{
 
 .reply-content{
     width: 1200px;
-    height: 300px;
     margin: auto;
     border-bottom: 1px solid #ddd;
 }

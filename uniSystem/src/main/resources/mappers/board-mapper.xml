@@ -356,7 +356,9 @@
 			#{file.boardFilePath} BOARD_FILE_PATH,
 			#{file.boardFileRename} BOARD_FILE_RENAME,
 			#{file.boardFileOriginal} BOARD_FILE_ORIGINAL,
+			
 			#{file.boardFileCategoryNo} CATEGORY_NO,
+			
 			#{file.boardNo} BOARD_NO
 			FROM DUAL
 		</foreach>
