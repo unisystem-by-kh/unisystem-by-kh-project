@@ -37,18 +37,25 @@ public class BoardServiceImpl implements BoardService{
 	// 자유게시판 목록 조회
 	@Override
 	public Map<String, Object> selectFreeBoardList(int categoryNo, int cp) {
-		
+
 		int listCount = dao.getListCount(categoryNo);
-		
+
 		Pagination pagination = new Pagination(cp, listCount);
-		
+
 		List<BoardDAO> boardList = dao.selectFreeBoardList(pagination, categoryNo);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
-		
+
+
+		System.out.println(boardList);
+
+		System.out.println("Service ;; " + map);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@썸네일을 찾아라 : " + boardList);
+
+
 		return map;
 	}
 
@@ -61,11 +68,14 @@ public class BoardServiceImpl implements BoardService{
 		Pagination pagination = new Pagination(cp, listCount);
 
 		List<BoardDAO> boardList = dao.selectinquiryBoardList(pagination, categoryNo);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
+
+
+
 
 		return map;
 	}
@@ -74,42 +84,42 @@ public class BoardServiceImpl implements BoardService{
 	// 자유게시판 목록 조회(검색)
 	@Override
 	public Map<String, Object> searchFreeBoardList(Map<String, Object> paramMap, int cp) {
-		
+
 		// 1. 특정 게시판의 삭제되지 않고 검색 조건이 일치하는 게시글 수 조회
 		int listCount = dao.getListCount(paramMap);
-		
+
 		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
 		// 		-> 내부 필드가 모두 계산되어 초기화됨
 		Pagination pagination = new Pagination(cp, listCount);
-		
+
 		// 3. 특정 게시판에서 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
 		// + 단, 검색 조건 일치하는 글만
 		List<Board> boardList = dao.searchFreeBoardList(pagination, paramMap);
-		
+
 		// 4. pagination, boardList를 Map에 답아서 반환
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
-		
+
 		return map;
-		
+
 	}
-	
+
 	// 1:1문의 목록(검색)
 	@Override
 	public Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp) {
-		
+
 		int listCount = dao.getListCountInquiry(paramMap);
 
 		Pagination pagination = new Pagination(cp, listCount);
 
 		List<BoardDAO> boardList = dao.selectinquiryBoardList(pagination, paramMap);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
-		
+
 		return map;
 	}
 
@@ -126,8 +136,8 @@ public class BoardServiceImpl implements BoardService{
 		return dao.updateReadCount(boardNo);
 	}
 
-	
-	
+
+
 	// 1:1문의 상세조회
 	@Override
 	public Board selectInquiryBoard(Map<String, Object> map) {
@@ -139,25 +149,25 @@ public class BoardServiceImpl implements BoardService{
 		return dao.selectFileList(boardNo);
 	}
 
-	
-	
+
+
 	// 자료실 목록 조회
 	@Override
 	public Map<String, Object> selectDataBoardList(int categoryNo, int cp) {
-		
+
 		int listCount = dao.getListCount(categoryNo);
-		
+
 		Pagination pagination = new Pagination(cp, listCount);
-		
+
 		List<Board> boardList = dao.selectDataList(categoryNo, pagination);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
-		
+
 		return map;
 	}
-  
+
 	// 1:1문의 작성
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -196,7 +206,11 @@ public class BoardServiceImpl implements BoardService{
 					// img에 파일 정보를 담아서 uploadList에 추가
 					img.setBoardFilePath(webPath); // 웹 접근 경로
 					img.setBoardNo(boardNo); // 게시글 번호
-					img.setBoardFileCategoryNo(board.getCategoryNo());
+
+					img.setBoardFileCategoryNo(
+							board.getCategoryNo()
+							);
+
 					// 파일 원본명
 					String fileName = file.get(i).getOriginalFilename(); // 원본명
 					img.setBoardFileOriginal(fileName); // 원본명
@@ -226,17 +240,17 @@ public class BoardServiceImpl implements BoardService{
 
 					// uploadList : 업로드된 파일의 정보 리스트
 					//					  (원본명, 변경명, 순서, 경로, 게시글 번호)
-					
+
 					// 순서 == images 업로드된 인덱스
-					
+
 					for(int i = 0; i < uploadList.size(); i++) {
-						
+
 						String rename = uploadList.get(i).getBoardFileRename();
-						
+
 						file.get(i).transferTo(new File(filePath + rename));
-						
+
 					}
-					
+
 				}else { // 일부 또는 전체 insert 실패
 
 					// ** 웹 서비스 수행 중 1개라도 실패하면 전체 실패 **
@@ -254,7 +268,7 @@ public class BoardServiceImpl implements BoardService{
 		}
 		return boardNo;
 	}
-	
+
 	// 자료실 상세 조회(미완)
 	@Override
 	public Board boardDataDetail(int boardNo) {
@@ -264,7 +278,7 @@ public class BoardServiceImpl implements BoardService{
 	// 게시글에 존재하는 파일 조회
 	@Override
 	public List<BoardFile> selectBoardFile(int boardNo) {
-		
+
 		return dao.selectBoardFile(boardNo);
 	}
 	// 1:1문의 게시글 삭제
@@ -272,7 +286,7 @@ public class BoardServiceImpl implements BoardService{
 	public int inquiryBoardDelete(int boardNo) {
 		return dao.inquiryBoardDelete(boardNo);
 	}
-	
+
 	// 1:1문의 게시글 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -326,47 +340,87 @@ public class BoardServiceImpl implements BoardService{
 					img.setBoardFileRename(Util.fileRename(fileName)); 
 
 					uploadList.add(img);
-					
+
 					// 오라클은 다중  UPDATE를 지원하지 않기 떄문에
 					// 하나씩 UPDATE 수행
-					
-					rowCount = dao.inquiryFileUpdate(img);
-					
-					if(rowCount == 0) {
-						// 수정 실패 == DB에 이미지가 없었다.
-						// -> 이미지를 삽입
-						rowCount = dao.inquiryFileInsert(img);
+					// 분류 작업 후 uploadList가 비어있지 않은 경우
+					// == 업로드한 파일이 있다.
+					if(!uploadList.isEmpty()) {
+
+						// BOARD_IMG 테이블에 INSERT하는 DAO 호출
+						int result = dao.insertInquiryFile(uploadList);
+						// result == 삽입된 행의 개수 == uploadList.size()
+
+						// 삽입된 행의 개수와 uploadList의 개수가 같다면
+						// == 전체 insert 성공
+						if(result == uploadList.size()) {
+
+							// 서버에 파일을 저장(transferTo())
+
+							// images      : 실제 파일이 담긴 객체 리스트
+							//				      (업로드 안된 인덱스 빈칸)
+
+							// uploadList : 업로드된 파일의 정보 리스트
+							//					  (원본명, 변경명, 순서, 경로, 게시글 번호)
+
+							// 순서 == images 업로드된 인덱스
+
+							for(int s = 0; s < uploadList.size(); s++) {
+
+								String rename = uploadList.get(s).getBoardFileRename();
+
+								file.get(s).transferTo(new File(filePath + rename));
+
+							}
+
+						}else { // 일부 또는 전체 insert 실패
+
+							// ** 웹 서비스 수행 중 1개라도 실패하면 전체 실패 **
+							// -> rollback 필요
+
+							// [결론]
+							// 예외를 강제로 발생기켜서 rollback 해야된다.
+							// -> 사용자 정의 예외 발생
+							// throw new FileUploadException(); // 예외 강제 발생
+
+						}
+						rowCount = dao.inquiryFileUpdate(img);
+
+						if(rowCount == 0) {
+							// 수정 실패 == DB에 이미지가 없었다.
+							// -> 이미지를 삽입
+							rowCount = dao.inquiryFileInsert(img);
+						}
 					}
+
+
+
 				}
 
 
-
 			}
-			
-			
 		}
 		return rowCount;
-	}
-	
-	
+	}	
+
 
 	// 공지사항 목록 조회
 	@Override
 	public Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp) {
-		
+
 		int listCount = dao.getListCount(categoryNo);
-		
-		
+
+
 		Pagination pagination = new Pagination(cp, listCount);
-		
-		
+
+
 		List<Board> boardList = dao.selectNoticeBoardList(pagination, categoryNo);
-		
-		
+
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
-		
+
 		return map;
 	}
 
@@ -374,24 +428,25 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp) {
 		// 1. 특정 게시판의 삭제되지 않고 검색 조건이 일치하는 게시글 수 조회
-				int listCount = dao.getListCount(paramMap);
-				
-				// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
-				// -> 내부 필드가 모두 계산되어 초기화됨
-				Pagination pagination = new Pagination(cp, listCount);
-				
-				// 3. 특저 게시판에서
-				// 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
-				// + 단, 검색 조건 일치하는 글만
-				List<Board> boardList = dao.selelctNoticeBoardList(pagination, paramMap);
-				
-				// 4. pagination, boardList를 Map 담아서 반환
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("pagination", pagination);
-				map.put("boardList", boardList);
-						
-				return map;
+		int listCount = dao.getListCount(paramMap);
+
+		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
+		// -> 내부 필드가 모두 계산되어 초기화됨
+		Pagination pagination = new Pagination(cp, listCount);
+
+		// 3. 특저 게시판에서
+		// 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
+		// + 단, 검색 조건 일치하는 글만
+		List<Board> boardList = dao.selelctNoticeBoardList(pagination, paramMap);
+
+		// 4. pagination, boardList를 Map 담아서 반환
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+
+		return map;
 	}
+
 
 	
 	
@@ -480,5 +535,5 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 	
-	
+
 }
