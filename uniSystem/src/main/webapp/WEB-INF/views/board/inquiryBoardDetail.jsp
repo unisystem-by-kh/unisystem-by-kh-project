@@ -19,7 +19,7 @@
 </head>
 <body>
 
-	<main>
+	<main class="main-con">
 	
 	    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	    <div class="boardname-area">
@@ -41,7 +41,7 @@
 
 			<c:if test="${!empty board.fileList}">
 				  <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
-                                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileRename}</a> 
+                                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileOriginal}</a> 
 			</c:if>
 			<c:if test="${empty board.fileList}">
 	        	<div>첨부된 파일이 없습니다.</div>
@@ -55,31 +55,38 @@
 		</c:if>
 			<button id="goToListBtn">목록으로</button>
 	    </div>
+
+		
+		<div class="reply-area">
+			<h1>답변</h1>
+		</div>
+		<c:if test="${board.replyCount == 0}">
+			<div class="reply-write">
+				<textarea placeholder="답변을 작성해주세요." id="replyWriteCon">
+		
+				</textarea>
+				<button id="addReply">답변작성</button>
+			</div>
+		</c:if>
+		<div class="reply-nick">
+			<div>답변자 : 관리자</div>
+			<div>답변일 : 2024.02.23</div>
+		</div>
+		<div class="reply-title">
+			<div>제목 : [RE]문의내용</div>
+		</div>
+		<div class="reply-content">
+			<div>
+				asdasdasdsadasdsad
+			</div>
+		</div>
+		<div class="button-container">
+			<button id="replyUpBtn">수정</button>
+			<button id="replyDeBtn">삭제</button>
+		</div>
 	
-	    <div class="reply-area">
-	        <h1>답변</h1>
-	    </div>
-	    <div class="reply-nick">
-	        <div>답변자 : 관리자</div>
-	        <div>답변일 : 2024.02.23</div>
-	    </div>
-	    <div class="reply-title">
-	        <div>제목 : [RE]문의내용</div>
-	    </div>
-	    <div class="reply-content">
-	        <div>
-	            asdasdasdsadasdsad
-	        </div>
-	    </div>
 	
-	    <form>
-	        <div class="reply-write">
-	            <textarea placeholder="답변을 작성해주세요.">
 	    
-	            </textarea>
-	            <button >답변작성</button>
-	        </div>
-	    </form>
 	
 	    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
@@ -98,6 +105,8 @@
         const categoryNo = "${board.categoryNo}";
 
         const loginMemberNo = "${loginMember.memberNo}"
+
+		const boardTitle = "${board.boardTitle}"
 
     </script>
 

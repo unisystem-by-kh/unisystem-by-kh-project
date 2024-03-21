@@ -15,7 +15,7 @@ const addToCart = (th) => {
 
             for(let cell of ro.cells){ // 각 tr 요소의 td 요소들
 
-                if(row[4].innerHTML == cell.innerHTML){
+                if(row[4].innerText == ro.cells[4].innerText){
                     alert("이미 담겨 있는 과목 입니다.")
                     return;
                 }
@@ -47,10 +47,15 @@ const addToCart = (th) => {
         if( i == 7 ){ // 강의 담기 버튼 따로 생성
             
             const cancleBtn = document.createElement('button');
+            const updateBtn = document.createElement('button');
+
             cancleBtn.innerText = '취소';
             cancleBtn.setAttribute("onclick", "deleteClass(this)" );
+
+            updateBtn.innerText = '신청';
+            updateBtn.setAttribute("onclick", "updateMyClass(this)" );
             
-            td.append(cancleBtn)
+            td.append(cancleBtn,updateBtn);
             
         }else{
             td.innerHTML = row[i].innerHTML;
@@ -64,10 +69,32 @@ const addToCart = (th) => {
 
 const deleteClass = th => {
 
-    const row = th.parentNode.parentNode;
+    const row = th.parentNode.parentNode; // 선택한 tr 반환
 
-    row.remove();
+    row.remove(); // 요소 삭제
 }
+
+const deleteMyClass = th => {
+
+    const row = th.parentNode.parentNode; // 선택한 tr 반환
+
+    let classNo = row.cells[0]; // tr의 첫 번째 td 반환 == 과목 번호
+
+}
+
+const updateMyClass = th => {
+
+    const row = th.parentNode.parentNode; // 선택한 tr 반환
+
+    let classNo = row.cells[0].innerText; // tr의 첫 번째 td 반환 == 과목 번호
+
+    const bodyData = { 'mem' : loginMember,'classes' : classNo};
+
+    console.log(bodyData);
+
+}
+
+
 
 
 
@@ -78,37 +105,45 @@ document.getElementById("class-btn").addEventListener("click", e => {
     // 수강 신청 화면
     const selectClass = document.querySelector(".select-class table");
 
-    for(let ro of selectClass.rows){ // 수강 신청 내역의 테이블의 tr 요소들
+    for(let ro = 0; ro < selectClass.rows.length; ro++){ // 수강 신청 내역의 테이블의 tr 요소들
 
-        let classNo = ro.cells[0].innerText;
+        if(ro != 0){ // 1번째 행은 제외
 
-        if(classNo != 'No.'){
-            
-            classes +=classNo.trim()+"/";
+            if(selectClass.rows[ro].cells[7].innerText != '신청 취소'){
+                
+                let classNo = selectClass.rows[ro].cells[0].innerText; // 수강 신청 과목번호 담음
+        
+                classes +=classNo.trim()+"/";
+            }
         }
-
     }
 
-    fetch('/collegian/insertLecture',{
-
-        method: "POST",
-        headers: {
-            "Content-Type": "application/text",
-        },
-        body: classes
-    })
-    .then(res => res.text())
-    .then(result => {
-
-        if(result>0){
-            alert(result);
-        }else{
-            alert("수강 신청 실패");
-        }
-
-    })
-    .catch(err => {console.log(err)})
-
+    if(classes != ""){ // 담긴 과목 번호가 있을 경우
+        
+        fetch('/collegian/insertLecture',{
     
+            method: "POST",
+            headers: {
+                "Content-Type": "application/text",
+            },
+            body: classes
+        })
+        .then(res => res.text())
+        .then(result => {
+    
+            if(result>0){
+                alert(result + "개의 수강 과목이 신청되었습니다.");
+
+                // 화면 다시 만들자....
+
+            }else{
+                alert("수강 신청 실패");
+            }
+    
+        })
+        .catch(err => {console.log(err)})
+    }else{
+        alert("신청할 과목이 존재하지 않습니다.")
+    }
 
 });
