@@ -62,9 +62,7 @@
 		</div>
 		<c:if test="${board.replyCount == 0}">
 			<div class="reply-write">
-				<textarea placeholder="답변을 작성해주세요." id="replyWriteCon">
-		
-				</textarea>
+				<textarea placeholder="답변을 작성해주세요." id="replyWriteCon"></textarea>
 				<button id="addReply">답변작성</button>
 			</div>
 		</c:if>

@@ -90,7 +90,7 @@ replyAdd.addEventListener("click", (e) => { // 댓글 등록 버튼이 클릭이
 
     if(replyContentInsert.value.trim().length == 0){ // 미작성인 경우
         alert("댓글을 작성한 후 버튼을 클릭해주세요.");
-
+        
         replyContentInsert.value = "";
         replyContentInsert.focus();
         return;

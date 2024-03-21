@@ -226,9 +226,16 @@ public class BoardServiceImpl implements BoardService{
 
 					// uploadList : 업로드된 파일의 정보 리스트
 					//					  (원본명, 변경명, 순서, 경로, 게시글 번호)
-
+					
 					// 순서 == images 업로드된 인덱스
-
+					
+					for(int i = 0; i < uploadList.size(); i++) {
+						
+						String rename = uploadList.get(i).getBoardFileRename();
+						
+						file.get(i).transferTo(new File(filePath + rename));
+						
+					}
 					
 				}else { // 일부 또는 전체 insert 실패
 
