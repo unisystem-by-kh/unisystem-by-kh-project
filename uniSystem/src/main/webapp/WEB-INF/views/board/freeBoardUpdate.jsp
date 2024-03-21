@@ -33,24 +33,11 @@
                 <div class="row3">
                     <div>
                         <div class="row3-imgArea">
-                            <%-- <label for="img">
-                                <img src="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}">
-                            </label>
-                            <input type="file" name="file" class="inputImage" id="file" accept="image/*"> --%>
-
-                            <%-- <label for="file">
-                                <img class="preview" src="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}">
-                            </label> --%>
                             <label for="file">
-                                <img class="preview" src="#">
+                                <img class="preview">
                             </label>
                             <input type="file" name="file" class="inputImage" id="file" accept="image/*">
-                            <%-- <span class="delete-image">&times;</span> --%>
-
-                            <%-- <input type="file" name="file" class="inputImage" id="file" accept="image/*">
-                            <span class="delete-image">&times;</span> --%>
                         </div>
-                        ${board}
                         <textarea placeholder="게시글 내용을 입력해주세요." maxlength="1400" name='boardContent'>${board.boardContent}</textarea>
                     </div>
                 </div>

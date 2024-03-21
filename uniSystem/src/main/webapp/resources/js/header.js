@@ -1,114 +1,114 @@
-// 3번째 네비게이션 효과
-// 필요변수 선언
-const homeNav = document.getElementsByClassName('navigation3-home')[0];
-const home = document.getElementById('home');
-const studentNav = document.getElementsByClassName('navigation3-student')[0];
-const student = document.getElementById('student');
-const subjectNav = document.getElementsByClassName('navigation3-subject')[0];
-const subject = document.getElementById('subject');
-const examNav = document.getElementsByClassName('navigation3-exam')[0];
-const exam = document.getElementById('exam');
-const professorNav = document.getElementsByClassName('navigation3-professor')[0];
-const professor = document.getElementById('professor');
+// // 3번째 네비게이션 효과
+// // 필요변수 선언
+// const homeNav = document.getElementsByClassName('navigation3-home')[0];
+// const home = document.getElementById('home');
+// const studentNav = document.getElementsByClassName('navigation3-student')[0];
+// const student = document.getElementById('student');
+// const subjectNav = document.getElementsByClassName('navigation3-subject')[0];
+// const subject = document.getElementById('subject');
+// const examNav = document.getElementsByClassName('navigation3-exam')[0];
+// const exam = document.getElementById('exam');
+// const professorNav = document.getElementsByClassName('navigation3-professor')[0];
+// const professor = document.getElementById('professor');
 
-// 홈에 올렸을 경우
-home.addEventListener("mouseover" , ()=>{
-    studentNav.style.display = "none";
-    subjectNav.style.display = "none";
-    examNav.style.display = "none";
-    professorNav.style.display = "none";
+// // 홈에 올렸을 경우
+// home.addEventListener("mouseover" , ()=>{
+//     studentNav.style.display = "none";
+//     subjectNav.style.display = "none";
+//     examNav.style.display = "none";
+//     professorNav.style.display = "none";
     
-    homeNav.style.display = "flex";
-    setTimeout(() => {
-        homeNav.style.opacity = "1";
+//     homeNav.style.display = "flex";
+//     setTimeout(() => {
+//         homeNav.style.opacity = "1";
 
-        studentNav.style.opacity = "0";
-        subjectNav.style.opacity = "0";
-        examNav.style.opacity = "0";
-        professorNav.style.opacity = "0";
-    }, 30);
-});
+//         studentNav.style.opacity = "0";
+//         subjectNav.style.opacity = "0";
+//         examNav.style.opacity = "0";
+//         professorNav.style.opacity = "0";
+//     }, 30);
+// });
 
 
-// 학생에 올렸을 경우
-if(student != null){
-    student.addEventListener("mouseover" , ()=>{
-        homeNav.style.display = "none";
-        subjectNav.style.display = "none";
-        examNav.style.display = "none";
-        professorNav.style.display = "none";
+// // 학생에 올렸을 경우
+// if(student != null){
+//     student.addEventListener("mouseover" , ()=>{
+//         homeNav.style.display = "none";
+//         subjectNav.style.display = "none";
+//         examNav.style.display = "none";
+//         professorNav.style.display = "none";
         
-        studentNav.style.display = "flex";
-        setTimeout(() => {
-            studentNav.style.opacity = "1";
+//         studentNav.style.display = "flex";
+//         setTimeout(() => {
+//             studentNav.style.opacity = "1";
             
-            homeNav.style.opacity = "0";
-            subjectNav.style.opacity = "0";
-            examNav.style.opacity = "0";
-            professorNav.style.opacity = "0";
-        }, 30);
-    });
-}
+//             homeNav.style.opacity = "0";
+//             subjectNav.style.opacity = "0";
+//             examNav.style.opacity = "0";
+//             professorNav.style.opacity = "0";
+//         }, 30);
+//     });
+// }
 
-// 교과목에 올렸을 경우
-if(subject != null){
-    subject.addEventListener("mouseover" , ()=>{
-        homeNav.style.display = "none";
-        studentNav.style.display = "none";
-        examNav.style.display = "none";
-        professorNav.style.display = "none";
+// // 교과목에 올렸을 경우
+// if(subject != null){
+//     subject.addEventListener("mouseover" , ()=>{
+//         homeNav.style.display = "none";
+//         studentNav.style.display = "none";
+//         examNav.style.display = "none";
+//         professorNav.style.display = "none";
         
-        subjectNav.style.display = "flex";
-        setTimeout(() => {
-            subjectNav.style.opacity = "1";
+//         subjectNav.style.display = "flex";
+//         setTimeout(() => {
+//             subjectNav.style.opacity = "1";
             
-            homeNav.style.opacity = "0";
-            studentNav.style.opacity = "0";
-            examNav.style.opacity = "0";
-            professorNav.style.opacity = "0";
-        }, 30);
-    });
-}
+//             homeNav.style.opacity = "0";
+//             studentNav.style.opacity = "0";
+//             examNav.style.opacity = "0";
+//             professorNav.style.opacity = "0";
+//         }, 30);
+//     });
+// }
 
-if(exam != null){
-    // 시험에 올렸을 경우
-    exam.addEventListener("mouseover" , ()=>{
-        homeNav.style.display = "none";
-        studentNav.style.display = "none";
-        subjectNav.style.display = "none";
-        professorNav.style.display = "none";
+// if(exam != null){
+//     // 시험에 올렸을 경우
+//     exam.addEventListener("mouseover" , ()=>{
+//         homeNav.style.display = "none";
+//         studentNav.style.display = "none";
+//         subjectNav.style.display = "none";
+//         professorNav.style.display = "none";
         
-        examNav.style.display = "flex";
-        setTimeout(() => {
-            examNav.style.opacity = "1";
+//         examNav.style.display = "flex";
+//         setTimeout(() => {
+//             examNav.style.opacity = "1";
             
-            subjectNav.style.opacity = "0";
-            homeNav.style.opacity = "0";
-            studentNav.style.opacity = "0";
-            professorNav.style.opacity = "0";
-        }, 30);
-    });
-}
+//             subjectNav.style.opacity = "0";
+//             homeNav.style.opacity = "0";
+//             studentNav.style.opacity = "0";
+//             professorNav.style.opacity = "0";
+//         }, 30);
+//     });
+// }
 
-if(professor != null){
-    // 교수에 올렸을 경우
-    professor.addEventListener("mouseover" , ()=>{
-        homeNav.style.display = "none";
-        studentNav.style.display = "none";
-        subjectNav.style.display = "none";
-        examNav.style.display = "none";
+// if(professor != null){
+//     // 교수에 올렸을 경우
+//     professor.addEventListener("mouseover" , ()=>{
+//         homeNav.style.display = "none";
+//         studentNav.style.display = "none";
+//         subjectNav.style.display = "none";
+//         examNav.style.display = "none";
         
-        professorNav.style.display = "flex";
-        setTimeout(() => {
-            professorNav.style.opacity = "1";
+//         professorNav.style.display = "flex";
+//         setTimeout(() => {
+//             professorNav.style.opacity = "1";
             
-            subjectNav.style.opacity = "0";
-            examNav.style.opacity = "0";
-            homeNav.style.opacity = "0";
-            studentNav.style.opacity = "0";
-        }, 30);
-    });
-}
+//             subjectNav.style.opacity = "0";
+//             examNav.style.opacity = "0";
+//             homeNav.style.opacity = "0";
+//             studentNav.style.opacity = "0";
+//         }, 30);
+//     });
+// }
 
 
 
@@ -147,6 +147,38 @@ if(professor != null){
 
 // }
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Navigation3의 세부 메뉴 요소들을 숨김
+    var navigation3Submenus = document.querySelectorAll(".navigation3 > div");
+    navigation3Submenus.forEach(function(submenu) {
+        submenu.style.display = "none";
+    });
 
+    // Navigation2의 각 메뉴 요소에 대해 이벤트 핸들러 등록
+    var navigation2MenuItems = document.querySelectorAll(".navigation2-row2 a");
+    navigation2MenuItems.forEach(function(item) {
+        var index = Array.prototype.indexOf.call(navigation2MenuItems, item);
+        // 마우스 진입 이벤트 핸들러 등록
+        item.addEventListener("mouseenter", function(event) {
+            // Navigation3의 해당하는 세부 메뉴 요소를 보이기
+            navigation3Submenus[index].style.display = "block";
+        });
+        // 마우스 나감 이벤트 핸들러 등록
+        item.addEventListener("click", function(event) {
+            // Navigation3의 해당하는 세부 메뉴 요소를 숨기기
+            navigation3Submenus[index].style.display = "none";
+        });
+    });
 
+    // 문서 전체에 클릭 이벤트 핸들러 등록
+    document.addEventListener("click", function(event) {
+        var clickedElement = event.target;
+        // Navigation2, Navigation3 및 그들의 자식 요소를 클릭한 경우에는 세부 메뉴가 사라지지 않도록 처리
+        if (!clickedElement.closest(".navigation2") && !clickedElement.closest(".navigation3")) {
+            navigation3Submenus.forEach(function(submenu) {
+                submenu.style.display = "none";
+            });
+        }
+    });
+});
 

@@ -137,7 +137,7 @@
 /* 글씨영역 */
 .row3 > div > :nth-child(2){
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
     text-align: start;
 

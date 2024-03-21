@@ -87,7 +87,7 @@ a{
 
 /* 교수 로그인시 */
 .navigation1-row2-professor{
-    width: 350px;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +95,7 @@ a{
 }
 /* 교수이름영역 */
 .navigation1-row2-professor > :nth-child(1){
-    width: 220px;
+    width: 250px;
     font-size: 16px;
 }
 /* 교수이름 */
@@ -227,7 +227,7 @@ a{
     font-size: 20px;
     width: 1000px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .navigation2-row2 > a{
     color: black;
@@ -240,49 +240,12 @@ a{
 
 /* 세번째줄 네비게이션바 */
 .navigation3{
-    width: 1200px;
+    width: 1400px;
     height: 45px;
-
-    margin-left: 200px;
 
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
-.navigation3 > a{
-    color: black;
-}
-
-
-/* 세번째줄 네비게이션바 안에 a태그 */
-.navigation3-home , .navigation3-student , .navigation3-subject , .navigation3-exam , .navigation3-professor , .navigation3-otherW{
-    margin-left: 50px;
-    font-size: 14px;
-    width: 800px;
-    display: none;
-    justify-content: space-around;
-    opacity: 0;
-    transition: opacity 1s ease-in-out; /* 트랜지션을 설정합니다. */
-    color: black;
-}
-
-.navigation3-home , .navigation3-student , .navigation3-subject , .navigation3-exam , .navigation3-professor , .navigation3-otherW{
-    margin-left: 50px;
-    font-size: 14px;
-    width: 800px;
-    display: none;
-    justify-content: space-around;
-    opacity: 0;
-    transition: opacity 1s ease-in-out; /* 트랜지션을 설정합니다. */
-    color: black;
-}
-.navigation3-home > a:hover , .navigation3-student > a:hover , .navigation3-subject > a:hover , .navigation3-exam > a:hover , .navigation3-professor > a:hover , .navigation3-otherW > a:hover{
-    color: crimson;
-    text-decoration: underline;
-}
-
-.navigation3-otherW > a{
-    color: black;
 }
 
 
