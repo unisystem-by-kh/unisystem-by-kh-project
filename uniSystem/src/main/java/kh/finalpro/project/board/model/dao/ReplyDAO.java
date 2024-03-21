@@ -25,7 +25,6 @@ public class ReplyDAO {
 	 * @return cList
 	 */
 	public List<Reply> select(int boardNo) {
-												// board-mapper.xml에 작성된 select 이용
 		return sqlSession.selectList("boardMapper.selectCommentList", boardNo);
 	}
 
@@ -34,7 +33,6 @@ public class ReplyDAO {
 	 * @return result
 	 */
 	public int insert(Reply reply) {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + reply);
 		return sqlSession.insert("replyMapper.insert" , reply);
 	}
 

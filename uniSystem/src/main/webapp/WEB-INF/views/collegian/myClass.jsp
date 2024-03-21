@@ -19,6 +19,7 @@
     <c:set var="lecture" value="${map.lecture}"/>
 	<c:set var="pagination" value="${map.pagination}"/>
 	<c:set var="department" value="${map.departmentList}"/>
+	<c:set var="myClassList" value="${map.myClassList}"/>
 	
 
 	 <main>
@@ -87,7 +88,7 @@
                     <c:choose>
                         <c:when test="${empty lecture}">
                             <tr>
-                                <td colspan ="8" style="text-align: center;">과목이 존재하지 않습니다.</td>
+                                <td id="noneLecture" colspan ="8" style="text-align: center;">과목이 존재하지 않습니다.</td>
                             </tr>
                         </c:when>
 
@@ -153,15 +154,40 @@
                         <th>신청인원</th>
                         <th>수강정원</th>
                     </tr>
+                     <c:choose>
+                        <c:when test="${empty myClassList}">
+                            <tr>
+                                <td id="noneLecture" colspan ="8" style="text-align: center;">수강 신청 과목이 존재하지 않습니다.</td>
+                            </tr>
+                        </c:when>
 
-                   
+                        <c:otherwise>
+                                <c:forEach items="${myClassList}" var="cl">
+                                    <tr>
+                                        <td>${cl.classNo}</td>
+                                        <td>${cl.departmentName}</td>
+                                        <td>${cl.classGrade}학년</td>
+                                        <td>${cl.classTrem}학기</td>
+                                        <td>${cl.className}</td>
+                                        <c:if test="${cl.classPoint == 2}" >
+                                            <td>교양</td>
+                                        </c:if>
+                                        <c:if test="${cl.classPoint == 3}" >
+                                            <td>전공</td>
+                                        </c:if>
+                                        <td>${cl.classPoint}</td>
+                                        <td><button id="delete-class" onclick=deleteMyClass(this)>신청 취소<button></td>
+                                        <td>${cl.classDay} (${cl.classStart}교시 ~ ${cl.classEnd}교시)</td>
+                                        <td>${cl.lectureCount}</td>
+                                        <td>${cl.classMax}
+                                    </tr>
+                                </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                     
                 </table>
-
-                <form action="" style="display: hiiden;">
-                    <input type="hidden">
-                    <button id="class-btn" type="submit">신청하기</button>
-                </form>
+             
+                <button id="class-btn" type="button">전체 신청 하기</button>
 
             </div>
         </div>
@@ -172,6 +198,10 @@
 
         
     </main>
+
+    <script>
+        const loginMember = '${loginMember}';
+    </script>
 
 
     <script src="/resources/js/collegian/myClass.js"></script>

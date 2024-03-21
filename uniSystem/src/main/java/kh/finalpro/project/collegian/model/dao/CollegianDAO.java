@@ -79,6 +79,16 @@ public class CollegianDAO {
 	public List<Class> searchLecture(Pagination pagination, Map<String, Object> paramMap) {
 		return null;
 	}
+
+	public int insertMyClass(Map<String, Object> map) {
+		
+		return sqlSession.insert("collegianMapper.insertMyClass",map);
+	}
+
+	public List<Class> selectMyClasses(Member mem) {
+		
+		return sqlSession.selectList("collegianMapper.selectMyClasses",mem);
+	}
 	
 	
 	

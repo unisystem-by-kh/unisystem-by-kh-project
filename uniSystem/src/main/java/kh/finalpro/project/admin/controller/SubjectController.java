@@ -64,8 +64,15 @@ public class SubjectController {
 	@PostMapping(value="/professorSearch",produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public List<Member> searchProfessor(@RequestBody String deptCode){
-		System.out.println(deptCode);
 		return service.searchProfessor(deptCode);
+	}
+	
+	// 강의 등록 시 교수 강의시간 체크
+	@PostMapping(value = "/timeCheck", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public int timeCheck(@RequestBody Map<String, Object> map) {
+		//System.out.println(map);
+		return service.timeCheck(map);
 	}
 
 

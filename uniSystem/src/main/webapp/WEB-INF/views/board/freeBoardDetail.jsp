@@ -46,7 +46,9 @@
             <div class="row3">
                 <div>
                     <%-- 주소부분 처리해야함 --%>
-                    <img src="https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/02/a0002727/img/ko/a0002727_parts_5bea39afbf327.jpg?20201211115557&q=80&rw=686&rh=490" alt="#">
+                    <c:set var="path" value="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"/>
+                    <img src="${path}">
+                    <%-- ${path} --%>
                     <div>
                         ${board.boardContent}
                     </div>
@@ -54,13 +56,15 @@
             </div>
 
             <div class="row4">
-                <div>
-                    <button><a href="/board/freeBoardUpdate" id="updateBtn">수정</a></button>
-                    <button>삭제</button>
-                </div>
-                <div>
-                    <button>목록</button>
-                </div>
+                <c:if test="${loginMember.memberNo == board.memberNo}" >
+                    <div>
+                        <button id="updateBtn">수정</button>
+                        <button id="deleteBtn">삭제</button>
+                    </div>
+                </c:if>
+                    <div>
+                        <button>목록</button>
+                    </div>
             </div>
 
             <div class="row5">한줄 댓글 <span></span></div>
@@ -89,7 +93,7 @@
                             <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
                             <div class="btnArea">
                                 <c:if test='${board.memberNo == reply.memberNo}'>
-                                    <button id='updateBtn' >수정</button>
+                                    <button id='updateBtn' onclick="showUpdateReply(${reply.replyNo}, this)" >수정</button>
                                     <button id='deleteBtn' onclick="deleteReply(${reply.replyNo})">삭제</button>
                                 </c:if>
                             </div>

@@ -23,6 +23,7 @@ function selectReplyList(){
                 const updateBtn = document.createElement('button');
                 updateBtn.setAttribute('id' , 'updateBtn');
                 updateBtn.innerText = '수정';
+                updateBtn.setAttribute('onclick', "showUpdateReply("+reply.replyNo+")")
                 const deleteBtn = document.createElement('button');
                 deleteBtn.setAttribute('id' , 'deleteBtn');
                 deleteBtn.innerText = '삭제';
@@ -114,7 +115,8 @@ replyAdd.addEventListener("click", (e) => { // 댓글 등록 버튼이 클릭이
             replyContentInsert.value = ""; // 작성했던 댓글 삭제
 
             selectReplyList(); // 비동기 댓글 목록 조회 함수 호출
-            // -> 새로운 댓글이 추가되어짐
+
+            location.reload();
 
         } else { // 실패
             alert("댓글 등록에 실패했습니다...");
@@ -138,6 +140,8 @@ function deleteReply(replyNo){
             if(result > 0){
                 alert("삭제되었습니다");
                 selectReplyList(); // 목록을 다시 조회해서 삭제된 글을 제거
+
+                location.reload();
             }else{
                 alert("삭제 실패");
             }
@@ -148,40 +152,118 @@ function deleteReply(replyNo){
 }
 
 // 댓글 수정
-document.addEventListener("DOMContentLoaded", function() {
-    const updateButtons = document.querySelectorAll('.row8 #updateBtn');
+let beforeReplyRow; // 수정 전 댓글 상태를 저장하기 위한 변수
 
-    updateButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const replyContent = this.closest('.row8').querySelector('.replyContnet').textContent.trim();
-            const replyNo = this.closest('.row8').querySelector('.replyNo').textContent.trim();
+function showUpdateReply(replyNo, btn) {
+    const temp = document.getElementsByClassName('updateBtn');
 
-            // 댓글 내용을 수정할 입력 창 생성
-            const editInput = document.createElement('textarea');
-            editInput.classList.add('editReplyContent');
-            editInput.setAttribute('rows', '3');
-            editInput.setAttribute('cols', '50');
-            editInput.value = replyContent;
+    if (temp.length > 0 && temp[0].parentElement) { // 수정 버튼이 이미 화면에 있을 때
+        if (confirm('댓글 수정 중입니다.\n현재 댓글을 수정하시겠습니까?')) {
+            temp[0].parentElement.innerHTML = beforeReplyRow;
+        } else {
+            return;
+        }
+    }
 
-            // 수정한 내용을 서버로 보내는 버튼 생성
-            const saveButton = document.createElement('button');
-            saveButton.textContent = '저장';
-            saveButton.addEventListener('click', function() {
-                const editedContent = editInput.value;
-                // 여기서 서버로 수정된 내용 전송
-                console.log('수정된 내용:', editedContent);
-                console.log('댓글 번호:', replyNo);
-                // 수정된 내용을 서버로 전송하는 Ajax 요청 등의 코드 작성
-            });
+    const replyRow = btn.parentElement.parentElement.parentElement;
+    beforeReplyRow = replyRow.innerHTML;
 
-            // 기존 내용과 수정 버튼을 숨김
-            this.parentElement.style.display = 'none';
+    const beforeContent = replyRow.querySelector('.replyContnet').innerText;
 
-            // 수정한 내용과 저장 버튼을 추가
-            const parentDiv = this.closest('.row8');
-            parentDiv.appendChild(editInput);
-            parentDiv.appendChild(saveButton);
-        });
-    });
-});
+    const textarea = document.createElement("textarea");
+    textarea.classList.add("updateBtn"); // 클래스 추가
+    textarea.value = beforeContent;
 
+    const repltBtnArea = document.createElement("div");
+    repltBtnArea.classList.add("btnArea");
+
+    const updateBtn = document.createElement("button");
+    updateBtn.innerText = "수정";
+    updateBtn.setAttribute("onclick", `updateReply(${replyNo}, this)`);
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerText = "취소";
+    cancelBtn.setAttribute("onclick", `updateCancel(this)`);
+
+    replyRow.innerHTML = '';
+    replyRow.append(textarea, repltBtnArea);
+    repltBtnArea.append(updateBtn, cancelBtn);
+}
+
+
+function updateCancel(){
+    if(confirm("댓글 수정을 취소하시겠습니까?")){
+        beforeReplyRow = null;
+        selectReplyList();
+
+        location.reload();
+    }
+}
+
+
+function updateReply(replyNo, btn){
+
+    // 새로 작성된 댓글 내용 얻어오기
+    const replyContent = btn.parentElement.previousElementSibling.value;
+    console.log(replyContent);
+
+    const data = {
+        "replyNo" : replyNo,
+        "replyContent" : replyContent
+    };
+
+    fetch("/reply",{
+        method : "PUT",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(result => {
+        if(result > 0){
+            alert("댓글이 수정되었습니다.");
+            selectReplyList();
+
+            location.reload();
+        }else{
+            alert("댓글 수정 실패");
+        }
+    })
+    .catch(err => console.log(err));
+
+}
+
+
+
+
+// 게시글 수정 관련 --------------------------------------------------------
+// 게시글 수정 버튼 클릭 시
+const updateBtn = document.getElementById('updateBtn');
+if(updateBtn != null){
+    
+    updateBtn.addEventListener('click' , ()=>{
+        location.href = location.pathname
+                        + '/update' + location.search;
+        // /board2/1/1503/update?cp=1 (GET방식)
+        console.log(location.href);
+    })
+
+}
+
+
+
+// 게시글 삭제
+if(document.getElementById("deleteBtn") != null){
+    
+    document.getElementById("deleteBtn").addEventListener("click",() => {
+        if(confirm("정말 삭제하시겠습니까?")){
+            
+            
+            location.href = "/board/" + categoryNo +"/" + boardNo +  "/delete";
+    
+            
+            alert("삭제 되었습니다.")
+            
+        }
+    })
+
+}

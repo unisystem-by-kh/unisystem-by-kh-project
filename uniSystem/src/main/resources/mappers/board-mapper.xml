@@ -459,14 +459,16 @@
 		WHERE BOARD_NO = #{boardNo} )C
 		WHERE
 		REPLY_ST = 'N'
-		ORDER  BY REPLY_NO
+		ORDER BY REPLY_NO DESC
 	</select>
 	
+	<!-- 게시판에 있는 파일 조회 -->	
 	<select id="selectBoardFile" resultMap="boardFile_rm">
 		SELECT * FROM BOARD_FILE
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 
+	<!-- 자료실 상세 조회 -->
 	<select id="boardDataDetail" resultMap="board_rm">
 		SELECT BOARD_TITLE, MEMBER_NAME, BOARD_CONTENT, TO_CHAR(BOARD_C_DATE, 'YYYY-MM-DD') AS BOARD_C_DATE, BOARD_COUNT
 		FROM BOARD
