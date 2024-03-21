@@ -131,8 +131,6 @@ public class CollegianServiceImpl implements CollegianService{
 		
 		for(int i=0; i < classNoList.length; i++) {
 			
-			System.out.println(i+"번째"+classNoList[i]);
-			
 			Map<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("classNo", classNoList[i]);
@@ -141,11 +139,15 @@ public class CollegianServiceImpl implements CollegianService{
 			
 			result += dao.insertMyClass(map);
 			
-			
 		}
 		
-		
 		return result;
+	}
+	
+	@Override
+	public List<Class> selectMyClasses(Member mem) {
+		
+		return dao.selectMyClasses(mem);
 	}
 	
 	

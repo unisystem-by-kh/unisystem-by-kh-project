@@ -84,6 +84,11 @@ public class CollegianDAO {
 		
 		return sqlSession.insert("collegianMapper.insertMyClass",map);
 	}
+
+	public List<Class> selectMyClasses(Member mem) {
+		
+		return sqlSession.selectList("collegianMapper.selectMyClasses",mem);
+	}
 	
 	
 	
