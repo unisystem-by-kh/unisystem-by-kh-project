@@ -108,6 +108,10 @@
                                     <c:if test="${!empty board.fileList}">
                                         <div><img src="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"></div>
                                     </c:if>
+                                    <!-- 썸네일이 없을 경우 -->
+                                    <c:if test="${empty board.fileList}">
+                                        <div></div>
+                                    </c:if>
                                     <div>${board.boardTitle}</div>
                                     <div>${board.boardContent}</div>
                                 </a>

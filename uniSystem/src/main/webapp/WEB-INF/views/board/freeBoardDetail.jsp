@@ -45,9 +45,17 @@
 
             <div class="row3">
                 <div>
-                    <%-- 주소부분 처리해야함 --%>
-                    <c:set var="path" value="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"/>
-                    <img src="${path}">
+                    <%-- 썸네일이 있을 경우 --%>
+                    <c:if test="${!empty board.fileList}">
+                        <c:set var="path" value="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"/>
+                        <img src="${path}">
+                    </c:if>
+                    <%-- 썸네일이 없을 경우 --%>
+                    <c:if test="${empty board.fileList}">
+                        <c:set var="path" value="#" />
+                        <%-- <img src="${path}" alt="썸네일을 등록해주세요."> --%>
+                        <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' />
+                    </c:if>
                     <div>
                         ${board.boardContent}
                     </div>
