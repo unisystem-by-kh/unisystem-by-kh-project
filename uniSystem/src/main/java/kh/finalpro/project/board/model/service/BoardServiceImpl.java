@@ -170,6 +170,11 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
 		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
 
+		// 0-1 boardSt가 null이라면 기본값 세팅
+		if(board.getBoardSt() == null) {
+			board.setBoardSt("N");
+		}
+		
 		// 1. BOARD 테이블 INSERT 하기(제목, 내용, 작성자, 게시판 코드)
 		// -> boardNo(시퀀스로 생성한 번호) 반환 받기
 		int boardNo = dao.inquiryBoardWrite(board);
