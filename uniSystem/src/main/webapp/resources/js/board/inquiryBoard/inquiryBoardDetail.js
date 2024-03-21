@@ -10,6 +10,7 @@ if(document.getElementById("deleteBtn") != null){
     
             
             alert("삭제 되었습니다.")
+            console.log(loginMemberNo.substring(1, 2))
             
         }
     })
@@ -43,7 +44,7 @@ goToListBtn.addEventListener("click",()=>{
     let key;
     let query;
 
-    if(params.get("key") != null){
+    if(params.get("query") != null){
         key = "&key=" + params.get("key");
         query = "&query=" + params.get("query");
 
