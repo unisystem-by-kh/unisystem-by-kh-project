@@ -303,26 +303,22 @@ public class BoardServiceImpl implements BoardService{
 		// 2. 게시글 부분이 수정 성공 했을 때
 		if(rowCount > 0) {
 
-			if(!deleteList.equals("")) { // 삭제할 이미지가 있다면
-				// 3. deleteList에 작성된 이미지 모두 삭제
-				Map<String, Object> deleteMap = new HashMap<String, Object>();
-				deleteMap.put("boardNo", board.getBoardNo());
-				deleteMap.put("deleteList", deleteList);
-
-				rowCount = dao.inquiryFileDelete(deleteMap);
-
-				if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백
-					// 예외 강제로 발생
-					// throw new ImageDeleteException();
-				}
-			}
-
-			// 4. 새로 업로드된 이미지 분류 작업
-
-			// images : 실제 파일이 담긴 List
-			//				  -> input type="file" 개수만큼 요소가 조재
-			//				  -> 제출된 파일이 없어도 MultipartFile 객체는 존재
-
+			/*
+			 * if(!deleteList.equals("")) { // 삭제할 이미지가 있다면 // 3. deleteList에 작성된 이미지 모두 삭제
+			 * Map<String, Object> deleteMap = new HashMap<String, Object>();
+			 * deleteMap.put("boardNo", board.getBoardNo()); deleteMap.put("deleteList",
+			 * deleteList);
+			 * 
+			 * rowCount = dao.inquiryFileDelete(deleteMap);
+			 * 
+			 * if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백 // 예외 강제로 발생 // throw new
+			 * ImageDeleteException(); } }
+			 * 
+			 * // 4. 새로 업로드된 이미지 분류 작업
+			 * 
+			 * // images : 실제 파일이 담긴 List // -> input type="file" 개수만큼 요소가 조재 // -> 제출된 파일이
+			 * 없어도 MultipartFile 객체는 존재
+			 */
 			List<BoardFile> uploadList = new ArrayList<BoardFile>();
 
 			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
@@ -348,12 +344,12 @@ public class BoardServiceImpl implements BoardService{
 					if(!uploadList.isEmpty()) {
 
 						// BOARD_IMG 테이블에 INSERT하는 DAO 호출
-						int result = dao.insertInquiryFile(uploadList);
+						// int result = dao.insertInquiryFile(uploadList);
 						// result == 삽입된 행의 개수 == uploadList.size()
 
 						// 삽입된 행의 개수와 uploadList의 개수가 같다면
 						// == 전체 insert 성공
-						if(result == uploadList.size()) {
+						
 
 							// 서버에 파일을 저장(transferTo())
 
@@ -400,7 +396,7 @@ public class BoardServiceImpl implements BoardService{
 
 			}
 
-		}
+		
 		return rowCount;
 	}	
 
