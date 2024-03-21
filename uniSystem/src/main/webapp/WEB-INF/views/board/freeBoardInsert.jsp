@@ -21,31 +21,31 @@
 
         <div class="mainContainer">
 
-            <form action="#" >
+            <form action="/board/${categoryNo}/insert" method="POST" id="boardWriteFrm"  enctype="multipart/form-data" >
                 
                 <div class="row1">
                     <div></div>
                     <div>게 시 글 작 성 중 . . .</div>
                 </div>
     
-                <div class="row2"><input type="text" placeholder="게시글 제목을 입력해주세요."></div>
+                <div class="row2" class="boardTitle"><input type="text" placeholder="게시글 제목을 입력해주세요."></div>
 
                 <div class="row3">
-                    <div>
-                        <div class="row3-imgArea">
+                    <div class="boardContent">
+                        <div class="row3-imgArea" >
                             <label for="file">
                                 <img class="preview" src="#">
                             </label>
                             <input type="file" name="file" class="inputImage" id="file" accept="image/*">
                         </div>
                         ${board}
-                        <textarea placeholder="게시글 내용을 입력해주세요." maxlength="1400" name='boardContent'>${board.boardContent}</textarea>
+                        <textarea placeholder="게시글 내용을 입력해주세요." maxlength="1400" name="boardContent"></textarea>
                     </div>
                 </div>
 
                 <div class="row4">게시글 글자수 확인(최대 1400자) : 현재 <span class="inputCount"> 1234 </span>글자 입력 중...</div>
 
-                <div class="row5"><button>게시글 작성 완료</button></div>
+                <div class="row5"><button type="submit">게시글 작성 완료</button></div>
 
             </form>
 
