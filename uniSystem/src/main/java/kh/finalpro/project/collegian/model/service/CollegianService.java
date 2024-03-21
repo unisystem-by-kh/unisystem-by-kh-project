@@ -22,4 +22,6 @@ public interface CollegianService {
 
 	List<Class> selectMyClasses(Member mem);
 
+	int deleteMyClass(Map<String, Object> map);
+
 }
