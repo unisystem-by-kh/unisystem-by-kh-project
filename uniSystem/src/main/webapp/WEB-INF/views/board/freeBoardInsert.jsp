@@ -28,10 +28,10 @@
                     <div>게 시 글 작 성 중 . . .</div>
                 </div>
     
-                <div class="row2" class="boardTitle"><input type="text" placeholder="게시글 제목을 입력해주세요."></div>
+                <div class="row2" class="boardTitle"><input type="text" placeholder="게시글 제목을 입력해주세요." name="boardTitle"></div>
 
                 <div class="row3">
-                    <div class="boardContent">
+                    <div>
                         <div class="row3-imgArea" >
                             <label for="file">
                                 <img class="preview" src="#">

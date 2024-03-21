@@ -33,7 +33,7 @@
                     <c:set var='boardUDate' value='${board.boardUDate}' />
                     <div>작성일 : <c:out value="${fn:substring(boardCDate, 0, 13)}"/></div>
                     <c:if test='${board.boardUDate != null}'>
-                        <div>수정일 : <c:out value="${fn:substring(boardUDate, 0, 11)}"/></div>
+                        <div>수정일 : <c:out value="${fn:substring(boardUDate, 0, 13)}"/></div>
                     </c:if>
                     
                     <div>작성자 : ${board.memberName}</div>
@@ -48,7 +48,6 @@
                     <%-- 주소부분 처리해야함 --%>
                     <c:set var="path" value="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"/>
                     <img src="${path}">
-                    <%-- ${path} --%>
                     <div>
                         ${board.boardContent}
                     </div>

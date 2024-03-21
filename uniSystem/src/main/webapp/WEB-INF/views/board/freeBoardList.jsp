@@ -106,10 +106,8 @@
                                 <a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">
                                     <!-- 썸네일이 있을 경우 -->
                                     <c:if test="${!empty board.fileList}">
-                                        <%-- 수정 필요 --%>
-                                        <%-- <div><img src="${board.fileList}" alt="#"></div> --%>
+                                        <div><img src="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"></div>
                                     </c:if>
-                                    <div><img src="https://iuc.cnu.ac.kr/_custom/cnu/resource/img/tmp_gallery.png" alt="#"></div>
                                     <div>${board.boardTitle}</div>
                                     <div>${board.boardContent}</div>
                                 </a>
