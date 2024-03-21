@@ -221,15 +221,53 @@ public class BoardController {
 	}
 
 
-	// 자유게시판 삽입
-	@GetMapping("/freeBoardInsert")
-	public String selectFreeBoardInsert() {
-		
-		
-
+	// 자유게시판 삽입(작성) 페이지
+	@GetMapping("/{categoryNo:3}/insert")
+	public String selectFreeBoardInsert(@PathVariable("categoryNo") int categoryNo) {
 		return "board/freeBoardInsert";
 	}
+	
+	// 자유게시판 삽입(작성)	
+	@PostMapping("/{categoryNo:3}/insert")
+	public String freeBoardWrite(
+			@PathVariable("categoryNo") int categoryNo
+			, Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
+			, @RequestParam(value="file", required = false) List<MultipartFile> file
+			, @SessionAttribute(value="loginMember") Member loginMember
+			, RedirectAttributes ra
+			, HttpSession session)throws IllegalStateException, IOException {
 
+		System.out.println("자료실 매핑 체크용" + categoryNo);
+		
+		// 1.로그인한 회원 번호를 얻어와 board에 세팅
+		board.setMemberNo(loginMember.getMemberNo());
+
+		// 2. boardCode도 board에 세팅
+		board.setCategoryNo(categoryNo);
+		System.out.println(board);
+		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
+		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
+		String webPath = "/resources/images/board/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+
+		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 
+		int boardNo = service.inquiryBoardWrite(board, file, webPath, filePath);
+		// 게시글 삽입 성공 시
+		// -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트
+		// -> /board/{boardCode}/{boardNo} @PathVariable
+		String message = null; 
+		String path = "redirect:";
+		if(boardNo > 0) { // 성공 시 
+			message = "게시글이 등록되었습니다.";
+			path += "/board/" + categoryNo + "/" + boardNo;
+		}else {
+			message= "게시글 등록 실패 ㅠㅠ";
+			path += "insert";
+		}
+		ra.addFlashAttribute("message",message);
+		return path;
+	}
+	
 
 	// 자유게시판 수정 화면
 	@GetMapping("/{categoryNo:3}/{boardNo}/update")

@@ -66,7 +66,7 @@
 
                 <!-- 게시글작성 버튼 -->
                 <div class="board-insert-area">
-                    <div><button><a href="/board/freeBoardInsert" style="color: gray;">게시글 작성</a></button></div>
+                    <div><button><a href="/board/${categoryNo}/insert" style="color: gray;">게시글 작성</a></button></div>
                 </div>
                 
             </div>
