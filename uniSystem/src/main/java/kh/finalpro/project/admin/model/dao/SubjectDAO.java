@@ -47,5 +47,13 @@ public class SubjectDAO {
 		return sqlSession.selectList("memberMapper.searchProfessor", deptCode);
 	}
 
+	/** 교수 강의 시간 조회 DAO
+	 * @param map
+	 * @return count
+	 */
+	public int timeCheck(Map<String, Object> map) {
+		return sqlSession.selectOne("subjectMapper.timeCheck", map);
+	}
+
 
 }
