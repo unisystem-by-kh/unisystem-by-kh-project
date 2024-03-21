@@ -22,8 +22,9 @@ public class Subject {
 	private int classEnd;
 	
 	private int departmentNo;
+	private String departmentName;
 	private String memeberNo;
+	private String memberName;
 	
-	private String professor;
 
 }
