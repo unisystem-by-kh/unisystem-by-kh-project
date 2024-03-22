@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="studentList" value="${map.studentList}" />
+<c:set var="lectureList" value="${map.lectureList}" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -77,21 +78,21 @@
 
                         <c:forEach items="${studentList}" var="student">
                             <div class="student-info-value">
-                                <div>${student.memberNo}</div>
+                                <div class="studentMemberNo">${student.memberNo}</div>
                                 <!-- 이걸로 사용해야함 <a>태그 -->
-                                <div><a href="/selectLecture?memberNo=${student.memberNo}">${student.memberName}</a></div>
+                                <div class="studentMemberName">${student.memberName}</a></div>
                                 <div>${student.memberGrade}</div>
                                 <div>${student.memberTerm}</div>
                                 <div>${student.memberAge}</div>
                                 <div>${student.departmentName}</div>
                                 <div>${student.lecturePoint}</div>
                             </div>
-                        </c:forEach>
+                        </c:forEach>    
 
-
-
-
+                        ${lectureList}
                     </div>
+
+
                 </div>
             </div>
 
@@ -104,7 +105,6 @@
                         <div>교과목</div>
                     </div>
 
-                    <%-- (영역)테스트용 값 --%>
                     <div class="student-object-info-value">
                         <div>09:00 ~ 10:00</div>
                         <div>통계학계론</div>

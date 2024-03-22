@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.board.model.dao.BoardDAO;
+import kh.finalpro.project.professor.model.dto.Lecture;
+import kh.finalpro.project.professor.model.dto.Professor;
 
 @Repository
 public class ProfessorDAO {
@@ -21,7 +23,7 @@ public class ProfessorDAO {
 	}
 
 	// 재학중인 학생 목록 조회
-	public List<ProfessorDAO> selectStudent() {
+	public List<Professor> selectStudent() {
 		return sqlSession.selectList("professorMapper.selectStudent");
 	}
 
@@ -31,8 +33,13 @@ public class ProfessorDAO {
 	}
 	
 	// 재학중인 학생 목록 조회 - 검색
-	public List<ProfessorDAO> searchStudent(Map<String, Object> paramMap) {
+	public List<Professor> searchStudent(Map<String, Object> paramMap) {
 		return sqlSession.selectList("professorMapper.searchStudent", paramMap);
+	}
+
+	// 학생이 수강중인 수강 목록 조회
+	public List<Lecture> lectureList() {
+		return sqlSession.selectList("professorMapper.lectureList");
 	}
 	
 	
