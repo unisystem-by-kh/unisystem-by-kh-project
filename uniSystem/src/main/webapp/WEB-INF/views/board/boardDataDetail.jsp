@@ -29,29 +29,39 @@
 
             <div class="detail-title">
                 <h1 class="dataTitle">자료실</h1>
-                <div>
-                    <button class="detail-button update-btn">수정</button>
-                    <button class="detail-button delete-btn">삭제</button>
-                </div>
+                <c:if test="${loginMember.memberNo == board.memberNo}" >
+                    <div>
+                        <button class="detail-button update-btn">수정</button>
+                        <button class="detail-button delete-btn">삭제</button>
+                    </div>
+                </c:if>
             </div>
 
             <div class="detail-content">
                 <div class="content-header">
                     <span>작성자 : ${board.memberName} </span>
                     <span>${board.boardTitle} </span>
-                    <div class="file-download">파일 다운로드 영역</div>
+                    <c:if test="${!empty boardFile}">
+                        <div class="write">
+                            <a href="${boardFile[0].boardFilePath}${boardFile[0].boardFileRename}"
+                                                download="${boardFile[0].boardFileOriginal}">${boardFile[0].boardFileOriginal}</a> 
+                            
+                        </div>
+                    </c:if>
+                    <c:if test="${empty boardFile}">
+                        <div class="write">첨부된 파일이 없습니다.</div>
+
+                    </c:if>
+                    <br>
+                    <span>작성일 : ${board.boardCDate}</span>
+                    <span>조회수 : ${board.boardCount}</span>
                 </div>
 
-                <div class="content-body"></div>
+                <div class="content-body">
+                    ${board.boardContent}
+                </div>
 
             </div>
-            <c:if test="${!empty boardFile}" >
-                <div class="write>"
-                    <a href="#">자료실 업로드</a>
-                </div>
-            </c:if>
-
-            
 
         </div>
 

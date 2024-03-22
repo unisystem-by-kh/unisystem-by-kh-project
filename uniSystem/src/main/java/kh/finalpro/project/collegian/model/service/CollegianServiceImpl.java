@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kh.finalpro.project.collegian.model.dao.CollegianDAO;
 import kh.finalpro.project.collegian.model.dto.Member;
@@ -131,23 +132,29 @@ public class CollegianServiceImpl implements CollegianService{
 		
 		for(int i=0; i < classNoList.length; i++) {
 			
-			System.out.println(i+"번째"+classNoList[i]);
-			
 			Map<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("classNo", classNoList[i]);
 			
-			map.put("mem", mem);
+			map.put("memberNo", mem.getMemberNo());
 			
 			result += dao.insertMyClass(map);
-			
-			
 		}
-		
-		
 		return result;
 	}
 	
+	// 수강 신청 내역 조회 
+	@Override
+	public List<Class> selectMyClasses(Member mem) {
+		return dao.selectMyClasses(mem);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	// 수강 신청 내역 삭제
+	@Override
+	public int deleteMyClass(Map<String, Object> map) {
+		return dao.deleteMyClass(map);
+	}
 	
 
 }

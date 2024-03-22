@@ -33,7 +33,7 @@
                     <c:set var='boardUDate' value='${board.boardUDate}' />
                     <div>작성일 : <c:out value="${fn:substring(boardCDate, 0, 13)}"/></div>
                     <c:if test='${board.boardUDate != null}'>
-                        <div>수정일 : <c:out value="${fn:substring(boardUDate, 0, 11)}"/></div>
+                        <div>수정일 : <c:out value="${fn:substring(boardUDate, 0, 13)}"/></div>
                     </c:if>
                     
                     <div>작성자 : ${board.memberName}</div>
@@ -45,8 +45,17 @@
 
             <div class="row3">
                 <div>
-                    <%-- 주소부분 처리해야함 --%>
-                    <img src="https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/02/a0002727/img/ko/a0002727_parts_5bea39afbf327.jpg?20201211115557&q=80&rw=686&rh=490" alt="#">
+                    <%-- 썸네일이 있을 경우 --%>
+                    <c:if test="${!empty board.fileList}">
+                        <c:set var="path" value="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"/>
+                        <img src="${path}">
+                    </c:if>
+                    <%-- 썸네일이 없을 경우 --%>
+                    <c:if test="${empty board.fileList}">
+                        <c:set var="path" value="#" />
+                        <%-- <img src="${path}" alt="썸네일을 등록해주세요."> --%>
+                        <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' />
+                    </c:if>
                     <div>
                         ${board.boardContent}
                     </div>
@@ -54,13 +63,15 @@
             </div>
 
             <div class="row4">
-                <div>
-                    <button><a href="/board/freeBoardUpdate" id="updateBtn">수정</a></button>
-                    <button>삭제</button>
-                </div>
-                <div>
-                    <button>목록</button>
-                </div>
+                <c:if test="${loginMember.memberNo == board.memberNo}" >
+                    <div>
+                        <button id="updateBtn">수정</button>
+                        <button id="deleteBtn">삭제</button>
+                    </div>
+                </c:if>
+                    <div>
+                        <button>목록</button>
+                    </div>
             </div>
 
             <div class="row5">한줄 댓글 <span></span></div>

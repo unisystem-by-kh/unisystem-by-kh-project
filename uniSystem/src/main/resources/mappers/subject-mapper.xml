@@ -16,6 +16,7 @@
 		<result property="classEnd" column="CLASS_END" />
 		
 		<result property="departmentNo" column="DEPARTMENT_NO" />
+		<result property="departmentName" column="DEPARTMENT_NAME" />
 		<result property="memeberNo" column="MEMBER_NO" />
 		<result property="memberName" column="MEMBER_NAME" />
 	</resultMap>
@@ -54,6 +55,31 @@
 		DEPARTMENT ORDER BY 1
 	</select>
 	
+	<!-- 교수 강의 시간 체크 -->
+	<select id="timeCheck" resultType="_int">
+		SELECT COUNT(*) FROM CLASS
+		WHERE MEMBER_NO = (SELECT MEMBER_NO FROM MEMBER
+		                   WHERE MEMBER_NAME = #{professor})
+		AND CLASS_DAY = #{classDay}
+		<![CDATA[
+			AND ((CLASS_START <= #{classStart} AND CLASS_END >= #{classStart})  OR (CLASS_START <= #{classEnd} AND CLASS_END >= #{classEnd}))
+		]]>
+	</select>
+	
+	<!-- 교과목 갯수 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM CLASS
+	</select>
+	
+	<!-- 교과목 조회 결과 -->
+	<select id="selectSubjectList" resultMap="subject_rm">
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, CLASS_DAY,
+		CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME
+		FROM CLASS A
+		JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+		JOIN MEMBER USING (MEMBER_NO)
+		ORDER BY 1 DESC
+	</select>
 
 
 

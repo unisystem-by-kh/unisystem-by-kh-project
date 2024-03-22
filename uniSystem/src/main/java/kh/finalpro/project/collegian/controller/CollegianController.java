@@ -104,37 +104,57 @@ public class CollegianController {
 		} else {
 			map = service.selectLecture(mem, cp);
 		}
+		
+		// 수강 신청 내역 조회
+		List<Class> myClassList = service.selectMyClasses(mem);
+		
+		//System.out.println("수강 신청 내역"+myClassList);
+		
+		map.put("myClassList", myClassList);
 
 		model.addAttribute("map", map);
 
 		return "/collegian/myClass";
 	}
 	
+	// 수강 신청 비동기
 	@PostMapping("/insertLecture")
 	@ResponseBody
-	public int insertMyClass(@RequestBody String classes) {
+	public int insertMyClass(@RequestBody Map<String, Object> paramMap) {
+		
+		String classes = (String) paramMap.get("classes");
 		
 		String[] classNoList = classes.replace(" ","").split("\\s*/\\s*");
 		
-		System.out.println(Arrays.toString(classNoList));
+		// System.out.println(Arrays.toString(classNoList));
 		
-		// 테스트
-
-		int departmentNo = 10;
-		int memberGrade = 1;
-		int memberTerm = 1;
-		// 까지
-
 		Member mem = new Member();
 
-		mem.setMemberNo("01-2412345");
-		mem.setDepartmentNo(departmentNo);
-		mem.setMemberGrade(memberGrade);
-		mem.setMemberTerm(memberTerm);
-		
+		mem.setMemberNo((String)paramMap.get("memberNo"));
 		
 		int result = service.insertMyClass(classNoList,mem);
 		
+		return result;
+		
+	}
+	
+	// 수강 과목 삭제 비동기
+	@PostMapping(value="/deleteLecture" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public int deleteMyClass(@RequestBody Map<String, Object> paramMap) {
+		
+//		System.out.println("연결");
+//		
+//		String classNo = (String) paramMap.get("classNo");
+//		
+//		int memberNo = (int) paramMap.get("memberNo");
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("classNo", classNo);
+//		map.put("memberNo", memberNo);
+		
+		int result = service.deleteMyClass(paramMap);
 		
 		return result;
 	}

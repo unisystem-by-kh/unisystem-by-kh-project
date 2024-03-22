@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="pagination" value="${map.pagination}" />
+<c:set var="boardList" value="${map.boardList}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,9 +34,9 @@
 	            <div>
 	                <select value="depart" >
 	                    <option value="" selected disabled hidden>전체</option>
-	                    <option value="1">경영학과</option>
-	                    <option value="2">경제학과</option>
-	                    <option value="3">건축학과</option>
+	                    <c:forEach items="${deptCodeList}" var="deptCode">
+                            <option value="${deptCode.DEPARTMENT_NO}">${deptCode.DEPARTMENT_NAME}</option>
+                        </c:forEach>
 	                </select>
 	            </div>
 	            <div>
@@ -51,99 +55,55 @@
 	            </tr>
 	        </thead>
 	        <tbody>
+			<c:forEach var="board" items="${boardList}">
 	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
+	                <td>${board.boardNo}</td>
+	                <td><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a></td>
+	                <td>${board.departmentName}</td>
+	                <td>${board.boardCDate}</td>
+	                <td>${board.readCount}</td>
 	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
-	            <tr>
-	                <td>2004</td>
-	                <td><a href="/board/departmentBoardDetail">공지입니다.</a></td>
-	                <td>경영학과</td>
-	                <td>2024.02.22</td>
-	                <td>20</td>
-	            </tr>
+	        </c:forEach>
 	        </tbody>
 	    </table>
-	
-	    <div class="pagi">
-	        <ul>
-	            <li>&lt;&lt;</li>
-	            <li>&lt;</li>
-	            <li id="current">1</li>
-	            <li>2</li>
-	            <li>3</li>
-	            <li>4</li>
-	            <li>5</li>
-	            <li>&gt;</li>
-	            <li>&gt;&gt;</li>
-	        </ul>
-	    </div>
+	<div class="pagi">
+			<ul>
+				<!-- 첫 페이지로 이동 -->
+				<li><a href="/board/${categoryNo}?cp=1${sp}">&lt;&lt;</a></li>
+
+				<!-- 이전 목록 마지막 번호로 이동 -->
+				<li><a
+					href="/board/${categoryNo}?cp=${pagination.prevPage}${sp}">&lt;</a></li>
+
+
+				<!-- 특정 페이지로 이동 -->
+				<c:forEach var="i" begin="${pagination.startPage}"
+					end="${pagination.endPage}" step="1">
+					<c:choose>
+						<c:when test="${i == pagination.currentPage}">
+							<!-- 현재 보고있는 페이지 -->
+							<li><a id="current">${i}</a></li>
+
+						</c:when>
+						<c:otherwise>
+							<!-- 현재 페이지를 제외한 나머지 -->
+							<li><a href="/board/${categoryNo}?cp=${i}${sp}">${i}</a></li>
+
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+
+				<!-- 다음 목록 시작 번호로 이동 -->
+				<li><a
+					href="/board/${categoryNo}?cp=${pagination.nextPage}${sp}">&gt;</a></li>
+
+				<!-- 끝 페이지로 이동 -->
+				<li><a
+					href="/board/${categoryNo}?cp=${pagination.maxPage}${sp}">&gt;&gt;</a></li>
+
+			</ul>
+		</div>
 	    
 	
 	    <jsp:include page="/WEB-INF/views/common/footer.jsp" />

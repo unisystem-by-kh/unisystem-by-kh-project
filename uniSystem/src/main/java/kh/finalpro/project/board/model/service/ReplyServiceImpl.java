@@ -35,7 +35,6 @@ public class ReplyServiceImpl implements ReplyService{
 	public int insert(Reply reply) {
 		// XSS 방지 처리
 		reply.setReplyContent(Util.XSSHandling(reply.getReplyContent()));
-		
 		return dao.insert(reply);
 	}
 

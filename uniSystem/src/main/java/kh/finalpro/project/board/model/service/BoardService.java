@@ -159,17 +159,20 @@ public interface BoardService {
 
 
 	/** 공지사항 작성페이지
+  int noticeBoardWrite(Board board, List<MultipartFile> files, String webPath, String filePath);
+  
+  
+	/** 자유게시판 수정
 	 * @param board
 	 * @param images
 	 * @param webPath
 	 * @param filePath
 	 * @return boardNo
+	 * @param deleteList
+	 * @return rowCount
 	 */
-	int noticeBoardWrite(Board board, List<MultipartFile> files, String webPath, String filePath);
+	int freeBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath, String deleteList) throws IllegalStateException, IOException;
 
-
-
-	
 
 
 }

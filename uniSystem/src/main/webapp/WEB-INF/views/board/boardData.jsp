@@ -28,7 +28,7 @@
 
         <c:if test="${fn:substring(loginMember.memberNo,0,2) != '01'}" >
             <div class="write">
-                <a href="#">자료실 업로드</a>
+                <a href="/board/${categoryNo}/write">자료실 업로드</a>
             </div>
         </c:if>
 

@@ -17,6 +17,8 @@ public class BoardFile {
 	private int boardFileCategoryNo;
 	private int boardNo;
 	
+	
+	
 // BOARD_FILE_NO, BOARD_FILE_PATH, BOARD_FILE_ORIGINAL, BOARD_FILE_RENAME, BOARD_FILE_CATEGORY_NO, BOARD_NO
 
 }
