@@ -28,100 +28,80 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardDAO dao;
 
+	// -------------------------------목록 조회--------------------------------------
+
+	// 게시판 목록 조회(공지사항, 자유게시판, 1:1 문의, 학과공지, 자료실)
+	@Override
+	public Map<String, Object> selelctBoardList(int categoryNo, int cp) {
+		int listCount = dao.getListCount(categoryNo);
+		Pagination pagination = new Pagination(cp, listCount);
+
+		// List<Board> boardList = dao.selectNoticeBoardList(pagination, categoryNo); // 공지사항
+		// List<Board> boardList = dao.selectFreeBoardList(pagination, categoryNo); // 자유게시판
+		// List<Board> boardList = dao.selectinquiryBoardList(pagination, categoryNo); // 1:1, 학과공지
+		// List<Board> boardList = dao.selectDataList(pagination, categoryNo); // 자료실
+		List<Board> boardList = dao.selectBoardList(pagination, categoryNo); // 전체
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		return map;
+	}
+
+	// -------------------------------- 검색 ---------------------------------------
+
+	// 게시판 목록 검색(공지사항, 자유게시판, 1:1문의, 학과공지)
+	@Override
+	public Map<String, Object> selelctBoardList(Map<String, Object> paramMap, int cp) {
+		// 1. 특정 게시판의 삭제되지 않고 검색 조건이 일치하는 게시글 수 조회
+		
+		int listCount = 0;
+		
+		if(paramMap.get("categoryNo").equals("2") || paramMap.get("categoryNo").equals("4")) {
+			listCount = dao.getListCountInquiry(paramMap); // 1:1문의, 학과공지
+		}else {
+			listCount = dao.getListCount(paramMap);
+		}
+
+		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
+		// -> 내부 필드가 모두 계산되어 초기화됨
+		Pagination pagination = new Pagination(cp, listCount);
+		// 3. 특정 게시판에서
+		// 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
+		// + 단, 검색 조건 일치하는 글만
+		// List<Board> boardList = dao.selelctNoticeBoardList(pagination, paramMap); // 공지사항
+		// List<Board> boardList = dao.searchFreeBoardList(pagination, paramMap); // 자유게시판
+		// List<Board> boardList = dao.selectinquiryBoardList(pagination, paramMap); // 1:1, 학과공지
+		
+		List<Board> boardList = dao.selelctBoardList(pagination, paramMap); // 전체
+		// 4. pagination, boardList를 Map 담아서 반환
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		return map;
+	}
+
+
+	// ------------------------------------------------------------------------------
+
+
+
+
+
+
+
 	// 게시판 종류 목록 조회
 	@Override
 	public List<Map<String, Object>> selectCategory() {
 		return dao.selectCategory();
 	}
 
-	// 자유게시판 목록 조회
-	@Override
-	public Map<String, Object> selectFreeBoardList(int categoryNo, int cp) {
+	
 
-		int listCount = dao.getListCount(categoryNo);
-
-		Pagination pagination = new Pagination(cp, listCount);
-
-		List<BoardDAO> boardList = dao.selectFreeBoardList(pagination, categoryNo);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("pagination", pagination);
-		map.put("boardList", boardList);
+	
 
 
-		System.out.println(boardList);
-
-		System.out.println("Service ;; " + map);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@썸네일을 찾아라 : " + boardList);
-
-
-		return map;
-	}
-
-	// 1:1 문의 목록조회
-	@Override
-	public Map<String, Object> selectinquiryBoardList(int categoryNo, int cp) {
-
-		int listCount = dao.getListCount(categoryNo);
-
-		Pagination pagination = new Pagination(cp, listCount);
-
-		List<Board> boardList = dao.selectinquiryBoardList(pagination, categoryNo);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("pagination", pagination);
-		map.put("boardList", boardList);
-
-
-
-
-		return map;
-	}
-
-
-	// 자유게시판 목록 조회(검색)
-	@Override
-	public Map<String, Object> searchFreeBoardList(Map<String, Object> paramMap, int cp) {
-
-		// 1. 특정 게시판의 삭제되지 않고 검색 조건이 일치하는 게시글 수 조회
-		int listCount = dao.getListCount(paramMap);
-
-		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
-		// 		-> 내부 필드가 모두 계산되어 초기화됨
-		Pagination pagination = new Pagination(cp, listCount);
-
-		// 3. 특정 게시판에서 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
-		// + 단, 검색 조건 일치하는 글만
-		List<Board> boardList = dao.searchFreeBoardList(pagination, paramMap);
-
-		// 4. pagination, boardList를 Map에 답아서 반환
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("boardList", boardList);
-
-		return map;
-
-	}
-
-	// 1:1문의 목록(검색)
-	@Override
-	public Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp) {
-
-		int listCount = dao.getListCountInquiry(paramMap);
-
-		Pagination pagination = new Pagination(cp, listCount);
-
-		List<BoardDAO> boardList = dao.selectinquiryBoardList(pagination, paramMap);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("pagination", pagination);
-		map.put("boardList", boardList);
-
-		return map;
-	}
 
 	// 자유게시판 상세 조회
 	@Override
@@ -151,22 +131,7 @@ public class BoardServiceImpl implements BoardService{
 
 
 
-	// 자료실 목록 조회
-	@Override
-	public Map<String, Object> selectDataBoardList(int categoryNo, int cp) {
-
-		int listCount = dao.getListCount(categoryNo);
-
-		Pagination pagination = new Pagination(cp, listCount);
-
-		List<Board> boardList = dao.selectDataList(categoryNo, pagination);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("boardList", boardList);
-
-		return map;
-	}
+	
 
 	// 1:1문의 작성
 	@Transactional(rollbackFor = Exception.class)
@@ -401,48 +366,9 @@ public class BoardServiceImpl implements BoardService{
 	}	
 
 
-	// 공지사항 목록 조회
-	@Override
-	public Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp) {
+	
 
-		int listCount = dao.getListCount(categoryNo);
-
-
-		Pagination pagination = new Pagination(cp, listCount);
-
-
-		List<Board> boardList = dao.selectNoticeBoardList(pagination, categoryNo);
-
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("boardList", boardList);
-
-		return map;
-	}
-
-	//공지사항 목록 검색
-	@Override
-	public Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp) {
-		// 1. 특정 게시판의 삭제되지 않고 검색 조건이 일치하는 게시글 수 조회
-		int listCount = dao.getListCount(paramMap);
-
-		// 2. 1번 조회 결과 + cp를 이용해서 pagination 객체 생성
-		// -> 내부 필드가 모두 계산되어 초기화됨
-		Pagination pagination = new Pagination(cp, listCount);
-
-		// 3. 특저 게시판에서
-		// 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
-		// + 단, 검색 조건 일치하는 글만
-		List<Board> boardList = dao.selelctNoticeBoardList(pagination, paramMap);
-
-		// 4. pagination, boardList를 Map 담아서 반환
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("boardList", boardList);
-
-		return map;
-	}
+	
 
 
 	

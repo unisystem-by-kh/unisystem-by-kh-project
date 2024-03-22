@@ -61,41 +61,100 @@ public class BoardController {
 	// ---------------------------------- 게시판 ----------------------------------
 	// ---------------------------------------------------------------------------
 
-	// ---------------------------------- 자유게시판 ---------------------------------- 
+	// -------------------------------페이지 이동--------------------------------------
 
-
-	// 자유게시판 목록
-	@GetMapping("/{categoryNo:3}")
-	public String selectFreeBoardList(
-			@PathVariable("categoryNo") int categoryNo,
-			@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
-			Model model,
-			@RequestParam Map<String, Object> paramMap
-			) {
-
-		Map<String, Object> map = null;
-
-		if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색 X)
-
-			// 게시글 목록조회 서비스 호출
-			map = service.selectFreeBoardList(categoryNo, cp);
-
-			// 조회 결과를 request scope에 세팅 후 forward
-			model.addAttribute("map" , map);
-
-		}else { // 검색어가 있을 때 (검색 O)
-
-			paramMap.put("categoryNo", categoryNo);
-
-			map = service.searchFreeBoardList(paramMap, cp);
-
-			model.addAttribute("map" , map);
-		}
-
-		model.addAttribute("map" , map);
-		return "board/freeBoardList";
+	// 자유게시판 삽입(작성) 페이지
+	@GetMapping("/{categoryNo:3}/insert")
+	public String selectFreeBoardInsert(@PathVariable("categoryNo") int categoryNo) {
+		return "board/freeBoardInsert";
 	}
 
+	// 자료실 등록 연결
+	@GetMapping("/{categoryNo:5}/write")
+	public String writeBoardData(@PathVariable("categoryNo") int categoryNo) {
+		return "board/boardDataWrite";
+	}
+
+	// 1:1문의 작성페이지
+	@GetMapping("/{categoryNo:4}/write")
+	public String inquiryBoardInsert(@PathVariable("categoryNo") int categoryNo) {
+		return "board/inquiryBoardWrite";
+	}
+
+	// 학과공지 작성페이지
+	@GetMapping("/departmentBoardWrite")
+	public String departmentBoardWrite() {
+		return "board/departmentBoardWrite";
+	}
+	// -------------------------------------------------------------------------------
+
+	// -------------------------------목록 조회--------------------------------------
+
+	
+	/* 
+		1 : noticeBoardList, selelctNoticeBoardList(검색어 상관 X)
+		2 : departmentBoardList, selectinquiryBoardList(검색어 상관 X)
+		3 : freeBoardList , selectFreeBoardList(검색어 없을 경우), searchFreeBoardList(검색어 있을 경우)
+		4 : inquiryBoardList, selectinquiryBoardList(검색어 상관 X)
+		5 : boardData
+	 */
+
+
+	// 게시판 목록(공지사항, 자유게시판, 1:1문의, 학과공지, 자료실)
+	@GetMapping("/{categoryNo:[1-5]{1}}")
+	public String selelctBoardList(
+			@PathVariable("categoryNo") int categoryNo
+			, @RequestParam(value="cp", required=false, defaultValue = "1") int cp
+			, Model model
+			, @RequestParam Map<String, Object> paramMap) {
+
+		Map<String, Object> map = null;
+		String path = null;
+		
+		switch (categoryNo) {
+		case 1: path="noticeBoardList"; break; // 공지사항
+		case 2: path="departmentBoardList"; break; // 학과공지
+		case 3: path="freeBoardList"; break; // 자유게시판
+		case 4: path="inquiryBoardList"; break; // 1:1 문의
+		case 5: path="boardData"; break; // 자료실
+		}
+
+		if(paramMap.get("query") == null) { // 검색어가 없을 때 (검색X)	
+			// 게시글 목록 조회 서비스 호출
+
+			// 수정 해야함 ********
+			// map = service.selelctNoticeBoardList(categoryNo, cp); // 공지사항
+			// map = service.selectFreeBoardList(categoryNo, cp); // 자유게시판
+			// map = service.selectinquiryBoardList(categoryNo,cp); // 1:1, 학과공지
+			// map = service.selectDataBoardList(categoryNo, cp); // 자료실
+
+			map = service.selelctBoardList(categoryNo,cp); // 전체
+
+
+			// 조회 결과를 request scope에 세팅 후 forward
+			model.addAttribute("map", map);
+			
+		} else { // 검색어가 있을 때 (검색 O)
+			
+			paramMap.put("categoryNo", categoryNo);
+
+//			 수정 해야함 ********
+			map = service.selelctBoardList(paramMap, cp);
+//			map = service.searchFreeBoardList(paramMap, cp);
+//			map = service.selelctBoardList(categoryNo,cp); // 1:1, 학과공지
+		}
+		model.addAttribute("map" , map);
+
+		return "board/" + path; 
+	}
+
+	// -------------------------------------------------------------------------------
+
+
+
+
+
+	// -------------------------------상세 조회--------------------------------------
 
 	// 자유게시판 상세
 	@GetMapping("/{categoryNo:3}/{boardNo}")
@@ -114,118 +173,92 @@ public class BoardController {
 
 		Board board = service.selectFreeBoard(map);
 		String path = null;
-
 		if(board != null) {
-
 			if(loginMember != null) { // 로그인 상태인 경우
 				map.put("memberNo", loginMember.getMemberNo());
 			}
-
-
 			// 쿠키를 이용한 조회수 증가 처리
-
 			// 1) 비회원 또는 로그인한 회원의 글이 아닌 경우
 			if(loginMember == null || loginMember.getMemberNo() != board.getMemberNo()) {
-
 				// 2) 쿠키 얻어오기
 				Cookie c = null;
 
 				Cookie[] cookies = req.getCookies();
 				if(cookies != null) {
-
 					for(Cookie cookie : cookies) {
 						if(cookie.getName().equals("readBoardNo")) {
 							c = cookie;
 							break;
 						}
 					}
-
 				}
-
 				// 3) 기존 쿠키가 없거나(c == null)
 				int result = 0;
-
 				if(c == null) {
-
 					// 쿠키가 존재 X -> 하나 새로 생성
 					c = new Cookie("readBoardNo" , "|" + boardNo + "|");
-
 					// 조회수 증가 서비스 호출
 					result = service.updateReadCount(boardNo);
-
 				}else {
-
-
 					// String.indexOf("문자열")
 					// : 찾는 문자열이 String 몇번 인덱스에 존재하는지 반환
 					//   단, 없으면 -1 반환
 					if(c.getValue().indexOf("|" + boardNo + "|") == -1) {
-
 						// 기존 값에 게시글 번호 추가해서 다시 세팅
 						c.setValue(c.getValue() + "|" + boardNo + "|");
-
 						// 조회수 증가 서비스 호출
 						result = service.updateReadCount(boardNo);
 					}
-
 				}
-
 				// 4) 조회수 증가 성공 시
 				// 쿠키가 적용되는 경로, 수명(당일 23시 59분 59초) 지정
-
 				if(result > 0) {
-
 					// 조회된 board 조회 수와 DB 조회 수 동기화
 					board.setBoardCount(board.getBoardCount() + 1);
-
 					// 적용 경로 설정
 					c.setPath("/"); // "/" 이하 경로 요청 시 쿠키 서버로 전달
-
 					// 수명 지정
 					Calendar cal = Calendar.getInstance();
 					cal.add(cal.DATE, 1);
-
 					// 날짜 표기법 변경 객체 (DB의 TO_CHAR()와 비슷)
 					SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-
 					// Java.util.Date
 					Date a = new Date(); // 현재 시간
-
 					Date temp = new Date(cal.getTimeInMillis()); // 내일 (24시간 후)
-
 					Date b = sdf.parse(sdf.format(temp)); // 내일 0시 0분 0초
 
 					// -> 내일 0시 0분 0초 까지 남은 시간을 초단위로 반환
 					long diff = (b.getTime() - a.getTime()) / 1000;
-
 					c.setMaxAge((int)diff); // 수명 설정
-
 					resp.addCookie(c); 
-
 				}
-
 			}
-
 			// ---------------------------------------------------------------------
-
 			path = "board/freeBoardDetail"; // forward할 jsp 경로
 			model.addAttribute("board" , board);
-
 		}else { // 조회 결과가 없을 경우
 			path = "redirect:/board/" + categoryNo;
 			// 게시판 첫 페이지로 리다이렉트
 			ra.addFlashAttribute("message" , "해당 게시글이 존재하지 않습니다."); // message는 푸터에 담겨있음
 		}
-
 		return path;
 	}
 
 
-	// 자유게시판 삽입(작성) 페이지
-	@GetMapping("/{categoryNo:3}/insert")
-	public String selectFreeBoardInsert(@PathVariable("categoryNo") int categoryNo) {
-		return "board/freeBoardInsert";
-	}
+
+
+	// -------------------------------------------------------------------------------
+
+	// ---------------------------------- 자유게시판 ---------------------------------- 
+
+
+	
+
+
+	
+
+
+	
 
 	// 자유게시판 삽입(작성)	
 	@PostMapping("/{categoryNo:3}/insert")
@@ -361,21 +394,7 @@ public class BoardController {
 	}
 
 
-	// 자료실 목록 연결
-	@GetMapping("/{categoryNo:5}")
-	public String boardData(
-			@PathVariable("categoryNo") int categoryNo
-			, @RequestParam(value="cp", required=false, defaultValue = "1") int cp
-			, Model model) {
-
-		// 자료실 목록 조회 서비스
-		Map<String, Object> map = service.selectDataBoardList(categoryNo, cp);
-
-		model.addAttribute("map", map);
-
-		return "board/boardData";
-
-	}
+	
 
 	/** 자료실 상세 페이지
 	 * @param boardNo
@@ -409,48 +428,10 @@ public class BoardController {
 		return "board/boardDataDetail";
 	}
 
-	// 자료실 등록 연결
-	@GetMapping("/{categoryNo:5}/write")
-	public String writeBoardData(@PathVariable("categoryNo") int categoryNo) {
-		return "board/boardDataWrite";
-	}
+	
 
 
-	//공지사항 목록
-	@GetMapping("/{categoryNo:1}")
-	public String selelctNoticeBoardList(
-			@PathVariable("categoryNo") int categoryNo
-			, @RequestParam(value="cp", required=false, defaultValue = "1") int cp
-			, Model model
-			, @RequestParam Map<String, Object> paramMap) {
-
-		if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색X)	
-
-			// 게시글 목록 조회 서비스 호출
-			Map<String, Object> map = service.selelctNoticeBoardList(categoryNo, cp);
-
-
-			// 조회 결과를 request scope에 세팅 후 forward
-			model.addAttribute("map", map);
-
-		} else { // 검색어가 있을 때 (검색 O)
-			paramMap.put("categoryNo", categoryNo);
-			Map<String, Object> map = service.selelctNoticeBoardList(paramMap, cp);
-			
-		    Pagination pagination = (Pagination) map.get("pagination");
-	        if (pagination == null) {
-	            pagination = new Pagination(cp, 0);
-	            pagination.setLimit(10);
-	        }
-			
-
-
-			model.addAttribute("map", map);
-			model.addAttribute("pagination", pagination);
-		}
-
-		return "board/noticeBoardList";
-	}
+	
 	
 
 
@@ -540,32 +521,7 @@ public class BoardController {
 	}
 
 
-	// 1:1문의 목록
-	@GetMapping("/{categoryNo:4}")
-	public String inquiryBoard(@PathVariable("categoryNo") int categoryNo,
-			@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
-			Model model,
-			@RequestParam Map<String, Object> paramMap) {
-
-		if(paramMap.get("query") == null) {
-
-			// 게시글 목록 조회 서비스 호출
-			Map<String, Object> map = service.selectinquiryBoardList(categoryNo,cp);
-
-			// 조회 결과를 request scope에 세팅 후 forward
-			model.addAttribute("map", map);
-		}else {
-
-			paramMap.put("categoryNo", categoryNo);
-
-			Map<String, Object> map = service.selectinquiryBoardList(paramMap, cp);
-
-			model.addAttribute("map", map);
-
-		}
-
-		return "board/inquiryBoardList";
-	}
+	
 
 
 	// 1:1문의 상세페이지
@@ -593,11 +549,7 @@ public class BoardController {
 		return path;
 	}	
 
-	// 1:1문의 작성페이지
-	@GetMapping("/{categoryNo:4}/write")
-	public String inquiryBoardInsert(@PathVariable("categoryNo") int categoryNo) {
-		return "board/inquiryBoardWrite";
-	}
+	
 
 
 
@@ -734,32 +686,7 @@ public class BoardController {
 	}
 
 
-	// 학과공지 목록
-	@GetMapping("/{categoryNo:2}")
-	public String departmentBoard(@PathVariable("categoryNo") int categoryNo,
-			@RequestParam(value="cp" , required=false, defaultValue="1") int cp,
-			Model model,
-			@RequestParam Map<String, Object> paramMap) {
-
-		if(paramMap.get("query") == null) {
-
-			// 게시글 목록 조회 서비스 호출
-			Map<String, Object> map = service.selectinquiryBoardList(categoryNo,cp);
-
-			// 조회 결과를 request scope에 세팅 후 forward
-			model.addAttribute("map", map);
-		}else {
-
-			paramMap.put("categoryNo", categoryNo);
-
-			Map<String, Object> map = service.selectinquiryBoardList(paramMap, cp);
-
-			model.addAttribute("map", map);
-
-		}
-
-		return "board/departmentBoardList";
-	}
+	
 
 	// 학과공지 상세
 	@GetMapping("/{categoryNo:2}/{boardNo}")
@@ -884,11 +811,7 @@ public class BoardController {
 		return path;
 	}
 
-	// 학과공지 작성페이지
-	@GetMapping("/departmentBoardWrite")
-	public String departmentBoardWrite() {
-		return "board/departmentBoardWrite";
-	}
+	
 
 
 
