@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>교과목 조회</title>
     
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/admin/subjectList.css">
 
@@ -22,15 +21,23 @@
     <main>
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-        <form action="/subjectList" id="searchFrm">
+        <c:if test="${!empty param.key}" >
+            <c:set var="sp" value="&key=${param.key}&query=${param.query}"/>
+        </c:if>
+
+        <form action="subjectList" id="searchFrm">
             <select name="key" id="subjectKey">
-                <option value="a">과목번호</option>
-                <option value="b">학과명</option>
-                <option value="c">과목명</option>
-                <option value="d">전담 교수</option>
+                <option value="t">과목명</option>
+                <option value="d">학과명</option>
+                <option value="p">전담 교수</option>
             </select>
             <input type="search" name="query" id="subjectQuery" placeholder="검색어를 입력해주세요.">
             <button id="searchBtn">검색</button>
+
+            <c:if test="${!empty param.key}" >
+                <h3 style="margin:30px">"${param.query}" 검색 결과</h3>
+            </c:if>
+
         </form>
 
         <table class="list-table">
@@ -50,7 +57,7 @@
                 <c:choose>
                    <c:when test="${empty subjectList}">
                     <tr>
-                        <td colspan="7">교과목이 존재하지 않습니다.</td>
+                        <th colspan="7">교과목이 존재하지 않습니다.</th>
                     </tr>
                    </c:when>
                 
@@ -66,6 +73,7 @@
                                 <td><button>과목수정</button></td>
                                 <td><button>삭제</button></td>
                             </tr>
+                            
                         </c:forEach>
 
                    </c:otherwise>
@@ -118,7 +126,26 @@
         <div class="modal_body">
             <div class="close-area">&times;</div>
             <h2>과목 수정</h2><hr>
-            <form>
+            <form action="/staff/update" id="insertFrm" method="post">
+                <div class="form-group">
+                    <label for="departmentName">학과</label>
+                    <select name="departmentNo" id="departmentNo">
+                        <option value="0">전체</option>
+                        <c:forEach items="${deptCodeList}" var="deptCode">
+                            <option value="${deptCode.DEPARTMENT_NO}">${deptCode.DEPARTMENT_NAME}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+        
+                <div class="form-group">
+                    <label for="professor">담당 교수</label>
+                    <input type="text" id="teacher" name="memberName" placeholder="담당 교수님을 입력해주세요." autocomplete="off">
+                    <div class="resultSet-area">
+                        <p id="x-btn">&times;</p>
+                        <ul id="resultSet" class="resultSet"></ul>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="className">과목명</label>
                     <input type="text" id="className" name="className" placeholder="과목명을 입력해주세요.">
@@ -134,25 +161,18 @@
                     <input type="text" id="classMax" name="classMax" placeholder="최대 수강 인원을 입력해주세요.">
                 </div>
         
-                <div class="form-group">
-                    <label for="departmentName">학과</label>
-                    <input type="text" id="departmentName" name="departmentName" placeholder="학과를 입력해주세요.">
-                </div>
-        
-                <div class="form-group">
-                    <label for="professor">담당 교수</label>
-                    <input type="text" id="professor" name="professor" placeholder="담당 교수님을 입력해주세요.">
-                </div>
         
                 <div class="form-group">
                     <label>강의 학기</label>
-                    <select name="grade" id="grade">
+                    <select name="classGrade" id="grade">
+                        <option value="0">학년</option>
                         <option value="1">1학년</option>
                         <option value="2">2학년</option>
                         <option value="3">3학년</option>
                         <option value="4">4학년</option>
                     </select>
-                    <select name="semester" id="semester">
+                    <select name="classTrem" id="semester">
+                        <option value="0">학기</option>
                         <option value="1">1학기</option>
                         <option value="2">2학기</option>
                     </select>
@@ -161,7 +181,8 @@
         
                 <div class="form-group">
                     <label for="calssDay">강의 요일</label>
-                    <select name="calssDay" id="calssDay">
+                    <select name="classDay" id="classDay">
+                        <option value="0">요일</option>
                         <option value="월">월</option>
                         <option value="화">화</option>
                         <option value="수">수</option>
@@ -173,10 +194,12 @@
         
                 <div class="form-group" id="classTime-area">
                     <label for="classTime">강의 시간</label>
-                    <input type="text" id="classStart" name="classTime" placeholder="시작">교시
-                    <input type="text" id="classEnd" name="classTime" placeholder="마치는">교시
-                    <button id="checkTime">시간 체크</button>
+                    <input type="text" id="classStart" name="classStart" placeholder="시작">교시
+                    <input type="text" id="classEnd" name="classEnd" placeholder="마치는">교시
+                    <button type="button" id="checkTime">시간 체크</button>
                 </div>
+
+                <input type="hidden" id="classNo" name="classNo" value="0">
 
                 <button class="btn">수정하기</button>
             </form>
@@ -185,6 +208,7 @@
     
     
 
+    <script src="/resources/js/admin/insertSubject.js"></script>
     <script src="/resources/js/admin/subjectList.js"></script>
     <script src="/resources/js/header.js"></script>
     
