@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kh.finalpro.project.collegian.model.dto.Class;
-import kh.finalpro.project.collegian.model.dto.Member;
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.service.CollegianService;
 
 @Controller
@@ -31,20 +32,11 @@ public class CollegianController {
 	// 교과목 조회 페이지 전환
 	@GetMapping("/classList")
 	public String selectClassList(Model model, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			@RequestParam Map<String, Object> paramMap) {
+			@RequestParam Map<String, Object> paramMap
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
 
-		// 테스트
 
-		int departmentNo = 10;
-		int memberGrade = 1;
-		int memberTerm = 1;
-		// 까지
-
-		Member mem = new Member();
-
-		mem.setDepartmentNo(departmentNo);
-		mem.setMemberGrade(memberGrade);
-		mem.setMemberTerm(memberTerm);
+		Member mem = loginMember;
 
 		Map<String, Object> map = null;
 
@@ -75,22 +67,15 @@ public class CollegianController {
 
 	// 수강신청 페이지 전환
 	@GetMapping("/myClass")
-	public String myClass(Model model, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			@RequestParam Map<String, Object> paramMap) {
+	public String myClass(Model model, @RequestParam Map<String, Object> paramMap
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
 
-		// 테스트
-
-		int departmentNo = 10;
-		int memberGrade = 1;
-		int memberTerm = 1;
-		// 까지
-
-		Member mem = new Member();
+		Member mem = loginMember;
 		
-		mem.setMemberNo("01-2412345");
-		mem.setDepartmentNo(departmentNo);
-		mem.setMemberGrade(memberGrade);
-		mem.setMemberTerm(memberTerm);
+//		mem.setMemberNo("01-2412345");
+//		mem.setDepartmentNo(departmentNo);
+//		mem.setMemberGrade(memberGrade);
+//		mem.setMemberTerm(memberTerm);
 
 		Map<String, Object> map = null;
 
@@ -99,10 +84,10 @@ public class CollegianController {
 
 			paramMap.put("query", ((String) paramMap.get("query")).toUpperCase()); // 검색어 대문자로 변환
 
-			map = service.searchLecture(paramMap, cp);
+			map = service.searchLecture(paramMap);
 
 		} else {
-			map = service.selectLecture(mem, cp);
+			map = service.selectLecture(mem);
 		}
 		
 		// 수강 신청 내역 조회
@@ -162,9 +147,19 @@ public class CollegianController {
 	
 
 	// 시간표 페이지 전환
-	@RequestMapping("/schedule")
-	public String schedule() {
+	@GetMapping("/schedule")
+	public String schedule(Model model
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+				
+		// 수강 신청 내역 조회
+		List<Class> myClassList = service.selectMyClasses(loginMember);
+		
+		map.put("myClassList", myClassList);
 
+		model.addAttribute("map", map);
+		
 		return "/collegian/schedule";
 	}
 

@@ -148,8 +148,8 @@
 	
 	<insert id="insertMyClass" parameterType="map">
 		INSERT INTO LECTURE VALUES( #{classNo} , #{memberNo} , DEFAULT ,
-		 (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo}) ,
-		  (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo}) )
+		 	(SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo}) ,
+		 	(SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo}) )
 	</insert>
 	
 	<select id="selectMyClasses" resultMap="class_rm">
@@ -187,6 +187,14 @@
 		AND MEMBER_NO = #{memberNo}
 	
 	</delete>
+	
+	<select id="checkClassMax" resultType="_int">
+		SELECT COUNT(*)
+		FROM CLASS A
+		WHERE CLASS_MAX > (SELECT COUNT(*) FROM LECTURE Z
+							WHERE A.CLASS_NO = Z.CLASS_NO)
+		AND A.CLASS_NO = #{classNo}
+	</select>
 
 
 </mapper>

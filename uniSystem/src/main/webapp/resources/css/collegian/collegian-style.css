@@ -192,12 +192,14 @@ table{
 
 th,
 td {
-    padding: 6px 15px;
+    padding: 10px 10px;
+    text-align: center;
 }
 th {
+    border-right: 1px solid #c6c9cc;
+    border-bottom: 1px solid #c6c9cc;
     background: #42444e;
     color: #fff;
-    text-align: left;
 }
 
 tr:first-child th:first-child {
@@ -208,7 +210,7 @@ tr:first-child th:last-child {
 }
 td {
     border-right: 1px solid #c6c9cc;
-    border-bottom: 1px solid #c6c9cc;
+    text-align: center;
 }
 td:first-child {
     border-left: 1px solid #c6c9cc;
@@ -221,6 +223,10 @@ tr:last-child td:first-child {
 }
 tr:last-child td:last-child {
     border-bottom-right-radius: 6px;
+}
+
+tr:last-child td{
+    border-bottom: 1px solid #c6c9cc;
 }
 
 /* 시간표 테이블 */
@@ -285,11 +291,8 @@ tr:last-child td:last-child {
 }
 
 .select-class{
-
     min-height: 0;
-    border-top: 2px solid #ddd;
     position: relative;
-
 }
 
 .stu-container > h2{
@@ -557,3 +560,24 @@ tr:last-child td:last-child {
   .select:hover::after {
     color: black;
   }
+
+
+  /* 수강 신청 버튼 */
+
+  td > button{
+    margin: 0 3px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .ex1{
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  #count-area{
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+  }
+  

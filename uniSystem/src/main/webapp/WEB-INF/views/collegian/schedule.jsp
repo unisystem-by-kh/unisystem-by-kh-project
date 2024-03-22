@@ -1,24 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>시간표 조회</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>시간표 조회</title>
 
-<link rel="stylesheet" href="/resources/css/style-main.css">
-<link rel="stylesheet"
-	href="/resources/css/collegian/collegian-style.css">
+	<link rel="stylesheet" href="/resources/css/style-main.css">
+	<link rel="stylesheet"
+		href="/resources/css/collegian/collegian-style.css">
 
-<script src="https://kit.fontawesome.com/9cd918496e.js"
-	crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/9cd918496e.js"
+		crossorigin="anonymous"></script>
 
 </head>
-<body>
 
+<c:set var="myClassList" value="${map.myClassList}"/>
+
+<body>
 
 	<main>
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -62,7 +64,7 @@
 						<button id="schedule-btn">출력</button>
 					</div>
 					<div class="schedule-area">
-						<table class="schedule">
+						<table class="schedule" id="table">
 							<thead>
 								<tr>
 									<th>교시</th>
@@ -74,15 +76,82 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1교시</td>
-									<td>JAVA</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
+
+							    <c:set var = "str" value = "Hello World!"/>
+
+							<c:forEach var="i" begin='1' end='6'>
+									<tr>
+										<td>${i}교시</td>
+
+										<td>
+											<c:forEach items="${myClassList}" var="myC" varStatus="st">
+											
+												<c:if test="${fn:contains(myC.classDay,'월')}">
+
+													<c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+														${myC.className}
+													</c:if>
+													
+												</c:if>
+
+											</c:forEach>
+										</td>
+										<td>
+											<c:forEach items="${myClassList}" var="myC" varStatus="st">
+											
+												<c:if test="${fn:contains(myC.classDay,'화')}">
+
+													<c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+														${myC.className}
+													</c:if>
+
+												</c:if>
+
+											</c:forEach>
+										</td>
+										<td>
+											<c:forEach items="${myClassList}" var="myC" varStatus="st">
+											
+												<c:if test="${fn:contains(myC.classDay,'수')}">
+
+													<c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+														${myC.className}
+													</c:if>
+
+												</c:if>
+
+											</c:forEach>
+										</td>
+										<td>
+											<c:forEach items="${myClassList}" var="myC" varStatus="st">
+											
+												<c:if test="${fn:contains(myC.classDay,'목')}">
+
+													<c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+														${myC.className}
+													</c:if>
+
+												</c:if>
+
+											</c:forEach>
+										</td>
+										<td>
+											<c:forEach items="${myClassList}" var="myC" varStatus="st">
+											
+												<c:if test="${fn:contains(myC.classDay,'금')}">
+
+													<c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+														${myC.className}
+													</c:if>
+
+												</c:if>
+
+											</c:forEach>
+										</td>
+										
+									</tr>
+							</c:forEach>
+								<%-- <tr>
 									<td>2교시</td>
 									<td></td>
 									<td>JAVA</td>
@@ -121,7 +190,7 @@
 									<td></td>
 									<td>JAVA</td>
 									<td>JAVA</td>
-								</tr>
+								</tr> --%>
 							</tbody>
 						</table>
 					</div>
@@ -129,6 +198,7 @@
 			</div>
 			
 	</main>
+
 
 
 
