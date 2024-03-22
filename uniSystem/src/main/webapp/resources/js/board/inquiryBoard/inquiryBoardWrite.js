@@ -2,7 +2,7 @@
 const boardWriteFrm = document.getElementById("boardWriteFrm");
 const boardTitle = document.getElementsByName("boardTitle")[0];
 const boardContent = document.getElementsByName("boardContent")[0];
-const boardSt = document.getElementsByName("boardSt")[0];
+const boardSt = document.getElementsByName("boardSt")[0,1];
 
 boardWriteFrm.addEventListener("submit", e => {
 
@@ -26,5 +26,7 @@ boardWriteFrm.addEventListener("submit", e => {
         alert("공개여부를 선택해주세요")
         e.preventDefault();
         return ;
+    }else{
+        alert("등록되었습니다.")
     }
 })

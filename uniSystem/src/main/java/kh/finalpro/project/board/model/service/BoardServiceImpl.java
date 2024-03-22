@@ -309,7 +309,7 @@ public class BoardServiceImpl implements BoardService{
 			 * deleteMap.put("boardNo", board.getBoardNo()); deleteMap.put("deleteList",
 			 * deleteList);
 			 * 
-			 * rowCount = dao.inquiryFileDelete(deleteMap);
+			 * rowCount = dao.inquiryFileDelete(deleteMap); 
 			 * 
 			 * if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백 // 예외 강제로 발생 // throw new
 			 * ImageDeleteException(); } }

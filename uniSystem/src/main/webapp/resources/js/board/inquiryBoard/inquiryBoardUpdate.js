@@ -2,7 +2,7 @@
 const boardWriteFrm = document.getElementById("boardWriteFrm");
 const boardTitle = document.getElementsByName("boardTitle")[0];
 const boardContent = document.getElementsByName("boardContent")[0];
-const boardSt = document.getElementsByName("boardSt")[0];
+const boardSt = document.getElementsByName("boardSt")[0,1];
 
 boardWriteFrm.addEventListener("submit", e => {
 
@@ -26,5 +26,54 @@ boardWriteFrm.addEventListener("submit", e => {
         alert("공개여부를 선택해주세요")
         e.preventDefault();
         return ;
+    }else{
+        alert("게시글 수정이 완료되었습니다.")
     }
+    
+
+   
+
+})
+
+// 목록으로
+const goToListBtn = document.getElementById("goToListBtn")
+
+
+goToListBtn.addEventListener("click",()=>{
+
+    /* // location.href = "/board/" + boardCode + location.search;
+    
+    
+    const pathname = location.pathname;
+    const params = new URL(location.href).searchParams;
+
+    let url = pathname.substring(0, pathname.indexOf("/",7));
+    
+    let cp;
+
+    if(params.get("cp") != null){ 
+        cp = "cp=" + params.get("cp"); 
+    }else{
+        cp = "cp=1" 
+    }
+
+    url += "?" + cp;
+
+
+    let key;
+    let query;
+
+    if(params.get("query") != null){
+        key = "&key=" + params.get("key");
+        query = "&query=" + params.get("query");
+
+        url += key + query;
+    }
+    
+    location.href = url; */
+    if(confirm("수정을 취소하시겠습니까?")){
+        history.back();
+
+    }
+
 })

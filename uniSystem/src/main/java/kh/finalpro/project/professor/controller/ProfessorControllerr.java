@@ -1,18 +1,53 @@
 package kh.finalpro.project.professor.controller;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import kh.finalpro.project.professor.model.service.ProfessorService;
+
+@SessionAttributes({"loginMember"})
 @RequestMapping("/professor")
 @Controller
 public class ProfessorControllerr {
+	
+	@Autowired
+	private ProfessorService service;
 
-	// 학생 조회 페이지
+	// 학생 조회 페이지 이동
 	@GetMapping("/professorPageStudentSearch")
-	public String professorPageStudentSearch() {
+	public String professorPageStudentSearch(
+				Model model,
+				@RequestParam Map<String, Object> paramMap
+			) {
+		
+		// 조건 활용으로 인하여 map null 값 우선 선언
+		Map<String, Object> map = null;
+		
+		if(paramMap.get("key") == null) {
 
+			map = service.selectStudent();
+
+			model.addAttribute("map" , map);
+
+		}else { // 검색어가 있을 때 (검색 O)
+
+			map = service.searchStudent(paramMap);
+
+			model.addAttribute("map" , map);
+		}
+		
+		System.out.println(map);
+		
 		return "professor/professorPageStudentSearch";
+		
+		
 		
 	}
 	

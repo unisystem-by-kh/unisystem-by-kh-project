@@ -25,6 +25,7 @@
       
       <result property="departmentNo" column="DEPARTMENT_NO" />
       <result property="departmentName" column="DEPARTMENT_NAME" />
+      <result property="departmentPrice" column="DEPARTMENT_Price" />
       
       
    </resultMap>
@@ -42,7 +43,7 @@
 		SELECT MEMBER_NO, MEMBER_ADDR, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_GEN,
 		    TO_CHAR(MEMBER_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS MEMBER_DATE,
 		    MEMBER_GRADE, MEMBER_TERM, MEMBER_STATUS, MEMBER_NAME, MEMBER_PROFILE, MEMBER_SSN, DEPARTMENT_NO
-		    ,DEPARTMENT_NAME
+		    ,DEPARTMENT_NAME, DEPARTMENT_PRICE
 		FROM MEMBER
 		JOIN DEPARTMENT USING(DEPARTMENT_NO)
 		WHERE MEMBER_NO = #{memberNo}

@@ -50,8 +50,8 @@
 				<div>공개여부</div>
 				<div>
 					<div>
-						공개 <input type="radio" name="boardSt" value="D"> 
-						비공개 <input type="radio" name="boardSt" value="N">
+						공개 <input type="radio" name="boardSt" value="D" id="open"> 
+						비공개 <input type="radio" name="boardSt" value="N" id="open">
 					</div>
 					<div>본인의 게시글을 타인에게 보이고 싶지 않을 경우에는 '비공개'를 선택하세요.</div>
 				</div>
