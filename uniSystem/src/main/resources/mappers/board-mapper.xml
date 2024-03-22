@@ -378,7 +378,7 @@
 			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
 		</selectKey>
 				 
-	    INSERT INTO BOARD
+		INSERT INTO BOARD
 		VALUES( #{boardNo},
 		#{boardTitle},
 		#{boardContent},
@@ -388,6 +388,28 @@
 		)
 	
 	</insert>
+	
+	<!-- 공지사항 파일업로드 -->
+	<insert id="uploadList">
+	INSERT INTO BOARD_FILE
+	SELECT SEQ_FILE_NO.NEXTVAL, A.*
+	FROM (
+		<foreach collection="list" item="file" separator=" UNION ALL ">
+			SELECT
+			#{file.boardFilePath} BOARD_FILE_PATH,
+			#{file.boardFileOriginal} BOARD_FILE_ORIGINAL,
+			#{file.boardFileRename} BOARD_FILE_RENAME,
+			
+			#{file.boardFileCategoryNo} CATEGORY_NO,
+			
+			#{file.boardNo} BOARD_NO
+			FROM DUAL
+		</foreach>
+
+		) A
+	</insert>
+	
+	
 		
 		
 	
