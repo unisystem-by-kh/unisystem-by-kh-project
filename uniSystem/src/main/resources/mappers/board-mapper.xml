@@ -57,6 +57,13 @@
 	</resultMap>
 
 
+	<!-- 게시판 종류 목록 조회 -->
+   <select id="selectCategory" resultType="map">
+		SELECT * 
+		FROM CATEGORY
+		ORDER BY 1
+   </select>
+
 	<!-- 게시글 목록 조회 모음 -->
 
 	<!-- 안되면 복구 용도 -->
@@ -252,15 +259,7 @@
 
 	<!-- listCount(끝) -->
 
-
-   <!-- 게시판 종류 목록 조회 -->
-   <select id="selectCategory" resultType="map">
-		SELECT * 
-		FROM CATEGORY
-		ORDER BY 1
-   </select>
-
-	
+	<!-- 게시판 상세 조회(시작) -->
    
    <!-- 자유게시판 상세 조회 -->
    <select id="selectFreeBoard" resultMap="board_rm">
@@ -277,22 +276,6 @@
 		WHERE BOARD_ST = 'N'
 		AND CATEGORY_NO = ${categoryNo}
 		AND BOARD_NO = ${boardNo}
-   </select>
-   
-   
-   <!-- 조회수 증가 -->
-   <update id="updateReadCount">
-      UPDATE BOARD
-      SET BOARD_COUNT = BOARD_COUNT + 1
-      WHERE BOARD_NO = #{boardNo}
-   </update>
-   
-   
-
-   <!-- 특정 게시글 이미지 조회 -->
-   <select id="selectFileList" resultMap="boardFile_rm">
-      SELECT * FROM BOARD_FILE
-      WHERE BOARD_NO = #{boardNo}
    </select>
 
    <!-- 1:1문의 상세 조회 -->
@@ -312,6 +295,26 @@
 		AND CATEGORY_NO = ${categoryNo}
 		AND BOARD_NO = ${boardNo}
    </select>
+
+   <!-- 게시판 상세 조회(끝) -->
+   
+   
+   <!-- 조회수 증가 -->
+   <update id="updateReadCount">
+      UPDATE BOARD
+      SET BOARD_COUNT = BOARD_COUNT + 1
+      WHERE BOARD_NO = #{boardNo}
+   </update>
+   
+   
+
+   <!-- 특정 게시글 이미지 조회 -->
+   <select id="selectFileList" resultMap="boardFile_rm">
+      SELECT * FROM BOARD_FILE
+      WHERE BOARD_NO = #{boardNo}
+   </select>
+
+   
    
 
    

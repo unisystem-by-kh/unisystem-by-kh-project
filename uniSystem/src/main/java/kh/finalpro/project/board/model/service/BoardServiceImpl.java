@@ -87,6 +87,22 @@ public class BoardServiceImpl implements BoardService{
 	// ------------------------------------------------------------------------------
 
 
+	// -----------------------------게시글 상세 조회------------------------------
+
+	// 자유게시판 상세 조회
+	@Override
+	public Board selectFreeBoard(Map<String, Object> map) {
+		return dao.selectFreeBoard(map);
+	}
+
+	// 1:1문의 상세조회
+	@Override
+	public Board selectInquiryBoard(Map<String, Object> map) {
+		return dao.selectInquiryBoard(map);
+	}
+
+	// ------------------------------------------------------------------------------
+
 
 
 
@@ -104,11 +120,7 @@ public class BoardServiceImpl implements BoardService{
 
 
 
-	// 자유게시판 상세 조회
-	@Override
-	public Board selectFreeBoard(Map<String, Object> map) {
-		return dao.selectFreeBoard(map);
-	}
+	
 
 	// 자유게시판 게시글 조회수 증가
 	@Transactional(rollbackFor = Exception.class)
@@ -119,11 +131,7 @@ public class BoardServiceImpl implements BoardService{
 
 
 
-	// 1:1문의 상세조회
-	@Override
-	public Board selectInquiryBoard(Map<String, Object> map) {
-		return dao.selectInquiryBoard(map);
-	}
+	
 
 	@Override
 	public List<String> selectFileList(int boardNo) {

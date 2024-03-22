@@ -39,9 +39,6 @@ public class BoardDAO {
 		}
 
 		return sqlSession.selectList("boardMapper.selectBoardList", categoryNo, rowBounds); // 공지사항, 자료실
-		// return sqlSession.selectList("boardMapper.selectFreeBoardList" , categoryNo, rowBounds); // 자유게시판
-		// return sqlSession.selectList("boardMapper.selectinquiryBoardList", categoryNo, rowBounds); // 1:1문의, 학과공지
-		// return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds); // 자료실
 
   	}
 
@@ -49,7 +46,7 @@ public class BoardDAO {
 
 	// ---------------------게시판 목록 조회(검색)----------------------------
 
-	/** 공지사항 목록 검색
+	/** 게시판 목록 검색
 	 * @param pagination
 	 * @param paramMap
 	 * @return boardList
@@ -62,9 +59,6 @@ public class BoardDAO {
 		// 2) RowBounds 객체 생성
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		// return sqlSession.selectList("boardMapper.selelctNoticeBoardList_search", paramMap, rowBounds); // 공지사항
-		// return sqlSession.selectList("boardMapper.searchFreeBoardList" , paramMap, rowBounds); // 자유게시판
-		// return sqlSession.selectList("boardMapper.selectinquiryBoardList_search", paramMap, rowBounds); // 1:1문의, 학과공지
 
 		return sqlSession.selectList("boardMapper.selectBoardList_search", paramMap, rowBounds); // 전체
 	}
@@ -94,13 +88,7 @@ public class BoardDAO {
 	}
 	// ---------------------------------------------------------------------
 
-
-	/** 게시판 종류 목록 조회 DAO
-	 * @return boardTypeList
-	 */
-	public List<Map<String, Object>> selectCategory() {
-		return sqlSession.selectList("boardMapper.selectCategory");
-	}
+	// ----------------------------게시판 상세 조회-----------------------------
 
 	/** 자유게시판 상세 조회
 	 * @param map
@@ -109,6 +97,28 @@ public class BoardDAO {
 	public Board selectFreeBoard(Map<String, Object> map) {
 		return sqlSession.selectOne("boardMapper.selectFreeBoard" , map);
 	}
+
+	/** 1:1문의 상세 조회
+	 * @param map
+	 * @return board
+	 */
+	public Board selectInquiryBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.selectInquiryBoard", map);
+	}
+
+
+	// ----------------------------------------------------------------------------
+
+
+
+	/** 게시판 종류 목록 조회 DAO
+	 * @return boardTypeList
+	 */
+	public List<Map<String, Object>> selectCategory() {
+		return sqlSession.selectList("boardMapper.selectCategory");
+	}
+
+	
 
 	/** 자유게시판 게시글 조회수 증가
 	 * @param boardNo
@@ -123,13 +133,7 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectImageListAll", boardNo);
 	}
 
-	/** 1:1문의 상세 조회
-	 * @param map
-	 * @return board
-	 */
-	public Board selectInquiryBoard(Map<String, Object> map) {
-		return sqlSession.selectOne("boardMapper.selectInquiryBoard", map);
-	}
+	
 
 	
 	
