@@ -1,27 +1,47 @@
-// // 버튼 요소를 가져옵니다.
-// var buttons = document.querySelectorAll('#btn1');
+document.addEventListener("DOMContentLoaded", function() {
+    const studentNos = document.querySelectorAll('.studentMemberNo');
+    studentNos.forEach(studentNo => {
+        studentNo.addEventListener('click', function() {
+            const selectedStudentNo = this.textContent;
+            showLecturesByStudentNo(selectedStudentNo);
+        });
+    });
 
-// // 각 버튼에 대해 이벤트 리스너를 추가합니다.
-// buttons.forEach(function(button) {
-//     button.addEventListener('click', function() {
-//         // 클릭된 버튼의 부모 요소에서 해당 요소를 찾습니다.
-//         var parent = this.parentElement.parentElement;
-//         // 해당 요소 안에 있는 값을 가져옵니다.
-//         var studentNo = parent.querySelector('.studentNo').textContent;
+    function showLecturesByStudentNo(studentNo) {
+        const lectureValues = document.querySelectorAll('.student-info-value');
+        const modal = document.getElementById("myModal");
+        const lectureInfo = document.getElementById("lectureInfo");
         
-//         // 가져온 학번을 출력합니다.
-//         console.log(studentNo);
-//         // 또는 원하는 작업을 수행할 수 있습니다.
-//     });
-// });
+        // 모달 내용 초기화
+        lectureInfo.innerHTML = "";
 
-console.log('test');
+        lectureValues.forEach(lectureValue => {
+            const lectureStudentNo = lectureValue.querySelector('.studentMemberNo').textContent;
+            if (lectureStudentNo === studentNo) {
+                // 해당 학생의 강의 정보를 모달에 추가
+                const className = lectureValue.querySelector('.className').textContent; // 과목명 가져오기
+                const lecturePoint = lectureValue.querySelector('.lecturePoint').textContent; // 성적 가져오기
+                // 강의 정보를 모달에 추가
+                const lectureContent = document.createElement("div");
+                lectureContent.textContent = `과목명: ${className}, 성적: ${lecturePoint}`;
+                lectureInfo.appendChild(lectureContent);
+            }
+        });
 
-const memberNo = document.getElementsByClassName('studentMemberNo');
+        // 모달 열기
+        modal.style.display = "block";
 
-for(let i = 0; i < memberNo.length; i++){
-    memberNo[i].addEventListener('click' , (e)=>{
-        console.log('asd');
-        console.log(memberNo[i].textContent);
-    })
-}
+        // 모달 닫기 버튼
+        const closeBtn = document.querySelector(".close");
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // 모달 외부 클릭 시 모달 닫기
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+});

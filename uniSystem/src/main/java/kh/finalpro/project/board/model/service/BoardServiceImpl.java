@@ -494,7 +494,7 @@ public class BoardServiceImpl implements BoardService{
 								
 								String rename = uploadList.get(i).getBoardFileRename();
 								
-								files.get(i).transferTo(new File(filePath + rename));
+								/* files.get(i).transferTo(new File(filePath + rename)); */
 							}
 							
 						} else { // 일부나 전체 insert 실패
@@ -507,6 +507,18 @@ public class BoardServiceImpl implements BoardService{
 				
 				
 				return boardNo;
+	}
+
+	@Override
+	public Map<String, Object> searchFreeBoardList(Map<String, Object> paramMap, int cp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> selectinquiryBoardList(Map<String, Object> paramMap, int cp) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
