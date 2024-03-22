@@ -151,5 +151,25 @@ public interface BoardService {
 	List<BoardFile> selectBoardFile(int boardNo);
 
 
+	/** 공지사항 상세조회 
+	 * @param map
+	 * @return board
+	 */
+	Board noticeDetailBoard(Map<String, Object> map);
+
+
+	/** 공지사항 작성페이지
+	 * @param board
+	 * @param images
+	 * @param webPath
+	 * @param filePath
+	 * @return boardNo
+	 */
+	int noticeBoardWrite(Board board, List<MultipartFile> files, String webPath, String filePath);
+
+
+
+	
+
 
 }

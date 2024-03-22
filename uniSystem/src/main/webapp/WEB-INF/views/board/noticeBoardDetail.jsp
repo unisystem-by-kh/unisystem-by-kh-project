@@ -31,17 +31,13 @@
 
         <div class="title">
             <p>제 목</p>
-            <span id="contentTitle">2024학년도 정시모집 3차(최종)</span>
+            <span id="contentTitle">${board.boardTitle}</span>
         </div>
-
-        <div class="writer">
-            <p>구 분</p>
-            <span id="WriterName">인사공지</span>
-        </div>
+      
 
         <div class="content">
             <p>내 용</p>
-            <span id="outputContent"></span>
+            <span id="outputContent">${board.boardContent}</span>
         </div>
 
         <div class="uploadFile">
@@ -57,15 +53,14 @@
         </div>
 
         <div class="noticeBtn">
-            <button id="listBtn">수정</button>
-            <button id="listBtn">삭제</button>
-            <button id="listBtn">취소</button>
-            <button id="listBtn"><a href="/board/noticeBoardList"> 목 록</a> </button>
+            <c:if test="${loginMember.memberNo == board.memberNo}">
+                <button id="editBtn">수정</button>
+                <button id="deleteBtn">삭제</button>
+            </c:if>
+            <button id="cancelBtn">취소</button>
+            <button id="listBtn"><a href="/board/1"> 목 록</a> </button>
         </div>
         
-        
-
-
     </div>
 
     <%-- <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/>  --%>
