@@ -90,5 +90,43 @@ public class SubjectDAO {
 		return sqlSession.selectList("subjectMapper.selectSubjectList", offset, rowBounds);
 	}
 
+	/** 교과목 목록 검색어(O) 갯수 조회
+	 * @param paramMap
+	 * @return listCount
+	 */
+	public int getListCount(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("subjectMapper.getListCount_query", paramMap);
+	}
+
+	/** 교과목 목록 조회 검색어(O)
+	 * @param paramMap
+	 * @param pagination
+	 * @return subjectList
+	 */
+	public List<Subject> selectSubjectList(Map<String, Object> paramMap, Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("subjectMapper.selectSubjectList_query", paramMap, rowBounds);
+	}
+
+	/** 교과목 수정 DAO
+	 * @param inputClass
+	 * @return result
+	 */
+	public int updateSubject(Subject inputClass) {
+		return sqlSession.update("subjectMapper.updateSubject",inputClass);
+	}
+
+	/** 교과목 삭제 DAO
+	 * @param classNo
+	 * @return result
+	 */
+	public int deleteSubject(int classNo) {
+		return sqlSession.delete("subjectMapper.deleteSubject", classNo);
+	}
+
 
 }
