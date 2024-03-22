@@ -159,7 +159,7 @@ public class BoardDAO {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		// 2) RowBounds 객체 생성
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit()+5);
 
 		// 3) selectList
 
@@ -277,9 +277,25 @@ public class BoardDAO {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		// 2) RowBounds 객체 생성
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit() + 5);
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("boardMapper.selelctNoticeBoardList_search", paramMap, rowBounds);
 	}
 
+	/** 공지사항 상세페이지
+	 * @param map
+	 * @return board
+	 */
+	public Board noticeDetailBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.noticeDetailBoard", map);
+	}
+
+	/** 공지사항 작성 페이지
+	 * @param board
+	 * @return boardNo
+	 */
+	public int noticeBoardWrite(Board board) {
+		return sqlSession.insert("boardMapper.noticeBoardWrite", board);
+	}
+	
 }
