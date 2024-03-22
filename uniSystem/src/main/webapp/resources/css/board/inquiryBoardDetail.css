@@ -196,3 +196,29 @@ main{
     color: crimson;
 }
 
+.relpyUpdateCon{
+    width: 100%;
+    height: 200px;
+    resize: none;
+}
+
+.btnArea{
+    width: 100%;
+    text-align: center;
+}
+
+.replyUp, .replyDe{
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.replyUp:hover, .replyDe:hover{
+    background-color: crimson;
+    color: white;
+}

@@ -27,4 +27,5 @@ public class Member {
 	
 	private int departmentNo; // 학과코드
 	private String departmentName; // 학과이름
+	private int departmentPrice; // 등록금
 }
