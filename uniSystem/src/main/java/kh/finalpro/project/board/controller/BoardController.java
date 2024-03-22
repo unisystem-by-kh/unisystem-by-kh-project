@@ -532,14 +532,12 @@ public class BoardController {
 			, RedirectAttributes ra
 			, HttpSession session)throws IllegalStateException, IOException {
 
-		System.out.println("자료실 매핑 체크용" + categoryNo);
 		
 		// 1.로그인한 회원 번호를 얻어와 board에 세팅
 		board.setMemberNo(loginMember.getMemberNo());
 
 		// 2. boardCode도 board에 세팅
 		board.setCategoryNo(categoryNo);
-		System.out.println(board);
 		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
 		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
 		String webPath = "/resources/images/board/";
@@ -594,7 +592,7 @@ public class BoardController {
 	   }
 	 
 	 // 게시글 수정 화면 전환
-	   @GetMapping("/{categoryNo:4}/{boardNo}/update")
+	   @GetMapping("/{categoryNo:[4,5]}/{boardNo}/update")
 	   public String inquiryBoardUpdate(
 	         @PathVariable("categoryNo") int categoryNo
 	         ,@PathVariable("boardNo") int boardNo
@@ -608,7 +606,13 @@ public class BoardController {
 	      model.addAttribute("board", board);
 	      // forward(요청위임) -> requset scope 유지 
 	      
-	      return "board/inquiryBoardUpdate";
+	      String path = null;
+	      switch (categoryNo) {
+			case 4: path = "inquiryBoardUpdate"; break;
+			case 5: path = "boardDataUpdate"; break;
+		  }
+	      
+	      return "board/" + path;
 	   }
 	 
 	

@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/board/boardDataWrite.css">
     
-    <script src="https://kit.fontawesome.com/9cd918496e.js" crossorigin="anonymous"></script>
 </head>
 <body>
 

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/board/boardDataWrite.css">
     
-    <script src="https://kit.fontawesome.com/9cd918496e.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -29,14 +29,19 @@
                 <div class="detail-content">
                     <div class="content-header">
                         <span>작성자 : ${loginMember.memberName}</span>
-                        <span>첨부 파일 : <input type="file" name="file" id="inputFile"/> </span>
+
+                        <span>
+                            <input type="text" value="첨부 파일 없음" id="fileName" disabled >
+                            <label for="inputFile">파일</label>
+                            <input type="file" name="file" id="inputFile"/>
+                        </span>
                     </div>
 
                     <div class="content-body">
                         <textarea name="boardContent" class="content-area" placeholder="내용을 입력하세요." id="boardContent"></textarea>
                     </div>
                 </div>
-                <div>
+                <div class="btn-area">
                     <button type="button" id="subBtn">등록</button>
                     <button type="reset">초기화</button>
                 </div>
