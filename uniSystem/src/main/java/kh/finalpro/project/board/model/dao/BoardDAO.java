@@ -87,7 +87,7 @@ public class BoardDAO {
 	 * @param boardCode
 	 * @return map
 	 */
-	public List<BoardDAO> selectinquiryBoardList(Pagination pagination, int categoryNo) {
+	public List<Board> selectinquiryBoardList(Pagination pagination, int categoryNo) {
 
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
