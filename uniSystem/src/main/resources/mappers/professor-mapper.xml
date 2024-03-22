@@ -34,9 +34,9 @@
          column="CLASS_NO" javaType="java.util.ArrayList" ofType="Subject">
       </collection> -->
       
-      <collection property="lectureList" select="selectLectureList"
+      <!-- <collection property="lectureList" select="selectLectureList"
          column="CLASS_NO" javaType="java.util.ArrayList" ofType="Lecture">
-      </collection>
+      </collection> -->
       
 	</resultMap>
 	
@@ -63,7 +63,8 @@
 	<resultMap type="Lecture" id="lecture_rm">
 		<id property="classNo" column="CLASS_NO" />
 		
-		<result property="memeberNo" column="MEMBER_NO" />
+		<result property="classNm" column="CLASS_NM" />
+		<result property="memberNo" column="MEMBER_NO" />
 		<result property="lecturePoint" column="LECTURE_POINT" />
 		<result property="lectureGrade" column="LECTURE_GRADE" />
 		<result property="lectureTerm" column="LECTURE_TERM" />
@@ -76,10 +77,11 @@
       WHERE MEMBER_NO = #{memberNo}
 	</select> -->
 	
-	<!-- 특정 학생이 수강중인 과목 목록 조회 -->
-	<select id="selectLecture" resultMap="lecture_rm">
-      SELECT * FROM LECTURE
-      WHERE MEMBER_NO = #{memberNo}
+	<!-- 모든 학생이 수강중인 과목 목록 조회 -->
+	<select id="lectureList" resultMap="lecture_rm">
+      SELECT L.CLASS_NO, L.MEMBER_NO, C.CLASS_NM
+      FROM LECTURE L
+      JOIN CLASS C ON C.CLASS_NO = L.CLASS_NO
 	</select>
 	
 
@@ -163,14 +165,19 @@
 		        WHEN SUBSTR(MEMBER_SSN, 1, 2) BETWEEN '00' AND '21' THEN TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('20' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
 		        ELSE TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('19' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
 		    END AS MEMBER_AGE,
-		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME, L.LECTURE_POINT
+		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME, L.LECTURE_POINT,
+		    
+		    (SELECT COUNT(*) FROM LECTURE
+      		WHERE MEMBER_NO = L.MEMBER_NO) AS LECTURE_COUNT
+		    
 		FROM MEMBER M
 		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
 		JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
 		AND M.MEMBER_GRADE = L.LECTURE_GRADE
 		AND M.MEMBER_TERM = L.LECTURE_TERM
-		AND MEMBER_STATUS = 'N'
+		AND M.MEMBER_STATUS = 'N'
+        AND L.MEMBER_NO = M.MEMBER_NO
 		
 		<choose>
          <when test='key == "no"'>

@@ -63,9 +63,10 @@
 .student-info-value{
     display: flex;
 }
-.student-info-value > :nth-child(2):hover{
+.student-info-value > :nth-child(1):hover{
     text-decoration: underline;
     cursor: pointer;
+    color: crimson;
 }
 
 /* 학생 정보 값 각 영역 */

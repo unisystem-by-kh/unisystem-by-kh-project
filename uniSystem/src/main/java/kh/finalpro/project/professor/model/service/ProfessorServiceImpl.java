@@ -11,6 +11,8 @@ import kh.finalpro.project.board.model.dao.BoardDAO;
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.Pagination;
 import kh.finalpro.project.professor.model.dao.ProfessorDAO;
+import kh.finalpro.project.professor.model.dto.Lecture;
+import kh.finalpro.project.professor.model.dto.Professor;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService{
@@ -25,14 +27,18 @@ public class ProfessorServiceImpl implements ProfessorService{
 		
 		int listCount = dao.getListCount();
 		
-		List<ProfessorDAO> studentList = dao.selectStudent();
+		List<Professor> studentList = dao.selectStudent();
+		
+		List<Lecture> lectureList = dao.lectureList();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("studentList", studentList);
+		map.put("lectureList", lectureList);
 		
 		System.out.println("DAO : listCount : " + listCount);
 		System.out.println("DAO : studentList : " + studentList);
+		System.out.println("DAO : lectureList : " + lectureList);
 		
 		return map;
 	}
@@ -44,7 +50,9 @@ public class ProfessorServiceImpl implements ProfessorService{
 		
 		int listCount = dao.getListCount(paramMap);
 
-		List<ProfessorDAO> studentList = dao.searchStudent(paramMap);
+		List<Professor> studentList = dao.searchStudent(paramMap);
+		
+		
 
 		Map<String, Object> map = new HashMap<String, Object>();
 

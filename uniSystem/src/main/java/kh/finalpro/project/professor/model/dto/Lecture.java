@@ -17,6 +17,7 @@ public class Lecture {
 	// 필드명
 //	CLASS_NO, MEMBER_NO, LECTURE_POINT, LECTURE_GRADE, LECTURE_TERM
 	private int classNo;
+	private String classNm;
 	private String memberNo;
 	
 	private int lecturePoint;
