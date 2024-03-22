@@ -19,82 +19,71 @@ public class BoardDAO {
 	private SqlSessionTemplate sqlSession;
 
 
-	/** 게시판 종류 목록 조회 DAO
-	 * @return boardTypeList
+
+	// -----------------------게시판 목록 조회------------------------------------
+
+	/** 게시판 목록 조회 (공지사항, 자유게시판, 1:1 문의, 학과공지, 자료실)
+	 * @param pagination
+	 * @param categoryNo
+	 * @return boardList
 	 */
-	public List<Map<String, Object>> selectCategory() {
-		return sqlSession.selectList("boardMapper.selectCategory");
+	public List<Board> selectBoardList(Pagination pagination, int categoryNo) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds;
+		
+		if(categoryNo == 1 || categoryNo == 5) {
+			rowBounds = new RowBounds(offset, pagination.getLimit()+5); // 공지사항, 자료실
+		}else {
+			rowBounds = new RowBounds(offset, pagination.getLimit()); // 자유게시판, 1:1 문의, 학과공지
+		}
+
+		return sqlSession.selectList("boardMapper.selectBoardList", categoryNo, rowBounds); // 공지사항, 자료실
+		// return sqlSession.selectList("boardMapper.selectFreeBoardList" , categoryNo, rowBounds); // 자유게시판
+		// return sqlSession.selectList("boardMapper.selectinquiryBoardList", categoryNo, rowBounds); // 1:1문의, 학과공지
+		// return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds); // 자료실
+
+  	}
+
+	// ---------------------------------------------------------------------
+
+	// ---------------------게시판 목록 조회(검색)----------------------------
+
+	/** 공지사항 목록 검색
+	 * @param pagination
+	 * @param paramMap
+	 * @return boardList
+	 */
+	public List<Board> selelctBoardList(Pagination pagination, Map<String, Object> paramMap) {
+
+		// 1) offset 계산
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		// 2) RowBounds 객체 생성
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		// return sqlSession.selectList("boardMapper.selelctNoticeBoardList_search", paramMap, rowBounds); // 공지사항
+		// return sqlSession.selectList("boardMapper.searchFreeBoardList" , paramMap, rowBounds); // 자유게시판
+		// return sqlSession.selectList("boardMapper.selectinquiryBoardList_search", paramMap, rowBounds); // 1:1문의, 학과공지
+
+		return sqlSession.selectList("boardMapper.selectBoardList_search", paramMap, rowBounds); // 전체
 	}
 
+	// ----------------------------게시판 카운트(다 있어야 함)-----------------------------
 	/**
 	 * 자유 게시판의 게시글 삭제 되지 않은 게시글 수 조회
 	 * @param boardCode
 	 * @return listCount
 	 */
-
 	public int getListCount(int categoryNo) {
-		
 		return sqlSession.selectOne("boardMapper.getListCount", categoryNo);
-
 	}
-
-
-	/** 자유 게시판의 게시글 목록 조회
-	 * @param pagination
-	 * @param categoryNo
-	 * @return listCount
-	 */
-	public List<BoardDAO> selectFreeBoardList(Pagination pagination, int categoryNo) {
-
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		
-		return sqlSession.selectList("boardMapper.selectFreeBoardList" , categoryNo, rowBounds);
-		
-	}
-
 	/** 자유 게시판의 게시글 수 조회(검색)
 	 * @param paramMap
 	 * @return listCount
 	 */
 	public int getListCount(Map<String, Object> paramMap) {
 		return sqlSession.selectOne("boardMapper.getListCount_search", paramMap);
-	}
-
-	/** 자유 게시판의 게시글 목록 조회(검색)
-	 * @param pagination
-	 * @param paramMap
-	 * @return boardList
-	 */
-	public List<Board> searchFreeBoardList(Pagination pagination, Map<String, Object> paramMap) {
-
-		// 1) offset 계산
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-				
-		// 2) RowBounds 객체 생성
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		
-		// 3) selectList("namespace.id" , 파라미터 , RowBounds) 호출
-		return sqlSession.selectList("boardMapper.searchFreeBoardList" , paramMap, rowBounds);
-
-	}
-	
-	
-
-	/** 1:1 문의 목록조회
-	 * @param pagination
-	 * @param boardCode
-	 * @return map
-	 */
-	public List<BoardDAO> selectinquiryBoardList(Pagination pagination, int categoryNo) {
-
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		
-		return sqlSession.selectList("boardMapper.selectinquiryBoardList", categoryNo, rowBounds);
-
 	}
 	/** 1:1문의 검색 게시글 갯수 조회
 	 * @param paramMap
@@ -103,22 +92,15 @@ public class BoardDAO {
 	public int getListCountInquiry(Map<String, Object> paramMap) {
 		return sqlSession.selectOne("boardMapper.getListCount_inquiry", paramMap);
 	}
+	// ---------------------------------------------------------------------
 
-	/** 1:1문의 목록(검색)
-	 * @param pagination
-	 * @param paramMap
-	 * @return
+
+	/** 게시판 종류 목록 조회 DAO
+	 * @return boardTypeList
 	 */
-	public List<BoardDAO> selectinquiryBoardList(Pagination pagination, Map<String, Object> paramMap) {
-		
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		
-		return sqlSession.selectList("boardMapper.selectinquiryBoardList_search", paramMap, rowBounds);
+	public List<Map<String, Object>> selectCategory() {
+		return sqlSession.selectList("boardMapper.selectCategory");
 	}
-	
-	
 
 	/** 자유게시판 상세 조회
 	 * @param map
@@ -149,36 +131,9 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.selectInquiryBoard", map);
 	}
 
-	/** 공지사항 목록 조회
-	 * @param pagination
-	 * @param categoryNo
-	 * @return
-	 */
-	public List<Board> selectNoticeBoardList(Pagination pagination, int categoryNo) {
-		
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		// 2) RowBounds 객체 생성
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit()+5);
-
-		// 3) selectList
-
-		return sqlSession.selectList("boardMapper.selectNoticeBoardList", categoryNo, rowBounds);
-  }
 	
-	/** 자료실 목록 조회
-	 * @param categoryNo
-	 * @param pagination
-	 * @return
-	 */
-	public List<Board> selectDataList(int categoryNo, Pagination pagination) {
-		
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit() + 5);
-		
-		return sqlSession.selectList("boardMapper.selectDataBoardList", categoryNo, rowBounds);
-	}
+	
+	
 	
 	
 	/** 1:1문의 작성
@@ -262,25 +217,7 @@ public class BoardDAO {
 
 	
 	
-	/** 공지사항 목록 검색
-	 * @param pagination
-	 * @param paramMap
-	 * @return boardList
-	 */
-	public List<Board> selelctNoticeBoardList(Pagination pagination, Map<String, Object> paramMap) {
-		// Rowbounds 객체
-		// - 마이바티스에서 페이징 처리를 위해 제동하는 객체
-		// - offset만큼 건너 뛰고
-		// 그 다음 지정된 행 개수(limit)만큼 조회
-
-		// 1) offset 계산
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		// 2) RowBounds 객체 생성
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		
-		return sqlSession.selectList("boardMapper.selelctNoticeBoardList_search", paramMap, rowBounds);
-	}
+	
 
 	/** 공지사항 상세페이지
 	 * @param map

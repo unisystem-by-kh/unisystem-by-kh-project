@@ -39,8 +39,9 @@
 			<div>첨부파일 :</div>
 			<div>첨부된 파일이 없습니다.</div>
 			<div>
-				<button>수정</button>
-				<button>삭제</button>
+				<button id="updateBtn">수정</button>
+				<button id="deleteBtn">삭제</button>
+				<button id="goToListBtn">목록으로</button>
 			</div>
 		</div>
 

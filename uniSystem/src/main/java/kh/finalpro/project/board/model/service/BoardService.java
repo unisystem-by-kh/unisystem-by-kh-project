@@ -24,12 +24,12 @@ public interface BoardService {
 	
 	
 	/**
-	 * 자유게시판 목록
+	 * 게시판 목록
 	 * @param boardCode
 	 * @param cp
 	 * @return map
 	 */
-	Map<String, Object> selectFreeBoardList(int categoryNo, int cp);
+	Map<String, Object> selelctBoardList(int categoryNo, int cp);
 
 	
 	/** 자유게시판 목록(검색)
@@ -38,14 +38,6 @@ public interface BoardService {
 	 * @return map
 	 */
 	Map<String, Object> searchFreeBoardList(Map<String, Object> paramMap, int cp);
-
-	/** 1 : 1 문의 목록조회
-	 * @param boardCode
-	 * @param cp
-	 * @return map
-	 */
-	Map<String, Object> selectinquiryBoardList(int categoryNo, int cp);
-
 
 
 	/** 1 : 1 문의 목록(검색)
@@ -82,17 +74,9 @@ public interface BoardService {
 	 * @return board
 	 */
 	Board selectInquiryBoard(Map<String, Object> map);
-
-
-
-
-	/** 자료실 목록 조회
-	 * @param categoryNo
-	 * @param cp
-	 * @return map
-	 */
-	Map<String, Object> selectDataBoardList(int categoryNo, int cp);
   
+	
+	
 	/** 1:1문의 작성
 	 * @param board
 	 * @param file
@@ -101,14 +85,6 @@ public interface BoardService {
 	 * @return
 	 */
 	int inquiryBoardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException;
-
-	
-	/** 공지사항 목록 조회
-	 * @param categoryNo
-	 * @param cp
-	 * @return map
-	 */
-	Map<String, Object> selelctNoticeBoardList(int categoryNo, int cp);
 	
 	
 
@@ -117,7 +93,7 @@ public interface BoardService {
 	 * @param cp
 	 * @return boardList
 	 */
-	Map<String, Object> selelctNoticeBoardList(Map<String, Object> paramMap, int cp);
+	Map<String, Object> selelctBoardList(Map<String, Object> paramMap, int cp);
 
 
 	/** 1:1문의 게시글 삭제

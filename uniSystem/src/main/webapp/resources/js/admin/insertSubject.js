@@ -79,13 +79,15 @@ function setting(event) {
 }
 
 // x버튼 클릭시 닫기
-xBtn.addEventListener("click", ()=>{
-    if(resultSet.style.display = "block"){
-        resultSet.style.display = "none";
-        xBtn.style.display = "none";
-        resultSet1.style.display = "none";
-    }
-})
+if(xBtn != null){
+    xBtn.addEventListener("click", ()=>{
+        if(resultSet.style.display = "block"){
+            resultSet.style.display = "none";
+            xBtn.style.display = "none";
+            resultSet1.style.display = "none";
+        }
+    })
+}
 
 
 /* 강의 시간 체크 교수는 맨 위에 선언되어있음 professor */
@@ -281,6 +283,24 @@ document.getElementById("insertFrm").addEventListener("submit", e=>{
         }).then(()=>{
             classPoint.focus();
             classPoint.value = "";
+        });
+
+        e.preventDefault();
+        return;
+    }
+
+    const regEx = /^[\d]+$/;
+
+    if(!regEx.test(classMax.value)){
+        swal({
+            title : "등록 불가",
+            text : "수강 정원에 숫자만 입력해주세요.",
+            icon  : "warning",
+            button : "확인",
+            closeOnClickOutside : false
+        }).then(()=>{
+            classMax.value = "";
+            classMax.focus();
         });
 
         e.preventDefault();

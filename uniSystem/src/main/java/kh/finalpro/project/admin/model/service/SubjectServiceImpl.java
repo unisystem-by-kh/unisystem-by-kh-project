@@ -84,10 +84,49 @@ public class SubjectServiceImpl implements SubjectService{
 		return map;
 	}
 	
+	// 교과목 목록 조회 검색어(O)
 	@Override
 	public Map<String, Object> selectSubjectList(Map<String, Object> paramMap, int cp) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		paramMap.put("query", ((String) paramMap.get("query")).toUpperCase());
+		
+		int listCount = dao.getListCount(paramMap);
+		
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		List<Subject> subjectList = dao.selectSubjectList(paramMap, pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("subjectList", subjectList);
+		
+		return map;
+	}
+	
+	// 교과목 수정 서비스
+	@Override
+	@Transactional
+	public int updateSubject(Subject inputClass) {
+		
+		// 담당교수 번호 가져오기
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("memberName", inputClass.getMemberName());
+		map.put("departmentNo", inputClass.getDepartmentNo());
+
+		String memberNo = dao.selectProfessor(map);
+
+		if(memberNo != null) inputClass.setMemeberNo(memberNo);
+		
+		return dao.updateSubject(inputClass);
+	}
+	
+	// 교과목 삭제
+	@Override
+	@Transactional
+	public int deleteSubject(int classNo) {
+		return dao.deleteSubject(classNo);
 	}
 
 
