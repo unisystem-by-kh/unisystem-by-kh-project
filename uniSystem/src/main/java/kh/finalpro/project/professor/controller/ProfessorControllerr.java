@@ -1,15 +1,19 @@
 package kh.finalpro.project.professor.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import kh.finalpro.project.board.model.dto.Reply;
+import kh.finalpro.project.professor.model.dto.Professor;
 import kh.finalpro.project.professor.model.service.ProfessorService;
 
 @SessionAttributes({"loginMember"})
@@ -25,6 +29,7 @@ public class ProfessorControllerr {
 	public String professorPageStudentSearch(
 				Model model,
 				@RequestParam Map<String, Object> paramMap
+//				@PathVariable("memberNo") int memberNo
 			) {
 		
 		// 조건 활용으로 인하여 map null 값 우선 선언
@@ -43,14 +48,11 @@ public class ProfessorControllerr {
 			model.addAttribute("map" , map);
 		}
 		
-		System.out.println(map);
+		model.addAttribute("map" , map);
 		
 		return "professor/professorPageStudentSearch";
 		
-		
-		
 	}
-	
 	
 	// 성적 조회
 	@GetMapping("/professorPageStudentGrade")

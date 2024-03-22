@@ -11,4 +11,5 @@ public interface ProfessorService {
 	// 학생 조회(교수 전용) - 검색 처리
 	Map<String, Object> searchStudent(Map<String, Object> paramMap);
 
+
 }
