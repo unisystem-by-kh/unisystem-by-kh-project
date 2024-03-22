@@ -292,10 +292,24 @@ public class BoardDAO {
 
 	/** 공지사항 작성 페이지
 	 * @param board
-	 * @return boardNo
+	 * @return
 	 */
-	public int noticeBoardWrite(Board board) {
-		return sqlSession.insert("boardMapper.noticeBoardWrite", board);
+	public int noticeboardInsert(Board board) {
+		int result = sqlSession.insert("boardMapper.noticeboardInsert", board);
+		
+		// 삽입 성공 시
+		if(result > 0) result = board.getBoardNo();
+		return result;
 	}
+	
+	/** 공지사항 파일리스트
+	 * @param uploadList
+	 * @return
+	 */
+	public int insertFileList(List<BoardFile> uploadList) {
+		return sqlSession.insert("boardMapper.insertFileList", uploadList);
+	}
+
+
 	
 }
