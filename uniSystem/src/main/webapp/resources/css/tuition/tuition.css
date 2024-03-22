@@ -26,7 +26,7 @@ main{
 }
 
 .pay-one > div:nth-of-type(1){
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +37,7 @@ main{
 }
 
 .pay-one > div:nth-of-type(2){
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +45,7 @@ main{
 }
 
 .pay-one > div:nth-of-type(3){
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,30 +56,14 @@ main{
 }
 
 .pay-one > div:nth-of-type(4){
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-right: 1px solid #ddd;
 }
 
-.pay-one > div:nth-of-type(5){
-    width: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ddd;
-    font-size: 16px;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-}
 
-.pay-one > div:nth-of-type(6){
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 
 .pay-two{
@@ -91,7 +75,7 @@ main{
 }
 
 .pay-two > div:nth-of-type(1){
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,7 +86,7 @@ main{
 }
 
 .pay-two > div:nth-of-type(2){
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,7 +94,7 @@ main{
 }
 
 .pay-two > div:nth-of-type(3){
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,30 +105,14 @@ main{
 }
 
 .pay-two > div:nth-of-type(4){
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-right: 1px solid #ddd;
 }
 
-.pay-two > div:nth-of-type(5){
-    width: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ddd;
-    font-size: 16px;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-}
 
-.pay-two > div:nth-of-type(6){
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .pay-three{
     width: 100%;
