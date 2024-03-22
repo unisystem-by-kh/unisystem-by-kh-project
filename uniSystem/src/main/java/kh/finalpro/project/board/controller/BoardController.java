@@ -92,10 +92,10 @@ public class BoardController {
 
 	
 	/* 
-		1 : noticeBoardList, selelctNoticeBoardList(검색어 상관 X)
-		2 : departmentBoardList, selectinquiryBoardList(검색어 상관 X)
-		3 : freeBoardList , selectFreeBoardList(검색어 없을 경우), searchFreeBoardList(검색어 있을 경우)
-		4 : inquiryBoardList, selectinquiryBoardList(검색어 상관 X)
+		1 : noticeBoardList 
+		2 : departmentBoardList 
+		3 : freeBoardList
+		4 : inquiryBoardList
 		5 : boardData
 	 */
 
@@ -121,13 +121,6 @@ public class BoardController {
 
 		if(paramMap.get("query") == null) { // 검색어가 없을 때 (검색X)	
 			// 게시글 목록 조회 서비스 호출
-
-			// 수정 해야함 ********
-			// map = service.selelctNoticeBoardList(categoryNo, cp); // 공지사항
-			// map = service.selectFreeBoardList(categoryNo, cp); // 자유게시판
-			// map = service.selectinquiryBoardList(categoryNo,cp); // 1:1, 학과공지
-			// map = service.selectDataBoardList(categoryNo, cp); // 자료실
-
 			map = service.selelctBoardList(categoryNo,cp); // 전체
 
 
@@ -135,24 +128,14 @@ public class BoardController {
 			model.addAttribute("map", map);
 			
 		} else { // 검색어가 있을 때 (검색 O)
-			
 			paramMap.put("categoryNo", categoryNo);
-
-//			 수정 해야함 ********
 			map = service.selelctBoardList(paramMap, cp);
-//			map = service.searchFreeBoardList(paramMap, cp);
-//			map = service.selelctBoardList(categoryNo,cp); // 1:1, 학과공지
 		}
 		model.addAttribute("map" , map);
-
 		return "board/" + path; 
 	}
 
 	// -------------------------------------------------------------------------------
-
-
-
-
 
 	// -------------------------------상세 조회--------------------------------------
 
@@ -167,6 +150,7 @@ public class BoardController {
 			HttpServletRequest req,
 			HttpServletResponse resp
 			) throws ParseException {
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("categoryNo", categoryNo);
 		map.put("boardNo", boardNo);
@@ -249,16 +233,7 @@ public class BoardController {
 
 	// -------------------------------------------------------------------------------
 
-	// ---------------------------------- 자유게시판 ---------------------------------- 
-
-
-	
-
-
-	
-
-
-	
+	// ----------------------------------게시글 작성--------------------------------------
 
 	// 자유게시판 삽입(작성)	
 	@PostMapping("/{categoryNo:3}/insert")
@@ -300,141 +275,6 @@ public class BoardController {
 		ra.addFlashAttribute("message",message);
 		return path;
 	}
-
-
-	// 자유게시판 수정 화면
-	@GetMapping("/{categoryNo:3}/{boardNo}/update")
-	public String selectFreeBoardUpdate(
-			@PathVariable("categoryNo") int categoryNo,
-			@PathVariable("boardNo") int boardNo,
-			Model model
-			) {
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("categoryNo", categoryNo);
-		map.put("boardNo", boardNo);
-
-		Board board = service.selectFreeBoard(map);
-
-		model.addAttribute("board", board);
-
-		return "board/freeBoardUpdate";
-
-	}
-
-	// 자유게시판 수정 기능
-	@PostMapping("/{categoryNo:3}/{boardNo}/update")
-	public String freeBoardUpdate(
-			Board board // 커맨드 객체(name==필드 경우 필드에 파라미터 세팅
-			,@RequestParam(value="cp", required = false, defaultValue = "1") int cp // 쿼리스트링 유지
-			,@RequestParam(value="deleteList", required = false) String deleteList // 삭제할 이미지 순서
-			,@RequestParam(value="file", required = false) List<MultipartFile> file // 업로드된 파일 리스트
-			,@PathVariable("categoryNo") int categoryNo
-			,@PathVariable("boardNo") int boardNo
-			,HttpSession session // 서버 파일 저장 경로 얻어올 경로
-			,RedirectAttributes ra // 리다이렉트 시 값 전달용
-			) throws IllegalStateException, IOException {
-
-
-		// 1) boardCode, boardNo를 커맨드 객체(board)에 세팅 
-		board.setCategoryNo(categoryNo);
-		board.setBoardNo(boardNo);
-		// board(boardCode, boardNo , boardTitle, boardContent)
-
-		// 2) 이미지 웹 접근 경로, 서버 저장 경로 
-		String webPath = "/resources/images/board/";
-		String filePath = session.getServletContext().getRealPath(webPath);
-
-		System.out.println(board);
-		// 3) 게시글 수정 서비스 호출 
-		int rowCount = service.inquiryBoardUpdate(board, file, webPath, filePath, deleteList);
-
-		// 4) 결과에 따라서 message, path 설정
-		String message = null; 
-		String path = "redirect:";
-
-		if(rowCount > 0) {
-			message = "게시글이 수정되었습니다.";
-			path += "/board/" + categoryNo + "/" + boardNo + "?cp=" + cp; // 상세조회 페이지
-		}else {
-			message = "게시글이 수정 실패.";
-			path += "update";
-		}
-
-		ra.addFlashAttribute("message",message);
-		return path;
-	}
-
-
-	// 1:1문의 게시글 삭제
-	@GetMapping("/{categoryNo:3}/{boardNo}/delete")
-	public String freeBoardDelete(@PathVariable("categoryNo") int categoryNo
-			,@PathVariable("boardNo") int boardNo
-			,HttpSession session
-			,RedirectAttributes ra
-			) {
-
-
-		int result = service.inquiryBoardDelete(boardNo);
-		String path = "redirect:";
-		String message = null;
-
-		if(result > 0) {
-			path += "/board/" + categoryNo;
-			message = "게시글이 삭제되었습니다.";
-		}else {
-			path += "/board/" + categoryNo + "/" + boardNo;
-			message = "게시글 삭제 실패";
-		}
-
-		ra.addFlashAttribute("message", message);
-
-
-		return path;
-	}
-
-
-	
-
-	/** 자료실 상세 페이지
-	 * @param boardNo
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/{categoryNo:5}/{boardNo}")
-	public String boardDataDetail(
-			@PathVariable("boardNo") int boardNo
-			, Model model
-			) {
-
-
-		Board board = service.boardDataDetail(boardNo);
-
-		List<BoardFile> boardFile = service.selectBoardFile(boardNo);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-
-		if(boardFile.size() != 0) {
-			System.out.println("배열 길이가 0이 아닐 때"+boardFile);
-
-			map.put("boardFile", boardFile);
-		}
-
-		map.put("board", board);
-
-		model.addAttribute("map", map);
-
-		return "board/boardDataDetail";
-	}
-
-	
-
-
-	
-	
-
-
 
 	//공지사항 작성페이지
 	@GetMapping("/{categoryNo:1}/noticeWrite")
@@ -483,75 +323,6 @@ public class BoardController {
 			
 			return path;
 	}
-	
-
-	//공지사항 상세페이지
-	@GetMapping("/{categoryNo:1}/{boardNo}")
-	public String noticeDetail( @PathVariable("categoryNo") int categoryNo
-	         , @PathVariable("boardNo") int boardNo
-	         , Model model // 데이터 전달용 객체
-	         , RedirectAttributes ra // 리다이렉트 시 데이터 전달용 객체
-	         , @SessionAttribute(value="loginMember", required=false) Member loginMember
-	        
-	         ) throws ParseException  {
-      
-      Map<String, Object> map = new HashMap<String, Object>();
-      map.put("categoryNo", categoryNo);
-      map.put("boardNo", boardNo);
-      
-      // 게시글 상세 조회 서비스 호출
-      Board board = service.noticeDetailBoard(map);
-      
-      String path = null;
-      
-		if (board != null) { // 조회 결과가 있을 경우
-			
-			
-			path = "board/noticeBoardDetail"; // forward할 jsp 경로
-
-			model.addAttribute("board", board);
-
-		} else { // 조회 결과가 없을 경우
-			path = "redirect:/board/" + categoryNo;
-			// 게시판 첫 페이지로 리다이렉트
-
-			ra.addFlashAttribute("message", "해당 게시글이 존재하지 않습니다.");
-		}
-      return path;
-	}
-
-
-	
-
-
-	// 1:1문의 상세페이지
-	@GetMapping("/{categoryNo:4}/{boardNo}")
-	public String boardDetail(
-			@PathVariable("categoryNo") int categoryNo,
-			@PathVariable("boardNo") int boardNo,
-			Model model, 
-			@SessionAttribute(value="loginMember", required=false) Member loginMember				
-			) throws ParseException {
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("categoryNo", categoryNo);
-		map.put("boardNo", boardNo);
-
-		// 게시글 상세 조회 서비스 호출
-		Board board = service.selectInquiryBoard(map);
-		String path = null;
-
-
-
-		path = "board/inquiryBoardDetail"; // forward할 jsp 경로
-		model.addAttribute("board", board);
-		return path;
-	}	
-
-	
-
-
 
 	// 1:1문의, 자료실 작성페이지
 	@PostMapping("/{categoryNo:[4,5]{1}}/write")
@@ -592,55 +363,53 @@ public class BoardController {
 		return path;
 	}
 
+	// ----------------------------------------------------------------------------------
 
+	
+	// ----------------------------------게시글 수정--------------------------------------
 
-	// 1:1문의 게시글 삭제
-
-	@GetMapping("/{categoryNo:4}/{boardNo}/delete")
-	public String boardDelete(@PathVariable("categoryNo") int categoryNo
+	// 자유게시판 수정 기능
+	@PostMapping("/{categoryNo:3}/{boardNo}/update")
+	public String freeBoardUpdate(
+			Board board // 커맨드 객체(name==필드 경우 필드에 파라미터 세팅
+			,@RequestParam(value="cp", required = false, defaultValue = "1") int cp // 쿼리스트링 유지
+			,@RequestParam(value="deleteList", required = false) String deleteList // 삭제할 이미지 순서
+			,@RequestParam(value="file", required = false) List<MultipartFile> file // 업로드된 파일 리스트
+			,@PathVariable("categoryNo") int categoryNo
 			,@PathVariable("boardNo") int boardNo
-			,HttpSession session
-			,RedirectAttributes ra
-			) {
+			,HttpSession session // 서버 파일 저장 경로 얻어올 경로
+			,RedirectAttributes ra // 리다이렉트 시 값 전달용
+			) throws IllegalStateException, IOException {
 
 
-		int result = service.inquiryBoardDelete(boardNo);
+		// 1) boardCode, boardNo를 커맨드 객체(board)에 세팅 
+		board.setCategoryNo(categoryNo);
+		board.setBoardNo(boardNo);
+		// board(boardCode, boardNo , boardTitle, boardContent)
+
+		// 2) 이미지 웹 접근 경로, 서버 저장 경로 
+		String webPath = "/resources/images/board/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+
+		System.out.println(board);
+		// 3) 게시글 수정 서비스 호출 
+		int rowCount = service.inquiryBoardUpdate(board, file, webPath, filePath, deleteList);
+
+		// 4) 결과에 따라서 message, path 설정
+		String message = null; 
 		String path = "redirect:";
-		String message = null;
 
-		if(result > 0) {
-			path += "/board/" + categoryNo;
-			message = "게시글이 삭제되었습니다.";
+		if(rowCount > 0) {
+			message = "게시글이 수정되었습니다.";
+			path += "/board/" + categoryNo + "/" + boardNo + "?cp=" + cp; // 상세조회 페이지
 		}else {
-			path += "/board/" + categoryNo + "/" + boardNo;
-			message = "게시글 삭제 실패";
+			message = "게시글이 수정 실패.";
+			path += "update";
 		}
 
-		ra.addFlashAttribute("message", message);
-
-
+		ra.addFlashAttribute("message",message);
 		return path;
 	}
-
-	// 게시글 수정 화면 전환
-	@GetMapping("/{categoryNo:4}/{boardNo}/update")
-	public String inquiryBoardUpdate(
-			@PathVariable("categoryNo") int categoryNo
-			,@PathVariable("boardNo") int boardNo
-			,Model model // 데이터 전달용 객체 (기본 scope : requset)
-			) {
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("categoryNo", categoryNo);
-		map.put("boardNo", boardNo);
-		Board board = service.selectInquiryBoard(map);
-		model.addAttribute("board", board);
-		// forward(요청위임) -> requset scope 유지 
-
-		return "board/inquiryBoardUpdate";
-	}
-
-
 
 	// 1:1문의 게시글 수정
 	@PostMapping("/{categoryNo:4}/{boardNo}/update")
@@ -685,8 +454,143 @@ public class BoardController {
 		return path;
 	}
 
+	// ----------------------------------------------------------------------------------
 
+
+	// ----------------------------------게시글 수정 화면 이동--------------------------------------
+
+	// 자유게시판 수정 화면 이동
+	@GetMapping("/{categoryNo:[3,4]}/{boardNo}/update")
+	public String selectFreeBoardUpdate(
+			@PathVariable("categoryNo") int categoryNo,
+			@PathVariable("boardNo") int boardNo,
+			Model model
+			) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+
+		Board board = service.selectFreeBoard(map);
+
+		model.addAttribute("board", board);
+
+		return "board/freeBoardUpdate";
+	}
+
+	// 1:1문의 수정 화면 전환
+	@GetMapping("/{categoryNo:4}/{boardNo}/update")
+	public String inquiryBoardUpdate(
+			@PathVariable("categoryNo") int categoryNo
+			,@PathVariable("boardNo") int boardNo
+			,Model model // 데이터 전달용 객체 (기본 scope : requset)
+			) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+		Board board = service.selectInquiryBoard(map);
+		model.addAttribute("board", board);
+
+		return "board/inquiryBoardUpdate";
+	}
+
+	// ----------------------------------------------------------------------------------
+
+
+	// ----------------------------------게시글 상세 조회--------------------------------------
 	
+	//공지사항 상세페이지
+	@GetMapping("/{categoryNo:1}/{boardNo}")
+	public String noticeDetail( @PathVariable("categoryNo") int categoryNo
+	         , @PathVariable("boardNo") int boardNo
+	         , Model model // 데이터 전달용 객체
+	         , RedirectAttributes ra // 리다이렉트 시 데이터 전달용 객체
+	         , @SessionAttribute(value="loginMember", required=false) Member loginMember
+	        
+	         ) throws ParseException  {
+      
+      Map<String, Object> map = new HashMap<String, Object>();
+      map.put("categoryNo", categoryNo);
+      map.put("boardNo", boardNo);
+      
+      // 게시글 상세 조회 서비스 호출
+      Board board = service.noticeDetailBoard(map);
+      
+      String path = null;
+      
+		if (board != null) { // 조회 결과가 있을 경우
+			
+			
+			path = "board/noticeBoardDetail"; // forward할 jsp 경로
+
+			model.addAttribute("board", board);
+
+		} else { // 조회 결과가 없을 경우
+			path = "redirect:/board/" + categoryNo;
+			// 게시판 첫 페이지로 리다이렉트
+
+			ra.addFlashAttribute("message", "해당 게시글이 존재하지 않습니다.");
+		}
+      return path;
+	}
+
+	/** 자료실 상세 페이지
+	 * @param boardNo
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/{categoryNo:5}/{boardNo}")
+	public String boardDataDetail(
+			@PathVariable("boardNo") int boardNo
+			, Model model
+			) {
+
+
+		Board board = service.boardDataDetail(boardNo);
+
+		List<BoardFile> boardFile = service.selectBoardFile(boardNo);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+
+		if(boardFile.size() != 0) {
+			System.out.println("배열 길이가 0이 아닐 때"+boardFile);
+
+			map.put("boardFile", boardFile);
+		}
+
+		map.put("board", board);
+
+		model.addAttribute("map", map);
+
+		return "board/boardDataDetail";
+	}
+
+	// 1:1문의 상세페이지
+	@GetMapping("/{categoryNo:4}/{boardNo}")
+	public String boardDetail(
+			@PathVariable("categoryNo") int categoryNo,
+			@PathVariable("boardNo") int boardNo,
+			Model model, 
+			@SessionAttribute(value="loginMember", required=false) Member loginMember				
+			) throws ParseException {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+
+		// 게시글 상세 조회 서비스 호출
+		Board board = service.selectInquiryBoard(map);
+		String path = null;
+
+
+
+		path = "board/inquiryBoardDetail"; // forward할 jsp 경로
+		model.addAttribute("board", board);
+		return path;
+	}	
 
 	// 학과공지 상세
 	@GetMapping("/{categoryNo:2}/{boardNo}")
@@ -810,6 +714,111 @@ public class BoardController {
 
 		return path;
 	}
+
+
+
+
+
+
+	// ---------------------------------------------------------------------------------------
+
+	
+
+
+	// 1:1문의 게시글 삭제
+	@GetMapping("/{categoryNo:3}/{boardNo}/delete")
+	public String freeBoardDelete(@PathVariable("categoryNo") int categoryNo
+			,@PathVariable("boardNo") int boardNo
+			,HttpSession session
+			,RedirectAttributes ra
+			) {
+
+		int result = service.inquiryBoardDelete(boardNo);
+		String path = "redirect:";
+		String message = null;
+
+		if(result > 0) {
+			path += "/board/" + categoryNo;
+			message = "게시글이 삭제되었습니다.";
+		}else {
+			path += "/board/" + categoryNo + "/" + boardNo;
+			message = "게시글 삭제 실패";
+		}
+
+		ra.addFlashAttribute("message", message);
+
+		return path;
+	}
+
+	
+
+
+	
+
+	
+
+	
+
+
+	
+	
+
+
+
+	
+	
+
+	
+
+
+	
+
+
+	
+	
+
+
+
+	
+
+
+
+	// 1:1문의 게시글 삭제
+	@GetMapping("/{categoryNo:4}/{boardNo}/delete")
+	public String boardDelete(@PathVariable("categoryNo") int categoryNo
+			,@PathVariable("boardNo") int boardNo
+			,HttpSession session
+			,RedirectAttributes ra
+			) {
+
+
+		int result = service.inquiryBoardDelete(boardNo);
+		String path = "redirect:";
+		String message = null;
+
+		if(result > 0) {
+			path += "/board/" + categoryNo;
+			message = "게시글이 삭제되었습니다.";
+		}else {
+			path += "/board/" + categoryNo + "/" + boardNo;
+			message = "게시글 삭제 실패";
+		}
+
+		ra.addFlashAttribute("message", message);
+
+		return path;
+	}
+
+	
+
+
+
+	
+
+
+	
+
+	
 
 	
 
