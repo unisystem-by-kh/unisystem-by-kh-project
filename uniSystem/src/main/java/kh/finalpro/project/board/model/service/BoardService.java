@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.board.model.dto.Board;
@@ -134,8 +135,15 @@ public interface BoardService {
 	Board noticeDetailBoard(Map<String, Object> map);
 
 
-	/** 공지사항 작성페이지
-  int noticeBoardWrite(Board board, List<MultipartFile> files, String webPath, String filePath);
+	/** 공지사항 작성 페이지
+	 * @param board
+	 * @param files
+	 * @param webPath
+	 * @param filePath
+	 * @return boardNo
+	 */
+	int noticeboardInsert(Board board, List<MultipartFile> files, String webPath, String filePath);
+	
   
   
 	/** 자유게시판 수정
@@ -148,6 +156,10 @@ public interface BoardService {
 	 * @return rowCount
 	 */
 	int freeBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath, String deleteList) throws IllegalStateException, IOException;
+
+
+
+
 
 
 

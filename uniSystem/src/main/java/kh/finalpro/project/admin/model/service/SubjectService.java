@@ -46,6 +46,18 @@ public interface SubjectService {
 	 */
 	Map<String, Object> selectSubjectList(Map<String, Object> paramMap, int cp);
 
+	/** 교과목 수정 서비스
+	 * @param inputClass
+	 * @return result
+	 */
+	int updateSubject(Subject inputClass);
+
+	/** 교과목 삭제
+	 * @param classNo
+	 * @return result
+	 */
+	int deleteSubject(int classNo);
+
 
 
 }

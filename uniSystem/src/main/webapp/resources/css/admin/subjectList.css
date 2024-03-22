@@ -7,7 +7,7 @@
 
 main{
     width: 1200px;
-    height: 1200px;
+    min-height: 1200px;
     margin: auto;
 
     display: flex;
@@ -109,6 +109,7 @@ main{
 .list-table tr > td:nth-of-type(4){ width: 10%;}
 .list-table tr > td:nth-of-type(5){ width: 20%;}
 .list-table tr > td:nth-of-type(6){ width: 15%;}
+.list-table tr > td:nth-of-type(8){display: none;}
 
 td>button{
     /* width: 100%; */
@@ -230,7 +231,10 @@ input[type="text"]:focus{
     border-bottom: 2px solid crimson;
 }
 
-input[name="classTime"]{
+input[id="classStart"]{
+    width: calc(45% - 160px);
+}
+input[id="classEnd"]{
     width: calc(45% - 160px);
 }
 
@@ -285,4 +289,54 @@ input[name="classTime"]{
     cursor: pointer;
     text-shadow: 1px 1px 2px gray;
     color: black;
+}
+
+
+#resultSet{
+    position: absolute;
+    z-index: 1001;
+    background-color: white;
+    list-style: none;
+    width: 300px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: scroll;
+    display: none;
+}
+
+#resultSet::-webkit-scrollbar {
+    display: none;
+}
+
+#resultSet>li{
+    padding: 2px 10px;
+}
+
+#resultSet>li>b:hover{
+    background-color: yellow;
+    cursor: pointer;
+}
+
+#resultSet>li>span{
+    color: #ccc;
+    font-weight: normal;
+}
+
+.resultSet-area>p{
+    position: absolute;
+    z-index: 1002;
+    right: 10px;
+    width: 10px;
+    font-size: 20px;
+    display: none;
+    cursor: pointer;
+}
+
+.resultSet-area{
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    right: 33px;
+    display: none;
 }

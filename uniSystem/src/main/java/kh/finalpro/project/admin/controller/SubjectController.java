@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,7 @@ public class SubjectController {
 							 , @RequestParam Map<String, Object> paramMap
 							 , Model model
 							  ) {
+		
 		
 		if(paramMap.get("query") == null) { // 검색어가 없을 때 (검색 X)
 			
@@ -84,6 +86,25 @@ public class SubjectController {
 
 		return path;
 	}
+	
+	@PostMapping(value = "/update", produces = "application/json; charset=UTF-8")
+	public String updateSubject(Subject inputClass
+			, @RequestHeader(value = "referer") String referer
+			, RedirectAttributes ra) {
+		
+		inputClass.setClassName(inputClass.getClassName().toUpperCase()); // 과목명 대문자 변환
+		
+		int result = service.updateSubject(inputClass);
+		
+		String message = null;
+		
+		if(result > 0) message = "수정 완료";
+		else		   message = "수정 실패";
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:"+referer;
+	}
 
 	// 담당교수 실시간 검색
 	@PostMapping(value="/professorSearch",produces = "application/json; charset=UTF-8")
@@ -98,6 +119,13 @@ public class SubjectController {
 	public int timeCheck(@RequestBody Map<String, Object> map) {
 		//System.out.println(map);
 		return service.timeCheck(map);
+	}
+	
+	// 교과목 삭제
+	@DeleteMapping("/delete")
+	@ResponseBody
+	public int deleteSubject(@RequestBody int classNo) {
+		return service.deleteSubject(classNo);
 	}
 
 
