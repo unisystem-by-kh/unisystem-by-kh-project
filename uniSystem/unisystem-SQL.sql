@@ -280,12 +280,13 @@ BEGIN
               SEQ_BOARD_NO.CURRVAL || '번째 게시글',
               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용 입니다.',
               DEFAULT, NULL, DEFAULT, DEFAULT, '01-2412345', 
-              CEIL(DBMS_RANDOM.VALUE(0,4))
+              CEIL(DBMS_RANDOM.VALUE(0,5))
       );
    END LOOP;
 END;
 
-
+COMMIT;
+DROP TABLE BOARD;
 -- 댓글
 CREATE TABLE "REPLY" (
    "REPLY_NO"   NUMBER      NOT NULL,
