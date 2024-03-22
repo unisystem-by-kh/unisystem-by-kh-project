@@ -28,10 +28,10 @@
         <div class="mainContainer con">
 
             <div class="detail-title">
-                <h1 class="dataTitle">자료실</h1>
+                <h1 class="dataTitle">자료실 ${categoryNo}</h1>
                 <c:if test="${loginMember.memberNo == board.memberNo}" >
                     <div>
-                        <button class="detail-button update-btn">수정</button>
+                        <button class="detail-button update-btn" onClick="location.href='/board/${categoryNo}/${boardNo}/update'">수정</button>
                         <button class="detail-button delete-btn">삭제</button>
                     </div>
                 </c:if>

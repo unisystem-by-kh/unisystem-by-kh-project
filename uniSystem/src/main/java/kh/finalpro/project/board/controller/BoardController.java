@@ -532,14 +532,11 @@ public class BoardController {
 			, RedirectAttributes ra
 			, HttpSession session)throws IllegalStateException, IOException {
 
-		System.out.println("자료실 매핑 체크용" + categoryNo);
-
 		// 1.로그인한 회원 번호를 얻어와 board에 세팅
 		board.setMemberNo(loginMember.getMemberNo());
 
 		// 2. boardCode도 board에 세팅
 		board.setCategoryNo(categoryNo);
-		System.out.println(board);
 		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
 		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
 		String webPath = "/resources/images/board/";
@@ -567,6 +564,7 @@ public class BoardController {
 
 
 	// 1:1문의 게시글 삭제
+
 	@GetMapping("/{categoryNo:4}/{boardNo}/delete")
 	public String boardDelete(@PathVariable("categoryNo") int categoryNo
 			,@PathVariable("boardNo") int boardNo
@@ -655,7 +653,6 @@ public class BoardController {
 		ra.addFlashAttribute("message",message);
 		return path;
 	}
-
 
 
 	// 학과공지 목록

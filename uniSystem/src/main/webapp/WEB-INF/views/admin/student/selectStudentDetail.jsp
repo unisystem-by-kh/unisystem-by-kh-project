@@ -74,7 +74,7 @@
                     <td>신원하</td>
                 </tr>
                 <tr>
-                    <td>보건통계학test</td>
+                    <td>보건통계학</td>
                     <td>2</td>
                     <td>조경숙</td>
                 </tr>
