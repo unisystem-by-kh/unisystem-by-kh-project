@@ -253,7 +253,7 @@
    
 	<!-- 1:1문의 게시판 목록조회 -->
 	<select id="selectinquiryBoardList" resultMap="board_rm">
-	 SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_ST,
+	 SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_ST,DEPARTMENT_NAME,
          
 		<![CDATA[
 		CASE  
@@ -279,6 +279,7 @@
 
       FROM "BOARD" B
       JOIN "MEMBER" USING(MEMBER_NO)
+      JOIN "DEPARTMENT" USING(DEPARTMENT_NO)
       WHERE (BOARD_ST = 'N' OR BOARD_ST = 'D')
       AND CATEGORY_NO = ${categoryNo}
       
@@ -488,7 +489,8 @@
 		UPDATE BOARD SET BOARD_TITLE =
 		#{boardTitle},
 		BOARD_CONTENT = #{boardContent},
-		BOARD_U_DATE = SYSDATE
+		BOARD_U_DATE = SYSDATE,
+		BOARD_ST = #{boardSt}
 		WHERE BOARD_NO
 		= #{boardNo}
 		AND CATEGORY_NO = #{categoryNo}

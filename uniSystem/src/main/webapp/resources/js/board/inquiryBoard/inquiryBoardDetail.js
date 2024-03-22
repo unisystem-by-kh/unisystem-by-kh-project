@@ -127,6 +127,7 @@ if(updateBtn != null){
                     const upBtn = document.createElement("button");
                     upBtn.setAttribute('id','replyUpBtn')
                     upBtn.innerText = '수정';
+                    upBtn.setAttribute('onclick', "updateReply(" + reply.replyNo + ",this)")
                     
                     const deBtn = document.createElement("button");
                     deBtn.setAttribute('id','replyDeBtn')
@@ -197,6 +198,7 @@ if(addReply != null){
 
 }
 
+// 댓글 삭제
 function deleteReply(replyNo){
 
     if( confirm("정말로 삭제 하시겠습니까?") ){
@@ -219,5 +221,79 @@ function deleteReply(replyNo){
 
     }
 }
+
+// 댓글 수정
+let beforeReplyRow; // 수정 전 댓글 상태를 저장하기 위한 변수
+
+function updateReply(replyNo, btn) {
+  
+    const replyRow = btn.parentElement.previousSibling.firstChild;
+
+    beforeReplyRow = replyRow.innerHTML;
+
+    const textarea = document.createElement("textarea");
+    textarea.classList.add("relpyUpdateCon"); // 클래스 추가
+    textarea.value = beforeReplyRow;
+
+    const replyBtnArea = document.createElement("div");
+    replyBtnArea.classList.add("btnArea");
+
+    const updateBtn = document.createElement("button");
+    updateBtn.innerText = "수정";
+    updateBtn.setAttribute("onclick", `updateReply1(${replyNo}, this)`);
+    updateBtn.classList.add("replyUp")
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerText = "취소";
+    cancelBtn.setAttribute("onclick", `updateCancel(this)`);
+    cancelBtn.classList.add("replyDe")
+    replyRow.innerHTML = '';
+    replyRow.append(textarea, replyBtnArea);
+    replyBtnArea.append(updateBtn, cancelBtn);
+}
+
+
+function updateCancel(){
+    if(confirm("댓글 수정을 취소하시겠습니까?")){
+        beforeReplyRow = null;
+        location.reload();
+        replyList();
+
+
+    }
+}
+
+
+function updateReply1(replyNo, btn){
+
+    // 새로 작성된 댓글 내용 얻어오기
+    const replyContent = btn.parentElement.previousElementSibling.value;
+    console.log(replyContent);
+
+    const data = {
+        "replyNo" : replyNo,
+        "replyContent" : replyContent
+    };
+
+    fetch("/reply",{
+        method : "PUT",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(result => {
+        if(result > 0){
+            alert("댓글이 수정되었습니다.");
+            location.reload();
+            replyList();
+
+        }else{
+            alert("댓글 수정 실패");
+        }
+    })
+    .catch(err => console.log(err));
+
+}
+
+
 
 

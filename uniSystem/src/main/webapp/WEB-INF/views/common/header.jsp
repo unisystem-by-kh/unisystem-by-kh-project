@@ -81,8 +81,8 @@
 
                 <%-- 학생 전용 --%>
                 <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
-                    <a href="#">필요한 메뉴 구성 입력 1</a>
-                    <a href="#">필요한 메뉴 구성 입력 1</a>
+                    <a href="/board/4">1:1문의</a>
+                    <a href="/tuition">등록금</a>
                     <a href="#">필요한 메뉴 구성 입력 1</a>
                 </c:if>
                 
@@ -109,7 +109,7 @@
             <%-- 소식은 고정 노출 --%>
             <div class="navigation3-home">
                 <a href="#">학사일정</a>
-                <a href="/board/departmentBoardList">학과공지</a>
+                <a href="/board/2">학과공지</a>
                 <a href="/board/3">자유게시판</a>
                 <a href="/board/4">1:1문의</a>
             </div>

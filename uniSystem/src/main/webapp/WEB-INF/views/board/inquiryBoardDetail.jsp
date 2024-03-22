@@ -50,7 +50,9 @@
 	    </div>
 	    <div class="update-delete-btn">
 		<c:if test="${loginMember.memberNo == board.memberNo}">
-	        <button id="updateBtn">수정</button>
+			<c:if test="${board.replyCount == 0}">
+	        	<button id="updateBtn">수정</button>
+			</c:if>
 	        <button id="deleteBtn">삭제</button>
 		</c:if>
 			<button id="goToListBtn">목록으로</button>
@@ -61,10 +63,12 @@
 			<h1>답변</h1>
 		</div>
 		<c:if test="${board.replyCount == 0}">
-			<div class="reply-write">
-				<textarea placeholder="답변을 작성해주세요." id="replyWriteCon"></textarea>
-				<button id="addReply">답변작성</button>
-			</div>
+			<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '03'}" >
+				<div class="reply-write">
+					<textarea placeholder="답변을 작성해주세요." id="replyWriteCon"></textarea>
+					<button id="addReply">답변작성</button>
+				</div>
+			</c:if>
 		</c:if>
 		<div class="reply-nick">
 			<div>답변자 : 관리자</div>
@@ -74,7 +78,7 @@
 			<div>제목 : [RE]문의내용</div>
 		</div>
 		<div class="reply-content">
-			<div>
+			<div id="content">
 				asdasdasdsadasdsad
 			</div>
 		</div>
