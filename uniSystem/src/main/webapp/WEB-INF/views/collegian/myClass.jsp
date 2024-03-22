@@ -81,14 +81,14 @@
                         <th>학점</th>
                         <th>신청 여부</th>
                         <th>강의 시간</th>
-                        <th>신청인원</th>
-                        <th>수강정원</th>
+                        <th>수강 정원</th>
+                        <th>신청 인원</th>
                     </tr>
 
                     <c:choose>
                         <c:when test="${empty lecture}">
                             <tr>
-                                <td id="noneLecture" colspan ="8" style="text-align: center;">과목이 존재하지 않습니다.</td>
+                                <td id="noneLecture" colspan ="11" style="text-align: center;">과목이 존재하지 않습니다.</td>
                             </tr>
                         </c:when>
 
@@ -108,15 +108,15 @@
                                         </c:if>
                                         <td>${lec.classPoint}</td>
                                         <c:if test="${lec.lectureFL > 0}" >
-                                            <td>신청 완료</td>
+                                            <td><button>신청 완료</button></td>
                                         </c:if>
 
                                         <c:if test="${lec.lectureFL == 0}" >
-                                            <td><button id="create-lecture" onclick=addToCart(this)>강의담기<button></td>
+                                            <td><button id="create-lecture" onclick=addToCart(this)>강의 담기</button></td>
                                         </c:if>
                                         <td>${lec.classDay} (${lec.classStart}교시 ~ ${lec.classEnd}교시)</td>
-                                        <td>${lec.lectureCount}</td>
                                         <td>${lec.classMax}
+                                        <td>${lec.lectureCount}</td>
                                     </tr>
                                 </c:forEach>
                         </c:otherwise>
@@ -124,7 +124,7 @@
                     
                 </table>
 
-                <div class="pagination-area">
+                <%-- <div class="pagination-area">
                     <div class="pagination">
                         <a href="#">&laquo;</a>
                         <a href="#">1</a>
@@ -134,11 +134,13 @@
                         <a href="#">5</a>
                         <a href="#">&raquo;</a>
                     </div>
-                </div>
+                </div> --%>
 
             </div>
-
-            <h2>수강 신청 내역</h2>
+            <div class="stu-header ex1">
+                <h2>수강 신청 내역</h2>
+            </div>
+            
             <div class="stu-board select-class">
                 <table>
                     <tr>
@@ -151,13 +153,13 @@
                         <th>학점</th>
                         <th>취소</th>
                         <th>강의 시간</th>
-                        <th>신청인원</th>
-                        <th>수강정원</th>
+                        <th>수강 정원</th>
+                        <th>신청 인원</th>
                     </tr>
                      <c:choose>
                         <c:when test="${empty myClassList}">
                             <tr>
-                                <td id="noneLecture" colspan ="8" style="text-align: center;">수강 신청 과목이 존재하지 않습니다.</td>
+                                <td id="noneLecture" colspan ="11" style="text-align: center;">수강 신청 과목이 존재하지 않습니다.</td>
                             </tr>
                         </c:when>
 
@@ -176,16 +178,17 @@
                                             <td>전공</td>
                                         </c:if>
                                         <td>${cl.classPoint}</td>
-                                        <td><button id="delete-class" onclick=deleteMyClass(this)>신청 취소<button></td>
+                                        <td><button id="delete-class" onclick=deleteMyClass(this)>신청 취소</button></td>
                                         <td>${cl.classDay} (${cl.classStart}교시 ~ ${cl.classEnd}교시)</td>
-                                        <td>${cl.lectureCount}</td>
                                         <td>${cl.classMax}
+                                        <td>${cl.lectureCount}</td>
                                     </tr>
                                 </c:forEach>
                         </c:otherwise>
                     </c:choose>
                     
                 </table>
+                <div id="count-area">총 이수학점 : </div>
              
                 <button id="class-btn" type="button">전체 신청 하기</button>
 

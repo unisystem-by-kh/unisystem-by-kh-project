@@ -1,5 +1,6 @@
 console.log("수강신청 js 연결")
 
+// 수강 신청 목록 담기
 const addToCart = (th) => {
 
     if(document.getElementById('noneLecture') != null){
@@ -74,6 +75,7 @@ const addToCart = (th) => {
 }
 
 
+// 담은 목록에서만 삭제
 const deleteClass = th => {
 
     const row = th.parentNode.parentNode; // 선택한 tr 반환
@@ -81,6 +83,7 @@ const deleteClass = th => {
     row.remove(); // 요소 삭제
 }
 
+// 신청한 수강 과목을 삭제
 const deleteMyClass = th => {
 
     const row = th.parentNode.parentNode; // 선택한 tr 반환
@@ -117,6 +120,7 @@ const deleteMyClass = th => {
 
 };
 
+// 단일 수강 신청
 const updateMyClass = th => {
 
     const row = th.parentNode.parentNode; // 선택한 tr 반환
@@ -137,10 +141,12 @@ const updateMyClass = th => {
             },
             body: JSON.stringify(bodyData)
         })
-        .then(res => res.text())
+        .then(res => res.json())
         .then(result => {
+
+            console.log(result);
     
-            if(result>0){
+            if(result>0 && result<100){
                 alert("해당 과목 수강 신청이 완료되었습니다.");
 
                 row.cells[7].innerHTML =""; 
@@ -151,9 +157,26 @@ const updateMyClass = th => {
 
                 row.cells[7].append(deletBtn);
 
+                console.log(row.cells[10].innerText);
+
+                row.cells[10].innerText = parseInt(row.cells[10].innerText)+1;
+
+            }else if(result>=100){
+
+                alert("수강 정원이 다 찼습니다.");
+
+                row.cells[7].innerHTML =""; 
+
+                const deletBtn = document.createElement('button');
+                deletBtn.innerText = '취소';
+                deletBtn.setAttribute("onclick", "deleteClass(this)" );
+
+                row.cells[7].append(deletBtn);
+
             }else{
                 alert("수강 신청 실패");
             }
+
     
         })
         .catch(err => {console.log(err)})
@@ -171,8 +194,8 @@ const updateMyClass = th => {
 document.getElementById("class-btn").addEventListener("click", e => {
     let classes = "";
 
-    // 수강 신청 화면
-    let selectClass = document.querySelector(".select-class table");
+    
+    let selectClass = document.querySelector(".select-class table"); // 수강 신청 화면
     
     for(let ro = 0; ro < selectClass.rows.length ; ro++){ // 수강 신청 내역의 테이블의 tr 요소들
 
@@ -203,12 +226,11 @@ document.getElementById("class-btn").addEventListener("click", e => {
         .then(result => {
     
             if(result>0){
-                alert(result + "개의 수강 과목이 신청되었습니다.");
-
-                // 화면 다시 만들자....
+                location.reload(); // 페이지 새로 고침
+                alert("수강 과목 신청 결과" + result);
 
             }else{
-                alert("수강 신청 실패");
+                alert("수강 신청 실패 서버 콘솔 확인하세요");
             }
     
         })
