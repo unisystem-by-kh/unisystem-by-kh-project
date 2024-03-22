@@ -69,12 +69,6 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectBoardList_search", paramMap, rowBounds); // 전체
 	}
 
-	// ----------------------------------------------------------------------
-
-
-
-
-
 	// ----------------------------게시판 카운트(다 있어야 함)-----------------------------
 	/**
 	 * 자유 게시판의 게시글 삭제 되지 않은 게시글 수 조회
