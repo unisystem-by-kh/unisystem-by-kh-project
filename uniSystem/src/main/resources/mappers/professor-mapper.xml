@@ -29,15 +29,12 @@
 		
 		<result property="lecturePoint" column="LECTURE_POINT" />
 		<result property="lectureCount" column="LECTURE_COUNT" />
+		<result property="lectureGrade" column="LECTURE_GRADE" />
+		<result property="lectureTerm" column="LECTRUE_TERM" />
 		
-<!-- 	  <collection property="classList" select="selectClassList"
-         column="CLASS_NO" javaType="java.util.ArrayList" ofType="Subject">
-      </collection> -->
-      
-      <!-- <collection property="lectureList" select="selectLectureList"
-         column="CLASS_NO" javaType="java.util.ArrayList" ofType="Lecture">
-      </collection> -->
-      
+		<result property="classNo" column="CLASS_NO" />
+		<result property="classNm" column="CLASS_NM" />
+		
 	</resultMap>
 	
 	<!-- 교과목 정보 resultMap -->
@@ -79,7 +76,7 @@
 	
 	<!-- 모든 학생이 수강중인 과목 목록 조회 -->
 	<select id="lectureList" resultMap="lecture_rm">
-      SELECT L.CLASS_NO, L.MEMBER_NO, C.CLASS_NM
+      SELECT L.CLASS_NO, L.MEMBER_NO, C.CLASS_NM, L.LECTURE_POINT, L.LECTURE_GRADE, L.LECTURE_TERM
       FROM LECTURE L
       JOIN CLASS C ON C.CLASS_NO = L.CLASS_NO
 	</select>
@@ -95,12 +92,12 @@
 	
 	<!-- 현재 재적중인 학생 목록 조회 -->
 	<select id="selectStudent" resultMap="member_rm">
-   		SELECT DISTINCT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
+		SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
 		    CASE
 		        WHEN SUBSTR(MEMBER_SSN, 1, 2) BETWEEN '00' AND '21' THEN TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('20' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
 		        ELSE TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('19' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
 		    END AS MEMBER_AGE,
-		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME, L.LECTURE_POINT,
+		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME, L.LECTURE_POINT, C.CLASS_NO, C.CLASS_NM,
 		    
 		    (SELECT COUNT(*) FROM LECTURE
       		WHERE MEMBER_NO = L.MEMBER_NO) AS LECTURE_COUNT
@@ -108,11 +105,13 @@
 		FROM MEMBER M
 		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
 		JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
+        JOIN CLASS  C ON C.CLASS_NO = L.CLASS_NO
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
-		AND M.MEMBER_GRADE = L.LECTURE_GRADE
-		AND M.MEMBER_TERM = L.LECTURE_TERM
+		<!-- AND M.MEMBER_GRADE = L.LECTURE_GRADE
+		AND M.MEMBER_TERM = L.LECTURE_TERM -->
 		AND M.MEMBER_STATUS = 'N'
         AND L.MEMBER_NO = M.MEMBER_NO
+        ORDER BY C.CLASS_NM
 	</select>
 	
 	
@@ -174,8 +173,8 @@
 		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
 		JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
-		AND M.MEMBER_GRADE = L.LECTURE_GRADE
-		AND M.MEMBER_TERM = L.LECTURE_TERM
+		<!-- AND M.MEMBER_GRADE = L.LECTURE_GRADE
+		AND M.MEMBER_TERM = L.LECTURE_TERM -->
 		AND M.MEMBER_STATUS = 'N'
         AND L.MEMBER_NO = M.MEMBER_NO
 		

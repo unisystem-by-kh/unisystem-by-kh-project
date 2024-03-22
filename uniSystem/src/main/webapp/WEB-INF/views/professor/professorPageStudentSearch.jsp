@@ -72,83 +72,38 @@
                             <div>학기</div>
                             <div>나이</div>
                             <div>학과</div>
+                            <div>과목</div>
                             <div>성적</div>
                         </div>
-                        ${studentList}
+                        
 
                         <c:forEach items="${studentList}" var="student">
                             <div class="student-info-value">
                                 <div class="studentMemberNo">${student.memberNo}</div>
-                                <!-- 이걸로 사용해야함 <a>태그 -->
                                 <div class="studentMemberName">${student.memberName}</a></div>
                                 <div>${student.memberGrade}</div>
                                 <div>${student.memberTerm}</div>
                                 <div>${student.memberAge}</div>
                                 <div>${student.departmentName}</div>
-                                <div>${student.lecturePoint}</div>
+                                <div class="className">${student.classNm}</div>
+                                <div class="lecturePoint">${student.lecturePoint}</div>
                             </div>
                         </c:forEach>    
 
-                        ${lectureList}
-                    </div>
+                        <!-- 모달 내용 -->
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <!-- 모달 닫기 버튼 -->
+                                <span class="close">&times;</span>
+                                <!-- 강의 정보를 표시할 영역 (lectureInfo) -->
+                                <div id="lectureInfo"></div>
+                            </div>
+                        </div>
 
 
-                </div>
-            </div>
-
-
-            <!-- 시간표 영역 -> 학생 정보 값이 많아지면 시간표 삭제 (예정) -> 학생 클릭하면 나오게? -->
-            <div class="student-clock-area">
-                <div class="student-clock-info">
-                    <div class="student-clock-info-value">
-                        <div>시간</div>
-                        <div>교과목</div>
-                    </div>
-
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
-                    </div>
-                    <div class="student-object-info-value">
-                        <div>09:00 ~ 10:00</div>
-                        <div>통계학계론</div>
                     </div>
                 </div>
             </div>
-
-
         </div>
 
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
