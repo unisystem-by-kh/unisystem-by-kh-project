@@ -34,5 +34,6 @@ public class Member {
 	// 성적관련으로 편하게 선언
 	private String memberAge; // 나이 변환
 	private int lecturePoint; // 성적
+	private int lectureCount; // 수강 수
 
 }

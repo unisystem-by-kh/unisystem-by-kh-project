@@ -38,17 +38,21 @@
                     <c:if test="${loginMember.memberStatus == 'D'}" >
                         <div>${loginMember.memberName}학생 상태 : 중퇴</div>
                     </c:if> --%>
+
+                    <c:if test="${!empty param.key}">
+                        <c:set var="sp" value="&key=${param.key}&query=${param.query}"/>
+                    </c:if>
                     
                     <div class="search-area">
-                        <form action="${categoryNo}" method="get" id="studentSearch" onsubmit="">
-                            <%-- <input type="hidden" name="type" value="${param.type}"> --%>
+                        <form action="/professor/professorPageStudentSearch" method="get" id="studentSearch">
+                            <input type="hidden" name="type" value="${param.type}">
                             <select name="key" id="search-key">
                                 <option value="#">검색 조건 선택</option>
                                 <option value="no">학번</option>
                                 <option value="nm">이름</option>
                                 <option value="gr">학년</option>
-                                <option value="tr">학과</option>
-                                <option value="po">성적</option>
+                                <option value="tr">학기</option>
+                                <option value="dp">학과</option>
                             </select>
             
                             <input type="text" name="query" placeholder="검색어를 입력해주세요." id="search-query">
@@ -69,12 +73,13 @@
                             <div>학과</div>
                             <div>성적</div>
                         </div>
+                        ${studentList}
 
                         <c:forEach items="${studentList}" var="student">
                             <div class="student-info-value">
                                 <div>${student.memberNo}</div>
                                 <!-- 이걸로 사용해야함 <a>태그 -->
-                                <div><a href="#">${student.memberName}</a></div>
+                                <div><a href="/selectLecture?memberNo=${student.memberNo}">${student.memberName}</a></div>
                                 <div>${student.memberGrade}</div>
                                 <div>${student.memberTerm}</div>
                                 <div>${student.memberAge}</div>
@@ -151,6 +156,7 @@
     </main>
 
     <script src="/resources/js/header.js"></script>
+    <script src="/resources/js/professor/professorPage-StudentSearch.js"></script>
     
 </body>
 </html>

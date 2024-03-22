@@ -46,7 +46,6 @@ public class ProfessorServiceImpl implements ProfessorService{
 
 		List<ProfessorDAO> studentList = dao.searchStudent(paramMap);
 
-		// 4. pagination, boardList를 Map에 답아서 반환
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("studentList", studentList);
