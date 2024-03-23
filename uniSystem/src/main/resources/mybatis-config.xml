@@ -22,6 +22,7 @@
 		<typeAlias type="kh.finalpro.project.admin.model.dto.Subject" alias="Subject" />
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Class" alias="Class" />
 		<typeAlias type="kh.finalpro.project.professor.model.dto.Lecture" alias="Lecture" />
+		<typeAlias type="kh.finalpro.project.admin.model.dto.Evaluation" alias="Evaluation" />
 		
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Department" alias="Department" />
 
@@ -36,6 +37,7 @@
 		<mapper resource="/mappers/collegian-mapper.xml" />
 		<mapper resource="/mappers/reply-mapper.xml" />
 		<mapper resource="/mappers/professor-mapper.xml" />
+		<mapper resource="/mappers/evaluation-mapper.xml" />
 	</mappers>		
 
 </configuration>

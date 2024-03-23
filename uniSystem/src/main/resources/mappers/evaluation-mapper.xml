@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="evaluationMapper">
+
+	<resultMap type="Evaluation" id="evaluation_rm">
+		<id property="lateNo" column="CLASS_LATE_NO" />
+		
+		<result property="lateContent" column="CLASS_LATE_CONTENT" />
+		<result property="lateLike" column="CLASS_LATE_LIKE" />
+		<result property="classNo" column="CLASS_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+	</resultMap>
+
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM CLASS_LATE
+	</select>
+	
+	<select id="selectLateList" resultMap="evaluation_rm">
+		SELECT * FROM CLASS_LATE
+		ORDER BY 1 
+	</select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
