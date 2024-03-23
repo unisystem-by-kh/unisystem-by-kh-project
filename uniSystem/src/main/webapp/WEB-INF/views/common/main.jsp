@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -24,29 +26,99 @@
         <%-- 여기부터 작성 --%>
         <div class="mainContainer">
 
+
+            <c:set var='memberNo' value='${loginMember.memberNo}' />
             <!-- 로그인 정보 영역 -->
-            <!-- *로그인 되었을 때 노출 -->
-            <div class="loginMember-Info-Area">
-                <div><img src="https://play-lh.googleusercontent.com/38AGKCqmbjZ9OuWx4YjssAz3Y0DTWbiM5HB0ove1pNBq_o9mtWfGszjZNxZdwt_vgHo" id="profileImg"></div>
-                <div class="info-area">
-                    <div>ㅇㅇㅇ 교수</div>
-                    <div>비즈니스경영과</div>
-                    <div></div>
+
+            <%-- 학생 일 경우 --%>
+            <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
+                <div class="loginMember-Info-Area">
+                    <div><a href="#"><img src="${loginMember.memberProfile}" id="profileImg"></a></div>
+                    
+                    <div class="info-area">
+                        <div>${loginMember.memberName} 학생</div>
+                        <div>학번 : ${loginMember.memberNo}</div>
+                        <div>${loginMember.memberEmail}</div>
+
+                        <c:set var="memberDate" value="${loginMember.memberDate}" />
+                        <div class="date">입학일자 : ${fn:substring(memberDate, 0, 13)}</div>
+
+                        <c:if test="${loginMember.memberStatus == 'N'}">
+                            <div class="recode-area">상태 : 재학중</div>
+                        </c:if>
+                        <c:if test="${loginMember.memberStatus == 'Y'}">
+                            <div class="recode-area">상태 : 휴학</div>
+                        </c:if>
+                        <c:if test="${loginMember.memberStatus == 'P'}">
+                            <div class="recode-area">상태 : 졸업</div>
+                        </c:if>
+                        <c:if test="${loginMember.memberStatus == 'D'}">
+                            <div class="recode-area">상태 : wndxhl</div>
+                        </c:if>
+                    </div>
+                    <div class="logoutBtn"><a href="/logout">로그아웃</a></div>
                 </div>
-                <div class="logoutBtn"><button><a href="/logout">로그아웃</a></button></div>
-                <div class="recode-area">상태 : 재학중</div>
-            </div>
+            </c:if>
 
+            <%-- 교수 일 경우 --%>
+            <c:if test="${fn:substring(memberNo, 0, 2) == '02'}" >
+                <div class="loginMember-Info-Area">
+                    <div><a href="#"><img src="${loginMember.memberProfile}" id="profileImg"></a></div>
+                    
+                    <div class="info-area">
+                        <div>${loginMember.memberName} 교수님</div>
+                        <div>교번 : ${loginMember.memberNo}</div>
+                        <div>${loginMember.memberEmail}</div>
 
+                        <c:set var="memberDate" value="${loginMember.memberDate}" />
+                        <div class="date">가입일 : ${fn:substring(memberDate, 0, 13)}</div>
+
+                        <c:if test="${loginMember.memberStatus == 'N'}">
+                            <div class="recode-area">상태 : 재직중</div>
+                        </c:if>
+                        <c:if test="${loginMember.memberStatus != 'N'}">
+                            <div class="recode-area">상태 : 퇴직</div>
+                        </c:if>
+                    </div>
+                    <div class="logoutBtn"><a href="/logout">로그아웃</a></div>
+                </div>
+            </c:if>
+
+            <%-- 교직원 일 경우 --%>
+            <c:if test="${fn:substring(memberNo, 0, 2) == '03'}" >
+                <div class="loginMember-Info-Area">
+                    <div><a href="#"><img src="${loginMember.memberProfile}" id="profileImg"></a></div>
+                    
+                    <div class="info-area">
+                        <div>${loginMember.memberName} 교직원</div>
+                        <div>관리자 번호 : ${loginMember.memberNo}</div>
+                        <div>${loginMember.memberEmail}</div>
+
+                        <c:set var="memberDate" value="${loginMember.memberDate}" />
+                        <div class="date">가입일 : ${fn:substring(memberDate, 0, 13)}</div>
+
+                        <c:if test="${loginMember.memberStatus == 'N'}">
+                            <div class="recode-area">상태 : 재직중</div>
+                        </c:if>
+                        <c:if test="${loginMember.memberStatus != 'N'}">
+                            <div class="recode-area">상태 : 퇴직</div>
+                        </c:if>
+                    </div>
+                    <div class="logoutBtn"><a href="/logout">로그아웃</a></div>
+                </div>
+            </c:if>
 
             <div class="border-area">
 
                 <!-- 버튼 영역 -->
                 <div class="button-area">
-                    <button><a href="#">학사 일정</a></button>
-                    <button><a href="#">학과 공지</a></button>
+                    <a href="board/1"><button>학사 일정</button></a>
+                    <a href="board/1"><button>학과 공지</button></a>
+                    <a href="board/1"><button>자유 게시판</button></a>
+                    <a href="board/1"><button>1:1 문의</button></a>
+                    <%-- <button><a href="board/2">학과 공지</a></button>
                     <button><a href="board/3">자유 게시판</a></button>
-                    <button><a href="#">1:1 문의</a></button>
+                    <button><a href="board/4">1:1 문의</a></button> --%>
                 </div>
     
                 <!-- 게시글 뷰 영역 (6개만 노출해야함으로 for문 사용 금지해서 각각 데이터 순서대로 넣기) -->
@@ -88,9 +160,9 @@
                     </div>
                     
                     <!-- 더보기 모양 영역 -->
-                    <div class="moreBoard-area">
+                    <%-- <div class="moreBoard-area">
                         <button><a href="#">+</a></button>
-                    </div>
+                    </div> --%>
                 </div>
 
             </div>
