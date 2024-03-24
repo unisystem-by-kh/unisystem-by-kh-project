@@ -36,7 +36,7 @@ public class Member {
 	private int lecturePoint; // 성적
 	private int lectureCount; // 수강 수
 	
-	private int classNo;
-	private String classNm;
+	private int classNo; // 수강과목번호
+	private String classNm; // 수강과목이름
 
 }

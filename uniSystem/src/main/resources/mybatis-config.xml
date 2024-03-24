@@ -38,6 +38,7 @@
 		<mapper resource="/mappers/reply-mapper.xml" />
 		<mapper resource="/mappers/professor-mapper.xml" />
 		<mapper resource="/mappers/evaluation-mapper.xml" />
+		<mapper resource="/mappers/ajax-mapper.xml" />
 	</mappers>		
 
 </configuration>

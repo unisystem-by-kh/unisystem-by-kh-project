@@ -27,16 +27,33 @@
       <result property="departmentName" column="DEPARTMENT_NAME" />
       <result property="departmentPrice" column="DEPARTMENT_Price" />
       
-      
    </resultMap>
+   
+   
+   <select id="memberListInfo" resultMap="member_rm">
+   
+   		SELECT MEMBER_NO, MEMBER_PW, MEMBER_ADDR, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_GEN, MEMBER_DATE
+        , MEMBER_GRADE, MEMBER_TERM, MEMBER_STATUS, MEMBER_NAME, MEMBER_PROFILE, MEMBER_SSN, M.DEPARTMENT_NO
+        , D.DEPARTMENT_NAME
+		FROM MEMBER M
+		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
+   
+   </select>
 
 
-	<insert id="signUp">
-	
-		INSERT INTO MEMBER (MEMBER_NO, MEMBER_PW, MEMBER_ADDR, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_GEN, MEMBER_NAME, DEPARTMENT_NO, MEMBER_BIRTH)
-		VALUES (#{memberNo}, #{memberPw}, #{memberAddr}, #{memberEmail}, #{memberPhone}, #{memberGen}, #{memberName}, 2, SYSDATE)
+	<update id="signUp">
 		
-	</insert>
+		UPDATE MEMBER 
+		SET MEMBER_PW = #{memberPw}, 
+		    MEMBER_ADDR = #{memberAddr}, 
+		    MEMBER_EMAIL = #{memberEmail}, 
+		    MEMBER_PHONE = #{memberPhone},
+		    MEMBER_GEN = #{memberGen}, 
+		    MEMBER_DATE = SYSDATE, 
+		    MEMBER_NAME = #{memberName}
+		WHERE MEMBER_NO = #{memberNo}
+		
+	</update>
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="Member" resultMap="member_rm">
