@@ -22,7 +22,6 @@
 
                 <%-- 테스트용으로 삭제 예정 --%>
                 <a href="/admin/selectStudentList">테스트용 교직원 학생 조회</a>
-                <a href="/signUp">회원가입 테스트</a>
             </div>
 
             <%-- 로그인 헤더 조건 변수 선언 --%>

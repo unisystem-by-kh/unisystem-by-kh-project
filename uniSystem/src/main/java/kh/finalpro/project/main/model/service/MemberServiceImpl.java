@@ -1,5 +1,6 @@
 package kh.finalpro.project.main.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.main.model.dao.MemberDAO;
 import kh.finalpro.project.main.model.dto.Member;
 
@@ -49,6 +51,22 @@ public class MemberServiceImpl implements MemberService{
 	public String findMemberPw(Member inputMember) {
 		return dao.findMemberPw(inputMember);
 	}
+
+	// 가입된 회원 목록 조회
+	@Override
+	public Map<String, Object> memberList() {
+		
+		List<Member> memberListInfo = dao.memberListInfo(); // 전체
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("memberListInfo", memberListInfo);
+		
+		System.out.println("memberListInfo : ServiceImpl : " + memberListInfo);
+		
+		return map;
+	}
+
 	
 
 }

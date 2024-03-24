@@ -37,34 +37,49 @@ public class MainController {
 
 		return "login"; // 로그인 페이지
 	}
-
-	// 회원가입 페이지 이동
-	@GetMapping("/signUp")
-	public String signUp(){
-		return "common/signUp";
-	}
-
+	
 	// 메인 페이지 이동
 	@GetMapping("/main")
 	public String main() {
 		return "common/main";
 	}
 
+	// 회원가입 페이지 이동
+	@GetMapping("/signUp")
+	public String signUp(Model model){
+		
+		Map<String, Object> map = null;
+		
+		map = service.memberList();
+
+		model.addAttribute("map", map);
+		
+		System.out.println(map);
+		
+		return "common/signUp";
+	}
+
 	// 회원가입 진행
 	@PostMapping("/signUp")
 	public String signUp(Member inputMember
-
+						,RedirectAttributes ra
 			) {
-
-
+		
 		int result = service.signUp(inputMember);
 
-		System.out.println("Contoller : " + result);
-		System.out.println("Contoller : " + inputMember);
-		System.out.println("--------------------------------------------------------------------------");
-
-
+		String path = "redirect:";
+		
+		if(result > 0) { // 가입 성공
+			path += "/"; // 로그인페이지로 이동
+			ra.addFlashAttribute("message", "회원가입을 성공했습니다.");
+			
+		}else { //가입 실패
+			path += "/member/signUp"; // 회원가입페이지로 이동
+			ra.addFlashAttribute("message", "회원가입을 실패했습니다.");
+		}
+		
 		return "redirect:/";
+		
 	}
 
 	// 로그인

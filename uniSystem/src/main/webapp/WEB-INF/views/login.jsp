@@ -59,7 +59,7 @@
                 |
                 <a class="btn-open-modal-pw">비밀번호 찾기</a>
                 |
-                <a href="signUp">회원가입</a>
+                <a href="/signUp">학사 정보 등록</a>
             </p>
         </form>
     </main>

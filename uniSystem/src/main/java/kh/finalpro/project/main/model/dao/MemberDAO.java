@@ -24,10 +24,9 @@ public class MemberDAO {
 	 */
 	public int signUp(Member inputMember) {
 		
-		
 		System.out.println("dao : " + inputMember);
-		// 추후 업데이트로 변경 예정
-		return sqlSession.insert("memberMapper.signUp" , inputMember);
+		
+		return sqlSession.update("memberMapper.signUp" , inputMember);
 	}
 
 
@@ -59,6 +58,18 @@ public class MemberDAO {
 	public String findMemberPw(Member inputMember) {
 		return sqlSession.selectOne("memberMapper.findMemberPw", inputMember);
 	}
+
+
+
+	/** 미리 가입된 회원 목록 조회
+	 * @return memberListInfo
+	 */
+	public List<Member> memberListInfo() {
+		return sqlSession.selectList("memberMapper.memberListInfo");
+	}
+
+
+
 
 
 
