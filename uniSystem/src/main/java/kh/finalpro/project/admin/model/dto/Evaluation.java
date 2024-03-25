@@ -17,4 +17,7 @@ public class Evaluation {
 	private int classNo;
 	private String memberNo;
 	
+	private String className; // 과목 이름
+	private String memberName; // 교수 이름
+	
 }

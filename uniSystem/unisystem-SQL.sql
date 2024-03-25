@@ -111,9 +111,9 @@ INSERT INTO "MEMBER" (
     "DEPARTMENT_NO"
 )
 VALUES(
-    012412345,
+    01-2478943,
     'pass01',
-    '학생일',
+    '학생삼',
     '주소 영역 ^^^ 상세주소 영역',
     'anycallshow@naver.com',
     '01012341234',
@@ -124,7 +124,7 @@ VALUES(
     'N',
     NULL,
     '970221-1234567',
-    1
+    10
 );
 
 -- 교수
