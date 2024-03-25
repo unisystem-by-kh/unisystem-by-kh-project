@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="tuitionMapper">
+
+	<insert id="tuitionInsert">
+		INSERT INTO PAY VALUES(SEQ_PAY_NO.NEXTVAL, #{payMethod}, #{departmentPrice}, SYSDATE, #{memberNo})
+	</insert>
+
+	<select id="tuition" resultType="_int">
+		SELECT COUNT(*) FROM PAY WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+</mapper>

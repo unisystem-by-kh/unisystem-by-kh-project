@@ -12,10 +12,6 @@ import lombok.ToString;
 public class Tuition {
 	
 	private String memberNo;
-	private String memberName;
-	private int memberGrade;
-	
-	private int departmentNo;
-	private String departmentName;
+	private String payMethod;
 	private int departmentPrice;
 }
