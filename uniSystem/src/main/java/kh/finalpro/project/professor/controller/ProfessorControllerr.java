@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kh.finalpro.project.board.model.dto.Reply;
@@ -54,13 +55,23 @@ public class ProfessorControllerr {
 		
 	}
 	
-	// 성적 조회
+	// 성적 조회 페이지 이동
 	@GetMapping("/professorPageStudentGrade")
 	public String professorPageStudentGrade() {
-
 		return "professor/professorPageStudentGrade";
-
 	}
+	
+	
+	
+	// 학생 목록 성적 조회 비동기 AJAX
+	@GetMapping(value="/selectMemberList" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Professor> selectMemberList(){
+		return service.selectMemberList();
+	}
+	
+	
+	
 
 	// 성적 수정
 	@GetMapping("/professorPageStudentGradeUpdate")

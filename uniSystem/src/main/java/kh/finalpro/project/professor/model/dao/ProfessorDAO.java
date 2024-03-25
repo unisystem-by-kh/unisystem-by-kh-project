@@ -41,6 +41,11 @@ public class ProfessorDAO {
 	public List<Lecture> lectureList() {
 		return sqlSession.selectList("professorMapper.lectureList");
 	}
+
+	// 모든 학생 조회
+	public List<Professor> selectMemberList() {
+		return sqlSession.selectList("professorMapper.selectMemberList");
+	}
 	
 	
 	
