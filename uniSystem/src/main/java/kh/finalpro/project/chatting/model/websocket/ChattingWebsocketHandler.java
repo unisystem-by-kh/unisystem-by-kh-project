@@ -12,6 +12,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kh.finalpro.project.chatting.model.dto.Message;
 import kh.finalpro.project.chatting.model.service.ChattingService;
 
 public class ChattingWebsocketHandler extends TextWebSocketHandler{
@@ -45,6 +48,16 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		logger.info("전달받은 내용 : " + message.getPayload());
+		
+		// Jackson에서 제공하는 객체
+        // JSON String -> VO Object
+        // 전달받은 내용 : {"senderNo":"5","targetNo":"1","chattingNo":"3","messageContent":"ㅎㅇ\n"}
+        ObjectMapper objectMapper = new ObjectMapper();
+        
+        Message msg = objectMapper.readValue( message.getPayload(), Message.class);
+        // Message 객체 확인
+        System.out.println("msg::" + msg); 
+        
 		
 	}
 
