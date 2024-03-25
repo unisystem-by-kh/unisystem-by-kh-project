@@ -57,4 +57,11 @@ public class ProfessorServiceImpl implements ProfessorService{
 		return map;
 	}
 
+
+	// 학생 목록 전부 조회
+	@Override
+	public List<Professor> selectMemberList() {
+		return dao.selectMemberList();
+	}
+
 }

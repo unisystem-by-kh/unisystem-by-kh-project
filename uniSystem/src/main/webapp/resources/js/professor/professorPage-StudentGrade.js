@@ -15,3 +15,22 @@ element.addEventListener("mouseenter", function() {
 element.addEventListener("mouseleave", function() {
   element.style.cursor = "default";
 });
+
+
+((e)=>{
+  console.log('test');
+
+})()
+
+
+function selectMemberList(){
+
+  fetch("/professor/selectMemberList")
+    .then(response => response.json())
+    .then(mList => {
+        console.log(mList);
+
+    })
+    .catch(err => console.log(err));
+
+}
