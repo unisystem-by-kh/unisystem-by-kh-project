@@ -1,5 +1,7 @@
 package kh.finalpro.project.collegian.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,10 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.collegian.model.dao.CollegianDAO;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.dto.Pagination;
+import kh.finalpro.project.collegian.model.dto.Task;
+import kh.finalpro.project.common.util.Util;
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Department;
 
@@ -163,5 +168,48 @@ public class CollegianServiceImpl implements CollegianService{
 		return dao.deleteMyClass(map);
 	}
 	
+	
+	// 과제물 조회
+	@Override
+	public List<Class> selectTaskList(Member loginMember) {
+		return dao.selectTaskList(loginMember);
+	}
+	
+	// 과제물 제출
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertTask(Member loginMember, int taskNo, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException {
+		
+		int result = 0;
+		
+		if(file.get(0).getSize() > 0) {
+			Task task = new Task();
+			
+			task.setFilePath(webPath);
+			task.setTaskNo(taskNo);
+			
+			String fileName = file.get(0).getOriginalFilename(); // 원본명
+			
+			task.setFileName(fileName);
+			task.setFileRename(Util.fileRename(fileName));
+			task.setMemberNo(loginMember.getMemberNo());
+			
+			result = dao.insertTask(task);
+			
+			if(result > 0) {
+				
+				System.out.println(result);
+				
+				String rename = task.getFileRename();
+				
+				file.get(0).transferTo(new File(filePath +rename));
+			}
+			
+			
+		}
+		
+		
+		return result;
+	}
 
 }

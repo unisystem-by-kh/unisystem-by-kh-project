@@ -25,6 +25,7 @@
 		<typeAlias type="kh.finalpro.project.admin.model.dto.Evaluation" alias="Evaluation" />
 		
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Department" alias="Department" />
+		<typeAlias type="kh.finalpro.project.collegian.model.dto.Task" alias="Task" />
 
 	</typeAliases>
 	
