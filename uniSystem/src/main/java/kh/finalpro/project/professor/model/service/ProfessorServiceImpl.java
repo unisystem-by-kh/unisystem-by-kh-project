@@ -36,10 +36,6 @@ public class ProfessorServiceImpl implements ProfessorService{
 		map.put("studentList", studentList);
 		map.put("lectureList", lectureList);
 		
-		System.out.println("DAO : listCount : " + listCount);
-		System.out.println("DAO : studentList : " + studentList);
-		System.out.println("DAO : lectureList : " + lectureList);
-		
 		return map;
 	}
 
@@ -58,9 +54,6 @@ public class ProfessorServiceImpl implements ProfessorService{
 
 		map.put("studentList", studentList);
 		
-		System.out.println("DAO : listCount : SEARCH : " + listCount);
-		System.out.println("DAO : studentList : SEARCH : " + studentList);
-
 		return map;
 	}
 

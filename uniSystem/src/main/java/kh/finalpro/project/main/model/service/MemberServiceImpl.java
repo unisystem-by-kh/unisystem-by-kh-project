@@ -25,9 +25,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		int result = dao.signUp(inputMember);
 		
-		System.out.println("serviceImpl : " + inputMember);
-		System.out.println("serviceImpl : " + result);
-		
 		return result;
 	}
 	
@@ -61,8 +58,6 @@ public class MemberServiceImpl implements MemberService{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("memberListInfo", memberListInfo);
-		
-		System.out.println("memberListInfo : ServiceImpl : " + memberListInfo);
 		
 		return map;
 	}

@@ -220,6 +220,10 @@ a{
     margin: 5px 0;
     color: black;
 }
+.logoText > :nth-child(3){
+    color: crimson;
+    font-weight: bold;
+}
 
 /* 홈있는 네비게이션 영역 */
 .navigation2-row2{
@@ -307,12 +311,14 @@ animation-iteration-count: infinite;
 .loginMember-Info-Area{
     border-left: 1px solid crimson ;
     border-right: 1px solid crimson ;
-    /* border-top: 1px solid crimson ;
-    border-bottom: 1px solid crimson ; */
     min-width: 300px;
-    height: 450px;
+    height: 350px;
     margin-right: 50px;
     padding: 20px;
+}
+.loginMember-Info-Area > :nth-child(1){
+    height: 100px;
+    margin-top: -15px;
 }
 
 /* 로그인 시 프로필 이미지 */
@@ -330,7 +336,7 @@ animation-iteration-count: infinite;
 .info-area > :nth-child(1){
     font-size: 1.2em;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 10px;
 }
 .info-area > :nth-child(2){
@@ -345,6 +351,7 @@ animation-iteration-count: infinite;
 /* 로그아웃 */
 .logoutBtn{
     margin-bottom: 45px;
+    font-size: 1.1em;
 }
 .logoutBtn > :nth-child(1){
     width: 130px;
@@ -360,6 +367,19 @@ animation-iteration-count: infinite;
 }
 .recode-area{
     font-weight: bold;
+}
+
+.boardImg{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 35px;
+}
+.boardImg > :nth-child(n){
+    width: 150px;
+    height: 40px;
+    /* border: 1px solid #ddd; */
+    border-radius: 7px;
 }
 
 /* 게시판 선택 버튼 영역 */
@@ -396,12 +416,40 @@ animation-iteration-count: infinite;
     color: white;
 }
 
+/* 공지사항 */
+.board5{
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-weight: bold;
+}
+.board5 > :nth-child(1){
+    width: 150px;
+    height: 80px;
+    margin-top: 15px;
+}
+.board5 > a > img{
+    width: 150px;
+    height: 55px;
+    margin-top: 15px;
+}
+
+#boardLink{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 
 /* 게시판 정보 전체 영역 */
 .border-area{
     min-width: 1050px;
     width: 1400px;
-    height: 400px;
+    height: 350px;
     display: flex;
     flex-direction: column;
 }
@@ -411,17 +459,16 @@ animation-iteration-count: infinite;
     display: flex;
     margin: auto 0;
     padding: 0 20px;
-    height: 400px;
+    height: 250px;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid crimson;
     border-bottom: 1px solid crimson;
 }
 
 /* 게시판 정보에 각 게시글 영역 */
 .border-view-select{
     width: 160px;
-    height: 400px;
+    height: 120px;
     margin: auto 0;
     display: flex;
     flex-direction: column;
@@ -534,4 +581,5 @@ footer span{
 .date{
     margin-top: -25px;
     margin-bottom: 15px;
+    font-size: 0.9em;
 }
