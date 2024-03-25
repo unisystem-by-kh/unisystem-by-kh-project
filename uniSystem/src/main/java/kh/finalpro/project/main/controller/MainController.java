@@ -54,8 +54,6 @@ public class MainController {
 
 		model.addAttribute("map", map);
 		
-		System.out.println(map);
-		
 		return "common/signUp";
 	}
 

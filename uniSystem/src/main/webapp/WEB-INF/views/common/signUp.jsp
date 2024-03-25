@@ -29,8 +29,6 @@
         </div>
     </section>
 
-    ${memberList[0]}
-
     <form action="/signUp" method="POST" name="signUpFrm" id="signUpFrm">
         
         <section class="number">
@@ -40,7 +38,12 @@
 
         <div id="inputNo">
             <input type="text" placeholder="2020204401" name="memberNo" id="memberNo">
+            <button id="memberCk" type="button">학과 확인</button>
         </div>
+
+        <section id="number">
+            <p id="numberMessage"></p>
+        </section>
 
         <section class="pw">
             <p>비밀번호</p>
@@ -59,7 +62,7 @@
         <div id="inputPw2">
             <input type="password" placeholder="비밀번호를 한번 더 입력하세요" name="memberPwConfirm" id="memberPwConfirm">
         </div>
-    
+
         <section class="name">
             <p>이름</p>
             <span id="nameMessage"> * 이름을 입력해주세요.</span>
@@ -96,18 +99,15 @@
 
         <div id="inputEmail">
             <input type="text" placeholder="user01@kh.or.kr" name="memberEmail" id="memberEmail" placeholder="아이디(이메일)" maxlength="30" autocomplete="off">
-            <button id="emailBtn">인증번호 발송</button>
+            <button id="sendAuthKeyBtn" type="button">인증번호 발송</button>
         </div>
-    
-        <div class="check">
-            <section class="emailcheck">
-                <p>인증번호 확인</p>
-            </section>
-            <div id="inputEmail2">
-                <input type="text" placeholder="user01@kh.or.kr">
-                <button id="emailBtn2">인증번호 확인</button>
-            </div>
+
+        <div class="signUp-input-area">
+            <input type="text" name="authKey" id="authKey" s placeholder="인증번호 입력" maxlength="8" autocomplete="off" >
+            
+            <button id="checkAuthKeyBtn" type="button">인증하기</button>
         </div>
+        <span class="signUp-message" id="authKeyMessage"></span>
     
         
         <section class="tel">
@@ -122,7 +122,7 @@
             <p>성별</p>
             <input type="radio" name="memberGen" value="M" id="memberGenM"> 남
             <input type="radio" name="memberGen" value="F" id="memberGenF"> 여
-            <span id="genMessage">성별을 선택해주세요.</span>
+            <span id="genMessage" class="error">성별을 선택해주세요.</span>
         </section>
 
         <div class="frmBtn">
@@ -137,24 +137,17 @@
         function sample6_execDaumPostcode() {
             new daum.Postcode({
                 oncomplete: function(data) {
-                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                     var addr = ''; // 주소 변수
 
-                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                     if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                         addr = data.roadAddress;
                     } else { // 사용자가 지번 주소를 선택했을 경우(J)
                         addr = data.jibunAddress;
                     }
 
-                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     document.getElementById('sample6_postcode').value = data.zonecode;
                     document.getElementById("sample6_address").value = addr;
                     
-                    // 커서를 상세주소 필드로 이동한다.
                     document.getElementById("sample6_detailAddress").focus();
                 }
             }).open();

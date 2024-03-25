@@ -24,8 +24,6 @@ public class MemberDAO {
 	 */
 	public int signUp(Member inputMember) {
 		
-		System.out.println("dao : " + inputMember);
-		
 		return sqlSession.update("memberMapper.signUp" , inputMember);
 	}
 

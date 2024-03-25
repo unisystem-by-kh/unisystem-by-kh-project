@@ -30,14 +30,83 @@
    </resultMap>
    
    
+   <!-- Board DTO에 대한 resultMap -->
+   <resultMap type="Board" id="board_rm">
+      <id property="boardNo" column="BOARD_NO" />
+
+      <result property="boardTitle" column="BOARD_TITLE" />
+      <result property="boardContent" column="BOARD_CONTENT" />
+      <result property="boardCDate" column="BOARD_C_DATE" />
+      <result property="boardUDate" column="BOARD_U_DATE" />
+
+      <result property="boardCount" column="BOARD_COUNT" />
+      <result property="boardSt" column="BOARD_ST" />
+      <result property="replyCount" column="REPLY_COUNT" />
+      
+      <result property="memberNo" column="MEMBER_NO" />
+      <result property="memberName" column="MEMBER_NAME" />
+      <result property="categoryNo" column="CATEGORY_NO" />
+
+      <result property="departmentName" column="DEPARTMENT_NAME" />
+     
+      <collection property="fileList" select="selectFileList"
+         column="BOARD_NO" javaType="java.util.ArrayList" ofType="BoardFile">
+      </collection>
+
+   </resultMap>
+   
+   <resultMap type="BoardFile" id="boardFile_rm">
+      <id property="boardFileNo" column="BOARD_FILE_NO" />
+
+      <result property="boardFilePath" column="BOARD_FILE_PATH" />
+      <result property="boardFileOriginal" column="BOARD_FILE_ORIGINAL" />
+      <result property="boardFileRename" column="BOARD_FILE_RENAME" />
+      
+      <result property="boardFileCategoryNo" column="BOARD_FILE_CATEGORY_NO" />
+      <result property="boardNo" column="BOARD_NO" />
+   </resultMap>
+   
+   
 	<!-- 이메일 중복 확인 -->
 	<select id="checkEmail" resultType="_int" >
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE MEMBER_EMAIL = #{email}
 	</select>
-
-
 	
+	<!-- 회원 번호로 학과 조회 -->
+	<select id="selectInfo" parameterType="string" resultType="string">
+		SELECT D.DEPARTMENT_NAME
+		FROM MEMBER M
+		JOIN DEPARTMENT D ON D.DEPARTMENT_NO = M.DEPARTMENT_NO
+		WHERE M.MEMBER_NO = #{number} 
+	</select>
+	
+	<!-- 공지사항 게시판 메인페이지 노출 -->
+	<select id="selectAnnouncement" resultMap="board_rm">
+		SELECT *
+		FROM (
+		    SELECT BOARD_NO, BOARD_TITLE, BOARD_COUNT, BOARD_CONTENT, BOARD_ST,
+		        (SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME
+		        FROM BOARD_FILE F
+		        WHERE F.BOARD_NO = B.BOARD_NO) AS THUMBNAIL
+		        FROM BOARD B
+		        WHERE CATEGORY_NO = 1
+		        AND BOARD_ST = 'N'
+		        ORDER BY BOARD_NO DESC
+		)
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+   <!-- 특정 게시글 이미지 조회 -->
+   <select id="selectFileList" resultMap="boardFile_rm">
+		SELECT * 
+		FROM BOARD_FILE F
+		JOIN BOARD B ON B.BOARD_NO = F.BOARD_NO
+		WHERE B.BOARD_NO = F.BOARD_NO
+   </select>
+
 
 </mapper>

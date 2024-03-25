@@ -27,18 +27,6 @@
             <div class="student-area">
                 <!-- 재적 상태 값 불러오기 -->
                 <div class="student-status">
-                    <%-- <c:if test="${loginMember.memberStatus == 'N'}" >
-                        <div>${loginMember.memberName}학생 상태 : 재학중</div>
-                    </c:if>
-                    <c:if test="${loginMember.memberStatus == 'Y'}" >
-                        <div>${loginMember.memberName}학생 상태 : 휴학중</div>
-                    </c:if>
-                    <c:if test="${loginMember.memberStatus == 'P'}" >
-                        <div>${loginMember.memberName}학생 상태 : 졸업</div>
-                    </c:if>
-                    <c:if test="${loginMember.memberStatus == 'D'}" >
-                        <div>${loginMember.memberName}학생 상태 : 중퇴</div>
-                    </c:if> --%>
 
                     <c:if test="${!empty param.key}">
                         <c:set var="sp" value="&key=${param.key}&query=${param.query}"/>
@@ -79,7 +67,7 @@
 
                         <c:forEach items="${studentList}" var="student">
                             <div class="student-info-value">
-                                <div class="studentMemberNo">${student.memberNo}</div>
+                                <div class="studentMemberNo" title="클릭 시, 해당 학생이 수강중인 강의 목록 조회">${student.memberNo}</div>
                                 <div class="studentMemberName">${student.memberName}</a></div>
                                 <div>${student.memberGrade}</div>
                                 <div>${student.memberTerm}</div>
@@ -94,7 +82,7 @@
                         <div id="myModal" class="modal">
                             <div class="modal-content">
                                 <!-- 모달 닫기 버튼 -->
-                                <span class="close">&times;</span>
+                                <div class="close"></div>
                                 <!-- 강의 정보를 표시할 영역 (lectureInfo) -->
                                 <div id="lectureInfo"></div>
                             </div>
