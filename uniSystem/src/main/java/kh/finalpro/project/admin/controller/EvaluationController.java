@@ -1,5 +1,6 @@
 package kh.finalpro.project.admin.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,39 @@ public class EvaluationController {
 			  Model model
 			, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp 
 			, RedirectAttributes ra 
-			, @SessionAttribute(value = "loginMember", required = false) Member loginMember ) {
+			, @SessionAttribute(value = "loginMember", required = false) Member loginMember 
+			, @RequestParam Map<String, Object> paramMap) {
 		
 		String memberNo = loginMember.getMemberNo().substring(0,2); // 교수면 02 | 교직원은 03
 		
-		// 평가 목록 전부 가져오기
-		Map<String, Object> map = service.selectLateList(cp);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(paramMap.get("key") == null) {
+			
+			if(memberNo.equals("02")) {
+				// 해당 교수 평가만 가져오기
+				map = service.selectLateList(cp, loginMember);
+				
+			} else {
+				
+				// 평가 목록 전부 가져오기
+				map = service.selectLateList(cp);
+			}
+			
+		} else {
+			// 검색어가 있으면서 교수일때
+			if(memberNo.equals("02")) {
+				
+				paramMap.put("memberNo", loginMember.getMemberNo());
+				map = service.selectLateList(cp, paramMap);
+				
+			} else {
+				
+				// 평가 목록 전부 가져오기(검색어)
+				map = service.selectLateList(cp, paramMap);
+			}
+		}
+		
 		
 		model.addAttribute("map", map);
 		

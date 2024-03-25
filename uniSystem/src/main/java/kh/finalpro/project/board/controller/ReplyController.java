@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kh.finalpro.project.board.model.dto.Reply;
+import kh.finalpro.project.board.model.service.ReplyService;
 import kh.finalpro.project.board.model.service.ReplyServiceImpl;
 
 @RestController
 public class ReplyController {
 
 	@Autowired
-	private ReplyServiceImpl service;
+	private ReplyService service;
 	
 	
 	
