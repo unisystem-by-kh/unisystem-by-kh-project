@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.dto.Pagination;
+import kh.finalpro.project.collegian.model.dto.Task;
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Department;
 
@@ -97,6 +98,14 @@ public class CollegianDAO {
 
 	public int checkClassMax(Map<String, Object> map) {
 		return sqlSession.selectOne("collegianMapper.checkClassMax", map);
+	}
+
+	public List<Class> selectTaskList(Member loginMember) {
+		return sqlSession.selectList("collegianMapper.selectTaskList",loginMember);
+	}
+
+	public int insertTask(Task task) {
+		return sqlSession.insert("collegianMapper.insertTask", task);
 	}
 	
 

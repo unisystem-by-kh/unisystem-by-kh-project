@@ -26,8 +26,24 @@
 		
 		<result property="lectureFL" column="LECTURE_FL" />
 		<result property="lectureCount" column="LECTURE_COUNT" />
+
+		<result property="taskRoute" column="TASK_ROUTE" />
+		<result property="taskDate" column="TASK_DATE" />
+		<result property="taskNo" column="TASK_NO" />
 		
 
+	</resultMap>
+	
+	
+	<resultMap type="Task" id="Task_rm">
+		<id property="fileNo" column="FILE_NO"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileRename" column="FILE_RENAME"/>
+		<result property="fkindNo" column="FKIND_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="taskNo" column="TASK_NO"/>
+	
 	</resultMap>
 	
 	<resultMap type="Department" id="department_rm">
@@ -195,6 +211,34 @@
 							WHERE A.CLASS_NO = Z.CLASS_NO)
 		AND A.CLASS_NO = #{classNo}
 	</select>
+	
+	<select id="selectTaskList" resultMap="class_rm">
+		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, DEPARTMENT_NAME, C.MEMBER_NAME, 
+        TASK_ROUTE, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, TASK_NO     
+	    FROM CLASS A
+	    JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+	    JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
+	    JOIN LECTURE L ON (L.CLASS_NO = A.CLASS_NO)
+        JOIN TASK T ON (T.CLASS_NO = A.CLASS_NO)
+	    
+	    WHERE A.DEPARTMENT_NO = (SELECT DEPARTMENT_NO FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+	    
+	    AND L.LECTURE_GRADE = (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		AND L.LECTURE_TERM = (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		AND L.MEMBER_NO = #{memberNo}
+	    
+        AND T.TASK_NO IS NOT NULL
+                
+	    ORDER BY 1
+	
+	</select>
+	
+	<insert id="insertTask" parameterType="Task">
+	
+		INSERT INTO FILEZIP VALUES
+		(SEQ_FILE_ZIP_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5,#{memberNo},#{taskNo})
+	
+	</insert>
 
 
 </mapper>

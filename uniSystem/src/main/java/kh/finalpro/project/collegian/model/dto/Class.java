@@ -24,6 +24,13 @@ public class Class {
 	private String departmentName;
 	private String memberName;
 	
-	private int lectureFL;
-	private int lectureCount;
+	private int lectureFL; // 수강 신청 여부
+	private int lectureCount; // 수강 인원
+	
+	// 과제물
+	private String taskRoute;
+	private String taskDate;
+	private int taskNo;
+	
+	
 }

@@ -1,9 +1,11 @@
 package kh.finalpro.project.collegian.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.main.model.dto.Member;
@@ -23,5 +25,9 @@ public interface CollegianService {
 	List<Class> selectMyClasses(Member mem);
 
 	int deleteMyClass(Map<String, Object> map);
+
+	List<Class> selectTaskList(Member loginMember);
+
+	int insertTask(Member loginMember, int taskNo, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException  ;
 
 }
