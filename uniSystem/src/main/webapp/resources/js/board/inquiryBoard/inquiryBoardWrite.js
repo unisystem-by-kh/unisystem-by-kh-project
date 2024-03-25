@@ -2,10 +2,11 @@
 const boardWriteFrm = document.getElementById("boardWriteFrm");
 const boardTitle = document.getElementsByName("boardTitle")[0];
 const boardContent = document.getElementsByName("boardContent")[0];
-const boardSt = document.getElementsByName("boardSt")[0,1];
+const boardSt = document.getElementsByName("boardSt");
 
 boardWriteFrm.addEventListener("submit", e => {
 
+   
     if(boardTitle.value.trim().length == 0){
         alert("제목을 입력해주세요.");
         boardTitle.value = "";
@@ -21,12 +22,14 @@ boardWriteFrm.addEventListener("submit", e => {
         e.preventDefault();
         return ;
     }
+    
+        if(boardSt[0].checked == false && boardSt[1].checked == false){
+            alert("공개여부를 선택해주세요")
+            e.preventDefault();
+            return ;
+        }else{
+            alert("등록되었습니다.")
+        }
 
-    if(!boardSt.checked){
-        alert("공개여부를 선택해주세요")
-        e.preventDefault();
-        return ;
-    }else{
-        alert("등록되었습니다.")
-    }
+    
 })

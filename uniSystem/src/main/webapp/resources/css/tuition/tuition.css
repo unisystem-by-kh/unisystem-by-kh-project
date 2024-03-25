@@ -1,5 +1,5 @@
 main{
-    width: 1200px;
+    width: 1400px;
     margin: auto;
 }
 
@@ -10,10 +10,9 @@ main{
 }
 
 .pay-main{
-    width: 750px;
+    width: 800px;
     height: 300px;
     margin: 30px auto;
-    border: 1px solid #ddd;
 }
 
 
@@ -220,7 +219,7 @@ main{
     height: 200px;
     border: 1px solid black;
     border-radius: 5px;
-    margin: auto;
+    margin:  30px auto;
 }
 .pay-clear > div:nth-of-type(1){
     width: 100%;
@@ -266,6 +265,9 @@ main{
     cursor: pointer;
     color: black;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pay-clear-button > a:hover{
@@ -273,3 +275,44 @@ main{
     color: white;
     border-radius: 5px;
 }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 1200px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.bill-details {
+    margin-bottom: 20px;
+    width: 800px;
+    margin: auto;
+}
+.bill-details h2 {
+    margin-bottom: 10px;
+    margin: auto;
+}
+.bill-details table {
+    width: 800px;
+    margin: auto;
+    border-collapse: collapse;
+}
+.bill-details th, .bill-details td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+.total {
+    text-align: right;
+    margin-top: 20px;
+    width: 800px;
+    margin: auto;
+}
+

@@ -70,6 +70,10 @@
 	</main>
 
 
+	<script>
+	const boardNo = "${board.boardNo}";
+	</script>
+
 	<script src="/resources/js/board/inquiryBoard/inquiryBoardDetail.js"></script>
 	<script src="/resources/js/board/inquiryBoard/inquiryBoardWrite.js"></script>
 </body>
