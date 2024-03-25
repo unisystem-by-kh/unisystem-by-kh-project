@@ -71,6 +71,14 @@
                 </div>
 
                 <div class="object-select-area">
+                    <select name="objectList" id="objectList">
+                        <option value="JAVA">JAVA</option>
+                        <option value="HTML">HTML</option>
+                        <option value="Spring">Spring</option>
+                    </select>
+                </div>
+
+                <div class="object-select-area">
                     <button id="searchBtn">조회하기</button>
                 </div>
             </div>
@@ -85,6 +93,7 @@
                     <div>학년</div>
                     <div>학기</div>
                     <div>학과</div>
+                    <div>과목</div>
                     <div>성적</div>
                 </div>
 
@@ -95,106 +104,14 @@
                         <div>1</div>
                         <div>1</div>
                         <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
-                    </div>
-                    <div class="grade-content">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>경영학과</div>
-                        <div>성적</div>
+                        <div>JAVA</div>
+                        <div><input type="text"></div>
                     </div>
                 </div>
+            </div>
+
+            <div class="object-select-area">
+                <button id="searchBtn">성적등록</button>
             </div>
 
         </div>

@@ -133,7 +133,8 @@
     font-weight: bold;
     font-size: 0.9em;
 
-    margin-right: -100px;
+    /* margin-right: -100px; */
+    margin-left: 60px;
 
     cursor: pointer;
 
@@ -162,7 +163,7 @@ body{
 /* 성적조회 영역 */
 .grade-area{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
 
@@ -189,7 +190,7 @@ body{
 }
 /* 목차 하나씩 */
 .grade-title > div{
-    width: 215px;
+    width: 184.5px;
     height: 30px;
 
     border: 1px solid gray;
@@ -211,7 +212,7 @@ body{
 }
 /* 정보 하나씩 */
 .grade-content > div{
-    width: 215px;
+    width: 190px;
     height: 30px;
 
     border: 1px solid #ddd;
