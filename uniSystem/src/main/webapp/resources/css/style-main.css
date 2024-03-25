@@ -87,7 +87,7 @@ a{
 
 /* 교수 로그인시 */
 .navigation1-row2-professor{
-    width: 350px;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +95,7 @@ a{
 }
 /* 교수이름영역 */
 .navigation1-row2-professor > :nth-child(1){
-    width: 220px;
+    width: 250px;
     font-size: 16px;
 }
 /* 교수이름 */
@@ -227,7 +227,7 @@ a{
     font-size: 20px;
     width: 1000px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .navigation2-row2 > a{
     color: black;
@@ -240,49 +240,12 @@ a{
 
 /* 세번째줄 네비게이션바 */
 .navigation3{
-    width: 1200px;
+    width: 1400px;
     height: 45px;
-
-    margin-left: 200px;
 
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
-.navigation3 > a{
-    color: black;
-}
-
-
-/* 세번째줄 네비게이션바 안에 a태그 */
-.navigation3-home , .navigation3-student , .navigation3-subject , .navigation3-exam , .navigation3-professor , .navigation3-otherW{
-    margin-left: 50px;
-    font-size: 14px;
-    width: 800px;
-    display: none;
-    justify-content: space-around;
-    opacity: 0;
-    transition: opacity 1s ease-in-out; /* 트랜지션을 설정합니다. */
-    color: black;
-}
-
-.navigation3-home , .navigation3-student , .navigation3-subject , .navigation3-exam , .navigation3-professor , .navigation3-otherW{
-    margin-left: 50px;
-    font-size: 14px;
-    width: 800px;
-    display: none;
-    justify-content: space-around;
-    opacity: 0;
-    transition: opacity 1s ease-in-out; /* 트랜지션을 설정합니다. */
-    color: black;
-}
-.navigation3-home > a:hover , .navigation3-student > a:hover , .navigation3-subject > a:hover , .navigation3-exam > a:hover , .navigation3-professor > a:hover , .navigation3-otherW > a:hover{
-    color: crimson;
-    text-decoration: underline;
-}
-
-.navigation3-otherW > a{
-    color: black;
 }
 
 
@@ -383,19 +346,17 @@ animation-iteration-count: infinite;
 .logoutBtn{
     margin-bottom: 45px;
 }
-.logoutBtn > button{
-    width: 100px;
+.logoutBtn > :nth-child(1){
+    width: 130px;
     height: 40px;
-    background-color: white;
-    border-radius: 7px;
-    border: 1px solid crimson;
+    font-size: 1.0em;
     font-weight: bold;
     cursor: pointer;
 }
-.logoutBtn > button:hover{
-    transition-duration: 0.5s;
-    border: 1px solid black;
-    font-size: 1.0em
+.logoutBtn > :nth-child(1):hover{
+    transition-duration: 0.35s;
+    color: crimson;
+    text-decoration: underline;
 }
 .recode-area{
     font-weight: bold;
@@ -414,7 +375,7 @@ animation-iteration-count: infinite;
 }
 
 /* 게시판 선택 버튼 각 영역 */
-.button-area > button{
+.button-area > a , .button-area > a > button{
     width: 175px;
     height: 35px;
     border: 1px solid crimson;
@@ -426,12 +387,12 @@ animation-iteration-count: infinite;
     align-items: center;
     font-weight: bold;
 }
-.button-area > button:hover{
+.button-area > a > button:hover{
     transition-duration: 0.5s;
     background-color: crimson;
     color: white;
 }
-.button-area > button > a:hover{
+.button-area > a > button:hover{
     color: white;
 }
 
@@ -567,3 +528,10 @@ footer span{
     padding : 0 10px;
 }
 /* --------------------- 푸터부분 끝 --------------------- */
+
+
+
+.date{
+    margin-top: -25px;
+    margin-bottom: 15px;
+}

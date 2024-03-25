@@ -42,7 +42,6 @@
 
 .number > span{
     margin-left: 15px;
-    color: red;
 }
 
 #inputNo{
@@ -75,7 +74,6 @@ input:focus{
 
 .pw > span{
     margin-left: 15px;
-    color: red;
 }
 
 #inputPw{
@@ -104,7 +102,6 @@ input:focus{
 
 .pw2 > span{
     margin-left: 15px;
-    color: red;
 }
 
 #inputPw2{
@@ -134,7 +131,6 @@ input:focus{
 
 .name > span{
     margin-left: 15px;
-    color: red;
 }
 
 #inputName{
@@ -215,7 +211,6 @@ input:focus{
 
 .email > span{
     margin-left: 15px;
-    color: red;
 }
 
 #inputEmail{
@@ -297,7 +292,6 @@ input:focus{
 
 .tel > span{
     margin-left: 15px;
-    color: red;
 }
 
 #inputTel{
@@ -383,7 +377,6 @@ input:focus{
 
 .type span{
     margin-left: 15px;
-    color: red;
 }
 
 .frmBtn{
@@ -409,3 +402,11 @@ input:focus{
     background-color: crimson;
 }
 
+
+
+.confirm{ color : green; }
+.error{ color : red; }
+
+#genMessage{
+    margin-left: 50px;
+}

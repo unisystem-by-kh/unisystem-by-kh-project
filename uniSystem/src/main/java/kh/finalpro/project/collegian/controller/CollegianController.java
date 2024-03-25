@@ -1,5 +1,7 @@
 package kh.finalpro.project.collegian.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kh.finalpro.project.collegian.model.dto.Class;
-import kh.finalpro.project.collegian.model.dto.Member;
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.service.CollegianService;
 
 @Controller
@@ -29,20 +32,11 @@ public class CollegianController {
 	// 교과목 조회 페이지 전환
 	@GetMapping("/classList")
 	public String selectClassList(Model model, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			@RequestParam Map<String, Object> paramMap) {
+			@RequestParam Map<String, Object> paramMap
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
 
-		// 테스트
 
-		int departmentNo = 10;
-		int memberGrade = 1;
-		int memberTerm = 1;
-		// 까지
-
-		Member mem = new Member();
-
-		mem.setDepartmentNo(departmentNo);
-		mem.setMemberGrade(memberGrade);
-		mem.setMemberTerm(memberTerm);
+		Member mem = loginMember;
 
 		Map<String, Object> map = null;
 
@@ -73,22 +67,15 @@ public class CollegianController {
 
 	// 수강신청 페이지 전환
 	@GetMapping("/myClass")
-	public String myClass(Model model, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			@RequestParam Map<String, Object> paramMap) {
+	public String myClass(Model model, @RequestParam Map<String, Object> paramMap
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
 
-		// 테스트
-
-		int departmentNo = 10;
-		int memberGrade = 1;
-		int memberTerm = 1;
-		// 까지
-
-		Member mem = new Member();
+		Member mem = loginMember;
 		
-		mem.setMemberNo("01-2412345");
-		mem.setDepartmentNo(departmentNo);
-		mem.setMemberGrade(memberGrade);
-		mem.setMemberTerm(memberTerm);
+//		mem.setMemberNo("01-2412345");
+//		mem.setDepartmentNo(departmentNo);
+//		mem.setMemberGrade(memberGrade);
+//		mem.setMemberTerm(memberTerm);
 
 		Map<String, Object> map = null;
 
@@ -97,21 +84,82 @@ public class CollegianController {
 
 			paramMap.put("query", ((String) paramMap.get("query")).toUpperCase()); // 검색어 대문자로 변환
 
-			map = service.searchLecture(paramMap, cp);
+			map = service.searchLecture(paramMap);
 
 		} else {
-			map = service.selectLecture(mem, cp);
+			map = service.selectLecture(mem);
 		}
+		
+		// 수강 신청 내역 조회
+		List<Class> myClassList = service.selectMyClasses(mem);
+		
+		//System.out.println("수강 신청 내역"+myClassList);
+		
+		map.put("myClassList", myClassList);
 
 		model.addAttribute("map", map);
 
 		return "/collegian/myClass";
 	}
+	
+	// 수강 신청 비동기
+	@PostMapping("/insertLecture")
+	@ResponseBody
+	public int insertMyClass(@RequestBody Map<String, Object> paramMap) {
+		
+		String classes = (String) paramMap.get("classes");
+		
+		String[] classNoList = classes.replace(" ","").split("\\s*/\\s*");
+		
+		// System.out.println(Arrays.toString(classNoList));
+		
+		Member mem = new Member();
+
+		mem.setMemberNo((String)paramMap.get("memberNo"));
+		
+		int result = service.insertMyClass(classNoList,mem);
+		
+		return result;
+		
+	}
+	
+	// 수강 과목 삭제 비동기
+	@PostMapping(value="/deleteLecture" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public int deleteMyClass(@RequestBody Map<String, Object> paramMap) {
+		
+//		System.out.println("연결");
+//		
+//		String classNo = (String) paramMap.get("classNo");
+//		
+//		int memberNo = (int) paramMap.get("memberNo");
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("classNo", classNo);
+//		map.put("memberNo", memberNo);
+		
+		int result = service.deleteMyClass(paramMap);
+		
+		return result;
+	}
+	
+	
 
 	// 시간표 페이지 전환
-	@RequestMapping("/schedule")
-	public String schedule() {
+	@GetMapping("/schedule")
+	public String schedule(Model model
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+				
+		// 수강 신청 내역 조회
+		List<Class> myClassList = service.selectMyClasses(loginMember);
+		
+		map.put("myClassList", myClassList);
 
+		model.addAttribute("map", map);
+		
 		return "/collegian/schedule";
 	}
 

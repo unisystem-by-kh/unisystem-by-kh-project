@@ -36,8 +36,16 @@
 						<div class="select">
 							<select name="major" id="">
 								<c:forEach items="${department}" var="d">
-									<option value="${d.departmentNo}">${d.departmentName}</option>
+									
+									<c:if test="${d.departmentNo == loginMember.departmentNo}" >
+										<option value="${d.departmentNo}" selected>${d.departmentName}</option>
+									</c:if>
+
+									<c:if test="${d.departmentNo != loginMember.departmentNo}" >
+										<option value="${d.departmentNo}">${d.departmentName}</option>
+									</c:if>
 								</c:forEach>
+								<option value=0>전체</option>
 							</select>
 						</div>
 						<div class="select">

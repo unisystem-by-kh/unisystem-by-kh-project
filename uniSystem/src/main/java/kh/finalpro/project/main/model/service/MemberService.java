@@ -33,6 +33,12 @@ public interface MemberService {
 	 */
 	String findMemberPw(Member inputMember);
 
+	
+	/** 회원 가입 시 미리 번호가 생성되어 있는 회원 목록 조회
+	 * @param loginMemberInfo
+	 * @return loginMemberInfo
+	 */
+	Map<String, Object> memberList();
 
 
 }

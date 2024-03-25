@@ -85,8 +85,7 @@
                             <!-- 게시글 목록 조회 결과가 있다면 -->
                             <c:forEach var="board" items="${boardList}">
                                 <tr>
-                                    <th><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a>   
-                                                    [${board.replyCount}] </th>
+                                    <th><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a> [${board.replyCount}] </th>
                                     <th>${board.memberName}</th>
                                     <th>${board.boardCDate}</th>
                                 </tr>
@@ -110,7 +109,7 @@
                     <!-- 이전 목록 마지막 번호로 이동 -->
                     <li><a href="/board/${categoryNo}?cp=${pagination.prevPage}${sp}">&lt;</a></li>
 
-					
+                    
                     <!-- 특정 페이지로 이동 -->
                     <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                         <c:choose>
@@ -137,11 +136,8 @@
                 
     <%-- 글쓰기 버튼 --%>
      <c:if test="${!empty loginMember}">
-        <button id="writeBtn">작   성</button>
-     </c:if>
-
-
-
+         <a href="/board/${categoryNo}/insert"><button id="writeBtn">작   성</button></a>
+    </c:if>
 
 
 

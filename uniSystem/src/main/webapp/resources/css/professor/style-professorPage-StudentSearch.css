@@ -3,7 +3,7 @@
 } */
 /* 학생 정보 영역 */
 .student-area{
-    width: 720px;
+    width: 1000px;
     height: 600px;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@
 
 /* 표 영역 */
 .student-info-area{
-    width: 690px;
+    width: 1000px;
     max-height: 550px;
     overflow-y: auto;
 }
@@ -50,7 +50,7 @@
     justify-content: center;
     align-items: center;
 
-    width: 100px;
+    width: 300px;
     height: 27px;
     border: 1px solid gray;
     font-size: 1.05em;
@@ -63,9 +63,10 @@
 .student-info-value{
     display: flex;
 }
-.student-info-value > :nth-child(2):hover{
+.student-info-value > :nth-child(1):hover{
     text-decoration: underline;
     cursor: pointer;
+    color: crimson;
 }
 
 /* 학생 정보 값 각 영역 */
@@ -74,10 +75,14 @@
     justify-content: center;
     align-items: center;
 
-    width: 100px;
+    width: 150px;
     height: 27px;
     border: 1px solid #ddd;
-    font-size: 1.05em;
+    font-size: 0.85em;
+
+    white-space: nowrap;
+    overflow: hidden;
+
 }
 
 /* 시간표 */
@@ -140,4 +145,78 @@
     height: 53px;
     border: 1px solid #ddd;
     font-size: 1.1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 모달 스타일 */
+.modal {
+    display: none; /* 모달 숨김 */
+    position: fixed; /* 고정 위치 */
+    z-index: 1; /* 다른 요소들 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* 모달 내용이 너무 많아서 화면을 벗어날 경우 스크롤 허용 */
+    background-color: rgba(0,0,0,0.5); /* 배경색과 투명도 */
+}
+
+/* 모달 콘텐츠 스타일 */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 모달 콘텐츠를 화면 중앙에 배치 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px; /* 최대 너비 지정 */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/* 모달 닫기 버튼 스타일 */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* 강의 정보 스타일 */
+.lecture-info {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+}
+
+#lectureInfo > :nth-child(1){
+    color: red;
 }

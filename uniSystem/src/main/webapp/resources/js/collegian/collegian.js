@@ -42,7 +42,7 @@ for (let i of selectBoxes) {
         .then(res => res.json())
         .then(searchList => {
             
-            history.replaceState({}, null, location.pathname);
+            history.replaceState({}, null, location.pathname); // 주소의 파라미터 값 지움
             
             document.getElementsByName("query")[0].value = '';
 

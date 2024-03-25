@@ -22,25 +22,26 @@
 			<h1>학과 공지</h1>
 		</div>
 		<div class="date-con">
-			<div>작성일 : 2024.02.22</div>
+			<div>작성일 : ${board.boardCDate}</div>
 			|
-			<div>수정일 : 2024.02.23</div>
+			<div>수정일 : ${board.boardUDate}</div>
 			|
-			<div>작성자 : 관리자</div>
+			<div>작성자 : ${board.memberName}</div>
 			|
-			<div>조회수 : 1</div>
+			<div>조회수 : ${board.readCount}</div>
 		</div>
 		<div class="title-con">
-			<div>제목</div>
+			<div>${board.boardTitle}</div>
 		</div>
 		<div class="image-con"></div>
-		<div class="content-con"></div>
+		<div class="content-con">${board.boardContent}</div>
 		<div class="file-button">
 			<div>첨부파일 :</div>
 			<div>첨부된 파일이 없습니다.</div>
 			<div>
-				<button>수정</button>
-				<button>삭제</button>
+				<button id="updateBtn">수정</button>
+				<button id="deleteBtn">삭제</button>
+				<button id="goToListBtn">목록으로</button>
 			</div>
 		</div>
 

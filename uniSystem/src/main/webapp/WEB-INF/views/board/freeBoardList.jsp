@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNI-SYSTEM</title>
+    <title>UNI-SYSTEM.FreeBoard</title>
 
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/board/freeBoardList.css">
@@ -66,7 +66,7 @@
 
                 <!-- 게시글작성 버튼 -->
                 <div class="board-insert-area">
-                    <div><button><a href="/board/freeBoardInsert" style="color: gray;">게시글 작성</a></button></div>
+                    <div><button><a href="/board/${categoryNo}/insert" style="color: gray;">게시글 작성</a></button></div>
                 </div>
                 
             </div>
@@ -106,10 +106,12 @@
                                 <a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">
                                     <!-- 썸네일이 있을 경우 -->
                                     <c:if test="${!empty board.fileList}">
-                                        <%-- 수정 필요 --%>
-                                        <%-- <div><img src="${board.fileList}" alt="#"></div> --%>
+                                        <div><img src="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"></div>
                                     </c:if>
-                                    <div><img src="https://iuc.cnu.ac.kr/_custom/cnu/resource/img/tmp_gallery.png" alt="#"></div>
+                                    <!-- 썸네일이 없을 경우 -->
+                                    <c:if test="${empty board.fileList}">
+                                        <div></div>
+                                    </c:if>
                                     <div>${board.boardTitle}</div>
                                     <div>${board.boardContent}</div>
                                 </a>

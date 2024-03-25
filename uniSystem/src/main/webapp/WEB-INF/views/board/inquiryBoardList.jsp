@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pagination" value="${map.pagination}" />
 <c:set var="boardList" value="${map.boardList}" />
 <!DOCTYPE html>
@@ -69,15 +69,16 @@
 							<tr>
 								<td>${board.boardNo}</td>
 								<td>
+									<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">'${board.memberName}'님의 문의글입니다.</a>
+											
 									<!-- ${boardCode} : @PathVariable로 request scope에 추가된 값 --> 
-									<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}">${board.boardTitle}</a>
 									<c:choose>
 										<c:when test="${board.boardSt == 'D' }">
 
 										</c:when>
 										<c:otherwise>
 										🔒
-									</c:otherwise>
+										</c:otherwise>
 									</c:choose>
 								</td>
 								<td>${board.memberName}</td>
@@ -137,10 +138,11 @@
 
 			</ul>
 		</div>
-		<div class="btn-area">
-			<a href="/board/${categoryNo}/write" id="btn">문의하기</a>
-		</div>
-
+		<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '01'}" >
+			<div class="btn-area">
+				<a href="/board/${categoryNo}/write" id="btn">문의하기</a>
+			</div>
+		</c:if>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
 </body>

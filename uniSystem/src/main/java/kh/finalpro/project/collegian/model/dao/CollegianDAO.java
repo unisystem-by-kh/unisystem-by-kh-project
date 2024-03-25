@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.finalpro.project.collegian.model.dto.Member;
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.dto.Pagination;
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Department;
@@ -65,23 +65,39 @@ public class CollegianDAO {
 		return sqlSession.selectList("collegianMapper.selectDepartmentList");
 	}
 
-	public List<Class> selectLecture(Member mem, Pagination pagination) {
+	public List<Class> selectLecture(Member mem) {
 		
-		// 1) offset 계산
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		// 2) RowBounds 객체 생성
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+//		// 1) offset 계산
+//		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+//
+//		// 2) RowBounds 객체 생성
+//		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		return sqlSession.selectList("collegianMapper.selectLecture",mem,rowBounds);
+		return sqlSession.selectList("collegianMapper.selectLecture",mem);
 	}
 
-	public List<Class> searchLecture(Pagination pagination, Map<String, Object> paramMap) {
+	public List<Class> searchLecture( Map<String, Object> paramMap) {
+		
 		return null;
 	}
-	
-	
-	
+
+	public int insertMyClass(Map<String, Object> map) {
+		
+		return sqlSession.insert("collegianMapper.insertMyClass",map);
+	}
+
+	public List<Class> selectMyClasses(Member mem) {
+		
+		return sqlSession.selectList("collegianMapper.selectMyClasses",mem);
+	}
+
+	public int deleteMyClass(Map<String, Object> map) {
+		return sqlSession.delete("collegianMapper.deleteMyClass", map);
+	}
+
+	public int checkClassMax(Map<String, Object> map) {
+		return sqlSession.selectOne("collegianMapper.checkClassMax", map);
+	}
 	
 
 }

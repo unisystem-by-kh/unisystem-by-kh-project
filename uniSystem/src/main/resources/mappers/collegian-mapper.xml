@@ -145,10 +145,56 @@
 	ORDER BY 1
 		
 	</select>
+	
+	<insert id="insertMyClass" parameterType="map">
+		INSERT INTO LECTURE VALUES( #{classNo} , #{memberNo} , DEFAULT ,
+		 	(SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo}) ,
+		 	(SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo}) )
+	</insert>
+	
+	<select id="selectMyClasses" resultMap="class_rm">
+		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, C.MEMBER_NAME, CLASS_MAX,
+        (SELECT COUNT(*) FROM LECTURE Z
+            WHERE A.CLASS_NO = Z.CLASS_NO) LECTURE_COUNT,
+        (SELECT COUNT(*) FROM LECTURE R
+		    WHERE R.MEMBER_NO = #{memberNo}
+		    AND R.CLASS_NO = A.CLASS_NO) LECTURE_FL
+	    FROM CLASS A
+	    JOIN DEPARTMENT B  ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+	    JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
+	    JOIN LECTURE L ON (L.CLASS_NO = A.CLASS_NO)
+	    
+	    WHERE A.DEPARTMENT_NO = #{departmentNo}
+	    
+	    AND L.LECTURE_GRADE = #{memberGrade}
+		AND L.LECTURE_TERM = #{memberTerm}
+		
+	    AND L.MEMBER_NO = #{memberNo}
+	    
+	    ORDER BY 1
+		
+	</select>
 
-
-
-
+	<delete id="deleteMyClass" parameterType="map">
+		
+		DELETE LECTURE
+		
+		WHERE CLASS_NO = #{classNo}
+		
+		AND LECTURE_GRADE = (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		AND LECTURE_TERM = (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		
+		AND MEMBER_NO = #{memberNo}
+	
+	</delete>
+	
+	<select id="checkClassMax" resultType="_int">
+		SELECT COUNT(*)
+		FROM CLASS A
+		WHERE CLASS_MAX > (SELECT COUNT(*) FROM LECTURE Z
+							WHERE A.CLASS_NO = Z.CLASS_NO)
+		AND A.CLASS_NO = #{classNo}
+	</select>
 
 
 </mapper>

@@ -27,4 +27,16 @@ public class Member {
 	
 	private int departmentNo; // 학과코드
 	private String departmentName; // 학과이름
+
+	private int departmentPrice; // 등록금
+
+	
+	// 성적관련으로 편하게 선언
+	private String memberAge; // 나이 변환
+	private int lecturePoint; // 성적
+	private int lectureCount; // 수강 수
+	
+	private int classNo; // 수강과목번호
+	private String classNm; // 수강과목이름
+
 }
