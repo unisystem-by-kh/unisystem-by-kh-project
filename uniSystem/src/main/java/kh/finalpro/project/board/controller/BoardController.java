@@ -277,44 +277,7 @@ public class BoardController {
 		return path;
 	}
 
-	/*
-	 * //공지사항 작성페이지
-	 * 
-	 * @GetMapping("/{categoryNo:1}/noticeWrite") public String
-	 * noticeWrite(@PathVariable("categoryNo") int categoryNo , Board board // 커멘트
-	 * 객체(필드에 파라미터 담겨있음!) , @RequestParam(value="images", required = false)
-	 * List<MultipartFile> files , @SessionAttribute("loginMember") Member
-	 * loginMember , RedirectAttributes ra , HttpSession session ) throws
-	 * IllegalStateException, IOException {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * // 1. 로그인한 회원 번호를 얻어와 board에 세팅 board.setMemberNo(loginMember.getMemberNo());
-	 * 
-	 * // 2. boardCode도 board에 세팅 board.setCategoryNo(categoryNo);
-	 * 
-	 * // 3. 업로드된 이미지 서버에 실제로 저장되는 경로 // + 웹에서 요청 시 이미지를 볼 수 있는 경로(웹 접근 경로) String
-	 * webPath ="/resources/images/board/"; String filePath =
-	 * session.getServletContext().getRealPath(webPath);
-	 * 
-	 * // 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 int boardNo =
-	 * service.noticeBoardWrite(board, files, webPath, filePath);
-	 * 
-	 * // 게시글 삽입 성공 시 // -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트 // ->
-	 * /board/{boardCode}/{boardNo}
-	 * 
-	 * String message = null; String path = "redirect:";
-	 * 
-	 * if(boardNo > 0) { //성공 시 message = "게시글이 등록되었습니다."; path += "/board/" +
-	 * categoryNo + "/" + boardNo;
-	 * 
-	 * } else { message = "게시글 등록 실패"; path += "insert"; }
-	 * 
-	 * ra.addFlashAttribute("message", message);
-	 * 
-	 * return path; }
-	 */
+	
 
 	// 1:1문의, 자료실 작성페이지
 	@PostMapping("/{categoryNo:[4,5]{1}}/write")
@@ -354,7 +317,48 @@ public class BoardController {
 		ra.addFlashAttribute("message",message);
 		return path;
 	}
+	
+	
+	
+	
+	//공지사항 작성페이지
+	@PostMapping("/{categoryNo:1}/insert")
+	public String noticeboardInsert(
+			@PathVariable("categoryNo") int categoryNo
+			, Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
+			, @RequestParam(value="file", required = false) List<MultipartFile> file
+			, @SessionAttribute(value="loginMember") Member loginMember
+			, RedirectAttributes ra
+			, HttpSession session)throws IllegalStateException, IOException {
 
+		// 1.로그인한 회원 번호를 얻어와 board에 세팅
+		board.setMemberNo(loginMember.getMemberNo());
+
+		// 2. boardCode도 board에 세팅
+		board.setCategoryNo(categoryNo);
+		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
+		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
+		String webPath = "/resources/images/board/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+
+
+		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 
+		int boardNo = service.noticeboardInsert(board, file, webPath, filePath);
+		// 게시글 삽입 성공 시
+		// -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트
+		// -> /board/{boardCode}/{boardNo} @PathVariable
+		String message = null; 
+		String path = "redirect:";
+		if(boardNo > 0) { // 성공 시 
+			message = "게시글이 등록되었습니다.";
+			path += "/board/" + categoryNo + "/" + boardNo;
+		}else {
+			message= "게시글 등록 실패 ㅠㅠ";
+			path += "write";
+		}
+		ra.addFlashAttribute("message",message);
+		return path;
+	}
 	// ----------------------------------------------------------------------------------
 
 	
@@ -614,53 +618,7 @@ public class BoardController {
 
 
 
-	//공지사항 작성페이지
-	@PostMapping("/{categoryNo:1}/insert")
-	public String noticeboardInsert(
-			@PathVariable("categoryNo") int categoryNo
-			, Board board // 커멘트 객체(필드에 파라미터 담겨있음!)
-			, @RequestParam(value="images", required = false) List<MultipartFile> files
-			, @SessionAttribute("loginMember") Member loginMember
-			, RedirectAttributes ra
-			, HttpSession session
-			) throws IllegalStateException, IOException {
-		
-		
-		
-		// 1. 로그인한 회원 번호를 얻어와 board에 세팅
-		board.setMemberNo(loginMember.getMemberNo());
-		
-		// 2. boardCode도 board에 세팅
-		board.setCategoryNo(categoryNo);
-		
-		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로
-		//	  + 웹에서 요청 시 이미지를 볼 수 있는 경로(웹 접근 경로)
-		String webPath ="/resources/images/board/";
-		String filePath = session.getServletContext().getRealPath(webPath);
-		
-		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기
-		int boardNo = service.noticeboardInsert(board, files, webPath, filePath);
-		
-		// 게시글 삽입 성공 시
-		// -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트
-		// -> /board/{boardCode}/{boardNo}
-		
-		String message = null;
-		String path = "redirect:";
-		
-		if(boardNo > 0) { //성공 시
-			message = "게시글이 등록되었습니다.";
-			path += "/board/" + categoryNo + "/" + boardNo;
-			
-		} else {
-			message = "게시글 등록 실패";
-			path += "insert";
-		}
-		
-		ra.addFlashAttribute("message", message);
-		
-		return path;
-	}
+	
 	
 
 	//공지사항 상세페이지

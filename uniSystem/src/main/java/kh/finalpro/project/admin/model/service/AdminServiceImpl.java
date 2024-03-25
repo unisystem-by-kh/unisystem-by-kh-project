@@ -18,6 +18,7 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 
 import kh.finalpro.project.admin.model.dao.AdminDAO;
+import kh.finalpro.project.admin.model.dto.Admin;
 import kh.finalpro.project.main.model.dto.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,16 @@ public class AdminServiceImpl implements AdminService{
 	public List<Member> selectList(String input) {
 		return dao.selectList(input);
 	}
+
+	@Override
+	public int saveUniqueNo(Admin admin) {
+		// TODO Auto-generated method stub
+		return dao.saveUniqueNo(admin);
+	}
+
+	
+	
+
 
 	
 

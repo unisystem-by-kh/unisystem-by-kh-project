@@ -56,9 +56,9 @@
             <c:if test="${loginMember.memberNo == board.memberNo}">
                 <button id="editBtn">수정</button>
                 <button id="deleteBtn">삭제</button>
+                <button id="cancelBtn">취소</button>
             </c:if>
-            <button id="cancelBtn">취소</button>
-            <button id="listBtn"><a href="/board/1"> 목 록</a> </button>
+            <a href="/board/1" id="listBtn"> 목 록</a> 
         </div>
         
     </div>

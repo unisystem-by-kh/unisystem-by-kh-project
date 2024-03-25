@@ -27,12 +27,13 @@
 }
 
 #radio1 {
-    margin-right: 100px;
+    margin-right: 80px;
     margin-top: 5px;
 }
 
-#radio2 {
+#radio3 {
     margin-top: 5px;
+    margin-right: 80px;
 }
 
 .checkList label, .checkList input[type="radio"] {
@@ -110,6 +111,8 @@ input[type="radio"]:checked {
 }
 
 
+
+
 /* 버튼/출력문구 */
 
 button, #complete, #completeNo {
@@ -135,4 +138,28 @@ button{
     margin-top: 20px;
     font-size: 30px;
     font-weight: bold;
+}
+
+#copyBtn{
+    font-size: 20px;
+    border: none;
+    background-color: white;
+}
+
+
+/* ----------------------- */
+
+#departmentGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%; /* 입력 그룹이 부모 요소의 전체 너비를 차지하도록 설정합니다. */
+}
+
+
+#copyBtn img {
+    width: 20px; /* 원하는 크기로 조절하세요 */
+    height: 20px; /* 원하는 크기로 조절하세요 */
+    margin-right: 2px; /* 이미지와 버튼 사이의 간격을 조절합니다 */
 }

@@ -204,3 +204,13 @@
     background-color: #ccc;
     font-weight: bold;
 }
+
+#a listBtn {
+    display: inline-block; /* Ensures the element respects width and height properties */
+    width: 100px;
+    height: 40px;
+    border: 1px solid #e1e1e2 ;
+    background-color: #e1e1e2;
+    /* Additional styling if needed */
+}
+

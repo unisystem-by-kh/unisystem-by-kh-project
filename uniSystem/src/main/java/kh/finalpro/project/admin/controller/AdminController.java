@@ -4,14 +4,20 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.finalpro.project.admin.model.dto.Admin;
 import kh.finalpro.project.admin.model.service.AdminService;
 import kh.finalpro.project.main.model.dto.Member;
 
@@ -23,9 +29,31 @@ public class AdminController {
 
 	//교직원  교번/학번 번호생성 페이지
 	@GetMapping("/UniqueNo")
-	public String uniqueNo() {
-		return "admin/UniqueNo";
+	public String showUniqueNoForm() {
+	    return "admin/UniqueNo";
 	}
+	//번호 생성 처리
+	@PostMapping("/UniqueNo")
+	public String generateUniqueNoAndSave(Admin admin,
+	                                      RedirectAttributes ra) {
+	    // 서비스를 통해 번호 생성 및 저장 메소드를 호출하고, 반환값을 받습니다.
+		System.out.println(admin);
+		
+	    int result = adminService.saveUniqueNo(admin);
+
+	    if (result == 1) {
+	        // 성공 시 메시지를 Flash 속성에 추가합니다.
+	        ra.addFlashAttribute("successMessage", "번호가 성공적으로 생성되었습니다.");
+	    } else {
+	        // 실패 시 메시지를 Flash 속성에 추가합니다.
+	        ra.addFlashAttribute("errorMessage", "번호 생성에 실패하였습니다.");
+	    }
+
+	    // 결과에 상관없이 UniqueNo 페이지로 리다이렉트합니다.
+	    return "redirect:/admin/UniqueNo";
+	}
+
+
 	
 	@GetMapping("/selectStudentList")
 	public String selectStudentList() {

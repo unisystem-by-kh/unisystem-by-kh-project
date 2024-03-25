@@ -439,74 +439,108 @@ public class BoardServiceImpl implements BoardService{
 		
 		return dao.noticeDetailBoard(map);
 	}
+	
+	
 
-	// 공지사항 작성 페이지
+	// 공지사항 작성 페이지----------------------------------
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int noticeboardInsert(Board board, List<MultipartFile> files, String webPath, String filePath) {
+	public int noticeboardInsert(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException{
 		// 0. XSS 방지 처리
-				board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
-				board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
-				
-			
-				int boardNo = dao.noticeboardInsert(board);
-			
-				if(boardNo > 0) { // 게시글 삽입 성공 시
-					
-					
-					List<BoardFile> uploadList = new ArrayList<BoardFile>();
-					
-				
-					for(int i=0; i<files.size(); i++) {
-						
-						
-						if(files.get(i).getSize() > 0) {
-							
-							BoardFile file = new BoardFile();
-						
-							file.setBoardFilePath(filePath); // 웹 접근 경로
-							file.setBoardNo(boardNo); // 게시글 번호
-							file.setBoardFileNo(boardNo); // 이미지 순서
-							
-							// 파일 원본명
-							String fileName = files.get(i).getOriginalFilename();
-							
-							file.setBoardFileOriginal(fileName); // 원본명
-							file.setBoardFileRename(Util.fileRename(fileName)); // 변경명
-							
-							uploadList.add(file);
-						}
-						
-					} 
-					if(!uploadList.isEmpty()) {
-						
-						// BOARD_IMG 테이블에 INSERT DAO 호출
-						int result = dao.insertFileList(uploadList);
-						// result == 삽입된 행의 개수 == uploadList.size()
-						
-						// 삽입된 행의 개수와 uploadList의 개수가 같다면
-						// == 전체 insert 성공
-						if(result == uploadList.size()) {
-							
-							
-							for(int i = 0; i<uploadList.size(); i++) {
-								
-								
-								String rename = uploadList.get(i).getBoardFileRename();
-								
-								/* files.get(i).transferTo(new File(filePath + rename)); */
-							}
-							
-						} else { // 일부나 전체 insert 실패
-							
-						}
-					}
-					
+		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
+		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
+
+		// 0-1 boardSt가 null이라면 기본값 세팅
+		if(board.getBoardSt() == null) {
+			board.setBoardSt("N");
+		}
+		
+		// 1. BOARD 테이블 INSERT 하기(제목, 내용, 작성자, 게시판 코드)
+		// -> boardNo(시퀀스로 생성한 번호) 반환 받기
+		int boardNo = dao.noticeboardInsert(board);
+
+		// 2. 게시글 삽입 성공 시
+		//	업로드된 이미지가 있다면 BOARD_IMG 테이블에 삽입하는 DAO 호출
+		if(boardNo > 0) { // 게시글 삽입 성공 시
+
+			// List<MultipartFile> images
+			// -> 업로드된 파일이 담긴 객체 MultipartFile이 5개 존재
+			// -> 단, 업로드된 파일이 없어도 MultipartFile 객체는 존재
+
+			// 실제 업로드된 파일의 정보를 기록할 List
+			List<BoardFile> uploadList = new ArrayList<BoardFile>();
+
+			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
+			for(int i = 0; i < file.size(); i++) {
+
+				// i번째 요소에 업로드한 파일이 있다면
+				if(file.get(i).getSize() > 0) {
+
+					BoardFile img = new BoardFile();
+					// img에 파일 정보를 담아서 uploadList에 추가
+					img.setBoardFilePath(webPath); // 웹 접근 경로
+					img.setBoardNo(boardNo); // 게시글 번호
+
+					img.setBoardFileCategoryNo(
+							board.getCategoryNo()
+							);
+
+					// 파일 원본명
+					String fileName = file.get(i).getOriginalFilename(); // 원본명
+					img.setBoardFileOriginal(fileName); // 원본명
+					img.setBoardFileRename(Util.fileRename(fileName)); // 변경명
+
+					uploadList.add(img);
 				}
-				
-				
-				
-				return boardNo;
+
+			} // 분류 for문 종료
+
+			// 분류 작업 후 uploadList가 비어있지 않은 경우
+			// == 업로드한 파일이 있다.
+			if(!uploadList.isEmpty()) {
+
+				// BOARD_IMG 테이블에 INSERT하는 DAO 호출
+				int result = dao.noticeBoardFile(uploadList);
+				// result == 삽입된 행의 개수 == uploadList.size()
+
+				// 삽입된 행의 개수와 uploadList의 개수가 같다면
+				// == 전체 insert 성공
+				if(result == uploadList.size()) {
+
+					// 서버에 파일을 저장(transferTo())
+
+					// images      : 실제 파일이 담긴 객체 리스트
+					//				      (업로드 안된 인덱스 빈칸)
+
+					// uploadList : 업로드된 파일의 정보 리스트
+					//					  (원본명, 변경명, 순서, 경로, 게시글 번호)
+
+					// 순서 == images 업로드된 인덱스
+
+					for(int i = 0; i < uploadList.size(); i++) {
+
+						String rename = uploadList.get(i).getBoardFileRename();
+
+						file.get(i).transferTo(new File(filePath + rename));
+
+					}
+
+				}else { // 일부 또는 전체 insert 실패
+
+					// ** 웹 서비스 수행 중 1개라도 실패하면 전체 실패 **
+					// -> rollback 필요
+
+					// [결론]
+					// 예외를 강제로 발생기켜서 rollback 해야된다.
+					// -> 사용자 정의 예외 발생
+					// throw new FileUploadException(); // 예외 강제 발생
+
+				}
+			}
+
+
+		}
+		return boardNo;
 	}
 
 	@Override

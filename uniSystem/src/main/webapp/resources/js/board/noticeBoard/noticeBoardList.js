@@ -21,3 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = searchUrl;
     });
 });
+
+
+const insertBtn = document.querySelector("#writeBtn");
+
+
