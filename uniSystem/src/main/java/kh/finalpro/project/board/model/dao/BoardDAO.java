@@ -247,10 +247,11 @@ public class BoardDAO {
 	 * @param uploadList
 	 * @return
 	 */
-	public int insertFileList(List<BoardFile> uploadList) {
+	public int noticeBoardFile(List<BoardFile> uploadList) {
 		return sqlSession.insert("boardMapper.insertFileList", uploadList);
 	}
 
+	
 
 	
 }

@@ -30,7 +30,26 @@
    <select id="selectList" resultType="member_rm">
    	SELECT * FROM MEMBER;
    </select>
-	
+   
+   <insert id="saveUniqueNo" parameterType="Admin" useGeneratedKeys="true" keyProperty="memberNo">
+    <selectKey order="BEFORE" resultType="int" keyProperty="memberNo">
+        SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL
+    </selectKey>
+    INSERT INTO MEMBER (
+        MEMBER_NO,
+        MEMBER_NAME,
+        MEMBER_SSN,
+        DEPARTMENT_NO
+    )
+    VALUES (
+        #{memberNo},
+        #{memberName},
+        #{memberSsn},
+        #{departmentNo}
+    )
+</insert>
+
+
 
 </mapper>
 
