@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
+<jsp:include page="/WEB-INF/views/common/chatting.jsp" />   
+
 <footer>
     <p>제1캠퍼스 - [11644] 경기도 의정부시 호암로 95 (호원동) / TEL : 031-1234-1234</P>
     <p>제2캠퍼스 - [11340] 경기도 동두천시 벌마들로 40번길 30 (상패동) / TEL : 031-1234-1234</P>
