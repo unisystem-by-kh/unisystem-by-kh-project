@@ -50,11 +50,11 @@
 						</tr>
 
 						<c:choose>
-							<c:when test="${empty taskList}">
+							<c:when test="${empty map.taskList}">
 								<td colspan='7'>제출할 과제 목록이 없습니다.</td>
 							</c:when>
 							<c:otherwise>
-								<c:forEach items="${taskList}" var="ta">
+								<c:forEach items="${map.taskList}" var="ta">
 									<tr>
 										<td>${ta.classNo}</td>
 										<td>${ta.departmentName}</td>
@@ -70,8 +70,19 @@
 										<td>${ta.classPoint}</td>
 										<td>${ta.memberName}</td>
 										<td><a>${ta.taskRoute}</a></td>
-										<td><button onclick= submitTask(this)>제출하기</button></td>
-                                        <td style="display : none;">${ta.taskNo}</td><%-- 과제 제출 --%>
+										<td>
+										<button onclick= submitTask(this)>
+										<c:choose>
+										   <c:when test="${empty ta.filePath}">
+												제출 하기
+										   </c:when>
+										   <c:otherwise>
+												제출 확인
+										   </c:otherwise>
+										</c:choose>
+										</button>
+										</td>
+                                        <td style="display : none;" filePath="${ta.filePath}" fileName="${ta.fileName}">${ta.taskNo}</td><%-- 과제 제출 정보 --%>
 										<td>${ta.taskDate}</td>
 									</tr>
 								</c:forEach>
@@ -125,8 +136,10 @@
                     <input type="text" class="input_box" id="name_box" />
                 <form action="/collegian/insertTask" method="POST" id="insertTask" onsubmit= "return taskSubmitValidation()" enctype="multipart/form-data">
                     <div class="modal_label">제출 파일</div>
-                    <input type="file" name="taskFile" class="input_box" id="des_box" accept=".pdf .PDF .hwp" />
+                    <input type="file" name="taskFile" class="input_box" id="des_box" accept=".pdf,.PDF,.hwp" />
                     <input type="hidden" name="taskNo" id="task_no" />
+					<div class="modal_label">제출한 파일</div>
+					<a id="openFile" href="" download=""></a>
                 </div>
                 <div class="m_footer">
                     <div class="modal_btn cancle" id="close_btn" onclick = notShow()>CANCLE</div>
@@ -135,7 +148,6 @@
                 </form>
             </div>
         </div>
-    <!-- 모달 -->
 
     <script src="/resources/js/collegian/task.js"></script>
 

@@ -31,6 +31,10 @@
 		<result property="taskDate" column="TASK_DATE" />
 		<result property="taskNo" column="TASK_NO" />
 		
+		
+		
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileName" column="FILE_NAME"/>
 
 	</resultMap>
 	
@@ -214,12 +218,15 @@
 	
 	<select id="selectTaskList" resultMap="class_rm">
 		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, DEPARTMENT_NAME, C.MEMBER_NAME, 
-        TASK_ROUTE, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, TASK_NO     
+        TASK_ROUTE, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, T.TASK_NO ,
+        F.FILE_PATH||F.FILE_RENAME AS FILE_PATH, FILE_NAME     
 	    FROM CLASS A
 	    JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
 	    JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
 	    JOIN LECTURE L ON (L.CLASS_NO = A.CLASS_NO)
         JOIN TASK T ON (T.CLASS_NO = A.CLASS_NO)
+        
+        LEFT JOIN FILEZIP F ON (T.TASK_NO = F.TASK_NO)
 	    
 	    WHERE A.DEPARTMENT_NO = (SELECT DEPARTMENT_NO FROM MEMBER WHERE MEMBER_NO = #{memberNo})
 	    
@@ -233,12 +240,34 @@
 	
 	</select>
 	
+	<select id="selectTask" resultType="_int">
+		SELECT COUNT(*)
+		FROM TASK T
+		JOIN FILEZIP F ON (T.TASK_NO = F.TASK_NO)
+		
+		WHERE F.TASK_NO = #{taskNo}
+		AND F.MEMBER_NO = #{memberNo}
+	
+	</select>
+	
 	<insert id="insertTask" parameterType="Task">
 	
 		INSERT INTO FILEZIP VALUES
 		(SEQ_FILE_ZIP_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5,#{memberNo},#{taskNo})
 	
 	</insert>
+	
+	<update id="updateTask" parameterType="Task">
+		
+		UPDATE FILEZIP 
+		SET FILE_PATH = #{filePath}
+		,FILE_NAME = #{fileName}
+		,FILE_RENAME = #{fileRename}
+		
+		WHERE TASK_NO = #{taskNo}
+		AND MEMBER_NO = #{memberNo}
+	
+	</update>
 
 
 </mapper>

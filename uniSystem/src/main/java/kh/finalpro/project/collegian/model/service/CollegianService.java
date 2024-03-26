@@ -26,8 +26,8 @@ public interface CollegianService {
 
 	int deleteMyClass(Map<String, Object> map);
 
-	List<Class> selectTaskList(Member loginMember);
+	Map<String,Object> selectTaskList(Member loginMember);
 
-	int insertTask(Member loginMember, int taskNo, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException  ;
+	int insertTask(Member loginMember, int taskNo, MultipartFile file, String webPath, String filePath) throws IllegalStateException, IOException  ;
 
 }
