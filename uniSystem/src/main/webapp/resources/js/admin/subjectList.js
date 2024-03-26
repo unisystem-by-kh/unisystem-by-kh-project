@@ -45,7 +45,7 @@ searchFrm.addEventListener("submit", e => {
 // 과목 수정 버튼 클릭시
 const table = document.querySelector("table");
 const rowList = table.rows;
-const modal = document.querySelector(".modal"); // 수정 모달창
+const modal = document.querySelector(".modal-area"); // 수정 모달창
 
 for(i=1; i<rowList.length; i++){ // thead부분 제외.
 

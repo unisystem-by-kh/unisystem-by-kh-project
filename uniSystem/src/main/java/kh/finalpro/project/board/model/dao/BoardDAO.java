@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.BoardFile;
 import kh.finalpro.project.board.model.dto.Pagination;
+import kh.finalpro.project.main.model.dto.Member;
 
 @Repository
 public class BoardDAO {
@@ -249,6 +250,42 @@ public class BoardDAO {
 	 */
 	public int noticeBoardFile(List<BoardFile> uploadList) {
 		return sqlSession.insert("boardMapper.insertFileList", uploadList);
+	}
+
+	/** 1:1문의 비밀번호 확인
+	 * @param map
+	 * @return
+	 */
+	public int boardCheck(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.boardCheck", map);
+	}
+
+	/** 학과공지 파일 업로드
+	 * @param uploadList
+	 * @return
+	 */
+	public int insertDepartmentFile(List<BoardFile> uploadList1) {
+		return sqlSession.insert("boardMapper.insertDepartmentFile", uploadList1);
+	}
+
+	/** 학과공지 이미지 업로드
+	 * @param uploadList2
+	 * @return 
+	 */
+	public int insertDepartmentImage(List<BoardFile> uploadList2) {
+		return sqlSession.insert("boardMapper.insertDepartmentImage", uploadList2);
+	}
+
+ 	/** 학과공지 수정 
+	 * @param board
+	 * @return
+	 */
+	public int departmentBoardUpdate(Board board) {
+		return sqlSession.update("boardMapper.updateDepartmentBoard", board);
+	}
+
+	public List<Member> selectMemberList(Member loginMember) {
+		return sqlSession.selectList("memberMapper.selectMemberList", loginMember);
 	}
 
 	

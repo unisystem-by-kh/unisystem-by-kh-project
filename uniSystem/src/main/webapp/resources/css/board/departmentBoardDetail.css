@@ -8,6 +8,8 @@ main{
     width: 1200px;
     height: 100px;
     margin: auto;
+    display: flex;
+    align-items: center;
 }
 
 .date-con{
@@ -33,10 +35,15 @@ main{
 }
 
 .image-con{
-    width: 1000px;
-    height: 200px;
+    width: 1200px;
+    height: 400px;
     margin: auto;
     border-bottom: 1px solid #ddd;
+}
+
+.image-con > img{
+    width: 100%;
+    height: 100%;
 }
 
 .content-con{
@@ -68,16 +75,23 @@ main{
     width: 20%;
 }
 
-.file-button > div:nth-of-type(3) > button{
+.button-area{
+    width: 1200px;
+    height: 80px;
+    margin: 20px auto;
+}
+
+.button-area > button{
     margin: 0 10px;
     background-color: white;
     border: none;
-    width: 80px;
+    width: 100px;
+    height: 30px;
     font-size: 14px;
     font-weight: bold;
 }
 
-.file-button > div:nth-of-type(3) > button:hover{
+.button-area > button:hover{
     background-color: crimson;
     color: white;
     border-radius: 3px;
@@ -143,24 +157,33 @@ main{
 }
 
 
-.goto{
+
+.button-container{
     width: 1200px;
     margin: 30px auto;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.goto > button{
-    cursor: pointer;
-    width: 200px;
-    height: 50px;
-    border: none;
+.button-container > button{
+    margin: 0 15px;
     background-color: white;
-    font-size: 16px;
+    width: 150px;
+    height: 50px;
     font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
 
-.goto > button:hover{
+.button-container > button:hover{
     background-color: crimson;
     color: white;
     border-radius: 3px;
+}
+
+.relpyUpdateCon{
+    width: 100%;
+    height: 100%;
+    resize: none;
 }

@@ -30,7 +30,7 @@ function kakaoPay() {
                 buyer_name: `name`, */
                 // buyer_tel : '010-1234-5678',
                 //buyer_postcode : '123-456'
-                buyer_no : loginMemberNo
+                buyer_no : loginMemberNo1
             }, async function (rsp) { // callback
                 if (rsp.success) { //결제 성공시
 					
