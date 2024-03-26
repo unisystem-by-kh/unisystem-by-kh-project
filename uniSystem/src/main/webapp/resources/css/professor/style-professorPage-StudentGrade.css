@@ -87,19 +87,21 @@
 
 /* 학과 글씨 영역 */
 .object-area{
-    width: 600px;
+    width: 50px;
     height: 50px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-size: 1.1em;
+    font-size: 0.9em;
     font-weight: bold;
+
+    margin-left: 30px;
 }
 
 /* 학과 선택 영역 */
-.object-select-area{
+.object-select-area , .object-select-area-depart, .object-select-area-class{
     width: 300px;
     height: 50px;
 
@@ -108,17 +110,18 @@
     align-items: center;
 }
 /* 학과 선택 select 박스 */
-.object-select-area > select{
-    border: 1px solid crimson;
+.object-select-area > select , .object-select-area-depart > select, .object-select-area-class > select{
+    border: 1.5px solid crimson;
     width: 150px;
     height: 40px;
     border-radius: 10px;
     padding-left: 20px;
 
     margin-right: -90px;
+    -webkit-appearance: none;
 }
 
-#searchBtn{
+#searchBtn, #insertBtn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,14 +143,13 @@
 
 }
 
-#searchBtn:hover{
+#searchBtn:hover, #insertBtn:hover{
     font-weight: bold;
     color: crimson;
-    background-color: white;
+    background-color: rgb(240, 234, 236);
     border: 1px solid crimson;
-    text-decoration: underline;
 }
-#searchBtn:active{
+#searchBtn:active, #insertBtn:active{
     border: 2px solid gray;
     color: crimson;
 }
@@ -187,13 +189,15 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: gray;
+    color: white;
 }
 /* 목차 하나씩 */
 .grade-title > div{
     width: 184.5px;
     height: 30px;
 
-    border: 1px solid gray;
+    border: 1px solid whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,7 +206,12 @@ body{
     font-weight: bold;
 }
 
-
+.content >div:nth-child(2n){
+    background-color: #eee;
+}
+.content >div:nth-child(n):hover{
+    background-color: rgb(240, 234, 236);
+}
 
 /* 정보영역 */
 .grade-content{

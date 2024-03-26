@@ -8,12 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kh.finalpro.project.board.model.dto.Reply;
+import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.professor.model.dto.Professor;
 import kh.finalpro.project.professor.model.service.ProfessorService;
 
@@ -70,9 +74,74 @@ public class ProfessorControllerr {
 		return service.selectMemberList();
 	}
 	
+	// 조건에 검색 된 학생 목록 성적 조회 비동기 AJAX
+	@GetMapping(value="/searchMemberList" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Professor> searchMemberList(@RequestParam Map<String, Object> paramMap){
+		return service.searchMemberList(paramMap);
+	}
+	
+	// 여러가지 선택 조건(학년, 학기, 학과, 과목)에 검색 된 학생 목록 성적 조회 비동기 AJAX
+	@GetMapping(value="/searchMember" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Professor> searchMember(@RequestParam Map<String, Object> paramMap){
+		return service.searchMember(paramMap);
+	}
+	
+	// 비동기로 학과를 가져와서 학과 목록 select/option 목록 가져오기
+	@GetMapping(value="/departmentList" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Professor> departmentList(){
+//		System.out.println("Controller : " + paramMap);
+		return service.departmentList();
+	}
+	
+	// 비동기로 과목을 가져와서 학과 목록 select/option 목록 가져오기
+	@GetMapping(value="/classList" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Professor> classList(){
+		return service.classList();
+	}
+	
+	
+	// 비동기로 모든 학생 성적 수정/삽입
+	@PostMapping(value="/updateGrades", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public int updateGrades(@RequestBody Map<String, Object> updatedGrades) {
+		
+		List<Map<String, Object>> gradesList = (List<Map<String, Object>>) updatedGrades.get("updatedGrades");
+		
+		System.out.println("gradesList : " + gradesList);
+
+		for (Map<String, Object> gradeMap : gradesList) {
+			
+		    String memberNo = (String)gradeMap.get("memberNo");
+		    String lectureGrade = (String)gradeMap.get("lectureGrade");
+		    String lectureTerm = (String)gradeMap.get("lectureTerm");
+		    String classNo = (String)gradeMap.get("classNo");
+		    String lecturePoint = (String)gradeMap.get("lecturePoint");
+
+		    System.out.println("memberNo: " + memberNo);
+		    System.out.println("lectureGrade: " + lectureGrade);
+		    System.out.println("lectureTerm: " + lectureTerm);
+		    System.out.println("classNo: " + classNo);
+		    System.out.println("lecturePoint: " + lecturePoint);
+		    System.out.println("---------------------------------");
+		    
+		}
+		
+        return service.updateGrades(gradesList);
+    }
 	
 	
 
+	
+	
+
+	
+	
+	
+	
 	// 성적 수정
 	@GetMapping("/professorPageStudentGradeUpdate")
 	public String professorPageStudentGradeUpdate() {
