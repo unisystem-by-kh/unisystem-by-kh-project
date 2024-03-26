@@ -30,7 +30,7 @@
 		<result property="lecturePoint" column="LECTURE_POINT" />
 		<result property="lectureCount" column="LECTURE_COUNT" />
 		<result property="lectureGrade" column="LECTURE_GRADE" />
-		<result property="lectureTerm" column="LECTRUE_TERM" />
+		<result property="lectureTerm" column="LECTURE_TERM" />
 		
 		<result property="classNo" column="CLASS_NO" />
 		<result property="classNm" column="CLASS_NM" />
@@ -221,9 +221,107 @@
         JOIN CLASS  C ON C.CLASS_NO = L.CLASS_NO
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
 		AND M.MEMBER_STATUS = 'N'
-        AND L.MEMBER_NO = M.MEMBER_NO	
-   
+        AND L.MEMBER_NO = M.MEMBER_NO
+		
    </select>
+   
+   <!-- 검색 조건에 따른 학생 정보 비동기 통신 -->
+   <select id="searchMemberList" resultMap="member_rm">
+   
+        SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
+		    CASE
+		        WHEN SUBSTR(MEMBER_SSN, 1, 2) BETWEEN '00' AND '21' THEN TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('20' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
+		        ELSE TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('19' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
+		    END AS MEMBER_AGE,
+		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME, L.LECTURE_GRADE, L.LECTURE_TERM, L.LECTURE_POINT, C.CLASS_NO, C.CLASS_NM,
+		    
+		    (SELECT COUNT(*) FROM LECTURE
+      		WHERE MEMBER_NO = L.MEMBER_NO) AS LECTURE_COUNT
+		    
+		FROM MEMBER M
+		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
+		JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
+        JOIN CLASS  C ON C.CLASS_NO = L.CLASS_NO
+		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
+		AND M.MEMBER_STATUS = 'N'
+        AND L.MEMBER_NO = M.MEMBER_NO	
+        
+		<choose>
+			<!-- 이름 -->
+			<when test='key == "name"'>
+				AND M.MEMBER_NAME LIKE '%${query}%'
+			</when>
+			<!-- 학번 -->
+			<when test='key == "no"'>
+				AND M.MEMBER_NO LIKE '%${query}%'
+			</when>
+		</choose>
+		
+   </select>
+   
+   
+   <!-- 여러가지 선택 조건(학년, 학기, 학과, 과목)에 검색 된 학생 목록 성적 조회 비동기 AJAX -->
+	<select id="searchMember" resultMap="member_rm">
+	    SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
+	    CASE
+	        WHEN SUBSTR(MEMBER_SSN, 1, 2) BETWEEN '00' AND '21' THEN TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('20' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
+	        ELSE TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('19' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
+	    END AS MEMBER_AGE,
+	    D.DEPARTMENT_NO, D.DEPARTMENT_NAME, L.LECTURE_GRADE, L.LECTURE_TERM, L.LECTURE_POINT, C.CLASS_NO, C.CLASS_NM,
+	    
+	    (SELECT COUNT(*) FROM LECTURE
+	    WHERE MEMBER_NO = L.MEMBER_NO) AS LECTURE_COUNT
+	    
+	    FROM MEMBER M
+	    JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
+	    JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
+	    JOIN CLASS  C ON C.CLASS_NO = L.CLASS_NO
+	    WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
+	    AND M.MEMBER_STATUS = 'N'
+	    <!-- AND L.MEMBER_NO = M.MEMBER_NO	 -->
+	    
+	    <!-- 학년 조건 -->
+	    <if test='grade != "" and grade != null'>
+	        AND L.LECTURE_GRADE LIKE #{grade}
+	    </if>
+	    <!-- 학기 조건 -->
+	    <if test='term != "" and term != null'>
+	        AND L.LECTURE_TERM LIKE #{term}
+	    </if>
+	    <!-- 학과 조건 -->
+	    <if test='depart != "" and depart != null'>
+	        AND D.DEPARTMENT_NAME LIKE #{depart}
+	    </if>
+	    <!-- 과목 조건 -->
+	    <if test='classes != "" and classes != null'>
+	        AND C.CLASS_NM LIKE #{classes}
+	    </if>
+	    
+	</select>
+	
+	<!-- 학과 조회 -->
+	<select id="departmentList" resultMap="member_rm">
+        SELECT DEPARTMENT_NO, DEPARTMENT_NAME
+        FROM DEPARTMENT
+	</select>
+	
+	<!-- 과목 조회 -->
+	<select id="classList" resultMap="member_rm">
+        SELECT CLASS_NO, CLASS_NM
+        FROM CLASS
+	</select>
+	
+	<!-- 성적 업데이트 -->
+	<update id="updateGrades" parameterType="java.util.List">
+	    UPDATE LECTURE
+	    SET LECTURE_POINT = #{lecturePoint}
+	    WHERE CLASS_NO = #{classNo}
+	      AND MEMBER_NO = #{memberNo}
+	      AND LECTURE_GRADE = #{lectureGrade}
+	      AND LECTURE_TERM = #{lectureTerm}
+	</update>
+
+
 	
 
 </mapper>
