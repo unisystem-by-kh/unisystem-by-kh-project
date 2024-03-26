@@ -8,20 +8,20 @@ let chattingNo; // 채팅방 번호
 let targetName; // 상대 이름
 
 // 채팅방 입장
-chatBtn.addEventListener("click", ()=>{
-    
-    fetch("/chatting/enter")
-    .then(resp=>resp.text())
-    .then(result => {
-        if(result > 0){
-            chattingNo = result;
-            selectChattingFn(); // 채팅방 입장 시 비동기로 메세지 목록 조회하는 함수 호출
-        }
+if(chatBtn != null){
+    chatBtn.addEventListener("click", ()=>{
+        
+        fetch("/chatting/enter")
+        .then(resp=>resp.text())
+        .then(result => {
+            if(result > 0){
+                chattingNo = result;
+                selectChattingFn(); // 채팅방 입장 시 비동기로 메세지 목록 조회하는 함수 호출
+            }
+        })
+        .catch(e=>console.log(e))
     })
-    .catch(e=>console.log(e))
-
-    
-})
+}
 
 // 4자리 난수 생성하는 함수
 function generateRandomNumber() {
@@ -117,7 +117,7 @@ function selectChattingFn() {
 // /chattingSock 이라는 요청 주소로 통신할 수 있는  WebSocket 객체 생성
 let chattingSock;
 
-if(loginMemberNo != ""){
+if(loginMemberNo != "" ){
     chattingSock = new SockJS("/chattingSock");
 }
 
