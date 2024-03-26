@@ -27,6 +27,9 @@
 		
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Department" alias="Department" />
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Task" alias="Task" />
+		
+		<typeAlias type="kh.finalpro.project.chatting.model.dto.Message" alias="Message" />
+		<typeAlias type="kh.finalpro.project.chatting.model.dto.ChattingRoom" alias="ChattingRoom" />
 
 	</typeAliases>
 	
@@ -42,6 +45,7 @@
 		<mapper resource="/mappers/evaluation-mapper.xml" />
 		<mapper resource="/mappers/ajax-mapper.xml" />
 		<mapper resource="/mappers/tuition-mapper.xml" />
+		<mapper resource="/mappers/chatting-mapper.xml" />
 	</mappers>		
 
 </configuration>

@@ -12,7 +12,7 @@
         <h2>UNI-SYSTEM</h2>
         <div class="chatting-content">
             <ul class="display-chatting">
-                <li class="chat-header"><h3>채팅방에 입장하였습니다.</h3></li>
+               <%--  <li class="chat-header"><h3>채팅방에 입장하였습니다.</h3></li>
                 <li class="chat-header"><h3>2024년 03월 25일</h3></li>
                 <li class="my-chat">
                 <span class="chatDate">14:01</span>
@@ -29,49 +29,11 @@
                     <span class="chatDate">14:05</span>
                 </div>
                 </li>
-                <li class="target-chat">
-                <div>
-                    <b>이번유저</b>   <br>
-                    <p class="chat">
-                        안녕하세요?? 반갑습니다.<br>
-                        ㅎㅎ
-                    </p>
-                    <span class="chatDate">14:05</span>
-                </div>
-                </li>
 
                 <li class="my-chat">
                     <span class="chatDate">14:01</span>
                     <p class="chat">가나다라마바사</p>
-                </li>
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
-                </li>
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
-                </li>
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
-                </li>
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
-                </li>
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
-                </li>
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
-                </li>
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
-                </li>
+                </li> --%>
             </ul>   
         
             <div class="input-area">
