@@ -26,7 +26,7 @@
 	            <h1>학과 공지</h1>
 	        </div>
 	        <div>
-	            <a href="/board/departmentBoardWrite">공지 등록</a>
+	            <a href="/board/${categoryNo}/write">공지 등록</a>
 	        </div>
 	    </div>
 	    <form>
@@ -39,9 +39,7 @@
                         </c:forEach>
 	                </select>
 	            </div>
-	            <div>
-	                <input type="search" placeholder="제목 검색">
-	            </div>
+	            
 	        </div>
 	    </form>
 	    <table class="depart-table">
@@ -61,7 +59,7 @@
 	                <td><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a></td>
 	                <td>${board.departmentName}</td>
 	                <td>${board.boardCDate}</td>
-	                <td>${board.readCount}</td>
+	                <td>${board.boardCount}</td>
 	            </tr>
 	        </c:forEach>
 	        </tbody>

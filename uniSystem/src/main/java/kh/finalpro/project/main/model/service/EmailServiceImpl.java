@@ -1,6 +1,7 @@
 package kh.finalpro.project.main.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.Message;
@@ -12,7 +13,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.main.model.dao.EmailDAO;
+import kh.finalpro.project.main.model.dto.Member;
 
 @Service
 public class EmailServiceImpl implements EmailService{
@@ -81,6 +84,7 @@ public class EmailServiceImpl implements EmailService{
 
 			// 송신자(보내는 사람) 지정
 			mail.setFrom(new InternetAddress(fromEmail, fromUsername));
+			
 			mail.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
 			// 수신자(받는사람) 지정
@@ -155,6 +159,45 @@ public class EmailServiceImpl implements EmailService{
 		map.put("email", email);
 		
 		return map;
+	}
+
+	@Override
+	public void emailShoot(Board board, List<Member> memberList) {
+		
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+
+			// 제목
+			String subject = board.getBoardTitle();
+
+			// 문자 인코딩
+			String charset = "UTF-8";
+
+			// 메일 내용
+			String mailContent 
+			= "<h3>"+board.getBoardContent()+ "</h3>";
+			
+			mail.setFrom(new InternetAddress(fromEmail, fromUsername));
+			
+			for(Member member : memberList) {
+				
+				mail.addRecipient(Message.RecipientType.TO, new InternetAddress(member.getMemberEmail()));
+				
+				// 이메일 제목 세팅
+				mail.setSubject(subject, charset);
+
+				// 내용 세팅
+				mail.setText(mailContent, charset, "html"); //"html" 추가 시 HTML 태그가 해석됨
+
+				mailSender.send(mail);
+			}
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

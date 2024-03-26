@@ -114,7 +114,7 @@
 					FROM BOARD_FILE F
 					WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
 				</if>
-				<if test="categoryNo == 2 or categoryNo == 4"> <!-- 학과공지, 1:1문의일 경우 -->
+				<if test="categoryNo == 4"> <!-- 학과공지, 1:1문의일 경우 -->
 					,
 					(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME FROM BOARD_FILE F
 		    		WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
@@ -495,6 +495,71 @@
 		)
 
 	</insert>
+	
+	
+	<!-- 1:1문의 비밀번호 확인 -->
+	<select id="boardCheck" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE MEMBER_NO = (SELECT MEMBER_NO FROM BOARD WHERE BOARD_NO = #{boardNo})
+		AND MEMBER_PW = #{modalPw}
+	</select>
+	
+	
+	
+	<!-- 학과공지 파일업로드 -->
+	<insert id="insertDepartmentFile">
+	INSERT INTO BOARD_FILE
+	SELECT SEQ_FILE_NO.NEXTVAL, A.*
+	FROM (
+		<foreach collection="list" item="file" separator=" UNION ALL ">
+			SELECT
+			#{file.boardFilePath} BOARD_FILE_PATH,
+			#{file.boardFileOriginal} BOARD_FILE_ORIGINAL,
+			#{file.boardFileRename} BOARD_FILE_RENAME,
+			
+			2,
+			
+			#{file.boardNo} BOARD_NO
+			FROM DUAL
+		</foreach>
+
+		) A
+	</insert>
+	
+	
+	<!-- 학과공지 이미지업로드 -->
+	<insert id="insertDepartmentImage">
+	INSERT INTO BOARD_FILE
+	SELECT SEQ_FILE_NO.NEXTVAL, A.*
+	FROM (
+		<foreach collection="list" item="images" separator=" UNION ALL ">
+			SELECT
+			#{images.boardFilePath} BOARD_FILE_PATH,
+			#{images.boardFileOriginal} BOARD_FILE_ORIGINAL,
+			#{images.boardFileRename} BOARD_FILE_RENAME,
+			
+			1,
+			
+			#{images.boardNo} BOARD_NO
+			FROM DUAL
+		</foreach>
+
+		) A
+	</insert>
+	
+	<!-- 학과공지 게시글 수정 -->
+	<update id="updateDepartmentBoard">
+		UPDATE BOARD SET BOARD_TITLE =
+		#{boardTitle},
+		BOARD_CONTENT = #{boardContent},
+		BOARD_U_DATE = SYSDATE
+		WHERE BOARD_NO
+		= #{boardNo}
+		AND CATEGORY_NO = #{categoryNo}
+	</update>
+	
+	
+	
 </mapper>
 
 
