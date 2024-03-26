@@ -107,6 +107,18 @@ public class CollegianDAO {
 	public int insertTask(Task task) {
 		return sqlSession.insert("collegianMapper.insertTask", task);
 	}
+
+	public List<Task> selectMyTaskes(Member loginMember) {
+		return sqlSession.selectList("collegianMapper.selectMyTaskes",loginMember);
+	}
+
+	public int selectTask(Task task) {
+		return sqlSession.selectOne("collegianMapper.selectTask",task);
+	}
+
+	public int updateTask(Task task) {
+		return sqlSession.update("collegianMapper.updateTask",task);
+	}
 	
 
 }

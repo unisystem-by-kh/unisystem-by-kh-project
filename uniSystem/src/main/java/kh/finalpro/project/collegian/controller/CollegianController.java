@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.main.model.dto.Member;
-import oracle.jdbc.proxy.annotation.Post;
 import kh.finalpro.project.collegian.model.service.CollegianService;
 
 @Controller
@@ -174,10 +175,10 @@ public class CollegianController {
 	public String task(Model model
 			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
 		
-		List<Class> taskList = service.selectTaskList(loginMember);
 		
+		Map<String,Object> map = service.selectTaskList(loginMember);
 		
-		model.addAttribute("taskList",taskList);
+		model.addAttribute("map",map);
 
 		return "/collegian/task";
 	}
@@ -185,29 +186,36 @@ public class CollegianController {
 	
 	@PostMapping("/insertTask")
 	public String insertTask(Model model,
-				@RequestParam(value="taskFile", required =false) List<MultipartFile> file,
+				@RequestParam(value="taskFile", required =false) MultipartFile file,
 				@SessionAttribute(value="loginMember") Member loginMember
 				,@RequestParam(value="taskNo", required = false) int taskNo
 				, RedirectAttributes ra
 				, HttpSession session)throws IllegalStateException, IOException {
 		
-		String webPath = "/resources/files2/task2/";
+		String webPath = "/resources/files/task/";
 		String filePath = session.getServletContext().getRealPath(webPath);
-		
-		System.out.println(file);
 		
 		int result = service.insertTask(loginMember,taskNo,file,webPath,filePath);
 		
-		
 		if(result > 0) {
-			System.out.println("파일 삽입 성공");
 			
-			List<Class> taskList = service.selectTaskList(loginMember);
+			Map<String,Object> map = service.selectTaskList(loginMember);
 			
-			model.addAttribute("taskList",taskList);
+			model.addAttribute("map",map);
+			
+		}else { // 과제 제출 실패
+			
 		}
 		
-		return "/collegian/task";
+		return "redirect:/collegian/task";
+	}
+	
+	
+	@GetMapping("/test")
+	public String testMethod( HttpSession session) throws IOException {
+		
+		
+		return null;
 	}
 
 }

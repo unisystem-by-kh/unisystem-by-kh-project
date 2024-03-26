@@ -171,43 +171,55 @@ public class CollegianServiceImpl implements CollegianService{
 	
 	// 과제물 조회
 	@Override
-	public List<Class> selectTaskList(Member loginMember) {
-		return dao.selectTaskList(loginMember);
+	public Map<String,Object> selectTaskList(Member loginMember) {
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		List<Class> taskList = dao.selectTaskList(loginMember); // 과제 제출 과목 목록
+		
+		//List<Task> myTaskes = dao.selectMyTaskes(loginMember); // 제출한 과제 목록
+		
+		map.put("taskList", taskList);
+		//map.put("myTaskes", myTaskes);
+		
+		return map;
 	}
 	
 	// 과제물 제출
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int insertTask(Member loginMember, int taskNo, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException {
+	public int insertTask(Member loginMember, int taskNo, MultipartFile file, String webPath, String filePath) throws IllegalStateException, IOException {
 		
 		int result = 0;
 		
-		if(file.get(0).getSize() > 0) {
+		if(file.getSize() > 0) {
 			Task task = new Task();
 			
 			task.setFilePath(webPath);
 			task.setTaskNo(taskNo);
 			
-			String fileName = file.get(0).getOriginalFilename(); // 원본명
+			String fileName = file.getOriginalFilename(); // 원본명
 			
 			task.setFileName(fileName);
 			task.setFileRename(Util.fileRename(fileName));
 			task.setMemberNo(loginMember.getMemberNo());
 			
-			result = dao.insertTask(task);
 			
-			if(result > 0) {
-				
-				System.out.println(result);
-				
-				String rename = task.getFileRename();
-				
-				file.get(0).transferTo(new File(filePath +rename));
+			result = dao.selectTask(task); // 제출한 과제물이 있는지 확인
+			
+			if(result == 0 ) { // 기존에 제출한 과제물이 없을 경우
+				result = dao.insertTask(task);
+			}else {
+				// task.setFileNo(result); // 조회한 파일 넘버 가져옴
+				result = dao.updateTask(task);
 			}
 			
+			if(result > 0) {
+				String rename = task.getFileRename();
+				file.transferTo(new File(filePath +rename));
+			}
 			
 		}
-		
 		
 		return result;
 	}

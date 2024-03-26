@@ -32,5 +32,8 @@ public class Class {
 	private String taskDate;
 	private int taskNo;
 	
+	// 제출한 과제물
+	private String filePath;
+	private String fileName;
 	
 }
