@@ -323,10 +323,11 @@ function classList() {
 document.getElementById('insertBtn').addEventListener('click' , ()=>{
   updateGrades();
   selectMemberList();
+  location.reload(); // 새로고침(성적 등록 결과값 불러오기 위함)
 })
 
 // 학생들의 점수를 비동기적으로 수정하는 함수
-function updateGrades() {
+function updateGrades(event) {
   // 현재 화면에 표시된 학생들의 정보영역을 가져옴
   const gradeContentList = document.querySelectorAll('.grade-content');
   
@@ -341,68 +342,52 @@ function updateGrades() {
     const sClassNumber = gradeContent.querySelector(':nth-child(8)').innerHTML; // 과목 번호
     const sPointInput = gradeContent.querySelector('input').value;
 
-    const updatedGrade = {
-      memberNo: sNumber,
-      lectureGrade: sGrade, // 학년
-      lectureTerm: sTerm, // 학기
-      classNo: sClassNumber, // 과목 번호
-      lecturePoint: sPointInput // 수정된 점수
-    };
+    if (sPointInput == '1' || sPointInput == '2' || sPointInput == '3' || sPointInput == '4') {
+      const updatedGrade = {
+        memberNo: sNumber,
+        lectureGrade: sGrade, // 학년
+        lectureTerm: sTerm, // 학기
+        classNo: sClassNumber, // 과목 번호
+        lecturePoint: sPointInput // 수정된 점수
+      };
 
-    updatedGrades.push(updatedGrade);
-
-    console.log(updatedGrades);
-  });
-
-  // 수정된 정보를 서버로 전송
-  fetch('/professor/updateGrades', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({updatedGrades})
-  })
-  .then(response => {
-    if (response.ok) {
-      // 성공적으로 업데이트되었음을 사용자에게 알림
-      alert('성적이 성공적으로 업데이트되었습니다.');
-
-    } else {
-      // 업데이트 실패 시 에러 처리
-      throw new Error('성적 업데이트에 실패했습니다.');
+      updatedGrades.push(updatedGrade);
+    }else{
+      // 올바른 값을 입력하도록 사용자에게 경고 메시지 출력
+      alert('올바른 점수를 입력하세요. \n(1 ~ 4 까지의 숫자만 입력 가능)');
+      // 해당 입력창으로 다시 포커스 이동
+      gradeContent.querySelector('input').focus();
+      // 함수 종료
+      event.stopPropagation();
     }
-  })
-  .catch(error => {
-    console.error('Error updating grades:', error);
-    // 실패한 경우 사용자에게 에러 메시지 표시
-    alert('성적 업데이트에 실패했습니다. 다시 시도해주세요.');
+
   });
+  if (updatedGrades.length > 0) {
+    fetch('/professor/updateGrades', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({updatedGrades})
+    })
+    .then(response => {
+      if (response.ok) {
+        if(confirm('성적을 수정하시겠습니까?')){
+          alert('성적이 성공적으로 업데이트되었습니다.');
+        }else{
+          alert('성적 수정을 취소 했습니다.');
+        }
+
+      } else {
+        throw new Error('성적 업데이트에 실패했습니다.');
+      }
+    })
+    .catch(error => {
+      console.error('Error updating grades:', error);
+      alert('성적 업데이트에 실패했습니다. 다시 시도해주세요.');
+    });
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // 페이지 입장시 검색 ajax 요청

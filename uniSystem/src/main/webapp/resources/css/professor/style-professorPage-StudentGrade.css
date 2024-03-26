@@ -109,50 +109,67 @@
     justify-content: center;
     align-items: center;
 }
-/* 학과 선택 select 박스 */
-.object-select-area > select , .object-select-area-depart > select, .object-select-area-class > select{
+
+/* 학과 선택 select 박스 기본 스타일 */
+.object-select-area > select,
+.object-select-area-depart > select,
+.object-select-area-class > select {
     border: 1.5px solid crimson;
     width: 150px;
     height: 40px;
     border-radius: 10px;
     padding-left: 20px;
-
     margin-right: -90px;
     -webkit-appearance: none;
+    transition: all 0.3s ease;
 }
 
-#searchBtn, #insertBtn{
+.object-select-area > select:hover,
+.object-select-area-depart > select:hover,
+.object-select-area-class > select:hover,
+.object-select-area > select:focus,
+.object-select-area-depart > select:focus,
+.object-select-area-class > select:focus {
+    border-color: rgb(240, 234, 236); 
+    background-color: rgba(240, 234, 236, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 옵션 선택 시 스타일 변경 */
+.object-select-area > select option,
+.object-select-area-depart > select option,
+.object-select-area-class > select option {
+    background-color: crimson;
+    color: white;
+    font-weight: bold;
+}
+
+
+#searchBtn,
+#insertBtn {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border: 1px solid white;
+    border: 1px solid transparent; 
     width: 120px;
     height: 40px;
     border-radius: 10px;
-
     background-color: crimson;
     color: white;
     font-weight: bold;
     font-size: 0.9em;
-
-    /* margin-right: -100px; */
     margin-left: 60px;
-
     cursor: pointer;
-
+    transition: all 0.4s ease; 
 }
 
-#searchBtn:hover, #insertBtn:hover{
-    font-weight: bold;
+#searchBtn:hover,
+#insertBtn:hover {
     color: crimson;
-    background-color: rgb(240, 234, 236);
+    background-color: white;
     border: 1px solid crimson;
 }
-#searchBtn:active, #insertBtn:active{
-    border: 2px solid gray;
-    color: crimson;
-}
+
 
 /* 스크롤바 제거 */
 body{
@@ -229,3 +246,37 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+.content > div:nth-child(2n-1) > div > input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 50px;
+    height: 25px;
+
+    background-color: white;
+    border: 0;
+    outline: none;
+}
+
+.content > div:nth-child(2n) > div > input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 50px;
+    height: 25px;
+
+    background-color: #eee;
+    border: 0;
+    outline: none;
+}
+.content > div:nth-child(2n-1) > div > input:hover{background-color: rgb(240, 234, 236);}
+.content > div:nth-child(2n) > div > input:hover{background-color: rgb(240, 234, 236);}
+.content > div:nth-child(2n-1) > div > input:focus{background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);}
+.content > div:nth-child(2n) > div > input:focus{background-color: #eee; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);}
+
+
