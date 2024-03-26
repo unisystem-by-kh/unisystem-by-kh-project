@@ -12,4 +12,5 @@ public class Admin {
     private String memberName; 
     private String department;
     private String memberSsn;
+    private String memberNo;
 }
