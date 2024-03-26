@@ -48,6 +48,6 @@
 <script>
     // 로그인한 회원 번호
     const loginMemberNo = "${loginMember.memberNo}";
-    </script>
+</script>
 <script src="/resources/js/chatting/chatting.js"></script>
 

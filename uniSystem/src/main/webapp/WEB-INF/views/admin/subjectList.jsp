@@ -122,7 +122,7 @@
 
 
     <%-- 과목 수정 영역 --%>
-    <div class="modal">
+    <div class="modal-area">
         <div class="modal_body">
             <div class="close-area">&times;</div>
             <h2>과목 수정</h2><hr>
