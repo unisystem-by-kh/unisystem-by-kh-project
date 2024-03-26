@@ -27,7 +27,6 @@
 		
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Department" alias="Department" />
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Task" alias="Task" />
-
 	</typeAliases>
 	
 	<!--mapper 파일(SQL 작성되는파일) 위치등록부분 -->

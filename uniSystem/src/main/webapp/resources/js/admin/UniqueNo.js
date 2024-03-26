@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 생성된 번호를 표시합니다.
         completeNo.textContent = prefix + randomNumber;
-
         // 복사하기 버튼을 보여줍니다.
         numberAndCopyBtn.style.display = 'block';
 
@@ -86,6 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // 입력란 초기화
         memberNameInput.value = '';
         ssnInput.value = '';
+
+        // 생성된 번호를 서버로 전송합니다.
+        generateNumber(prefix, randomNumber);
     });
 
     // 복사하기 버튼을 클릭하면 번호를 클립보드에 복사합니다.
@@ -122,8 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-function generateNumber() {
+function generateNumber(prefix, randomNumber) {
     // 번호 생성을 위해 필요한 데이터를 수집합니다.
     const memberName = document.getElementById('memberName').value;
     const department = document.getElementById('department').value;
@@ -131,25 +132,24 @@ function generateNumber() {
     
     // 서버로 전송할 데이터를 객체로 정의합니다.
     const data = {
+        memberNo: prefix + randomNumber,
         memberName: memberName,
-        department: department,
-        memberSsn: memberSsn
+        memberSsn: memberSsn,
+        departmentNo: department
     };
-
+    console.log(data);
     // 서버로 데이터를 전송합니다.
-    fetch('/admin/UniqueNo', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+    fetch("/admin/UniqueNo", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(result => {
+        console.log(result);
         // 서버에서 받은 결과를 처리합니다.
         if (result.success) {
             // 성공적으로 생성된 경우
-            document.getElementById('completeNo').textContent = result.generatedNo;
             document.getElementById('numberAndCopyBtn').style.display = 'block';
         } else {
             // 생성에 실패한 경우

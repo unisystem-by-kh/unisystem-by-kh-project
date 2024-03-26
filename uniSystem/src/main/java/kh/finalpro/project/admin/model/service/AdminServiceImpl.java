@@ -29,7 +29,7 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 
-@SuppressWarnings("deprecation")
+@Service
 public class AdminServiceImpl implements AdminService{
 
 	@Autowired
