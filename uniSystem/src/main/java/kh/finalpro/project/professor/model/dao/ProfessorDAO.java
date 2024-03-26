@@ -76,13 +76,6 @@ public class ProfessorDAO {
 		    String lectureTerm = (String)gradeMap.get("lectureTerm");
 		    String classNo = (String)gradeMap.get("classNo");
 		    String lecturePoint = (String)gradeMap.get("lecturePoint");
-
-		    System.out.println("memberNo: " + memberNo);
-		    System.out.println("lectureGrade: " + lectureGrade);
-		    System.out.println("lectureTerm: " + lectureTerm);
-		    System.out.println("classNo: " + classNo);
-		    System.out.println("lecturePoint: " + lecturePoint);
-		    System.out.println("---------------------------------");
 		    
 		    result = sqlSession.update("professorMapper.updateGrades" , gradeMap);
 		    

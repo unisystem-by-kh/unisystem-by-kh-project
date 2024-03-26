@@ -111,8 +111,7 @@ public class ProfessorControllerr {
 		
 		List<Map<String, Object>> gradesList = (List<Map<String, Object>>) updatedGrades.get("updatedGrades");
 		
-		System.out.println("gradesList : " + gradesList);
-
+		// 이거 필요 없을지도?
 		for (Map<String, Object> gradeMap : gradesList) {
 			
 		    String memberNo = (String)gradeMap.get("memberNo");
@@ -121,13 +120,6 @@ public class ProfessorControllerr {
 		    String classNo = (String)gradeMap.get("classNo");
 		    String lecturePoint = (String)gradeMap.get("lecturePoint");
 
-		    System.out.println("memberNo: " + memberNo);
-		    System.out.println("lectureGrade: " + lectureGrade);
-		    System.out.println("lectureTerm: " + lectureTerm);
-		    System.out.println("classNo: " + classNo);
-		    System.out.println("lecturePoint: " + lecturePoint);
-		    System.out.println("---------------------------------");
-		    
 		}
 		
         return service.updateGrades(gradesList);

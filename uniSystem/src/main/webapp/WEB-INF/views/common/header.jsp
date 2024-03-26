@@ -145,9 +145,7 @@
                 <!-- 학생을 올렸을 경우 -->
                 <div class="navigation3-professor">
                     <a href="/professor/professorPageStudentSearch">학생 조회</a>
-                    <a href="/professor/professorPageStudentGrade">성적 조회</a>
-                    <a href="/professor/professorPageStudentGradeInsert">성적 등록</a>
-                    <a href="/professor/professorPageStudentGradeUpdate">성적 수정</a>
+                    <a href="/professor/professorPageStudentGrade">성적 관리</a>
                 </div>
 
                 <!-- 교과목을 올렸을 경우 -->
