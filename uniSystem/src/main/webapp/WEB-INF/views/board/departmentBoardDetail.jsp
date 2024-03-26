@@ -19,38 +19,50 @@
 
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="depart-detail">
-			<h1>학과 공지</h1>
+			<h1>학과 공지</h1> - ${board.departmentName}
+			
 		</div>
 		<div class="date-con">
+			
 			<div>작성일 : ${board.boardCDate}</div>
 			|
 			<div>수정일 : ${board.boardUDate}</div>
 			|
 			<div>작성자 : ${board.memberName}</div>
 			|
-			<div>조회수 : ${board.readCount}</div>
+			<div>조회수 : ${board.boardCount}</div>
 		</div>
 		<div class="title-con">
 			<div>${board.boardTitle}</div>
 		</div>
-		<div class="image-con"></div>
+		<div class="image-con">
+			<img src="${board.fileList[1].boardFilePath}${board.fileList[1].boardFileRename}">
+			
+		</div>
 		<div class="content-con">${board.boardContent}</div>
 		<div class="file-button">
 			<div>첨부파일 :</div>
-			<div>첨부된 파일이 없습니다.</div>
-			<div>
-				<button id="updateBtn">수정</button>
-				<button id="deleteBtn">삭제</button>
-				<button id="goToListBtn">목록으로</button>
-			</div>
+			<c:if test="${!empty board.fileList}">
+				  <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
+                                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileOriginal}</a> 
+			</c:if>
+			<c:if test="${empty board.fileList}">
+	        	<div>첨부된 파일이 없습니다.</div>
+
+			</c:if>
+		</div>
+		<div class="button-area">
+			<button id="updateBtn">수정</button>
+			<button id="deleteBtn">삭제</button>
+			<button id="goToListBtn">목록으로</button>
 		</div>
 
 		<div class="reply-con">
 			<h1>댓글</h1>
 		</div>
 		<div class="reply-content-con">
-			<textarea></textarea>
-			<button>등록</button>
+			<textarea id="replyWriteCon"></textarea>
+			<button id="addReply">등록</button>
 		</div>
 
 		<div class="dat-con">
@@ -58,27 +70,33 @@
 		</div>
 		<div class="dat-info">
 			<div>이름 : 유저일</div>
-			|
-			<div>학과 : 경영학과</div>
-			|
+			||
 			<div>작성일 : 2024.02.23</div>
 		</div>
-		<div class="dat-con">
-			<div>댓글 1</div>
+		<div class="button-container">
+			<button id="replyUpBtn">수정</button>
+			<button id="replyDeBtn">삭제</button>
 		</div>
-		<div class="dat-info">
-			<div>이름 : 유저일</div>
-			|
-			<div>학과 : 경영학과</div>
-			|
-			<div>작성일 : 2024.02.23</div>
-		</div>
-		<div class="goto">
-			<button>목록으로</button>
-		</div>
-
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
+
+	<script>
+
+        // JSP에서 작성 가능한 언어/라이브러리
+        // -> html, css, js, java, EL, JSTL
+
+        // JSP 해석 우선 순위 : java/EL/JSTL > HTML, CSS, JS
+
+
+        // 게시글 번호 전역 변수로 선언
+        const boardNo = "${board.boardNo}";
+        const categoryNo = "${board.categoryNo}";
+
+		const boardTitle = "${board.boardTitle}"
+
+    </script>
+
+	<script src="/resources/js/board/departmentBoard/departmentBoardDetail.js"></script>
 </body>
 </html>

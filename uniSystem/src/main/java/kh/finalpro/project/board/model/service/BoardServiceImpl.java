@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.common.util.Util;
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.board.model.dao.BoardDAO;
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.BoardFile;
@@ -55,9 +56,9 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Map<String, Object> selelctBoardList(Map<String, Object> paramMap, int cp) {
 		// 1. 특정 게시판의 삭제되지 않고 검색 조건이 일치하는 게시글 수 조회
-		
+
 		int listCount = 0;
-		
+
 		if(paramMap.get("categoryNo").equals("2") || paramMap.get("categoryNo").equals("4")) {
 			listCount = dao.getListCountInquiry(paramMap); // 1:1문의, 학과공지
 		}else {
@@ -73,7 +74,7 @@ public class BoardServiceImpl implements BoardService{
 		// List<Board> boardList = dao.selelctNoticeBoardList(pagination, paramMap); // 공지사항
 		// List<Board> boardList = dao.searchFreeBoardList(pagination, paramMap); // 자유게시판
 		// List<Board> boardList = dao.selectinquiryBoardList(pagination, paramMap); // 1:1, 학과공지
-		
+
 		List<Board> boardList = dao.selelctBoardList(pagination, paramMap); // 전체
 		// 4. pagination, boardList를 Map 담아서 반환
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -114,13 +115,13 @@ public class BoardServiceImpl implements BoardService{
 		return dao.selectCategory();
 	}
 
-	
-
-	
 
 
 
-	
+
+
+
+
 
 	// 자유게시판 게시글 조회수 증가
 	@Transactional(rollbackFor = Exception.class)
@@ -131,7 +132,7 @@ public class BoardServiceImpl implements BoardService{
 
 
 
-	
+
 
 	@Override
 	public List<String> selectFileList(int boardNo) {
@@ -140,7 +141,7 @@ public class BoardServiceImpl implements BoardService{
 
 
 
-	
+
 
 	// 1:1문의 작성
 	@Transactional(rollbackFor = Exception.class)
@@ -154,7 +155,7 @@ public class BoardServiceImpl implements BoardService{
 		if(board.getBoardSt() == null) {
 			board.setBoardSt("N");
 		}
-		
+
 		// 1. BOARD 테이블 INSERT 하기(제목, 내용, 작성자, 게시판 코드)
 		// -> boardNo(시퀀스로 생성한 번호) 반환 받기
 		int boardNo = dao.inquiryBoardWrite(board);
@@ -220,7 +221,7 @@ public class BoardServiceImpl implements BoardService{
 					for(int i = 0; i < uploadList.size(); i++) {
 
 						String rename = uploadList.get(i).getBoardFileRename();
-
+						System.out.println(filePath + rename);
 						file.get(i).transferTo(new File(filePath + rename));
 
 					}
@@ -313,134 +314,134 @@ public class BoardServiceImpl implements BoardService{
 					if(!uploadList.isEmpty()) {
 
 
-							for(int s = 0; s < uploadList.size(); s++) {
+						for(int s = 0; s < uploadList.size(); s++) {
 
-								String rename = uploadList.get(s).getBoardFileRename();
+							String rename = uploadList.get(s).getBoardFileRename();
 
-								file.get(s).transferTo(new File(filePath + rename));
-
-							}
-
-						}else { // 일부 또는 전체 insert 실패
-
+							file.get(s).transferTo(new File(filePath + rename));
 
 						}
-						rowCount = dao.inquiryFileUpdate(img);
 
-						if(rowCount == 0) {
-							// 수정 실패 == DB에 이미지가 없었다.
-							// -> 이미지를 삽입
-							rowCount = dao.inquiryFileInsert(img);
-						}
+					}else { // 일부 또는 전체 insert 실패
+
+
 					}
+					rowCount = dao.inquiryFileUpdate(img);
 
-				
-
+					if(rowCount == 0) {
+						// 수정 실패 == DB에 이미지가 없었다.
+						// -> 이미지를 삽입
+						rowCount = dao.inquiryFileInsert(img);
+					}
 				}
+
 
 
 			}
 
-		
+
+		}
+
+
 		return rowCount;
 	}	
 
 
-	
-
-	
 
 
-	
-	
+
+
+
+
+
 	// 자유게시판 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int freeBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath,
 			String deleteList) throws IllegalStateException, IOException {
-		
+
 		// 1. 게시글 제목/내용만 수정
 
-				// 1) XSS 방지 처리
-				board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
-				board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
-				// 2) DAO호출
-				int rowCount = dao.inquiryBoardUpdate(board);
-				
-				System.out.println(rowCount);
+		// 1) XSS 방지 처리
+		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
+		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
+		// 2) DAO호출
+		int rowCount = dao.inquiryBoardUpdate(board);
 
-				// 2. 게시글 부분이 수정 성공 했을 때
-				if(rowCount > 0) {
+		System.out.println(rowCount);
 
-					if(!deleteList.equals("")) { // 삭제할 이미지가 있다면
-						// 3. deleteList에 작성된 이미지 모두 삭제
-						Map<String, Object> deleteMap = new HashMap<String, Object>();
-						deleteMap.put("boardNo", board.getBoardNo());
-						deleteMap.put("deleteList", deleteList);
+		// 2. 게시글 부분이 수정 성공 했을 때
+		if(rowCount > 0) {
 
-						rowCount = dao.inquiryFileDelete(deleteMap);
+			if(!deleteList.equals("")) { // 삭제할 이미지가 있다면
+				// 3. deleteList에 작성된 이미지 모두 삭제
+				Map<String, Object> deleteMap = new HashMap<String, Object>();
+				deleteMap.put("boardNo", board.getBoardNo());
+				deleteMap.put("deleteList", deleteList);
 
-						if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백
-							// 예외 강제로 발생
-							// throw new ImageDeleteException();
-						}
-					}
-					System.out.println(deleteList);
+				rowCount = dao.inquiryFileDelete(deleteMap);
 
-					// 4. 새로 업로드된 이미지 분류 작업
-
-					// images : 실제 파일이 담긴 List
-					//				  -> input type="file" 개수만큼 요소가 조재
-					//				  -> 제출된 파일이 없어도 MultipartFile 객체는 존재
-
-					List<BoardFile> uploadList = new ArrayList<BoardFile>();
-
-					// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
-
-					for(int i = 0; i < file.size(); i++) {
-
-						if(file.get(i).getSize() > 0) {
-
-							BoardFile img = new BoardFile();
-							img.setBoardFilePath(webPath);
-							img.setBoardNo(board.getBoardNo()); 
-
-							String fileName = file.get(i).getOriginalFilename(); 
-							img.setBoardFileOriginal(fileName); 
-							img.setBoardFileRename(Util.fileRename(fileName)); 
-
-							uploadList.add(img);
-							
-							// 오라클은 다중  UPDATE를 지원하지 않기 떄문에
-							// 하나씩 UPDATE 수행
-							
-							rowCount = dao.inquiryFileUpdate(img);
-							
-							if(rowCount == 0) {
-								// 수정 실패 == DB에 이미지가 없었다.
-								// -> 이미지를 삽입
-								rowCount = dao.inquiryFileInsert(img);
-							}
-						}
-						
-						System.out.println(uploadList);
-
-					}
-					
-					
+				if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백
+					// 예외 강제로 발생
+					// throw new ImageDeleteException();
 				}
-				return rowCount;
-		
+			}
+			System.out.println(deleteList);
+
+			// 4. 새로 업로드된 이미지 분류 작업
+
+			// images : 실제 파일이 담긴 List
+			//				  -> input type="file" 개수만큼 요소가 조재
+			//				  -> 제출된 파일이 없어도 MultipartFile 객체는 존재
+
+			List<BoardFile> uploadList = new ArrayList<BoardFile>();
+
+			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
+
+			for(int i = 0; i < file.size(); i++) {
+
+				if(file.get(i).getSize() > 0) {
+
+					BoardFile img = new BoardFile();
+					img.setBoardFilePath(webPath);
+					img.setBoardNo(board.getBoardNo()); 
+
+					String fileName = file.get(i).getOriginalFilename(); 
+					img.setBoardFileOriginal(fileName); 
+					img.setBoardFileRename(Util.fileRename(fileName)); 
+
+					uploadList.add(img);
+
+					// 오라클은 다중  UPDATE를 지원하지 않기 떄문에
+					// 하나씩 UPDATE 수행
+
+					rowCount = dao.inquiryFileUpdate(img);
+
+					if(rowCount == 0) {
+						// 수정 실패 == DB에 이미지가 없었다.
+						// -> 이미지를 삽입
+						rowCount = dao.inquiryFileInsert(img);
+					}
+				}
+
+				System.out.println(uploadList);
+
+			}
+
+
+		}
+		return rowCount;
+
 	}
 
 	//공지사항 게시글 상세조회
 	@Override
 	public Board noticeDetailBoard(Map<String, Object> map) {
-		
+
 		return dao.noticeDetailBoard(map);
 	}
-	
-	
+
+
 
 	// 공지사항 작성 페이지----------------------------------
 	@Transactional(rollbackFor = Exception.class)
@@ -454,7 +455,7 @@ public class BoardServiceImpl implements BoardService{
 		if(board.getBoardSt() == null) {
 			board.setBoardSt("N");
 		}
-		
+
 		// 1. BOARD 테이블 INSERT 하기(제목, 내용, 작성자, 게시판 코드)
 		// -> boardNo(시퀀스로 생성한 번호) 반환 받기
 		int boardNo = dao.noticeboardInsert(board);
@@ -543,6 +544,181 @@ public class BoardServiceImpl implements BoardService{
 		return boardNo;
 	}
 
+
+
+	// 1:1문의 비밀번호 확인
+	@Override
+	public int boardCheck(Map<String, Object> map) {
+		return dao.boardCheck(map);
+	}
+
+	// 학과공지 게시글 작성
+	@Override
+	public int departmentBoardInsert(Board board, List<MultipartFile> file, List<MultipartFile> images, String webPath,
+			String filePath) throws IllegalStateException, IOException {
+
+
+		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
+		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
+
+		// 0-1 boardSt가 null이라면 기본값 세팅
+		if(board.getBoardSt() == null) {
+			board.setBoardSt("N");
+		}
+
+		// 1. BOARD 테이블 INSERT 하기(제목, 내용, 작성자, 게시판 코드)
+		// -> boardNo(시퀀스로 생성한 번호) 반환 받기
+		int boardNo = dao.inquiryBoardWrite(board);
+
+		// 2. 게시글 삽입 성공 시
+		//	업로드된 이미지가 있다면 BOARD_IMG 테이블에 삽입하는 DAO 호출
+		if(boardNo > 0) { // 게시글 삽입 성공 시
+
+			// List<MultipartFile> images
+			// -> 업로드된 파일이 담긴 객체 MultipartFile이 5개 존재
+			// -> 단, 업로드된 파일이 없어도 MultipartFile 객체는 존재
+
+			// 실제 업로드된 파일의 정보를 기록할 List
+			List<BoardFile> uploadList1 = new ArrayList<BoardFile>();
+			List<BoardFile> uploadList2 = new ArrayList<BoardFile>();
+
+			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
+			for(int i = 0; i < file.size(); i++) {
+
+				// i번째 요소에 업로드한 파일이 있다면
+				if(file.get(i).getSize() > 0) {
+
+					BoardFile img = new BoardFile();
+					// img에 파일 정보를 담아서 uploadList에 추가
+					img.setBoardFilePath(webPath); // 웹 접근 경로
+					img.setBoardNo(boardNo); // 게시글 번호
+
+					img.setBoardFileCategoryNo(
+							board.getCategoryNo()
+							);
+
+					// 파일 원본명
+					String fileName = file.get(i).getOriginalFilename(); // 원본명
+					img.setBoardFileOriginal(fileName); // 원본명
+					img.setBoardFileRename(Util.fileRename(fileName)); // 변경명
+
+					uploadList1.add(img);
+				}
+
+				for(int s = 0; s < images.size(); s++) {
+
+					// i번째 요소에 업로드한 파일이 있다면
+					if(images.get(i).getSize() > 0) {
+
+						BoardFile imgs = new BoardFile();
+						// img에 파일 정보를 담아서 uploadList에 추가
+						imgs.setBoardFilePath(webPath); // 웹 접근 경로
+						imgs.setBoardNo(boardNo); // 게시글 번호
+
+						imgs.setBoardFileCategoryNo(
+								board.getCategoryNo()
+								);
+
+						// 파일 원본명
+						String fileName = file.get(i).getOriginalFilename(); // 원본명
+						imgs.setBoardFileOriginal(fileName); // 원본명
+						imgs.setBoardFileRename(Util.fileRename(fileName)); // 변경명
+
+						uploadList2.add(imgs);
+					}
+				}
+
+			} // 분류 for문 종료
+
+			// 분류 작업 후 uploadList가 비어있지 않은 경우
+			// == 업로드한 파일이 있다.
+			if(!uploadList1.isEmpty()) {
+
+				// BOARD_IMG 테이블에 INSERT하는 DAO 호출
+				int result = dao.insertDepartmentFile(uploadList1);
+				// result == 삽입된 행의 개수 == uploadList.size()
+
+				// 삽입된 행의 개수와 uploadList의 개수가 같다면
+				// == 전체 insert 성공
+				if(result == uploadList1.size()) {
+
+					// 서버에 파일을 저장(transferTo())
+
+					// images      : 실제 파일이 담긴 객체 리스트
+					//				      (업로드 안된 인덱스 빈칸)
+
+					// uploadList : 업로드된 파일의 정보 리스트
+					//					  (원본명, 변경명, 순서, 경로, 게시글 번호)
+
+					// 순서 == images 업로드된 인덱스
+
+					for(int i = 0; i < uploadList1.size(); i++) {
+
+						String rename = uploadList1.get(i).getBoardFileRename();
+						System.out.println(filePath + rename);
+						file.get(i).transferTo(new File(filePath + rename));
+
+					}
+
+				}else { // 일부 또는 전체 insert 실패
+
+					// ** 웹 서비스 수행 중 1개라도 실패하면 전체 실패 **
+					// -> rollback 필요
+
+					// [결론]
+					// 예외를 강제로 발생기켜서 rollback 해야된다.
+					// -> 사용자 정의 예외 발생
+					// throw new FileUploadException(); // 예외 강제 발생
+
+				}
+
+				if(!uploadList2.isEmpty()) {
+
+					// BOARD_IMG 테이블에 INSERT하는 DAO 호출
+					int result1 = dao.insertDepartmentImage(uploadList2);
+					// result == 삽입된 행의 개수 == uploadList.size()
+
+					// 삽입된 행의 개수와 uploadList의 개수가 같다면
+					// == 전체 insert 성공
+					if(result1 == uploadList2.size()) {
+
+						// 서버에 파일을 저장(transferTo())
+
+						// images      : 실제 파일이 담긴 객체 리스트
+						//				      (업로드 안된 인덱스 빈칸)
+
+						// uploadList : 업로드된 파일의 정보 리스트
+						//					  (원본명, 변경명, 순서, 경로, 게시글 번호)
+
+						// 순서 == images 업로드된 인덱스
+
+						for(int i = 0; i < uploadList2.size(); i++) {
+
+							String rename = uploadList2.get(i).getBoardFileRename();
+							System.out.println(filePath + rename);
+							images.get(i).transferTo(new File(filePath + rename));
+
+						}
+
+					}else { // 일부 또는 전체 insert 실패
+
+						// ** 웹 서비스 수행 중 1개라도 실패하면 전체 실패 **
+						// -> rollback 필요
+
+						// [결론]
+						// 예외를 강제로 발생기켜서 rollback 해야된다.
+						// -> 사용자 정의 예외 발생
+						// throw new FileUploadException(); // 예외 강제 발생
+
+					}
+
+				}
+			}
+
+		}
+		return boardNo;
+	}
+
 	@Override
 	public Map<String, Object> searchFreeBoardList(Map<String, Object> paramMap, int cp) {
 		// TODO Auto-generated method stub
@@ -555,12 +731,125 @@ public class BoardServiceImpl implements BoardService{
 		return null;
 	}
 
-	
-	
+	// 학과공지 수정
+	@Override
+	public int departmentBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath,
+			List<MultipartFile> images) throws IllegalStateException, IOException {
+		// 1) XSS 방지 처리
+		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
+		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
+		// 2) DAO호출
+		int rowCount = dao.departmentBoardUpdate(board);
 
-	
-	
-	
-	
+		// 2. 게시글 부분이 수정 성공 했을 때
+		if(rowCount > 0) {
+
+
+			List<BoardFile> uploadList1= new ArrayList<BoardFile>();
+			List<BoardFile> uploadList2 = new ArrayList<BoardFile>();
+
+			// images에 담겨있는 파일 중 실제 업로드된 파일만 분류
+
+			for(int i = 0; i < file.size(); i++) {
+
+				if(file.get(i).getSize() > 0) {
+
+					BoardFile img = new BoardFile();
+					img.setBoardFilePath(webPath);
+					img.setBoardNo(board.getBoardNo()); 
+
+					String fileName = file.get(i).getOriginalFilename(); 
+					img.setBoardFileOriginal(fileName); 
+					img.setBoardFileRename(Util.fileRename(fileName)); 
+
+					uploadList1.add(img);
+					if(!uploadList1.isEmpty()) {
+
+
+						for(int s = 0; s < uploadList1.size(); s++) {
+
+							String rename = uploadList1.get(s).getBoardFileRename();
+
+							file.get(s).transferTo(new File(filePath + rename));
+
+						}
+
+					}else { // 일부 또는 전체 insert 실패
+
+
+					}
+					rowCount = dao.inquiryFileUpdate(img);
+
+					if(rowCount == 0) {
+						// 수정 실패 == DB에 이미지가 없었다.
+						// -> 이미지를 삽입
+						rowCount = dao.inquiryFileInsert(img);
+					}
+				}
+
+
+
+			}
+
+			for(int i = 0; i < images.size(); i++) {
+
+				if(images.get(i).getSize() > 0) {
+
+					BoardFile img = new BoardFile();
+					img.setBoardFilePath(webPath);
+					img.setBoardNo(board.getBoardNo()); 
+
+					String fileName = file.get(i).getOriginalFilename(); 
+					img.setBoardFileOriginal(fileName); 
+					img.setBoardFileRename(Util.fileRename(fileName)); 
+
+					uploadList2.add(img);
+					if(!uploadList2.isEmpty()) {
+
+
+						for(int s = 0; s < uploadList2.size(); s++) {
+
+							String rename = uploadList2.get(s).getBoardFileRename();
+
+							images.get(s).transferTo(new File(filePath + rename));
+
+						}
+
+					}else { // 일부 또는 전체 insert 실패
+
+
+					}
+					rowCount = dao.inquiryFileUpdate(img);
+
+					if(rowCount == 0) {
+						// 수정 실패 == DB에 이미지가 없었다.
+						// -> 이미지를 삽입
+						rowCount = dao.inquiryFileInsert(img);
+					}
+				}
+
+
+
+			}
+
+
+		}
+
+
+		return rowCount;
+	}
+
+	@Override
+	public List<Member> selectMemberList(Member loginMember) {
+		return dao.selectMemberList(loginMember);
+	}	
+
+
+
+
+
+
+
+
 
 }

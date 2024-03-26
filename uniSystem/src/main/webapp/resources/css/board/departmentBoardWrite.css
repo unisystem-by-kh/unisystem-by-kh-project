@@ -6,14 +6,14 @@ main{
 
 #writeForm{
     width: 1200px;
-    height:1000px;
-    border: 1px solid #ddd;
+    height:1200px;
+    border: 1px solid black;
     margin: auto;
 }
 
 .depart-top{
     width: 90%;
-    margin: auto;
+    margin: 30px auto;
     border-bottom: 1px solid black;
 }
 
@@ -87,7 +87,7 @@ main{
     font-weight: bold;
 }
 .depart-file-area > div:nth-of-type(4){
-    width: 20%;
+    width: 40%;
     display: flex;
     align-items: center;
 }
@@ -98,10 +98,19 @@ main{
 
 .image-area{
     width: 80%;
-    height: 150px;
+    height: 300px;
     margin: 30px auto;
     border: 1px solid #ddd;
     text-align: center;
+}
+
+.image-area > img{
+    width: 100%;
+    height: 100%;
+}
+
+.deleteImage{
+    cursor: pointer;
 }
 
 .depart-content-area{

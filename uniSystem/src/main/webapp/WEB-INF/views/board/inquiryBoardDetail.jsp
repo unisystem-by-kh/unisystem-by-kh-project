@@ -103,13 +103,13 @@
 
         // JSP 해석 우선 순위 : java/EL/JSTL > HTML, CSS, JS
 
+
         // 게시글 번호 전역 변수로 선언
         const boardNo = "${board.boardNo}";
-        
+		console.log(boardNo)
         const categoryNo = "${board.categoryNo}";
-
-        const loginMemberNo = "${loginMember.memberNo}"
-
+		console.log(categoryNo)
+       
 		const boardTitle = "${board.boardTitle}"
 
     </script>
