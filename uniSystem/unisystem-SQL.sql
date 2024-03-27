@@ -100,7 +100,9 @@ COMMENT ON COLUMN "MEMBER"."DEPARTMENT_NO" IS '회원이 속한 학과 번호(�
 ALTER TABLE "MEMBER" ADD CONSTRAINT "PK_MEMBER" PRIMARY KEY (
    "MEMBER_NO"
 );
+--------------------------------------------------------------------------------
 -- 학생 샘플데이터
+-- 1번학과 학생 샘플데이터 1
 INSERT INTO "MEMBER" (
     "MEMBER_NO",
     "MEMBER_PW",
@@ -133,7 +135,174 @@ VALUES(
     '970221-1234567',
     1
 );
+-- 2번학과 학생 샘플데이터 1
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412346',
+    'pass06',
+    '학생육번',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example@naver.com',
+    '01043214321',
+    'F',
+    SYSDATE,
+    1,
+    1,
+    'N',
+    NULL,
+    '910516-1234567',
+    2
+);
+-- 1번학과 학생 샘플데이터 2
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412347',
+    'pass07',
+    '학생칠번임',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    1,
+    1,
+    'N',
+    NULL,
+    '201011-1234567',
+    1
+);
+-- 1번학과 학생 샘플데이터 3
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412348',
+    'pass08',
+    '학생팔랑',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example8@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    1,
+    1,
+    'N',
+    NULL,
+    '021111-1234567',
+    1
+);
+-- 2번학과 학생 샘플데이터 2
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412349',
+    'pass09',
+    '구구',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example8@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    1,
+    1,
+    'N',
+    NULL,
+    '001230-1234567',
+    2
+);
+-- 3번학과 학생 샘플데이터 1
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412340',
+    'pass00',
+    '영',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example10@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    1,
+    1,
+    'N',
+    NULL,
+    '871230-1234567',
+    3
+);
+--------------------------------------------------------------------------------
 -- 교수 샘플데이터
+-- 1번 학과 교수 샘플데이터 1
 INSERT INTO "MEMBER" (
     "MEMBER_NO",
     "MEMBER_PW",
@@ -165,6 +334,39 @@ VALUES(
     NULL,
     '970221-2345678',
     1
+);
+-- 2번 학과 교수 샘플데이터 1
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '02-2422222',
+    'pass022',
+    '교수이번쓰',
+    '주소 영역 ^^^ 상세주소 영역',
+    'professor01@naver.com',
+    '01078947894',
+    'M',
+    SYSDATE,
+    NULL,
+    NULL,
+    'N',
+    NULL,
+    '670221-2345678',
+    2
 );
 -- 교직원 샘플데이터
 INSERT INTO "MEMBER" (
@@ -199,7 +401,7 @@ VALUES(
     '970221-2345654',
     1
 );
--- 학생 중간 커밋
+-- 회원 중간 커밋
 COMMIT;
 --------------------------------------------------------------------------------
 -- 게시판 카테고리

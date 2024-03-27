@@ -51,6 +51,9 @@
                     </div>
 
                 </div>
+                <div class="infoCheck">
+                    현재 재학중이고 수업을 듣는 학생만 조회
+                </div>
                 <div class="student-info">
                     <div class="student-info-area">
                         <div class="student-info-value-name">
