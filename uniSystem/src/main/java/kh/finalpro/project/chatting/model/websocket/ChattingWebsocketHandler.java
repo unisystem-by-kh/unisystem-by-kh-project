@@ -1,6 +1,8 @@
 package kh.finalpro.project.chatting.model.websocket;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,9 +15,11 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import kh.finalpro.project.chatting.model.dto.Message;
 import kh.finalpro.project.chatting.model.service.ChattingService;
+import kh.finalpro.project.main.model.dto.Member;
 
 public class ChattingWebsocketHandler extends TextWebSocketHandler{
 
@@ -39,8 +43,8 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 		// 이를 필드에 선언해준sessions에 저장
 		sessions.add(session);
 
-		logger.info("{}연결됨", session.getId());
-		System.out.println(session.getId() + "연결됨");
+		//logger.info("{}연결됨", session.getId());
+		//System.out.println(session.getId() + "연결됨");
 	}
 
 	//handlerTextMessage - 클라이언트로부터 텍스트 메세지를 받았을때 실행
@@ -57,6 +61,28 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         Message msg = objectMapper.readValue( message.getPayload(), Message.class);
         // Message 객체 확인
         System.out.println("msg::" + msg); 
+        
+        int result = service.insertMessage(msg);
+        
+        if(result > 0) {
+        	
+        	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+        	msg.setSendTime( sdf.format(new Date()) );
+        	
+        	for (WebSocketSession s : sessions) {
+        		
+        		String loginMemberNo = ((Member)s.getAttributes().get("loginMember")).getMemberNo();
+        		logger.debug("loginMemberNo : " + loginMemberNo);
+        		
+        		/*if(loginMemberNo.equals(msg.getSenderNo())) {
+        			s.sendMessage(new TextMessage(new Gson().toJson(msg)));
+        		}else {
+        			s.sendMessage(new TextMessage(new Gson().toJson(msg)));
+        		}*/
+        		s.sendMessage(new TextMessage(new Gson().toJson(msg)));
+				
+			}
+        }
         
 		
 	}

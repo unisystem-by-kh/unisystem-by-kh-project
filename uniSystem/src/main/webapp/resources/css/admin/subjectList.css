@@ -160,7 +160,7 @@ footer{
 
 
 /* 과목수정 모달 */
-.modal{
+.modal-area{
     position:absolute;
     display: none;
     

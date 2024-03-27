@@ -69,15 +69,16 @@
 							<tr>
 								<td>${board.boardNo}</td>
 								<td>
-									<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">'${board.memberName}'님의 문의글입니다.</a>
-											
+
+									
 									<!-- ${boardCode} : @PathVariable로 request scope에 추가된 값 --> 
 									<c:choose>
 										<c:when test="${board.boardSt == 'D' }">
-
+											<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}" id="boardTitle-con">'${board.memberName}'님의 문의글입니다.</a>
+											
 										</c:when>
 										<c:otherwise>
-										🔒
+											<a data="${board.boardNo}" onclick=modal(this)>'${board.memberName}'님의 문의글입니다.</a>🔒
 										</c:otherwise>
 									</c:choose>
 								</td>
@@ -145,5 +146,28 @@
 		</c:if>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
+
+
+	<div class="modal-back">
+            <div class="pw-modal">
+                <div class="pw-modal-area">
+                    <h1>비밀번호 확인</h1>
+					<span id="closeBtn">&times;</span>
+                </div>
+                <div class="pw-modal-write">
+                    <p>비밀글 기능으로 보호된 게시글입니다.</p>
+                    <p>작성자와 관리자만 열람하실 수 있습니다. 본인이라면 비밀번호를 입력해주세요.</p>
+                </div>
+                <div class="pw-modal-input">
+                    <input type="password"  id="modal-pw">
+                    <button type="submit" id="modalBtn">확인</button>
+                </div>
+            </div>
+    </div>
+
+	<script src="/resources/js/board/inquiryBoard/inquiryBoardList.js"></script>
+	<script>
+		
+	</script>
 </body>
 </html>

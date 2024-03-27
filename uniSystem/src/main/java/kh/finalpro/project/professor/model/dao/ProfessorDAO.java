@@ -1,5 +1,7 @@
 package kh.finalpro.project.professor.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +48,43 @@ public class ProfessorDAO {
 	public List<Professor> selectMemberList() {
 		return sqlSession.selectList("professorMapper.selectMemberList");
 	}
-	
+
+	public List<Professor> searchMemberList(Map<String, Object> paramMap) {
+		return sqlSession.selectList("professorMapper.searchMemberList", paramMap);
+	}
+
+	public List<Professor> searchMember(Map<String, Object> paramMap) {
+		return sqlSession.selectList("professorMapper.searchMember", paramMap);
+	}
+
+	public List<Professor> departmentList() {
+		return sqlSession.selectList("professorMapper.departmentList");
+	}
+
+	public List<Professor> classList() {
+		return sqlSession.selectList("professorMapper.classList");
+	}
+
+	public int updateGrades(List<Map<String, Object>> gradesList) {
+		
+		int result = 0;
+		
+		for (Map<String, Object> gradeMap : gradesList) {
+			
+		    String memberNo = (String)gradeMap.get("memberNo");
+		    String lectureGrade = (String)gradeMap.get("lectureGrade");
+		    String lectureTerm = (String)gradeMap.get("lectureTerm");
+		    String classNo = (String)gradeMap.get("classNo");
+		    String lecturePoint = (String)gradeMap.get("lecturePoint");
+		    
+		    result = sqlSession.update("professorMapper.updateGrades" , gradeMap);
+		    
+		}
+		
+		return result;
+	}
+
+
 	
 	
 	

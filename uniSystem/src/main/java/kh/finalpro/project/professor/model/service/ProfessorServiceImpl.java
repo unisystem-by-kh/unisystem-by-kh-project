@@ -58,10 +58,40 @@ public class ProfessorServiceImpl implements ProfessorService{
 	}
 
 
-	// 학생 목록 전부 조회
+	// 학생 목록 전부 조회 - ajax
 	@Override
 	public List<Professor> selectMemberList() {
 		return dao.selectMemberList();
 	}
+
+	// 검색 조건에 따른 학생 목록 조회 - ajax
+	@Override
+	public List<Professor> searchMemberList(Map<String, Object> paramMap) {
+		return dao.searchMemberList(paramMap);
+	}
+
+	// 여러가지 선택 조건(학년, 학기, 학과, 과목)에 검색 된 학생 목록 성적 조회 비동기 AJAX
+	@Override
+	public List<Professor> searchMember(Map<String, Object> paramMap) {
+		return dao.searchMember(paramMap);
+	}
+
+	// 비동기로 학과를 가져와서 학과 목록 select/option 목록 가져오기
+	@Override
+	public List<Professor> departmentList() {
+		return dao.departmentList();
+	}
+
+	// 비동기로 과목을 가져와서 학과 목록 select/option 목록 가져오기
+	@Override
+	public List<Professor> classList() {
+		return dao.classList();
+	}
+
+	@Override
+	public int updateGrades(List<Map<String, Object>> gradesList) {
+		return dao.updateGrades(gradesList);
+	}
+
 
 }

@@ -71,7 +71,7 @@
 
 
 	<script>
-	const boardNo = "${board.boardNo}";
+		const boardNo = "${board.boardNo}";
 	</script>
 
 	<script src="/resources/js/board/inquiryBoard/inquiryBoardDetail.js"></script>

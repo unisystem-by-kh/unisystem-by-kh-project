@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="chattingMapper">
+
+	<resultMap type="ChattingRoom" id="chattingRoom_rm">
+	     <id property="chattingNo" column="CHATTING_NO" />
+	
+	     <result property="chattingCreateDate" column="CHATTING_CREATE_DATE" />
+	     <result property="memberNo" column="MEMBER_NO" />
+	</resultMap>
+	
+	<resultMap type="Message" id="message_rm">
+	   <id property="messageNo" column="MESSAGE_NO" />
+	
+	   <result property="messageContent" column="MESSAGE_CONTENT" />
+	   <result property="sendTime" column="MESSAGE_SEND_DATE" />
+	   <result property="chattingNo" column="CHATTING_NO" />
+	   <result property="senderNo" column="MEMBER_NO" />
+	   <result property="memberName" column="MEMBER_NAME" />
+	</resultMap>
+
+   
+	<resultMap type="Member" id="member_rm">
+	   <id property="memberNo" column="MEMBER_NO"/>
+	   
+	   <result property="memberName" column="MEMBER_NAME"/>
+	</resultMap>   
+   
+	<select id="checkChattingNo" resultType="_int">
+		SELECT NVL(SUM(CHATTING_NO),0) CHATTING_NO FROM CHATTING
+		WHERE TO_CHAR(CHATTING_CREATE_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	</select>
+
+	<insert id="createChattingRoom" parameterType="map" useGeneratedKeys="true"> 
+	
+		<selectKey keyProperty="chattingNo" order="BEFORE" resultType="_int">
+			SELECT SEQ_CHATTING_NO.NEXTVAL FROM DUAL	
+		</selectKey>
+		
+		INSERT INTO CHATTING
+		VALUES (#{chattingNo}, DEFAULT, #{loginMemberNo})
+		
+	</insert>
+	
+	<insert id="insertMessage">
+		INSERT INTO MESSAGE
+		VALUES (SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, #{chattingNo}, #{senderNo})
+	</insert>
+	
+	<select id="selectMessageList" resultMap="message_rm">
+		SELECT MESSAGE_NO, MESSAGE_CONTENT, CHATTING_NO, MEMBER_NO, MEMBER_NAME,
+		        TO_CHAR(MESSAGE_SEND_DATE, 'YYYY.MM.DD HH24:MI') MESSAGE_SEND_DATE
+		FROM MESSAGE
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE CHATTING_NO = #{chattingNo}
+		ORDER BY MESSAGE_NO
+	</select>
+
+</mapper>

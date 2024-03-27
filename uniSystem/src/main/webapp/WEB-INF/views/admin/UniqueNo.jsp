@@ -28,7 +28,7 @@
                 <input type="radio" id="radio2" name="radios">
             </div>
 
-            <form action="/admin/UniqueNo" method="POST" id="generateForm" enctype="multipart/form-data">
+            <form action="/admin/UniqueNo" method="POST" id="generateForm">
                 <div class="input-group">
                     <!-- 이름 입력 -->
                     <label for="memberName">이름</label>

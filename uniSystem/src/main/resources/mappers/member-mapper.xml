@@ -98,4 +98,11 @@
 		ORDER BY 2
 	</select>
 	
+	
+	<select id="selectMemberList"  resultMap="member_rm">
+		SELECT * FROM MEMBER
+		WHERE DEPARTMENT_NO = #{departmentNo}
+		AND MEMBER_NO LIKE '01%' 
+	</select>
+	
 </mapper>

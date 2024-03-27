@@ -454,6 +454,8 @@ animation-iteration-count: infinite;
     flex-direction: column;
 }
 
+
+
 /* 게시판 정보 영역 */
 .border-view{
     display: flex;
