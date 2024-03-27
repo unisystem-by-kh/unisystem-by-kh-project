@@ -74,7 +74,6 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         		String loginMemberNo = ((Member)s.getAttributes().get("loginMember")).getMemberNo();
         		logger.debug("loginMemberNo : " + loginMemberNo);
         		
-        		
         		/*if(loginMemberNo.equals(msg.getSenderNo())) {
         			s.sendMessage(new TextMessage(new Gson().toJson(msg)));
         		}else {

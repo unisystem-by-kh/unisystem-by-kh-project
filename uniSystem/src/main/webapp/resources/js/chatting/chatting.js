@@ -23,16 +23,6 @@ if(chatBtn != null){
     })
 }
 
-// 4자리 난수 생성하는 함수
-function generateRandomNumber() {
-    return Math.floor(1000 + Math.random() * 9000);
-}
-
-// 랜덤 4자리 숫자로 익명 이름 생성하는 함수
-function generateAnonymousName() {
-    return "익명" + generateRandomNumber();
-}
-
 
 // 채팅 메세지 영역
 const display = document.getElementsByClassName("display-chatting")[0];
@@ -43,8 +33,7 @@ function selectChattingFn() {
     fetch("/chatting/selectMessage?"+`chattingNo=${chattingNo}&memberNo=${loginMemberNo}`)
     .then(resp=>resp.json())
     .then(messageList => {
-        //console.log(messageList);
-
+        console.log(messageList);
 
         const ul = document.querySelector(".display-chatting");
 
@@ -93,8 +82,11 @@ function selectChattingFn() {
 
                 const div = document.createElement("div");
 
+                // 상대 이름
                 const b = document.createElement("b");
-                b.innerText = "익명"; // 상대 이름
+                b.innerText = msg.memberName; 
+                targetName = msg.memberName;
+
                 const br = document.createElement("br");
 
                 div.append(b, br, p, span);
@@ -136,6 +128,7 @@ const sendMessage = ()=>{
             "senderNo" : loginMemberNo,
             "chattingNo" : chattingNo,
             "messageContent": inputChatting.value,
+            "memberName" : targetName
         };
         console.log(obj);
         chattingSock.send(JSON.stringify(obj));
@@ -192,7 +185,7 @@ chattingSock.onmessage = function(e) {
         
             // 상대 이름
             const b = document.createElement("b");
-            b.innerText = targetName; // 전역변수
+            b.innerText = msg.memberName; // 전역변수
             console.log("입력했을떄:"+b.innerText);
             const br = document.createElement("br");
         
