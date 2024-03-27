@@ -89,8 +89,8 @@
 
                 <div class="form-group" id="classTime-area">
                     <label for="classTime">강의 시간</label>
-                    <input type="text" id="classStart" name="classStart" placeholder="시작">교시
-                    <input type="text" id="classEnd" name="classEnd" placeholder="마치는">교시
+                    <input type="text" id="classStart" name="classStart" placeholder="시작" maxlength="1">교시
+                    <input type="text" id="classEnd" name="classEnd" placeholder="마치는" maxlength="1">교시
                     <button type="button" id="checkTime">시간 체크</button>
                 </div>
 

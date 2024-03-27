@@ -63,32 +63,8 @@ public class ChattingServiceImpl implements ChattingService{
 	// 메세지 목록 조회
 	@Override
 	public List<Message> selectMessageList(Map<String, Object> paramMap) {
-
-		// 채팅방에 메세지 가져오기
-		List<Message> messageList = dao.selectMessageList(Integer.parseInt(String.valueOf(paramMap.get("chattingNo"))));
-
-		// 익명 이름을 생성하고, senderNo와 매핑하여 유일한 익명 이름 부여
-		Map<String, String> senderNoToAnonymousName = new HashMap<>();
-		
-		for (Message m : messageList) {
-			String senderNo = m.getSenderNo();
-			
-			if (!senderNoToAnonymousName.containsKey(senderNo)) {
-				
-				// 새로운 senderNo에 대한 익명 이름 생성
-				Random random = new Random();
-				int randomNum = random.nextInt(9000) + 1000; 
-				senderNoToAnonymousName.put(senderNo, "익명" + randomNum);
-			}
-			
-			// 해당 senderNo에 대한 익명 이름 설정
-			m.setMemberName(senderNoToAnonymousName.get(senderNo));
-		}
-
-		System.out.println(messageList);
-
-		return messageList;
-
+		return dao.selectMessageList(Integer.parseInt(String.valueOf(paramMap.get("chattingNo"))));
 	}
-	
+
+
 }

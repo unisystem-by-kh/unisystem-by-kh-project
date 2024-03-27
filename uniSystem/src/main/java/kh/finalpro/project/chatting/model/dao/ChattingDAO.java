@@ -1,5 +1,6 @@
 package kh.finalpro.project.chatting.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,21 @@ public class ChattingDAO {
 	 */
 	public List<Message> selectMessageList(int chattingNo) {
 		return sqlSession.selectList("chattingMapper.selectMessageList", chattingNo);
+	}
+
+	/** 채팅방에서 사용할 익명이름 업데이트
+	 * @param senderNo
+	 * @param string
+	 * @return 
+	 */
+	public int updateMessageSecretName(String senderNo, String secretName) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("senderNo", senderNo);
+		map.put("secretName", secretName);
+		
+		return sqlSession.update("chattingMapper.updateMessageSecretName", map);
 	}
 
 }
