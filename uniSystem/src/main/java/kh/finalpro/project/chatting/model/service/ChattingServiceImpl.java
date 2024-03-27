@@ -41,29 +41,13 @@ public class ChattingServiceImpl implements ChattingService{
 		return dao.insertMessage(msg);
 	}
 
-	/*// 메세지 목록 조회
-	@Override
-	public List<Message> selectMessageList(Map<String, Object> paramMap) {
-
-		// 채팅방에 메세지 가져오기
-		List<Message> messageList = dao.selectMessageList( Integer.parseInt( String.valueOf(paramMap.get("chattingNo") ))); 
-
-		// 채팅한 학생들의 이름 바꿔주기
-		Random random = new Random();
-        int randomNum = random.nextInt(9000) + 1000;
-
-		for (Message m : messageList) {
-			m.setMemberName( m.getMemberName().replaceAll(m.getMemberName(), "익명"+randomNum) );
-		}
-		System.out.println(messageList);
-
-		return null;
-	}*/
-
 	// 메세지 목록 조회
 	@Override
 	public List<Message> selectMessageList(Map<String, Object> paramMap) {
-		return dao.selectMessageList(Integer.parseInt(String.valueOf(paramMap.get("chattingNo"))));
+		List<Message> messageList = dao.selectMessageList(Integer.parseInt(String.valueOf(paramMap.get("chattingNo")))); 
+		//System.out.println(messageList);
+		return messageList;
+		//return dao.selectMessageList(Integer.parseInt(String.valueOf(paramMap.get("chattingNo"))));
 	}
 
 
