@@ -2,6 +2,8 @@ package kh.finalpro.project.collegian.model.service;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,22 +42,29 @@ public class CertificateServiceImpl implements CertificateService{
 		certificate.setMemberNo(loginMember.getMemberNo());
 		certificate.setFkindNo(no); // 증명서 카테고리 번호
 		
-		System.out.println(no);
-		
 		int result = 0;
 		
-		if(upNo == 0) result = dao.selectCertificateCount(certificate); // (조회)생성된 학생증이 있는지 확인
+		if(upNo == 0) result = dao.selectCertificateCount(certificate); // (조회)생성된 중명서가 있는지 확인
 		
-		if(result == 0) { // 생성된 학생증이 없다면 학생증 생성
+		if(result == 0) { // 생성된 중명서가 없다면 학생증 생성
 			Context context = new Context();
 			String htmlContent = null;
 			String originPdfName = null;
 			
 			if(no == 4) { // 학생증
+				
+				String state = null;
+				
+				switch (loginMember.getMemberStatus()) {
+					case "N":  state = "재학생"; break;
+					case "Y":  state = "휴학생"; break;
+					case "P":  state = "졸업생"; break;
+					case "D":  state = "중퇴"; break;
+				}
 				context.setVariable("name", loginMember.getMemberName());
 				context.setVariable("memberNo", loginMember.getMemberNo());
 				context.setVariable("department", loginMember.getDepartmentName());
-				context.setVariable("state", loginMember.getMemberStatus());
+				context.setVariable("state", state);
 				
 				htmlContent = templateEngine.process("studentID", context); // pdfTemplate == html 양식 명
 				
@@ -63,14 +72,33 @@ public class CertificateServiceImpl implements CertificateService{
 			}
 			
 			if(no == 1) { // 학적 증명서
+				
+				
+				LocalDate currentDate = LocalDate.now();
+		        
+		        // 년월일 형식으로 포맷하기
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy 년 MM 월 dd 일");
+		        String formattedDate = currentDate.format(formatter);
+		        
+				
+				String state = null;
+				
+				switch (loginMember.getMemberStatus()) {
+					case "N":  state = "재학"; break;
+					case "Y":  state = "휴학"; break;
+					case "P":  state = "졸업"; break;
+					case "D":  state = "중퇴"; break;
+				}
+				
 				context.setVariable("name", loginMember.getMemberName());
 				context.setVariable("memberNo", loginMember.getMemberNo());
 				context.setVariable("department", loginMember.getDepartmentName());
-				context.setVariable("state", loginMember.getMemberStatus());
+				context.setVariable("state", state);
 				context.setVariable("date", loginMember.getMemberDate());
-				context.setVariable("grade", loginMember.getMemberGrade());
-				context.setVariable("term", loginMember.getMemberTerm());
+				context.setVariable("grade", loginMember.getMemberGrade()+"학년");
+				context.setVariable("term", loginMember.getMemberTerm()+"학기");
 				context.setVariable("ssn", loginMember.getMemberSsn());
+				context.setVariable("sysdate", formattedDate);
 				
 				
 				htmlContent = templateEngine.process("state", context); // pdfTemplate == html 양식 명
@@ -100,6 +128,21 @@ public class CertificateServiceImpl implements CertificateService{
         
 		return certificate;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/*
