@@ -120,7 +120,16 @@
     cursor: pointer;
 }
 
+.infoCheck{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
+    color: gray;
+    font-size: 1.1em;
+    font-weight: bold;
+}
 
 
 
