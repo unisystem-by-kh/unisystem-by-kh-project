@@ -45,7 +45,7 @@
 	
 	<insert id="insertMessage">
 		INSERT INTO MESSAGE
-		VALUES (SEQ_MESSAGE_NO.NEXTVAL, #{secretName}, #{messageContent}, DEFAULT, #{chattingNo}, #{senderNo})
+		VALUES (SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, #{chattingNo}, #{senderNo})
 	</insert>
 	
 	<select id="selectMessageList" resultMap="message_rm">

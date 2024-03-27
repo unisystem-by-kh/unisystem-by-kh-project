@@ -72,22 +72,12 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         //msg::Message(messageNo=0, messageContent=하이요
         //, sendTime=null, chattingNo=1, senderNo=01-2412345, secretName=null)
         
-        // 만약 secretName이 null이면 익명 이름 생성하여 설정
-        String anonymousName = generateAnonymousName();
-        
-        if(msg.getSecretName() == null) {
-        	msg.setSecretName(anonymousName);
-        }
-        
         int result = service.insertMessage(msg); // 메세지 삽입 
         
         if(result > 0) {
         	
-        	System.out.println("anonymousName::"+anonymousName);
-        	
         	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
         	msg.setSendTime( sdf.format(new Date()) );
-        	msg.setSecretName(anonymousName);
         	
         	for (WebSocketSession s : sessions) {
         		
