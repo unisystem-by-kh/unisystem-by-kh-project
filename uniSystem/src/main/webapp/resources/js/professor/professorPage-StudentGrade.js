@@ -16,8 +16,6 @@ function selectMemberList(){
   fetch("/professor/selectMemberList")
     .then(response => response.json())
     .then(mList => {
-        console.log(mList);
-
         const gradeArea = document.getElementsByClassName('grade-area')[0];
         gradeArea.innerHTML = ''
 
@@ -38,6 +36,7 @@ function selectMemberList(){
         classes.innerHTML = '과목';
         const point = document.createElement('div');
         point.innerHTML = '성적';
+
         gradeTitle.append(number, name, grade, grade, term, depart, classes, point);
 
         const content = document.createElement('div');
@@ -65,16 +64,28 @@ function selectMemberList(){
             sClassNo.innerHTML = list.classNo;
             sClassNo.style.display = 'none';
 
+            // 본인의 학과만 식별 하기 위해서 추가
+            const departmentNo = document.createElement('div');
+            departmentNo.innerHTML = list.departmentNo;
+            departmentNo.style.display = 'none';
+
             const sPoint = document.createElement('div');
             const sPointInput = document.createElement('input');
-            sPointInput.setAttribute('placeholder' , '성적 입력');
-            sPointInput.setAttribute('value' , list.lecturePoint);
+            sPointInput.setAttribute('placeholder' , '입력');
+
+            // 본인의 학과만 성적 보이게 처리
+            if(departmentNo.innerText == memberDepartmentNo){
+              sPointInput.setAttribute('value' , list.lecturePoint);
+            }else{
+              sPointInput.setAttribute('value' , '비공개');
+            }
+
             if(sPointInput.value == '0'){
               sPointInput.setAttribute('value' , '')
             }
             sPoint.append(sPointInput);
             
-            gradeContent.append(sNumber, sName, sGrade, sTerm, sDepart, sClass, sPoint, sClassNo);
+            gradeContent.append(sNumber, sName, sGrade, sTerm, sDepart, sClass, sPoint, sClassNo, departmentNo);
 
             content.append(gradeContent);
 
@@ -105,11 +116,12 @@ function searchMemberList(){
 
     .then(response => response.json())
     .then(sList => {
-        console.log(sList);
-        console.log(query);
-
         const gradeArea = document.getElementsByClassName('grade-area')[0];
         gradeArea.innerHTML = ''
+
+        // 검색 조건 및 검색창 내용 초기화
+        document.getElementById('search').selectedIndex = 0;
+        document.getElementById('query').value = '';
 
         const gradeTitle = document.createElement('div');
         gradeTitle.classList.add('grade-title');
@@ -155,16 +167,29 @@ function searchMemberList(){
             sClassNo.innerHTML = list.classNo;
             sClassNo.style.display = 'none';
 
+            // 본인의 학과만 식별 하기 위해서 추가
+            const departmentNo = document.createElement('div');
+            departmentNo.innerHTML = list.departmentNo;
+            departmentNo.style.display = 'none';
+
             const sPoint = document.createElement('div');
             const sPointInput = document.createElement('input');
-            sPointInput.setAttribute('placeholder' , '성적입력');
+            sPointInput.setAttribute('placeholder' , '입력');
             sPointInput.setAttribute('value' , list.lecturePoint);
             if(sPointInput.value == '0'){
               sPointInput.setAttribute('value' , '')
             }
+
+            // 본인의 학과만 성적 보이게 처리
+            if(departmentNo.innerText == memberDepartmentNo){
+              sPointInput.setAttribute('value' , list.lecturePoint);
+            }else{
+              sPointInput.setAttribute('value' , '비공개');
+            }
+
             sPoint.append(sPointInput);
             
-            gradeContent.append(sNumber, sName, sGrade, sTerm, sDepart, sClass, sPoint, sClassNo);
+            gradeContent.append(sNumber, sName, sGrade, sTerm, sDepart, sClass, sPoint, sClassNo, departmentNo);
 
             content.append(gradeContent);
           }
@@ -191,7 +216,6 @@ function searchMember() {
   fetch(`/professor/searchMember?grade=${grade}&term=${term}&depart=${depart}&classes=${classes}`)
       .then(response => response.json())
       .then(scList => {
-          console.log(scList);
 
           const gradeArea = document.getElementsByClassName('grade-area')[0];
           gradeArea.innerHTML = '';
@@ -238,17 +262,30 @@ function searchMember() {
               const sClassNo = document.createElement('div');
               sClassNo.innerHTML = list.classNo;
               sClassNo.style.display = 'none';
+
+              // 본인의 학과만 식별 하기 위해서 추가
+              const departmentNo = document.createElement('div');
+              departmentNo.innerHTML = list.departmentNo;
+              departmentNo.style.display = 'none';
               
               const sPoint = document.createElement('div');
               const sPointInput = document.createElement('input');
-              sPointInput.setAttribute('placeholder', '성적입력');
+              sPointInput.setAttribute('placeholder', '입력');
               sPointInput.setAttribute('value', list.lecturePoint);
               if(sPointInput.value == '0'){
                 sPointInput.setAttribute('value' , '')
               }
+
+              // 본인의 학과만 성적 보이게 처리
+              if(departmentNo.innerText == memberDepartmentNo){
+                sPointInput.setAttribute('value' , list.lecturePoint);
+              }else{
+                sPointInput.setAttribute('value' , '비공개');
+              }
+
               sPoint.append(sPointInput);
 
-              gradeContent.append(sNumber, sName, sGrade, sTerm, sDepart, sClass, sPoint, sClassNo);
+              gradeContent.append(sNumber, sName, sGrade, sTerm, sDepart, sClass, sPoint, sClassNo, departmentNo);
 
               content.append(gradeContent);
           }
@@ -266,7 +303,6 @@ function departmentList() {
   fetch(`/professor/departmentList`)
       .then(response => response.json())
       .then(departmentList => {
-        console.log(departmentList);
 
         const objectSelectArea = document.getElementsByClassName('object-select-area-depart')[0];
         objectSelectArea.innerHTML = '';
@@ -274,6 +310,13 @@ function departmentList() {
         const departmentListS = document.createElement('select');
         departmentListS.setAttribute('name' , 'depart');
         departmentListS.setAttribute('id' , 'departmentList');
+
+        // 이벤트 리스너 추가
+        departmentListS.addEventListener('change', function() {
+          const selectedDepartment = this.value; // 선택된 학과 이름
+          const selectedDepartmentNo = departmentList.find(department => department.departmentName === selectedDepartment).departmentNo; // 선택된 학과의 departmentNo
+          classList(selectedDepartmentNo); // 선택된 학과에 대한 과목 조회 함수 호출
+        });
 
         for(let department of departmentList){
           const departments = document.createElement('option');
@@ -286,16 +329,22 @@ function departmentList() {
 
         objectSelectArea.append(departmentListS);
 
+        // 처음에 함수 실행
+        const selectedDepartment = departmentList[0].departmentName; // 처음 학과 이름
+        const selectedDepartmentNo = departmentList[0].departmentNo; // 처음 학과의 departmentNo
+        classList(selectedDepartmentNo); // 선택된 학과에 대한 과목 조회 함수 호출
+
       })
       .catch(err => console.log(err));
 }
 
-// 학과 목록 조회로 select option에 넣을 ajax
-function classList() {
-  fetch(`/professor/classList`)
+
+
+// 교과목 목록 조회로 select option에 넣을 ajax
+function classList(selectedDepartmentNo) {
+  fetch(`/professor/classList?departmentNo=${selectedDepartmentNo}`)
       .then(response => response.json())
       .then(classList => {
-        console.log(classList);
 
         const objectSelectArea = document.getElementsByClassName('object-select-area-class')[0];
         objectSelectArea.innerHTML = '';
@@ -304,20 +353,32 @@ function classList() {
         classAll.setAttribute('name' , 'classes');
         classAll.setAttribute('id' , 'classList');
 
-        for(let classes of classList){
-          const classO = document.createElement('option');
-          classO.innerHTML = classes.classNm;
-          classO.setAttribute('value' , classes.classNm);
-          classO.setAttribute('name' , 'queryD');
+        
+        // 해당 학과의 강의만을 필터링하여 선택
+        const filteredClassList = classList.filter(classes => classes.departmentNo === selectedDepartmentNo);
 
-          classAll.append(classO);
+        if (filteredClassList.length === 0) {
+          const noOption = document.createElement('option');
+          noOption.innerHTML = '개설된 교과목 없음';
+          classAll.append(noOption);
+        } else {
+          for(let classes of filteredClassList){
+            const classO = document.createElement('option');
+            classO.innerHTML = classes.classNm;
+            classO.setAttribute('value' , classes.classNm);
+            classO.setAttribute('name' , 'queryD');
+
+            classAll.append(classO);
+          }
         }
+        
 
         objectSelectArea.append(classAll);
 
       })
       .catch(err => console.log(err));
 }
+
 
 
 document.getElementById('insertBtn').addEventListener('click' , ()=>{
@@ -340,7 +401,17 @@ function updateGrades(event) {
     const sGrade = gradeContent.querySelector(':nth-child(3)').innerHTML; // 학년
     const sTerm = gradeContent.querySelector(':nth-child(4)').innerHTML; // 학기
     const sClassNumber = gradeContent.querySelector(':nth-child(8)').innerHTML; // 과목 번호
+    const departmentNo = gradeContent.querySelector(':nth-child(9)').innerHTML; // 과목 번호
     const sPointInput = gradeContent.querySelector('input').value;
+
+    console.log(departmentNo);
+    console.log(memberDepartmentNo);
+    // 본인이 속한 학과만 처리할 수 있음
+    if(departmentNo != memberDepartmentNo){
+      alert('본인의 속한 학과의 학생만 성적을 수정 할 수 있습니다.\n다시 시도해주세요.');
+      gradeContent.querySelector('input').focus();
+      event.stopPropagation();
+    }
 
     if (sPointInput == '1' || sPointInput == '2' || sPointInput == '3' || sPointInput == '4') {
       const updatedGrade = {
@@ -352,6 +423,7 @@ function updateGrades(event) {
       };
 
       updatedGrades.push(updatedGrade);
+
     }else{
       // 올바른 값을 입력하도록 사용자에게 경고 메시지 출력
       alert('올바른 점수를 입력하세요. \n(1 ~ 4 까지의 숫자만 입력 가능)');
@@ -361,7 +433,10 @@ function updateGrades(event) {
       event.stopPropagation();
     }
 
+
+
   });
+
   if (updatedGrades.length > 0) {
     fetch('/professor/updateGrades', {
       method: 'POST',
@@ -394,5 +469,4 @@ function updateGrades(event) {
 (()=>{
   selectMemberList();
   departmentList();
-  classList();
 })()

@@ -63,7 +63,7 @@
                             <div>학기</div>
                             <div>나이</div>
                             <div>학과</div>
-                            <div>과목</div>
+                            <div>수강과목</div>
                             <div>성적</div>
                         </div>
                         
@@ -80,7 +80,7 @@
                                 <div class="lecturePoint">${student.lecturePoint}</div>
                             </div>
                         </c:forEach>    
-
+    
                         <!-- 모달 내용 -->
                         <div id="myModal" class="modal">
                             <div class="modal-content">
