@@ -19,10 +19,10 @@
                 </li>
                 <li>증명서 발급
                     <ul>
-                        <a href="#"><li>- 학적 증명서<img src="/resources/images/collegian/icons8-card1-50.png" style="width: 25px;"></li></a>
-                        <a href="#"><li>- 성적 증명서<img src="/resources/images/collegian/icons8-card2-50.png" style="width: 25px;"></li></a>
-                        <a href="#"><li>- 등록금 납부 증명서<img src="/resources/images/collegian/icons8-card3-48.png" style="width: 25px;"></li></a>
-                        <a href="/collegian/certificate/4?upNo=0"><li>- 학생증<img src="/resources/images/collegian/icons8-card4-80.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/certificate/1"><li>- 학적 증명서<img src="/resources/images/collegian/icons8-card1-50.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/certificate/2"><li>- 성적 증명서<img src="/resources/images/collegian/icons8-card2-50.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/certificate/3"><li>- 등록금 납부 증명서<img src="/resources/images/collegian/icons8-card3-48.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/certificate/4"><li>- 학생증<img src="/resources/images/collegian/icons8-card4-80.png" style="width: 25px;"></li></a>
                     </ul>
                 </li>
                 <li>내 정보

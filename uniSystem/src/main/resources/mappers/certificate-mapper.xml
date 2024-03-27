@@ -29,7 +29,7 @@
 	<!-- 증명서 인서트 -->
 	<insert id="insertCertificate">
 		INSERT INTO FILEZIP
-		VALUES (SEQ_FILE_ZIP_NO.NEXTVAL,
+		VALUES (SEQ_ZIP_NO.NEXTVAL,
 		 #{filePath},
 		  #{fileName},
 		   #{fileRename},

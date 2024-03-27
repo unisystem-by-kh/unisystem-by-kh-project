@@ -13,7 +13,7 @@
 		<result property="classPoint" column="CLASS_POINT" />
 		<result property="classMax" column="CLASS_MAX" />
 		<result property="classGrade" column="CLASS_GRADE" />
-		<result property="classTrem" column="CLASS_TREM" />
+		<result property="classTrem" column="CLASS_TERM" />
 		<result property="classDay" column="CLASS_DAY" />
 		<result property="classStart" column="CLASS_START" />
 		<result property="classEnd" column="CLASS_END" />
@@ -63,18 +63,18 @@
 		SELECT COUNT(*) FROM CLASS
 		WHERE DEPARTMENT_NO = #{departmentNo}
 		AND CLASS_GRADE = #{memberGrade}
-		AND CLASS_TREM = #{memberTerm}
+		AND CLASS_TERM = #{memberTerm}
 	</select>
 
 	<!-- 교과목 조회 결과 -->
 	<select id="selectClassList" resultMap="class_rm">
-		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, CLASS_DAY,
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, CLASS_DAY,
 		CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME
 		FROM CLASS A
 		JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
 		JOIN MEMBER USING (MEMBER_NO)
 		WHERE CLASS_GRADE = #{memberGrade}
-		AND CLASS_TREM =#{memberTerm}
+		AND CLASS_TERM =#{memberTerm}
 		AND A.DEPARTMENT_NO = #{departmentNo}
 	</select>
 
@@ -94,7 +94,7 @@
 		</if>
 
 		<if test='step != "0"'>
-			AND CLASS_TREM = #{step}
+			AND CLASS_TERM = #{step}
 		</if>
 
 		<if test='type != "0"'>
@@ -108,7 +108,7 @@
 	</select>
 
 	<select id="selectClassList_search" resultMap="class_rm">
-		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM,
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM,
 		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME
 		FROM CLASS A
 		JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
@@ -125,7 +125,7 @@
 		</if>
 
 		<if test='step != "0"'>
-			AND CLASS_TREM = #{step}
+			AND CLASS_TERM = #{step}
 		</if>
 
 		<if test='type != "0"'>
@@ -146,7 +146,7 @@
 	
 	<!-- 수강 신청 조회  -->
 	<select id="selectLecture" resultMap="class_rm">
-	SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM,
+	SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM,
 		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,CLASS_MAX,
         (SELECT COUNT(*) FROM LECTURE Z
             WHERE A.CLASS_NO = Z.CLASS_NO) LECTURE_COUNT,
@@ -160,7 +160,7 @@
 	WHERE A.DEPARTMENT_NO = #{departmentNo}
 	
 	AND CLASS_GRADE = #{memberGrade}
-	AND CLASS_TREM = #{memberTerm}
+	AND CLASS_TERM = #{memberTerm}
 	
 	ORDER BY 1
 		
@@ -173,7 +173,7 @@
 	</insert>
 	
 	<select id="selectMyClasses" resultMap="class_rm">
-		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, C.MEMBER_NAME, CLASS_MAX,
+		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, C.MEMBER_NAME, CLASS_MAX,
         (SELECT COUNT(*) FROM LECTURE Z
             WHERE A.CLASS_NO = Z.CLASS_NO) LECTURE_COUNT,
         (SELECT COUNT(*) FROM LECTURE R
@@ -217,7 +217,7 @@
 	</select>
 	
 	<select id="selectTaskList" resultMap="class_rm">
-		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, DEPARTMENT_NAME, C.MEMBER_NAME, 
+		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, DEPARTMENT_NAME, C.MEMBER_NAME, 
         TASK_ROUTE, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, T.TASK_NO ,
         F.FILE_PATH||F.FILE_RENAME AS FILE_PATH, FILE_NAME     
 	    FROM CLASS A
@@ -253,7 +253,7 @@
 	<insert id="insertTask" parameterType="Task">
 	
 		INSERT INTO FILEZIP VALUES
-		(SEQ_FILE_ZIP_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5,#{memberNo},#{taskNo})
+		(SEQ_ZIP_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5,#{memberNo},#{taskNo})
 	
 	</insert>
 	

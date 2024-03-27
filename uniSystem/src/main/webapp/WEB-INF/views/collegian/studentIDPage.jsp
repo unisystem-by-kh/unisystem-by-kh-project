@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>시간표 조회</title>
+	<title>증명서</title>
 
 	<link rel="stylesheet" href="/resources/css/style-main.css">
 	<link rel="stylesheet"
@@ -18,7 +18,21 @@
 
 </head>
 
-<c:set var="myClassList" value="${map.myClassList}"/>
+<c:set var="fkindNo" value="${certificate.fkindNo}"/>
+
+<c:if test="${fkindNo == 1}" >
+	<c:set var="title" value="학적 증명서"/>
+</c:if>
+<c:if test="${fkindNo == 2}" >
+	<c:set var="title" value="성적 증명서"/>
+</c:if>
+<c:if test="${fkindNo == 3}" >
+	<c:set var="title" value="등록금 납부 증명서"/>
+</c:if>
+<c:if test="${fkindNo == 4}" >
+	<c:set var="title" value="학생증"/>
+</c:if>
+
 
 <body>
 
@@ -30,7 +44,7 @@
 
 			<div class="stu-container">
 				<div class="stu-header">
-					<h2>학생증 발급</h2>
+					<h2>${title}</h2>
 				</div>
 				
 
@@ -66,7 +80,7 @@
 		window.onload = function(){
 
 			history.replaceState({}, null, location.pathname)
-			
+
 		}
 	</script>
 
