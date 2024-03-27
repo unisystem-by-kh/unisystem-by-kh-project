@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -27,6 +28,13 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 
 	@Autowired
 	private ChattingService service;
+	
+	// 익명 이름 생성
+	private String generateAnonymousName() {
+	    Random random = new Random();
+	    int randomNum = random.nextInt(9000) + 1000; // 4자리 랜덤 숫자 생성
+	    return "익명" + randomNum;
+	}
 
 	// WebSocketSession : 클라이언트 - 서버간 전이중통신을 담당하는 객체 (JDBC Connection과 유사)
 	// 클라이언트의 최초 웹소켓 요청 시 생성
@@ -61,13 +69,25 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         Message msg = objectMapper.readValue( message.getPayload(), Message.class);
         // Message 객체 확인
         System.out.println("msg::" + msg); 
+        //msg::Message(messageNo=0, messageContent=하이요
+        //, sendTime=null, chattingNo=1, senderNo=01-2412345, secretName=null)
         
-        int result = service.insertMessage(msg);
+        // 만약 secretName이 null이면 익명 이름 생성하여 설정
+        String anonymousName = generateAnonymousName();
+        
+        if(msg.getSecretName() == null) {
+        	msg.setSecretName(anonymousName);
+        }
+        
+        int result = service.insertMessage(msg); // 메세지 삽입 
         
         if(result > 0) {
         	
+        	System.out.println("anonymousName::"+anonymousName);
+        	
         	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
         	msg.setSendTime( sdf.format(new Date()) );
+        	msg.setSecretName(anonymousName);
         	
         	for (WebSocketSession s : sessions) {
         		

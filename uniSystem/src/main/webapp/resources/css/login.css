@@ -1,6 +1,10 @@
 /* 배경화면 */
 body{
-    background-image: url("/resources/images/winter.jpg");
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    background-image: url("/resources/images/3.jpg");
     background-repeat: no-repeat;
     background-size : cover;
 }

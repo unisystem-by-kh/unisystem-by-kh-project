@@ -10,7 +10,7 @@
 		<result property="classPoint" column="CLASS_POINT" />
 		<result property="classMax" column="CLASS_MAX" />
 		<result property="classGrade" column="CLASS_GRADE" />
-		<result property="classTrem" column="CLASS_TREM" />
+		<result property="classTrem" column="CLASS_TERM" />
 		<result property="classDay" column="CLASS_DAY" />
 		<result property="classStart" column="CLASS_START" />
 		<result property="classEnd" column="CLASS_END" />
@@ -73,7 +73,7 @@
 	
 	<!-- 교과목 조회 결과 -->
 	<select id="selectSubjectList" resultMap="subject_rm">
-		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, CLASS_DAY,
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, CLASS_DAY,
 		CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME, A.DEPARTMENT_NO
 		FROM CLASS A
 		JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
@@ -106,7 +106,7 @@
 	
 	<!-- 검색어가 있을 때 교과목 목록 조회 결과 -->
 	<select id="selectSubjectList_query" resultMap="subject_rm">
-		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TREM, CLASS_DAY,
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, CLASS_DAY,
 				CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME, C.DEPARTMENT_NO
 		FROM CLASS C
 		JOIN DEPARTMENT D ON ( C.DEPARTMENT_NO = D.DEPARTMENT_NO)
@@ -139,7 +139,7 @@
 		CLASS_POINT = #{classPoint},
 		CLASS_MAX = #{classMax},
 		CLASS_GRADE = #{classGrade},
-		CLASS_TREM = #{classTrem},
+		CLASS_TERM = #{classTrem},
 		CLASS_DAY = #{classDay},
 		CLASS_START = #{classStart},
 		CLASS_END = #{classEnd},

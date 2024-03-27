@@ -84,8 +84,8 @@ function selectChattingFn() {
 
                 // 상대 이름
                 const b = document.createElement("b");
-                b.innerText = msg.memberName; 
-                targetName = msg.memberName;
+                b.innerText = msg.secretName; 
+                targetName = msg.secretName;
 
                 const br = document.createElement("br");
 
@@ -128,7 +128,7 @@ const sendMessage = ()=>{
             "senderNo" : loginMemberNo,
             "chattingNo" : chattingNo,
             "messageContent": inputChatting.value,
-            "memberName" : targetName
+            "secretName" : targetName
         };
         console.log(obj);
         chattingSock.send(JSON.stringify(obj));
@@ -185,7 +185,7 @@ chattingSock.onmessage = function(e) {
         
             // 상대 이름
             const b = document.createElement("b");
-            b.innerText = msg.memberName; // 전역변수
+            b.innerText = msg.secretName; // 전역변수
             console.log("입력했을떄:"+b.innerText);
             const br = document.createElement("br");
         
