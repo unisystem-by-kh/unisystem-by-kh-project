@@ -27,6 +27,7 @@
 		
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Department" alias="Department" />
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Task" alias="Task" />
+		<typeAlias type="kh.finalpro.project.collegian.model.dto.Certificate" alias="Certificate" />
 
 	</typeAliases>
 	
@@ -42,6 +43,9 @@
 		<mapper resource="/mappers/evaluation-mapper.xml" />
 		<mapper resource="/mappers/ajax-mapper.xml" />
 		<mapper resource="/mappers/tuition-mapper.xml" />
+		
+		
+		<mapper resource="/mappers/certificate-mapper.xml" />
 	</mappers>		
 
 </configuration>
