@@ -125,30 +125,49 @@ public class ProfessorControllerr {
         return service.updateGrades(gradesList);
     }
 	
-	
+	/*
+	 * // 성적 수정
+	 * 
+	 * @GetMapping("/professorPageStudentGradeUpdate") public String
+	 * professorPageStudentGradeUpdate() {
+	 * 
+	 * return "professor/professorPageStudentGradeUpdate";
+	 * 
+	 * }
+	 * 
+	 * // 성적 등록
+	 * 
+	 * @GetMapping("/professorPageStudentGradeInsert") public String
+	 * professorPageStudentGradeInsert() {
+	 * 
+	 * return "professor/professorPageStudentGradeInsert";
+	 * 
+	 * }
+	 */	
 
 	
 	
-
-	
-	
-	
-	
-	// 성적 수정
-	@GetMapping("/professorPageStudentGradeUpdate")
-	public String professorPageStudentGradeUpdate() {
-
-		return "professor/professorPageStudentGradeUpdate";
-
+	// 과제 목록
+	@GetMapping("/taskList")
+	public String taskList() {
+		
+		return "professor/taskList";
+		
 	}
 
-	// 성적 등록
-	@GetMapping("/professorPageStudentGradeInsert")
-	public String professorPageStudentGradeInsert() {
-
-		return "professor/professorPageStudentGradeInsert";
-
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 과제 등록
 	@GetMapping("/taskWrite")
@@ -156,10 +175,9 @@ public class ProfessorControllerr {
 		return "professor/taskWrite";
 	}
 	
-	// 과제 목록
-	@GetMapping("/taskList")
-	public String taskList() {
-		return "professor/taskList";
-	}
-
+	
+	
+	
+	
+	
 }
