@@ -54,7 +54,7 @@
 					</div>
 					
 					<iframe src="${certificate.filePath}" title="${certificate.fileName}"
-					 width="1000" height="500" frameborder="0" id="pdfViewer">
+					 width="1000" height="700" frameborder="0" id="pdfViewer">
 					 ${certificate.fileName}
 					 </iframe>
 
