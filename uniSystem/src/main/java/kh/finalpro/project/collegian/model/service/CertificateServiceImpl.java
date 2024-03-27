@@ -40,6 +40,8 @@ public class CertificateServiceImpl implements CertificateService{
 		certificate.setMemberNo(loginMember.getMemberNo());
 		certificate.setFkindNo(no); // 증명서 카테고리 번호
 		
+		System.out.println(no);
+		
 		int result = 0;
 		
 		if(upNo == 0) result = dao.selectCertificateCount(certificate); // (조회)생성된 학생증이 있는지 확인
@@ -58,6 +60,24 @@ public class CertificateServiceImpl implements CertificateService{
 				htmlContent = templateEngine.process("studentID", context); // pdfTemplate == html 양식 명
 				
 				originPdfName = loginMember.getMemberNo()+"_"+loginMember.getMemberName()+"_학생증.pdf";
+			}
+			
+			if(no == 1) { // 학적 증명서
+				context.setVariable("name", loginMember.getMemberName());
+				context.setVariable("memberNo", loginMember.getMemberNo());
+				context.setVariable("department", loginMember.getDepartmentName());
+				context.setVariable("state", loginMember.getMemberStatus());
+				context.setVariable("date", loginMember.getMemberDate());
+				context.setVariable("grade", loginMember.getMemberGrade());
+				context.setVariable("term", loginMember.getMemberTerm());
+				context.setVariable("ssn", loginMember.getMemberSsn());
+				
+				
+				htmlContent = templateEngine.process("state", context); // pdfTemplate == html 양식 명
+				
+				
+				originPdfName = loginMember.getMemberNo()+"_"+loginMember.getMemberName()+"_학적증명서.pdf";
+				
 			}
 			
 			

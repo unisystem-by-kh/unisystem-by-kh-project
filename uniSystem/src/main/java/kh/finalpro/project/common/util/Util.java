@@ -77,6 +77,9 @@ public class Util {
         File normalFont = new File(staticPath + "/fonts" + "/NanumBarunGothic.ttf");
         File boldFont = new File(staticPath + "/fonts" + "/NanumGothicBold.ttf");
         
+        System.out.println(normalFont);
+        System.out.println(boldFont);
+        
         
         task.setFileName(originPdfName); // 파일 원본명
         

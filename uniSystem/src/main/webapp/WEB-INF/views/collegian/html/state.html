@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Thymeleaf PDF Example</title>
+</head>
+<style>
+body {
+	font-family: NanumBarunGothic, NanumGothicBold; 
+	width: 800px;
+}
+.headcontainer h1 {
+	text-align: center;
+	margin-top: 100px;
+}
+.bodycontainer {
+	border: 2px solid black;
+	position: relative;
+}
+.content{
+	margin-top: 300px;
+	text-align: center;
+}
+.infoarea{
+    position: absolute;
+    right: 10px;
+    top: 230px;
+    font-size: 19px;
+    font-weight: bold;
+    z-index: 10;
+}
+h3{
+    font-size: 25px;
+    margin-bottom: 50px;
+}
+h5{
+    font-size: 19px;
+    margin-top: 80px;
+}
+.stamp{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 9;
+}
+</style>
+<body>
+	<div class="bodycontainer">
+		<div class="headcontainer">
+			<h1>학&nbsp;&nbsp;&nbsp;적&nbsp;&nbsp;&nbsp;증&nbsp;&nbsp;&nbsp;명&nbsp;&nbsp;&nbsp;서</h1>
+		</div>
+		<div class="infoarea">
+			<table>
+				<tr>
+					<td>주민등록번호 :</td>
+					<td th:text=${ssn}>96102124-01214</td>
+				</tr>
+				<tr>
+					<td>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명
+						:</td>
+					<td th:text=${name}>차준형</td>
+				</tr>
+				<tr>
+					<td>학&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;번
+						:</td>
+					<td th:text=${memberNo}>17-73037996</td>
+				</tr>
+			</table>
+		</div>
+		<div class="content">
+			<div>
+				<h3>
+					<span th:text=${datet}>2022년10월18일</span> <span>유니시스템</span> <span
+						th:text=${department}>컴퓨터과학과</span> <span>입학</span>
+				</h3>
+			</div>
+			<div>
+				<h3>
+					<span>2022년11월18일</span> <span th:text=${department}>컴퓨터과학과</span>
+					<span> <span th:text=${grade}>1학년</span> 
+					<span th:text=${term}>1학기</span> <span th:text=${state}>재학중</span>
+					</span>
+				</h3>
+			</div>
+			<h5>위의 사실을 증명함</h5>
+			<h5>2022년 11월 18일</h5>
+			<h5>유&nbsp;니&nbsp;시&nbsp;스&nbsp;템</h5>
+		</div>
+		<div class="stamp">
+			<img src="../../images/collegian/stamp.png">
+		</div>
+	</div>
+</body>
+</html>
