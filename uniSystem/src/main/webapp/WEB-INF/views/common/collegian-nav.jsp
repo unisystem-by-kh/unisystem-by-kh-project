@@ -11,10 +11,10 @@
             <ul>
                 <li>수강
                     <ul>
-                        <a href="classList"><li>- 교과목 조회<img src="/resources/images/collegian/icons8-books-48.png" style="width: 25px;"></li></a>
-                        <a href="myClass"><li>- 수강 신청<img src="/resources/images/collegian/icons8-myclass-68.png" style="width: 25px;"></li></a>
-                        <a href="schedule"><li>- 시간표<img src="/resources/images/collegian/icons8-clock-50.png" style="width: 25px;"></li></a>
-                        <a href="task"><li>- 과제물 제출<img src="/resources/images/collegian/icons8-work-48.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/classList"><li>- 교과목 조회<img src="/resources/images/collegian/icons8-books-48.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/myClass"><li>- 수강 신청<img src="/resources/images/collegian/icons8-myclass-68.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/schedule"><li>- 시간표<img src="/resources/images/collegian/icons8-clock-50.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/task"><li>- 과제물 제출<img src="/resources/images/collegian/icons8-work-48.png" style="width: 25px;"></li></a>
                     </ul>
                 </li>
                 <li>증명서 발급
@@ -22,7 +22,7 @@
                         <a href="#"><li>- 학적 증명서<img src="/resources/images/collegian/icons8-card1-50.png" style="width: 25px;"></li></a>
                         <a href="#"><li>- 성적 증명서<img src="/resources/images/collegian/icons8-card2-50.png" style="width: 25px;"></li></a>
                         <a href="#"><li>- 등록금 납부 증명서<img src="/resources/images/collegian/icons8-card3-48.png" style="width: 25px;"></li></a>
-                        <a href="#"><li>- 학생증<img src="/resources/images/collegian/icons8-card4-80.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/certificate/4?upNo=0"><li>- 학생증<img src="/resources/images/collegian/icons8-card4-80.png" style="width: 25px;"></li></a>
                     </ul>
                 </li>
                 <li>내 정보

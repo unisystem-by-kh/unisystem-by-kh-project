@@ -664,3 +664,22 @@ td>button {
 	background-color: rgb(50, 77, 158);
 	color: white;
 }
+
+.pdf-area{
+	text-align: center;
+}
+
+.updateBtn-area{
+	display: flex;
+	justify-content: end;
+	padding-right: 65px;
+	margin-bottom: 10px;
+}
+
+
+#updateBtn{
+	display: flex;
+	padding: 10px;
+	font-size: 14px;
+	cursor: pointer;
+}

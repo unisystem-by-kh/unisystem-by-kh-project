@@ -24,12 +24,12 @@
 		<typeAlias type="kh.finalpro.project.professor.model.dto.Lecture" alias="Lecture" />
 		<typeAlias type="kh.finalpro.project.admin.model.dto.Evaluation" alias="Evaluation" />
 		<typeAlias type="kh.finalpro.project.tuition.model.dto.Tuition" alias="Tuition" />
-		
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Department" alias="Department" />
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Task" alias="Task" />
-		
+		<typeAlias type="kh.finalpro.project.collegian.model.dto.Certificate" alias="Certificate" />
 		<typeAlias type="kh.finalpro.project.chatting.model.dto.Message" alias="Message" />
 		<typeAlias type="kh.finalpro.project.chatting.model.dto.ChattingRoom" alias="ChattingRoom" />
+
 
 	</typeAliases>
 	
@@ -45,7 +45,9 @@
 		<mapper resource="/mappers/evaluation-mapper.xml" />
 		<mapper resource="/mappers/ajax-mapper.xml" />
 		<mapper resource="/mappers/tuition-mapper.xml" />
+		<mapper resource="/mappers/certificate-mapper.xml" />
 		<mapper resource="/mappers/chatting-mapper.xml" />
+
 	</mappers>		
 
 </configuration>
