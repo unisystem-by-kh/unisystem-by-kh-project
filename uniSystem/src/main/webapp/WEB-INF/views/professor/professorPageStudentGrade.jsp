@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -41,9 +43,8 @@
                         </div>
                     </form>
                 </div>
-    
                 <%-- <div class="object-area">조건선택 →</div> --%>
-
+                <%-- ${loginMember} --%>
                 <div class="object-select-area">
                     <select name="grade" id="objectList">
                         <%-- <option value="" name="queryG">학년선택</option> --%>
@@ -124,9 +125,14 @@
 
     </main>
 
+    <script>
+        const memberDepartmentNo = ${loginMember.departmentNo};
+    </script>
+
     <script src="/resources/js/header.js"></script>
 
     <script src="/resources/js/professor/professorPage-StudentGrade.js"></script>
+
 
 </body>
 </html>

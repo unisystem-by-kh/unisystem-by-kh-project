@@ -307,8 +307,9 @@
 	
 	<!-- 과목 조회 -->
 	<select id="classList" resultMap="member_rm">
-        SELECT CLASS_NO, CLASS_NM
+        SELECT CLASS_NO, CLASS_NM, DEPARTMENT_NO
         FROM CLASS
+        JOIN DEPARTMENT USING(DEPARTMENT_NO)
 	</select>
 	
 	<!-- 성적 업데이트 -->
