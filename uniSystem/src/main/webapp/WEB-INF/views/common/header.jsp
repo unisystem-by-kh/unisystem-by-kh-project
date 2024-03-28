@@ -161,7 +161,7 @@
                 <!-- 교수에 올렸을 경우 -->
                 <div class="navigation3-professor">
                     <a href="/late">교수 평가 조회</a>
-                    <a href="#">교원증 발급(준비중...)</a>
+                    <a href="/professor/professorPageCertificate">교원증 발급</a>
                 </div>
             </c:if>
 

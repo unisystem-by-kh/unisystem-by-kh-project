@@ -1,0 +1,88 @@
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.certificate {
+    border: 2px solid #000;
+    border-radius: 7px;
+    width: 525px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: -30px;
+}
+
+
+.header img {
+    width: 300px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+}
+
+.content img {
+    width: 100px;
+    height: 120px;
+    margin-right: 20px;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    align-content: start;
+    flex-direction: column;
+}
+
+.info p {
+    margin: 5px 0;
+    display: flex;
+    justify-content: start;
+}
+
+.info p strong {
+    margin-right: 5px;
+}
+
+.btn {
+    background-color: gray;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 20px 30px;
+    border-radius: 7px;
+}
+
+.btn:hover {
+    background-color: black;
+    color: white;
+}
+
+#profileImage{
+    border: 2px solid #ddd;
+    width: 135px;
+    height: 185px;
+    margin-top: 2px;
+}
+
+#address{
+    text-align: start;
+    margin: -5px 0;
+}

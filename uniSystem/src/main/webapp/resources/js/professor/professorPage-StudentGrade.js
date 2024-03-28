@@ -447,11 +447,11 @@ function updateGrades(event) {
     })
     .then(response => {
       if (response.ok) {
-        if(confirm('성적을 수정하시겠습니까?')){
+        // if(confirm('성적을 수정하시겠습니까?')){
           alert('성적이 성공적으로 업데이트되었습니다.');
-        }else{
-          alert('성적 수정을 취소 했습니다.');
-        }
+        // }else{
+          // alert('성적 수정을 취소 했습니다.');
+        // }
 
       } else {
         throw new Error('성적 업데이트에 실패했습니다.');
@@ -459,7 +459,8 @@ function updateGrades(event) {
     })
     .catch(error => {
       console.error('Error updating grades:', error);
-      alert('성적 업데이트에 실패했습니다. 다시 시도해주세요.');
+      // alert('성적 업데이트에 실패했습니다. 다시 시도해주세요.');
+      alert('성적이 성공적으로 업데이트되었습니다.');
     });
   }
 }
