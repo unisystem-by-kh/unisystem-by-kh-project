@@ -83,12 +83,9 @@
 		</beans:property>
 	</beans:bean>	
 	
-	<!-- <beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+	<beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<beans:property name="templateEngine" ref="templateEngine" />
 		<beans:property name="characterEncoding" value="UTF-8" />
-		<beans:property name="order" value="1" />
 	</beans:bean>
-	 -->
-	
 	
 </beans:beans>

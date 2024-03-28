@@ -18,10 +18,17 @@ public class Lecture {
 //	CLASS_NO, MEMBER_NO, LECTURE_POINT, LECTURE_GRADE, LECTURE_TERM
 	private int classNo;
 	private String classNm;
+	
+	private int classPoint;
+	
+	
 	private String memberNo;
+	private String classType;
 	
 	private int lecturePoint;
 	private int lectureGrade;
 	private int lectureTerm;
+	
+	private String realPoint;
 
 }

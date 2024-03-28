@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.service.CollegianService;
 
@@ -211,11 +212,50 @@ public class CollegianController {
 	}
 	
 	
-	@GetMapping("/test")
-	public String testMethod( HttpSession session) throws IOException {
+	@GetMapping("/change")
+	public String changeState( Model model
+			,@SessionAttribute(value="loginMember") Member loginMember
+			) {
 		
+		Request req = new Request();
 		
-		return null;
+		req.setMemberNo(loginMember.getMemberNo());
+		
+		List<Request> reqList = service.selectRequest(req);
+		
+		model.addAttribute("reqList",reqList);
+		
+		return "/collegian/change";
 	}
+	
+	
+	@PostMapping("/insertState")
+	public String insertRequest( Model model
+			,@SessionAttribute(value="loginMember") Member loginMember
+			,String content
+			,char st
+			) {
+		
+		Request req = new Request();
+		
+		req.setMemberNo(loginMember.getMemberNo());
+		req.setReqType(st+"");
+		req.setReqReason(content);
+		
+		int result = service.insertRequest(req);
+		
+		if(result > 0) {
+			List<Request> reqList = service.selectRequest(req);
+			
+			model.addAttribute("reqList",reqList);
+		}
+		
+		return "redirect:/collegian/change";
+	}
+	
+	
+	
+	
+	
 
 }

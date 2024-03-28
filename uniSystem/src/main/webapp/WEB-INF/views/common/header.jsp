@@ -81,9 +81,11 @@
 
                 <%-- 학생 전용 --%>
                 <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
-                    <a href="/board/4">1:1문의</a>
-                    <a href="/tuition">등록금</a>
-                    <a href="#">필요한 메뉴 구성 입력 1</a>
+                    <%-- <a href="/board/4">1:1문의</a> --%>
+                    <a href="/collegian/classList">수강</a>
+                    <a href="/collegian/certificate/4">증명서 발급</a>
+                    <a href="/collegian/change">내정보</a>
+                    <a href="/tuition">등록금 납부</a>
                 </c:if>
                 
                 <%-- 교수 전용 --%>
@@ -118,23 +120,25 @@
             <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
                 <!-- 필요한 메뉴 구성 입력 1을 올렸을 경우 -->
                 <div class="navigation3-student">
-                    <a href="#">세부메뉴1</a>
-                    <a href="#">세부메뉴2</a>
-                    <a href="#">세부메뉴3</a>
+                    <a href="/collegian/classList">교과목 조회</a>
+                    <a href="/collegian/myClass">수강신청</a>
+                    <a href="/collegian/schedule">시간표</a>
+                    <a href="/collegian/task">과제물 제출</a>
                 </div>
 
                 <!-- 필요한 메뉴 구성 입력 2을 올렸을 경우 -->
                 <div class="navigation3-student">
-                    <a href="#">세부메뉴1</a>
-                    <a href="#">세부메뉴2</a>
-                    <a href="#">세부메뉴3</a>
+                    <a href="/collegian/certificate/1">학적 증명서</a>
+                    <a href="/collegian/certificate/2">성적 증명서</a>
+                    <a href="/collegian/certificate/2">미지정</a>
+                    <a href="/collegian/certificate/4">학생증</a>
                 </div>
 
                 <!-- 필요한 메뉴 구성 입력 2을 올렸을 경우 -->
                 <div class="navigation3-student">
-                    <a href="#">세부메뉴1</a>
-                    <a href="#">세부메뉴2</a>
-                    <a href="#">세부메뉴3</a>
+                    <a href="#">개인 정보 수정</a>
+                    <a href="/collegian/change">학적 변동 신청</a>
+                    <a href="#">학점 조회</a>
                 </div>
             </c:if>
 
