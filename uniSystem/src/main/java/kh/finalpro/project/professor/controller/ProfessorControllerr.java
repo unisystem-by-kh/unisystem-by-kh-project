@@ -1,7 +1,10 @@
 package kh.finalpro.project.professor.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.Reply;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.professor.model.dto.Lecture;
@@ -159,6 +165,18 @@ public class ProfessorControllerr {
 		model.addAttribute("map",map);
 		
 		return "professor/taskWrite";
+	}
+	
+	// 과제 등록
+	@PostMapping("/taskWrite")
+	@ResponseBody
+	public String taskWrite(
+			@RequestParam(value="file", required = false) List<MultipartFile> file
+			, @SessionAttribute(value="loginMember") Member loginMember
+			, RedirectAttributes ra
+			, HttpSession session)throws IllegalStateException, IOException {
+		
+		return null;
 	}
 
 	

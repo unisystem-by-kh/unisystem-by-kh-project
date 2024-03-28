@@ -138,9 +138,94 @@ function deleteBtn(){
 
 const saveBtn = document.getElementById("save");
 
+
+
+
+
 saveBtn.addEventListener("click", ()=>{
-    // for()
+    for(let i of dept){
+        if(Number(i.value) < 0){
+            alert("과목이 선택되지 않은 과제가 있습니다.");
+            return;
+        }
+    }
+
+    for(let i of file){
+        if(i.value == ''){
+            alert("과제파일이 등록되지 않은 과제가 있습니다.");
+            return;
+        }
+    }
+
+    // form 데이터 가져오기
+    // const form = document.querySelector('form');
+    // const formData = new FormData(form);
+
+    // 1번 객체
+    let firstObject = {};
+
+    // 2번 객체
+    const secondObject = {};
+    
+    for (let i = 0; i < dept.length; i++) {
+        // 1번 객체에 데이터 담기
+        firstObject.dept = dept[i].value;
+        firstObject.file = file[i].value;
+        firstObject.date = currentDate[i].value;
+    
+        // 1번 객체를 2번 객체에 담기
+        secondObject.data = { ...firstObject };
+    
+        // 1번 객체 초기화
+        firstObject = {};
+    
+        // 2번 객체에 1번 객체 담기
+        secondObject[i] = { ...secondObject.data };
+    }
+    delete secondObject.data;
+    // console.log(secondObject);
+    // console.log(secondObject[0]);
+    // console.log(secondObject[1]);
+
+
+    // JavaScript 객체를 JSON 문자열로 변환
+    let jsonData = '';
+    
+    console.log(Object.values(secondObject).length);
+
+    for(let i=0; i<Object.values(secondObject).length; i++){
+        if(i+1 == Object.values(secondObject).length){
+            jsonData += JSON.stringify(secondObject[i]);
+        }else{
+            jsonData += JSON.stringify(secondObject[i])+",";
+        }
+    }
+  
+
+    console.log(JSON.stringify(jsonData));
+    console.log(jsonData);
+
+    // JSON 데이터 전송
+    fetch('/taskWrite', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: jsonData,
+    })
+    .then(response => {
+        // 응답 처리
+    })
+    .catch(error => {
+        // 에러 처리
+    });
+
 });
+
+
+
+
+
 
 
 
