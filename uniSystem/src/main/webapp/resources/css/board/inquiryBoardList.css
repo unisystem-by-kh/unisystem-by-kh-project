@@ -71,6 +71,7 @@ input:focus {outline: none;}
     margin: auto;
     border-collapse: collapse;
     border-top: 1px solid #ddd;
+    table-layout: fixed;
 }
 
 .table > thead{
@@ -82,6 +83,12 @@ input:focus {outline: none;}
 .table > tbody{
     text-align: center;
     
+}
+
+tbody  td{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 tbody td:nth-of-type(1){

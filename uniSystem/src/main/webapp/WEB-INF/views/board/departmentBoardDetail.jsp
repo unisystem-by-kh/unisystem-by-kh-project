@@ -52,8 +52,10 @@
 			</c:if>
 		</div>
 		<div class="button-area">
-			<button id="updateBtn">수정</button>
-			<button id="deleteBtn">삭제</button>
+			<c:if test="${loginMember.memberNo == board.memberNo}">
+				<button id="updateBtn">수정</button>
+				<button id="deleteBtn">삭제</button>
+			</c:if>
 			<button id="goToListBtn">목록으로</button>
 		</div>
 
@@ -64,18 +66,19 @@
 			<textarea id="replyWriteCon"></textarea>
 			<button id="addReply">등록</button>
 		</div>
-
-		<div class="dat-con">
-			<div>댓글 1</div>
-		</div>
-		<div class="dat-info">
-			<div>이름 : 유저일</div>
-			||
-			<div>작성일 : 2024.02.23</div>
-		</div>
-		<div class="button-container">
-			<button id="replyUpBtn">수정</button>
-			<button id="replyDeBtn">삭제</button>
+		<div id="reply-area">
+			<div class="dat-con">
+				<div>댓글 1</div>
+			</div>
+			<div class="dat-info">
+				<div>이름 : 유저일</div>
+				|
+				<div>작성일 : 2024.02.23</div>
+			</div>
+			<div class="button-container">
+				<button id="replyUpBtn">수정</button>
+				<button id="replyDeBtn">삭제</button>
+			</div>
 		</div>
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />

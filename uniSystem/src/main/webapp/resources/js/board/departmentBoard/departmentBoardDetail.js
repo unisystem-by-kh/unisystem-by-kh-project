@@ -77,17 +77,18 @@ if(updateBtn != null){
         .then(resp => resp.json())
         .then(rList => {
     
-            const replyContent = document.querySelector(".dat-con");
-            replyContent.innerHTML = ""; 
-
-            const replyInfo = document.querySelector(".dat-info");
-            replyInfo.innerHTML = "";
-
             
-            const replyArea = document.querySelector(".reply-content-con")
-    
+            const replyContainer = document.getElementById("reply-area")
+            replyContainer.innerHTML = "";
+            
+            
             for(let reply of rList){
+                
+                const replyContent = document.createElement("div");
+                replyContent.classList.add("dat-con")
     
+                const replyInfo = document.createElement("div");
+                replyInfo.classList.add("dat-info")
                 
                 const div1 = document.createElement("div");
                 div1.innerHTML = "이름 : " + reply.memberName;
@@ -103,10 +104,12 @@ if(updateBtn != null){
                 div4.innerHTML = reply.replyContent;
                 
                 replyContent.append(div4);
-                
-                replyArea.after(replyContent,replyInfo)
-                const btn = document.querySelector(".button-container")
+
+                const btn = document.createElement("div")
+                btn.classList.add(".button-container")
                 btn.innerHTML="";
+
+                replyContainer.append(replyContent, replyInfo)
 
                 if(loginMemberNo == reply.memberNo){
 
@@ -126,7 +129,7 @@ if(updateBtn != null){
                     deBtn.setAttribute('onclick', "deleteReply("+reply.replyNo+")")
                     
                     btnArea.append(upBtn,deBtn);
-                    replyInfo.after(btnArea)
+                    replyContainer.append(btnArea)
                 }
             }
             
@@ -217,13 +220,29 @@ function deleteReply(replyNo){
 let beforeReplyRow; // 수정 전 댓글 상태를 저장하기 위한 변수
 
 function updateReply(replyNo, btn) {
+
+
+    const temp = document.getElementsByClassName("replyUpdateCon");  
+
+    if(temp.length > 0){ // 수정이 한 개 이상 열려 있는 경우
+
+        if(confirm("다른 댓글이 수정 중입니다. 현재 댓글을 수정 하시겠습니까?")){ // 확인
+
+            temp[0].parentElement.innerHTML = beforeReplyRow;
+            // comment-row                       // 백업한 댓글
+            // 백업 내용으로 덮어 씌워 지면서 textarea 사라짐
+       
+        }else{ // 취소
+            return;
+        }
+    }
   
     const replyRow = btn.parentElement.previousSibling.previousSibling.firstChild;
     console.log(replyRow)
     beforeReplyRow = replyRow.innerHTML;
 
     const textarea = document.createElement("textarea");
-    textarea.classList.add("relpyUpdateCon"); // 클래스 추가
+    textarea.classList.add("replyUpdateCon"); // 클래스 추가
     textarea.value = beforeReplyRow;
 
     const replyBtnArea = document.createElement("div");
