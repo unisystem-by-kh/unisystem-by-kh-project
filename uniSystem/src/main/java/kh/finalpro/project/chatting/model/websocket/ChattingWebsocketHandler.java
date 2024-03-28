@@ -30,11 +30,11 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 	private ChattingService service;
 	
 	// 익명 이름 생성
-	private String generateAnonymousName() {
-	    Random random = new Random();
-	    int randomNum = random.nextInt(9000) + 1000; // 4자리 랜덤 숫자 생성
-	    return "익명" + randomNum;
-	}
+//	private String generateAnonymousName() {
+//	    Random random = new Random();
+//	    int randomNum = random.nextInt(9000) + 1000; // 4자리 랜덤 숫자 생성
+//	    return "익명" + randomNum;
+//	}
 
 	// WebSocketSession : 클라이언트 - 서버간 전이중통신을 담당하는 객체 (JDBC Connection과 유사)
 	// 클라이언트의 최초 웹소켓 요청 시 생성
@@ -59,7 +59,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		logger.info("전달받은 내용 : " + message.getPayload());
+//		logger.info("전달받은 내용 : " + message.getPayload());
 		
 		// Jackson에서 제공하는 객체
         // JSON String -> VO Object
@@ -68,7 +68,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         
         Message msg = objectMapper.readValue( message.getPayload(), Message.class);
         // Message 객체 확인
-        System.out.println("msg::" + msg); 
+        // System.out.println("msg::" + msg); 
         //msg::Message(messageNo=0, messageContent=하이요
         //, sendTime=null, chattingNo=1, senderNo=01-2412345, secretName=null)
         
@@ -82,7 +82,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         	for (WebSocketSession s : sessions) {
         		
         		String loginMemberNo = ((Member)s.getAttributes().get("loginMember")).getMemberNo();
-        		logger.debug("loginMemberNo : " + loginMemberNo);
+//        		logger.debug("loginMemberNo : " + loginMemberNo);
         		
         		if(loginMemberNo.equals(msg.getSenderNo())) {
         			s.sendMessage(new TextMessage(new Gson().toJson(msg)));

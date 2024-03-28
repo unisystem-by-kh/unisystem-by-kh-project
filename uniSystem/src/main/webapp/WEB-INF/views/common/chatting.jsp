@@ -3,15 +3,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '01'}" >
-    <button onclick="toggleModal()" class="chatBtn">채팅방</button>
+    <button onclick="toggleModal()" class="chatBtn"><img src="/resources/images/etc/window.png" alt="채팅방"></button>
 </c:if>
 
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="toggleModal()">&times;</span>
-        <h2>UNI-SYSTEM</h2>
+        <h2>UNI-TALK</h2>
         <div class="chatting-content">
-            <ul class="display-chatting">
+            <ul class="display-chatting" onclick="changeBackground()">
                <%--  <li class="chat-header"><h3>채팅방에 입장하였습니다.</h3></li>
                 <li class="chat-header"><h3>2024년 03월 25일</h3></li>
                 <li class="my-chat">
@@ -28,13 +28,12 @@
                     </p>
                     <span class="chatDate">14:05</span>
                 </div>
-                </li>
-
-                <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">가나다라마바사</p>
                 </li> --%>
-            </ul>   
+                
+            </ul>
+
+            <input type="file" accept="image/*" id="bgImageInput" style="display: none;" onchange="handleImageUpload(event)">
+            <label for="bgImageInput" class="change-bg-btn"></label>
         
             <div class="input-area">
                 <textarea id="inputChatting" rows="3"></textarea>
