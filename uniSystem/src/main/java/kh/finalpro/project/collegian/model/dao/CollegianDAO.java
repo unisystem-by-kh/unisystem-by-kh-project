@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.dto.Pagination;
+import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.collegian.model.dto.Task;
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Department;
@@ -118,6 +119,14 @@ public class CollegianDAO {
 
 	public int updateTask(Task task) {
 		return sqlSession.update("collegianMapper.updateTask",task);
+	}
+
+	public int insertRequest(Request req) {
+		return sqlSession.insert("collegianMapper.insertRequest",req);
+	}
+
+	public List<Request> selectRequest(Request req) {
+		return sqlSession.selectList("collegianMapper.selectRequest",req);
 	}
 	
 
