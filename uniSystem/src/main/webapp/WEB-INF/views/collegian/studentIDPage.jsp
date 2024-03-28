@@ -69,6 +69,8 @@
 			
 	</main>
 
+	<script src="/resources/js/collegian/nav.js"></script>
+
 	<script>
 		let no = location.href.split("?")[0].split("/")[5]
 

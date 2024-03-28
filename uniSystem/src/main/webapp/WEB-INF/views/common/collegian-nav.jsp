@@ -12,8 +12,8 @@
                 <li>수강
                     <ul>
                         <a href="/collegian/classList"><li>- 교과목 조회<img src="/resources/images/collegian/icons8-books-48.png" style="width: 25px;"></li></a>
-                        <a href="/collegian/myClass"><li>- 수강 신청<img src="/resources/images/collegian/icons8-myclass-68.png" style="width: 25px;"></li></a>
-                        <a href="/collegian/schedule"><li>- 시간표<img src="/resources/images/collegian/icons8-clock-50.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/myClass"><li>- 수강 신청/변경<img src="/resources/images/collegian/icons8-myclass-68.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/schedule"><li>- 시간표 조회<img src="/resources/images/collegian/icons8-clock-50.png" style="width: 25px;"></li></a>
                         <a href="/collegian/task"><li>- 과제물 제출<img src="/resources/images/collegian/icons8-work-48.png" style="width: 25px;"></li></a>
                     </ul>
                 </li>
@@ -37,8 +37,7 @@
 </body>
 
 <script type="text/javascript">
-	
-	const navList = document.querySelectorAll('.stu-nav a');
+/* 	
 	
 	const boardName = window.location.pathname.split('/').reverse()[0];
 
@@ -56,8 +55,6 @@
 
     if(boardName == 'task'){
         navList[3].style.color='black';
-    }
-
-	
+    } */
 </script>
 </html>

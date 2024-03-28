@@ -103,6 +103,7 @@ public class CertificateServiceImpl implements CertificateService{
 				context.setVariable("sysdate", formattedDate);
 				
 				
+				
 				htmlContent = templateEngine.process("state", context); // pdfTemplate == html 양식 명
 				
 				
@@ -130,7 +131,9 @@ public class CertificateServiceImpl implements CertificateService{
 				context.setVariable("ssn", loginMember.getMemberSsn());
 				context.setVariable("sysdate", formattedDate);
 				
-				context.setVariable("scoreList", scoreList);
+				
+				context.setVariable("scoreList", scoreList );
+				
 				
 				htmlContent = templateEngine.process("score", context); // pdfTemplate == html 양식 명
 				

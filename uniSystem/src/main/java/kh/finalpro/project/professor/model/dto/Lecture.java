@@ -31,4 +31,9 @@ public class Lecture {
 	
 	private String realPoint;
 
+	/*
+	 * @Override public String toString() { // 성적 증명서 출력 오류 때문에 toString 오버라이딩함
+	 * return lectureGrade+"-"+lectureTerm
+	 * +" | "+classType+" | "+classNm+" | "+classPoint+" | "+realPoint ; }
+	 */
 }

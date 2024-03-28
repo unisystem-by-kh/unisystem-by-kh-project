@@ -113,6 +113,7 @@
             </div>
         </div>
 	</main>
+    <script src="/resources/js/collegian/nav.js"></script>
 
 
 
