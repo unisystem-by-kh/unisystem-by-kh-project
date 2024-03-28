@@ -45,7 +45,7 @@
 		<result property="classPoint" column="CLASS_POINT" />
 		<result property="classMax" column="CLASS_MAX" />
 		<result property="classGrade" column="CLASS_GRADE" />
-		<result property="classTrem" column="CLASS_TREM" />
+		<result property="classTrem" column="CLASS_TERM" />
 		<result property="classDay" column="CLASS_DAY" />
 		<result property="classStart" column="CLASS_START" />
 		<result property="classEnd" column="CLASS_END" />
@@ -66,6 +66,21 @@
 		<result property="lectureGrade" column="LECTURE_GRADE" />
 		<result property="lectureTerm" column="LECTURE_TERM" />
 	</resultMap>
+	
+	<!-- 과제 정보 resultMap -->
+	<resultMap type="Task" id="task_rm">
+		<id property="taskNo" column="TASK_NO" />
+		
+		<result property="classNm" column="CLASS_NM" />
+		<result property="taskRoute" column="TASK_ROUTE" />
+		<result property="taskDate" column="TASK_DATE" />
+		<result property="classNo" column="CLASS_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="classPoint" column="CLASS_POINT" />
+		<result property="fileName" column="FILE_NAME" />
+	</resultMap>
+	
+	
 	
 	<!-- 모든 학생이 수강중인 과목 목록 조회 -->
 	<select id="lectureList" resultMap="lecture_rm">
@@ -330,6 +345,21 @@
 	      AND LECTURE_GRADE = #{lectureGrade}
 	      AND LECTURE_TERM = #{lectureTerm}
 	</update>
+	
+	<select id="selectTaskList" resultMap="task_rm">
+		SELECT TASK_NO, T.CLASS_NO, CLASS_POINT, FILE_NAME, TASK_DATE
+		FROM TASK T
+		JOIN CLASS C ON(T.CLASS_NO = C.CLASS_NO)
+		JOIN FILEZIP USING(TASK_NO)
+		WHERE FKIND_NO = 5
+		AND T.MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="selectClassList" resultMap="class_rm">
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_TERM
+		FROM CLASS
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 
 
 	

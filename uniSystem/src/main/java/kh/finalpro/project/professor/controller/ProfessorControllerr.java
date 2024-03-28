@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kh.finalpro.project.board.model.dto.Reply;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.professor.model.dto.Professor;
+import kh.finalpro.project.professor.model.dto.Task;
 import kh.finalpro.project.professor.model.service.ProfessorService;
 
 @SessionAttributes({"loginMember"})
@@ -147,33 +149,18 @@ public class ProfessorControllerr {
 
 	
 	
-	// 과제 목록
-	@GetMapping("/taskList")
-	public String taskList() {
-		
-		return "professor/taskList";
-		
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 과제 등록
+	// 과제 조회, 등록 페이지 이동
 	@GetMapping("/taskWrite")
-	public String taskWrite() {
+	public String taskWrite(
+			Model model
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
+		
+		Map<String, Object> map = service.selectTaskList(loginMember);
+		model.addAttribute("map",map);
+		
 		return "professor/taskWrite";
 	}
+
 	
 	
 	

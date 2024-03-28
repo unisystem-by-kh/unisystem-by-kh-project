@@ -15,7 +15,7 @@ public class Class {
 	private int classPoint;
 	private int classMax;
 	private int classGrade;
-	private int classTrem;
+	private int classTerm;
 	private char classDay;
 	private int classStart;
 	private int classEnd;

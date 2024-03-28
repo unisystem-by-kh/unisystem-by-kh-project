@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.board.model.dao.BoardDAO;
+import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.professor.model.dto.Professor;
+import kh.finalpro.project.professor.model.dto.Task;
 
 @Repository
 public class ProfessorDAO {
@@ -82,6 +85,15 @@ public class ProfessorDAO {
 		}
 		
 		return result;
+	}
+
+	public List<Task> selectTaskList(Member loginMember) {
+		
+		return sqlSession.selectList("professorMapper.selectTaskList", loginMember);
+	}
+
+	public List<Class> selectClassList(Member loginMember) {
+		return sqlSession.selectList("professorMapper.selectClassList", loginMember);
 	}
 
 

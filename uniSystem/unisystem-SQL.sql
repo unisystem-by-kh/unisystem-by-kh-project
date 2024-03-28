@@ -1,3 +1,4 @@
+
 -- 오라클 11G 이전 버전의 SQL 작성을 가능하게 하는 구문.
 -- ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 -- C## : 일반 사용자(사용자 계정을 의미)
@@ -981,7 +982,9 @@ INSERT INTO "CLASS" VALUES(
 );
 
 COMMIT;
+
 ---------------------- FOREIGN KEY 설정은 마지막에 처리 ---------------------------
+
 
 
 
