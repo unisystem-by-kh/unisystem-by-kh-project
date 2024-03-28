@@ -6,18 +6,20 @@
 <jsp:include page="/WEB-INF/views/common/chatting.jsp" />   
 
 <footer>
-    <p>제1캠퍼스 - [11644] 경기도 의정부시 호암로 95 (호원동) / TEL : 031-1234-1234</P>
-    <p>제2캠퍼스 - [11340] 경기도 동두천시 벌마들로 40번길 30 (상패동) / TEL : 031-1234-1234</P>
+    <p>Best english sayings</P>
+    <p>"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</P>
+    <p>"In the midst of winter, I found there was, within me, an invincible summer." - Albert Camus</P>
+    <p>"Life is not measured by the number of breaths we take, but by the moments that take our breath away." - Maya Angelou</P>
     <p>UNI-SYSTEM KH  INFORMATION EDUCATION CENTER UNIVERSITY.</P>
 
     <article>
-        <a href="#">프로젝트 소개</a>    
+        <a href="#">Project Introduction</a>    
         <span>|</span>
-        <a href="#">이용약관</a>    
+        <a href="#">Terms of Service</a>    
         <span>|</span>
-        <a href="#">개인정보처리방침</a>    
+        <a href="#">Privacy Policy</a>    
         <span>|</span>
-        <a href="#">고객센터</a>    
+        <a href="#">Customer Service</a>
     </article>
 </footer>
 

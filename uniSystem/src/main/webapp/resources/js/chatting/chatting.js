@@ -3,6 +3,25 @@ function toggleModal() {
     modal.style.display = modal.style.display === "block" ? "none" : "block";
 }
 
+function changeBackground(){
+    document.getElementById("bgImageInput").click();
+}
+
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const imageUrl = event.target.result;
+        const ulElement = document.querySelector(".display-chatting");
+        ulElement.style.backgroundImage = `url(${imageUrl})`;
+        ulElement.style.backgroundSize = "cover";
+        ulElement.style.backgroundPosition = "center";
+    };
+
+    reader.readAsDataURL(file);
+}
+
 const chatBtn = document.querySelector(".chatBtn"); // 채팅방 버튼
 let chattingNo; // 채팅방 번호
 let targetName; // 상대 이름

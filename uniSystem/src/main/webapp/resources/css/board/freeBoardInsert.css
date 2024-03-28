@@ -212,3 +212,12 @@ textarea::placeholder{
     color: white;
     cursor: pointer;
 }
+
+#imgUp{
+    cursor: pointer;
+    font-weight: bold;
+    color: gray;
+}
+#imgUp:hover{
+    text-decoration: underline;
+}

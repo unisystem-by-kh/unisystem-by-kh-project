@@ -466,6 +466,12 @@
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<!-- 자유게시판 게시글 삭제 -->
+	<update id="freeBoardDelete">
+		UPDATE BOARD SET BOARD_ST = 'Y'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
 	<!-- 1:1문의 게시글 수정 -->
 	<update id="inquiryBoardUpdate">
 		UPDATE BOARD SET BOARD_TITLE =
@@ -475,6 +481,15 @@
 		BOARD_ST = #{boardSt}
 		WHERE BOARD_NO
 		= #{boardNo}
+		AND CATEGORY_NO = #{categoryNo}
+	</update>
+	<!-- 자유게시판 게시글 수정 -->
+	<update id="updateFreeBoardList">
+		UPDATE BOARD 
+		SET BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent},
+		BOARD_U_DATE = SYSDATE
+		WHERE BOARD_NO = #{boardNo}
 		AND CATEGORY_NO = #{categoryNo}
 	</update>
 	

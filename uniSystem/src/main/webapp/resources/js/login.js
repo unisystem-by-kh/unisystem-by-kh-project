@@ -9,8 +9,9 @@ loginFrm.addEventListener("submit", e => {
 
         swal({
             title : "비밀번호를 입력해주세요.",
-                icon  : "error",
-                closeOnClickOutside : false
+            icon  : "error",
+            dangerMode : true,
+            closeOnClickOutside : false
         }).then(function(){
             userPw.value = "";
             userPw.focus();
@@ -237,7 +238,12 @@ if(btn2 != null){
                 });
 
             } else{
-                alert("임시 비밀번호 전송 실패...");
+                swal({
+                    title : "인증 실패",
+                    text : "학번, 이름, 이메일을 확인해주세요.",
+                    icon : "warning",
+                    closeOnClickOutside : false
+                });
             }
             
         })

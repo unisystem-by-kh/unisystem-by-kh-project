@@ -365,7 +365,7 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
 		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
 		// 2) DAO호출
-		int rowCount = dao.inquiryBoardUpdate(board);
+		int rowCount = dao.freeBoardUpdate(board);
 
 
 		// 2. 게시글 부분이 수정 성공 했을 때
@@ -844,6 +844,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Member> selectMemberList(Member loginMember) {
 		return dao.selectMemberList(loginMember);
+	}
+
+	@Override
+	public int freeBoardDelete(int boardNo) {
+		return dao.freeBoardDelete(boardNo);
 	}	
 
 

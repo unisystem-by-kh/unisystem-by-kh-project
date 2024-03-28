@@ -3,7 +3,7 @@
 } */
 /* 학생 정보 영역 */
 .student-area{
-    width: 1000px;
+    width: 1350px;
     height: 600px;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@
 
 /* 표 영역 */
 .student-info-area{
-    width: 1000px;
+    width: 1350px;
     max-height: 550px;
     overflow-y: auto;
 }
@@ -43,6 +43,10 @@
 /* 학생 정보 값 해드 */
 .student-info-value-name{
     display: flex;
+}
+.student-info-value-name > div:nth-child(2n-1){
+    background-color: gray;
+    color: white;
 }
 /* 학생 정보 값 해드 각 영역 */
 .student-info-value-name > div{
@@ -58,15 +62,54 @@
 
     margin-top: 15px;
 }
+.student-info-value-name > :nth-child(9){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 400px;
+    height: 27px;
+    border: 1px solid gray;
+    font-size: 1.05em;
+    font-weight: bold;
+
+    margin-top: 15px;
+}
+.student-info-value-name > :nth-child(5){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 27px;
+    border: 1px solid gray;
+    font-size: 1.05em;
+    font-weight: bold;
+
+    margin-top: 15px;
+}
+.student-info-value-name > :nth-child(6){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 27px;
+    border: 1px solid gray;
+    font-size: 1.05em;
+    font-weight: bold;
+
+    margin-top: 15px;
+}
 
 /* 학생 정보 값 */
 .student-info-value{
     display: flex;
 }
 .student-info-value > :nth-child(1):hover{
-    text-decoration: underline;
+    /* text-decoration: underline;
     cursor: pointer;
-    color: crimson;
+    color: crimson; */
 }
 
 /* 학생 정보 값 각 영역 */
@@ -82,11 +125,56 @@
 
     white-space: nowrap;
     overflow: hidden;
+}
+.student-info-value > :nth-child(9){
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    width: 200px;
+    height: 27px;
+    border: 1px solid #ddd;
+    font-size: 0.85em;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.student-info-value > :nth-child(5){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 27px;
+    border: 1px solid #ddd;
+    font-size: 0.85em;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.student-info-value > :nth-child(6){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 27px;
+    border: 1px solid #ddd;
+    font-size: 0.85em;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.student-info-value:nth-child(2n){
+    background-color: #eee;
+}
+.student-info-value:hover{
+    background-color: rgba(236, 164, 162, 0.747);
+    cursor: pointer;
 }
 
 .search-area{
-    width: 1000px;
+    width: 1350px;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -127,7 +215,7 @@
     text-align: center;
 
     color: gray;
-    font-size: 1.1em;
+    font-size: 0.9em;
     font-weight: bold;
 }
 

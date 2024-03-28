@@ -67,5 +67,12 @@ public class EvaluationController {
 		
 		return "/admin/subjectEvaluation";
 	}
+	
+	// 오시는길
+	@GetMapping("/comeMap")
+	public String comeMap() {
+
+		return "board/comeMap";
+	}
 
 }
