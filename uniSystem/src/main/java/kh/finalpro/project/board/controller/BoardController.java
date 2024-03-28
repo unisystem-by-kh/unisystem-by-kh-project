@@ -138,6 +138,7 @@ public class BoardController {
 			paramMap.put("categoryNo", categoryNo);
 			map = service.selelctBoardList(paramMap, cp);
 		}
+		
 		model.addAttribute("map" , map);
 		return "board/" + path; 
 	}

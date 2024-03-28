@@ -20,7 +20,6 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="depart-detail">
 			<h1>학과 공지</h1> - ${board.departmentName}
-			
 		</div>
 		<div class="date-con">
 			
@@ -33,11 +32,15 @@
 			<div>조회수 : ${board.boardCount}</div>
 		</div>
 		<div class="title-con">
-			<div>${board.boardTitle}</div>
+			<div>제목 : ${board.boardTitle}</div>
 		</div>
 		<div class="image-con">
+		<c:if test="${!empty board.fileList[1]}">
 			<img src="${board.fileList[1].boardFilePath}${board.fileList[1].boardFileRename}">
-			
+		</c:if>
+		<c:if test="${empty board.fileList[1]}">
+	        	<div>첨부된 파일이 없습니다.</div>
+		</c:if>
 		</div>
 		<div class="content-con">${board.boardContent}</div>
 		<div class="file-button">

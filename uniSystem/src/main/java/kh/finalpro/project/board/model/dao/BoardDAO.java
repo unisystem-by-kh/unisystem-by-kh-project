@@ -288,6 +288,14 @@ public class BoardDAO {
 		return sqlSession.selectList("memberMapper.selectMemberList", loginMember);
 	}
 
+	public int inquiryImageUpdate(BoardFile img2) {
+		return sqlSession.update("boardMapper.inquiryImageUpdate", img2);
+	}
+
+	public int inquiryImageInsert(BoardFile img2) {
+		return sqlSession.insert("boardMapper.inquiryImageInsert", img2);
+	}
+
 	
 
 	

@@ -74,11 +74,17 @@
 									<!-- ${boardCode} : @PathVariable로 request scope에 추가된 값 --> 
 									<c:choose>
 										<c:when test="${board.boardSt == 'D' }">
-											<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}" id="boardTitle-con">'${board.memberName}'님의 문의글입니다.</a>
-											
+											<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}" id="boardTitle-con">${board.boardContent}</a>
 										</c:when>
 										<c:otherwise>
-											<a data="${board.boardNo}" onclick=modal(this)>'${board.memberName}'님의 문의글입니다.</a>🔒
+											<c:choose>
+												<c:when test="${fn:substring(loginMember.memberNo, 0, 2) == '03'}">
+													<a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}" id="boardTitle-con">'${board.memberName}'님의 문의글입니다.</a>🔒
+												</c:when>
+												<c:otherwise>
+													<a data="${board.boardNo}" onclick=modal(this)>'${board.memberName}'님의 문의글입니다.</a>🔒
+												</c:otherwise>
+											</c:choose>
 										</c:otherwise>
 									</c:choose>
 								</td>

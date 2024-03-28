@@ -60,3 +60,13 @@ writeForm.addEventListener("submit", e => {
     }
     
 })
+
+const goToList = document.getElementById("gotoList")
+
+goToList.addEventListener("click",e=>{
+    if(confirm("게시물 작성을 취소하시겠습니까?")){
+        e.preventDefault();
+        history.back()
+        return ;
+    }
+})

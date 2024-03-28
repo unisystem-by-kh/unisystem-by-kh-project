@@ -71,7 +71,6 @@ input:focus {outline: none;}
     margin: auto;
     border-collapse: collapse;
     border-top: 1px solid #ddd;
-    table-layout: fixed;
 }
 
 .table > thead{
@@ -97,8 +96,8 @@ tbody td:nth-of-type(1){
 
 tbody td:nth-of-type(2){
     text-align: start;
-    
     width: 800px;
+    padding-left: 5px;
 }
 
 th, tr{

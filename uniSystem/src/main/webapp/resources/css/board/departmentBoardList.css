@@ -54,6 +54,21 @@ main{
     align-items: center;
 }
 
+.select-search-area > div > button{
+    width: 80px;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+    border: none;
+}
+
+.select-search-area > div > button:hover{
+    background-color: crimson;
+    color: white;
+}
+
 .select-search-area select{
     outline: none;
     width: 200px;
@@ -117,6 +132,7 @@ main{
 .depart-table > tbody > tr > td:nth-of-type(2){
     border-right: 1px solid #ddd;
     margin-left: 5px;
+    padding: 5px;
 }
 
 .depart-table > tbody > tr > td >  a:hover{
