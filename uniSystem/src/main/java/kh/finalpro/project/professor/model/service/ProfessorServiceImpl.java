@@ -10,12 +10,21 @@ import org.springframework.stereotype.Service;
 import kh.finalpro.project.board.model.dao.BoardDAO;
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.Pagination;
+import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.professor.model.dao.ProfessorDAO;
 import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.professor.model.dto.Professor;
+import kh.finalpro.project.professor.model.dto.Task;
 
+/**
+ * @author user1
+ *
+ */
 @Service
 public class ProfessorServiceImpl implements ProfessorService{
+
+	
 
 	@Autowired
 	private ProfessorDAO dao;
@@ -91,6 +100,22 @@ public class ProfessorServiceImpl implements ProfessorService{
 	@Override
 	public int updateGrades(List<Map<String, Object>> gradesList) {
 		return dao.updateGrades(gradesList);
+	}
+	
+	// 과제 등록 페이지 이동 시 등록되어 있는 과제 조회
+	@Override
+	public Map<String, Object> selectTaskList(Member loginMember) {
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		List<Task> taskList = dao.selectTaskList(loginMember); // 등록된 과제 목록 조회
+		
+		List<Class> classList = dao.selectClassList(loginMember); // 교수 담당 과목 조회
+		
+		map.put("taskList", taskList);
+		map.put("classList", classList);
+		
+		return map;
 	}
 
 

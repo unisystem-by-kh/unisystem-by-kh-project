@@ -3,6 +3,7 @@ package kh.finalpro.project.professor.model.service;
 import java.util.List;
 import java.util.Map;
 
+import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.professor.model.dto.Professor;
 
 
@@ -30,6 +31,9 @@ public interface ProfessorService {
 	List<Professor> classList();
 
 	int updateGrades(List<Map<String, Object>> gradesList);
+
+	// 과제 등록 페이지 이동 시 등록되어 있는 과제 조회
+	Map<String, Object> selectTaskList(Member loginMember);
 
 
 
