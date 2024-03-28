@@ -67,10 +67,18 @@ public class ProfessorControllerr {
 		
 	}
 	
-	// 성적 조회 페이지 이동
+	// 성적 관리 페이지 이동
 	@GetMapping("/professorPageStudentGrade")
 	public String professorPageStudentGrade() {
 		return "professor/professorPageStudentGrade";
+	}
+	
+	// 증명서 조회 페이지 이동
+	@GetMapping("/professorPageCertificate")
+	public String professorPageCertificate(
+			) {
+
+		return "professor/professorPageCertificate";
 	}
 	
 	

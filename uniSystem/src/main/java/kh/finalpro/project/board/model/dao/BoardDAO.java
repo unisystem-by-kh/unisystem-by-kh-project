@@ -301,7 +301,6 @@ public class BoardDAO {
 
 
 
-
 	/** 자유게시판 수정
 	 * @param board
 	 * @return 
