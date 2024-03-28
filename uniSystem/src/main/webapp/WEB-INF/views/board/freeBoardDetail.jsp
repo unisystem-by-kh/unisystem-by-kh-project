@@ -52,9 +52,10 @@
                     </c:if>
                     <%-- 썸네일이 없을 경우 --%>
                     <c:if test="${empty board.fileList}">
-                        <c:set var="path" value="#" />
+                        <%-- <c:set var="path" value="#" /> --%>
                         <%-- <img src="${path}" alt="썸네일을 등록해주세요."> --%>
-                        <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' />
+                        <%-- <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' /> --%>
+                        asdasdasd
                     </c:if>
                     <div>
                         ${board.boardContent}
