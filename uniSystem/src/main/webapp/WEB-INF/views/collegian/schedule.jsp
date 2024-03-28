@@ -40,7 +40,7 @@
 						<span>학번</span> <input type="text" value="201123421" readonly>
 
 						<span>성명</span> <input type="text" value="차준형" readonly> 
-						 <div class="select">
+						<%--  <div class="select">
 						<select	name="grade" id="">
 							<option value="">1학년</option>
 							<option value="">2학년</option>
@@ -54,7 +54,7 @@
 							<option value="">2학기</option>
 							<option value="">전체</option>
 						</select>
-						</div>
+						</div> --%>
 
 					</form>
 				</div>
@@ -151,46 +151,6 @@
 										
 									</tr>
 							</c:forEach>
-								<%-- <tr>
-									<td>2교시</td>
-									<td></td>
-									<td>JAVA</td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>3교시</td>
-									<td></td>
-									<td>JAVA</td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>4교시</td>
-									<td></td>
-									<td>JAVA</td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>5교시</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>6교시</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>JAVA</td>
-									<td>JAVA</td>
-								</tr> --%>
 							</tbody>
 						</table>
 					</div>
@@ -198,7 +158,7 @@
 			</div>
 			
 	</main>
-
+	<script src="/resources/js/collegian/nav.js"></script>
 
 
 

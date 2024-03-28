@@ -104,9 +104,9 @@
 
     </script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/resources/js/tuition/tuition.js"></script>
     <script src="/resources/js/jspdf.min.js"></script>
     <script src="/resources/js/html2canvas.js"></script>
-    <script src="/resources/js/tuition/tuition.js"></script>
    
 
    

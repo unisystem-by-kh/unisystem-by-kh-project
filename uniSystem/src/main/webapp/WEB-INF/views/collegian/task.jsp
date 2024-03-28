@@ -150,6 +150,7 @@
         </div>
 
     <script src="/resources/js/collegian/task.js"></script>
+	<script src="/resources/js/collegian/nav.js"></script>
 
 </body>
 

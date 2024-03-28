@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.main.model.dto.Member;
 
 public interface CollegianService {
@@ -29,5 +30,10 @@ public interface CollegianService {
 	Map<String,Object> selectTaskList(Member loginMember);
 
 	int insertTask(Member loginMember, int taskNo, MultipartFile file, String webPath, String filePath) throws IllegalStateException, IOException  ;
+
+	int insertRequest(Request req);
+
+	List<Request> selectRequest(Request req);
+
 
 }

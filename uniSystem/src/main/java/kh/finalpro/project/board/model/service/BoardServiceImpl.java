@@ -182,9 +182,14 @@ public class BoardServiceImpl implements BoardService{
 					img.setBoardFilePath(webPath); // 웹 접근 경로
 					img.setBoardNo(boardNo); // 게시글 번호
 
-					img.setBoardFileCategoryNo(
-							board.getCategoryNo()
-							);
+					
+					img.setCategoryNo(board.getCategoryNo());
+
+					if(img.getCategoryNo() == 3) {
+						img.setBoardFileCategoryNo(1);
+					}else {
+						img.setBoardFileCategoryNo(2);
+					}
 
 					// 파일 원본명
 					String fileName = file.get(i).getOriginalFilename(); // 원본명
@@ -221,7 +226,11 @@ public class BoardServiceImpl implements BoardService{
 					for(int i = 0; i < uploadList.size(); i++) {
 
 						String rename = uploadList.get(i).getBoardFileRename();
+						
+						System.out.println("++++++++++++++++++++++++++++++++ : "+rename);
+						
 						file.get(i).transferTo(new File(filePath + rename));
+						
 
 					}
 
@@ -377,11 +386,11 @@ public class BoardServiceImpl implements BoardService{
 				deleteMap.put("boardNo", board.getBoardNo());
 				deleteMap.put("deleteList", deleteList);
 
-				rowCount = dao.inquiryFileDelete(deleteMap);
+				rowCount = dao.freeFileDelete(deleteMap);
 
 				if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백
-					// 예외 강제로 발생
-					// throw new ImageDeleteException();
+//					 예외 강제로 발생
+//					 throw new ImageDeleteException();
 				}
 			}
 
@@ -398,7 +407,9 @@ public class BoardServiceImpl implements BoardService{
 			for(int i = 0; i < file.size(); i++) {
 
 				if(file.get(i).getSize() > 0) {
-
+					
+					Map<String, Object> map = new HashMap<String, Object>();
+					
 					BoardFile img = new BoardFile();
 					img.setBoardFilePath(webPath);
 					img.setBoardNo(board.getBoardNo()); 
@@ -406,18 +417,42 @@ public class BoardServiceImpl implements BoardService{
 					String fileName = file.get(i).getOriginalFilename(); 
 					img.setBoardFileOriginal(fileName); 
 					img.setBoardFileRename(Util.fileRename(fileName)); 
-
+					
 					uploadList.add(img);
+					
+					map.put("img", img);
+					map.put("categoryNo", board.getCategoryNo());
+					
+					System.out.println("zxclkjnczxlhkjxcznlkjqewrwiqprnioqniqn::::::::::::::::::::::" + map);
+					
+					if(!uploadList.isEmpty()) {
+						
+						
+						for(int s = 0; s < uploadList.size(); s++) {
+							
+							String rename = uploadList.get(s).getBoardFileRename();
+							
+							System.out.println("lkfdjkljgfdjklfgdkljgfdfdl ::::" + rename);
+							
+							file.get(s).transferTo(new File(filePath + rename));
+							
+						}
+						
+					}else { // 일부 또는 전체 insert 실패
+						
+						
+					}
 
-					// 오라클은 다중  UPDATE를 지원하지 않기 떄문에
-					// 하나씩 UPDATE 수행
-
-					rowCount = dao.inquiryFileUpdate(img);
+					rowCount = dao.freeFileUpdate(img);
+					
+					System.out.println("123123123123213123 ::::::::::"+rowCount);
+					System.out.println("@@@@@@@@@@@@@@@@@@@@" + uploadList);
+					System.out.println("####################" + img);
 
 					if(rowCount == 0) {
 						// 수정 실패 == DB에 이미지가 없었다.
 						// -> 이미지를 삽입
-						rowCount = dao.inquiryFileInsert(img);
+						rowCount = dao.freeFileInsert(img);
 					}
 				}
 

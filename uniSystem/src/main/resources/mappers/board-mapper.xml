@@ -103,6 +103,7 @@
 		        END BOARD_C_DATE,
 		    ]]>
 
+
 		(SELECT COUNT(*) FROM "REPLY" R
 		WHERE R.BOARD_NO = B.BOARD_NO
 		AND R.REPLY_ST = 'N') REPLY_COUNT
@@ -118,6 +119,22 @@
 			(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME FROM BOARD_FILE F
 			WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
 		</if>
+
+		       (SELECT COUNT(*) FROM "REPLY" R
+			    WHERE R.BOARD_NO = B.BOARD_NO
+				AND R.REPLY_ST = 'N') REPLY_COUNT
+
+				<if test="categoryNo == 0" > <!-- 자유게시판일 경우 -->
+					,
+					(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME
+					FROM BOARD_FILE F
+					WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
+				</if>
+				<if test="categoryNo == 4"> <!-- 학과공지, 1:1문의일 경우 -->
+					,
+					(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME FROM BOARD_FILE F
+		    		WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
+
 
 		FROM "BOARD" B
 		JOIN "MEMBER" USING(MEMBER_NO)
@@ -389,7 +406,13 @@
 			BOARD_FILE_ORIGINAL,
 			#{file.boardFileRename} BOARD_FILE_RENAME,
 
+
 			2 CATEGORY_NO,
+
+
+			
+			#{file.boardFileCategoryNo} CATEGORY_NO,
+			
 
 			#{file.boardNo} BOARD_NO
 			FROM DUAL
@@ -542,6 +565,16 @@
 		WHERE BOARD_NO = #{boardNo}
 	</delete>
 
+
+
+	
+	<!-- 자유게시판 파일 삭제 -->
+	<delete id="freeFileDelete">
+		DELETE FROM BOARD_FILE
+		WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
+
 	<!-- 1:1문의 파일 수정 -->
 	<update id="inquiryFileUpdate">
 		UPDATE BOARD_FILE SET BOARD_FILE_PATH =
@@ -552,6 +585,20 @@
 		AND
 		BOARD_FILE_CATEGORY_NO = 2
 	</update>
+
+
+
+	
+	<!-- 자유게시판 파일 수정 -->
+	<update id="freeFileUpdate">
+		UPDATE BOARD_FILE 
+		SET BOARD_FILE_PATH = #{boardFilePath}
+		,BOARD_FILE_ORIGINAL = #{boardFileOriginal}
+		,BOARD_FILE_RENAME = #{boardFileRename}
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_FILE_CATEGORY_NO = 1
+	</update>
+	
 
 	<update id="inquiryImageUpdate">
 		UPDATE BOARD_FILE SET BOARD_FILE_PATH =
@@ -587,6 +634,22 @@
 
 	</insert>
 
+
+
+
+	<!-- 자유게시판 파일 삽입 -->
+	<insert id="freeFileInsert">
+		INSERT INTO BOARD_FILE
+		VALUES( SEQ_FILE_NO.NEXTVAL,
+		#{boardFilePath},
+		#{boardFileOriginal},
+		#{boardFileRename},
+		1,
+		#{boardNo}
+		)
+
+	</insert>
+	
 
 	<!-- 1:1문의 비밀번호 확인 -->
 	<select id="boardCheck" resultType="_int">

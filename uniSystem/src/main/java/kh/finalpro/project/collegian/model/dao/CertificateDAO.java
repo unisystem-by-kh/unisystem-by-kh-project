@@ -1,11 +1,15 @@
 package kh.finalpro.project.collegian.model.dao;
 
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.collegian.model.dto.Certificate;
+import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 
 @Repository
 public class CertificateDAO {
@@ -30,6 +34,10 @@ public class CertificateDAO {
 
 	public int updateCertificate(Certificate certificate) {
 		return sqlSession.update("certificateMapper.updateCertificate",certificate);
+	}
+
+	public List<Lecture> selectScore(Member loginMember) {
+		return sqlSession.selectList("collegianMapper.selectScore", loginMember);
 	}
 
 	
