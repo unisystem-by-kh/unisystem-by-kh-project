@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="studentList" value="${map.studentList}" />
 <c:set var="lectureList" value="${map.lectureList}" />
@@ -41,7 +43,7 @@
                                 <option value="nm">이름</option>
                                 <option value="gr">학년</option>
                                 <option value="tr">학기</option>
-                                <option value="dp">학과</option>
+                                <option value="dp">전화번호</option>
                             </select>
             
                             <input type="text" name="query" placeholder="검색어를 입력해주세요." id="search-query">
@@ -52,36 +54,63 @@
 
                 </div>
                 <div class="infoCheck">
-                    현재 재학중이고 수업을 듣는 학생만 조회
+                    본인이 속한 학과 학생 조회
+                    <br>
+                    클릭하면 복사 가능
                 </div>
                 <div class="student-info">
                     <div class="student-info-area">
                         <div class="student-info-value-name">
                             <div>학번</div>
+                            <div>학과</div>
                             <div>이름</div>
+                            <div>나이</div>
                             <div>학년</div>
                             <div>학기</div>
-                            <div>나이</div>
-                            <div>학과</div>
-                            <div>수강과목</div>
-                            <div>성적</div>
+                            <div>입학년도</div>
+                            <div>생년월일</div>
+                            <div>이메일</div>
+                            <div>전화번호</div>
+                            <div>학적상태</div>
                         </div>
                         
-
                         <c:forEach items="${studentList}" var="student">
-                            <div class="student-info-value">
-                                <div class="studentMemberNo" title="클릭 시, 해당 학생이 수강중인 강의 목록 조회">${student.memberNo}</div>
-                                <div class="studentMemberName">${student.memberName}</a></div>
-                                <div>${student.memberGrade}</div>
-                                <div>${student.memberTerm}</div>
-                                <div>${student.memberAge}</div>
-                                <div>${student.departmentName}</div>
-                                <div class="className">${student.classNm}</div>
-                                <div class="lecturePoint">${student.lecturePoint}</div>
-                            </div>
-                        </c:forEach>    
+                            <c:if test="${loginMember.departmentNo == student.departmentNo}">
+                                <div class="student-info-value">
+                                    <div class="studentMemberNo">${student.memberNo}</div>
+                                    <div>${student.departmentName}</div>
+                                    <div class="studentMemberName">${student.memberName}</a></div>
+                                    <div>만 ${student.memberAge}살</div>
+                                    <div>${student.memberGrade}</div>
+                                    <div>${student.memberTerm}</div>
+                                    <div>${student.memberDate.substring(0, 4)}년</div>
+                                    <c:if test="${student.memberSsn.substring(7, 8) == 1 || student.memberSsn.substring(7, 8) == 3}">
+                                        <c:set var="genM" value="남" />
+                                    </c:if>
+                                    <c:if test="${student.memberSsn.substring(7, 8) == 2 || student.memberSsn.substring(7, 8) == 4}">
+                                        <c:set var="genF" value="여" />
+                                    </c:if>
+                                    <div>${student.memberSsn.substring(0, 2)}년${student.memberSsn.substring(2, 4)}월${student.memberSsn.substring(4, 6)}일(${genM}${genF})</div>
+                                    <div>${student.memberEmail}</div>
+                                    <div>${student.memberPhone.substring(0, 3)}&ndash;${student.memberPhone.substring(3, 7)}&ndash;${student.memberPhone.substring(7, 11)}</div>
+                                    <c:if test="${student.memberStatus == 'N'}">
+                                        <c:set var="stN" value="재학중" />
+                                    </c:if>
+                                    <c:if test="${student.memberStatus == 'Y'}">
+                                        <c:set var="stY" value="휴학중" />
+                                    </c:if>
+                                    <c:if test="${student.memberStatus == 'P'}">
+                                        <c:set var="stP" value="졸업" />
+                                    </c:if>
+                                    <c:if test="${student.memberStatus == 'D'}">
+                                        <c:set var="stD" value="중퇴" />
+                                    </c:if>
+                                    <div>${stN}${stY}${stP}${stD}</div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
     
-                        <!-- 모달 내용 -->
+                        <%-- <!-- 모달 내용 -->
                         <div id="myModal" class="modal">
                             <div class="modal-content">
                                 <!-- 모달 닫기 버튼 -->
@@ -89,7 +118,7 @@
                                 <!-- 강의 정보를 표시할 영역 (lectureInfo) -->
                                 <div id="lectureInfo"></div>
                             </div>
-                        </div>
+                        </div> --%>
 
 
                     </div>

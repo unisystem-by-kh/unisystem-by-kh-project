@@ -34,7 +34,8 @@
                     <div>
                         <div class="row3-imgArea" >
                             <label for="file">
-                                <img class="preview" src="#">
+                                <img class="preview">
+                                <div id="imgUp">이미지등록</div>
                             </label>
                             <input type="file" name="file" class="inputImage" id="file" accept="image/*">
                         </div>

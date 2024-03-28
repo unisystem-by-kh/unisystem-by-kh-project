@@ -189,6 +189,9 @@ public interface BoardService {
 	List<Member> selectMemberList(Member loginMember);
 
 
+	int freeBoardDelete(int boardNo);
+
+
 
 
 

@@ -34,7 +34,7 @@
                     <div>
                         <div class="row3-imgArea">
                             <label for="file">
-                                <img class="preview">
+                                <img class="preview" src="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}">
                             </label>
                             <input type="file" name="file" class="inputImage" id="file" accept="image/*">
                         </div>

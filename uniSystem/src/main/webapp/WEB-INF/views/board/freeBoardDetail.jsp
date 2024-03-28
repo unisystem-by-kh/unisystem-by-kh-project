@@ -70,7 +70,7 @@
                     </div>
                 </c:if>
                     <div>
-                        <button>목록</button>
+                        <button id="goToListBtn">목록</button>
                     </div>
             </div>
 
