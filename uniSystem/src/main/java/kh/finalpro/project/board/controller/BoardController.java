@@ -395,7 +395,7 @@ public class BoardController {
 
 		System.out.println(board);
 		// 3) 게시글 수정 서비스 호출 
-		int rowCount = service.inquiryBoardUpdate(board, file, webPath, filePath, deleteList);
+		int rowCount = service.freeBoardUpdate(board, file, webPath, filePath, deleteList);
 
 		// 4) 결과에 따라서 message, path 설정
 		String message = null; 
@@ -883,7 +883,7 @@ public class BoardController {
 
 
 
-	// 1:1문의 게시글 삭제
+	// 자유게시판 게시글 삭제
 	@GetMapping("/{categoryNo:{3}}/{boardNo}/delete")
 	public String freeBoardDelete(@PathVariable("categoryNo") int categoryNo
 			,@PathVariable("boardNo") int boardNo
@@ -891,9 +891,11 @@ public class BoardController {
 			,RedirectAttributes ra
 			) {
 
-		int result = service.inquiryBoardDelete(boardNo);
+		int result = service.freeBoardDelete(boardNo);
 		String path = "redirect:";
 		String message = null;
+		
+		System.out.println("@@@@@@@@@@@@@@ :: @@@@@@@@@@@@@ ::" +result);
 
 		if(result > 0) {
 			path += "/board/" + categoryNo;
@@ -988,7 +990,7 @@ public class BoardController {
 
 
 	// 1:1문의 게시글 삭제
-	@GetMapping("/{categoryNo:[2,4]{1}}/{boardNo}/delete")
+	@GetMapping("/{categoryNo:[2,3,4]{1}}/{boardNo}/delete")
 	public String boardDelete(@PathVariable("categoryNo") int categoryNo
 			,@PathVariable("boardNo") int boardNo
 			,HttpSession session

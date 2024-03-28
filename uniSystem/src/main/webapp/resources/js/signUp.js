@@ -392,45 +392,207 @@ function validateGender() {
 memberGenM.addEventListener("change", validateGender);
 memberGenF.addEventListener("change", validateGender);
 
-
 // 회원 가입 form 태그가 제출 되었을 때
 const signUpFrm = document.getElementById("signUpFrm");
-signUpFrm.addEventListener("submit" , e => {
+signUpFrm.addEventListener("submit", e => {
+    e.preventDefault(); // 제출을 막음
 
-    // 성별을 체크하지 않은 경우(성별은 별개)
-    if (!isGenderSelected()) {
-        alert("성별을 선택해 주세요.");
-        e.preventDefault();
-        return;
-    }
-
-    validateGender();
-
-    for(let key in checkObj){
-        if(!checkObj[key]){
-            switch(key){
-                case "memberCk": alert("학과 확인을 해주세요."); break;
-                case "memberNo": alert("번호 유효하지 않습니다.\n다시 입력 해주세요."); break;
-                case "memberEmail": alert("이메일이 유효하지 않습니다."); break;
-                case "authKey" : alert("인증번호 확인 필수"); break;
-                case "memberPw": alert("비밀번호가 유효하지 않습니다."); break;
-                case "memberPwConfirm": alert("비밀번호확인이 일치하지 않습니다."); break;
-                case "memberName": alert("이름이 유효하지 않습니다."); break;
-                case "memberPhone": alert("전화번호가 유효하지 않습니다."); break;
-                case "memberGen" : alert("성별을 체크해 주세요."); break;
+    for (let key in checkObj) {
+        if (!checkObj[key]) {
+            switch (key) {
+                case "memberCk":
+                    swal({
+                        title: "알림",
+                        text: "학과 확인을 해주세요.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberNo":
+                    swal({
+                        title: "알림",
+                        text: "번호 유효하지 않습니다. 다시 입력 해주세요.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberEmail":
+                    swal({
+                        title: "알림",
+                        text: "이메일이 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "authKey":
+                    swal({
+                        title: "알림",
+                        text: "인증번호 확인 필수",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberPw":
+                    swal({
+                        title: "알림",
+                        text: "비밀번호가 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberPwConfirm":
+                    swal({
+                        title: "알림",
+                        text: "비밀번호확인이 일치하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberName":
+                    swal({
+                        title: "알림",
+                        text: "이름이 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberPhone":
+                    swal({
+                        title: "알림",
+                        text: "전화번호가 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberGen":
+                    swal({
+                        title: "알림",
+                        text: "성별을 체크해 주세요.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
             }
 
-            document.getElementById(key).focus();
-
-            e.preventDefault();
+            // document.getElementById(key).focus();
 
             return;
         }
     }
 
+    // 성별을 체크하지 않은 경우(성별은 별개)
+    if (!isGenderSelected()) {
+        swal({
+            title: "알림",
+            text: "모든 값을 선택 및 입력해 주세요.",
+            icon: "warning",
+            button: "OK"
+        });
+        return;
+    }
 
-})
+    // 모든 유효성 검사 통과 시 폼 제출
+    signUpFrm.submit();
+});
+
+// swal 사용법
+// swal({
+//     title : "제목 부분 (크게나옴)",
+//     text : "내용 부분(작게나옴)", // 써도 되고 안써도됨
+//     icon : "warning", // "warning", "success", "error" 아이콘 모양 세개중 하나 골라사용
+//     closeOnClickOutside : false, // ok이나 확인 버튼 클릭시에만 알림창 꺼짐 옵션 
+//     dangerMode : true, // 경고모드 확인 버튼이 빨개짐
+//     buttons : "ok" // "ok" 부분에 사용할 문구 작성 가능 (기본 값 'OK')
+//     // ["취소","확인"] <-- 이렇게 confirm처럼 사용 가능 
+// })
+// .then((yes)=>{
+//     if(yes){
+//         // 확인 버튼 클릭시 후에 실행할 코드 input에 포커스 줄거면 여기에 코드 작성해야 포커스 감 
+//     }
+// });
+
+// 버려진 코드 ↓↓↓↓↓↓↓↓↓
+// // 회원 가입 form 태그가 제출 되었을 때
+// const signUpFrm = document.getElementById("signUpFrm");
+// signUpFrm.addEventListener("submit" , e => {
 
 
+//     for(let key in checkObj){
+//         if(!checkObj[key]){
+//             switch(key){
+//                 case "memberCk": alert("학과 확인을 해주세요."); break;
+//                 case "memberNo": alert("번호 유효하지 않습니다.\n다시 입력 해주세요."); break;
+//                 case "memberEmail": alert("이메일이 유효하지 않습니다."); break;
+//                 case "authKey" : alert("인증번호 확인 필수"); break;
+//                 case "memberPw": alert("비밀번호가 유효하지 않습니다."); break;
+//                 case "memberPwConfirm": alert("비밀번호확인이 일치하지 않습니다."); break;
+//                 case "memberName": alert("이름이 유효하지 않습니다."); break;
+//                 case "memberPhone": alert("전화번호가 유효하지 않습니다."); break;
+//                 case "memberGen" : alert("성별을 체크해 주세요."); break;
+//             }
 
+//             document.getElementById(key).focus();
 
+//             e.preventDefault();
+
+//             return;
+//         }
+
+//         // 성별을 체크하지 않은 경우(성별은 별개)
+//         if (!isGenderSelected()) {
+//             alert("모든 값을 선택 및 입력해 주세요.");
+//             e.preventDefault();
+//             return;
+//         }
+
+//         validateGender();
+//     }
+    
+//     return false;
+
+// })

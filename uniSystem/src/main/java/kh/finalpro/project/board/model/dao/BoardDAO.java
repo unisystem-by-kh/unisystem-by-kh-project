@@ -185,6 +185,7 @@ public class BoardDAO {
 	 * @return
 	 */
 	public int inquiryBoardDelete(int boardNo) {
+		System.out.println(boardNo);
 		return sqlSession.update("boardMapper.inquiryBoardDelete", boardNo);
 	}
 
@@ -286,6 +287,19 @@ public class BoardDAO {
 
 	public List<Member> selectMemberList(Member loginMember) {
 		return sqlSession.selectList("memberMapper.selectMemberList", loginMember);
+	}
+
+	/** 자유게시판 수정
+	 * @param board
+	 * @return 
+	 */
+	public int freeBoardUpdate(Board board) {
+		System.out.println(board);
+		return sqlSession.update("boardMapper.updateFreeBoardList", board);
+	}
+
+	public int freeBoardDelete(int boardNo) {
+		return sqlSession.delete("boardMapper.freeBoardDelete", boardNo);
 	}
 
 	
