@@ -289,6 +289,14 @@ public class BoardDAO {
 		return sqlSession.selectList("memberMapper.selectMemberList", loginMember);
 	}
 
+
+	public int inquiryImageUpdate(BoardFile img2) {
+		return sqlSession.update("boardMapper.inquiryImageUpdate", img2);
+	}
+
+	public int inquiryImageInsert(BoardFile img2) {
+		return sqlSession.insert("boardMapper.inquiryImageInsert", img2);
+
 	/** 자유게시판 수정
 	 * @param board
 	 * @return 
@@ -300,6 +308,7 @@ public class BoardDAO {
 
 	public int freeBoardDelete(int boardNo) {
 		return sqlSession.delete("boardMapper.freeBoardDelete", boardNo);
+
 	}
 
 	

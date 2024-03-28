@@ -142,6 +142,10 @@
 	<!-- 게시글 목록 조회 검색(공지사항 : 제목/내용, 자유게시판, 1:1문의, 학과공지) -->
 	<select id="selectBoardList_search" resultMap="board_rm">
 		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NAME, BOARD_COUNT, BOARD_CONTENT, BOARD_ST,
+		<if test="categoryNo == 2">
+			DEPARTMENT_NAME,
+		</if>
+		
 		<![CDATA[
 			CASE  
 			WHEN SYSDATE - BOARD_C_DATE < 1/24/60
@@ -189,10 +193,16 @@
 				</when>
 			</choose>
 		</if>
-		<if test="categoryNo == 2 or categoryNo == 4">
+		<if test="categoryNo == 4">
 			WHERE (BOARD_ST = 'N' OR BOARD_ST = 'D')
 			AND CATEGORY_NO = ${categoryNo}
 			AND MEMBER_NAME LIKE '%${query}%'
+		</if>
+		<if test="categoryNo == 2">
+			JOIN DEPARTMENT USING(DEPARTMENT_NO)
+			WHERE BOARD_ST = 'N'
+			AND CATEGORY_NO = ${categoryNo}
+			AND DEPARTMENT_NO = #{query}
 		</if>
 		ORDER BY BOARD_NO DESC
 	</select>
@@ -353,7 +363,7 @@
 			#{file.boardFileOriginal} BOARD_FILE_ORIGINAL,
 			#{file.boardFileRename} BOARD_FILE_RENAME,
 			
-			#{file.boardFileCategoryNo} CATEGORY_NO,
+			2 CATEGORY_NO,
 			
 			#{file.boardNo} BOARD_NO
 			FROM DUAL
@@ -494,18 +504,26 @@
 		UPDATE BOARD_FILE SET BOARD_FILE_PATH = #{boardFilePath}
 		,BOARD_FILE_ORIGINAL = #{boardFileOriginal}
 		,BOARD_FILE_RENAME = #{boardFileRename}
-		WHERE
-		BOARD_NO = #{boardNo}
-		
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_FILE_CATEGORY_NO = 2
 	</update>
+	
+	<update id="inquiryImageUpdate">
+		UPDATE BOARD_FILE SET BOARD_FILE_PATH = #{boardFilePath}
+		,BOARD_FILE_ORIGINAL = #{boardFileOriginal}
+		,BOARD_FILE_RENAME = #{boardFileRename}
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_FILE_CATEGORY_NO = 1
+	</update>
+	
 	<!-- 1:1문의 파일 삽입 -->
-	<insert id="inquiryFileInsert">
+	<insert id="inquiryImageInsert">
 		INSERT INTO BOARD_FILE
 		VALUES( SEQ_FILE_NO.NEXTVAL,
 		#{boardFilePath},
 		#{boardFileOriginal},
 		#{boardFileRename},
-		2,
+		1,
 		#{boardNo}
 		)
 

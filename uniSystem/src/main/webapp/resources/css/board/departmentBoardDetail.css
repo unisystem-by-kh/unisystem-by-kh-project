@@ -35,10 +35,11 @@ main{
 
 .image-con{
     width: 1200px;
-    height: 400px;
+    height: 500px;
     margin: auto;
     border-bottom: 1px solid #ddd;
 }
+
 
 .image-con > img{
     width: 100%;
@@ -55,8 +56,11 @@ main{
 
 .file-button{
     width: 1200px;
+    height: 50px;
     margin: 10px auto;
     display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
 }
 .file-button > div:nth-of-type(1){
     width: 10%;
@@ -79,14 +83,16 @@ main{
     width: 1200px;
     height: 80px;
     margin: 20px auto;
+    display: flex;
+    justify-content: end;
 }
 
 .button-area > button{
     margin: 0 10px;
     background-color: white;
     border: none;
-    width: 100px;
-    height: 30px;
+    width: 150px;
+    height: 50px;
     font-size: 14px;
     font-weight: bold;
 }

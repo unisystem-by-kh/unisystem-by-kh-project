@@ -36,7 +36,7 @@
             <c:when test="${result != 0}">
                 <div class="pay-clear">
                     <div><img src="/resources/images/board/check.png" id="checkImage" /></div>
-                    <div>'${loginMember.memberName}님' 납부할 금액이 없습니다.</div>
+                    <div>'${loginMember.memberName}님' 납부할 등록금이 없습니다.</div>
                 </div>
 
                 <div class="pay-clear-button">
@@ -83,15 +83,12 @@
             </table>
         </div>
     
-        <div class="total">
-            <p>총 금액: ${loginMember.departmentPrice}</p>
-        </div>
-
     </div>
 
                 <div class="pay-button">
-                    <button id="print">출력</button>
-                    <button onclick="kakaoPay()">납부하기</button>
+                    <button id="print"><img src="/resources/images/board/print.png" id="pay-kakao"  style="width:100%; height:95%"> 출력</button>
+                    
+                    <button onclick="kakaoPay()"><img src="/resources/images/board/kakaopay.jpg"  id="pay-kakao" style="width:100%; height:95%">  납부하기</button>
                 </div>
             </c:otherwise>
         </c:choose>    

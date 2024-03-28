@@ -56,7 +56,7 @@
 	            <div class="departButton">
 	                <button type="submit">등록하기</button>
 	        </form>
-	                <button>취소</button>
+	                <button  id="gotoList">취소</button>
 	            </div>
 	        
 					<div id="loadingSpinner"></div>
