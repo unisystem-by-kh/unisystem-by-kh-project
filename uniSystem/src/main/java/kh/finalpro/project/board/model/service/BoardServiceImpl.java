@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService{
 
 		int listCount = 0;
 
-		if(paramMap.get("categoryNo").equals("2") || paramMap.get("categoryNo").equals("4")) {
+		if(paramMap.get("categoryNo").equals(2) || paramMap.get("categoryNo").equals(4)) {
 			listCount = dao.getListCountInquiry(paramMap); // 1:1문의, 학과공지
 		}else {
 			listCount = dao.getListCount(paramMap);
