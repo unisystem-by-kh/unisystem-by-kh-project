@@ -59,6 +59,7 @@
 	                <button>취소</button>
 	            </div>
 	        
+					<div id="loadingSpinner"></div>
 	
 	    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>

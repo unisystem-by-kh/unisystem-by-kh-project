@@ -26,7 +26,9 @@
 	            <h1>학과 공지</h1>
 	        </div>
 	        <div>
-	            <a href="/board/${categoryNo}/write">공지 등록</a>
+				<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '02'}" >
+					<a href="/board/${categoryNo}/write">공지 등록</a>
+				</c:if>	
 	        </div>
 	    </div>
 	    <form>
