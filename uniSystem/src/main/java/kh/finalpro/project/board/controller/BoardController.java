@@ -240,7 +240,6 @@ public class BoardController {
 			, RedirectAttributes ra
 			, HttpSession session)throws IllegalStateException, IOException {
 
-		System.out.println("자료실 매핑 체크용" + categoryNo);
 
 		// 1.로그인한 회원 번호를 얻어와 board에 세팅
 		board.setMemberNo(loginMember.getMemberNo());
