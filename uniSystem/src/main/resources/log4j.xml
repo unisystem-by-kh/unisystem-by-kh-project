@@ -22,7 +22,7 @@
    </appender>
 	
 	<!-- Application Loggers -->
-	<logger name="java.finalpro.project">
+	<logger name="kh.finalpro.project">
 		<level value="debug" />
 		<appender-ref ref="dailyRollingFile" />
 	</logger>
