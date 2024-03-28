@@ -39,7 +39,7 @@
 	                </div>
 	            </div>
 	            <div class="image-area">
-					<img class="imgArea" src="" />
+					<img class="imgArea"/>
 	                이미지 : <input type="file" name="images"accept="image/*" class="inputImage">
 					<span class="deleteImage">&times;</span> 
 	            </div>

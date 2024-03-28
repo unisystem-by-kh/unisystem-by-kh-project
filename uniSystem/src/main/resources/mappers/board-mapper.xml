@@ -108,7 +108,7 @@
 			    WHERE R.BOARD_NO = B.BOARD_NO
 				AND R.REPLY_ST = 'N') REPLY_COUNT
 
-				<if test="categoryNo == 3" > <!-- 자유게시판일 경우 -->
+				<if test="categoryNo == 0" > <!-- 자유게시판일 경우 -->
 					,
 					(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME
 					FROM BOARD_FILE F
@@ -363,7 +363,7 @@
 			#{file.boardFileOriginal} BOARD_FILE_ORIGINAL,
 			#{file.boardFileRename} BOARD_FILE_RENAME,
 			
-			2 CATEGORY_NO,
+			#{file.boardFileCategoryNo} CATEGORY_NO,
 			
 			#{file.boardNo} BOARD_NO
 			FROM DUAL
@@ -499,6 +499,12 @@
 		WHERE BOARD_NO = #{boardNo}
 	</delete>
 	
+	<!-- 자유게시판 파일 삭제 -->
+	<delete id="freeFileDelete">
+		DELETE FROM BOARD_FILE
+		WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
 	<!-- 1:1문의 파일 수정 -->
 	<update id="inquiryFileUpdate">
 		UPDATE BOARD_FILE SET BOARD_FILE_PATH = #{boardFilePath}
@@ -506,6 +512,16 @@
 		,BOARD_FILE_RENAME = #{boardFileRename}
 		WHERE BOARD_NO = #{boardNo}
 		AND BOARD_FILE_CATEGORY_NO = 2
+	</update>
+	
+	<!-- 자유게시판 파일 수정 -->
+	<update id="freeFileUpdate">
+		UPDATE BOARD_FILE 
+		SET BOARD_FILE_PATH = #{boardFilePath}
+		,BOARD_FILE_ORIGINAL = #{boardFileOriginal}
+		,BOARD_FILE_RENAME = #{boardFileRename}
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_FILE_CATEGORY_NO = 1
 	</update>
 	
 	<update id="inquiryImageUpdate">
@@ -518,6 +534,18 @@
 	
 	<!-- 1:1문의 파일 삽입 -->
 	<insert id="inquiryImageInsert">
+		INSERT INTO BOARD_FILE
+		VALUES( SEQ_FILE_NO.NEXTVAL,
+		#{boardFilePath},
+		#{boardFileOriginal},
+		#{boardFileRename},
+		1,
+		#{boardNo}
+		)
+
+	</insert>
+	<!-- 자유게시판 파일 삽입 -->
+	<insert id="freeFileInsert">
 		INSERT INTO BOARD_FILE
 		VALUES( SEQ_FILE_NO.NEXTVAL,
 		#{boardFilePath},

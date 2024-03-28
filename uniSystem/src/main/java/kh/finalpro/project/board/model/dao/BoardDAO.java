@@ -296,7 +296,7 @@ public class BoardDAO {
 
 	public int inquiryImageInsert(BoardFile img2) {
 		return sqlSession.insert("boardMapper.inquiryImageInsert", img2);
-
+	}
 	/** 자유게시판 수정
 	 * @param board
 	 * @return 
@@ -310,6 +310,19 @@ public class BoardDAO {
 		return sqlSession.delete("boardMapper.freeBoardDelete", boardNo);
 
 	}
+
+	public int freeFileDelete(Map<String, Object> deleteMap) {
+		return sqlSession.delete("boardMapper.freeFileDelete", deleteMap);
+	}
+
+	public int freeFileUpdate(BoardFile img) {
+		return sqlSession.update("boardMapper.freeFileUpdate", img);
+	}
+
+	public int freeFileInsert(BoardFile img) {
+		return sqlSession.insert("boardMapper.freeFileInsert", img);
+	}
+	
 
 	
 
