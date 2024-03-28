@@ -33,7 +33,7 @@ function kakaoPay() {
                 buyer_no : loginMemberNo1
             }, async function (rsp) { // callback
                 if (rsp.success) { //결제 성공시
-					
+					console.log(rsp)
                     const data = {"memberNo" : loginMemberNo,
                                   "departmentPrice" : departmentPrice,
                                   "payMethod" : rsp.pay_method}

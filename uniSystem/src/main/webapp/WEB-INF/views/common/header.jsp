@@ -91,7 +91,6 @@
                 <%-- 교수 전용 --%>
                 <c:if test="${fn:substring(memberNo, 0, 2) == '02'}" >
                     <a href="#">학생</a>
-                    <a href="#">교과목</a>
                     <a href="#">과제</a>
                     <a href="#">교수</a>
                 </c:if>
@@ -99,7 +98,7 @@
                 <%-- 교직원 전용 --%>
                 <c:if test="${fn:substring(memberNo, 0, 2) == '03'}" >
                     <a href="/admin/UniqueNo">조회</a>
-                    <a href="/admin/UniqueNo">교과목</a>
+                    <a href="/staff/subjectList">교과목</a>
                     <a href="/admin/UniqueNo">교번/학번 발급</a>
                 </c:if>
             </div>
@@ -150,12 +149,6 @@
                 <div class="navigation3-professor">
                     <a href="/professor/professorPageStudentSearch">학생 조회</a>
                     <a href="/professor/professorPageStudentGrade">성적 관리</a>
-                </div>
-
-                <!-- 교과목을 올렸을 경우 -->
-                <div class="navigation3-professor">
-                    <a href="/staff/subjectList">교과목 조회</a>
-                    <a href="/staff/insert">교과목 등록</a>
                 </div>
 
                 <!-- 과제를 올렸을 경우 -->
