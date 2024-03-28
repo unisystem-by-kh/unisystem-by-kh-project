@@ -296,7 +296,9 @@ public class BoardDAO {
 
 	public int inquiryImageInsert(BoardFile img2) {
 		return sqlSession.insert("boardMapper.inquiryImageInsert", img2);
+
 	}
+
 	/** 자유게시판 수정
 	 * @param board
 	 * @return 

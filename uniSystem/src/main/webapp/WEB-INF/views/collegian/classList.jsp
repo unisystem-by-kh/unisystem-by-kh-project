@@ -155,6 +155,7 @@
 		
 	</script>
 	<script src="/resources/js/collegian/collegian.js"></script>
+	<script src="/resources/js/collegian/nav.js"></script>
 </body>
 
 
