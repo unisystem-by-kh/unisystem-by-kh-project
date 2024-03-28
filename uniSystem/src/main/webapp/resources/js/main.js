@@ -1,21 +1,14 @@
 ((e) => {
-    console.log('메인페이지 연결 테스트');
-
     selectAnnouncement();
 })()
 
 
 function selectAnnouncement(){
-    console.log('함수 연결 테스트');
-
     fetch("/selectAnnouncement")
     .then(response => response.json())
     .then(bList => {
-        console.log(bList);
-        
         const borderView = document.getElementsByClassName('border-view')[0];
         borderView.innerText='';
-        console.log(borderView);
 
         for(let list of bList){
 

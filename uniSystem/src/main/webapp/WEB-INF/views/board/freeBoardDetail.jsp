@@ -144,10 +144,10 @@
 
     <script>
         const boardNo = "${board.boardNo}";
-        // console.log(boardNo);
+        console.log(boardNo);
 
-        const loginMemberNo = "${board.memberNo}";
-        // console.log(loginMemberNo);
+        // const loginMemberNo = "${board.memberNo}";
+        console.log(loginMemberNo);
 
         const categoryNo = "${categoryNo}";
     </script>
