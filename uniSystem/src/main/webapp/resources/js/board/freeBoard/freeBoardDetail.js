@@ -81,7 +81,7 @@ const replyContentInsert = document.getElementById("replyContentInsert");
 
 replyAdd.addEventListener("click", (e) => { // 댓글 등록 버튼이 클릭이 되었을 때
 
-    console.log(loginMemberNo);
+    
 
     if(loginMemberNo == ""){ // 로그인 X
         alert("로그인 후 이용해주세요.");
@@ -101,6 +101,7 @@ replyAdd.addEventListener("click", (e) => { // 댓글 등록 버튼이 클릭이
         "memberNo" : loginMemberNo,
         "replyContent" : replyContentInsert.value
     };
+    console.log(data);
 
     fetch("/reply" , {
         method : "POST",
