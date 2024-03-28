@@ -20,7 +20,6 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="depart-detail">
 			<h1>학과 공지</h1> - ${board.departmentName}
-			
 		</div>
 		<div class="date-con">
 			
@@ -33,11 +32,15 @@
 			<div>조회수 : ${board.boardCount}</div>
 		</div>
 		<div class="title-con">
-			<div>${board.boardTitle}</div>
+			<div>제목 : ${board.boardTitle}</div>
 		</div>
 		<div class="image-con">
+		<c:if test="${!empty board.fileList[1]}">
 			<img src="${board.fileList[1].boardFilePath}${board.fileList[1].boardFileRename}">
-			
+		</c:if>
+		<c:if test="${empty board.fileList[1]}">
+	        	<div>첨부된 파일이 없습니다.</div>
+		</c:if>
 		</div>
 		<div class="content-con">${board.boardContent}</div>
 		<div class="file-button">
@@ -52,8 +55,10 @@
 			</c:if>
 		</div>
 		<div class="button-area">
-			<button id="updateBtn">수정</button>
-			<button id="deleteBtn">삭제</button>
+			<c:if test="${loginMember.memberNo == board.memberNo}">
+				<button id="updateBtn">수정</button>
+				<button id="deleteBtn">삭제</button>
+			</c:if>
 			<button id="goToListBtn">목록으로</button>
 		</div>
 
@@ -64,18 +69,19 @@
 			<textarea id="replyWriteCon"></textarea>
 			<button id="addReply">등록</button>
 		</div>
-
-		<div class="dat-con">
-			<div>댓글 1</div>
-		</div>
-		<div class="dat-info">
-			<div>이름 : 유저일</div>
-			||
-			<div>작성일 : 2024.02.23</div>
-		</div>
-		<div class="button-container">
-			<button id="replyUpBtn">수정</button>
-			<button id="replyDeBtn">삭제</button>
+		<div id="reply-area">
+			<div class="dat-con">
+				<div>댓글 1</div>
+			</div>
+			<div class="dat-info">
+				<div>이름 : 유저일</div>
+				|
+				<div>작성일 : 2024.02.23</div>
+			</div>
+			<div class="button-container">
+				<button id="replyUpBtn">수정</button>
+				<button id="replyDeBtn">삭제</button>
+			</div>
 		</div>
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />

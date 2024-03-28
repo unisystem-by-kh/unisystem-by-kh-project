@@ -39,7 +39,7 @@
 	                </div>
 	            </div>
 	            <div class="image-area">
-					<img class="imgArea" src="" />
+					<img class="imgArea"/>
 	                이미지 : <input type="file" name="images"accept="image/*" class="inputImage">
 					<span class="deleteImage">&times;</span> 
 	            </div>
@@ -56,9 +56,10 @@
 	            <div class="departButton">
 	                <button type="submit">등록하기</button>
 	        </form>
-	                <button>취소</button>
+	                <button  id="gotoList">취소</button>
 	            </div>
 	        
+					<div id="loadingSpinner"></div>
 	
 	    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>

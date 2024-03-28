@@ -97,6 +97,7 @@ public class MainController {
 			path += "redirect:main";
 
 			model.addAttribute("loginMember", loginMember);
+			
 
 			Cookie c = new Cookie("saveId", loginMember.getMemberNo());
 

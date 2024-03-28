@@ -22,7 +22,7 @@
     <main>
 
         <!-- 오시는 길 -->
-        <a href="/board/comeMap" class="come-on-area">
+        <a href="/comeMap" class="come-on-area">
             <i class="fa-solid fa-flag fa-2x"></i>
         </a>
 

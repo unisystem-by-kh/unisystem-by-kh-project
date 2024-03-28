@@ -20,24 +20,31 @@
 	<main>
 	
 	    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
+		<c:if test="${!empty param.query}">
+            <c:set var="sp" value="&query=${param.query}"/>
+        </c:if>
 	
 	    <div class="depart-area">
 	        <div>
 	            <h1>학과 공지</h1>
 	        </div>
 	        <div>
-	            <a href="/board/${categoryNo}/write">공지 등록</a>
+				<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '02'}" >
+					<a href="/board/${categoryNo}/write">공지 등록</a>
+				</c:if>	
 	        </div>
 	    </div>
-	    <form>
+	    <form action="/board/${categoryNo}" method="get">
 	        <div class="select-search-area">
 	            <div>
-	                <select value="depart" >
+	                <select name="query" >
 	                    <option value="" selected disabled hidden>전체</option>
 	                    <c:forEach items="${deptCodeList}" var="deptCode">
                             <option value="${deptCode.DEPARTMENT_NO}">${deptCode.DEPARTMENT_NAME}</option>
                         </c:forEach>
 	                </select>
+					<button type="submit">조회</button>
 	            </div>
 	            
 	        </div>

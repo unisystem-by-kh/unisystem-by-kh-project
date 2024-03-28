@@ -29,6 +29,8 @@
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Certificate" alias="Certificate" />
 		<typeAlias type="kh.finalpro.project.chatting.model.dto.Message" alias="Message" />
 		<typeAlias type="kh.finalpro.project.chatting.model.dto.ChattingRoom" alias="ChattingRoom" />
+		
+		<typeAlias type="kh.finalpro.project.collegian.model.dto.Request" alias="Request" />
 
 
 	</typeAliases>

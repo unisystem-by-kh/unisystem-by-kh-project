@@ -100,7 +100,7 @@
 	
 	<!-- 현재 재적중인 학생 목록 조회 -->
 	<select id="selectStudent" resultMap="member_rm">
-		SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
+<!-- 		SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
 		    CASE
 		        WHEN SUBSTR(MEMBER_SSN, 1, 2) BETWEEN '00' AND '21' THEN TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('20' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
 		        ELSE TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('19' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
@@ -117,7 +117,21 @@
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
 		AND M.MEMBER_STATUS = 'N'
         AND L.MEMBER_NO = M.MEMBER_NO
-        ORDER BY C.CLASS_NM
+        ORDER BY C.CLASS_NM -->
+   		SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
+		    CASE
+		        WHEN SUBSTR(MEMBER_SSN, 1, 2) BETWEEN '00' AND '21' THEN TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('20' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
+		        ELSE TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('19' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
+		    END AS MEMBER_AGE,
+		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME
+		    
+		FROM MEMBER M
+		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
+
+		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
+		AND M.MEMBER_STATUS = 'N'
+
+        ORDER BY D.DEPARTMENT_NO
 	</select>
 	
 	
@@ -142,7 +156,7 @@
 
          <when test='key == "nm"'>
             <!-- 이름 -->
-            AND M.MEMBER_NM LIKE '%${query}%'
+            AND M.MEMBER_NAME LIKE '%${query}%'
          </when>
 
          <when test='key == "gr"'>
@@ -157,7 +171,7 @@
          
          <when test='key == "dp"'>
             <!-- 학과 -->
-            AND D.DEPARTMENT_NAME LIKE '%${query}%'
+            AND M.MEMBER_PHONE LIKE '%${query}%'
          </when>
       </choose>
    </select>
@@ -165,24 +179,19 @@
    
    
    <select id="searchStudent" resultMap="member_rm">
-        SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
+   		SELECT M.MEMBER_NO, M.MEMBER_PW, M.MEMBER_ADDR, M.MEMBER_EMAIL, M.MEMBER_PHONE, M.MEMBER_GEN, M.MEMBER_DATE, M.MEMBER_GRADE, M.MEMBER_TERM, M.MEMBER_STATUS, M.MEMBER_NAME, M.MEMBER_PROFILE, M.MEMBER_SSN,
 		    CASE
 		        WHEN SUBSTR(MEMBER_SSN, 1, 2) BETWEEN '00' AND '21' THEN TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('20' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
 		        ELSE TO_CHAR(SYSDATE, 'YYYY') - TO_NUMBER('19' || SUBSTR(MEMBER_SSN, 1, 2)) - 1
 		    END AS MEMBER_AGE,
-		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME, L.LECTURE_POINT, C.CLASS_NO, C.CLASS_NM,
-		    
-		    (SELECT COUNT(*) FROM LECTURE
-      		WHERE MEMBER_NO = L.MEMBER_NO) AS LECTURE_COUNT
+		    D.DEPARTMENT_NO, D.DEPARTMENT_NAME
 		    
 		FROM MEMBER M
 		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
-		JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
-        JOIN CLASS  C ON C.CLASS_NO = L.CLASS_NO
+
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
 		AND M.MEMBER_STATUS = 'N'
-        AND L.MEMBER_NO = M.MEMBER_NO
-		
+
 		<choose>
          <when test='key == "no"'>
             <!-- 학번 -->
@@ -191,7 +200,7 @@
 
          <when test='key == "nm"'>
             <!-- 이름 -->
-            AND M.MEMBER_NM LIKE '%${query}%'
+            AND M.MEMBER_NAME LIKE '%${query}%'
          </when>
 
          <when test='key == "gr"'>
@@ -206,12 +215,12 @@
          
          <when test='key == "dp"'>
             <!-- 학과 -->
-            AND D.DEPARTMENT_NAME LIKE '%${query}%'
+            AND M.MEMBER_PHONE LIKE '%${query}%'
          </when>
       </choose>
       
       
-      ORDER BY C.CLASS_NM
+      ORDER BY D.DEPARTMENT_NO
 		
    </select>
    

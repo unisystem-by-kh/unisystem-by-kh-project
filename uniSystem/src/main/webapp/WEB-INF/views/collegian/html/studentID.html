@@ -112,7 +112,12 @@ table td{
                 <div>유니시스템</div>
             </div >
             <div class="id-profile">
-                <img src="https://post-phinf.pstatic.net/MjAxODA0MjdfMjQ1/MDAxNTI0Nzk1MjIyOTU3.nI6AOvSs7PzkcPwzGp7wSOvzVlC9wXLPdG-6aU2raiYg.5ZrismmDkV87ADogzX8IMxFwxfpecDooRBn__pORyVQg.JPEG/%EA%B3%A0%EC%B0%BD%EC%84%9D.jpg?type=w1200">
+                <th:block th:if="${profile == null}">
+                    <img src="https://post-phinf.pstatic.net/MjAxODA0MjdfMjQ1/MDAxNTI0Nzk1MjIyOTU3.nI6AOvSs7PzkcPwzGp7wSOvzVlC9wXLPdG-6aU2raiYg.5ZrismmDkV87ADogzX8IMxFwxfpecDooRBn__pORyVQg.JPEG/%EA%B3%A0%EC%B0%BD%EC%84%9D.jpg?type=w1200">
+                </th:block>
+                <th:block th:unless="${profile == null}">
+                    <img th:src="${profile}"/>
+                </th:block>
             </div>
             <div class="id-main">
                 <div th:text="${name}" class="info-name">홍길동</div>

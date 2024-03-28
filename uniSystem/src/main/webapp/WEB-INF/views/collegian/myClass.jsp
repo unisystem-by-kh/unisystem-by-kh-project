@@ -204,13 +204,11 @@
 
     <script>
         const memberNo = '${loginMember.memberNo}';
-        // const memberGrade = '${loginMember.memberGrade}';
-        // const memberTerm = '${loginMember.memberTerm}';
-        // const departmentNo = '${loginMember.departmentNo}';
     </script>
 
 
     <script src="/resources/js/collegian/myClass.js"></script>
+    <script src="/resources/js/collegian/nav.js"></script>
 
 </body>
 

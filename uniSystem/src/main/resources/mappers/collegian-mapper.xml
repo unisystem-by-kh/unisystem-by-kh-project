@@ -38,7 +38,6 @@
 
 	</resultMap>
 	
-	
 	<resultMap type="Task" id="Task_rm">
 		<id property="fileNo" column="FILE_NO"/>
 		<result property="filePath" column="FILE_PATH"/>
@@ -55,6 +54,28 @@
 		<id property="departmentNo" column="DEPARTMENT_NO"/>
 		<result property="departmentName"  column="DEPARTMENT_NAME"/>	
 			
+	</resultMap>
+	
+	<resultMap type="Lecture" id="lecture_rm">
+		<id property="classNo" column="CLASS_NO" />
+		<result property="classNm" column="CLASS_NM" />
+		<result property="classPoint" column="CLASS_POINT" />
+		<result property="classType" column="CLASS_TYPE" />
+		
+		<result property="lecturePoint" column="LECTURE_POINT" />
+		<result property="lectureGrade" column="LECTURE_GRADE" />
+		<result property="lectureTerm" column="LECTURE_TERM" />
+		<result property="realPoint" column="REAL_POINT" />
+	
+	</resultMap>
+	
+	<resultMap type="Request" id="request_rm">
+		<id property="reqNo" column="REQUEST_NO" />
+		<result property="reqType" column="REQUEST_TYPE" />
+		<result property="reqReason" column="REQUEST_REASON" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="confirmNo" column="CONFIRM_NO" />
+		<result property="reqState" column="REQUEST_ST" />
 	</resultMap>
 	
 
@@ -268,6 +289,66 @@
 		AND MEMBER_NO = #{memberNo}
 	
 	</update>
+
+
+	<!-- 성적 조회 -->
+	<select id="selectScore" 	resultMap="lecture_rm">
+
+		SELECT LECTURE_GRADE,LECTURE_TERM,CLASS_NM,CLASS_POINT,LECTURE_POINT,
+			(CASE CLASS_POINT
+				WHEN 3 THEN '전공'
+				ELSE '교양'
+				END
+			) AS CLASS_TYPE,
+		(CASE LECTURE_POINT
+			WHEN -1 THEN '미부여'
+			WHEN 0 THEN 'F'
+			WHEN 1 THEN 'D'
+			WHEN 2 THEN 'C'
+			WHEN 3 THEN 'B'
+			WHEN 4 THEN 'A'
+			ELSE 'NONE'
+			END
+		) AS REAL_POINT
+
+		FROM LECTURE L
+		JOIN CLASS C ON (L.CLASS_NO = C.CLASS_NO)
+		WHERE L.MEMBER_NO = '01-2412345'
+	</select>
+	
+	
+	<select id="selectRequest" resultMap="request_rm">
+		SELECT REQUEST_NO,
+		    (CASE REQUEST_TYPE
+		        WHEN 'Y' THEN '휴학 신청'
+		        WHEN 'N' THEN '복학 신청'
+		        WHEN 'D' THEN '자퇴 신청'
+		    ELSE 'NONE'
+		    END) AS REQUEST_TYPE
+		    , REQUEST_REASON,
+		    (CASE WHEN 
+		        CONFIRM_NO LIKE 
+		        '02-%' THEN '교수 승인'
+		       WHEN
+		        CONFIRM_NO LIKE 
+		        '03-%' THEN '처리 완료'         
+		       WHEN 
+		       CONFIRM_NO IS NULL THEN '승인 대기중'
+        		ELSE '반려'  
+		    END) AS REQUEST_ST , 
+		    (SELECT MEMBER_NAME
+		    FROM MEMBER
+		    WHERE MEMBER_NO = R.CONFIRM_NO) AS CONFIRM_NO
+		FROM REQUEST R
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<insert id="insertRequest">
+		INSERT INTO
+		REQUEST VALUES(SEQ_REQ_NO.NEXTVAL,
+		#{reqType},#{reqReason},#{memberNo}, NULL)
+			
+	</insert>
 
 
 </mapper>

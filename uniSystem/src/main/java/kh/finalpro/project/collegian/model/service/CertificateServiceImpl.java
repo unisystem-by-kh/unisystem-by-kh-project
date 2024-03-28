@@ -4,6 +4,7 @@ package kh.finalpro.project.collegian.model.service;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import kh.finalpro.project.collegian.model.dao.CertificateDAO;
 import kh.finalpro.project.collegian.model.dto.Certificate;
 import kh.finalpro.project.common.util.Util;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 
 @Service
 public class CertificateServiceImpl implements CertificateService{
@@ -65,6 +67,7 @@ public class CertificateServiceImpl implements CertificateService{
 				context.setVariable("memberNo", loginMember.getMemberNo());
 				context.setVariable("department", loginMember.getDepartmentName());
 				context.setVariable("state", state);
+				context.setVariable("profile", loginMember.getMemberProfile());
 				
 				htmlContent = templateEngine.process("studentID", context); // pdfTemplate == html 양식 명
 				
@@ -73,11 +76,10 @@ public class CertificateServiceImpl implements CertificateService{
 			
 			if(no == 1) { // 학적 증명서
 				
-				
 				LocalDate currentDate = LocalDate.now();
 		        
 		        // 년월일 형식으로 포맷하기
-		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy 년 MM 월 dd 일");
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 ");
 		        String formattedDate = currentDate.format(formatter);
 		        
 				
@@ -101,6 +103,7 @@ public class CertificateServiceImpl implements CertificateService{
 				context.setVariable("sysdate", formattedDate);
 				
 				
+				
 				htmlContent = templateEngine.process("state", context); // pdfTemplate == html 양식 명
 				
 				
@@ -108,7 +111,35 @@ public class CertificateServiceImpl implements CertificateService{
 				
 			}
 			
-			
+			if(no == 2) { // 성적 증명서
+				
+				
+				List<Lecture> scoreList = dao.selectScore(loginMember); // 성적 목록
+				
+				
+				LocalDate currentDate = LocalDate.now();
+		        
+		        // 년월일 형식으로 포맷하기
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 ");
+		        String formattedDate = currentDate.format(formatter);
+				
+				
+				context.setVariable("name", loginMember.getMemberName());
+				context.setVariable("memberNo", loginMember.getMemberNo());
+				context.setVariable("department", loginMember.getDepartmentName());
+				context.setVariable("date", loginMember.getMemberDate());
+				context.setVariable("ssn", loginMember.getMemberSsn());
+				context.setVariable("sysdate", formattedDate);
+				
+				
+				context.setVariable("scoreList", scoreList );
+				
+				
+				htmlContent = templateEngine.process("score", context); // pdfTemplate == html 양식 명
+				
+				originPdfName = loginMember.getMemberNo()+"_"+loginMember.getMemberName()+"_성적증명서.pdf";
+				
+			}
 			
 			String baseUrl = session.getServletContext().getRealPath(webPath);
 			

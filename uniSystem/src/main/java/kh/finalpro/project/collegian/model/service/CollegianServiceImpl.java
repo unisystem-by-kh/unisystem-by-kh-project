@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kh.finalpro.project.collegian.model.dao.CollegianDAO;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.collegian.model.dto.Pagination;
+import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.collegian.model.dto.Task;
 import kh.finalpro.project.common.util.Util;
 import kh.finalpro.project.collegian.model.dto.Class;
@@ -222,6 +223,19 @@ public class CollegianServiceImpl implements CollegianService{
 		}
 		
 		return result;
+	}
+	
+	// 학적 변동 신청 내역 조회
+	@Override
+	public List<Request> selectRequest(Request req) {
+		return dao.selectRequest(req);
+	}	
+	
+	// 학적 변동 신청
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertRequest(Request req) {
+		return dao.insertRequest(req);
 	}
 
 }

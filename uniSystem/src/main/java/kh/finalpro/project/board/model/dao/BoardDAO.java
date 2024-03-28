@@ -185,6 +185,7 @@ public class BoardDAO {
 	 * @return
 	 */
 	public int inquiryBoardDelete(int boardNo) {
+		System.out.println(boardNo);
 		return sqlSession.update("boardMapper.inquiryBoardDelete", boardNo);
 	}
 
@@ -287,6 +288,47 @@ public class BoardDAO {
 	public List<Member> selectMemberList(Member loginMember) {
 		return sqlSession.selectList("memberMapper.selectMemberList", loginMember);
 	}
+
+
+	public int inquiryImageUpdate(BoardFile img2) {
+		return sqlSession.update("boardMapper.inquiryImageUpdate", img2);
+	}
+
+	public int inquiryImageInsert(BoardFile img2) {
+		return sqlSession.insert("boardMapper.inquiryImageInsert", img2);
+
+	}
+
+
+	}
+
+
+	/** 자유게시판 수정
+	 * @param board
+	 * @return 
+	 */
+	public int freeBoardUpdate(Board board) {
+		System.out.println(board);
+		return sqlSession.update("boardMapper.updateFreeBoardList", board);
+	}
+
+	public int freeBoardDelete(int boardNo) {
+		return sqlSession.delete("boardMapper.freeBoardDelete", boardNo);
+
+	}
+
+	public int freeFileDelete(Map<String, Object> deleteMap) {
+		return sqlSession.delete("boardMapper.freeFileDelete", deleteMap);
+	}
+
+	public int freeFileUpdate(BoardFile img) {
+		return sqlSession.update("boardMapper.freeFileUpdate", img);
+	}
+
+	public int freeFileInsert(BoardFile img) {
+		return sqlSession.insert("boardMapper.freeFileInsert", img);
+	}
+	
 
 	
 

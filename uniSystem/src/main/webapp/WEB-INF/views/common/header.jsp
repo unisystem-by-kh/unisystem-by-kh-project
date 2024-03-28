@@ -16,7 +16,7 @@
         <nav class="navigation1">
             <!-- 공통 -->
             <div class="navigation1-row1">
-                <a href="/board/comeMap">오시는길</a>
+                <a href="/comeMap">오시는길</a>
                 <a href="/board/1">공지사항</a>
                 <a href="/board/5">자료실</a>
 
@@ -81,15 +81,16 @@
 
                 <%-- 학생 전용 --%>
                 <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
-                    <a href="/board/4">1:1문의</a>
-                    <a href="/tuition">등록금</a>
-                    <a href="#">필요한 메뉴 구성 입력 1</a>
+                    <%-- <a href="/board/4">1:1문의</a> --%>
+                    <a href="/collegian/classList">수강</a>
+                    <a href="/collegian/certificate/4">증명서 발급</a>
+                    <a href="/collegian/change">내정보</a>
+                    <a href="/tuition">등록금 납부</a>
                 </c:if>
                 
                 <%-- 교수 전용 --%>
                 <c:if test="${fn:substring(memberNo, 0, 2) == '02'}" >
                     <a href="#">학생</a>
-                    <a href="#">교과목</a>
                     <a href="#">과제</a>
                     <a href="#">교수</a>
                 </c:if>
@@ -97,7 +98,7 @@
                 <%-- 교직원 전용 --%>
                 <c:if test="${fn:substring(memberNo, 0, 2) == '03'}" >
                     <a href="/admin/UniqueNo">조회</a>
-                    <a href="/admin/UniqueNo">교과목</a>
+                    <a href="/staff/subjectList">교과목</a>
                     <a href="/admin/UniqueNo">교번/학번 발급</a>
                 </c:if>
             </div>
@@ -118,23 +119,25 @@
             <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
                 <!-- 필요한 메뉴 구성 입력 1을 올렸을 경우 -->
                 <div class="navigation3-student">
-                    <a href="#">세부메뉴1</a>
-                    <a href="#">세부메뉴2</a>
-                    <a href="#">세부메뉴3</a>
+                    <a href="/collegian/classList">교과목 조회</a>
+                    <a href="/collegian/myClass">수강신청</a>
+                    <a href="/collegian/schedule">시간표</a>
+                    <a href="/collegian/task">과제물 제출</a>
                 </div>
 
                 <!-- 필요한 메뉴 구성 입력 2을 올렸을 경우 -->
                 <div class="navigation3-student">
-                    <a href="#">세부메뉴1</a>
-                    <a href="#">세부메뉴2</a>
-                    <a href="#">세부메뉴3</a>
+                    <a href="/collegian/certificate/1">학적 증명서</a>
+                    <a href="/collegian/certificate/2">성적 증명서</a>
+                    <a href="/collegian/certificate/2">미지정</a>
+                    <a href="/collegian/certificate/4">학생증</a>
                 </div>
 
                 <!-- 필요한 메뉴 구성 입력 2을 올렸을 경우 -->
                 <div class="navigation3-student">
-                    <a href="#">세부메뉴1</a>
-                    <a href="#">세부메뉴2</a>
-                    <a href="#">세부메뉴3</a>
+                    <a href="#">개인 정보 수정</a>
+                    <a href="/collegian/change">학적 변동 신청</a>
+                    <a href="#">학점 조회</a>
                 </div>
             </c:if>
 
@@ -146,12 +149,6 @@
                 <div class="navigation3-professor">
                     <a href="/professor/professorPageStudentSearch">학생 조회</a>
                     <a href="/professor/professorPageStudentGrade">성적 관리</a>
-                </div>
-
-                <!-- 교과목을 올렸을 경우 -->
-                <div class="navigation3-professor">
-                    <a href="/staff/subjectList">교과목 조회</a>
-                    <a href="/staff/insert">교과목 등록</a>
                 </div>
 
                 <!-- 과제를 올렸을 경우 -->
@@ -174,10 +171,10 @@
 
                 <!-- 조회 올렸을 경우 -->
                 <div class="navigation3-admin">
-                    <a href="professor/professorPageStudentSearch">학생 조회</a>
-                    <a href="professor/professorPageStudentGrade">학생(성적) 조회</a>
-                    <a href="professor/professorPageStudentGradeInsert">교수 조회</a>
-                    <a href="professor/professorPageStudentGradeUpdate">교직원 조회</a>
+                    <a href="/professor/professorPageStudentSearch">학생 조회</a>
+                    <a href="/professor/professorPageStudentGrade">학생(성적) 조회</a>
+                    <a href="/professor/professorPageStudentGradeInsert">교수 조회</a>
+                    <a href="/professor/professorPageStudentGradeUpdate">교직원 조회</a>
                     <a href="/late">교수 평가 조회</a>
                 </div>
 

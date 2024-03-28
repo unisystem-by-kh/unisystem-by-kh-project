@@ -116,7 +116,7 @@
 
                 <!-- 버튼 영역 -->
                 <div class="button-area">
-                    <a href="board/1"><button>학사 일정</button></a>
+                    <a href="board/1"><button>공지 사항</button></a>
                     <a href="board/2"><button>학과 공지</button></a>
                     <a href="board/3"><button>자유 게시판</button></a>
                     <a href="board/4"><button>1:1 문의</button></a>

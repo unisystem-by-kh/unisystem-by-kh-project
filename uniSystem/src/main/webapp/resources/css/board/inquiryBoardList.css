@@ -84,14 +84,20 @@ input:focus {outline: none;}
     
 }
 
+tbody  td{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 tbody td:nth-of-type(1){
     width: 50px;
 }
 
 tbody td:nth-of-type(2){
     text-align: start;
-    
     width: 800px;
+    padding-left: 5px;
 }
 
 th, tr{
