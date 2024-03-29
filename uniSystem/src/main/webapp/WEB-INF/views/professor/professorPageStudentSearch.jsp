@@ -30,10 +30,6 @@
                 <!-- 재적 상태 값 불러오기 -->
                 <div class="student-status">
 
-                    <c:if test="${!empty param.key}">
-                        <c:set var="sp" value="key=${param.key}&query=${param.query}"/>
-                    </c:if>
-                    
                     <div class="search-area">
                         <form action="/professor/professorPageStudentSearch" method="get" id="studentSearch">
                             <input type="hidden" name="type" value="${param.type}">
@@ -59,10 +55,12 @@
                         <p>본인이 속한 학과 학생 조회</p>
                         <p>클릭하면 복사 가능</p>
                     </div>
-                    <form action="/professor/excel/download?${sp}" method="get">
+                    
+                    <form action="/professor/excel/download" method="get">
                         <c:forEach var="entry" items="${param}">
                             <input type="hidden" name="${entry.key}" value="${entry.value}" />
                         </c:forEach>
+                        <%-- <input type="text" name="test"/> --%>
                         <button id="excelBtn">해당 목록을 엑셀로 저장<br>(Excel Download)</button>
                     </form>
                 </div>
