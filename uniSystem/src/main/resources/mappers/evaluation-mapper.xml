@@ -4,10 +4,10 @@
 <mapper namespace="evaluationMapper">
 
 	<resultMap type="Evaluation" id="evaluation_rm">
-		<id property="lateNo" column="CLASS_LATE_NO" />
+		<id property="rateNo" column="CLASS_RATE_NO" />
 		
-		<result property="lateContent" column="CLASS_LATE_CONTENT" />
-		<result property="lateLike" column="CLASS_LATE_LIKE" />
+		<result property="rateContent" column="CLASS_RATE_CONTENT" />
+		<result property="rateLike" column="CLASS_RATE_LIKE" />
 		<result property="classNo" column="CLASS_NO" />
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="className" column="CLASS_NM" />
@@ -16,14 +16,14 @@
 
 	<!-- 과목 평가 조회 (교직원) -->
 	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*) FROM CLASS_LATE
+		SELECT COUNT(*) FROM CLASS_RATE
 	</select>
 	
-	<select id="selectLateList" resultMap="evaluation_rm">
-		SELECT CLASS_LATE_NO, CLASS_LATE_CONTENT, CLASS_LATE_LIKE, L.CLASS_NO, L.MEMBER_NO
+	<select id="selectRateList" resultMap="evaluation_rm">
+		SELECT CLASS_RATE_NO, CLASS_RATE_CONTENT, CLASS_RATE_LIKE, R.CLASS_NO, R.MEMBER_NO
 		       , CLASS_NM, MEMBER_NAME
-		FROM CLASS_LATE L
-		JOIN CLASS C ON(C.CLASS_NO = L.CLASS_NO)
+		FROM CLASS_RATE R
+		JOIN CLASS C ON(C.CLASS_NO = R.CLASS_NO)
 		JOIN MEMBER M ON(M.MEMBER_NO = C.MEMBER_NO)
 		ORDER BY 1 DESC
 	</select>
@@ -31,17 +31,17 @@
 	<!-- 과목 평가 조회 (교수) -->
 	<select id="listCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM CLASS_LATE L
-		JOIN CLASS C ON(C.CLASS_NO = L.CLASS_NO)
+		FROM CLASS_RATE R
+		JOIN CLASS C ON(C.CLASS_NO = R.CLASS_NO)
 		JOIN MEMBER M ON(M.MEMBER_NO = C.MEMBER_NO)
 		WHERE M.MEMBER_NO = #{memberNo}
 	</select>
 	
-	<select id="lateList" resultMap="evaluation_rm">
-		SELECT CLASS_LATE_NO, CLASS_LATE_CONTENT, CLASS_LATE_LIKE, L.CLASS_NO, L.MEMBER_NO
+	<select id="RateList" resultMap="evaluation_rm">
+		SELECT CLASS_RATE_NO, CLASS_RATE_CONTENT, CLASS_RATE_LIKE, R.CLASS_NO, R.MEMBER_NO
 		       , CLASS_NM, MEMBER_NAME
-		FROM CLASS_LATE L
-		JOIN CLASS C ON(C.CLASS_NO = L.CLASS_NO)
+		FROM CLASS_RATE R
+		JOIN CLASS C ON(C.CLASS_NO = R.CLASS_NO)
 		JOIN MEMBER M ON(M.MEMBER_NO = C.MEMBER_NO)
 		WHERE M.MEMBER_NO = #{memberNo}
 		ORDER BY 1 DESC
@@ -58,8 +58,8 @@
 	<!-- 평가 목록 조회(검색어) 갯수 조회 -->
 	<select id="searchListCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM CLASS_LATE L
-		JOIN CLASS C ON(C.CLASS_NO = L.CLASS_NO)
+		FROM CLASS_RATE R
+		JOIN CLASS C ON(C.CLASS_NO = R.CLASS_NO)
 		JOIN MEMBER M ON(M.MEMBER_NO = C.MEMBER_NO)
 		WHERE CLASS_NM = #{key}
 		<if test='memberNo != null'>
@@ -68,11 +68,11 @@
 	</select>
 	
 	<!-- 평가 목록 조회(검색어) -->
-	<select id="searchLateList" resultMap="evaluation_rm">
-		SELECT CLASS_LATE_NO, CLASS_LATE_CONTENT, CLASS_LATE_LIKE, L.CLASS_NO, L.MEMBER_NO
+	<select id="searchRateList" resultMap="evaluation_rm">
+		SELECT CLASS_RATE_NO, CLASS_RATE_CONTENT, CLASS_RATE_LIKE, R.CLASS_NO, R.MEMBER_NO
 		       , CLASS_NM, MEMBER_NAME
-		FROM CLASS_LATE L
-		JOIN CLASS C ON(C.CLASS_NO = L.CLASS_NO)
+		FROM CLASS_RATE R
+		JOIN CLASS C ON(C.CLASS_NO = R.CLASS_NO)
 		JOIN MEMBER M ON(M.MEMBER_NO = C.MEMBER_NO)
 		WHERE CLASS_NM = #{key}
 		<if test='memberNo != null'>
@@ -85,7 +85,7 @@
 	<select id="classList" resultMap="evaluation_rm">
 		SELECT DISTINCT CLASS_NM
 		FROM CLASS C
-		JOIN CLASS_LATE L ON (L.CLASS_NO = C.CLASS_NO)
+		JOIN CLASS_RATE R ON (R.CLASS_NO = C.CLASS_NO)
 		ORDER BY 1
 	</select>
 

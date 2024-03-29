@@ -11,9 +11,10 @@ public interface EmailService {
 	/** 비밀번호 찾기
 	 * @param email
 	 * @param string
+	 * @param string2 
 	 * @return result
 	 */
-	int findPw(String email, String string);
+	int findPw(String email, String memberName, String title);
 	
 	String createAuthKey();
 

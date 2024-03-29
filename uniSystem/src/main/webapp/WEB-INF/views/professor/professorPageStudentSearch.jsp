@@ -57,6 +57,9 @@
                     본인이 속한 학과 학생 조회
                     <br>
                     클릭하면 복사 가능
+                    <form action="/professor/excel/download" method="get">
+                        <button>해당 목록을 엑셀로 저장(Excel Download)</button>
+                    </form>
                 </div>
                 <div class="student-info">
                     <div class="student-info-area">

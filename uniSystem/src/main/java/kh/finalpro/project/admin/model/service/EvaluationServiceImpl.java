@@ -20,13 +20,13 @@ public class EvaluationServiceImpl implements EvaluationService{
 
 	// 교수 평가 목록 조회(교직원)
 	@Override
-	public Map<String, Object> selectLateList(int cp) {
+	public Map<String, Object> selectRateList(int cp) {
 		
 		int listCount = dao.getListCount();
 		
 		Pagination pagination = new Pagination(cp, listCount);
 		
-		List<Evaluation> lateList = dao.selectLateList(pagination);
+		List<Evaluation> lateList = dao.selectRateList(pagination);
 		
 		List<Evaluation> classList = dao.selectclassList();
 		
@@ -40,13 +40,13 @@ public class EvaluationServiceImpl implements EvaluationService{
 	
 	// 교수 평가 목록 조회(교수)
 	@Override
-	public Map<String, Object> selectLateList(int cp, Member loginMember) {
+	public Map<String, Object> selectRateList(int cp, Member loginMember) {
 		
 		int listCount = dao.getListCount(loginMember);
 		
 		Pagination pagination = new Pagination(cp, listCount);
 		
-		List<Evaluation> lateList = dao.selectLateList(pagination, loginMember);
+		List<Evaluation> lateList = dao.selectRateList(pagination, loginMember);
 		
 		// 교수가 가지고 있는 과목 가져오기
 		List<Evaluation> classList = dao.selectClassList(loginMember);
@@ -61,13 +61,13 @@ public class EvaluationServiceImpl implements EvaluationService{
 	
 	// 교수 평가 목록 조회 (교수, 검색)
 	@Override
-	public Map<String, Object> selectLateList(int cp, Map<String, Object> paramMap) {
+	public Map<String, Object> selectRateList(int cp, Map<String, Object> paramMap) {
 		
 		int listCount = dao.getListCount(paramMap);
 		
 		Pagination pagination = new Pagination(cp, listCount);
 		
-		List<Evaluation> lateList = dao.selectLateList(pagination, paramMap);
+		List<Evaluation> lateList = dao.selectRateList(pagination, paramMap);
 		
 		List<Evaluation> classList; 
 				
