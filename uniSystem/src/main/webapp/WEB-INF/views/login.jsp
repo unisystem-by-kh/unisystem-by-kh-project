@@ -91,6 +91,14 @@
 
     <script src="/resources/js/login.js"></script>
 
+    <c:if test="${empty loginMember}">
+        <c:if test="${!empty filterMessage}">
+            <script>
+                swal("${filterMessage}", "", "warning");
+            </script>
+        </c:if>
+    </c:if>
+
     <c:if test="${!empty message}">
         <script>
             swal("${message}", "", "success");

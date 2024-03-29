@@ -4,9 +4,10 @@ body{
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
-    background-image: url("/resources/images/background/3.jpg");
+    background-image: url("/resources/images/background/go3.jpg");
     background-repeat: no-repeat;
     background-size : cover;
+    background-position: center;
 }
 
 main{
