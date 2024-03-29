@@ -114,3 +114,18 @@ document.querySelectorAll('.student-info-value').forEach(function(element) {
     });
 
 });
+
+
+// 첫 번째 폼 요소의 값이 변경될 때 두 번째 폼 요소에 동일한 값을 복사하는 함수
+function copyValues() {
+    var searchType = document.getElementById('search-type').value;
+    var searchQuery = document.getElementById('search-query').value;
+
+    console.log(searchType);
+    console.log(searchQuery);
+    
+    document.getElementById('download-type').value = searchType;
+    document.getElementById('download-query').value = searchQuery;
+}
+
+const searchKey = document.getElementById('search-key');

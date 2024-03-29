@@ -1,11 +1,18 @@
 package kh.finalpro.project.professor.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +49,6 @@ public class ProfessorControllerr {
 	public String professorPageStudentSearch(
 				Model model,
 				@RequestParam Map<String, Object> paramMap
-//				@PathVariable("memberNo") int memberNo
 			) {
 		
 		// 조건 활용으로 인하여 map null 값 우선 선언
@@ -77,9 +83,133 @@ public class ProfessorControllerr {
 	@GetMapping("/professorPageCertificate")
 	public String professorPageCertificate(
 			) {
-
 		return "professor/professorPageCertificate";
 	}
+	
+	
+	// 학생 조회에서 엑셀로 저장
+	@GetMapping(value="/excel/download" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public void excelDownload(
+				HttpServletResponse resp
+				,@RequestParam Map<String, Object> paramMap
+				,@SessionAttribute(value="loginMember", required = false) Member loginMember
+//				,Model model
+			)throws IOException {
+		
+//      Workbook wb = new HSSFWorkbook(); // xls 파일
+		Workbook wb = new XSSFWorkbook(); // xlsx 파일
+		
+		Sheet sheet = wb.createSheet("학생 목록");
+		
+        Row row = null;
+        Cell cell = null;
+        int rowNum = 0;
+        
+        // 먼저 엑셀 멘 위에 제목 넣기
+        row = sheet.createRow(rowNum++);
+        cell = row.createCell(0);
+        cell.setCellValue("학번");
+        cell = row.createCell(1);
+        cell.setCellValue("학과");
+        cell = row.createCell(2);
+        cell.setCellValue("이름");
+        cell = row.createCell(3);
+        cell.setCellValue("나이");
+        cell = row.createCell(4);
+        cell.setCellValue("학년");
+        cell = row.createCell(5);
+        cell.setCellValue("학기");
+        cell = row.createCell(6);
+        cell.setCellValue("입학년도");
+        cell = row.createCell(7);
+        cell.setCellValue("생년월일");
+        cell = row.createCell(8);
+        cell.setCellValue("이메일");
+        cell = row.createCell(9);
+        cell.setCellValue("전화번호");
+        cell = row.createCell(10);
+        cell.setCellValue("학적상태");
+        
+		System.out.println("paramMap ::: "+paramMap);
+
+	    // 검색된 결과만을 가져오도록 수정
+	    Map<String, Object> map = null;
+	    if(paramMap.get("key") == null) {
+	        map = service.selectStudent();
+	    }else {
+	        map = service.searchStudent(paramMap);
+	    }
+		
+		List<Member> list = (List<Member>) map.get("studentList");
+		
+		for(Member listStudent : list) {
+			
+			if(listStudent.getDepartmentNo() == loginMember.getDepartmentNo()) {
+				
+				String studentNo = listStudent.getMemberNo(); // 0
+				String studentDepartmentName = listStudent.getDepartmentName(); // 1
+				String studentName = listStudent.getMemberName(); // 2
+				String studentAge = listStudent.getMemberAge(); // 3
+				String studentGrade = listStudent.getMemberGrade(); // 4
+				String studentTerm = listStudent.getMemberTerm(); // 5
+				String studentDate = listStudent.getMemberDate(); // 6
+				String studentSsn = listStudent.getMemberSsn(); // 7
+				String studentEmail = listStudent.getMemberEmail(); // 8
+				String studentPhone = listStudent.getMemberPhone(); // 9
+				String studentStatus = listStudent.getMemberStatus(); // 10
+				
+	            row = sheet.createRow(rowNum++);
+	            cell = row.createCell(0);
+	            cell.setCellValue(studentNo);
+	            cell = row.createCell(1);
+	            cell.setCellValue(studentDepartmentName);
+	            cell = row.createCell(2);
+	            cell.setCellValue(studentName);
+	            cell = row.createCell(3);
+	            cell.setCellValue(studentAge);
+	            cell = row.createCell(4);
+	            cell.setCellValue(studentGrade);
+	            cell = row.createCell(5);
+	            cell.setCellValue(studentTerm);
+	            cell = row.createCell(6);
+	            cell.setCellValue(studentDate.substring(0, 4) + "년");
+	            cell = row.createCell(7);
+	            if(studentSsn.substring(7,8).equals("1") || studentSsn.substring(8,8).equals("3")) {
+	            	cell.setCellValue(studentSsn.substring(0,2) + "년" + studentSsn.substring(2,4) + "월" + studentSsn.substring(4,6) + "일(남)");
+	            }else if(studentSsn.substring(7,8).equals("2") || studentSsn.substring(8,8).equals("4")) {
+	            	cell.setCellValue(studentSsn.substring(0,2) + "년" + studentSsn.substring(2,4) + "월" + studentSsn.substring(4,6) + "일(여)");
+	            }
+	            cell = row.createCell(8);
+	            cell.setCellValue(studentEmail);
+	            cell = row.createCell(9);
+	            cell.setCellValue(studentPhone);
+	            cell = row.createCell(10);
+	            if(studentStatus.equals("N")) {
+	            	cell.setCellValue("재학중");
+	            }else if(studentStatus.equals("Y")) {
+	            	cell.setCellValue("휴학중");
+	            }else if(studentStatus.equals("P")) {
+	            	cell.setCellValue("졸업");
+	            }else if(studentStatus.equals("D")) {
+	            	cell.setCellValue("중퇴");
+	            }
+	            
+			}
+			
+		}
+
+	    // 엑셀 타입으로 변환
+        resp.setContentType("ms-vnd/excel");
+//      response.setHeader("Content-Disposition", "attachment;filename=example.xls"); // xls 파일
+        resp.setHeader("Content-Disposition", "attachment;filename=example.xlsx"); // xlsx 파일
+		
+        // 파일 내보내주고 닫기
+        wb.write(resp.getOutputStream());
+        wb.close();
+        
+	}
+	
 	
 	
 	
