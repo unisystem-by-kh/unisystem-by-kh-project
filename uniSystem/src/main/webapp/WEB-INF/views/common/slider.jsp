@@ -5,16 +5,16 @@
         <!-- 슬라이드 이미지 인클루드 -->
         <div class="side-image-area">
             <div class="mySlides fade">
-                <img src="https://us.123rf.com/450wm/malchev/malchev1705/malchev170500031/78855870-ilustraci%C3%B3n-de-dibujos-animados-de-bosque-con-copia-espacio.jpg" class="slideshow-image">
+                <img src="https://www.shutterstock.com/image-photo/two-giraffe-heads-black-white-260nw-2334965933.jpg" class="slideshow-image">
             </div>
             <div class="mySlides fade">
-                <img src="https://png.pngtree.com/background/20220726/original/pngtree-forest-landscape-tree-trunks-horizontal-seamless-background-for-games-apps-picture-image_1800316.jpg" class="slideshow-image">
+                <img src="https://png.pngtree.com/background/20231016/original/pngtree-3d-rendering-of-a-dark-wall-and-floor-background-picture-image_5574721.jpg" class="slideshow-image">
             </div>
             <div class="mySlides fade">
-                <img src="https://png.pngtree.com/background/20220726/original/pngtree-forest-landscape-horizontal-seamless-background-for-games-apps-picture-image_1800420.jpg" class="slideshow-image">
+                <img src="https://img.freepik.com/fotos-premium/cimente-o-assoalho-e-o-fundo-interior-da-sala-escura-com-conceito-da-exposicao-do-produto-cenarios-de-estudio-escuro-ou-vitrine-em-branco-renderizacao-em-3d_79161-1064.jpg" class="slideshow-image">
             </div>
             <div class="mySlides fade">
-                <img src="https://media.istockphoto.com/id/622443438/ko/%EB%B2%A1%ED%84%B0/%EC%88%B2%EA%B3%BC-%EC%96%B8%EB%8D%95-%EA%B2%8C%EC%9E%84-%EB%B0%B0%EA%B2%BD.jpg?s=170667a&w=0&k=20&c=PGa-MsZsWinr3O3fuoqcLcb6xln5Gpni-Ny5x-Gq0zY=" class="slideshow-image">
+                <img src="https://img.freepik.com/vektoren-premium/studiohintergrund-schwarz-im-abstrakten-stil-auf-dunklem-hintergrund-abstrakter-studioschwarzhintergrund-der-von-strahln-von-scheinwerfern-beleuchtet-wird-buehne-fuer-produktdemonstration-dunkelkammerinnenraum_88188-938.jpg" class="slideshow-image">
             </div>
         </div>
 </article>

@@ -1,24 +1,19 @@
 /* 웹폰트 호출 */
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Fredoka:wght@300..700&display=swap');
+@font-face {
+	font-family: 'Pretendard-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
+		format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
 * { 
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Pretendard-Regular';
 }
-
-body{
-    /* 카리나 */
-    /* background-image: url('https://e1.pxfuel.com/desktop-wallpaper/761/590/desktop-wallpaper-aespa-pics-on-twitter-karina-aespa.jpg'); */
-    /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3NAdiRs4Cn_KY6qQzcFT1D-svd39VGBJhAA&usqp=CAU'); */
-    /* background-image: url('https://i.pinimg.com/originals/db/f2/6a/dbf26a2351f0a58c63644da1d303896d.jpg'); */
-    /* background-size: 20% 100%; */
-    /* background-size: 100% 100%; */
-}
-
-/* 영역확인용 */
-/* div, main, section, header, footer, article, nav, aside, form, a, p
-{ border : 1px solid gray; } */
 
 main{
     min-width: 1200px;
@@ -46,6 +41,7 @@ a{
 /* 네비게이션 전체 영역 */
 .headerAll{
     width: 100%;
+    z-index: 9999;
 }
 
 /* 첫번째줄 네비게이션 */
@@ -190,8 +186,8 @@ a{
     display: flex;
     align-items: center;
     /* border-radius: 0 0 10px 10px; */
-    border-bottom: 1px solid crimson;
-    border-top: 1px solid crimson;
+    border-bottom: 3px solid gray;
+    border-top: 3px solid gray;
 }
 
 /* 로고영역 */
@@ -247,23 +243,34 @@ a{
     width: 1400px;
     height: 45px;
 
+    background-color: gray;
+
     display: flex;
+
+    /* 숨길 예정 */
+    /* display: none; */
+
     justify-content: space-around;
     align-items: center;
+    
+    border-radius: 0 0 10px 10px;
 }
-
+.navigation3 > div > a{
+    color: whitesmoke;
+}
 
 /* --------------------- 헤더부분 끝 --------------------- */
 
 
 /* -------------------- 슬라이드 이미지 영역 시작 -------------------- */
 .side-image-area{
-    width: 1400px;
-    height: 180px;
+    width: 1100px;
+    height: 348px;
     display: flex;
     margin: auto 0;
-    margin-top: -45px;
+    margin-top: -101px;
     margin-bottom: 70px;
+    border-bottom: 3px solid gray;
 }
 /* 이미지 크기 */
 .slideshow-image{
@@ -271,9 +278,8 @@ a{
     justify-content: center;
     align-items: center;
     margin: auto 0;
-    width: 1400px;
-    height: 180px;
-    border-radius: 10px;
+    width: 1100px;
+    height: 348px;
 }
 
 @keyframes fade {
@@ -309,25 +315,59 @@ animation-iteration-count: infinite;
 
 /* 로그인 했을 경우 노출 영역 */
 .loginMember-Info-Area{
-    border-left: 1px solid crimson ;
-    border-right: 1px solid crimson ;
+    border-left: 3px solid gray;
+    border-right: 3px solid gray;
+    border-bottom: 3px solid gray;
     min-width: 300px;
     height: 350px;
-    margin-right: 50px;
+    /* margin-right: 50px; */
     padding: 20px;
+    padding-top: 29.5px;
+    margin-top: -207px;
 }
 .loginMember-Info-Area > :nth-child(1){
     height: 100px;
     margin-top: -15px;
 }
+#mypageA{
+    width: 300px;
+    height: 300px;
+}
 
 /* 로그인 시 프로필 이미지 */
 #profileImg{
-    border: 1px solid crimson;
+    border: 3px solid #ddd;
     border-radius: 50%;
     width: 120px;
     height: 120px;
 }
+
+
+
+/* 마이페이지 네온사인 ㅋ */
+.neon-sign {
+    animation: neon-blink 2.5s ease-in-out infinite alternate;
+    width: fit-content; 
+    margin: 0 auto;
+}
+
+.neon-sign a {
+    color: black;
+}
+
+@keyframes neon-blink {
+    0% {
+        opacity: 1;
+        text-shadow: 0 0 7px #ccc, 0 0 15px #ccc, 0 0 25px;
+    }
+    100% {
+        opacity: 0.5;
+        text-shadow: none;
+    }
+}
+
+
+
 
 /* 로그인 시 정보 영역 */
 .info-area{
@@ -553,9 +593,10 @@ footer{
     justify-content: center;
     align-items: start;
     /* border-radius: 10px 10px 0 0; */
-    border-top: 1px solid crimson;
-    border-bottom: 1px solid crimson;
+    border-top: 3px solid gray;
+    border-bottom: 3px solid gray;
     margin-top: 20px;
+    padding: 7px;
 }
 
 footer > p{ 
@@ -742,3 +783,5 @@ footer span{
 .chatDate {
     font-size: 12px;
 }
+
+
