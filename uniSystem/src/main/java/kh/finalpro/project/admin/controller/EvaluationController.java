@@ -23,7 +23,7 @@ public class EvaluationController {
 	@Autowired
 	private EvaluationService service;
 	
-	@GetMapping("/late")
+	@GetMapping("/rate")
 	public String lateList(
 			  Model model
 			, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp 
@@ -39,12 +39,12 @@ public class EvaluationController {
 			
 			if(memberNo.equals("02")) {
 				// 해당 교수 평가만 가져오기
-				map = service.selectLateList(cp, loginMember);
+				map = service.selectRateList(cp, loginMember);
 				
 			} else {
 				
 				// 평가 목록 전부 가져오기
-				map = service.selectLateList(cp);
+				map = service.selectRateList(cp);
 			}
 			
 		} else {
@@ -52,12 +52,12 @@ public class EvaluationController {
 			if(memberNo.equals("02")) {
 				
 				paramMap.put("memberNo", loginMember.getMemberNo());
-				map = service.selectLateList(cp, paramMap);
+				map = service.selectRateList(cp, paramMap);
 				
 			} else {
 				
 				// 평가 목록 전부 가져오기(검색어)
-				map = service.selectLateList(cp, paramMap);
+				map = service.selectRateList(cp, paramMap);
 			}
 		}
 		

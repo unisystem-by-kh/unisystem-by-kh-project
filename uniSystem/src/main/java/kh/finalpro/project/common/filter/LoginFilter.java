@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @WebFilter(filterName = "loginFilter",
-		   urlPatterns = {"/board/**", "/admin/**", "/main", "/tuition/**", "/professor/**", "/staff/**", "/late", "/collegian/**"})
+		   urlPatterns = {"/board/*", "/admin/*", "/main", "/tuition/*", "/professor/*", "/staff/*", "/rate", "/collegian/*"})
 public class LoginFilter implements Filter{
 
 	public void init(FilterConfig filterConfig) throws ServletException {
