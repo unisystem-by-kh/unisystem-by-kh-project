@@ -2,28 +2,16 @@ const currDept = document.getElementsByName('dept')[0].innerHTML; // + 버튼 �
 const upXBtn = document.getElementsByClassName('up-x')[0].innerHTML; // 위와 마찬가지
 const newTr = document.querySelector("tbody>tr:first-child").innerHTML;
 
-
-// 기본 인덱스 길이
-let defaultIndex = 3; // 추후 숫자 변경
-
 const writePlus = document.getElementById("writePlus");
 
 writePlus.addEventListener("click", ()=>{
 
     const tr = document.createElement("tr");
-    const noTd = document.createElement("td");
-    noTd.innerText = defaultIndex++;
 
     // tr을 통째로 넣었을 때 JS가 작동 X
-    tr.innerHTML = newTr;
-    console.log(tr);
+    tr.innerHTML = newTr; // 1행에 있던 HTML을 복사
+
     document.querySelector("tbody").append(tr);
-
-
-    document.querySelector("tbody>tr:last-child>td:first-child").remove();
-
-
-    document.querySelector("tbody>tr:last-child").prepend(noTd);
 
     dateFn();
     fileFn();
@@ -102,8 +90,9 @@ function xBtnFn(){
 const dept = document.getElementsByName('dept');
 const deptList = document.getElementsByClassName('deptList');
 const term = document.getElementsByClassName('term');
+const grade = document.getElementsByClassName('grade');
 
-// 과목명에 따라 분류, 학기 변경
+// 과목명에 따라 분류, 학기, 학년 변경
 function deptFn(){
     for(let i=0; i<dept.length; i++){
         dept[i].addEventListener("change", ()=>{
@@ -115,6 +104,7 @@ function deptFn(){
                 case '3' : str = '전공'; break;
             }
             term[i].innerText = classTerm[index];
+            grade[i].innerText = classGrade[index];
             deptList[i].innerText = str;
         });
     }
@@ -138,10 +128,7 @@ function deleteBtn(){
 
 const saveBtn = document.getElementById("save");
 
-
-
-
-
+// 현 상태 저장을 누를 시 교과목, 제출기한, 과제파일 명(파일을 가져가는게 아닌 파일 명만)을 가지고 서버로 감
 saveBtn.addEventListener("click", ()=>{
     for(let i of dept){
         if(Number(i.value) < 0){
@@ -157,76 +144,50 @@ saveBtn.addEventListener("click", ()=>{
         }
     }
 
-    // form 데이터 가져오기
-    // const form = document.querySelector('form');
-    // const formData = new FormData(form);
-
-    // 1번 객체
-    let firstObject = {};
-
-    // 2번 객체
-    const secondObject = {};
-    
-    for (let i = 0; i < dept.length; i++) {
-        // 1번 객체에 데이터 담기
-        firstObject.dept = dept[i].value;
-        firstObject.file = file[i].value;
-        firstObject.date = currentDate[i].value;
-    
-        // 1번 객체를 2번 객체에 담기
-        secondObject.data = { ...firstObject };
-    
-        // 1번 객체 초기화
-        firstObject = {};
-    
-        // 2번 객체에 1번 객체 담기
-        secondObject[i] = { ...secondObject.data };
-    }
-    delete secondObject.data;
-    // console.log(secondObject);
-    // console.log(secondObject[0]);
-    // console.log(secondObject[1]);
-
 
     // JavaScript 객체를 JSON 문자열로 변환
     let jsonData = '';
     
-    console.log(Object.values(secondObject).length);
+    const arr = [];
 
-    for(let i=0; i<Object.values(secondObject).length; i++){
-        if(i+1 == Object.values(secondObject).length){
-            jsonData += JSON.stringify(secondObject[i]);
-        }else{
-            jsonData += JSON.stringify(secondObject[i])+",";
+    for(let i=0; i<dept.length; i++){
+        const classNo = dept[i].value;
+        const fileName = file[i].value;
+        const taskDate = currentDate[i].value;
+
+        const obj = {
+            classNo : classNo,
+            fileName : fileName,
+            taskDate : taskDate
         }
+
+        arr.push(obj);
     }
-  
 
-    console.log(JSON.stringify(jsonData));
-    console.log(jsonData);
-
+    console.log(arr);
+    
     // JSON 데이터 전송
-    fetch('/taskWrite', {
+    fetch('/professor/taskWrite', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: jsonData,
+        body: JSON.stringify(arr)
     })
-    .then(response => {
-        // 응답 처리
-    })
-    .catch(error => {
-        // 에러 처리
-    });
+    .then(resp => resp.text())
+    .then(result => {
 
+        const subForm =  document.getElementById("subForm");
+
+        subForm.action = '/professor/uploadTask';
+        subForm.method = 'POST';
+        subForm.enctype = 'multipart/form-data';
+        subForm.submit();
+        
+    })
+    .catch(e => {console.log(e)})
+   
 });
-
-
-
-
-
-
 
 
 dateFn();
@@ -234,3 +195,42 @@ fileFn();
 deptFn();
 xBtnFn();
 deleteBtn();
+
+
+
+// 등록된 과제 삭제
+function deleteTask(taskNo){
+    console.log(taskNo);
+
+    fetch('/professor/taskDelete',{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: taskNo
+    })
+    .then(resp => resp.text())
+    .then(result => {
+        if(result > 0){
+            console.log("삭제 완");
+            
+            swal({
+                title : "등록된 과제가 삭제되었습니다.",
+                    icon  : "success",
+                    closeOnClickOutside : false
+            }).then(function(){
+                history.go(0);
+            });
+
+        }else{
+            swal({
+                title : "과제 삭제 실패",
+                    icon  : "error",
+                    closeOnClickOutside : false
+            }).then(function(){
+                history.go(0);
+            });
+        }
+    })
+    .catch(e => console.log(e))
+
+    // history.go(0); : 페이지 새로 고침
+}

@@ -19,9 +19,12 @@
 <body>
 
     <main>
-        <%-- <div>
-            ${map.classList}
-        </div> --%>
+        <div>
+            <%-- ${map.taskList} --%>
+            <%-- ${fn:length(map.taskList)} --%>
+            <%-- <hr> --%>
+            <%-- ${map.classList} --%>
+        </div>
 
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
@@ -33,7 +36,7 @@
                 <span id="writePlus"><i class="fa-solid fa-plus"></i></span>
             </h1>
 
-            <form action="#" >
+            <form action="/professor/uploadTask" method="POST" enctype="multipart/form-data" id="subForm">
                 <table class="tesk-table">
                     <thead>
                         <tr>
@@ -48,8 +51,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td class='term'>1</td>
+                            <td class='grade'>0</td>
+                            <td class='term'>0</td>
                             <td>
                                 <select name="dept">
                                     <option value="-1" disabled selected>과목을 선택하세요.</option>
@@ -73,7 +76,7 @@
                         </tr>
 
                         
-                        <tr>
+                        <%-- <tr>
                             <td>2</td>
                             <td class='term'>2</td>
                             <td>
@@ -96,12 +99,13 @@
                                     <input type="date" class="currentDate">
                             </td>
                             <td><button type="button" class="del-btn">삭제</button></td>
-                        </tr>
+                        </tr> --%>
+
                     </tbody>
                 </table>
 
                 <span class="save" id="save">
-                    현 상태 저장 <i class="fa-regular fa-floppy-disk"></i>
+                   현 상태 저장 <i class="fa-regular fa-floppy-disk"></i>
                 </span>
             </form>
 
@@ -120,19 +124,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>등록된 번호</td>
-                        <td>등록된 학기</td>
-                        <td>등록된 과목명</td>
-                        <td>등록된 분류</td>
-                        <td>등록된 과제 파일 명</td>
-                        <td>등록된 제출 기한 (YYYY-MM-DD)</td>
-                        <td>삭제 버튼</td>
-                    </tr>
+
+                    
+                    <c:if test="${fn:length(map.taskList) != 0}" >
+                        <c:forEach items="${map.taskList}" var="taskList">
+                            <tr>
+                                <td>${taskList.classGrade}</td>
+                                <td>${taskList.classTerm}</td>
+                                <td>${taskList.classNm}</td>
+                                <c:if test="${taskList.classPoint == 2}" >
+                                    <td>비전공</td>
+                                </c:if>
+                                <c:if test="${taskList.classPoint == 3}" >
+                                    <td>전공</td>
+                                </c:if>
+                                <td>${taskList.fileName}</td>
+                                <td>${taskList.taskDate}</td>
+                                <td><button class="delete-btn" onclick="deleteTask(${taskList.taskNo})">삭제</button></td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${fn:length(map.taskList) == 0}" >
+                        <tr>
+                            <td colspan="7" class='not-task'>등록된 과제가 없습니다.</td>
+                        </tr>
+                    </c:if>
                 </tbody>
 
             </table>
-
+        </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
@@ -150,6 +170,11 @@
 
         <c:forEach items="${map.classList}" var="item">
             classTerm.push("${item.classTrem}");
+        </c:forEach>
+
+        const classGrade = new Array();
+        <c:forEach items="${map.classList}" var="item">
+            classGrade.push("${item.classGrade}");
         </c:forEach>
 
     </script>

@@ -68,7 +68,7 @@
 	</resultMap>
 	
 	<!-- 과제 정보 resultMap -->
-	<resultMap type="Task" id="task_rm">
+	<resultMap type="ProfessorTask" id="task_rm">
 		<id property="taskNo" column="TASK_NO" />
 		
 		<result property="classNm" column="CLASS_NM" />
@@ -78,6 +78,9 @@
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="classPoint" column="CLASS_POINT" />
 		<result property="fileName" column="FILE_NAME" />
+		<result property="classNm" column="CLASS_NM" />
+		<result property="classTerm" column="CLASS_TERM" />
+		<result property="classGrade" column="CLASS_GRADE" />
 	</resultMap>
 	
 	
@@ -346,8 +349,9 @@
 	      AND LECTURE_TERM = #{lectureTerm}
 	</update>
 	
+	<!-- 등록된 과제 조회 -->
 	<select id="selectTaskList" resultMap="task_rm">
-		SELECT TASK_NO, T.CLASS_NO, CLASS_POINT, FILE_NAME, TASK_DATE
+		SELECT TASK_NO, T.CLASS_NO, CLASS_POINT, FILE_NAME, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, CLASS_NM, CLASS_TERM, CLASS_GRADE
 		FROM TASK T
 		JOIN CLASS C ON(T.CLASS_NO = C.CLASS_NO)
 		JOIN FILEZIP USING(TASK_NO)
@@ -355,13 +359,40 @@
 		AND T.MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 과제 등록 페이지에서 사용하기위해 과목명, 학기, 분류(CLASS_POINT) 조회 -->
 	<select id="selectClassList" resultMap="class_rm">
-		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_TERM
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_TERM, CLASS_GRADE
 		FROM CLASS
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
+	
+	<!-- 과제 테이블에 과제 삽입 -->
+	<insert id="insertTask">
+		INSERT INTO TASK
+		VALUES(SEQ_TASK_NO.NEXTVAL, NULL, #{taskDate}, #{classNo}, #{memberNo})
+	</insert>
 
-
+	<!-- 파일테이블에 과제 파일 삽입 -->
+	<insert id="uploadTask">
+		INSERT INTO FILEZIP VALUES(
+		SEQ_FILE_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5, 
+		#{memberNo}, #{classNo}, 
+		    (SELECT TASK_NO FROM TASK
+		WHERE MEMBER_NO = #{memberNo}
+		AND CLASS_NO = #{classNo}
+		AND TASK_NO NOT IN
+		    (SELECT TASK_NO FROM FILEZIP)))
+	</insert>
+	
+	<!-- 과제 목록 지우기 -->
+	<delete id="taskListDelete">
+		DELETE FROM TASK WHERE TASK_NO = #{taskNo}
+	</delete>
+	
+	<!-- 과제 파일 지우기 -->
+	<delete id="taskFileDelete">
+		DELETE FROM FILEZIP WHERE TASK_NO = #{taskNo}
+	</delete>
 	
 
 </mapper>

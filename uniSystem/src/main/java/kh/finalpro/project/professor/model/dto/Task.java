@@ -15,18 +15,25 @@ import lombok.ToString;
 public class Task {
 	
 	// 필드명
-//	TASK_NO, TASK_ROUTE, TASK_DATE, CLASS_NO, MEMBER_NO
+//	TASK_NO, TASK_ROUTE, TASK_DATE, CLASS_NO, MEMBER_NO, CLASS_TERM
 	private int taskNo;
 	private String taskRoute;
 	private String taskDate;
+//	private String taskTerm;
 	
-	private int classNo;
-	private int memberNo;
+	private String classNo;
+	private String memberNo;
 
 	private String classNm;
 	private int classPoint;
-	private String fileName;
+	private int classTerm;
+	private String classGrade;
 	
+	
+	
+	private String fileName;
+	private String fileRename;
+	private String filePath;
 	
 	
 }

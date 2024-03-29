@@ -96,6 +96,30 @@ public class ProfessorDAO {
 		return sqlSession.selectList("professorMapper.selectClassList", loginMember);
 	}
 
+	// 과제 등록
+	public int insertTask(Task task, Member loginMember) {
+		
+		task.setMemberNo(loginMember.getMemberNo());
+		
+		return sqlSession.insert("professorMapper.insertTask", task);
+	}
+
+	// 과제 파일 등록
+	public int uploadTask(Task task) {
+		System.out.println(task);
+		return sqlSession.insert("professorMapper.uploadTask", task);
+	}
+
+	// 과제 목록 삭제
+	public int taskListDelete(int taskNo) {
+		return sqlSession.delete("professorMapper.taskListDelete", taskNo);
+	}
+
+	// 과제 파일 삭제
+	public int taskFileDelete(int taskNo) {
+		return sqlSession.delete("professorMapper.taskFileDelete", taskNo);
+	}
+
 
 	
 	

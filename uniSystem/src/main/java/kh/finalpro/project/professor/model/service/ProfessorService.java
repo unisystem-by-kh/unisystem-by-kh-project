@@ -1,10 +1,14 @@
 package kh.finalpro.project.professor.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.professor.model.dto.Professor;
+import kh.finalpro.project.professor.model.dto.Task;
 
 
 public interface ProfessorService {
@@ -34,6 +38,15 @@ public interface ProfessorService {
 
 	// 과제 등록 페이지 이동 시 등록되어 있는 과제 조회
 	Map<String, Object> selectTaskList(Member loginMember);
+
+	// 과제 등록(파일 제외)
+	int insertTask(Member loginMember, List<Task> insertTask);
+
+	// 과제 파일 등록
+	int uploadTask(List<MultipartFile> files, String webPath, String filePath, String[] classNo, Member loginMember) throws IllegalStateException, IOException;
+
+	// 등록된 과제 삭제
+	int taskDelete(int taskNo);
 
 
 

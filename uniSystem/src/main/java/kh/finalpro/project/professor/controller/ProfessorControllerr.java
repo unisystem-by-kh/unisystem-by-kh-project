@@ -1,6 +1,7 @@
 package kh.finalpro.project.professor.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -306,18 +308,68 @@ public class ProfessorControllerr {
 	}
 	
 	// 과제 등록
-	@PostMapping("/taskWrite")
+	@PostMapping(value="/taskWrite", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String taskWrite(
-			@RequestParam(value="file", required = false) List<MultipartFile> file
-			, @SessionAttribute(value="loginMember") Member loginMember
+	public int taskWrite(
+//			@RequestParam(value="file", required = false) List<MultipartFile> file
+			@SessionAttribute(value="loginMember") Member loginMember
 			, RedirectAttributes ra
-			, HttpSession session)throws IllegalStateException, IOException {
+			, HttpSession session
+			, @RequestBody List<Task> insertTask)throws IllegalStateException, IOException {
 		
-		return null;
-	}
+		
+		int result = service.insertTask(loginMember, insertTask);
+		String message;
+		if(result > 0) {
+			message = "과제가 등록되었습니다.";
+		}else {
+			message = "과제 등록 실패.";
+		}
 
+		ra.addFlashAttribute("message",message);
+		
+		return result;
+	}
 	
+	// 과제 파일 등록
+	@PostMapping(value="/uploadTask", produces = "application/json; charset=UTF-8")
+	public String uploadTask(
+			@RequestParam(value="file", required = false) List<MultipartFile> files
+			, @SessionAttribute(value="loginMember") Member loginMember
+			, HttpSession session
+			, @RequestParam(value="dept") String[] classNo
+			, RedirectAttributes ra)throws Exception {
+		
+		String webPath = "/resources/files/task/";
+		String filePath = session.getServletContext().getRealPath(webPath); // 서버의 진짜 주소를 가져와라
+		
+		int result = service.uploadTask(files, webPath, filePath, classNo, loginMember); 
+		
+		String message = null;
+		String path = "redirect:";
+		if(result > 0) { // 성공 시
+			message = "과제 파일이 등록되었습니다.";
+			path += "/professor/taskWrite";
+		}else {
+			message = "과제 파일 업로드 실패";
+			path += "/professor/taskWrite";
+		}
+		
+		ra.addFlashAttribute("message" , message);
+		
+		return path;
+		
+	}
+	
+	// 등록된 과제 삭제
+	@PutMapping("/taskDelete")
+	@ResponseBody
+	public int taskDelete(@RequestBody int taskNo) {
+		
+		int result = service.taskDelete(taskNo);
+		
+		return result;
+	}
 	
 	
 	
