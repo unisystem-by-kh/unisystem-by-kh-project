@@ -20,9 +20,9 @@
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
         <div class="mainContainer con">
-            <form action="/board/${categoryNo}/write" method="POST" id="boardWriteFrm" enctype="multipart/form-data">
+            <form action="/board/${categoryNo}/${board.boardNo}/update" method="POST" id="boardWriteFrm" enctype="multipart/form-data">
                 <div class="detail-title">
-                    <input class="title-input" placeholder="제목을 입력하세요." name="boardTitle">
+                    <input class="title-input" placeholder="제목을 입력하세요." name="boardTitle" value="${board.boardTitle}">
                 </div>
 
                 <div class="detail-content">
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="content-body">
-                        <textarea name="boardContent" class="content-area" placeholder="내용을 입력하세요."></textarea>
+                        <textarea name="boardContent" class="content-area" placeholder="내용을 입력하세요.">${board.boardContent}</textarea>
                     </div>
                 </div>
                 <div>
