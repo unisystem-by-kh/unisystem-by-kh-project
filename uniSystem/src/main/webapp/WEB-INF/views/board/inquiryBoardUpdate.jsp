@@ -33,7 +33,7 @@
             </div>
             <div class="boardTitle">
                 <div>제목</div>
-                <input type="text" name="boardTitle" value="${board.boardTitle}">
+                <input type="text" name="boardTitle" value="${board.boardTitle}"/>
             </div>
             <div class="boardContent">
                 <div>내용</div>

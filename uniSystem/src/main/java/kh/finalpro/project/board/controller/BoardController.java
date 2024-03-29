@@ -68,7 +68,7 @@ public class BoardController {
 	public String writeBoardData(@PathVariable("categoryNo") int categoryNo) {
 		return "board/boardDataWrite";
 	}
-
+	
 	// 1:1문의 작성페이지
 	@GetMapping("/{categoryNo:4}/write")
 	public String inquiryBoardInsert(@PathVariable("categoryNo") int categoryNo) {
@@ -87,6 +87,8 @@ public class BoardController {
 		
 		return "/board/noticeBoardWrite";
 	}
+	
+	
 			
 	
 	// -------------------------------------------------------------------------------
@@ -517,7 +519,7 @@ public class BoardController {
 	// ----------------------------------게시글 수정 화면 이동--------------------------------------
 
 	// 자유게시판 수정 화면 이동
-	@GetMapping("/{categoryNo:3}/{boardNo}/update")
+	@GetMapping("/{categoryNo:[3,5]{1}}/{boardNo}/update")
 	public String selectFreeBoardUpdate(
 			@PathVariable("categoryNo") int categoryNo,
 			@PathVariable("boardNo") int boardNo,
@@ -532,7 +534,15 @@ public class BoardController {
 
 		model.addAttribute("board", board);
 
-		return "board/freeBoardUpdate";
+		String path = "board";
+		if(categoryNo == 3) {
+			path += "/freeBoardUpdate";
+		}else {
+			path += "/boardDataUpdate";
+		}
+		System.out.println(path);
+		
+		return path;
 	}
 
 	// 1:1문의 수정 화면 전환
@@ -568,6 +578,8 @@ public class BoardController {
 
 		return "board/departmentBoardUpdate";
 	}
+	
+	
 
 	// ----------------------------------------------------------------------------------
 
