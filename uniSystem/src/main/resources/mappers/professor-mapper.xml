@@ -132,7 +132,7 @@
 		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
 
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
-		AND M.MEMBER_STATUS = 'N'
+		<!-- AND M.MEMBER_STATUS = 'N' -->
 
         ORDER BY D.DEPARTMENT_NO
 	</select>
@@ -193,7 +193,7 @@
 		JOIN DEPARTMENT D ON M.DEPARTMENT_NO = D.DEPARTMENT_NO
 
 		WHERE SUBSTR(M.MEMBER_NO, 1, 2) = '01'
-		AND M.MEMBER_STATUS = 'N'
+		<!-- AND M.MEMBER_STATUS = 'N' -->
 
 		<choose>
          <when test='key == "no"'>

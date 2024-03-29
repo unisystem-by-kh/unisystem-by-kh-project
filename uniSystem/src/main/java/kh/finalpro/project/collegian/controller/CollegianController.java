@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.collegian.model.service.CollegianService;
 
 @Controller
@@ -211,7 +212,7 @@ public class CollegianController {
 		return "redirect:/collegian/task";
 	}
 	
-	
+	// 학적 변동 신청 페이지 전환
 	@GetMapping("/change")
 	public String changeState( Model model
 			,@SessionAttribute(value="loginMember") Member loginMember
@@ -228,7 +229,7 @@ public class CollegianController {
 		return "/collegian/change";
 	}
 	
-	
+	// 학적 변동 신청
 	@PostMapping("/insertState")
 	public String insertRequest( Model model
 			,@SessionAttribute(value="loginMember") Member loginMember
@@ -252,6 +253,22 @@ public class CollegianController {
 		
 		return "redirect:/collegian/change";
 	}
+	
+	// 학점 조회 페이지 전환
+	@GetMapping("/score")
+	public String selectScore(Model model
+			,@SessionAttribute(value="loginMember") Member loginMember) {
+		
+		
+		List<Lecture> score = service.selectScore(loginMember);
+		
+		
+		model.addAttribute("score",score);
+		
+		
+		return "/collegian/scorePage";
+	}
+	
 	
 	
 	

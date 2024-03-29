@@ -13,7 +13,7 @@
 		<result property="classPoint" column="CLASS_POINT" />
 		<result property="classMax" column="CLASS_MAX" />
 		<result property="classGrade" column="CLASS_GRADE" />
-		<result property="classTrem" column="CLASS_TERM" />
+		<result property="classTerm" column="CLASS_TERM" />
 		<result property="classDay" column="CLASS_DAY" />
 		<result property="classStart" column="CLASS_START" />
 		<result property="classEnd" column="CLASS_END" />
@@ -66,6 +66,7 @@
 		<result property="lectureGrade" column="LECTURE_GRADE" />
 		<result property="lectureTerm" column="LECTURE_TERM" />
 		<result property="realPoint" column="REAL_POINT" />
+		<result property="rateFlag" column="RATE_FL" />
 	
 	</resultMap>
 	
@@ -310,13 +311,15 @@
 			ELSE 'NONE'
 			END
 		) AS REAL_POINT
-
+		,(CASE  WHEN CLASS_RATE_NO IS NOT NULL  THEN 'Y' ELSE 'N'  END) AS RATE_FL
+		
 		FROM LECTURE L
 		JOIN CLASS C ON (L.CLASS_NO = C.CLASS_NO)
-		WHERE L.MEMBER_NO = '01-2412345'
+		LEFT JOIN CLASS_RATE R ON (L.MEMBER_NO = R.MEMBER_NO)
+		WHERE L.MEMBER_NO = #{memberNo}
 	</select>
 	
-	
+	<!-- 학적 변동 신청 내역 조회 -->
 	<select id="selectRequest" resultMap="request_rm">
 		SELECT REQUEST_NO,
 		    (CASE REQUEST_TYPE
@@ -343,6 +346,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 학적 변동 신청  -->
 	<insert id="insertRequest">
 		INSERT INTO
 		REQUEST VALUES(SEQ_REQ_NO.NEXTVAL,

@@ -27,11 +27,11 @@
 	
 	    <div class="depart-area">
 	        <div>
-	            <h1>학과 공지</h1>
+	            <h1>📢 학과 공지</h1>
 	        </div>
 	        <div>
 				<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '02'}" >
-					<a href="/board/${categoryNo}/write">공지 등록</a>
+					<a href="/board/${categoryNo}/write">✏️ 공지 등록</a>
 				</c:if>	
 	        </div>
 	    </div>

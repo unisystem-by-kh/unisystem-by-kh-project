@@ -4,7 +4,11 @@ const deleteImage = document.getElementsByClassName("deleteImage")
 const writeForm = document.getElementById("writeForm")
 const boardTitle = document.getElementsByName("boardTitle")[0];
 const boardContent = document.getElementsByName("boardContent")[0];
-
+const shoot = document.getElementsByName("shoot");
+$(document).ready(function(){
+    //화면 준비되면 로딩이미지 숨기기
+    $('.wrap-loading').hide();	
+});
 inputImage[0].addEventListener("change", e => {
 
     const file = e.target.files[0];
@@ -58,7 +62,15 @@ writeForm.addEventListener("submit", e => {
         e.preventDefault();
         return ;
     }
+
+
     
+    if(shoot[0].checked == false && shoot[1].checked == false){
+        alert("이메일 발송여부를 선택해주세요")
+        e.preventDefault();
+        return ;
+    }
+    $(".wrap-loading").show();
 })
 
 const goToList = document.getElementById("gotoList")
@@ -70,3 +82,10 @@ goToList.addEventListener("click",e=>{
         return ;
     }
 })
+
+
+
+
+
+
+

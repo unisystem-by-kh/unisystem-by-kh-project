@@ -14,7 +14,7 @@
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
         <div class="mainContainer">
             <div class="taskList">
-                <h2>과제 목록</h2>
+                <h2>제출된 과제 목록</h2>
                 <table>
                     <thead>
                         <tr>

@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @WebFilter(filterName = "loginFilter",
-		   urlPatterns = {"/board/**", "/admin/**", "/main", "/tuition/**", "/professor/**", "/staff/**", "/late", "/collegian/**"})
+		   urlPatterns = {"/board/*", "/admin/*", "/main", "/tuition/*", "/professor/*", "/staff/*", "/rate", "/collegian/*"})
 public class LoginFilter implements Filter{
 
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -46,9 +46,10 @@ public class LoginFilter implements Filter{
 		// 3) session에서 "loginMember" key를 가진 속성을 얻어와
 		//	  null인 경우 메인페이지로 redirect 시키기
 		if(session.getAttribute("loginMember") == null) {
-			session.setAttribute("message", "로그인 후 이용해주세요.");
+			session.setAttribute("filterMessage", "로그인 후 이용해주세요.");
 			resp.sendRedirect("/");
-			return;
+		} else {
+			session.removeAttribute("filterMessage");
 		}
 
 		/* 응용

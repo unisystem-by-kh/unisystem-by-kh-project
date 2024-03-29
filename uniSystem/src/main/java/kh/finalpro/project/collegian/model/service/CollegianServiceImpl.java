@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.collegian.model.dao.CollegianDAO;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.collegian.model.dto.Pagination;
 import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.collegian.model.dto.Task;
@@ -236,6 +237,12 @@ public class CollegianServiceImpl implements CollegianService{
 	@Override
 	public int insertRequest(Request req) {
 		return dao.insertRequest(req);
+	}
+	
+	
+	@Override
+	public List<Lecture> selectScore(Member loginMember) {
+		return dao.selectScore(loginMember);
 	}
 
 }

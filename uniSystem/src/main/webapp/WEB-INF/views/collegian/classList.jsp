@@ -104,7 +104,7 @@
 											<td>${cl.classNo}</td>
 											<td>${cl.departmentName}</td>
 											<td>${cl.classGrade}학년</td>
-											<td>${cl.classTrem}학기</td>
+											<td>${cl.classTerm}학기</td>
 											<td>${cl.className}</td>
 											<c:if test="${cl.classPoint == 2}" >
 												<td>교양</td>

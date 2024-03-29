@@ -22,12 +22,13 @@ boardWriteFrm.addEventListener("submit", e => {
         return ;
     }
 
-    if(!boardSt.checked){
+  
+    if(boardSt[0].checked == false && boardSt[1].checked == false){
         alert("공개여부를 선택해주세요")
         e.preventDefault();
         return ;
     }else{
-        alert("게시글 수정이 완료되었습니다.")
+        alert("등록되었습니다.")
     }
     
 

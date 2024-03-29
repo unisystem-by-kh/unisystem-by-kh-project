@@ -14,56 +14,59 @@
 	href="/resources/css/board/departmentBoardDetail.css">
 </head>
 <body>
-
-	<main>
-
+		<main>
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 		<div class="depart-detail">
-			<h1>학과 공지</h1> - ${board.departmentName}
+			<h1>📢 학과 공지</h1> - ${board.departmentName}
 		</div>
 		<div class="date-con">
+			<div>
+				${board.boardTitle}
+			</div>
+			<div>
+				👵🏿 ${board.memberName}  
+				<c:if test="${empty board.boardUDate}">
+				🕒 ${board.boardCDate} 
+				</c:if>
+				<c:if test="${!empty board.boardUDate}">
+				🕒 ${board.boardUDate} 
+				</c:if>
+				👀 ${board.boardCount}
+			</div>
 			
-			<div>작성일 : ${board.boardCDate}</div>
-			|
-			<div>수정일 : ${board.boardUDate}</div>
-			|
-			<div>작성자 : ${board.memberName}</div>
-			|
-			<div>조회수 : ${board.boardCount}</div>
 		</div>
-		<div class="title-con">
-			<div>제목 : ${board.boardTitle}</div>
-		</div>
-		<div class="image-con">
+		
 		<c:if test="${!empty board.fileList[1]}">
+			<div class="image-con">
 			<img src="${board.fileList[1].boardFilePath}${board.fileList[1].boardFileRename}">
+			</div>
 		</c:if>
 		<c:if test="${empty board.fileList[1]}">
-	        	<div>첨부된 파일이 없습니다.</div>
+
 		</c:if>
-		</div>
 		<div class="content-con">${board.boardContent}</div>
 		<div class="file-button">
 			<div>첨부파일 :</div>
 			<c:if test="${!empty board.fileList}">
-				  <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
+				💾<a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
                                     download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileOriginal}</a> 
 			</c:if>
 			<c:if test="${empty board.fileList}">
-	        	<div>첨부된 파일이 없습니다.</div>
+	        	<div>💾첨부된 파일이 없습니다.</div>
 
 			</c:if>
 		</div>
 		<div class="button-area">
 			<c:if test="${loginMember.memberNo == board.memberNo}">
-				<button id="updateBtn">수정</button>
+				<button type="button" id="updateBtn">수정</button>
 				<button id="deleteBtn">삭제</button>
 			</c:if>
 			<button id="goToListBtn">목록으로</button>
 		</div>
 
 		<div class="reply-con">
-			<h1>댓글</h1>
+			<h1>💬 댓글</h1>
 		</div>
 		<div class="reply-content-con">
 			<textarea id="replyWriteCon"></textarea>
@@ -79,8 +82,8 @@
 				<div>작성일 : 2024.02.23</div>
 			</div>
 			<div class="button-container">
-				<button id="replyUpBtn">수정</button>
-				<button id="replyDeBtn">삭제</button>
+				<button type="button" id="replyUpBtn">수정</button>
+				<button  id="replyDeBtn">삭제</button>
 			</div>
 		</div>
 

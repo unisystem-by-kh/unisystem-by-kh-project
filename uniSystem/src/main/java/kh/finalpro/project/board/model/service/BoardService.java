@@ -143,7 +143,7 @@ public interface BoardService {
 	 * @param filePath
 	 * @return boardNo
 	 */
-	int noticeboardInsert(Board board, List<MultipartFile> files, String webPath, String filePath)throws IllegalStateException, IOException;
+	int noticeboardWrite(Board board, List<MultipartFile> files, String webPath, String filePath)throws IllegalStateException, IOException;
 	
   
   

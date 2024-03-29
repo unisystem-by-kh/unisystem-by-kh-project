@@ -81,8 +81,7 @@ if(updateBtn != null){
             const replyNick = document.querySelector(".reply-nick");
             replyNick.innerHTML = "";
 
-            const replyTitle = document.querySelector(".reply-title");
-            replyTitle.innerHTML = "";
+           
 
             const replyContent = document.querySelector(".reply-content");
             replyContent.innerHTML = ""; 
@@ -96,25 +95,22 @@ if(updateBtn != null){
                 
                 
                 const div1 = document.createElement("div");
-                div1.innerHTML = "답변자 : " + reply.memberName;
+                div1.innerHTML = reply.memberName;
                 
                 const div2 = document.createElement("div");
                 const formattedDate = reply.replyDate.substring(0, 15);
-                div2.innerHTML = "답변일 : " + formattedDate;
+                div2.innerHTML =  formattedDate;
                 
                 replyNick.append(div1,div2);
                 
-                const div3 = document.createElement("div");
-                div3.innerHTML = "제목 : [RE]" + boardTitle;
                 
-                replyTitle.append(div3);
                 
                 const div4 = document.createElement("div")
                 div4.innerHTML = reply.replyContent;
                 
                 replyContent.append(div4);
                 
-                replyArea.after(replyNick,replyTitle,replyContent)
+                replyArea.after(replyNick,replyContent)
                 const btn = document.querySelector(".button-container")
                 btn.innerHTML="";
                 if(loginMemberNo == reply.memberNo){

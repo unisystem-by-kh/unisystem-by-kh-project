@@ -477,7 +477,7 @@ public class BoardServiceImpl implements BoardService{
 	// 공지사항 작성 페이지----------------------------------
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int noticeboardInsert(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException{
+	public int noticeboardWrite(Board board, List<MultipartFile> file, String webPath, String filePath) throws IllegalStateException, IOException{
 		// 0. XSS 방지 처리
 		board.setBoardTitle(Util.XSSHandling(board.getBoardTitle()));
 		board.setBoardContent(Util.XSSHandling(board.getBoardContent()));
@@ -489,7 +489,7 @@ public class BoardServiceImpl implements BoardService{
 
 		// 1. BOARD 테이블 INSERT 하기(제목, 내용, 작성자, 게시판 코드)
 		// -> boardNo(시퀀스로 생성한 번호) 반환 받기
-		int boardNo = dao.noticeboardInsert(board);
+		int boardNo = dao.noticeboardWrite(board);
 
 		// 2. 게시글 삽입 성공 시
 		//	업로드된 이미지가 있다면 BOARD_IMG 테이블에 삽입하는 DAO 호출

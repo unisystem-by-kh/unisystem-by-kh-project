@@ -22,7 +22,7 @@ loginFrm.addEventListener("submit", e => {
     if(userId.value.trim() == 0){
 
         swal({
-            title : "아이디를 입력해주세요.",
+            title : "학번을 입력해주세요.",
                 icon  : "error",
                 closeOnClickOutside : false
         }).then(function(){
@@ -133,7 +133,7 @@ if(btn1 != null){
 
             if(memberNo.length != 0){
                 swal({
-                    title : "아이디 찾기 결과",
+                    title : "학번 찾기 결과",
                     text : `회원님의 학번은 ${memberNo} 입니다.`,
                     icon : "success",
                     closeOnClickOutside : false
@@ -164,7 +164,7 @@ if(btn2 != null){
 
         if(pwUserId.value.trim().length == 0){
             swal({
-                title : "아이디를 입력해주세요.",
+                title : "학번 입력해주세요.",
                     icon  : "error",
                     closeOnClickOutside : false
             }).then(function(){
@@ -206,7 +206,7 @@ if(btn2 != null){
 
             if(result.length != 0){
                 
-                sendEmail(result);
+                sendEmail(result, pwUserName);
 
             } else {
                 swal({
@@ -221,11 +221,11 @@ if(btn2 != null){
 
     })
 
-    function sendEmail(email) {
+    function sendEmail(email, memberName) {
 
         showLoadingSpinner(); // 로딩창 시작
-
-        fetch("/sendEmail/findPw?email=" + email)
+        console.log(memberName);
+        fetch("/sendEmail/findPw?email=" + email + "&memberName="+memberName.value)
         .then(resp => resp.text())
         .then( result => {
 

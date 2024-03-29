@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.collegian.model.dto.Pagination;
 import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.collegian.model.dto.Task;
@@ -127,6 +128,10 @@ public class CollegianDAO {
 
 	public List<Request> selectRequest(Request req) {
 		return sqlSession.selectList("collegianMapper.selectRequest",req);
+	}
+
+	public List<Lecture> selectScore(Member loginMember) {
+		return sqlSession.selectList("collegianMapper.selectScore",loginMember);
 	}
 	
 

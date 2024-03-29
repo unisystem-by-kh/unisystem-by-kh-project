@@ -401,7 +401,7 @@ function updateGrades(event) {
     const sGrade = gradeContent.querySelector(':nth-child(3)').innerHTML; // 학년
     const sTerm = gradeContent.querySelector(':nth-child(4)').innerHTML; // 학기
     const sClassNumber = gradeContent.querySelector(':nth-child(8)').innerHTML; // 과목 번호
-    const departmentNo = gradeContent.querySelector(':nth-child(9)').innerHTML; // 과목 번호
+    const departmentNo = gradeContent.querySelector(':nth-child(9)').innerHTML; // 학과 번호
     const sPointInput = gradeContent.querySelector('input').value;
 
     console.log(departmentNo);
@@ -432,8 +432,6 @@ function updateGrades(event) {
       // 함수 종료
       event.stopPropagation();
     }
-
-
 
   });
 
@@ -471,3 +469,4 @@ function updateGrades(event) {
   selectMemberList();
   departmentList();
 })()
+

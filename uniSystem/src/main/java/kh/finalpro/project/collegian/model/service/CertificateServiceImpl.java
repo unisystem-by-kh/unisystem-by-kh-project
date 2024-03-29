@@ -4,6 +4,7 @@ package kh.finalpro.project.collegian.model.service;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -131,8 +132,19 @@ public class CertificateServiceImpl implements CertificateService{
 				context.setVariable("ssn", loginMember.getMemberSsn());
 				context.setVariable("sysdate", formattedDate);
 				
+
+				
+				/*
+				 * List lec = Arrays.asList( new Lecture("F"), new Lecture("A"), new
+				 * Lecture("B"));
+				 * 
+				 * System.out.println(lec);
+				 */
+				
+				//context.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
 				
 				context.setVariable("scoreList", scoreList );
+				//context.setVariable("lec", lec);
 				
 				
 				htmlContent = templateEngine.process("score", context); // pdfTemplate == html 양식 명
