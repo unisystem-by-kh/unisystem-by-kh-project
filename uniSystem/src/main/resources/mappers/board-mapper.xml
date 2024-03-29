@@ -104,40 +104,35 @@
 		    ]]>
 
 
-		(SELECT COUNT(*) FROM "REPLY" R
-		WHERE R.BOARD_NO = B.BOARD_NO
-		AND R.REPLY_ST = 'N') REPLY_COUNT
+				(SELECT COUNT(*) FROM "REPLY" R
+				WHERE R.BOARD_NO = B.BOARD_NO
+				AND R.REPLY_ST = 'N') REPLY_COUNT,
 
-		<if test="categoryNo == 3"> <!-- 자유게시판일 경우 -->
+<!-- 		<if test="categoryNo == 3"> 자유게시판일 경우
 			,
 			(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME
 			FROM BOARD_FILE F
 			WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
 		</if>
-		<if test="categoryNo == 4"> <!-- 학과공지, 1:1문의일 경우 -->
+		<if test="categoryNo == 4"> 학과공지, 1:1문의일 경우
 			,
 			(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME FROM BOARD_FILE F
 			WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
 		</if>
-
+ -->
 		       (SELECT COUNT(*) FROM "REPLY" R
 			    WHERE R.BOARD_NO = B.BOARD_NO
 				AND R.REPLY_ST = 'N') REPLY_COUNT
 
-				<if test="categoryNo == 0" > <!-- 자유게시판일 경우 -->
-					,
-					(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME
-					FROM BOARD_FILE F
-					WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
-				</if>
-				<if test="categoryNo == 4"> <!-- 학과공지, 1:1문의일 경우 -->
-					,
-					(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME FROM BOARD_FILE F
-		    		WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
-
-				</if>
-		FROM "BOARD" B
-		JOIN "MEMBER" USING(MEMBER_NO)
+			<if test="categoryNo != 2">
+				,
+				(SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME
+				FROM BOARD_FILE F
+				WHERE F.BOARD_NO = B.BOARD_NO) THUMBNAIL
+			</if>
+	
+				FROM "BOARD" B
+				JOIN "MEMBER" USING(MEMBER_NO)
 
 		<choose>
 			<when test="categoryNo == 2 or categoryNo == 4"> <!-- 학과공지, 1:1문의 -->
