@@ -4,11 +4,11 @@ const submitTask = th =>{ // 모달 창 함수
 
     const modalContainer = document.getElementById("modal");
 
-    const nameBox = document.getElementById('name_box'); // 제출 과제 명 input
+    const nameBox = document.querySelector('#name_box > h2' ); // 제출 과제 명 input
 
     const inputTask = document.getElementById("task_no"); // 숨겨진 task no
 
-    nameBox.value = th.parentNode.parentNode.cells[4].innerText; // 과제 제출 과목 담기
+    nameBox.innerText = "📖 "+th.parentNode.parentNode.cells[4].innerText; // 과제 제출 과목 담기
 
     const infoData = th.parentNode.parentNode.cells[10]; // 데이터 담긴 td
 

@@ -158,29 +158,46 @@ table{
 				<tr>
 					<td class="right">
 						<table>
-							                            
-                            <th:block th:each="score:${scoreList}">
-                                <div >
+							<tr>
+								<td colspan="5">1학년</td>
+							</tr>
+                            <!-- <th:block th:each="hobby : ${hobbies}" th:text="${hobby}"> -->
+                            <th:block th:each="k : ${scoreList}" >
+                                <tr>
                                 	<!-- <th:block th:object="${score}"></th:block> -->
                                 	
-                                	<td th:text="${score}">JAVA</td>
-                                   <!--  <td class="word-space" th:text="${#strings.toUpperCase('score')}">1</td> -->
+                                	<th:block th:utext="${k}">JAVA</th:block>
+                                    <!-- <td class="word-space" th:text="${#strings.toUpperCase('score')}">1</td> -->
                                  	<!--<td th:text="${score[0].classType}">전공</td> -->
-                                    <td th:text="${score.classNm}">JAVA</td>
-                                    <td th:text="${score.classType}">JAVA</td>
-                                    <!-- <td th:text="${score.classPoint}">3.0</td>
-                                    <td th:text="${score.realPoint}">A</td> -->
-                                 </div>
+                                    <!-- <td th:text="${score.classNm}">JAVA</td>
+                                    <td th:text="${score.classType}">JAVA</td> -->
+                                    <!-- <td th:text="${score.classPoint}">3.0</td> -->
+                                    <!-- <td th:text="${le.realPoint}">A</td> -->
+                                 </tr>
                             </th:block>
                             
-                            <!-- <div th:object="${scoreList}">
-                            	<span th:text="*{classNm}"></span>
-                            </div> -->
+                            <tr>
+								<td colspan="5">2학년</td>
+							</tr>
+							<th:block th:each="k : ${scoreList}" >
+                                <tr>
+                                	<th:block th:utext="${k}">JAVA</th:block>
+                                 </tr>
+                            </th:block>
 														
 						</table>
 					</td>
 					<td>
 						<table>
+						
+							<tr>
+								<td colspan="5">3학년</td>
+							</tr>
+							
+							
+							<tr>
+								<td colspan="5">4학년</td>
+							</tr>
 							
 						</table>
 					</td>

@@ -29,7 +29,7 @@
                     <ul>
                         <a href="#"><li>- 개인 정보 수정<img src="/resources/images/collegian/icons8-man-32.png" style="width: 25px;"></li></a>
                         <a href="/collegian/change"><li>- 학적 변동 신청<img src="/resources/images/collegian/icons8-study-50.png" style="width: 25px;"></li></a>
-                        <a href="#"><li>- 학점 조회<img src="/resources/images/collegian/icons8-score-50.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/score"><li>- 학점 조회<img src="/resources/images/collegian/icons8-score-50.png" style="width: 25px;"></li></a>
                     </ul>
                 </li>
             </ul>

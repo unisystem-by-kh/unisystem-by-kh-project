@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 
 public interface CollegianService {
 
@@ -34,6 +35,8 @@ public interface CollegianService {
 	int insertRequest(Request req);
 
 	List<Request> selectRequest(Request req);
+
+	List<Lecture> selectScore(Member loginMember);
 
 
 }

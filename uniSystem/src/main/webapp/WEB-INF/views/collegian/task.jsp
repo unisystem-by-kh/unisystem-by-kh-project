@@ -59,7 +59,7 @@
 										<td>${ta.classNo}</td>
 										<td>${ta.departmentName}</td>
 										<td>${ta.classGrade}</td>
-										<td>${ta.classTrem}</td>
+										<td>${ta.classTerm}</td>
 										<td>${ta.className}</td>
 										<c:if test="${ta.classPoint == 2}">
 											<td>교양</td>
@@ -132,14 +132,13 @@
                     <div class="close_btn " id="close_btn" onclick = notShow()>X</div>
                 </div>
                 <div class="m_body">
-                    <div class="modal_label">제출 과제 명</div>
-                    <input type="text" class="input_box" id="name_box" />
+                    <div class="modal_label" id="name_box"><h2></h2></div>
                 <form action="/collegian/insertTask" method="POST" id="insertTask" onsubmit= "return taskSubmitValidation()" enctype="multipart/form-data">
-                    <div class="modal_label">제출 파일</div>
+                    <div class="modal_label"><h4>제출 파일</h4></div>
                     <input type="file" name="taskFile" class="input_box" id="des_box" accept=".pdf,.PDF,.hwp" />
                     <input type="hidden" name="taskNo" id="task_no" />
-					<div class="modal_label">제출한 파일</div>
-					<a id="openFile" href="" download=""></a>
+					<div class="modal_label"><h4>제출한 파일</h4></div>
+					💾 <a id="openFile" href="" download=""></a>
                 </div>
                 <div class="m_footer">
                     <div class="modal_btn cancle" id="close_btn" onclick = notShow()>CANCLE</div>
