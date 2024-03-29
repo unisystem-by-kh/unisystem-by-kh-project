@@ -219,10 +219,10 @@ public class ProfessorServiceImpl implements ProfessorService{
 		
 		int result = 0;
 		
-		result += dao.taskListDelete(taskNo);
+		result += dao.taskFileDelete(taskNo);
 		
 		if(result > 0) {
-			result += dao.taskFileDelete(taskNo);
+			result += dao.taskListDelete(taskNo);
 		}
 		
 		return result;
