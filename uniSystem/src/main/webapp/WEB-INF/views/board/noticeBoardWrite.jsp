@@ -24,7 +24,7 @@
         <div class="announcement">
             <h2>공 지 사 항</h2>
         </div>
-
+<form action="/board/${categoryNo}/write" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
         <div class="title">
             <p>제&nbsp;&nbsp;&nbsp;목</p>
             <input type="text"  name="inputTitle"  placeholder="제목을 입력해주세요">
@@ -34,8 +34,8 @@
 
             <p>구&nbsp;&nbsp;&nbsp;분</p>
             <select>
-                <option>인사공지</option>
-                <option>학사공지</option>
+                <option value="1">인사공지</option>
+                <option value="2">학사공지</option>
             </select>
         </div>
 
@@ -46,18 +46,17 @@
 
         <div class="uploadFile">
             <p>첨부파일</p>
-            <input type="button" id="uploadBtn" value="파일선택">
-            <span id="uploadName" value>선택된 파일 없음</span>
+            <input type="file" id="file" value="파일선택">
         </div>
 
         
 
         <div class="saveCancle">
-            <input type="button" id="savaBtn" value="등 록">
-            <input type="button" id="cancleBtn" value="취 소">
+            <input type="submit" id="savaBtn" value="등 록">
+            <input type="button" id="goToListBtn" value="취 소">
         </div>
 
-        
+      </form>  
 
     </div>
 
@@ -68,6 +67,7 @@
 </main>
 
     <script src="/resources/js/header.js"></script>
+    <script src="/resources/js/board/noticeBoard/noticeBoardWrite.js"></script>
 
 </body>
 </html>

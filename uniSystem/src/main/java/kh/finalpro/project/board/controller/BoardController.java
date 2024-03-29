@@ -80,6 +80,15 @@ public class BoardController {
 	public String departmentBoardWrite(@PathVariable("categoryNo") int categoryNo) {
 		return "board/departmentBoardWrite";
 	}
+	
+	//공지사항 작성페이지
+	@GetMapping("/{categoryNo:1}/write")
+	public String noticeboardInsert(@PathVariable("categoryNo") int categoryNo) {
+		
+		return "/board/noticeBoardWrite";
+	}
+			
+	
 	// -------------------------------------------------------------------------------
 
 	// -------------------------------목록 조회--------------------------------------
@@ -315,8 +324,9 @@ public class BoardController {
 
 
 	//공지사항 작성페이지
-	@PostMapping("/{categoryNo:1}/insert")
-	public String noticeboardInsert(
+	
+	@PostMapping("/{categoryNo:1}/write")
+	public String noticeboardWrite(
 			@PathVariable("categoryNo") int categoryNo
 			, Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
 			, @RequestParam(value="file", required = false) List<MultipartFile> file
@@ -334,9 +344,8 @@ public class BoardController {
 		String webPath = "/resources/images/board/";
 		String filePath = session.getServletContext().getRealPath(webPath);
 
-
 		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 
-		int boardNo = service.noticeboardInsert(board, file, webPath, filePath);
+		int boardNo = service.noticeboardWrite(board, file, webPath, filePath);
 		// 게시글 삽입 성공 시
 		// -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트
 		// -> /board/{boardCode}/{boardNo} @PathVariable
@@ -347,11 +356,13 @@ public class BoardController {
 			path += "/board/" + categoryNo + "/" + boardNo;
 		}else {
 			message= "게시글 등록 실패 ㅠㅠ";
-			path += "write";
+			path += "insert";
 		}
 		ra.addFlashAttribute("message",message);
 		return path;
 	}
+
+
 	// ----------------------------------------------------------------------------------
 
 

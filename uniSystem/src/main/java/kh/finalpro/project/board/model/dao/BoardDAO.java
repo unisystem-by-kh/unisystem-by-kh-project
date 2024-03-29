@@ -237,11 +237,15 @@ public class BoardDAO {
 	 * @param board
 	 * @return
 	 */
-	public int noticeboardInsert(Board board) {
-		int result = sqlSession.insert("boardMapper.noticeboardInsert", board);
+	
+	public int noticeboardWrite(Board board) {
 		
-		// 삽입 성공 시
-		if(result > 0) result = board.getBoardNo();
+		int result =  sqlSession.insert("boardMapper.noticeboardInsert", board);
+		
+		if(result > 0) {
+			result = board.getBoardNo();
+		}
+		
 		return result;
 	}
 	

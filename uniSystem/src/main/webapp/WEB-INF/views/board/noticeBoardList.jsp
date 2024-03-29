@@ -136,7 +136,8 @@
                 
     <%-- 글쓰기 버튼 --%>
      <c:if test="${!empty loginMember}">
-       <a href="/board/${categoryNo}/insert" id="writeBtn"> 작   성</a>
+      <a href="/board/${categoryNo}/write" id="writeBtn"> 작   성</a>
+    
     </c:if>
 
 

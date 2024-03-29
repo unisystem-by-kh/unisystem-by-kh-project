@@ -45,6 +45,6 @@
 </main>
 
     <script src="/resources/js/header.js"></script>
-
+    <script src="/resources/js/board/noticeBoard/noticeBoardDetail.js"></script>
 </body>
 </html>
