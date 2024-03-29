@@ -52,9 +52,10 @@
                     </c:if>
                     <%-- 썸네일이 없을 경우 --%>
                     <c:if test="${empty board.fileList}">
-                        <c:set var="path" value="#" />
+                        <%-- <c:set var="path" value="#" /> --%>
                         <%-- <img src="${path}" alt="썸네일을 등록해주세요."> --%>
-                        <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' />
+                        <%-- <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' /> --%>
+                        asdasdasd
                     </c:if>
                     <div>
                         ${board.boardContent}
@@ -70,7 +71,7 @@
                     </div>
                 </c:if>
                     <div>
-                        <button>목록</button>
+                        <button id="goToListBtn">목록</button>
                     </div>
             </div>
 
@@ -144,10 +145,10 @@
 
     <script>
         const boardNo = "${board.boardNo}";
-        // console.log(boardNo);
+        console.log(boardNo);
 
-        const loginMemberNo = "${board.memberNo}";
-        // console.log(loginMemberNo);
+        // const loginMemberNo = "${board.memberNo}";
+        console.log(loginMemberNo);
 
         const categoryNo = "${categoryNo}";
     </script>

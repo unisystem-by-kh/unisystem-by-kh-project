@@ -14,8 +14,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>평가 조회</title>
 
-<link rel="stylesheet" href="/resources/css/style-main.css">
 <link rel="stylesheet" href="/resources/css/admin/subjectEvaluation.css">
+<link rel="stylesheet" href="/resources/css/style-main.css">
 
 </head>
 <body>

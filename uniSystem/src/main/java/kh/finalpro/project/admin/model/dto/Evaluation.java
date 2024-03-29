@@ -11,9 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Evaluation {
 
-	private int lateNo;
-	private String lateContent;
-	private int lateLike;
+	private int rateNo;
+	private String rateContent;
+	private int rateLike;
 	private int classNo;
 	private String memberNo;
 	

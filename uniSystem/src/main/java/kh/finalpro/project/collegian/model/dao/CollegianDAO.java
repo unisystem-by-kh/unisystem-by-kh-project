@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.collegian.model.dto.Pagination;
+import kh.finalpro.project.collegian.model.dto.Request;
+import kh.finalpro.project.collegian.model.dto.Task;
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Department;
 
@@ -97,6 +100,38 @@ public class CollegianDAO {
 
 	public int checkClassMax(Map<String, Object> map) {
 		return sqlSession.selectOne("collegianMapper.checkClassMax", map);
+	}
+
+	public List<Class> selectTaskList(Member loginMember) {
+		return sqlSession.selectList("collegianMapper.selectTaskList",loginMember);
+	}
+
+	public int insertTask(Task task) {
+		return sqlSession.insert("collegianMapper.insertTask", task);
+	}
+
+	public List<Task> selectMyTaskes(Member loginMember) {
+		return sqlSession.selectList("collegianMapper.selectMyTaskes",loginMember);
+	}
+
+	public int selectTask(Task task) {
+		return sqlSession.selectOne("collegianMapper.selectTask",task);
+	}
+
+	public int updateTask(Task task) {
+		return sqlSession.update("collegianMapper.updateTask",task);
+	}
+
+	public int insertRequest(Request req) {
+		return sqlSession.insert("collegianMapper.insertRequest",req);
+	}
+
+	public List<Request> selectRequest(Request req) {
+		return sqlSession.selectList("collegianMapper.selectRequest",req);
+	}
+
+	public List<Lecture> selectScore(Member loginMember) {
+		return sqlSession.selectList("collegianMapper.selectScore",loginMember);
 	}
 	
 

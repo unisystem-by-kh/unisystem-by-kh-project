@@ -22,7 +22,7 @@
     <main>
 
         <!-- 오시는 길 -->
-        <a href="/board/comeMap" class="come-on-area">
+        <a href="/comeMap" class="come-on-area">
             <i class="fa-solid fa-flag fa-2x"></i>
         </a>
 
@@ -50,12 +50,12 @@
             <!-- 아이디 저장 부분 -->
             <div class="saveId-area">
                 <input type="checkbox" name="saveId" ${save}  id="saveId" ${chk}>
-                <label for="saveId"><i class="fas fa-check"></i>아이디 저장</label>
+                <label for="saveId"><i class="fas fa-check"></i>학번 저장</label>
             </div>
 
             <!-- 찾기/회원가입 부분 -->
             <p class="text-area">
-                <a class="btn-open-modal-id">아이디 찾기</a>
+                <a class="btn-open-modal-id">학번 찾기</a>
                 |
                 <a class="btn-open-modal-pw">비밀번호 찾기</a>
                 |
@@ -67,11 +67,11 @@
     <div class="modal id">
         <div class="modal_body">
             <div class="close-area">&times;</div>
-            <h2>아이디 찾기</h2>
+            <h2>학번 찾기</h2>
             <input type="text" name="memberName" id="idUserName" placeholder="이름을 입력해주세요.">
             <input type="email" name="memberEmail" id="idUserEmail" placeholder="이메일을 입력해주세요.">
             <br>
-            <button class="btn" id="btn1">아이디 찾기</button>
+            <button class="btn" id="btn1">학번 찾기</button>
         </div>
     </div>
 
@@ -90,6 +90,14 @@
     <div id="loadingSpinner"></div>
 
     <script src="/resources/js/login.js"></script>
+
+    <c:if test="${empty loginMember}">
+        <c:if test="${!empty filterMessage}">
+            <script>
+                swal("${filterMessage}", "", "warning");
+            </script>
+        </c:if>
+    </c:if>
 
     <c:if test="${!empty message}">
         <script>

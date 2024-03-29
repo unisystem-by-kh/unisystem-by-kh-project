@@ -27,6 +27,8 @@ public class Board {
 
 	private String departmentName;
 	
+	private int shoot;
+	
 	// 이미지 목록
 	private List<BoardFile> fileList;
 

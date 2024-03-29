@@ -1,9 +1,13 @@
 package kh.finalpro.project.collegian.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
 import kh.finalpro.project.collegian.model.service.CollegianService;
 
 @Controller
@@ -164,10 +173,106 @@ public class CollegianController {
 	}
 
 	// 과제물 페이지 전환
-	@RequestMapping("task")
-	public String task() {
+	@GetMapping("task")
+	public String task(Model model
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
+		
+		
+		Map<String,Object> map = service.selectTaskList(loginMember);
+		
+		model.addAttribute("map",map);
 
 		return "/collegian/task";
 	}
+	
+	
+	@PostMapping("/insertTask")
+	public String insertTask(Model model,
+				@RequestParam(value="taskFile", required =false) MultipartFile file,
+				@SessionAttribute(value="loginMember") Member loginMember
+				,@RequestParam(value="taskNo", required = false) int taskNo
+				, RedirectAttributes ra
+				, HttpSession session)throws IllegalStateException, IOException {
+		
+		String webPath = "/resources/files/task/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+		
+		int result = service.insertTask(loginMember,taskNo,file,webPath,filePath);
+		
+		if(result > 0) {
+			
+			Map<String,Object> map = service.selectTaskList(loginMember);
+			
+			model.addAttribute("map",map);
+			
+		}else { // 과제 제출 실패
+			
+		}
+		
+		return "redirect:/collegian/task";
+	}
+	
+	// 학적 변동 신청 페이지 전환
+	@GetMapping("/change")
+	public String changeState( Model model
+			,@SessionAttribute(value="loginMember") Member loginMember
+			) {
+		
+		Request req = new Request();
+		
+		req.setMemberNo(loginMember.getMemberNo());
+		
+		List<Request> reqList = service.selectRequest(req);
+		
+		model.addAttribute("reqList",reqList);
+		
+		return "/collegian/change";
+	}
+	
+	// 학적 변동 신청
+	@PostMapping("/insertState")
+	public String insertRequest( Model model
+			,@SessionAttribute(value="loginMember") Member loginMember
+			,String content
+			,char st
+			) {
+		
+		Request req = new Request();
+		
+		req.setMemberNo(loginMember.getMemberNo());
+		req.setReqType(st+"");
+		req.setReqReason(content);
+		
+		int result = service.insertRequest(req);
+		
+		if(result > 0) {
+			List<Request> reqList = service.selectRequest(req);
+			
+			model.addAttribute("reqList",reqList);
+		}
+		
+		return "redirect:/collegian/change";
+	}
+	
+	// 학점 조회 페이지 전환
+	@GetMapping("/score")
+	public String selectScore(Model model
+			,@SessionAttribute(value="loginMember") Member loginMember) {
+		
+		
+		List<Lecture> score = service.selectScore(loginMember);
+		
+		
+		model.addAttribute("score",score);
+		
+		
+		return "/collegian/scorePage";
+	}
+	
+	
+	
+	
+	
+	
 
 }

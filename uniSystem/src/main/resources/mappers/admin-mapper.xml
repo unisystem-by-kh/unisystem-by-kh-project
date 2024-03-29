@@ -30,7 +30,22 @@
    <select id="selectList" resultType="member_rm">
    	SELECT * FROM MEMBER;
    </select>
-	
+   
+   
+   <insert id="saveUniqueNo" parameterType="member_rm">
+      INSERT INTO MEMBER (
+        MEMBER_NO,
+        MEMBER_NAME,
+        MEMBER_SSN,
+        DEPARTMENT_NO
+    )
+    VALUES (
+        #{memberNo}, #{memberName}, #{memberSsn} , #{departmentNo}
+    )
+    
+	</insert>
+	  
+
 
 </mapper>
 

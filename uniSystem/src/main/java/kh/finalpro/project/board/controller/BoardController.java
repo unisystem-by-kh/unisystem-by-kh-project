@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +36,7 @@ import kh.finalpro.project.board.model.dto.BoardFile;
 import kh.finalpro.project.board.model.dto.Pagination;
 import kh.finalpro.project.board.model.service.BoardService;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.main.model.service.EmailService;
 import kh.finalpro.project.student.model.dto.Student;
 
 @SessionAttributes({"loginMember"})
@@ -43,19 +46,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService service;
-
-
-	// 오시는길
-	@GetMapping("/comeMap")
-	public String comeMap() {
-
-		return "board/comeMap";
-	}
-
-
-
-
-
+	
+	@Autowired
+	private EmailService emailService;
 
 
 	// ---------------------------------------------------------------------------
@@ -83,15 +76,24 @@ public class BoardController {
 	}
 
 	// 학과공지 작성페이지
-	@GetMapping("/departmentBoardWrite")
-	public String departmentBoardWrite() {
+	@GetMapping("/{categoryNo:2}/write")
+	public String departmentBoardWrite(@PathVariable("categoryNo") int categoryNo) {
 		return "board/departmentBoardWrite";
 	}
+	
+	//공지사항 작성페이지
+	@GetMapping("/{categoryNo:1}/write")
+	public String noticeboardInsert(@PathVariable("categoryNo") int categoryNo) {
+		
+		return "/board/noticeBoardWrite";
+	}
+			
+	
 	// -------------------------------------------------------------------------------
 
 	// -------------------------------목록 조회--------------------------------------
 
-	
+
 	/* 
 		1 : noticeBoardList 
 		2 : departmentBoardList 
@@ -111,7 +113,7 @@ public class BoardController {
 
 		Map<String, Object> map = null;
 		String path = null;
-		
+
 		switch (categoryNo) {
 		case 1: path="noticeBoardList"; break; // 공지사항
 		case 2: path="departmentBoardList"; break; // 학과공지
@@ -127,11 +129,12 @@ public class BoardController {
 
 			// 조회 결과를 request scope에 세팅 후 forward
 			model.addAttribute("map", map);
-			
+
 		} else { // 검색어가 있을 때 (검색 O)
 			paramMap.put("categoryNo", categoryNo);
 			map = service.selelctBoardList(paramMap, cp);
 		}
+		
 		model.addAttribute("map" , map);
 		return "board/" + path; 
 	}
@@ -246,7 +249,6 @@ public class BoardController {
 			, RedirectAttributes ra
 			, HttpSession session)throws IllegalStateException, IOException {
 
-		System.out.println("자료실 매핑 체크용" + categoryNo);
 
 		// 1.로그인한 회원 번호를 얻어와 board에 세팅
 		board.setMemberNo(loginMember.getMemberNo());
@@ -277,44 +279,7 @@ public class BoardController {
 		return path;
 	}
 
-	/*
-	 * //공지사항 작성페이지
-	 * 
-	 * @GetMapping("/{categoryNo:1}/noticeWrite") public String
-	 * noticeWrite(@PathVariable("categoryNo") int categoryNo , Board board // 커멘트
-	 * 객체(필드에 파라미터 담겨있음!) , @RequestParam(value="images", required = false)
-	 * List<MultipartFile> files , @SessionAttribute("loginMember") Member
-	 * loginMember , RedirectAttributes ra , HttpSession session ) throws
-	 * IllegalStateException, IOException {
-	 * 
-	 * 
-	 * 
-	 * 
-	 * // 1. 로그인한 회원 번호를 얻어와 board에 세팅 board.setMemberNo(loginMember.getMemberNo());
-	 * 
-	 * // 2. boardCode도 board에 세팅 board.setCategoryNo(categoryNo);
-	 * 
-	 * // 3. 업로드된 이미지 서버에 실제로 저장되는 경로 // + 웹에서 요청 시 이미지를 볼 수 있는 경로(웹 접근 경로) String
-	 * webPath ="/resources/images/board/"; String filePath =
-	 * session.getServletContext().getRealPath(webPath);
-	 * 
-	 * // 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 int boardNo =
-	 * service.noticeBoardWrite(board, files, webPath, filePath);
-	 * 
-	 * // 게시글 삽입 성공 시 // -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트 // ->
-	 * /board/{boardCode}/{boardNo}
-	 * 
-	 * String message = null; String path = "redirect:";
-	 * 
-	 * if(boardNo > 0) { //성공 시 message = "게시글이 등록되었습니다."; path += "/board/" +
-	 * categoryNo + "/" + boardNo;
-	 * 
-	 * } else { message = "게시글 등록 실패"; path += "insert"; }
-	 * 
-	 * ra.addFlashAttribute("message", message);
-	 * 
-	 * return path; }
-	 */
+
 
 	// 1:1문의, 자료실 작성페이지
 	@PostMapping("/{categoryNo:[4,5]{1}}/write")
@@ -355,9 +320,52 @@ public class BoardController {
 		return path;
 	}
 
+
+
+
+	//공지사항 작성페이지
+	
+	@PostMapping("/{categoryNo:1}/write")
+	public String noticeboardWrite(
+			@PathVariable("categoryNo") int categoryNo
+			, Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
+			, @RequestParam(value="file", required = false) List<MultipartFile> file
+			, @SessionAttribute(value="loginMember") Member loginMember
+			, RedirectAttributes ra
+			, HttpSession session)throws IllegalStateException, IOException {
+
+		// 1.로그인한 회원 번호를 얻어와 board에 세팅
+		board.setMemberNo(loginMember.getMemberNo());
+
+		// 2. boardCode도 board에 세팅
+		board.setCategoryNo(categoryNo);
+		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
+		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
+		String webPath = "/resources/images/board/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+
+		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 
+		int boardNo = service.noticeboardWrite(board, file, webPath, filePath);
+		// 게시글 삽입 성공 시
+		// -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트
+		// -> /board/{boardCode}/{boardNo} @PathVariable
+		String message = null; 
+		String path = "redirect:";
+		if(boardNo > 0) { // 성공 시 
+			message = "게시글이 등록되었습니다.";
+			path += "/board/" + categoryNo + "/" + boardNo;
+		}else {
+			message= "게시글 등록 실패 ㅠㅠ";
+			path += "insert";
+		}
+		ra.addFlashAttribute("message",message);
+		return path;
+	}
+
+
 	// ----------------------------------------------------------------------------------
 
-	
+
 	// ----------------------------------게시글 수정--------------------------------------
 
 	// 자유게시판 수정 기능
@@ -385,7 +393,7 @@ public class BoardController {
 
 		System.out.println(board);
 		// 3) 게시글 수정 서비스 호출 
-		int rowCount = service.inquiryBoardUpdate(board, file, webPath, filePath, deleteList);
+		int rowCount = service.freeBoardUpdate(board, file, webPath, filePath, deleteList);
 
 		// 4) 결과에 따라서 message, path 설정
 		String message = null; 
@@ -426,7 +434,6 @@ public class BoardController {
 		String webPath = "/resources/images/board/";
 		String filePath = session.getServletContext().getRealPath(webPath);
 
-		System.out.println(board);
 		// 3) 게시글 수정 서비스 호출 
 		int rowCount = service.inquiryBoardUpdate(board, file, webPath, filePath, deleteList);
 
@@ -446,13 +453,67 @@ public class BoardController {
 		return path;
 	}
 
+
+	// 학과공지 게시글 수정
+	@PostMapping("/{categoryNo:2}/{boardNo}/update")
+	public String departmentBoardUpdate(
+			Board board // 커맨드 객체(name==필드 경우 필드에 파라미터 세팅
+			,@RequestParam(value="cp", required = false, defaultValue = "1") int cp // 쿼리스트링 유지
+			,@SessionAttribute("loginMember") Member loginMember
+			,@RequestParam(value="images", required = false) List<MultipartFile> images 
+			,@RequestParam(value="file", required = false) List<MultipartFile> file // 업로드된 파일 리스트
+			,@PathVariable("categoryNo") int categoryNo
+			,@PathVariable("boardNo") int boardNo
+			,HttpSession session // 서버 파일 저장 경로 얻어올 경로
+			,RedirectAttributes ra // 리다이렉트 시 값 전달용
+			) throws IllegalStateException, IOException {
+
+
+		// 1) boardCode, boardNo를 커맨드 객체(board)에 세팅 
+		board.setCategoryNo(categoryNo);
+		board.setBoardNo(boardNo);
+		// board(boardCode, boardNo , boardTitle, boardContent)
+		
+		if(board.getShoot() == 1) {
+			
+			List<Member> memberList = service.selectMemberList(loginMember);
+			System.out.println(memberList);
+			
+			emailService.emailShoot(board,memberList);
+			
+		}
+
+		// 2) 이미지 웹 접근 경로, 서버 저장 경로 
+		String webPath = "/resources/images/board/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+
+		// 3) 게시글 수정 서비스 호출 
+		int rowCount = service.departmentBoardUpdate(board, file, webPath, filePath, images);
+
+		// 4) 결과에 따라서 message, path 설정
+		String message = null; 
+		String path = "redirect:";
+
+		if(rowCount > 0) {
+			message = "게시글이 수정되었습니다.";
+			path += "/board/" + categoryNo + "/" + boardNo + "?cp=" + cp; // 상세조회 페이지
+		}else {
+			message = "게시글이 수정 실패.";
+			path += "update";
+		}
+
+		ra.addFlashAttribute("message",message);
+		return path;
+	}
+
+
 	// ----------------------------------------------------------------------------------
 
 
 	// ----------------------------------게시글 수정 화면 이동--------------------------------------
 
 	// 자유게시판 수정 화면 이동
-	@GetMapping("/{categoryNo:[3,4]}/{boardNo}/update")
+	@GetMapping("/{categoryNo:3}/{boardNo}/update")
 	public String selectFreeBoardUpdate(
 			@PathVariable("categoryNo") int categoryNo,
 			@PathVariable("boardNo") int boardNo,
@@ -487,33 +548,50 @@ public class BoardController {
 		return "board/inquiryBoardUpdate";
 	}
 
+	// 학과공지 수정 화면 전환
+	@GetMapping("/{categoryNo:2}/{boardNo}/update")
+	public String departmentBoardUpdate(
+			@PathVariable("categoryNo") int categoryNo
+			,@PathVariable("boardNo") int boardNo
+			,Model model // 데이터 전달용 객체 (기본 scope : requset)
+			) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+		Board board = service.selectInquiryBoard(map);
+		model.addAttribute("board", board);
+
+		return "board/departmentBoardUpdate";
+	}
+
 	// ----------------------------------------------------------------------------------
 
 
 	// ----------------------------------게시글 상세 조회--------------------------------------
-	
+
 	//공지사항 상세페이지
 	@GetMapping("/{categoryNo:1}/{boardNo}")
 	public String noticeDetail( @PathVariable("categoryNo") int categoryNo
-	         , @PathVariable("boardNo") int boardNo
-	         , Model model // 데이터 전달용 객체
-	         , RedirectAttributes ra // 리다이렉트 시 데이터 전달용 객체
-	         , @SessionAttribute(value="loginMember", required=false) Member loginMember
-	        
-	         ) throws ParseException  {
-      
-      Map<String, Object> map = new HashMap<String, Object>();
-      map.put("categoryNo", categoryNo);
-      map.put("boardNo", boardNo);
-      
-      // 게시글 상세 조회 서비스 호출
-      Board board = service.noticeDetailBoard(map);
-      
-      String path = null;
-      
+			, @PathVariable("boardNo") int boardNo
+			, Model model // 데이터 전달용 객체
+			, RedirectAttributes ra // 리다이렉트 시 데이터 전달용 객체
+			, @SessionAttribute(value="loginMember", required=false) Member loginMember
+
+			) throws ParseException  {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+
+		// 게시글 상세 조회 서비스 호출
+		Board board = service.noticeDetailBoard(map);
+
+		String path = null;
+
 		if (board != null) { // 조회 결과가 있을 경우
-			
-			
+
+
 			path = "board/noticeBoardDetail"; // forward할 jsp 경로
 
 			model.addAttribute("board", board);
@@ -524,7 +602,7 @@ public class BoardController {
 
 			ra.addFlashAttribute("message", "해당 게시글이 존재하지 않습니다.");
 		}
-      return path;
+		return path;
 	}
 
 	/** 자료실 상세 페이지
@@ -574,94 +652,48 @@ public class BoardController {
 	 * }
 	 */
 
-		Map<String, Object> map = new HashMap<String, Object>();
+	Map<String, Object> map = new HashMap<String, Object>();
 
-		/*
-		 * // 자료실 등록 연결
-		 * 
-		 * @GetMapping("/{categoryNo:5}/write") public String
-		 * writeBoardData(@PathVariable("categoryNo") int categoryNo) { return
-		 * "board/boardDataWrite"; }
-		 * 
-		 * 
-		 * //공지사항 목록
-		 * 
-		 * @GetMapping("/{categoryNo:1}") public String selelctNoticeBoardList(
-		 * 
-		 * @PathVariable("categoryNo") int categoryNo , @RequestParam(value="cp",
-		 * required=false, defaultValue = "1") int cp , Model model , @RequestParam
-		 * Map<String, Object> paramMap) {
-		 * 
-		 * if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색X)
-		 * 
-		 * // 게시글 목록 조회 서비스 호출 Map<String, Object> map =
-		 * service.selelctNoticeBoardList(categoryNo, cp);
-		 * 
-		 * 
-		 * // 조회 결과를 request scope에 세팅 후 forward model.addAttribute("map", map);
-		 * 
-		 * } else { // 검색어가 있을 때 (검색 O) paramMap.put("categoryNo", categoryNo);
-		 * Map<String, Object> map = service.selelctNoticeBoardList(paramMap, cp);
-		 * 
-		 * 
-		 * 
-		 * model.addAttribute("map", map); }
-		 * 
-		 * 
-		 * map.put("categoryNo", categoryNo); map.put("boardNo", boardNo); }
-		 */
-
-
+	/*
+	 * // 자료실 등록 연결
+	 * 
+	 * @GetMapping("/{categoryNo:5}/write") public String
+	 * writeBoardData(@PathVariable("categoryNo") int categoryNo) { return
+	 * "board/boardDataWrite"; }
+	 * 
+	 * 
+	 * //공지사항 목록
+	 * 
+	 * @GetMapping("/{categoryNo:1}") public String selelctNoticeBoardList(
+	 * 
+	 * @PathVariable("categoryNo") int categoryNo , @RequestParam(value="cp",
+	 * required=false, defaultValue = "1") int cp , Model model , @RequestParam
+	 * Map<String, Object> paramMap) {
+	 * 
+	 * if(paramMap.get("key") == null) { // 검색어가 없을 때 (검색X)
+	 * 
+	 * // 게시글 목록 조회 서비스 호출 Map<String, Object> map =
+	 * service.selelctNoticeBoardList(categoryNo, cp);
+	 * 
+	 * 
+	 * // 조회 결과를 request scope에 세팅 후 forward model.addAttribute("map", map);
+	 * 
+	 * } else { // 검색어가 있을 때 (검색 O) paramMap.put("categoryNo", categoryNo);
+	 * Map<String, Object> map = service.selelctNoticeBoardList(paramMap, cp);
+	 * 
+	 * 
+	 * 
+	 * model.addAttribute("map", map); }
+	 * 
+	 * 
+	 * map.put("categoryNo", categoryNo); map.put("boardNo", boardNo); }
+	 */
 
 
-	//공지사항 작성페이지
-	@PostMapping("/{categoryNo:1}/insert")
-	public String noticeboardInsert(
-			@PathVariable("categoryNo") int categoryNo
-			, Board board // 커멘트 객체(필드에 파라미터 담겨있음!)
-			, @RequestParam(value="images", required = false) List<MultipartFile> files
-			, @SessionAttribute("loginMember") Member loginMember
-			, RedirectAttributes ra
-			, HttpSession session
-			) throws IllegalStateException, IOException {
-		
-		
-		
-		// 1. 로그인한 회원 번호를 얻어와 board에 세팅
-		board.setMemberNo(loginMember.getMemberNo());
-		
-		// 2. boardCode도 board에 세팅
-		board.setCategoryNo(categoryNo);
-		
-		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로
-		//	  + 웹에서 요청 시 이미지를 볼 수 있는 경로(웹 접근 경로)
-		String webPath ="/resources/images/board/";
-		String filePath = session.getServletContext().getRealPath(webPath);
-		
-		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기
-		int boardNo = service.noticeboardInsert(board, files, webPath, filePath);
-		
-		// 게시글 삽입 성공 시
-		// -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트
-		// -> /board/{boardCode}/{boardNo}
-		
-		String message = null;
-		String path = "redirect:";
-		
-		if(boardNo > 0) { //성공 시
-			message = "게시글이 등록되었습니다.";
-			path += "/board/" + categoryNo + "/" + boardNo;
-			
-		} else {
-			message = "게시글 등록 실패";
-			path += "insert";
-		}
-		
-		ra.addFlashAttribute("message", message);
-		
-		return path;
-	}
-	
+
+
+
+
 
 	//공지사항 상세페이지
 	/*
@@ -692,8 +724,13 @@ public class BoardController {
 	 * 
 	 * ra.addFlashAttribute("message", "해당 게시글이 존재하지 않습니다."); } return path; }
 	 */
-
-	
+	@ResponseBody
+	@PostMapping("/check")
+	public int boardCheck(
+			@RequestBody Map<String, Object> map
+			){
+		return service.boardCheck(map); 
+	}
 
 
 	// 1:1문의 상세페이지
@@ -736,7 +773,7 @@ public class BoardController {
 		map.put("categoryNo", categoryNo);
 		map.put("boardNo", boardNo);
 
-		Board board = service.selectFreeBoard(map);
+		Board board = service.selectInquiryBoard(map);
 		String path = null;
 
 		if(board != null) {
@@ -851,20 +888,22 @@ public class BoardController {
 
 	// ---------------------------------------------------------------------------------------
 
-	
 
 
-	// 1:1문의 게시글 삭제
-	@GetMapping("/{categoryNo:3}/{boardNo}/delete")
+
+	// 자유게시판 게시글 삭제
+	@GetMapping("/{categoryNo:{3}}/{boardNo}/delete")
 	public String freeBoardDelete(@PathVariable("categoryNo") int categoryNo
 			,@PathVariable("boardNo") int boardNo
 			,HttpSession session
 			,RedirectAttributes ra
 			) {
 
-		int result = service.inquiryBoardDelete(boardNo);
+		int result = service.freeBoardDelete(boardNo);
 		String path = "redirect:";
 		String message = null;
+		
+		System.out.println("@@@@@@@@@@@@@@ :: @@@@@@@@@@@@@ ::" +result);
 
 		if(result > 0) {
 			path += "/board/" + categoryNo;
@@ -879,41 +918,87 @@ public class BoardController {
 		return path;
 	}
 
-	
-
-
-	
-
-	
-
-	
-
-
-	
-	
 
 
 
-	
-	
-
-	
-
-
-	
-
-
-	
-	
 
 
 
-	
+	//학과공지 작성페이지
+	@PostMapping("/{categoryNo:2}/write")
+	public String departmentBoardInsert(
+			@PathVariable("categoryNo") int categoryNo
+			, Board board // 커맨드 객체 (필드에 파라미터 담겨있음)
+			, @RequestParam(value="file", required = false) List<MultipartFile> file
+			, @RequestParam(value="images", required = false) List<MultipartFile> images
+			, @SessionAttribute(value="loginMember") Member loginMember
+			, RedirectAttributes ra
+			, HttpSession session)throws IllegalStateException, IOException {
+		
+		
+		// 1.로그인한 회원 번호를 얻어와 board에 세팅
+		board.setMemberNo(loginMember.getMemberNo());
+
+		// 2. boardCode도 board에 세팅
+		board.setCategoryNo(categoryNo);
+		
+		if(board.getShoot() == 1) {
+			
+			List<Member> memberList = service.selectMemberList(loginMember);
+			System.out.println(memberList);
+			
+			emailService.emailShoot(board,memberList);
+			
+		}
+		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
+		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
+		String webPath = "/resources/images/board/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+
+
+		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 
+		int boardNo = service.departmentBoardInsert(board, file, images, webPath, filePath);
+		// 게시글 삽입 성공 시
+		// -> 방금 삽입한 게시글의 상세 조회 페이지 리다이렉트
+		// -> /board/{boardCode}/{boardNo} @PathVariable
+		String message = null; 
+		String path = "redirect:";
+		if(boardNo > 0) { // 성공 시 
+			message = "게시글이 등록되었습니다.";
+			path += "/board/" + categoryNo + "/" + boardNo;
+		}else {
+			message= "게시글 등록 실패 ㅠㅠ";
+			path += "write";
+		}
+		ra.addFlashAttribute("message",message);
+
+
+
+		return path;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 	// 1:1문의 게시글 삭제
-	@GetMapping("/{categoryNo:4}/{boardNo}/delete")
+	@GetMapping("/{categoryNo:[2,3,4]{1}}/{boardNo}/delete")
 	public String boardDelete(@PathVariable("categoryNo") int categoryNo
 			,@PathVariable("boardNo") int boardNo
 			,HttpSession session
@@ -938,18 +1023,18 @@ public class BoardController {
 		return path;
 	}
 
-	
 
 
 
-	
 
 
-	
 
-	
 
-	
+
+
+
+
+
 
 
 

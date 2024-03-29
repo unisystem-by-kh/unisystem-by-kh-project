@@ -2,9 +2,10 @@
     width: 1200px;
     margin: auto;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 3px solid crimson;
     font-size: 25px;
     font-weight: bold;
+    margin-bottom: 15px;
 }
 
 .logo{
@@ -12,6 +13,12 @@
     margin: auto;
     text-align: center;
     height: 200pxs;
+    margin-bottom: 20px;
+}
+
+button{
+    border: 2px solid crimson;
+    margin-left: 5px;
 }
 
 #main-logo > div:nth-of-type(1){
@@ -27,12 +34,18 @@
     font-size: 14px;
 }
 
+.logoText{
+    text-decoration: none;
+    color: crimson;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
 .number{
     width: 1000px;
     margin: auto;
     display: flex;
     align-items: center;
-    margin-top: 100px;
 }
 
 .number > p{
@@ -42,6 +55,20 @@
 
 .number > span{
     margin-left: 15px;
+}
+
+#number{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    color: green;
+}
+#number > p{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: -10px;
 }
 
 #inputNo{
@@ -56,15 +83,19 @@
     border-bottom: 2px solid #ddd;
 }
 
-input:focus{
+input:focus {
     outline: none;
+    border-bottom: 2px solid crimson;
+    box-shadow: 0 0 5px crimson;
 }
+
 
 .pw{
     width: 1000px;
     margin: auto;
     display: flex;
     align-items: center;
+    margin-top: 15px;
 }
 
 .pw > p{
@@ -122,6 +153,7 @@ input:focus{
     margin: auto;
     display: flex;
     align-items: center;
+    margin-top: 15px;
 }
 
 .name > p{
@@ -146,11 +178,13 @@ input:focus{
 }
 
 
+
 .addr{
     width: 1000px;
     margin: auto;
     display: flex;
     align-items: center;
+    margin-top: 15px;
 }
 
 .addr > p{
@@ -196,12 +230,17 @@ input:focus{
     border-bottom: 2px solid #ddd;
 }
 
+#sample6_address{
+    margin: 5px 0;
+}
+
 
 .email{
     width: 1000px;
     margin: auto;
     display: flex;
     align-items: center;
+    margin-top: 15px;
 }
 
 .email > p{
@@ -213,7 +252,7 @@ input:focus{
     margin-left: 15px;
 }
 
-#inputEmail{
+#inputEmail, #authKey{
     width: 1000px;
     display: flex;
     margin: auto;
@@ -225,9 +264,40 @@ input:focus{
     font-weight: bold;
     cursor: pointer;
 }
-#emailBtn:hover{
+#emailBtn:hover, #sendAuthKeyBtn:hover, #checkAuthKeyBtn:hover{
     background-color: crimson;
     color: white;
+}
+
+.signUp-input-area{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#authKey{
+    width: 70%;
+    height: 30px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+#authKeyMessage{
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    font-size: 1.0em;
+}
+
+#checkAuthKeyBtn, #sendAuthKeyBtn{
+    width: 30%;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    height: 30px;
 }
 
 #inputEmail > input{
@@ -260,18 +330,18 @@ input:focus{
     margin: auto;
 }
 
-#emailBtn2{
+#emailBtn2, #memberCk{
     width: 30%;
     background-color: white;
     font-weight: bold;
     cursor: pointer;
 }
-#emailBtn2:hover{
+#emailBtn2:hover , #memberCk:hover{
     background-color: crimson;
     color: white;
 }
 
-#inputEmail2 > input{
+#inputEmail2, #inputNo > input{
     width: 70%;
     height: 30px;
     border: none;
@@ -283,6 +353,7 @@ input:focus{
     margin: auto;
     display: flex;
     align-items: center;
+    margin-top: 15px;
 }
 
 .tel > p{
@@ -341,6 +412,8 @@ input:focus{
     align-items: center;
     font-size: 16px;
     font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 
@@ -386,6 +459,7 @@ input:focus{
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top: 3px solid crimson;
 }
 
 .frmBtn > button{
@@ -395,6 +469,7 @@ input:focus{
     font-weight: bold;
     background-color: white;
     cursor: pointer;
+    margin-top: -50px;
 }
 
 .frmBtn > button:hover{
@@ -409,4 +484,8 @@ input:focus{
 
 #genMessage{
     margin-left: 50px;
+}
+
+#inputNo{
+    display: flex;
 }

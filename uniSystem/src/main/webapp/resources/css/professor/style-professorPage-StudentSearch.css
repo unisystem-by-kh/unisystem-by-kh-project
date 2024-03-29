@@ -3,7 +3,7 @@
 } */
 /* 학생 정보 영역 */
 .student-area{
-    width: 1000px;
+    width: 1350px;
     height: 600px;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@
 
 /* 표 영역 */
 .student-info-area{
-    width: 1000px;
+    width: 1350px;
     max-height: 550px;
     overflow-y: auto;
 }
@@ -43,6 +43,10 @@
 /* 학생 정보 값 해드 */
 .student-info-value-name{
     display: flex;
+}
+.student-info-value-name > div:nth-child(2n-1){
+    background-color: gray;
+    color: white;
 }
 /* 학생 정보 값 해드 각 영역 */
 .student-info-value-name > div{
@@ -58,15 +62,54 @@
 
     margin-top: 15px;
 }
+.student-info-value-name > :nth-child(9){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 400px;
+    height: 27px;
+    border: 1px solid gray;
+    font-size: 1.05em;
+    font-weight: bold;
+
+    margin-top: 15px;
+}
+.student-info-value-name > :nth-child(5){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 27px;
+    border: 1px solid gray;
+    font-size: 1.05em;
+    font-weight: bold;
+
+    margin-top: 15px;
+}
+.student-info-value-name > :nth-child(6){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 27px;
+    border: 1px solid gray;
+    font-size: 1.05em;
+    font-weight: bold;
+
+    margin-top: 15px;
+}
 
 /* 학생 정보 값 */
 .student-info-value{
     display: flex;
 }
 .student-info-value > :nth-child(1):hover{
-    text-decoration: underline;
+    /* text-decoration: underline;
     cursor: pointer;
-    color: crimson;
+    color: crimson; */
 }
 
 /* 학생 정보 값 각 영역 */
@@ -82,77 +125,99 @@
 
     white-space: nowrap;
     overflow: hidden;
-
 }
-
-/* 시간표 */
-
-
-/* 학생 시간표 영역 */
-.student-clock{
-    width: 620px;
-    height: 600px;
+.student-info-value > :nth-child(9){
     display: flex;
     justify-content: center;
     align-items: center;
 
-    margin-top: 50px;
-    margin-left: 15px;
-    
-    /* border: 1px solid crimson; */
-}
+    width: 200px;
+    height: 27px;
+    border: 1px solid #ddd;
+    font-size: 0.85em;
 
-
-/* 학생 시간표 영역 */
-.student-clock-area{
-    width: 620px;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    
-    padding: 10px;
-    padding-top: 32px;
-    /* border: 1px solid crimson; */
+    white-space: nowrap;
+    overflow: hidden;
 }
-
-.student-clock-info-value{
-    display: flex;
-}
-.student-object-info-value{
-    display: flex;
-}
-
-/* 시간표 헤더 값 영역 */
-.student-clock-info-value > div{
+.student-info-value > :nth-child(5){
     display: flex;
     justify-content: center;
     align-items: center;
 
+    width: 100px;
+    height: 27px;
+    border: 1px solid #ddd;
+    font-size: 0.85em;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.student-info-value > :nth-child(6){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 27px;
+    border: 1px solid #ddd;
+    font-size: 0.85em;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.student-info-value:nth-child(2n-1){
+    background-color: #eee;
+}
+.student-info-value:hover{
+    background-color: rgba(236, 164, 162, 0.747);
+    cursor: pointer;
+}
+
+.search-area{
+    width: 1350px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-key{
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+#search-query{
+    padding-left: 10px;
+    border: 2px solid gray;
+    border-radius: 10px;
     width: 300px;
-    height: 55px;
-    border: 1px solid gray;
-    font-size: 1.1em;
+    height: 30px;
+}
+
+#studentSearch > button{
+    width: 70px;
+    height: 30px;
+    border: 2px solid gray;
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.infoCheck{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: gray;
+    font-size: 0.9em;
     font-weight: bold;
 }
-
-/* 시간표 값 영역 */
-.student-object-info-value > div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 300px;
-    height: 53px;
-    border: 1px solid #ddd;
-    font-size: 1.1em;
-}
-
-
-
-
-
-
-
 
 
 
@@ -183,14 +248,14 @@
 
 /* 모달 콘텐츠 스타일 */
 .modal-content {
-    background-color: #fefefe;
+    background-color: whitesmoke;
     margin: 15% auto; /* 모달 콘텐츠를 화면 중앙에 배치 */
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px; /* 최대 너비 지정 */
     border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(255, 0, 0, 0.418);
 }
 
 /* 모달 닫기 버튼 스타일 */
@@ -217,6 +282,34 @@
     border-radius: 5px;
 }
 
-#lectureInfo > :nth-child(1){
-    color: red;
+#lectureInfo > :nth-child(n){
+    color: black;
+}
+
+#excelBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 45px;
+
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+
+    font-weight: bold;
+    color: gray;
+    padding: 0px;
+    margin-left: 50px;
+
+    cursor: pointer;
+}
+#excelBtn:hover{
+    color: #888;
+    background-color: rgba(236, 164, 162, 0.747);
+    border: 3px solid gray;
+}
+#infoV{
+    cursor: default;
 }

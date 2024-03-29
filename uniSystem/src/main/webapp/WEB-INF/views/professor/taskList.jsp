@@ -14,16 +14,16 @@
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
         <div class="mainContainer">
             <div class="taskList">
-                <h2>과제 목록</h2>
+                <h2>제출된 과제 목록</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>번호</th>
+                            <th>과제번호</th>
                             <th>학년</th>
                             <th>학기</th>
                             <th>과목명</th>
                             <th>분류</th>
-                            <th>과제명</th>
+                            <th>파일</th>
                             <th>마감일</th>
                         </tr>
                     </thead>
@@ -34,7 +34,7 @@
                             <td>1</td>
                             <td>자료구조</td>
                             <td>전공</td>
-                            <td><a href="/taskDetails.jsp?id=1">과제 1</a></td>
+                            <td><a href="/taskDetails.jsp?id=1">파일1</a></td>
                             <td>2024-03-15</td>
                         </tr>
                         <tr>
@@ -43,7 +43,7 @@
                             <td>2</td>
                             <td>프로그래밍 기초</td>
                             <td>전공</td>
-                            <td><a href="/taskDetails.jsp?id=2">과제 2</a></td>
+                            <td><a href="/taskDetails.jsp?id=2">파일2</a></td>
                             <td>2024-03-18</td>
                         </tr>
                         <tr>
@@ -52,7 +52,7 @@
                             <td>1</td>
                             <td>영어 회화</td>
                             <td>교양</td>
-                            <td><a href="/taskDetails.jsp?id=3">과제 3</a></td>
+                            <td><a href="/taskDetails.jsp?id=3">파일3</a></td>
                             <td>2024-03-20</td>
                         </tr>
                         <tr>
@@ -61,7 +61,7 @@
                             <td>2</td>
                             <td>데이터베이스</td>
                             <td>전공</td>
-                            <td><a href="/taskDetails.jsp?id=4">과제 4</a></td>
+                            <td><a href="/taskDetails.jsp?id=4">파일4</a></td>
                             <td>2024-03-22</td>
                         </tr>
                         <tr>
@@ -70,7 +70,7 @@
                             <td>1</td>
                             <td>국어문학</td>
                             <td>교양</td>
-                            <td><a href="/taskDetails.jsp?id=5">과제 5</a></td>
+                            <td><a href="/taskDetails.jsp?id=5">파일5</a></td>
                             <td>2024-03-25</td>
                         </tr>
                     </tbody>

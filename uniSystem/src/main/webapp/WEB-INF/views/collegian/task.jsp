@@ -27,62 +27,78 @@
 			<jsp:include page="/WEB-INF/views/common/collegian-nav.jsp" />
 
 			<div class="stu-container">
-            <div class="stu-header">
-                <h2>과제물 제출 </h2>
-            </div>
+				<div class="stu-header">
+					<h2>과제물 제출</h2>
+				</div>
 
-            <h4>📣 제출 파일은 .hwp .pdf 형식으로 제한합니다.</h4>
+				<h4>📣 제출 파일은 .hwp .pdf 형식으로 제한합니다.</h4>
 
-            <div class="stu-board">
-                <table>
-                    <tr>
-                        <th>No.</th>
-                        <th>학과명</th>
-                        <th>학년</th>
-                        <th>학기</th>
-                        <th>과목명</th>
-                        <th>분류</th>
-                        <th>학점</th>
-                        <th>담당교수</th>
-                        <th>과제 확인</th>
-                        <th>과제 제출</th>
-                        <th>제출 기한</th>
-                    </tr>
+				<div class="stu-board">
+					<table>
+						<tr>
+							<th>No.</th>
+							<th>학과명</th>
+							<th>학년</th>
+							<th>학기</th>
+							<th>과목명</th>
+							<th>분류</th>
+							<th>학점</th>
+							<th>담당교수</th>
+							<th>과제 확인</th>
+							<th>과제 제출</th>
+							<th>제출 기한</th>
+						</tr>
 
-                    <tr>
-                        <td>1</td>
-                        <td>컴퓨터과학과</td>
-                        <td>1학년</td>
-                        <td>1학기</td>
-                        <td>JAVA</td>
-                        <td>전공</td>
-                        <td>3</td>
-                        <td>남궁성</td>
-                        <td><a>확인</a></td>
-                        <td><button>제출하기</button></td>
-                        <td>2024-04-15</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>컴퓨터과학과</td>
-                        <td>1학년</td>
-                        <td>1학기</td>
-                        <td>JAVA</td>
-                        <td>전공</td>
-                        <td>3</td>
-                        <td>남궁성</td>
-                        <td><a>확인</a></td>
-                        <td><button>제출완료</button></td>
-                        <td>2024-04-15</td>
-                    </tr>
-                    
-                    
-                </table>
+						<c:choose>
+							<c:when test="${empty map.taskList}">
+								<td colspan='7'>제출할 과제 목록이 없습니다.</td>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${map.taskList}" var="ta">
+									<tr>
+										<td>${ta.classNo}</td>
+										<td>${ta.departmentName}</td>
+										<td>${ta.classGrade}</td>
+										<td>${ta.classTerm}</td>
+										<td>${ta.className}</td>
+										<c:if test="${ta.classPoint == 2}">
+											<td>교양</td>
+										</c:if>
+										<c:if test="${ta.classPoint == 3}">
+											<td>전공</td>
+										</c:if>
+										<td>${ta.classPoint}</td>
+										<td>${ta.memberName}</td>
+										<td><a>${ta.taskRoute}</a></td>
+										<td>
+										<button onclick= submitTask(this)>
+										<c:choose>
+										   <c:when test="${empty ta.filePath}">
+												제출 하기
+										   </c:when>
+										   <c:otherwise>
+												제출 확인
+										   </c:otherwise>
+										</c:choose>
+										</button>
+										</td>
+                                        <td style="display : none;" filePath="${ta.filePath}" fileName="${ta.fileName}">${ta.taskNo}</td><%-- 과제 제출 정보 --%>
+										<td>${ta.taskDate}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 
-            </div>
-            <div class="task-notice">
-                <h3>과제 제출 안내</h3>
-                <pre><strong>👁‍🗨 반드시 제출한 과제물 파일을 열거나 다운로드하여 아래 사항들을 확인하시기 바랍니다.</strong>                    
+
+					</table>
+
+				</div>
+				<div class="task-notice">
+					<h3>과제 제출 안내</h3>
+					<pre>
+
+
+<strong>👁‍🗨 반드시 제출한 과제물 파일을 열거나 다운로드하여 아래 사항들을 확인하시기 바랍니다.</strong>                    
     
     ✅ 제출한 과제물이 해당 교과목과 일치하는지 확인.
 
@@ -103,12 +119,37 @@
 
                 </pre>
 
-            </div>
-        </div>
+				</div>
+			</div>
 			
 	</main>
 
+    <!-- 모달 -->
+        <div class="modal" id="modal">
+            <div class="modal_body">
+                <div class="m_head">
+                    <div class="modal_title">과제물 제출 창</div>
+                    <div class="close_btn " id="close_btn" onclick = notShow()>X</div>
+                </div>
+                <div class="m_body">
+                    <div class="modal_label" id="name_box"><h2></h2></div>
+                <form action="/collegian/insertTask" method="POST" id="insertTask" onsubmit= "return taskSubmitValidation()" enctype="multipart/form-data">
+                    <div class="modal_label"><h4>제출 파일</h4></div>
+                    <input type="file" name="taskFile" class="input_box" id="des_box" accept=".pdf,.PDF,.hwp" />
+                    <input type="hidden" name="taskNo" id="task_no" />
+					<div class="modal_label"><h4>제출한 파일</h4></div>
+					💾 <a id="openFile" href="" download=""></a>
+                </div>
+                <div class="m_footer">
+                    <div class="modal_btn cancle" id="close_btn" onclick = notShow()>CANCLE</div>
+                    <div class="modal_btn save" id="save_btn"><button type="submit">SAVE</button></div>
+                </div>
+                </form>
+            </div>
+        </div>
 
+    <script src="/resources/js/collegian/task.js"></script>
+	<script src="/resources/js/collegian/nav.js"></script>
 
 </body>
 

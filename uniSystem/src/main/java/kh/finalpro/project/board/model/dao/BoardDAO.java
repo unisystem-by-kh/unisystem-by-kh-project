@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.BoardFile;
 import kh.finalpro.project.board.model.dto.Pagination;
+import kh.finalpro.project.main.model.dto.Member;
 
 @Repository
 public class BoardDAO {
@@ -184,6 +185,7 @@ public class BoardDAO {
 	 * @return
 	 */
 	public int inquiryBoardDelete(int boardNo) {
+		System.out.println(boardNo);
 		return sqlSession.update("boardMapper.inquiryBoardDelete", boardNo);
 	}
 
@@ -235,11 +237,15 @@ public class BoardDAO {
 	 * @param board
 	 * @return
 	 */
-	public int noticeboardInsert(Board board) {
-		int result = sqlSession.insert("boardMapper.noticeboardInsert", board);
+	
+	public int noticeboardWrite(Board board) {
 		
-		// 삽입 성공 시
-		if(result > 0) result = board.getBoardNo();
+		int result =  sqlSession.insert("boardMapper.noticeboardInsert", board);
+		
+		if(result > 0) {
+			result = board.getBoardNo();
+		}
+		
 		return result;
 	}
 	
@@ -247,10 +253,86 @@ public class BoardDAO {
 	 * @param uploadList
 	 * @return
 	 */
-	public int insertFileList(List<BoardFile> uploadList) {
+	public int noticeBoardFile(List<BoardFile> uploadList) {
 		return sqlSession.insert("boardMapper.insertFileList", uploadList);
 	}
 
+	/** 1:1문의 비밀번호 확인
+	 * @param map
+	 * @return
+	 */
+	public int boardCheck(Map<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.boardCheck", map);
+	}
+
+	/** 학과공지 파일 업로드
+	 * @param uploadList
+	 * @return
+	 */
+	public int insertDepartmentFile(List<BoardFile> uploadList1) {
+		return sqlSession.insert("boardMapper.insertDepartmentFile", uploadList1);
+	}
+
+	/** 학과공지 이미지 업로드
+	 * @param uploadList2
+	 * @return 
+	 */
+	public int insertDepartmentImage(List<BoardFile> uploadList2) {
+		return sqlSession.insert("boardMapper.insertDepartmentImage", uploadList2);
+	}
+
+ 	/** 학과공지 수정 
+	 * @param board
+	 * @return
+	 */
+	public int departmentBoardUpdate(Board board) {
+		return sqlSession.update("boardMapper.updateDepartmentBoard", board);
+	}
+
+	public List<Member> selectMemberList(Member loginMember) {
+		return sqlSession.selectList("memberMapper.selectMemberList", loginMember);
+	}
+
+
+	public int inquiryImageUpdate(BoardFile img2) {
+		return sqlSession.update("boardMapper.inquiryImageUpdate", img2);
+	}
+
+	public int inquiryImageInsert(BoardFile img2) {
+		return sqlSession.insert("boardMapper.inquiryImageInsert", img2);
+
+	}
+
+
+
+	/** 자유게시판 수정
+	 * @param board
+	 * @return 
+	 */
+	public int freeBoardUpdate(Board board) {
+		System.out.println(board);
+		return sqlSession.update("boardMapper.updateFreeBoardList", board);
+	}
+
+	public int freeBoardDelete(int boardNo) {
+		return sqlSession.delete("boardMapper.freeBoardDelete", boardNo);
+
+	}
+
+	public int freeFileDelete(Map<String, Object> deleteMap) {
+		return sqlSession.delete("boardMapper.freeFileDelete", deleteMap);
+	}
+
+	public int freeFileUpdate(BoardFile img) {
+		return sqlSession.update("boardMapper.freeFileUpdate", img);
+	}
+
+	public int freeFileInsert(BoardFile img) {
+		return sqlSession.insert("boardMapper.freeFileInsert", img);
+	}
+	
+
+	
 
 	
 }

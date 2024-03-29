@@ -6,11 +6,18 @@ import java.util.List;
 
 import com.google.api.services.calendar.model.Event;
 
+import kh.finalpro.project.admin.model.dto.Admin;
 import kh.finalpro.project.main.model.dto.Member;
 
 public interface AdminService {
 
 	List<Member> selectList(String input);
+
+	int saveUniqueNo(Admin admin);
+
+
+
+
 
 	// 추후 수정 예정
 //	void createEvent(Event event) throws IOException, GeneralSecurityException;

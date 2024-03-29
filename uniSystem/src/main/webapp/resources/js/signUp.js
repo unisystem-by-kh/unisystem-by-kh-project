@@ -1,21 +1,75 @@
-console.log('test');
-
-console.log(memberListArray)
-
-console.log(memberListArray.length);
-
-console.log();
-
-
 const checkObj = {
+    "memberCk" : false,
     "memberNo" : false,
     "memberPw" : false,
     "memberPwConfirm" : false,
     "memberName" : false,
     "memberEmail" : false,
     "memberPhone" : false,
-    "memberGen" : false
+    "memberGen" : false,
+    "authKey" : false
 };
+
+
+// 번호 유효성 검사
+const memberNo = document.getElementById("memberNo");
+const noMessage = document.getElementById("noMessage");
+const noBtn = document.getElementById("memberCk");
+const numberMessage = document.getElementById("numberMessage");
+
+memberNo.addEventListener("input" , () => {
+    // 입력된 번호가 없을 경우
+    if(memberNo.value.trim().length == 0){
+        memberNo.value = '';
+        noMessage.innerText = '번호를 입력해주세요.';
+        
+        noMessage.classList.remove("confirm" , "error");
+
+        checkObj.memberNo = false;
+        return;
+    }
+
+    const regEx  = /^(01|02|03)-\d{2}\d{5}$/;
+
+    if(regEx.test(memberNo.value)){ // 유효한 경우
+        noMessage.classList.add("confirm");
+        noMessage.classList.remove("error");
+        noMessage.innerText = '유효한 번호입니다.';
+        checkObj.memberNo = true; // 유효 O
+
+    } else { // 유효하지 않은 경우
+        noMessage.classList.add("error");
+        noMessage.classList.remove("confirm");
+        noMessage.innerText = '유효하지 않은 번호입니다.';
+        checkObj.memberNo = false; // 유효 X
+    }
+
+})
+
+noBtn.addEventListener("click" , (e) => {
+
+    fetch("/selectInfo?number=" + memberNo.value)
+    .then(response => response.text()) // 응답객체 -> 파싱(parsing, 데이터 형태 변환)
+    .then(result => {
+        if(result != ''){
+            numberMessage.classList.add("confirm");
+            numberMessage.classList.remove("error");
+            numberMessage.innerHTML = '회원님의 소속 학과는 "' + result + '" 입니다.';
+            checkObj.memberCk = true;
+        }else{
+            numberMessage.classList.add("error");
+            numberMessage.classList.remove("confirm");
+            numberMessage.innerText = '일치하지 않은 회원 번호 입니다.';
+            checkObj.memberCk = false;
+        }
+
+    })
+    .catch(err => {console.log(err)})
+    
+})
+
+
+
 
 // 이메일 유효성 검사
 const memberEmail = document.getElementById("memberEmail");
@@ -39,34 +93,25 @@ memberEmail.addEventListener("input" , () => {
 
     const regEx = /^[A-Za-z\d\-\_]{6,}@[가-힣\w\-\_]+(\.\w+){1,3}$/;
 
-    // 2) 입력 받은 이메일과 정규식 일치 여부 판별
     if(regEx.test(memberEmail.value)){ // 유효한 경우
 
-        /* *************************************************** */
-        /* fetch() API를 이용한 ajax(비동기 통신) */
-
-        // GET 방식 ajax 요청(파라미터는 쿼리스트링으로 전달!)
         fetch("/dupCheck/email?email=" + memberEmail.value)
         .then(response => response.text()) // 응답객체 -> 파싱(parsing, 데이터 형태 변환)
         .then(count => {
-            // count : 중복되면 1, 중복 아니면 0
             console.log(count);
             if(count == 0){
                 emailMessage.classList.add("confirm");
                 emailMessage.classList.remove("error");
                 emailMessage.innerText = '사용 가능한 이메일 입니다.';
+                checkObj.memberEmail = true;
             }else{
                 emailMessage.classList.add("error");
                 emailMessage.classList.remove("confirm");
                 emailMessage.innerText = '이미 사용중인 이메일 입니다.';
+                checkObj.memberEmail = false;
             }
-
-        }) // 파싱한 데이터를 이용해서 수행할 코드 작성
+        })
         .catch(err => {console.log(err)}) // 예외 처리
-
-        /* *************************************************** */
-
-        checkObj.memberEmail = true; // 유효 O
 
     }else{ // 유효하지 않은 경우
         emailMessage.classList.add("error");
@@ -75,10 +120,104 @@ memberEmail.addEventListener("input" , () => {
         checkObj.memberEmail = false; // 유효 X
     }
 
-    console.log(memberEmail.value);
-
 })
 
+
+// 인증번호 발송
+const sendAuthKeyBtn = document.getElementById("sendAuthKeyBtn");
+const authKeyMessage = document.getElementById("authKeyMessage");
+let authTimer;
+let authMin = 4;
+let authSec = 59;
+// 인증 확인
+const authKey = document.getElementById("authKey");
+const checkAuthKeyBtn = document.getElementById("checkAuthKeyBtn");
+
+// 인증번호를 발송한 이메일 저장
+let tempEmail;
+let resultAuthKey;
+
+sendAuthKeyBtn.addEventListener("click", function(){
+    authMin = 4;
+    authSec = 59;
+
+    // 인증 번호 발송 할 때마다 다시 타이머를 멈춤
+    clearInterval(authTimer);
+
+    checkObj.authKey = false;
+
+    if(checkObj.memberEmail){ // 중복이 아닌 이메일인 경우
+
+        /* fetch() API 방식 ajax */
+        fetch("/sendEmail/signUp?email="+memberEmail.value)
+        .then(resp => resp.json())
+        .then(result => {
+
+            resultAuthKey = result.authKey;
+            console.log(result.authKey);
+
+            if(result != null){
+                tempEmail = memberEmail.value;
+
+            }else{
+                alert("인증번호 발송 실패");
+            }
+
+            checkAuthKeyBtn.addEventListener('click' , (e) => {
+                console.log(resultAuthKey);
+                console.log(authKey.value);
+
+                if(resultAuthKey == authKey.value){
+                    alert('인증번호가 일치합니다.');
+                    clearInterval(authTimer);
+                    authKeyMessage.innerText = "인증되었습니다.";
+                    authKeyMessage.classList.add("confirm");
+                    checkObj.authKey = true;
+
+                    authKey.disabled = true;
+                    checkAuthKeyBtn.disabled = true;
+                }else{
+                    alert('인증번호가 일치하지 않습니다.\n다시 인증해주세요.');
+                    checkObj.authKey = false;
+                }
+            })
+
+        })
+        .catch(err => {
+            console.log("이메일 발송 중 에러 발생");
+            console.log(err);
+        });
+
+        alert("인증번호가 발송 되었습니다.");
+
+        authKeyMessage.innerText = "05:00";
+        authKeyMessage.classList.remove("confirm");
+
+        authTimer = window.setInterval(()=>{
+
+            authKeyMessage.innerText = "0" + authMin + ":" + (authSec<10 ? "0" + authSec : authSec);
+           
+            if(authMin == 0 && authSec == 0){
+                checkObj.authKey = false;
+                clearInterval(authTimer);
+                return;
+            }
+
+            if(authSec == 0){
+                authSec = 60;
+                authMin--;
+            }
+
+            authSec--; // 1초 감소
+
+        }, 1000)
+
+    } else{
+        alert("중복되지 않은 이메일을 작성해주세요.");
+        memberEmail.focus();
+    }
+
+});
 
 
 // 비밀번호/비밀번호 확인 유효성 검사
@@ -158,7 +297,6 @@ memberPwConfirm.addEventListener("input" , () => {
 })
 
 
-
 // 이름 유효성 검사
 const memberName = document.getElementById("memberName");
 const nameMessage = document.getElementById("nameMessage");
@@ -192,7 +330,6 @@ memberName.addEventListener("input" , () => {
 })
 
 
-
 // 전화번호 유효성 검사
 const memberPhone = document.getElementById("memberPhone");
 const phoneMessage = document.getElementById("phoneMessage");
@@ -208,7 +345,6 @@ memberPhone.addEventListener("input" , ()=>{
 
         return;
     }
-
 
     const regEx = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/;
 
@@ -226,55 +362,11 @@ memberPhone.addEventListener("input" , ()=>{
 
 })
 
-// 번호 유효성 검사
-const memberNo = document.getElementById("memberNo");
-const noMessage = document.getElementById("noMessage");
-
-memberNo.addEventListener("input" , () => {
-    // 입력된 이름이 없을 경우
-    if(memberNo.value.trim().length == 0){
-        memberNo.value = '';
-        noMessage.innerText = '번호를 입력해주세요.';
-        
-        noMessage.classList.remove("confirm" , "error");
-
-        checkObj.memberNo = false;
-
-        return;
-    }
-
-    const regEx  = /^(01|02|03)-\d{2}\d{5}$/;
-
-
-    if(regEx.test(memberNo.value)){ // 유효한 경우
-        noMessage.classList.add("confirm");
-        noMessage.classList.remove("error");
-        noMessage.innerText = '유효한 번호입니다.';
-        checkObj.memberNo = true; // 유효 O
-    } else { // 유효하지 않은 경우
-        noMessage.classList.add("error");
-        noMessage.classList.remove("confirm");
-        noMessage.innerText = '유효하지 않은 번호입니다.';
-        checkObj.memberNo = false; // 유효 X
-    }
-})
 
 // 성별 유효성 검사
 const memberGenM = document.getElementById("memberGenM");
 const memberGenF = document.getElementById("memberGenF");
 const genMessage = document.getElementById("genMessage");
-
-memberGenM.addEventListener("change", () => {
-    // 남성을 선택한 경우
-    memberGenF.checked = false; // 여성 선택 취소
-    checkObj.memberGen = true; // 유효 O
-});
-
-memberGenF.addEventListener("change", () => {
-    // 여성을 선택한 경우
-    memberGenM.checked = false; // 남성 선택 취소
-    checkObj.memberGen = true; // 유효 O
-});
 
 // 성별이 선택되었는지 확인
 function isGenderSelected() {
@@ -284,6 +376,9 @@ function isGenderSelected() {
 // 성별 유효성 검사 및 메시지 표시
 function validateGender() {
     if (!isGenderSelected()) {
+        genMessage.classList.add("error");
+        genMessage.classList.remove("confirm");
+        genMessage.innerText = '성별을 선택해 주세요.';
         checkObj.memberGen = false; // 유효 X
     } else {
         genMessage.innerText = '성별이 선택되었습니다.';
@@ -294,35 +389,210 @@ function validateGender() {
 }
 
 // 성별이 선택되지 않았을 때 메시지 표시
-document.getElementById("memberGenM").addEventListener("change", validateGender);
-document.getElementById("memberGenF").addEventListener("change", validateGender);
-
-
-
-
+memberGenM.addEventListener("change", validateGender);
+memberGenF.addEventListener("change", validateGender);
 
 // 회원 가입 form 태그가 제출 되었을 때
 const signUpFrm = document.getElementById("signUpFrm");
-signUpFrm.addEventListener("submit" , e => {
+signUpFrm.addEventListener("submit", e => {
+    e.preventDefault(); // 제출을 막음
 
-    for(let key in checkObj){
-        if(!checkObj[key]){
-            switch(key){
-                case "memberNo": alert("번호 유효하지 않습니다.\n다시 입력 해주세요."); break;
-                case "memberEmail": alert("이메일이 유효하지 않습니다."); break;
-                case "memberPw": alert("비밀번호가 유효하지 않습니다."); break;
-                case "memberPwConfirm": alert("비밀번호확인이 일치하지 않습니다."); break;
-                case "memberNickname": alert("닉네임이 유효하지 않습니다."); break;
-                case "memberPhone": alert("전화번호가 유효하지 않습니다."); break;
-                case "memberGen" : alert("성별을 꼭 체크해 주세요."); break;
+    for (let key in checkObj) {
+        if (!checkObj[key]) {
+            switch (key) {
+                case "memberCk":
+                    swal({
+                        title: "알림",
+                        text: "학과 확인을 해주세요.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberNo":
+                    swal({
+                        title: "알림",
+                        text: "번호 유효하지 않습니다. 다시 입력 해주세요.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberEmail":
+                    swal({
+                        title: "알림",
+                        text: "이메일이 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "authKey":
+                    swal({
+                        title: "알림",
+                        text: "인증번호 확인 필수",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberPw":
+                    swal({
+                        title: "알림",
+                        text: "비밀번호가 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberPwConfirm":
+                    swal({
+                        title: "알림",
+                        text: "비밀번호확인이 일치하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberName":
+                    swal({
+                        title: "알림",
+                        text: "이름이 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberPhone":
+                    swal({
+                        title: "알림",
+                        text: "전화번호가 유효하지 않습니다.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
+                case "memberGen":
+                    swal({
+                        title: "알림",
+                        text: "성별을 체크해 주세요.",
+                        icon: "warning",
+                        button: "OK"
+                    })
+                    .then((es)=>{
+                        if(es){
+                            document.getElementById(key).focus();
+                        }
+                    });
+                    break;
             }
 
-            document.getElementById(key).focus();
-
-            e.preventDefault();
+            // document.getElementById(key).focus();
 
             return;
         }
     }
 
-})
+    // 성별을 체크하지 않은 경우(성별은 별개)
+    if (!isGenderSelected()) {
+        swal({
+            title: "알림",
+            text: "모든 값을 선택 및 입력해 주세요.",
+            icon: "warning",
+            button: "OK"
+        });
+        return;
+    }
+
+    // 모든 유효성 검사 통과 시 폼 제출
+    signUpFrm.submit();
+});
+
+// swal 사용법
+// swal({
+//     title : "제목 부분 (크게나옴)",
+//     text : "내용 부분(작게나옴)", // 써도 되고 안써도됨
+//     icon : "warning", // "warning", "success", "error" 아이콘 모양 세개중 하나 골라사용
+//     closeOnClickOutside : false, // ok이나 확인 버튼 클릭시에만 알림창 꺼짐 옵션 
+//     dangerMode : true, // 경고모드 확인 버튼이 빨개짐
+//     buttons : "ok" // "ok" 부분에 사용할 문구 작성 가능 (기본 값 'OK')
+//     // ["취소","확인"] <-- 이렇게 confirm처럼 사용 가능 
+// })
+// .then((yes)=>{
+//     if(yes){
+//         // 확인 버튼 클릭시 후에 실행할 코드 input에 포커스 줄거면 여기에 코드 작성해야 포커스 감 
+//     }
+// });
+
+// 버려진 코드 ↓↓↓↓↓↓↓↓↓
+// // 회원 가입 form 태그가 제출 되었을 때
+// const signUpFrm = document.getElementById("signUpFrm");
+// signUpFrm.addEventListener("submit" , e => {
+
+
+//     for(let key in checkObj){
+//         if(!checkObj[key]){
+//             switch(key){
+//                 case "memberCk": alert("학과 확인을 해주세요."); break;
+//                 case "memberNo": alert("번호 유효하지 않습니다.\n다시 입력 해주세요."); break;
+//                 case "memberEmail": alert("이메일이 유효하지 않습니다."); break;
+//                 case "authKey" : alert("인증번호 확인 필수"); break;
+//                 case "memberPw": alert("비밀번호가 유효하지 않습니다."); break;
+//                 case "memberPwConfirm": alert("비밀번호확인이 일치하지 않습니다."); break;
+//                 case "memberName": alert("이름이 유효하지 않습니다."); break;
+//                 case "memberPhone": alert("전화번호가 유효하지 않습니다."); break;
+//                 case "memberGen" : alert("성별을 체크해 주세요."); break;
+//             }
+
+//             document.getElementById(key).focus();
+
+//             e.preventDefault();
+
+//             return;
+//         }
+
+//         // 성별을 체크하지 않은 경우(성별은 별개)
+//         if (!isGenderSelected()) {
+//             alert("모든 값을 선택 및 입력해 주세요.");
+//             e.preventDefault();
+//             return;
+//         }
+
+//         validateGender();
+//     }
+    
+//     return false;
+
+// })

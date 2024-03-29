@@ -1,19 +1,19 @@
 main{
-	 width: 1200px;
+	 width: 1400px;
     margin: auto;
 }
 
 
 #writeForm{
     width: 1200px;
-    height:1000px;
-    border: 1px solid #ddd;
+    height:1200px;
+    border: 1px solid black;
     margin: auto;
 }
 
 .depart-top{
     width: 90%;
-    margin: auto;
+    margin: 30px auto;
     border-bottom: 1px solid black;
 }
 
@@ -87,7 +87,7 @@ main{
     font-weight: bold;
 }
 .depart-file-area > div:nth-of-type(4){
-    width: 20%;
+    width: 40%;
     display: flex;
     align-items: center;
 }
@@ -98,10 +98,34 @@ main{
 
 .image-area{
     width: 80%;
-    height: 150px;
+    height: 300px;
     margin: 30px auto;
     border: 1px solid #ddd;
     text-align: center;
+}
+
+#img{
+    display: none;
+}
+
+.image-area > label{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.image-area  img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+.deleteImage{
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .depart-content-area{
@@ -173,3 +197,62 @@ main{
     color: white;
     border-radius: 3px;
 }
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+#loadingSpinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid rgba(0, 0, 0, 0.8);
+    border-top: 4px solid #ccc;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1.5s linear infinite;
+    display: none;
+}
+
+/*로딩이미지*/
+.wrap-loading {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    opacity: 0.9;
+    z-index: 9999;
+    background-color: #FCFEFC;
+}
+.wrap-loading div {
+    position: fixed;
+    top: 40%;
+    left: 42%;
+    width: 200px;
+    margin-left: -100px;
+    margin-top: -130px;
+    text-align: center;
+   
+  }
+  .wrap-loading div img {
+    display: block;
+    margin: 0 auto 5px;
+  }
+  .wrap-loading div p {
+    text-align: center;
+  }
+  .wrap-loading div b {
+    font-size: 18px;
+  }
+  .display-none {
+    display: none;
+  }
+  .warp_pagination {
+    text-align: center;
+  }

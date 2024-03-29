@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.dto.BoardFile;
+import kh.finalpro.project.main.model.dto.Member;
 
 /**
  * @author user1
@@ -142,7 +143,7 @@ public interface BoardService {
 	 * @param filePath
 	 * @return boardNo
 	 */
-	int noticeboardInsert(Board board, List<MultipartFile> files, String webPath, String filePath);
+	int noticeboardWrite(Board board, List<MultipartFile> files, String webPath, String filePath)throws IllegalStateException, IOException;
 	
   
   
@@ -156,6 +157,39 @@ public interface BoardService {
 	 * @return rowCount
 	 */
 	int freeBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath, String deleteList) throws IllegalStateException, IOException;
+
+
+	int boardCheck(Map<String, Object> map);
+
+
+	/** 학과공지 작성 페이지
+	 * @param board
+	 * @param file
+	 * @param images
+	 * @param webPath
+	 * @param filePath
+	 * @return boardNo
+	 */
+	int departmentBoardInsert(Board board, List<MultipartFile> file, List<MultipartFile> images, String webPath,
+			String filePath) throws IllegalStateException, IOException;
+
+ 
+	/** 학과공지 수정
+	 * @param board
+	 * @param file
+	 * @param webPath
+	 * @param filePath
+	 * @param images
+	 * @return
+	 */
+	int departmentBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath,
+			List<MultipartFile> images)throws IllegalStateException, IOException;
+
+
+	List<Member> selectMemberList(Member loginMember);
+
+
+	int freeBoardDelete(int boardNo);
 
 
 

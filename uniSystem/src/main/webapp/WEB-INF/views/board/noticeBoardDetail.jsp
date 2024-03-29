@@ -56,19 +56,35 @@
             <c:if test="${loginMember.memberNo == board.memberNo}">
                 <button id="editBtn">수정</button>
                 <button id="deleteBtn">삭제</button>
+                <button id="cancelBtn">취소</button>
             </c:if>
-            <button id="cancelBtn">취소</button>
-            <button id="listBtn"><a href="/board/1"> 목 록</a> </button>
+            <a href="/board/1" id="listBtn"> 목 록</a> 
         </div>
         
     </div>
 
-    <%-- <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/>  --%>
+    <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/> 
     <!-- 오류나서 주석처리함 -->
      <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
+ <script>
 
+        // JSP에서 작성 가능한 언어/라이브러리
+        // -> html, css, js, java, EL, JSTL
+
+        // JSP 해석 우선 순위 : java/EL/JSTL > HTML, CSS, JS
+
+
+        // 게시글 번호 전역 변수로 선언
+        const boardNo = "${board.boardNo}";
+		console.log(boardNo)
+        const categoryNo = "${board.categoryNo}";
+		console.log(categoryNo)
+       
+		const boardTitle = "${board.boardTitle}"
+
+    </script>
     <script src="/resources/js/header.js"></script>
 
 </body>

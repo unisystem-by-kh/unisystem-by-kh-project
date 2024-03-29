@@ -1,5 +1,5 @@
 main{
-	 width: 1200px;
+	 width: 1400px;
     margin: auto;
 }
 
@@ -7,6 +7,9 @@ main{
     width: 1200px;
     margin: auto;
     border-bottom: 1px solid black;
+}
+.boardName > h1{
+    margin-bottom: 30px;
 }
 
 .boardTop{

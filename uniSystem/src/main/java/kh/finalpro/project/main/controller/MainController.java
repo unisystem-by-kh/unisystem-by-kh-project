@@ -54,8 +54,6 @@ public class MainController {
 
 		model.addAttribute("map", map);
 		
-		System.out.println(map);
-		
 		return "common/signUp";
 	}
 
@@ -99,6 +97,7 @@ public class MainController {
 			path += "redirect:main";
 
 			model.addAttribute("loginMember", loginMember);
+			
 
 			Cookie c = new Cookie("saveId", loginMember.getMemberNo());
 

@@ -63,8 +63,6 @@ function selectReplyList(){
             
             replyList.append(btnProfileArea, replyMemberName, replyDate, replyContnet, replyNo); // 최종추가
 
-            console.log(replyList);
-
             rowArea.append(replyList);
 
         }
@@ -81,7 +79,7 @@ const replyContentInsert = document.getElementById("replyContentInsert");
 
 replyAdd.addEventListener("click", (e) => { // 댓글 등록 버튼이 클릭이 되었을 때
 
-    console.log(loginMemberNo);
+    
 
     if(loginMemberNo == ""){ // 로그인 X
         alert("로그인 후 이용해주세요.");
@@ -205,7 +203,6 @@ function updateReply(replyNo, btn){
 
     // 새로 작성된 댓글 내용 얻어오기
     const replyContent = btn.parentElement.previousElementSibling.value;
-    console.log(replyContent);
 
     const data = {
         "replyNo" : replyNo,
@@ -243,27 +240,24 @@ if(updateBtn != null){
     updateBtn.addEventListener('click' , ()=>{
         location.href = location.pathname
                         + '/update' + location.search;
-        // /board2/1/1503/update?cp=1 (GET방식)
-        console.log(location.href);
     })
 
 }
 
-
-
-// 게시글 삭제
 if(document.getElementById("deleteBtn") != null){
-    
     document.getElementById("deleteBtn").addEventListener("click",() => {
         if(confirm("정말 삭제하시겠습니까?")){
-            
-            
             location.href = "/board/" + categoryNo +"/" + boardNo +  "/delete";
-    
-            
             alert("삭제 되었습니다.")
-            
+            console.log(loginMemberNo.substring(1, 2))
         }
     })
+}
 
+// 게시글 목록으로 가기
+const goToListBtn = document.getElementById('goToListBtn');
+if(goToListBtn != null){
+    goToListBtn.addEventListener('click' , ()=>{
+        location.href = "/board/" + categoryNo + location.search;
+    })
 }

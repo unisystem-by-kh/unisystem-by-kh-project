@@ -1,55 +1,77 @@
 main{
-	 width: 1200px;
+	width: 1400px;
     margin: auto;
 }
 
 
 .depart-detail{
-    width: 1200px;
+    width: 900px;
     height: 100px;
     margin: auto;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    
+}
+
+.depart-detail > h1{
+    font-size: 40px;
 }
 
 .date-con{
-    width: 1200px;
+    width: 900px;
+    height: 150px;
     margin: auto;
-    display: flex;
-    justify-content: end;
     border-bottom: 1px solid black;
+}
+.date-con > div:nth-of-type(1){
+    padding-left: 5px;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: end;
+    font-size: 28px;
     font-weight: bold;
 }
-.date-con > div{
-   margin: 0 15px;
+.date-con > div:nth-of-type(2){
+    width: 100%;
+    height: 50%;
+    padding-left: 5px;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
-.title-con{
-    width: 1200px;
-    height: 50px;
-    margin: auto;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    border-bottom: 1px solid #ddd;
-}
 
 .image-con{
-    width: 1000px;
-    height: 200px;
+    width: 900px;
+    min-height: 200px;
     margin: auto;
     border-bottom: 1px solid #ddd;
+    padding: 0 10px;
+    text-align: center;
+}
+
+
+.image-con > img{
+    width: 300px;
 }
 
 .content-con{
-    width: 1200px;
-    height: 400px;
+    width: 900px;
+    min-height: 400px;
     margin: auto;
     border-bottom: 1px solid black;
+    word-break:break-all;
+    padding: 10px 10px;
 }
 
 .file-button{
-    width: 1200px;
+    width: 900px;
+    height: 50px;
     margin: 10px auto;
     display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
 }
 .file-button > div:nth-of-type(1){
     width: 10%;
@@ -68,23 +90,32 @@ main{
     width: 20%;
 }
 
-.file-button > div:nth-of-type(3) > button{
+.button-area{
+    width: 900px;
+    height: 80px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: end;
+}
+
+.button-area > button{
     margin: 0 10px;
     background-color: white;
     border: none;
-    width: 80px;
+    width: 150px;
+    height: 50px;
     font-size: 14px;
     font-weight: bold;
 }
 
-.file-button > div:nth-of-type(3) > button:hover{
+.button-area > button:hover{
     background-color: crimson;
     color: white;
     border-radius: 3px;
 } 
 
 .reply-con{
-    width: 1200px;
+    width: 800px;
     margin: auto;
     display: flex;
     align-items: center;
@@ -92,14 +123,14 @@ main{
 }
 
 .reply-content-con{
-    width: 1000px;
+    width: 800px;
     margin: auto;
     text-align: center;
 }
 
 .reply-content-con > textarea {
     width: 100%;
-    height: 200px;
+    height: 150px;
     resize: none;
     margin-top: 20px;
 }
@@ -119,17 +150,22 @@ main{
     color: white;
     border-radius: 3px;
 }
+#reply-area{
+    width: 800px;
+    margin: 30px auto;
+}
+
 
 .dat-con{
-    width: 1000px;
-    height: 150px;
+    width: 800px;
+    height: 200px;
     margin: auto;
     margin-top: 30px;
     border: 1px solid #ddd;
 }
 
 .dat-info{
-    width: 1000px;
+    width: 800px;
     height: 30px;
     margin: auto;
     display: flex;
@@ -143,24 +179,57 @@ main{
 }
 
 
-.goto{
-    width: 1200px;
+
+.button-container{
+    width: 800px;
     margin: 30px auto;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.goto > button{
-    cursor: pointer;
-    width: 200px;
-    height: 50px;
-    border: none;
+.button-container > button{
+    margin: 0 15px;
     background-color: white;
-    font-size: 16px;
+    width: 150px;
+    height: 50px;
     font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
 
-.goto > button:hover{
+.button-container > button:hover{
     background-color: crimson;
     color: white;
     border-radius: 3px;
+}
+
+.replyUpdateCon{
+    width: 100%;
+    height: 150px;
+    resize: none;
+    border: 1px solid crimson;
+}
+
+.replyUp , .replyDe{
+    width: 100px;
+    height: 30px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin: 5px 15px;
+    font-weight: bold;
+}
+
+
+.replyUp:hover , .replyDe:hover{
+    background-color: crimson;
+    color: white;
+}
+
+.btnArea{
+    width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: end;
 }

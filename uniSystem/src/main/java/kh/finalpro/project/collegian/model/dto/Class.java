@@ -15,7 +15,7 @@ public class Class {
 	private int classPoint;
 	private int classMax;
 	private int classGrade;
-	private int classTrem;
+	private int classTerm;
 	private char classDay;
 	private int classStart;
 	private int classEnd;
@@ -24,6 +24,16 @@ public class Class {
 	private String departmentName;
 	private String memberName;
 	
-	private int lectureFL;
-	private int lectureCount;
+	private int lectureFL; // 수강 신청 여부
+	private int lectureCount; // 수강 인원
+	
+	// 과제물
+	private String taskRoute;
+	private String taskDate;
+	private int taskNo;
+	
+	// 제출한 과제물
+	private String filePath;
+	private String fileName;
+	
 }
