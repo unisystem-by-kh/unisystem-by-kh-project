@@ -96,6 +96,8 @@ const classDay = document.getElementById("classDay"); // 요일
 const classStart = document.getElementById("classStart"); // 시작교시
 const classEnd = document.getElementById("classEnd"); // 마치는교시
 let check = false;
+let savedClassStart;
+let savedClassEnd;
 
 checkTime.addEventListener("click", () =>{
 
@@ -196,6 +198,10 @@ checkTime.addEventListener("click", () =>{
         // 겹치는 시간이 있는지 확인 != 0 중복됨 강의 등록 X
         if(count == 0){
             swal("등록 가능", "", "success");
+
+            savedClassStart = classStart.value;
+            savedClassEnd = classEnd.value;
+
             check = true;
 
         }else{
@@ -354,6 +360,14 @@ document.getElementById("insertFrm").addEventListener("submit", e=>{
 
         e.preventDefault();
         return;
+    }
+
+    if(savedClassStart != classStart.value){
+        check = false;
+    }
+
+    if(savedClassEnd != classEnd.value){
+        check = false;
     }
 
     if(check == false){
