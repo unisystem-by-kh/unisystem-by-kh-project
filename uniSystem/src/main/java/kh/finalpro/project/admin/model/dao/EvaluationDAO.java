@@ -29,14 +29,14 @@ public class EvaluationDAO {
 	 * @param pagination
 	 * @return map
 	 */
-	public List<Evaluation> selectLateList(Pagination pagination) {
+	public List<Evaluation> selectRateList(Pagination pagination) {
 
 		int offset
 		= (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		return sqlSession.selectList("evaluationMapper.selectLateList", pagination, rowBounds);
+		return sqlSession.selectList("evaluationMapper.selectRateList", pagination, rowBounds);
 	}
 
 	/** 평가 목록 갯수 카운트 (교수)
@@ -53,14 +53,14 @@ public class EvaluationDAO {
 	 * @param loginMember
 	 * @return
 	 */
-	public List<Evaluation> selectLateList(Pagination pagination, Member loginMember) {
+	public List<Evaluation> selectRateList(Pagination pagination, Member loginMember) {
 		
 		int offset
 		= (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		return sqlSession.selectList("evaluationMapper.lateList",loginMember, rowBounds);
+		return sqlSession.selectList("evaluationMapper.RateList",loginMember, rowBounds);
 	}
 
 	/** 교수가 가지고 있는 교과목 조회
@@ -84,14 +84,14 @@ public class EvaluationDAO {
 	 * @param paramMap
 	 * @return lateList
 	 */
-	public List<Evaluation> selectLateList(Pagination pagination, Map<String, Object> paramMap) {
+	public List<Evaluation> selectRateList(Pagination pagination, Map<String, Object> paramMap) {
 		
 		int offset
 		= (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		return sqlSession.selectList("evaluationMapper.searchLateList",paramMap, rowBounds);
+		return sqlSession.selectList("evaluationMapper.searchRateList",paramMap, rowBounds);
 	}
 
 	/** 교수가 가지고 있는 과목 목록 조회

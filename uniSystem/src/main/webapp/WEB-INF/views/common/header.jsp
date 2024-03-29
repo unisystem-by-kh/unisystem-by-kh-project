@@ -160,7 +160,7 @@
 
                 <!-- 교수에 올렸을 경우 -->
                 <div class="navigation3-professor">
-                    <a href="/late">교수 평가 조회</a>
+                    <a href="/rate">교수 평가 조회</a>
                     <a href="/professor/professorPageCertificate">교원증 발급</a>
                 </div>
             </c:if>
@@ -175,7 +175,7 @@
                     <a href="/professor/professorPageStudentGrade">학생(성적) 조회</a>
                     <a href="/professor/professorPageStudentGradeInsert">교수 조회</a>
                     <a href="/professor/professorPageStudentGradeUpdate">교직원 조회</a>
-                    <a href="/late">교수 평가 조회</a>
+                    <a href="/rate">교수 평가 조회</a>
                 </div>
 
                 <!-- 교과목을 올렸을 경우 -->
