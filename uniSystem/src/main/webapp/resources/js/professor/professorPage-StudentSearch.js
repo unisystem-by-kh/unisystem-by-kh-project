@@ -127,5 +127,3 @@ function copyValues() {
     document.getElementById('download-type').value = searchType;
     document.getElementById('download-query').value = searchQuery;
 }
-
-const searchKey = document.getElementById('search-key');
