@@ -23,6 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-const insertBtn = document.querySelector("#writeBtn");
+
 
 

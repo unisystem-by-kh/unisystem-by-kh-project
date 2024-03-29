@@ -106,7 +106,7 @@
 
 		(SELECT COUNT(*) FROM "REPLY" R
 		WHERE R.BOARD_NO = B.BOARD_NO
-		AND R.REPLY_ST = 'N') REPLY_COUNT
+		AND R.REPLY_ST = 'N') REPLY_COUNT,
 
 		<if test="categoryNo == 3"> <!-- 자유게시판일 경우 -->
 			,
