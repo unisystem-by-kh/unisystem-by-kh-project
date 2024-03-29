@@ -129,6 +129,7 @@ for(i=1; i<rowList.length; i++){ // thead부분 제외.
                     } else {
                         swal({
                             title : "삭제 실패.",
+                            text : "수강 중인 학생이 존재합니다.",
                             icon : "error",
                             button : "확인",
                             closeOnClickOutside : false

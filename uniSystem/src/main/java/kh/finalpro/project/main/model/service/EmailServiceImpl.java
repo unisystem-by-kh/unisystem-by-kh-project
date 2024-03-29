@@ -61,7 +61,7 @@ public class EmailServiceImpl implements EmailService{
 
 	@Transactional
 	@Override
-	public int findPw(String email, String title) {
+	public int findPw(String email, String memberName, String title) {
 		
 		//6자리 난수 인증번호 생성
 		String authKey = createAuthKey();
@@ -70,15 +70,23 @@ public class EmailServiceImpl implements EmailService{
 			MimeMessage mail = mailSender.createMimeMessage();
 
 			// 제목
-			String subject = "[UNI-SYSTEM] "+title+" 임시 비밀번호";
+			String subject = "[UNI-SYSTEM] " + title;
 
 			// 문자 인코딩
 			String charset = "UTF-8";
 
 			// 메일 내용
 			String mailContent 
-			= "<p>UNI-SYSTEM "+title+" 임시비밀번호 입니다.</p>"
-					+ "<h3 style='color:blue'>" + authKey + "</h3>";
+			= "<div style='background-color: #f4f4f4; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>"
+		        + "<h2 style='color: #333; text-align: center; font-family: Arial, sans-serif;'>UNI-SYSTEM " + memberName + " " + title + "</h2>"
+		        + "<hr style='border-top: 1px solid #ccc;'>"
+		        + "<p style='font-size: 16px; text-align: center;'>안녕하세요, " + memberName + "님!</p>"
+		        + "<p style='font-size: 16px; text-align: center;'>아래는 임시비밀번호입니다:</p>"
+		        + "<h3 style='color: #007bff; font-size: 24px; text-align: center;'>" + authKey + "</h3>"
+		        + "<p style='font-size: 16px; text-align: center;'>로그인 후 비밀번호를 변경해주시기 바랍니다.</p>"
+		        + "<p style='font-size: 14px; text-align: center; margin-top: 20px;'>홈페이지 주소: [홈페이지 주소]</p>"
+		        + "<p style='font-size: 14px; text-align: center; margin-top: 20px;'>이 이메일은 자동 발송되었습니다. 본인이 요청하지 않았다면 무시하셔도 됩니다.</p>"
+		        + "</div>";
 
 
 
