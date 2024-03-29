@@ -8,6 +8,9 @@ main{
     margin: auto;
     border-bottom: 1px solid black;
 }
+.boardName > h1{
+    margin-bottom: 30px;
+}
 
 .boardTop{
     width: 1200px;

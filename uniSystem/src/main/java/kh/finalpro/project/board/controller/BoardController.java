@@ -448,6 +448,7 @@ public class BoardController {
 	public String departmentBoardUpdate(
 			Board board // 커맨드 객체(name==필드 경우 필드에 파라미터 세팅
 			,@RequestParam(value="cp", required = false, defaultValue = "1") int cp // 쿼리스트링 유지
+			,@SessionAttribute("loginMember") Member loginMember
 			,@RequestParam(value="images", required = false) List<MultipartFile> images 
 			,@RequestParam(value="file", required = false) List<MultipartFile> file // 업로드된 파일 리스트
 			,@PathVariable("categoryNo") int categoryNo
@@ -461,6 +462,15 @@ public class BoardController {
 		board.setCategoryNo(categoryNo);
 		board.setBoardNo(boardNo);
 		// board(boardCode, boardNo , boardTitle, boardContent)
+		
+		if(board.getShoot() == 1) {
+			
+			List<Member> memberList = service.selectMemberList(loginMember);
+			System.out.println(memberList);
+			
+			emailService.emailShoot(board,memberList);
+			
+		}
 
 		// 2) 이미지 웹 접근 경로, 서버 저장 경로 
 		String webPath = "/resources/images/board/";

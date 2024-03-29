@@ -147,7 +147,7 @@
 		</div>
 		<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '01'}" >
 			<div class="btn-area">
-				<a href="/board/${categoryNo}/write" id="btn">문의하기</a>
+				<a href="/board/${categoryNo}/write" id="btn">✏️ 문의하기</a>
 			</div>
 		</c:if>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />

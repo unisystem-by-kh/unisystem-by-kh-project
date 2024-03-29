@@ -12,7 +12,7 @@ main{
 }
 
 #title{
-    width: 70%;
+    width: 83%;
 }
 
 #title > h1{
@@ -137,8 +137,9 @@ tbody a:hover{
     text-align: center;
 }
 
-.pagi li:hover{
+.pagi a:hover{
     cursor: pointer;
+    color: crimson;
 }
 
 #current{

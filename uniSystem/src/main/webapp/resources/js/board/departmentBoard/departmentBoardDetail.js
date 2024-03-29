@@ -91,11 +91,11 @@ if(updateBtn != null){
                 replyInfo.classList.add("dat-info")
                 
                 const div1 = document.createElement("div");
-                div1.innerHTML = "이름 : " + reply.memberName;
+                div1.innerHTML = "🙍‍♂️" + reply.memberName;
                 
                 const div2 = document.createElement("div");
                 const formattedDate = reply.replyDate.substring(0, 15);
-                div2.innerHTML = "작성일 : " + formattedDate;
+                div2.innerHTML = "🕕 " + formattedDate;
                 
                 replyInfo.append(div1,div2);
                 

@@ -23,16 +23,13 @@
 	
 	    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	    <div class="boardname-area">
-	        <h1>${categoryName}</h1>
+	        <h1>문의내역</h1>
 	    </div>
 	    <div class="title-date">
-	        <div>제목 : ${board.boardTitle}</div>
-	        <div>신청일 : ${board.boardCDate}</div>
+	        <div>${board.boardTitle}</div>
+	        <div>${board.memberName} | ${board.departmentName} | ${board.boardCDate} </div>
 	    </div>
-	    <div class="nick-hak">
-	        <div>신청인 : ${board.memberName }</div>
-	        <div>학과 : ${board.departmentName}</div>
-	    </div>
+	  
 	    <div class="content-area">
 	        <div>${board.boardContent}</div>
 	    </div>
@@ -40,11 +37,11 @@
 	        <div>첨부 파일 :</div>
 
 			<c:if test="${!empty board.fileList}">
-				  <a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
+				  💾<a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
                                     download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileOriginal}</a> 
 			</c:if>
 			<c:if test="${empty board.fileList}">
-	        	<div>첨부된 파일이 없습니다.</div>
+	        	<div>💾첨부된 파일이 없습니다.</div>
 
 			</c:if>
 	    </div>
@@ -60,7 +57,7 @@
 
 		
 		<div class="reply-area">
-			<h1>답변</h1>
+			<h1>💬 답변</h1>
 		</div>
 		<c:if test="${board.replyCount == 0}">
 			<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '03'}" >
@@ -71,11 +68,8 @@
 			</c:if>
 		</c:if>
 		<div class="reply-nick">
-			<div>답변자 : 관리자</div>
-			<div>답변일 : 2024.02.23</div>
-		</div>
-		<div class="reply-title">
-			<div>제목 : [RE]문의내용</div>
+			<div>관리자</div>
+			<div>2024.02.23</div>
 		</div>
 		<div class="reply-content">
 			<div id="content">
