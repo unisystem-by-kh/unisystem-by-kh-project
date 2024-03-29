@@ -143,8 +143,8 @@ public class BoardController {
 
 	// -------------------------------상세 조회--------------------------------------
 
-	// 자유게시판 상세
-	@GetMapping("/{categoryNo:3}/{boardNo}")
+	// 자유게시판, 자료실 상세
+	@GetMapping("/{categoryNo:[3,5]{1}}/{boardNo}")
 	public String selectFreeBoardDetail(
 			@PathVariable("categoryNo") int categoryNo,
 			@PathVariable("boardNo") int boardNo,
@@ -222,7 +222,11 @@ public class BoardController {
 				}
 			}
 			// ---------------------------------------------------------------------
-			path = "board/freeBoardDetail"; // forward할 jsp 경로
+			if(categoryNo == 3) {
+				path = "board/freeBoardDetail"; // forward할 jsp 경로 // 자유게시판
+			}else {
+				path = "board/boardDataDetail"; // forward할 jsp 경로 // 자료실
+			}
 			model.addAttribute("board" , board);
 		}else { // 조회 결과가 없을 경우
 			path = "redirect:/board/" + categoryNo;
@@ -610,32 +614,32 @@ public class BoardController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/{categoryNo:5}/{boardNo}")
-	public String boardDataDetail(
-			@PathVariable("boardNo") int boardNo
-			, Model model
-			) {
-
-
-		Board board = service.boardDataDetail(boardNo);
-
-		List<BoardFile> boardFile = service.selectBoardFile(boardNo);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-
-		if(boardFile.size() != 0) {
-			System.out.println("배열 길이가 0이 아닐 때"+boardFile);
-
-			map.put("boardFile", boardFile);
-		}
-
-		map.put("board", board);
-
-		model.addAttribute("map", map);
-
-		return "board/boardDataDetail";
-	}
+//	@GetMapping("/{categoryNo:5}/{boardNo}")
+//	public String boardDataDetail(
+//			@PathVariable("boardNo") int boardNo
+//			, Model model
+//			) {
+//
+//
+//		Board board = service.boardDataDetail(boardNo);
+//
+//		List<BoardFile> boardFile = service.selectBoardFile(boardNo);
+//
+//		Map<String, Object> map = new HashMap<String, Object>();
+//
+//
+//		if(boardFile.size() != 0) {
+//			System.out.println("배열 길이가 0이 아닐 때"+boardFile);
+//
+//			map.put("boardFile", boardFile);
+//		}
+//
+//		map.put("board", board);
+//
+//		model.addAttribute("map", map);
+//
+//		return "board/boardDataDetail";
+//	}
 
 
 	// 1:1문의 상세페이지

@@ -146,7 +146,7 @@ public class BoardDAO {
 	 * @return boardNo
 	 */
 	public int inquiryBoardWrite(Board board) {
-		
+		System.out.println(board);
 		int result = sqlSession.insert("boardMapper.inquiryBoardWrite", board);
 		
 		if(result > 0) {
