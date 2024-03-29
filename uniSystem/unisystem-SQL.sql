@@ -746,7 +746,7 @@ COMMIT;
 -- 과제 테이블 생성
 CREATE TABLE "TASK"(
    "TASK_NO"            NUMBER            NOT NULL,
-   "TASK_ROUTE"         VARCHAR2(300)     NOT NULL,
+   "TASK_ROUTE"         VARCHAR2(300)     NULL,
    "TASK_DATE"          DATE DEFAULT       SYSDATE,
    "CLASS_NO"           NUMBER            NOT NULL,
    "MEMBER_NO"          VARCHAR2(11)      NOT NULL
@@ -787,8 +787,8 @@ COMMIT;
 CREATE TABLE "FILEZIP" (
    "FILE_NO"   NUMBER      NOT NULL,
    "FILE_PATH"   VARCHAR2(300)      NOT NULL,
-   "FILE_NAME"   VARCHAR2(30)      NOT NULL,
-   "FILE_RENAME"   VARCHAR2(30)      NOT NULL,
+   "FILE_NAME"   VARCHAR2(300)      NOT NULL,
+   "FILE_RENAME"   VARCHAR2(300)      NOT NULL,
    "FKIND_NO"   NUMBER      NOT NULL,
    "MEMBER_NO"   VARCHAR2(11)      NOT NULL,
    "CLASS_NO"    NUMBER            NOT NULL,
