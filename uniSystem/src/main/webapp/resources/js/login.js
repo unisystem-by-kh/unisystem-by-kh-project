@@ -206,7 +206,7 @@ if(btn2 != null){
 
             if(result.length != 0){
                 
-                sendEmail(result);
+                sendEmail(result, pwUserName);
 
             } else {
                 swal({
@@ -221,11 +221,11 @@ if(btn2 != null){
 
     })
 
-    function sendEmail(email) {
+    function sendEmail(email, memberName) {
 
         showLoadingSpinner(); // 로딩창 시작
-
-        fetch("/sendEmail/findPw?email=" + email)
+        console.log(memberName);
+        fetch("/sendEmail/findPw?email=" + email + "&memberName="+memberName.value)
         .then(resp => resp.text())
         .then( result => {
 
