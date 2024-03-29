@@ -165,7 +165,7 @@
     white-space: nowrap;
     overflow: hidden;
 }
-.student-info-value:nth-child(2n){
+.student-info-value:nth-child(2n-1){
     background-color: #eee;
 }
 .student-info-value:hover{
@@ -284,4 +284,32 @@
 
 #lectureInfo > :nth-child(n){
     color: black;
+}
+
+#excelBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 45px;
+
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+
+    font-weight: bold;
+    color: gray;
+    padding: 0px;
+    margin-left: 50px;
+
+    cursor: pointer;
+}
+#excelBtn:hover{
+    color: #888;
+    background-color: rgba(236, 164, 162, 0.747);
+    border: 3px solid gray;
+}
+#infoV{
+    cursor: default;
 }

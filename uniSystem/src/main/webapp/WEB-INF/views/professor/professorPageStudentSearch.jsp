@@ -31,7 +31,7 @@
                 <div class="student-status">
 
                     <c:if test="${!empty param.key}">
-                        <c:set var="sp" value="&key=${param.key}&query=${param.query}"/>
+                        <c:set var="sp" value="key=${param.key}&query=${param.query}"/>
                     </c:if>
                     
                     <div class="search-area">
@@ -53,14 +53,20 @@
                     </div>
 
                 </div>
+
                 <div class="infoCheck">
-                    본인이 속한 학과 학생 조회
-                    <br>
-                    클릭하면 복사 가능
-                    <form action="/professor/excel/download" method="get">
-                        <button>해당 목록을 엑셀로 저장(Excel Download)</button>
+                    <div id="infoV">
+                        <p>본인이 속한 학과 학생 조회</p>
+                        <p>클릭하면 복사 가능</p>
+                    </div>
+                    <form action="/professor/excel/download?${sp}" method="get">
+                        <c:forEach var="entry" items="${param}">
+                            <input type="hidden" name="${entry.key}" value="${entry.value}" />
+                        </c:forEach>
+                        <button id="excelBtn">해당 목록을 엑셀로 저장<br>(Excel Download)</button>
                     </form>
                 </div>
+
                 <div class="student-info">
                     <div class="student-info-area">
                         <div class="student-info-value-name">
@@ -96,18 +102,24 @@
                                     <div>${student.memberSsn.substring(0, 2)}년${student.memberSsn.substring(2, 4)}월${student.memberSsn.substring(4, 6)}일(${genM}${genF})</div>
                                     <div>${student.memberEmail}</div>
                                     <div>${student.memberPhone.substring(0, 3)}&ndash;${student.memberPhone.substring(3, 7)}&ndash;${student.memberPhone.substring(7, 11)}</div>
-                                    <c:if test="${student.memberStatus == 'N'}">
-                                        <c:set var="stN" value="재학중" />
-                                    </c:if>
-                                    <c:if test="${student.memberStatus == 'Y'}">
-                                        <c:set var="stY" value="휴학중" />
-                                    </c:if>
-                                    <c:if test="${student.memberStatus == 'P'}">
-                                        <c:set var="stP" value="졸업" />
-                                    </c:if>
-                                    <c:if test="${student.memberStatus == 'D'}">
-                                        <c:set var="stD" value="중퇴" />
-                                    </c:if>
+                                    <c:set var="stN" value="" />
+                                    <c:set var="stY" value="" />
+                                    <c:set var="stP" value="" />
+                                    <c:set var="stD" value="" />
+                                    <c:choose>
+                                        <c:when test="${student.memberStatus == 'N'}">
+                                            <c:set var="stN" value="재학중" />
+                                        </c:when>
+                                        <c:when test="${student.memberStatus == 'Y'}">
+                                            <c:set var="stY" value="휴학중" />
+                                        </c:when>
+                                        <c:when test="${student.memberStatus == 'P'}">
+                                            <c:set var="stP" value="졸업" />
+                                        </c:when>
+                                        <c:when test="${student.memberStatus == 'D'}">
+                                            <c:set var="stD" value="중퇴" />
+                                        </c:when>
+                                    </c:choose>
                                     <div>${stN}${stY}${stP}${stD}</div>
                                 </div>
                             </c:if>
