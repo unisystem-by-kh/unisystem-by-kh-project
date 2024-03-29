@@ -10,12 +10,13 @@
 
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/board/departmentBoardWrite.css">
+	<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<main>
 	
 	    <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	        <form action="/board/${categoryNo}/write" method="POST" id="writeForm" enctype="multipart/form-data">
+	        <form action="/board/${categoryNo}/write" method="POST" id="writeForm" enctype="multipart/form-data" >
 	            <div class="depart-top">
 	                <h1>학과 공지</h1>
 					
@@ -39,8 +40,10 @@
 	                </div>
 	            </div>
 	            <div class="image-area">
-					<img class="imgArea"/>
-	                이미지 : <input type="file" name="images"accept="image/*" class="inputImage">
+					<label for="img">
+						<img class="imgArea"/>
+					</label>
+	                <input type="file" name="images" id="img" accept="image/*" class="inputImage">
 					<span class="deleteImage">&times;</span> 
 	            </div>
 	            <div class="depart-content-area">
@@ -60,6 +63,13 @@
 	            </div>
 	        
 					<div id="loadingSpinner"></div>
+
+
+			<div class="wrap-loading">
+				<div>
+					<img style="width:500px"  alt="" src="https://global.discourse-cdn.com/business7/uploads/jupiter/original/2X/c/c0297d064f2bfc5ecf73ad80efa3b288e88a80b9.gif">
+				</div>
+			</div>
 	
 	    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>

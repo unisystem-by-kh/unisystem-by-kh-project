@@ -5,10 +5,12 @@ const writeForm = document.getElementById("writeForm")
 const boardTitle = document.getElementsByName("boardTitle")[0];
 const boardContent = document.getElementsByName("boardContent")[0];
 const shoot = document.getElementsByName("shoot");
+
 $(document).ready(function(){
     //화면 준비되면 로딩이미지 숨기기
     $('.wrap-loading').hide();	
 });
+
 inputImage[0].addEventListener("change", e => {
 
     const file = e.target.files[0];
@@ -63,17 +65,16 @@ writeForm.addEventListener("submit", e => {
         return ;
     }
 
-
-    
     if(shoot[0].checked == false && shoot[1].checked == false){
         alert("이메일 발송여부를 선택해주세요")
         e.preventDefault();
         return ;
     }
     $(".wrap-loading").show();
+    
 })
 
-const goToList = document.getElementById("gotoList")
+const goToList = document.getElementById("goToList")
 
 goToList.addEventListener("click",e=>{
     if(confirm("게시물 작성을 취소하시겠습니까?")){
@@ -82,8 +83,6 @@ goToList.addEventListener("click",e=>{
         return ;
     }
 })
-
-
 
 
 

@@ -175,7 +175,8 @@ main{
     text-align: center;
 }
 
-.pagi li:hover{
+.pagi a:hover{
+    color: crimson;
     cursor: pointer;
 }
 
