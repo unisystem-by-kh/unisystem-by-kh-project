@@ -275,7 +275,7 @@
 	<insert id="insertTask" parameterType="Task">
 	
 		INSERT INTO FILEZIP VALUES
-		(SEQ_ZIP_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5,#{memberNo},#{taskNo})
+		(SEQ_FILE_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5,#{memberNo},#{taskNo})
 	
 	</insert>
 	

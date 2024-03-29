@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="board" value="${map.board}" />
-<c:if test="${!empty map.boardFile}" >
+<%-- <c:set var="board" value="${map.board}" /> --%>
+<%-- <c:if test="${!empty map.boardFile}" >
     <c:set var="boardFile" value="${map.boardFile}"/>
-</c:if>
+</c:if> --%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,7 +28,7 @@
         <div class="mainContainer con">
 
             <div class="detail-title">
-                <h1 class="dataTitle">자료실 ${categoryNo}</h1>
+                <h1 class="dataTitle">자료실</h1>
                 <c:if test="${loginMember.memberNo == board.memberNo}" >
                     <div>
                         <button class="detail-button update-btn" onClick="location.href='/board/${categoryNo}/${boardNo}/update'">수정</button>
