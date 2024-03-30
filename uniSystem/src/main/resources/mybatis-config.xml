@@ -32,6 +32,8 @@
 		<typeAlias type="kh.finalpro.project.professor.model.dto.Task" alias="ProfessorTask" />
 		
 		<typeAlias type="kh.finalpro.project.collegian.model.dto.Request" alias="Request" />
+		<!-- 교직원이 가져올 학생 정보 -->
+		<typeAlias type="kh.finalpro.project.admin.model.dto.Student" alias="StudentList" />
 
 
 	</typeAliases>
@@ -50,6 +52,7 @@
 		<mapper resource="/mappers/tuition-mapper.xml" />
 		<mapper resource="/mappers/certificate-mapper.xml" />
 		<mapper resource="/mappers/chatting-mapper.xml" />
+		<mapper resource="/mappers/admin-mapper.xml" />
 
 	</mappers>		
 

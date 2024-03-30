@@ -3,10 +3,12 @@ package kh.finalpro.project.admin.model.service;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Map;
 
 import com.google.api.services.calendar.model.Event;
 
 import kh.finalpro.project.admin.model.dto.Admin;
+import kh.finalpro.project.admin.model.dto.Student;
 import kh.finalpro.project.main.model.dto.Member;
 
 public interface AdminService {
@@ -15,7 +17,8 @@ public interface AdminService {
 
 	int saveUniqueNo(Admin admin);
 
-
+	// 학생 정보 조회
+	List<Student> selectStudentList();
 
 
 

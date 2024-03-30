@@ -24,26 +24,60 @@
       
       <result property="departmentNo" column="DEPARTMENT_NO" />
       
-      
+   </resultMap>
+   
+   <resultMap type="StudentList" id="student_rm">
+   		<id property="memberNo" column="MEMBER_NO" />
+   		
+   		<result property="memberName" column="MEMBER_NAME"/>
+   		<result property="memberGrade" column="MEMBER_GRADE"/>
+   		<result property="deptName" column="DEPARTMENT_NAME"/>
+   		<result property="memberStatus" column="MEMBER_STATUS"/>
+   		<result property="classPoint" column="CLASS_POINT"/>
+   		<result property="requestType" column="REQUEST_TYPE"/>
+   		<result property="requestReason" column="REQUEST_REASON"/>
    </resultMap>
 
-   <select id="selectList" resultType="member_rm">
-   	SELECT * FROM MEMBER;
-   </select>
+<!--    <select id="selectList" resultMap="member_rm"> -->
+<!--    	SELECT * FROM MEMBER; -->
+<!--    </select> -->
    
-   
-   <insert id="saveUniqueNo" parameterType="member_rm">
-      INSERT INTO MEMBER (
-        MEMBER_NO,
-        MEMBER_NAME,
-        MEMBER_SSN,
-        DEPARTMENT_NO
-    )
-    VALUES (
-        #{memberNo}, #{memberName}, #{memberSsn} , #{departmentNo}
-    )
-    
-	</insert>
+<!--    <insert id="saveUniqueNo" parameterType="member_rm"> -->
+<!--       INSERT INTO MEMBER ( -->
+<!--         MEMBER_NO, -->
+<!--         MEMBER_NAME, -->
+<!--         MEMBER_SSN, -->
+<!--         DEPARTMENT_NO -->
+<!--     ) -->
+<!--     VALUES ( -->
+<!--         #{memberNo}, #{memberName}, #{memberSsn} , #{departmentNo} -->
+<!--     ) -->
+<!-- 	</insert> -->
+	
+	<!-- 학생 정보 조회 -->
+	<select id="selectStudentList" resultMap="student_rm">
+		<![CDATA[
+			SELECT 
+			    M.MEMBER_NO ,
+			    MEMBER_NAME, 
+			    MEMBER_GRADE, 
+			    DEPARTMENT_NAME, 
+			    MEMBER_STATUS, 
+			    NVL(SUM(CASE WHEN L.LECTURE_POINT >= 1 THEN CLASS_POINT ELSE 0 END), 0) AS CLASS_POINT,
+			    REQUEST_TYPE,
+			    REQUEST_REASON
+			FROM 
+			    MEMBER M, LECTURE L, CLASS C, DEPARTMENT D, REQUEST R
+			WHERE 
+			    L.MEMBER_NO(+) = M.MEMBER_NO
+			    AND C.CLASS_NO(+) = L.CLASS_NO
+			    AND M.DEPARTMENT_NO = D.DEPARTMENT_NO
+			    AND M.MEMBER_NO = R.MEMBER_NO(+)
+			    AND SUBSTR(M.MEMBER_NO, 1,2) = '01'
+			GROUP BY 
+			    M.MEMBER_NO, MEMBER_NAME, MEMBER_GRADE, DEPARTMENT_NAME, MEMBER_STATUS, REQUEST_TYPE, REQUEST_REASON
+		]]>
+	</select>
 	  
 
 
