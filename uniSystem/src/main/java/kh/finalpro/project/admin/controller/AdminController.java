@@ -3,6 +3,7 @@ package kh.finalpro.project.admin.controller;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.finalpro.project.admin.model.dto.Admin;
+import kh.finalpro.project.admin.model.dto.Student;
 import kh.finalpro.project.admin.model.service.AdminService;
 import kh.finalpro.project.main.model.dto.Member;
 
@@ -30,13 +32,13 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService; // AdminService 서비스 변수;
 
-	//교직원  교번/학번 번호생성 페이지
+	// 교직원  교번/학번 번호생성 페이지
 	@GetMapping("/UniqueNo")
 	public String showUniqueNoForm() {
 	    return "admin/UniqueNo";
 	}
 	
-	//번호 생성 처리
+	// 번호 생성 처리
 	@ResponseBody
 	@PostMapping(value ="/UniqueNo", produces="application/json; charset=UTF-8")
 	public String saveUniqueNo(@RequestBody Admin admin,
@@ -58,11 +60,25 @@ public class AdminController {
 
 
 	
+	/** 교직원용 학생 조회
+	 * @return
+	 */
 	@GetMapping("/selectStudentList")
-	public String selectStudentList() {
+	public String selectStudentList(Model model) {
+		
+//		Map<String, Object> map = adminService.selectStudentList();
+		
+		List<Student> studentList = adminService.selectStudentList();
+		
+		System.out.println(studentList);
+		model.addAttribute("studentList", studentList);
+		
 		return "admin/student/selectStudentList";
 	}
 	
+	/** 학생 세부 정보 조회
+	 * @return
+	 */
 	@GetMapping("/selectStudentDetail")
 	public String selectStudentDetail() {
 		return "admin/student/selectStudentDetail";

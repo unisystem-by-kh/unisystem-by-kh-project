@@ -19,6 +19,7 @@ import com.google.api.services.calendar.model.Event;
 
 import kh.finalpro.project.admin.model.dao.AdminDAO;
 import kh.finalpro.project.admin.model.dto.Admin;
+import kh.finalpro.project.admin.model.dto.Student;
 import kh.finalpro.project.main.model.dto.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -44,6 +47,13 @@ public class AdminServiceImpl implements AdminService{
 	public int saveUniqueNo(Admin admin) {
 		// TODO Auto-generated method stub
 		return dao.saveUniqueNo(admin);
+	}
+
+	// 학생 정보 조회
+	@Override
+	public List<Student> selectStudentList() {
+		
+		return dao.selectStudentList();
 	}
 
 	
