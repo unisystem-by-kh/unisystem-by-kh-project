@@ -31,11 +31,16 @@
    		
    		<result property="memberName" column="MEMBER_NAME"/>
    		<result property="memberGrade" column="MEMBER_GRADE"/>
+   		<result property="memberTerm" column="MEMBER_TERM"/>
    		<result property="deptName" column="DEPARTMENT_NAME"/>
    		<result property="memberStatus" column="MEMBER_STATUS"/>
    		<result property="classPoint" column="CLASS_POINT"/>
    		<result property="requestType" column="REQUEST_TYPE"/>
    		<result property="requestReason" column="REQUEST_REASON"/>
+   		
+   		<!-- 학생 새부 정보 추가 -->
+   		<result property="memberDate" column="MEMBER_DATE"/>
+   		<result property="pay" column="PAY"/>
    </resultMap>
 
 <!--    <select id="selectList" resultMap="member_rm"> -->
@@ -61,6 +66,7 @@
 			    M.MEMBER_NO ,
 			    MEMBER_NAME, 
 			    MEMBER_GRADE, 
+			    MEMBER_TERM,
 			    DEPARTMENT_NAME, 
 			    MEMBER_STATUS, 
 			    NVL(SUM(CASE WHEN L.LECTURE_POINT >= 1 THEN CLASS_POINT ELSE 0 END), 0) AS CLASS_POINT,
@@ -75,14 +81,24 @@
 			    AND M.MEMBER_NO = R.MEMBER_NO(+)
 			    AND SUBSTR(M.MEMBER_NO, 1,2) = '01'
 			GROUP BY 
-			    M.MEMBER_NO, MEMBER_NAME, MEMBER_GRADE, DEPARTMENT_NAME, MEMBER_STATUS, REQUEST_TYPE, REQUEST_REASON
+			    M.MEMBER_NO, MEMBER_NAME, MEMBER_GRADE, DEPARTMENT_NAME, MEMBER_STATUS, REQUEST_TYPE, REQUEST_REASON, MEMBER_TERM
 		]]>
 	</select>
 	
-	<!-- 학생 진급(학년+1) -->
+	<!-- 학생 진급(학기+1) -->
 	<update id="demotion">
-		UPDATE MEMBER SET MEMBER_GRADE = (MEMBER_GRADE+1)
-		WHERE MEMBER_NO = #{memberNo}
+		UPDATE MEMBER 
+		SET 
+		    MEMBER_GRADE = CASE 
+		                      WHEN MEMBER_TERM = 2 THEN MEMBER_GRADE + 1 
+		                      ELSE MEMBER_GRADE
+		                  END,
+		    MEMBER_TERM = CASE 
+		                     WHEN MEMBER_TERM = 2 THEN 1 
+		                     ELSE MEMBER_TERM + 1 
+		                  END
+		WHERE 
+		    MEMBER_NO = #{memberNo}
 	</update>
 	
 	<!-- 학생 등록금 초기화(학년이 올라가면 등록금 테이블에 있던 정보 제거) -->
@@ -90,8 +106,42 @@
 		DELETE FROM PAY WHERE MEMBER_NO = #{memberNo}
 	</delete>
 	  
+	<!-- 4학년 2학기일때 진급 시 재적을 졸업으로 변경 -->
+	<update id="graduation">
+		UPDATE MEMBER SET MEMBER_STATUS = 'P'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 
-
+	<select id="studentDetail" resultMap="student_rm">
+		<![CDATA[
+			SELECT 
+			    M.MEMBER_NO, 
+			    MEMBER_NAME, 
+			    TO_CHAR(MEMBER_DATE, 'YYYY-MM-DD') AS MEMBER_DATE,
+			    MEMBER_GRADE, 
+			    MEMBER_TERM,
+			    MEMBER_STATUS,
+			    NVL(SUM(CASE WHEN L.LECTURE_POINT >= 1 THEN CLASS_POINT ELSE 0 END), 0) AS CLASS_POINT,
+			    CASE 
+			          WHEN (SELECT COUNT(*) FROM PAY WHERE MEMBER_NO = #{memberNo}) = 1 THEN '1'
+			          ELSE '0'
+			    END AS PAY
+			FROM
+			    MEMBER M
+			LEFT JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
+			LEFT JOIN CLASS C ON C.CLASS_NO = L.CLASS_NO
+			WHERE 
+			    M.MEMBER_NO = #{memberNo}
+			GROUP BY 
+			    M.MEMBER_NO, 
+			    MEMBER_NAME, 
+			    MEMBER_DATE, 
+			    MEMBER_GRADE, 
+			    MEMBER_TERM,
+			    MEMBER_STATUS
+	    ]]>
+	</select>
+	
 </mapper>
 
 

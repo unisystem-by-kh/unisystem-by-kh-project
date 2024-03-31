@@ -23,6 +23,9 @@ public interface AdminService {
 	// 학생 진급 승인
 	int demotion(List<Student> memberNoArr) throws Exception;
 
+	// 학생 세부 정보
+	Student studentDetail(String memberNo);
+
 
 
 	// 추후 수정 예정

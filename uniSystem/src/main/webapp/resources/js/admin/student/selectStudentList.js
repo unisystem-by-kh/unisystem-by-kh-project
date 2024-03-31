@@ -46,8 +46,12 @@ function openModal() {
     checkedNo.forEach(no => {
         if(no.checked){ // 체크 된 학생들만
             const memberNo = no.parentElement.firstElementChild.innerText;
+            const memberGrade = Number(no.parentElement.parentElement.nextElementSibling.nextElementSibling.innerText);
+            const memberTerm = Number(no.parentElement.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerText);
             const memberObj = {
-                memberNo : memberNo
+                memberNo : memberNo,
+                memberGrade : memberGrade,
+                memberTerm : memberTerm
             }
             memberNoArr.push(memberObj);
         }
@@ -114,7 +118,7 @@ function statusChange(requestReason, e){
 
         td.innerText = requestReason; // 매개변수로 받아온 재적 요청 사유를 대입
 
-        td.setAttribute("colspan", "6"); // td를 한줄 크키로 지정
+        td.setAttribute("colspan", "7"); // td를 한줄 크키로 지정
         tr.append(td);
         status.parentElement.after(tr); // 클릭된 td 바로 다음 요소에 추가
 
@@ -151,7 +155,7 @@ search.addEventListener("change", (e)=>{
         const newTr = document.createElement("tr");
     
         const newTd = document.createElement("td");
-        newTd.setAttribute("colspan", '6');
+        newTd.setAttribute("colspan", '7');
     
         newTd.innerText = '검색 결과가 없습니다.';
 
@@ -199,13 +203,14 @@ firstSelect.addEventListener("change", ()=>{
             selectTagFn('DD', backupTr);
             break;
     }
+    colorChange();
+    noChange();
 });
 
 /* 재적상태 옵션 변경 시 실행되는 함수 */
 function selectTagFn(status, backupTr){
     studentArr.forEach(stu=>{
         if(stu.requestType != ''){
-            console.log("요청사항 타입"+stu.requestType);
             if(stu.requestType+status.substr(0,1) == status){
                 tbody.append(insertTr(backupTr, stu));
             }    
@@ -213,6 +218,42 @@ function selectTagFn(status, backupTr){
             if(stu.memberStatus == status){
                 tbody.append(insertTr(backupTr, stu));
             }
+        }
+    });
+    if(tbody.innerHTML == '') tbody.append(emptyTbody());
+}
+
+/* 학년 select 선택시 실행 */
+const secondSelect = document.getElementById("secondSelect");
+secondSelect.addEventListener("change", ()=>{
+
+    const backupTr = tbodyFirstTr.cloneNode(true);
+
+    tbody.innerHTML = '';
+
+    switch(secondSelect.value){
+        case '1' : console.log("1학년"); 
+            secondSelectTag('1', backupTr);
+            break;
+        case '2' : console.log("2학년"); 
+            secondSelectTag('2', backupTr);
+            break;
+        case '3' : console.log("3학년"); 
+            secondSelectTag('3', backupTr);
+            break;
+        case '4' : console.log("4학년"); 
+            secondSelectTag('4', backupTr);
+            break;
+    }
+    colorChange();
+    noChange();
+});
+
+/* 학년 select 선택시 실행되는 이벤트 안에서 실행되는 함수 */
+function secondSelectTag(grade, backupTr){
+    studentArr.forEach(stu=>{
+        if(stu.memberGrade == grade){
+            tbody.append(insertTr(backupTr, stu));
         }
     });
     if(tbody.innerHTML == '') tbody.append(emptyTbody());
@@ -230,8 +271,11 @@ function insertTr(backupTr, stu){
     newTr.firstElementChild.nextElementSibling.firstElementChild.innerText = stu.memberName;
     // 세 번째 td 안에 학년 삽입            
     newTr.firstElementChild.nextElementSibling.nextElementSibling.innerText = stu.memberGrade;
-    // 네 번째 td 안에 학과 삽입
-    newTr.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.innerText = stu.deptName;
+
+    // 네 번째 td 안에 학기 삽입
+    newTr.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.innerText = stu.memberTerm;
+
+    newTr.lastElementChild.previousElementSibling.previousElementSibling.innerText = stu.deptName;
 
     // 다섯 번째 td 내용
     if(stu.requestType != ''){ // 재적 변경 요청이 있을 경우
@@ -273,7 +317,7 @@ function emptyTbody(){
     const newTr = document.createElement("tr");
             
     const newTd = document.createElement("td");
-    newTd.setAttribute("colspan", '6');
+    newTd.setAttribute("colspan", '7');
 
     newTd.innerText = '검색 결과가 없습니다.';
 

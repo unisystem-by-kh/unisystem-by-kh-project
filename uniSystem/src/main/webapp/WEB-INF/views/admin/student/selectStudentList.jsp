@@ -40,10 +40,12 @@
                         <option value="NN">복학신청</option>
                         <option value="DD">자퇴신청</option>
                     </select>
-                    <select name="second_select">
-                        <option value="completion">이수여부</option>
-                        <option value="completion">이수</option>
-                        <option value="incomplete">학점 미달</option>
+                    <select name="second_select" id="secondSelect">
+                        <option disabled selected>학년</option>
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4">4학년</option>
                     </select>
                     <button id="allSelect">전체 선택</button>
                     <button onclick="openModal()">일괄 진급</button>
@@ -55,6 +57,7 @@
                         <th>학번</th>
                         <th>이름</th>
                         <th>학년</th>
+                        <th>학기</th>
                         <th>학과</th>
                         <th>재적 상태</th>
                         <th>이수 여부</th>
@@ -70,8 +73,9 @@
                                         <input type="checkbox" class="select-row">
                                     </label>
                                 </td>
-                                <td><a href="/student/${student.memberNo}/selectStudentDetail">${student.memberName}</a></td>
+                                <td><a href="/admin/${student.memberNo}/selectStudentDetail">${student.memberName}</a></td>
                                 <td>${student.memberGrade}</td>
+                                <td>${student.memberTerm}</td>
                                 <td>${student.deptName}</td>
                                 <c:set var="status" value="${student.memberStatus}"/>
                                 <c:if test="${!empty student.requestType}" >
@@ -127,6 +131,7 @@
                     "memberNo": "${student.memberNo}",
                     "memberName": "${student.memberName}",
                     "memberGrade": "${student.memberGrade}",
+                    "memberTerm": "${student.memberTerm}",
                     "deptName": "${student.deptName}",
                     "memberStatus": "${student.memberStatus}",
                     "classPoint": "${student.classPoint}",
