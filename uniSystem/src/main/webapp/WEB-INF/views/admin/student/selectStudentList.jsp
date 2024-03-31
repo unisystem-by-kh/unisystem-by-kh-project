@@ -19,7 +19,7 @@
     <main>
 
         <%-- <div>
-            ${studentList}
+            ${studentList[0]}
         </div> --%>
 
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -27,7 +27,7 @@
         <div class="container">
             <div class="search-area">
                 <div>
-                    <input type="text" placeholder="검색어 입력">
+                    <input type="text" placeholder="학번, 이름으로 검색" id="search">
                 </div>
                 <div>
                     <select name="first_select">
@@ -143,6 +143,31 @@
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
+
+    <script>
+        const studentArr = [];
+        let newStudent = {};
+    </script>
+    <c:forEach items="${studentList}" var="student">
+            <script>
+                newStudent = {
+                    "memberNo": "${student.memberNo}",
+                    "memberName": "${student.memberName}",
+                    "memberGrade": "${student.memberGrade}",
+                    "deptName": "${student.deptName}",
+                    "memberStatus": "${student.memberStatus}",
+                    "classPoint": "${student.classPoint}",
+                    "requestType": "${student.requestType}",
+                    "requestReason": "${student.requestReason}"
+                };
+                studentArr.push(newStudent);
+            </script>
+            
+            <c:if test="${!loop.last}">,</c:if>
+    </c:forEach>
+
+    
+    <%-- memberNo=01-2412345, memberName=학생일, memberGrade=2, deptName=공공데이터융합, memberStatus=N, classPoint=9, requestType=Y, requestReason=삶이 피폐해서... --%>
 
     <script src="/resources/js/header.js"></script>
     <script src="/resources/js/admin/student/selectStudentList.js"></script>

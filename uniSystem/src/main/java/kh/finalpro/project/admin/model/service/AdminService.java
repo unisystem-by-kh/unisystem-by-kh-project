@@ -21,7 +21,7 @@ public interface AdminService {
 	List<Student> selectStudentList();
 
 	// 학생 진급 승인
-	int demotion(List<Student> memberNoArr);
+	int demotion(List<Student> memberNoArr) throws Exception;
 
 
 

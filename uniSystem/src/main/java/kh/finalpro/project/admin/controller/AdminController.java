@@ -77,7 +77,7 @@ public class AdminController {
 	@PostMapping(value="/demotion"/* , produces="application/json; charset=UTF-8" */)
 	@ResponseBody
 	public int demotion(
-			@RequestBody List<Student> memberNoArr) {
+			@RequestBody List<Student> memberNoArr) throws Exception {
 		
 //		System.out.println(memberNoArr);
 		

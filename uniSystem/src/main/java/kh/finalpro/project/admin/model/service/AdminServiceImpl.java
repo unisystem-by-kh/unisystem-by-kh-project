@@ -24,6 +24,8 @@ import kh.finalpro.project.main.model.dto.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -57,17 +59,24 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	// 학생 진급 승인
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int demotion(List<Student> memberNoArr) {
+	public int demotion(List<Student> memberNoArr) throws Exception{
 		
-		int result = 0;
+		int totalResult = 0;
 		
 		for(Student memberNo : memberNoArr) {
+			int result = dao.demotion(memberNo);	
+			if (result <= 0) {
+                throw new RuntimeException("진급 실패 : " + memberNo.getMemberNo()); // 진급 실패시 강제 예외 발생
+            }
+			totalResult += result;
+			
 			System.out.println(memberNo.getMemberNo());
-			result += dao.demotion(memberNo);
+			
 		}
 		
-		return result;
+		return totalResult;
 	}
 	
 	
