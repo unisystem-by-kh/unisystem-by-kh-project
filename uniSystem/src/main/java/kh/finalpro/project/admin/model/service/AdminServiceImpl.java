@@ -56,6 +56,22 @@ public class AdminServiceImpl implements AdminService{
 		return dao.selectStudentList();
 	}
 
+	// 학생 진급 승인
+	@Override
+	public int demotion(List<Student> memberNoArr) {
+		
+		int result = 0;
+		
+		for(Student memberNo : memberNoArr) {
+			System.out.println(memberNo.getMemberNo());
+			result += dao.demotion(memberNo);
+		}
+		
+		return result;
+	}
+	
+	
+
 	
 	
 

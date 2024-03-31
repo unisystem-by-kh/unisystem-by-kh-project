@@ -20,6 +20,9 @@ public interface AdminService {
 	// 학생 정보 조회
 	List<Student> selectStudentList();
 
+	// 학생 진급 승인
+	int demotion(List<Student> memberNoArr);
+
 
 
 	// 추후 수정 예정
