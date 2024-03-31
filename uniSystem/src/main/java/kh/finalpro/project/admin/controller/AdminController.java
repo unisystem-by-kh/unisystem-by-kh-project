@@ -2,6 +2,7 @@ package kh.finalpro.project.admin.controller;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,59 +81,31 @@ public class AdminController {
 	public int demotion(
 			@RequestBody List<Student> memberNoArr) throws Exception {
 		
-//		System.out.println(memberNoArr);
+		System.out.println(memberNoArr);
 		
 		int result = adminService.demotion(memberNoArr);
 		
 		return result;
 	}
 	
-	
-	/** 학생 세부 정보 조회
-	 * @return
-	 */
-	@GetMapping("/selectStudentDetail")
-	public String selectStudentDetail() {
-		return "admin/student/selectStudentDetail";
-	}
-	
+	// 학생 검색
 	@GetMapping("/selectList")
 	public List<Member> selectList(@RequestBody String input) {
 		System.out.println(input);
 		return adminService.selectList(input);
 	}
 	
-	
-	
-	// 추후 수정 예정
-	/*
-	// 캘린더 API 컨트롤러
-	@RequestMapping("/calender")
-	public class CalendarController {
-		// 생성자를 통해 GoogleCalendarService를 주입받음
-	    public CalendarController(AdminService calendarService) {
-	        adminService = calendarService;
-	    }
-
-	 // POST 메소드를 통해 이벤트를 생성하는 엔드포인트
-	    @PostMapping
-	    public ResponseEntity<?> createEvent(@RequestBody Event event) {
-	        try {
-	        	// GoogleCalendarService를 통해 이벤트를 생성
-	        	adminService.createEvent(event); 
-	            // 성공 응답 반환
-	            return ResponseEntity.ok().build();
-	        } catch (IOException | GeneralSecurityException e) {
-	        	// 오류 반환
-	            e.printStackTrace();
-	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	        }
-	    }
-
-	    // 이벤트 업데이트 및 삭제를 위한 다른 엔드포인트를 구현할 수 있음
+	// 학생 세부 정보 조회
+	@GetMapping("/{memberNo}/selectStudentDetail")
+	public String selectStudentDetail(Model model
+			, @PathVariable("memberNo") String memberNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Student student = adminService.studentDetail(memberNo);
+		// List<>
+		
+		return "/admin/student/selectStudentDetail";
 	}
-	*/
-	
 	
 	
 }

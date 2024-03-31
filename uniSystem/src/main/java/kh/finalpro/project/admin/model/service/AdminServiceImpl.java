@@ -78,6 +78,17 @@ public class AdminServiceImpl implements AdminService{
 		
 		return totalResult;
 	}
+
+	// 학생 세부 정보
+	@Override
+	public Student studentDetail(String memberNo) {
+		
+		Student student = dao.studentDetail(memberNo);
+		
+		return null;
+	}
+	
+	
 	
 	
 
@@ -88,31 +99,6 @@ public class AdminServiceImpl implements AdminService{
 	
 
 	
-	// 추후 수정 예정
 	
-	/*
-	private final String APPLICATION_NAME = "Your Application Name"; // 애플리케이션 이름
-    private final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance(); // JSON Factory
-    		// JacksonFactory.getDefaultInstance(); // 더이상 사용되지 않는 코드여서 위의 코드로 교체
-     
-    
-    private final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport(); // HTTP Transport
-    private final String CALENDAR_ID = "primary"; // 캘린더 ID
-
-    // Google Calendar 서비스를 초기화하여 반환
-    private Calendar getService() throws GeneralSecurityException, IOException {
-        GoogleCredential credential = GoogleCredential.fromStream(
-                new FileInputStream("path/to/your/credentials.json")) // 자격 증명 파일의 경로
-                .createScoped(Collections.singletonList(CalendarScopes.CALENDAR));
-        return new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
-                .setApplicationName(APPLICATION_NAME)
-                .build();
-    }
-	
-	// 이벤트 생성
-    public void createEvent(Event event) throws IOException, GeneralSecurityException {
-        getService().events().insert(CALENDAR_ID, event).execute();
-    }
-    */
 	
 }
