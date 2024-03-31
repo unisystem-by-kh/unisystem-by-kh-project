@@ -1,8 +1,8 @@
-((e) => {
+/* ((e) => {
     selectAnnouncement();
 })()
 
-
+// 공지사항 목록이였던 것
 function selectAnnouncement(){
     fetch("/selectAnnouncement")
     .then(response => response.json())
@@ -36,4 +36,4 @@ function selectAnnouncement(){
 
     })
     .catch(err => console.log(err));
-}
+} */

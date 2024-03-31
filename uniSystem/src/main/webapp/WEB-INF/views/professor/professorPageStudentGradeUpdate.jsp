@@ -26,8 +26,6 @@
             <!-- 학기 버튼 및 제목 -->
             <div class="title-area">
 
-
-
                 <div class="object-select-area">
                     <select name="objectList" id="objectList">
                         <option value="1학년">1학년</option>
@@ -44,8 +42,6 @@
                     </select>
                 </div>
 
-
-
                 <div>성적 수정</div>
             </div>
 
@@ -53,92 +49,20 @@
             <form action="#" class="student-area">
                 <div class="student-info-area">
                     <!-- 학과 학번 이름 성적 수정 영역 -->
-                    <div class="student-title">
+                    <%-- <div class="student-title">
                         <div>학과</div>
                         <div>학번</div>
                         <div>이름</div>
                         <div>성적</div>
-                    </div>
+                    </div> --%>
     
                     <!-- 정보 영역 한페이지에 최대 13개까지 노출 for문 사용 -->
-                    <div class="student-info">
+                    <%-- <div class="student-info">
                         <div>123456</div>
                         <div>홍길동</div>
                         <div>경영학과</div>
                         <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
-                    <div class="student-info">
-                        <div>123456</div>
-                        <div>홍길동</div>
-                        <div>경영학과</div>
-                        <div><input type="text" placeholder="수정할 성적을 입력해주세요." value="1" id="studentGrade"></div>
-                    </div>
+                    </div> --%>
                 </div>
                 
                 

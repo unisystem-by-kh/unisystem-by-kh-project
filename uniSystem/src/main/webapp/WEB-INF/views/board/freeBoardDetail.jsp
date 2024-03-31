@@ -55,7 +55,6 @@
                         <%-- <c:set var="path" value="#" /> --%>
                         <%-- <img src="${path}" alt="썸네일을 등록해주세요."> --%>
                         <%-- <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' /> --%>
-                        asdasdasd
                     </c:if>
                     <div>
                         ${board.boardContent}
@@ -121,21 +120,6 @@
 
 
             </div>
-
-            <!-- 페이지네이션 영역 -->
-            <%-- <div class="paginations-area">
-                <div>&lt;</div>
-                <div id="paginations">
-                    <div class="active">1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>5</div>
-                </div>
-                <div>&gt;</div>
-            </div> --%>
-
-
 
         </div>
 
