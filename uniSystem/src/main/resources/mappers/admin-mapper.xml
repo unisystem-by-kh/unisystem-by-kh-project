@@ -78,6 +78,17 @@
 			    M.MEMBER_NO, MEMBER_NAME, MEMBER_GRADE, DEPARTMENT_NAME, MEMBER_STATUS, REQUEST_TYPE, REQUEST_REASON
 		]]>
 	</select>
+	
+	<!-- 학생 진급(학년+1) -->
+	<update id="demotion">
+		UPDATE MEMBER SET MEMBER_GRADE = (MEMBER_GRADE+1)
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 학생 등록금 초기화(학년이 올라가면 등록금 테이블에 있던 정보 제거) -->
+	<delete id="deletePay">
+		DELETE FROM PAY WHERE MEMBER_NO = #{memberNo}
+	</delete>
 	  
 
 

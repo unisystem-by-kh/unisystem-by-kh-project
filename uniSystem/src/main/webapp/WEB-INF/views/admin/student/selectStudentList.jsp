@@ -18,9 +18,9 @@
 
     <main>
 
-        <div>
+        <%-- <div>
             ${studentList}
-        </div>
+        </div> --%>
 
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
@@ -61,7 +61,7 @@
                             <tr>
                                 <td>
                                     <label>
-                                        ${student.memberNo}
+                                        <span>${student.memberNo}</span>
                                         <input type="checkbox" class="select-row">
                                     </label>
                                 </td>
@@ -121,7 +121,7 @@
 
 
 
-            <div id="modal" class="modal">
+            <%-- <div id="modal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="close" onclick="closeModal()">&times;</span>
@@ -136,7 +136,7 @@
                         <!-- <button class="confirm-btn" onclick="closeModal()" style="display:none">확인</button> -->
                     </div>
                 </div>
-            </div>
+            </div> --%>
 
         </div>
 

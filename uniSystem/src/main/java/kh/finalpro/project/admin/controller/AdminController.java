@@ -66,15 +66,26 @@ public class AdminController {
 	@GetMapping("/selectStudentList")
 	public String selectStudentList(Model model) {
 		
-//		Map<String, Object> map = adminService.selectStudentList();
-		
 		List<Student> studentList = adminService.selectStudentList();
 		
-		System.out.println(studentList);
 		model.addAttribute("studentList", studentList);
 		
 		return "admin/student/selectStudentList";
 	}
+	
+	// 학생 진급
+	@PostMapping(value="/demotion"/* , produces="application/json; charset=UTF-8" */)
+	@ResponseBody
+	public int demotion(
+			@RequestBody List<Student> memberNoArr) {
+		
+//		System.out.println(memberNoArr);
+		
+		int result = adminService.demotion(memberNoArr);
+		
+		return result;
+	}
+	
 	
 	/** 학생 세부 정보 조회
 	 * @return

@@ -41,5 +41,14 @@ public class AdminDAO {
 		return sqlSession.selectList("adminmapper.selectStudentList");
 	}
 
+	public int demotion(Student memberNo) {
+		int result = sqlSession.update("adminmapper.demotion", memberNo);
+		if(result > 0) {
+			result = sqlSession.delete("adminmapper.deletePay", memberNo);
+		}
+		
+		return result;
+	}
+
 
 }
