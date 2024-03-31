@@ -41,6 +41,7 @@ a{
 /* 네비게이션 전체 영역 */
 .headerAll{
     width: 100%;
+    height: 188px;
     z-index: 9999;
 }
 
@@ -248,7 +249,7 @@ a{
     display: flex;
 
     /* 숨길 예정 */
-    /* display: none; */
+    display: none;
 
     justify-content: space-around;
     align-items: center;
@@ -256,8 +257,31 @@ a{
     border-radius: 0 0 10px 10px;
 }
 .navigation3 > div > a{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
     color: whitesmoke;
 }
+
+.navigation3 > div{
+    display: flex;
+    justify-content: center;
+}
+
+.navigation3-home > a:hover{
+    text-decoration: underline;
+}
+
+.navigation3-student > a:hover{
+    text-decoration: underline;
+}
+
+
+
+
+
+
 
 /* --------------------- 헤더부분 끝 --------------------- */
 
