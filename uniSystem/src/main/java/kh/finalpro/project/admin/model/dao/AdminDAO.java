@@ -41,6 +41,7 @@ public class AdminDAO {
 		return sqlSession.selectList("adminmapper.selectStudentList");
 	}
 
+	// 학생 진급, 등록금 테이블에 납부 정보 삭제
 	public int demotion(Student memberNo) {
 		int result = sqlSession.update("adminmapper.demotion", memberNo);
 		if(result > 0) {
