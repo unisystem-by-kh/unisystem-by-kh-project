@@ -30,10 +30,15 @@
                     <input type="text" placeholder="학번, 이름으로 검색" id="search">
                 </div>
                 <div>
-                    <select name="first_select">
-                        <option value="status">재적 상태</option>
-                        <option value="name">이름</option>
-                        <option value="department">학과</option>
+                    <select name="first_select" id="first_select">
+                        <option disabled selected>재적 상태</option>
+                        <option value="N">재학중</option>
+                        <option value="Y">휴학중</option>
+                        <option value="P">졸업</option>
+                        <option value="D">중퇴</option>
+                        <option value="YY">휴학신청</option>
+                        <option value="NN">복학신청</option>
+                        <option value="DD">자퇴신청</option>
                     </select>
                     <select name="second_select">
                         <option value="completion">이수여부</option>
@@ -101,42 +106,10 @@
                                 <td>${student.classPoint}/30(한 학년 총 학점)</td>
                                 </tr>
                         </c:forEach>
-
-                        <tr>
-                            <td>
-                                <label>
-                                    test
-                                    <input type="checkbox" class="select-row">
-                                </label>
-                            </td>
-                            <td><a href="/student/selectStudentDetail">test이름</a></td>
-                            <td>test학년</td>
-                            <td>test학과</td>
-                            <td class="std-status">test 학적<input type="checkbox" hidden></td>
-                            <td>test 이수 여부</td>
-                        </tr>
+                        
                     </tbody>
                 </div>
             </table>
-
-
-
-            <%-- <div id="modal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <img src="https://via.placeholder.com/150" alt="이미지 영역">
-                        <div style="font-size: 20px;">진급 N개를 처리하시겠습니까?</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="cancel-btn" onclick="closeModal()">취소</button>
-                        <button class="approve-btn" onclick="confirmModal()">승인</button>
-                        <!-- <button class="confirm-btn" onclick="closeModal()" style="display:none">확인</button> -->
-                    </div>
-                </div>
-            </div> --%>
 
         </div>
 
@@ -163,11 +136,8 @@
                 studentArr.push(newStudent);
             </script>
             
-            <c:if test="${!loop.last}">,</c:if>
+            <c:if test="${!loop.last}"></c:if>
     </c:forEach>
-
-    
-    <%-- memberNo=01-2412345, memberName=학생일, memberGrade=2, deptName=공공데이터융합, memberStatus=N, classPoint=9, requestType=Y, requestReason=삶이 피폐해서... --%>
 
     <script src="/resources/js/header.js"></script>
     <script src="/resources/js/admin/student/selectStudentList.js"></script>
