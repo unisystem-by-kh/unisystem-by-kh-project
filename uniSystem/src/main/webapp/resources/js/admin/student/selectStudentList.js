@@ -68,7 +68,6 @@ function openModal() {
         text : "진급을 승인하려면 확인 버튼",
         icon : "warning", // 아이콘 모양 
         buttons : ["취소", "승인"],
-        dangerMode : true,
     })
     .then((willDelete) => {
         if(willDelete){ // 예 버튼 클릭시
