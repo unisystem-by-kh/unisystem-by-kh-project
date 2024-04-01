@@ -132,7 +132,49 @@
         <div class="btmArea">
             <%-- 게시판 영역 --%>
             <div class="boardArea">
-                게시판 넣어주세욥
+                <div>
+                    <h1>자유게시판</h1>
+                </div>
+                <div class="img-title">
+                    <div>
+                        <a href="/board[0]/3/${board[0].boardNo}">${board[0].boardTitle}</a>
+                    </div>
+                    <div>
+                        <img src="${board[0].fileList[0].boardFilePath}${board[0].fileList[0].boardFileRename}">
+                    </div>
+                </div>
+                <div class="img-title">
+                    <div>
+                        <a href="/board[1]/3/${board[0].boardNo}">${board[1].boardTitle}</a>
+                    </div>
+                    <div>
+                        <img src="${board[1].fileList[0].boardFilePath}${board[1].fileList[0].boardFileRename}">
+                    </div>
+                </div>
+                <div class="img-title">
+                    <div>
+                        <a href="/board[2]/3/${board[0].boardNo}">${board[2].boardTitle}</a>
+                    </div>
+                    <div>
+                        <img src="${board[2].fileList[0].boardFilePath}${board[2].fileList[0].boardFileRename}">
+                    </div>
+                </div>
+                <div class="img-title">
+                    <div>
+                        <a href="/board[3]/3/${board[0].boardNo}">${board[3].boardTitle}</a>
+                    </div>
+                    <div>
+                        <img src="${board[3].fileList[0].boardFilePath}${board[3].fileList[0].boardFileRename}">
+                    </div>
+                </div>
+                <div class="img-title">
+                    <div>
+                        <a href="/board[4]/3/${board[0].boardNo}">${board[4].boardTitle}</a>
+                    </div>
+                    <div>
+                        <img src="${board[4].fileList[0].boardFilePath}${board[4].fileList[0].boardFileRename}">
+                    </div>
+                </div>
             </div>
 
 
