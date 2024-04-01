@@ -174,9 +174,9 @@
                 <div class="navigation3-admin" id="selectList">
                     
                     <a href="/admin/selectStudentList">학생 조회</a>
-                    <a href="/professor/professorPageStudentGrade">학생(성적) 조회</a>
-                    <a href="/professor/professorPageStudentGradeInsert">교수 조회</a>
-                    <a href="/professor/professorPageStudentGradeUpdate">교직원 조회</a>
+                    <a href="#">학생(성적) 조회</a>
+                    <a href="#">교수 조회</a>
+                    <a href="#">교직원 조회</a>
                     <a href="/rate">교수 평가 조회</a>
                 </div>
 

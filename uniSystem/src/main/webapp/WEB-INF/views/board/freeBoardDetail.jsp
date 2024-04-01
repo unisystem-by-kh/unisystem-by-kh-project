@@ -33,7 +33,7 @@
                     <c:set var='boardUDate' value='${board.boardUDate}' />
                     <div>작성일 : <c:out value="${fn:substring(boardCDate, 0, 13)}"/></div>
                     <c:if test='${board.boardUDate != null}'>
-                        <div>수정일 : <c:out value="${fn:substring(boardUDate, 0, 13)}"/></div>
+                        <div>수정일 : <c:out value="${fn:substring(boardUDate, 0, 16)}"/></div>
                     </c:if>
                     
                     <div>작성자 : ${board.memberName}</div>
@@ -74,64 +74,70 @@
                     </div>
             </div>
 
-            <div class="row5">한줄 댓글 <span></span></div>
-
-            <div class="row6">
-                <%-- 로그인한 회원의 프로필 이미지 넣기 --%>
-                <c:if test="${empty loginMember.memberProfile}" >
-                    <div><img src="/resources/images/background/user.png"></div>
-                </c:if>
-                <c:if test="${!empty loginMember.memberProfile}" >
-                    <div><img src="${loginMember.memberProfile}"></div>
-                </c:if>
-                <div><textarea id="replyContentInsert" cols="150" rows="3" placeholder="댓글을 입력해주세요." maxlength="100"></textarea></div>
-                <div><button id="replyAdd">작성</button></div>
-            </div>
-
-            <div class="row7">
-                <div>프로필</div>
-                <div>작성자</div>
-                <div>작성일</div>
-                <div>댓글 내용</div>
-                <div>번호</div>
-            </div>
-            <%-- ${board.replyList} 확인용 --%>
-            <div class="row8-area">
-
-                <c:forEach items="${board.replyList}" var="reply">
-                
-                    <div class="row8">
-                        <div class="btn-profile-area">
-                            <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
-                            <div class="btnArea">
-                                <c:if test='${board.memberNo == reply.memberNo}'>
-                                    <button id='updateBtn' onclick="showUpdateReply(${reply.replyNo}, this)" >수정</button>
-                                    <button id='deleteBtn' onclick="deleteReply(${reply.replyNo})">삭제</button>
-                                </c:if>
-                            </div>
-                            <c:if test="${empty reply.memberProfile}" >
-                                <div class="profileImg-reply"><img src="/resources/images/background/user.png" alt="#" class="imgProfile"></div>
-                            </c:if>
-                            <c:if test="${!empty reply.memberProfile}" >
-                                <div class="profileImg-reply"><img src="${reply.memberProfile}" alt="#" class="imgProfile"></div>
-                            </c:if>
-                        </div>
-                        <div class="replyMemberName">${reply.memberName}</div>
-
-                        <c:set var='replyDate' value='${reply.replyDate}' />
-                        <div class='replyDate'><c:out value="${fn:substring(replyDate, 0, 15)}"/></div>
-
-                        <div class='replyContnet'>${reply.replyContent}</div>
-                        <%-- 댓글 번호를 할지? 회원 아이디를 넣어줄지? --%>
-                        <div class='replyNo'>${reply.replyNo}</div>
-                    </div>
-                
-                </c:forEach>
 
 
-            </div>
+
 
         </div>
+            <div class="replyArea">
+
+                <div class="row5">한줄 댓글 <span></span></div>
+
+                <div class="row6">
+                    <%-- 로그인한 회원의 프로필 이미지 넣기 --%>
+                    <c:if test="${empty loginMember.memberProfile}" >
+                        <div><img src="/resources/images/background/user.png"></div>
+                    </c:if>
+                    <c:if test="${!empty loginMember.memberProfile}" >
+                        <div><img src="${loginMember.memberProfile}"></div>
+                    </c:if>
+                    <div><textarea id="replyContentInsert" cols="150" rows="3" placeholder="댓글을 입력해주세요." maxlength="100"></textarea></div>
+                    <div><button id="replyAdd">작성</button></div>
+                </div>
+
+                <div class="row7">
+                    <div>프로필</div>
+                    <div>작성자</div>
+                    <div>작성일</div>
+                    <div>댓글 내용</div>
+                    <%-- <div>번호</div> --%>
+                </div>
+                <%-- ${board.replyList} 확인용 --%>
+                <div class="row8-area">
+
+                    <c:forEach items="${board.replyList}" var="reply">
+                    
+                        <div class="row8">
+                            <div class="btn-profile-area">
+                                <!-- 로그인하면 본인 댓글 작성에 한에서 노출 -->
+                                <div class="btnArea">
+                                    <c:if test='${board.memberNo == reply.memberNo}'>
+                                        <button id='updateBtn' onclick="showUpdateReply(${reply.replyNo}, this)" >수정</button>
+                                        <button id='deleteBtn' onclick="deleteReply(${reply.replyNo})">삭제</button>
+                                    </c:if>
+                                </div>
+                                <c:if test="${empty reply.memberProfile}" >
+                                    <div class="profileImg-reply"><img src="/resources/images/background/user.png" alt="#" class="imgProfile"></div>
+                                </c:if>
+                                <c:if test="${!empty reply.memberProfile}" >
+                                    <div class="profileImg-reply"><img src="${reply.memberProfile}" alt="#" class="imgProfile"></div>
+                                </c:if>
+                            </div>
+                            <div class="replyMemberName">${reply.memberName}</div>
+
+                            <c:set var='replyDate' value='${reply.replyDate}' />
+                            <div class='replyDate'><c:out value="${fn:substring(replyDate, 0, 15)}"/></div>
+
+                            <div class='replyContnet'>${reply.replyContent}</div>
+                            <%-- <div class='replyNo'>${reply.replyNo}</div> --%>
+                        </div>
+                    
+                    </c:forEach>
+
+
+                </div>
+
+            </div>
 
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

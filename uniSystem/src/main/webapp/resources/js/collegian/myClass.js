@@ -224,7 +224,7 @@ document.getElementById("class-btn").addEventListener("click", e => {
         })
         .then(res => res.text())
         .then(result => {
-    
+            console.log(result);
             if(result>0){
                 location.reload(); // 페이지 새로 고침
                 alert("수강 과목 신청 결과" + result);

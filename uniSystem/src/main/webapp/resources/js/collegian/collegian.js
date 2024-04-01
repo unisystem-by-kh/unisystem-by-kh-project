@@ -116,7 +116,7 @@ for (let i of selectBoxes) {
                 const classGrade = document.createElement("td");
                 classGrade.innerText = i.classGrade+"학년";
                 const classTrem = document.createElement("td");
-                classTrem.innerText = i.classTrem+"학기";
+                classTrem.innerText = i.classTerm+"학기";
                 const className = document.createElement("td");
                 className.innerText = i.className;
                 const classPoint = document.createElement("td");

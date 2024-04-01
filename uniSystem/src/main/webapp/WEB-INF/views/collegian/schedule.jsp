@@ -35,11 +35,11 @@
 
 				<div class="search-area">
 					<form action="">
-						<span>학과</span> <input type="text" value="컴퓨터과학과" readonly>
+						<span>학과</span> <input type="text" value="${loginMember.departmentName}" readonly>
 
-						<span>학번</span> <input type="text" value="201123421" readonly>
+						<span>학번</span> <input type="text" value="${loginMember.memberNo}" readonly>
 
-						<span>성명</span> <input type="text" value="차준형" readonly> 
+						<span>성명</span> <input type="text" value="${loginMember.memberName}" readonly> 
 						<%--  <div class="select">
 						<select	name="grade" id="">
 							<option value="">1학년</option>
