@@ -78,7 +78,7 @@ public class EmailServiceImpl implements EmailService{
 			// 메일 내용
 			String mailContent 
 			= "<div style='background-color: #f4f4f4; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);'>"
-		        + "<h2 style='color: #333; text-align: center; font-family: Arial, sans-serif;'>UNI-SYSTEM " + memberName + " " + title + "</h2>"
+		        + "<h2 style='color: #333; text-align: center; font-family: Arial, sans-serif;'>UNI-SYSTEM " + title + "</h2>"
 		        + "<hr style='border-top: 1px solid #ccc;'>"
 		        + "<p style='font-size: 16px; text-align: center;'>안녕하세요, " + memberName + "님!</p>"
 		        + "<p style='font-size: 16px; text-align: center;'>아래는 임시비밀번호입니다:</p>"
@@ -112,6 +112,7 @@ public class EmailServiceImpl implements EmailService{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("authKey", authKey);
 		map.put("email", email);
+		map.put("memberName", memberName);
 
 //		System.out.println(map);
 
