@@ -17,7 +17,7 @@
             <!-- 공통 -->
             <div class="navigation1-row1">
                 <a href="/comeMap">오시는길</a>
-                <a href="/board/1">공지사항</a>
+                
                 <a href="/board/5">자료실</a>
 
                 <%-- 테스트용으로 삭제 예정 --%>
@@ -110,7 +110,7 @@
 
             <%-- 소식은 고정 노출 --%>
             <div class="navigation3-home" id="newsList">
-                <a href="#">학사일정</a>
+                <a href="/board/1">공지사항</a>
                 <a href="/board/2">학과공지</a>
                 <a href="/board/3">자유게시판</a>
                 <a href="/board/4">1:1문의</a>
