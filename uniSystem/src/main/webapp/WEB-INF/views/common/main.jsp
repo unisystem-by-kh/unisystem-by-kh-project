@@ -125,6 +125,21 @@
                 <jsp:include page="/WEB-INF/views/common/slider.jsp" />
             </div>
 
+
+
+        </div>
+
+        <div class="btmArea">
+            <%-- 게시판 영역 --%>
+            <div class="boardArea">
+                게시판 넣어주세욥
+            </div>
+
+
+            <%-- 시간표 영역 --%>
+            <div class="timeArea">
+                시간표 넣어주세욥
+            </div>
         </div>
 
         <!-- 푸터 인클루드 -->
