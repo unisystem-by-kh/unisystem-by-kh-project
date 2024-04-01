@@ -36,7 +36,7 @@
 }
 
 .info-area div:nth-child(odd) {
-    color: #6c5ce7; /* 홀수 번째 정보의 글자색 변경 */
+    color: rgb(130, 203, 196); /* 홀수 번째 정보의 글자색 변경 */
 }
 
 .info-area {
@@ -56,7 +56,7 @@
 }
 
 .info-area div:nth-child(odd) {
-    color: #6c5ce7; /* 홀수 번째 정보의 글자색 변경 */
+    color: rgb(130, 203, 196); /* 홀수 번째 정보의 글자색 변경 */
 }
 
 

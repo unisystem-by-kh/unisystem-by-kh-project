@@ -227,7 +227,7 @@
     transition-duration: 0.3s;
 }
 .boardList-area:hover{
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgb(130, 203, 196);;
 }
 
 .boardList-area > div{
@@ -255,7 +255,7 @@
     font-weight: normal;
 }
 .boardList-area > :nth-child(2) > a > div:hover{
-    color: gray;
+    color: rgb(130, 203, 196);
     font-weight: bolder;
 }
 .boardList-area > :nth-child(2) > a > :nth-child(1){
@@ -359,7 +359,7 @@
     transition: background-color 0.3s ease-in-out;
 }
 .paginations-area > :nth-child(1):hover , .paginations-area > :nth-child(3):hover{
-    background-color: gray;
+    background-color: rgb(130, 203, 196);
     color: white;
 }
 
@@ -388,7 +388,7 @@
 }
 /* 버튼 클릭 효과 */
 #paginations a:hover {
-    background-color: gray;
+    background-color: rgb(130, 203, 196);;
     color: white;
 }
 #paginations a.active {

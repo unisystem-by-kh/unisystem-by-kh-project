@@ -53,7 +53,7 @@
                 <div class="infoCheck">
                     <div id="infoV">
                         <p>본인이 속한 학과 학생 조회</p>
-                        <p>클릭하면 복사 가능</p>
+                        <p>클릭하면 해당 내용 복사 가능</p>
                     </div>
                     
                     <form action="/professor/excel/download" method="get">
