@@ -86,7 +86,7 @@ public class MainController {
 			
 		}else { //가입 실패
 			path += "/member/signUp"; // 회원가입페이지로 이동
-			ra.addFlashAttribute("message", "회원가입을 실패했습니다.");
+			ra.addFlashAttribute("errorMessage", "회원가입을 실패했습니다.");
 		}
 		
 		return "redirect:/";
@@ -126,7 +126,7 @@ public class MainController {
 
 		}else {
 			path += "redirect:/";
-			ra.addFlashAttribute("message", "학번 또는 비밀번호가 일치하지 않습니다.");
+			ra.addFlashAttribute("errorMessage", "학번 또는 비밀번호가 일치하지 않습니다.");
 		}
 
 

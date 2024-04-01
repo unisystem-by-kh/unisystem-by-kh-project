@@ -21,8 +21,6 @@ public class EmailController {
 	@GetMapping("/findPw")
 	@ResponseBody
 	public int findPw(String email, String memberName) {
-		System.out.println("email:"+email);
-		System.out.println("memberName:"+memberName);
 		
 		return service.findPw(email, memberName, "임시비밀번호 안내");
 	}

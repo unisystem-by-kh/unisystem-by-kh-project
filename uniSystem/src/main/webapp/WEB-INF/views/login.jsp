@@ -99,9 +99,14 @@
         </c:if>
     </c:if>
 
+    <c:if test="${!empty errorMessage}">
+        <script>
+            swal("${errorMessage}", "", "error");
+        </script>
+    </c:if>
     <c:if test="${!empty message}">
         <script>
-            swal("${message}", "", "error");
+            swal("${message}", "", "success");
         </script>
     </c:if>
 </body>
