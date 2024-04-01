@@ -29,6 +29,9 @@ public interface AdminService {
 	// 학생 세부 정보 수강 과목 조회
 	List<Student> stuLecture(String memberNo);
 
+	// 학생 재적 변경
+	int studentUpdate(Student memberArr);
+
 
 
 	// 추후 수정 예정

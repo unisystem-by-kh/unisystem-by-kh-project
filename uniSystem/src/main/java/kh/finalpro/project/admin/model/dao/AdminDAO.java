@@ -64,5 +64,14 @@ public class AdminDAO {
 		return sqlSession.selectList("adminmapper.stuLecture", memberNo);
 	}
 
+	// 학생 재적 변경
+	public int studentUpdate(Student memberArr) {
+		return sqlSession.update("adminmapper.studentUpdate", memberArr);
+	}
+
+	public int requestUpdate(Student memberArr) {
+		return sqlSession.update("adminmapper.requestUpdate", memberArr);
+	}
+
 
 }

@@ -107,9 +107,9 @@ public class AdminController {
 		
 		System.out.println(memberArr);
 		
-//		int result = adminService.studentUpdate(memberArr);
+		int result = adminService.studentUpdate(memberArr);
 		
-		return 0;
+		return result;
 	}
 	
 }
