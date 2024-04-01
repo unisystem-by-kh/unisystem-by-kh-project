@@ -404,11 +404,6 @@
 			BOARD_FILE_ORIGINAL,
 			#{file.boardFileRename} BOARD_FILE_RENAME,
 
-
-			2 CATEGORY_NO,
-
-
-			
 			#{file.boardFileCategoryNo} CATEGORY_NO,
 			
 
@@ -713,6 +708,23 @@
 		#{boardNo}
 		AND CATEGORY_NO = #{categoryNo}
 	</update>
+	
+	<select id="selectMainBoard" resultMap="board_rm">
+		SELECT *
+		FROM (
+		    SELECT BOARD_NO, BOARD_TITLE, BOARD_COUNT, BOARD_CONTENT, BOARD_ST,
+		        (SELECT BOARD_FILE_PATH || BOARD_FILE_RENAME
+		        FROM BOARD_FILE F
+		        WHERE F.BOARD_NO = B.BOARD_NO) AS THUMBNAIL
+		        FROM BOARD B
+		        WHERE CATEGORY_NO = 3
+		        AND BOARD_ST = 'N'
+		        ORDER BY BOARD_NO DESC
+		)
+		<![CDATA[
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
 
 
 

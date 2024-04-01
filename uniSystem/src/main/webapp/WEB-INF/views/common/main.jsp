@@ -142,6 +142,7 @@
             </div>
         </div>
 
+       
         <!-- 푸터 인클루드 -->
     	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
     

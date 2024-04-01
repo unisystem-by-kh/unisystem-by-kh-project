@@ -21,6 +21,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.finalpro.project.admin.model.dto.Subject;
+import kh.finalpro.project.board.model.dto.Board;
+import kh.finalpro.project.board.model.service.BoardService;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.main.model.service.MemberService;
 
@@ -30,6 +32,9 @@ public class MainController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private BoardService serviceBoard;
 
 	// 첫화면 (로그인 페이지)
 	@GetMapping("/")
@@ -40,7 +45,15 @@ public class MainController {
 	
 	// 메인 페이지 이동
 	@GetMapping("/main")
-	public String main() {
+	public String main(Model model) {
+		
+		
+			List<Board> board = serviceBoard.selectMainBoard();
+			
+			model.addAttribute("board", board);
+		
+		
+		
 		return "common/main";
 	}
 
