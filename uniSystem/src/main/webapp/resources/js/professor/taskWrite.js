@@ -96,22 +96,29 @@ const grade = document.getElementsByClassName('grade');
 
 // 과목명에 따라 분류, 학기, 학년 변경
 function deptFn(){
-    for(let i=0; i<dept.length; i++){
-        dept[i].addEventListener("change", ()=>{
-    
-            const index = Number(dept[i].value);
-            // console.log(index);
-            let str;
-            switch(classList[index]){
-                case '2' : str = '비전공'; break;
-                case '3' : str = '전공'; break;
+    for(let j=0; j < dept.length; j++){
+        dept[j].addEventListener("change", ()=>{
+            const selectVal = dept[j].value;
+        
+            for(let i=0; i<classNo.length; i++){
+                if(selectVal == classNo[i]){
+        
+                    let str;
+                    switch(classList[i]){
+                        case '2' : str = '비전공'; break;
+                        case '3' : str = '전공'; break;
+                    }
+        
+                    dept[j].parentElement.nextElementSibling.innerText = str;
+                    dept[j].parentElement.previousSibling.innerText = classTerm[i];
+                    // dept[j].parentElement.previousSibling.previousSibling.innerText = classTerm[i];
+                    term[j].innerText = classTerm[i];
+                    grade[j].innerText = classGrade[i];
+                    
+                }
             }
-            term[i].innerText = classTerm[index];
-            grade[i].innerText = classGrade[index];
-            deptList[i].innerText = str;
-        });
+        })
     }
-    return;
 }
 
 const delBtn = document.getElementsByClassName("del-btn"); // td 삭제 버튼
@@ -154,9 +161,12 @@ saveBtn.addEventListener("click", ()=>{
     const arr = [];
 
     for(let i=0; i<dept.length; i++){
+        
         const classNo = dept[i].value;
         const fileName = file[i].value;
         const taskDate = currentDate[i].value;
+
+        console.log(classNo);
 
         const obj = {
             classNo : classNo,
@@ -169,6 +179,8 @@ saveBtn.addEventListener("click", ()=>{
 
     console.log(arr);
     
+    
+
     // JSON 데이터 전송
     fetch('/professor/taskWrite', {
         method: 'POST',
@@ -189,6 +201,8 @@ saveBtn.addEventListener("click", ()=>{
         
     })
     .catch(e => {console.log(e)})
+
+    
    
 });
 

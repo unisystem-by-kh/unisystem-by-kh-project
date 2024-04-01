@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/student/selectStudentDetail-style.css">
+    <%-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --%>
     
     <script src="https://kit.fontawesome.com/9cd918496e.js" crossorigin="anonymous"></script>
 </head>
@@ -35,7 +36,7 @@
                     <th>생년월일</th>
                     <th>학년</th>
                     <th>학기</th>
-                    <th>학적</th>
+                    <th>재적 변경</th>
                     <th>이수한 학점</th>
                     <th>등록금 납부 여부</th>
                     <th>저장</th>
@@ -49,10 +50,26 @@
                     <td>${student.memberGrade}</td>
                     <td>${student.memberTerm}</td>
                     <td>
-                        <select>
-                            <option value="재학중">재학중</option>
-                            <option value="휴학중">휴학중</option>
-                            <option value="졸업">졸업</option>
+                        <select class="form-control" id="student-select">
+                            <c:if test="${!empty student.requestType}" >
+                                <option value="${student.requestType}" selected>
+                                    <c:choose>
+                                       <c:when test="${student.requestType == 'Y'}">
+                                            휴학신청중
+                                       </c:when>
+                                       <c:when test="${student.requestType == 'N'}">
+                                            복학신청중
+                                       </c:when>
+                                       <c:when test="${student.requestType == 'D'}">
+                                            자퇴신청중
+                                       </c:when>
+                                    </c:choose>
+                                </option>
+                            </c:if>
+                            <option value="N">재학중으로 변경</option>
+                            <option value="Y">휴학중으로 변경</option>
+                            <option value="D">중퇴로 변경</option>
+                            <option value="P">졸업으로 변경</option>
                         </select>
                     </td>
                     <td>${student.classPoint}
@@ -97,10 +114,17 @@
                             미완
                         </c:if>
                     </td>
-                    <td><button>저장</button></td>
+                    <td><button class="custom-btn btn-5" onClick="changeStatus('${student.memberNo}', '${student.requestType}')">저장</button></td>
                 </tr>
             </tbody>
         </table>
+
+        <c:if test="${!empty student.requestReason}" >
+            <div class="request-reason">
+                요청 사유 : ${student.requestReason}
+            </div>
+        </c:if>
+
         <table>
             <thead>
                 <tr>
@@ -110,6 +134,11 @@
                 </tr>
             </thead>
             <tbody>
+                <c:if test="${empty stuLecture}" >
+                    <tr>
+                        <td colspan="3">수강 강의가 없습니다.</td>
+                    </tr>
+                </c:if>
                 <c:forEach items="${stuLecture}" var="item">
                     <tr>
                         <td>${item.className}</td>
@@ -117,21 +146,6 @@
                         <td>${item.memberName}</td>
                     </tr>
                 </c:forEach>
-                <tr>
-                    <td>JAVA</td>
-                    <td>3</td>
-                    <td>고길동</td>
-                </tr>
-                <tr>
-                    <td>HTML</td>
-                    <td>3</td>
-                    <td>신원하</td>
-                </tr>
-                <tr>
-                    <td>보건통계학</td>
-                    <td>2</td>
-                    <td>조경숙</td>
-                </tr>
             </tbody>
         </table>
 
@@ -140,6 +154,7 @@
     </main>
 
     <script src="/resources/js/header.js"></script>
+    <script src="/resources/js/admin/student/selectStudentDetail.js"></script>
 
 </body>
 </html>
