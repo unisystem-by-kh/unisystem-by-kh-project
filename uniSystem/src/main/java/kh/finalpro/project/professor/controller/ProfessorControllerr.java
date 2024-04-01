@@ -317,6 +317,7 @@ public class ProfessorControllerr {
 			, HttpSession session
 			, @RequestBody List<Task> insertTask)throws IllegalStateException, IOException {
 		
+		System.out.println(insertTask);
 		
 		int result = service.insertTask(loginMember, insertTask);
 		String message;
