@@ -23,11 +23,15 @@
         <div class="container">
             <div id="professorCertificate" class="certificate">
                 <div class="header">
-                    <img src="/resources/images/background/logo.png" alt="University Logo">
+                    <img src="/resources/images/main-logo2.png" alt="University Logo" id="logoImg">
                 </div>
                 <div class="content">
-                    <%-- <img src="${loginMember.memberProfile}" id="profileImage"> --%>
-                    <img src="/resources/images/background/memberImage.jpg"id="profileImage">
+                    <c:if test="${!empty loginMember.memberProfile}" >
+                        <img src="${loginMember.memberProfile}" id="profileImage">
+                    </c:if>
+                    <c:if test="${empty loginMember.memberProfile}" >
+                        <img src="/resources/images/background/user.png" id="profileImage">
+                    </c:if>
                     <div class="info">
                         <p><strong>학번 :</strong> <span id="studentID">${loginMember.memberNo}</span></p>
                         <p><strong>이름 :</strong> <span id="name">${loginMember.memberName}</span></p>
