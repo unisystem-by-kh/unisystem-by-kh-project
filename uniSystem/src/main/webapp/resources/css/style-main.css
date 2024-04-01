@@ -590,16 +590,17 @@ animation-iteration-count: infinite;
     align-content: center;
 }
 /*  게시판영역 */
-.boardArea{
-   
-    
+.slide_div_wrap{
     width: 700px;
     height: 300px;
-
-    background-color: aquamarine;
     margin-top: -207px;
     margin-bottom: -23px;
     border: 3px solid gray;
+}
+
+.slide_div_wrap > div:nth-of-type(1){
+    width: 700px;
+    padding: 10px;
 }
 /* 시간표영역 */
 .timeArea{
@@ -616,26 +617,31 @@ animation-iteration-count: infinite;
 
     border: 3px solid gray;
 }
-.slide_div_wrap > div:nth-of-type(1){
-    width: 700px;
-    height: 50px;
-    padding: 10px;
+
+.slide_div > .img-title{
+    display: flex;
+    justify-content: center;
 }
 .img-title{
-    display: flex;
+    margin-left: 200px;
 }
-
 .img-title > div:nth-of-type(1){
     width: 350px;
-    text-align: center;
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .img-title > div:nth-of-type(2) > img{
     width: 300px;
-    height: 230px;
+    height: 150px;
 }
+
+.img-title a:hover{
+    color: gray;
+}
+
+
+
 
 
 /* --------------------- 메인부분 끝 --------------------- */

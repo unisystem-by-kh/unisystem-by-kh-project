@@ -10,8 +10,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNI-SYSTEM</title>
-
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/style-main.css">
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/css/slick-1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/css/slick-1.8.1/slick/slick-theme.css"/>
 </head>
 <body>
 
@@ -131,50 +134,78 @@
 
         <div class="btmArea">
             <%-- 게시판 영역 --%>
-            <div class="boardArea">
+            <div class="slide_div_wrap">
                 <div>
                     <h1>자유게시판</h1>
                 </div>
-                <div class="img-title">
-                    <div>
-                        <a href="/board[0]/3/${board[0].boardNo}">${board[0].boardTitle}</a>
+                <div class="slide_div">
+                    <div class="img-title">
+                        <div>
+                            <a href="/board/3/${board[0].boardNo}">${board[0].boardTitle}</a>
+                        </div>
+                        <div>
+                            <c:if test="${empty board[0].fileList}">
+                                <img src="/resources/images/noimages.gif">
+                            </c:if>
+                            <c:if test="${!empty board[0].fileList}">
+                                <img src="${board[0].fileList[0].boardFilePath}${board[0].fileList[0].boardFileRename}">
+                            </c:if>
+                        </div>
                     </div>
-                    <div>
-                        <img src="${board[0].fileList[0].boardFilePath}${board[0].fileList[0].boardFileRename}">
+                    <div class="img-title">
+                        <div>
+                            <a href="/board/3/${board[1].boardNo}">${board[1].boardTitle}</a>
+                        </div>
+                        <div>
+                            <c:if test="${empty board[1].fileList}">
+                                <img src="/resources/images/noimages.gif">
+                            </c:if>
+                            <c:if test="${!empty board[1].fileList}">
+                                <img src="${board[1].fileList[0].boardFilePath}${board[1].fileList[0].boardFileRename}">
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="img-title">
+                        <div>
+                            <a href="/board/3/${board[2].boardNo}">${board[2].boardTitle}</a>
+                        </div>
+                        <div>
+                            <c:if test="${empty board[2].fileList}">
+                                <img src="/resources/images/noimages.gif">
+                            </c:if>
+                            <c:if test="${!empty board[2].fileList}">
+                                <img src="${board[2].fileList[0].boardFilePath}${board[2].fileList[0].boardFileRename}">
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="img-title">
+                        <div>
+                            <a href="/board/3/${board[3].boardNo}">${board[3].boardTitle}</a>
+                        </div>
+                        <div>
+                            <c:if test="${empty board[3].fileList}">
+                                <img src="/resources/images/noimages.gif">
+                            </c:if>
+                            <c:if test="${!empty board[3].fileList}">
+                                <img src="${board[3].fileList[0].boardFilePath}${board[3].fileList[0].boardFileRename}">
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="img-title">
+                        <div>
+                            <a href="/board/3/${board[4].boardNo}">${board[4].boardTitle}</a>
+                        </div>
+                        <div>
+                            <c:if test="${empty board[4].fileList}">
+                                <img src="/resources/images/noimages.gif">
+                            </c:if>
+                            <c:if test="${!empty board[4].fileList}">
+                                <img src="${board[4].fileList[0].boardFilePath}${board[4].fileList[0].boardFileRename}">
+                            </c:if>
+                        </div>
                     </div>
                 </div>
-                <div class="img-title">
-                    <div>
-                        <a href="/board[1]/3/${board[0].boardNo}">${board[1].boardTitle}</a>
-                    </div>
-                    <div>
-                        <img src="${board[1].fileList[0].boardFilePath}${board[1].fileList[0].boardFileRename}">
-                    </div>
-                </div>
-                <div class="img-title">
-                    <div>
-                        <a href="/board[2]/3/${board[0].boardNo}">${board[2].boardTitle}</a>
-                    </div>
-                    <div>
-                        <img src="${board[2].fileList[0].boardFilePath}${board[2].fileList[0].boardFileRename}">
-                    </div>
-                </div>
-                <div class="img-title">
-                    <div>
-                        <a href="/board[3]/3/${board[0].boardNo}">${board[3].boardTitle}</a>
-                    </div>
-                    <div>
-                        <img src="${board[3].fileList[0].boardFilePath}${board[3].fileList[0].boardFileRename}">
-                    </div>
-                </div>
-                <div class="img-title">
-                    <div>
-                        <a href="/board[4]/3/${board[0].boardNo}">${board[4].boardTitle}</a>
-                    </div>
-                    <div>
-                        <img src="${board[4].fileList[0].boardFilePath}${board[4].fileList[0].boardFileRename}">
-                    </div>
-                </div>
+                
             </div>
 
 
@@ -208,6 +239,16 @@
             slides[slideIndex-1].style.display = "block";
             setTimeout(showSlides, 3000);
         }
+
+        $(document).ready(function(){
+
+            $(".slide_div").slick(
+             {   dots: true,
+                autoplay : true,
+                autoplaySpeed: 5000
+             }
+            );
+        })
     </script>
 
 </body>
