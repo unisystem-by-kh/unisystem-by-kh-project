@@ -46,6 +46,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int saveUniqueNo(Admin admin) {
 		// TODO Auto-generated method stub
 		return dao.saveUniqueNo(admin);

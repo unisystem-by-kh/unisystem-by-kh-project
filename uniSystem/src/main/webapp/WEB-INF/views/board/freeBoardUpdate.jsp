@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="row4">게시글 글자수 확인(최대 1400자) : 현재 <span class="inputCount"> 1234 </span>글자 입력 중...</div>
+                <%-- <div class="row4">게시글 글자수 확인(최대 1400자) : 현재 <span class="inputCount"> 1234 </span>글자 입력 중...</div> --%>
 
                 <div class="row5"><button>게시글 수정 완료</button></div>
 

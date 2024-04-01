@@ -67,7 +67,7 @@
             <!-- 클릭 시 메인 페이지로 이동하는 문구 -->
             <div class="logoArea">
                 <a href="/main" class="logoText">
-                    <img src="resources/images/main-logo2.png" id="mainLogo">
+                    <img src="/resources/images/main-logo2.png" id="mainLogo">
                     <%-- <div>UNI-SYSTEM</div>
                     <div>KH INFORMATION EDUCATION CENTER</div>
                     <div>UNIVERSITY</div> --%>
