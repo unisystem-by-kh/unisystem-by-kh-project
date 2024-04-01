@@ -43,21 +43,11 @@ public class AdminController {
 	// 번호 생성 처리
 	@ResponseBody
 	@PostMapping(value ="/UniqueNo", produces="application/json; charset=UTF-8")
-	public String saveUniqueNo(@RequestBody Admin admin,
+	public int saveUniqueNo(@RequestBody Admin admin,
 	                           RedirectAttributes ra) {
 		System.out.println(admin);
-		
-	    int result = adminService.saveUniqueNo(admin);
 
-	    if (result == 1) {
-	        ra.addFlashAttribute("successMessage", "번호가 성공적으로 생성되었습니다.");
-	        
-	    } else {
-	    	
-	        ra.addFlashAttribute("errorMessage", "번호 생성에 실패하였습니다.");
-	    }
-
-	    return "redirect:/admin/UniqueNo";
+	    return adminService.saveUniqueNo(admin);
 	}
 
 

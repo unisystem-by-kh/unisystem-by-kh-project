@@ -18,7 +18,7 @@ public class AdminDAO {
 	private SqlSessionTemplate sqlSession;
 
 	public List<Member> selectList(String input) {
-		return sqlSession.selectList("");
+		return null;
 	}
 
 	/** 번호생성
@@ -26,11 +26,7 @@ public class AdminDAO {
 	 * @return result
 	 */
 	public int saveUniqueNo(Admin admin) {
-		
-		int result = sqlSession.insert("adminmapper.saveUniqueNo", admin );
-		
-		
-		return result;
+		return sqlSession.insert("adminmapper.saveUniqueNo", admin );
 	}
 	
 

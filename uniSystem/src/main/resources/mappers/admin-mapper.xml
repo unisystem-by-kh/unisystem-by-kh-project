@@ -44,20 +44,20 @@
    </resultMap>
 
 <!--    <select id="selectList" resultMap="member_rm"> -->
-<!--    	SELECT * FROM MEMBER; -->
+<!--    	SELECT * FROM MEMBER -->
 <!--    </select> -->
    
-<!--    <insert id="saveUniqueNo" parameterType="member_rm"> -->
-<!--       INSERT INTO MEMBER ( -->
-<!--         MEMBER_NO, -->
-<!--         MEMBER_NAME, -->
-<!--         MEMBER_SSN, -->
-<!--         DEPARTMENT_NO -->
-<!--     ) -->
-<!--     VALUES ( -->
-<!--         #{memberNo}, #{memberName}, #{memberSsn} , #{departmentNo} -->
-<!--     ) -->
-<!-- 	</insert> -->
+	<insert id="saveUniqueNo">
+		INSERT INTO MEMBER (
+		  MEMBER_NO,
+		  MEMBER_NAME,
+		  MEMBER_SSN,
+		  DEPARTMENT_NO
+		)
+		VALUES (
+		    #{memberNo}, #{memberName}, #{memberSsn} , #{department}
+		)
+	</insert>
 	
 	<!-- 학생 정보 조회 -->
 	<select id="selectStudentList" resultMap="student_rm">
