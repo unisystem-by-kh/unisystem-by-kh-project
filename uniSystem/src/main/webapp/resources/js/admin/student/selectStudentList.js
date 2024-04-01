@@ -48,12 +48,17 @@ function openModal() {
             const memberNo = no.parentElement.firstElementChild.innerText;
             const memberGrade = Number(no.parentElement.parentElement.nextElementSibling.nextElementSibling.innerText);
             const memberTerm = Number(no.parentElement.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerText);
+            const classPoint = Number(no.parentElement.parentElement.parentElement.lastElementChild.innerText.substr(0, 3));
+
             const memberObj = {
                 memberNo : memberNo,
                 memberGrade : memberGrade,
-                memberTerm : memberTerm
+                memberTerm : memberTerm,
+                classPoint : classPoint
             }
             memberNoArr.push(memberObj);
+                
+
         }
     });
 
@@ -67,6 +72,48 @@ function openModal() {
     })
     .then((willDelete) => {
         if(willDelete){ // 예 버튼 클릭시
+            
+            // 이수학점 충족 검사
+            for (const member of memberNoArr) {
+                let gradeFlag = false; // 이수 학점 충족 여부
+                console.log(member);
+                console.log(member.memberTerm);
+                console.log(member.memberGrade);
+                console.log(member.classPoint);
+
+                if(member.memberTerm == 1){
+                    switch(member.memberGrade){
+                        case 1 : if(member.classPoint >= 15) gradeFlag = true; break;
+                        case 2 : if(member.classPoint >= 45) gradeFlag = true; break;
+                        case 3 : if(member.classPoint >= 75) gradeFlag = true; break;
+                        case 4 : if(member.classPoint >= 105) gradeFlag = true; break;
+                    }
+                }else{
+                    switch(member.memberGrade){
+                        case 1 : if(member.classPoint >= 30) gradeFlag = true; break;
+                        case 2 : if(member.classPoint >= 60) gradeFlag = true; break;
+                        case 3 : if(member.classPoint >= 90) gradeFlag = true; break;
+                        case 4 : if(member.classPoint >= 120) gradeFlag = true; break;
+                    }
+                }
+
+                if(!gradeFlag){
+                    swal({
+                        title : "진급 불가",
+                        text : "이수학점을 충족하지 못한 학생이 있습니다.",
+                        icon  : "error",
+                        closeOnClickOutside : false
+                    }).then(function(){
+                        history.go(0);
+                    });
+                    return;
+                }
+
+            }
+
+
+
+
 
             /* 진급 할려는 회원 번호를 가지고 비동기 통신 */
             fetch("/admin/demotion",{
@@ -89,7 +136,7 @@ function openModal() {
                 }else{
                     swal({
                         title : "진급 실패",
-                        text : "진급 조건을 충족하지 못한 대상이 있습니다.",
+                        text : "등록급을 납부하지 못한 학생이 있습니다.",
                         icon  : "error",
                         closeOnClickOutside : false
                     }).then(function(){
@@ -267,7 +314,7 @@ function insertTr(backupTr, stu){
     // 첫 td 안쪽 span 태그에 memberNo 삽입
     newTr.firstElementChild.firstElementChild.innerHTML = stu.memberNo + "<input type='checkbox' class='select-row'>"; 
     // 두 번째 td 안에 a태그 안에 href 변경 및 내용 변경
-    newTr.firstElementChild.nextElementSibling.firstElementChild.setAttribute("href", '/student/'+stu.memberNo+'/selectStudentDetail');
+    newTr.firstElementChild.nextElementSibling.firstElementChild.setAttribute("href", '/admin/'+stu.memberNo+'/selectStudentDetail');
     newTr.firstElementChild.nextElementSibling.firstElementChild.innerText = stu.memberName;
     // 세 번째 td 안에 학년 삽입            
     newTr.firstElementChild.nextElementSibling.nextElementSibling.innerText = stu.memberGrade;
@@ -275,9 +322,10 @@ function insertTr(backupTr, stu){
     // 네 번째 td 안에 학기 삽입
     newTr.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.innerText = stu.memberTerm;
 
+    // 다섯 번째 td 학과 삽입
     newTr.lastElementChild.previousElementSibling.previousElementSibling.innerText = stu.deptName;
 
-    // 다섯 번째 td 내용
+    // 여섯 번째 td 내용
     if(stu.requestType != ''){ // 재적 변경 요청이 있을 경우
 
         newTr.lastElementChild.previousElementSibling.classList.remove("std-status"); // 만약 class 가 있다면 아래에서 추가해주기 위해 제거
@@ -303,11 +351,27 @@ function insertTr(backupTr, stu){
         }
 
 
-    } // 다섯 번째 td 내용 변경 끝
+    } // 여섯 번째 td 내용 변경 끝
     
-    // 여섯 번째 td 안에 이수 학점 대입
-    newTr.lastElementChild.innerText = stu.classPoint+'/30(한 학년 총 학점)'; // '/30(한 학년 총 학점)' : 추후 변경 요소
-
+    // 마지막 td 안에 이수 학점 대입
+    let str = '\u00a0\u00a0/\u00a0\u00a0';
+    if(stu.memberTerm == 1){
+        switch(stu.memberGrade){
+            case '1' : str += '15'; break;
+            case '2' : str += '45'; break;
+            case '3' : str += '75'; break;
+            case '4' : str += '105'; break;
+        }
+    }else{
+        switch(stu.memberGrade){
+            case '1' : str += '30'; break;
+            case '2' : str += '60'; break;
+            case '3' : str += '90'; break;
+            case '4' : str += '120'; break;
+        }
+    }
+    newTr.lastElementChild.innerText = stu.classPoint+str; // 한 학생이 채워야 하는 이수 학점
+    // console.log(newTr.lastElementChild.innerText);
     return newTr;
 }
 

@@ -92,8 +92,10 @@ public class AdminController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		Student student = adminService.studentDetail(memberNo);
-		// List<>
-		
+		List<Student> stuLecture = adminService.stuLecture(memberNo);
+		map.put("student", student);
+		map.put("stuLecture", stuLecture);
+		model.addAttribute("map", map);
 		return "/admin/student/selectStudentDetail";
 	}
 	

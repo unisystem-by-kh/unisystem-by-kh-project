@@ -107,7 +107,41 @@
                                     </c:when>
                                     </c:choose>
                                 </c:if>
-                                <td>${student.classPoint}/30(한 학년 총 학점)</td>
+                                <td>
+                                    ${student.classPoint}&nbsp&nbsp/&nbsp
+                                    <c:if test="${student.memberTerm == 1}" >
+                                        <c:choose>
+                                            <c:when test="${student.memberGrade == 1}">
+                                                15
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 2}" >
+                                                45
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 3}" >
+                                                75
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 4}" >
+                                                105
+                                            </c:when>
+                                        </c:choose>
+                                    </c:if>
+                                    <c:if test="${student.memberTerm == 2}" >
+                                        <c:choose>
+                                            <c:when test="${student.memberGrade == 1}">
+                                                30
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 2}" >
+                                                60
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 3}" >
+                                                90
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 4}" >
+                                                120
+                                            </c:when>
+                                        </c:choose>
+                                    </c:if>
+                                </td>
                                 </tr>
                         </c:forEach>
                         

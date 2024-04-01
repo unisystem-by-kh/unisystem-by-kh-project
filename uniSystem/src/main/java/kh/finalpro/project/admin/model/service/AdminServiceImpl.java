@@ -85,8 +85,15 @@ public class AdminServiceImpl implements AdminService{
 		
 		Student student = dao.studentDetail(memberNo);
 		
-		return null;
+		return student;
 	}
+
+	@Override
+	public List<Student> stuLecture(String memberNo) {
+		return dao.stuLecture(memberNo);
+	}
+	
+	
 	
 	
 	
