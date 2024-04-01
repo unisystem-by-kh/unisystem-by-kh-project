@@ -4,6 +4,7 @@ const newTr = document.querySelector("tbody>tr:first-child").innerHTML;
 
 const writePlus = document.getElementById("writePlus");
 
+// 과제 등록의 +버튼 클릭시
 writePlus.addEventListener("click", ()=>{
 
     const tr = document.createElement("tr");
@@ -25,6 +26,7 @@ writePlus.addEventListener("click", ()=>{
 
 // document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);
 
+// 제출 기한 설정의 초기값
 const currentDate = document.getElementsByClassName('currentDate');
 for(let i=0; i<currentDate.length; i++){
     currentDate[i].value = new Date().toISOString().substring(0, 10);
@@ -63,7 +65,7 @@ function fileFn(){
 }
 
 const xBtn = document.getElementsByName('X-btn');
-
+// 과제 등록의 X 버튼 클릭시 과제 삭제
 function xBtnFn(){
     for(let i=0; i<xBtn.length; i++){
         xBtn[i].addEventListener("click", ()=>{
@@ -97,7 +99,8 @@ function deptFn(){
     for(let i=0; i<dept.length; i++){
         dept[i].addEventListener("change", ()=>{
     
-            const index = Number(dept[i].value)-1;
+            const index = Number(dept[i].value);
+            // console.log(index);
             let str;
             switch(classList[index]){
                 case '2' : str = '비전공'; break;
