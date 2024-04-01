@@ -24,29 +24,151 @@
       
       <result property="departmentNo" column="DEPARTMENT_NO" />
       
-      
+   </resultMap>
+   
+   <resultMap type="StudentList" id="student_rm">
+   		<id property="memberNo" column="MEMBER_NO" />
+   		
+   		<result property="memberName" column="MEMBER_NAME"/>
+   		<result property="memberGrade" column="MEMBER_GRADE"/>
+   		<result property="memberTerm" column="MEMBER_TERM"/>
+   		<result property="deptName" column="DEPARTMENT_NAME"/>
+   		<result property="memberStatus" column="MEMBER_STATUS"/>
+   		<result property="classPoint" column="CLASS_POINT"/>
+   		<result property="requestType" column="REQUEST_TYPE"/>
+   		<result property="requestReason" column="REQUEST_REASON"/>
+   		
+   		<!-- 학생 새부 정보 추가 -->
+   		<result property="memberDate" column="MEMBER_DATE"/>
+   		<result property="pay" column="PAY"/>
+   		<result property="className" column="CLASS_NM"/>
    </resultMap>
 
-   <select id="selectList" resultType="member_rm">
-   	SELECT * FROM MEMBER;
-   </select>
+<!--    <select id="selectList" resultMap="member_rm"> -->
+<!--    	SELECT * FROM MEMBER -->
+<!--    </select> -->
    
-   
-   <insert id="saveUniqueNo" parameterType="member_rm">
-      INSERT INTO MEMBER (
-        MEMBER_NO,
-        MEMBER_NAME,
-        MEMBER_SSN,
-        DEPARTMENT_NO
-    )
-    VALUES (
-        #{memberNo}, #{memberName}, #{memberSsn} , #{departmentNo}
-    )
-    
+	<insert id="saveUniqueNo">
+		INSERT INTO MEMBER (
+		  MEMBER_NO,
+		  MEMBER_NAME,
+		  MEMBER_SSN,
+		  DEPARTMENT_NO
+		)
+		VALUES (
+		    #{memberNo}, #{memberName}, #{memberSsn} , #{department}
+		)
 	</insert>
+	
+	<!-- 학생 정보 조회 -->
+	<select id="selectStudentList" resultMap="student_rm">
+		<![CDATA[
+			SELECT 
+			    M.MEMBER_NO ,
+			    MEMBER_NAME, 
+			    MEMBER_GRADE, 
+			    MEMBER_TERM,
+			    DEPARTMENT_NAME, 
+			    MEMBER_STATUS, 
+			    NVL(SUM(CASE WHEN L.LECTURE_POINT >= 1 THEN CLASS_POINT ELSE 0 END), 0) AS CLASS_POINT,
+			    REQUEST_TYPE,
+			    REQUEST_REASON
+			FROM 
+			    MEMBER M, LECTURE L, CLASS C, DEPARTMENT D, REQUEST R
+			WHERE 
+			    L.MEMBER_NO(+) = M.MEMBER_NO
+			    AND C.CLASS_NO(+) = L.CLASS_NO
+			    AND M.DEPARTMENT_NO = D.DEPARTMENT_NO
+			    AND M.MEMBER_NO = R.MEMBER_NO(+)
+			    AND SUBSTR(M.MEMBER_NO, 1,2) = '01'
+			GROUP BY 
+			    M.MEMBER_NO, MEMBER_NAME, MEMBER_GRADE, DEPARTMENT_NAME, MEMBER_STATUS, REQUEST_TYPE, REQUEST_REASON, MEMBER_TERM
+		]]>
+	</select>
+	
+	<!-- 학생 진급(학기+1) -->
+	<update id="demotion">
+		UPDATE MEMBER 
+		SET 
+		    MEMBER_GRADE = CASE 
+		                      WHEN MEMBER_TERM = 2 THEN MEMBER_GRADE + 1 
+		                      ELSE MEMBER_GRADE
+		                  END,
+		    MEMBER_TERM = CASE 
+		                     WHEN MEMBER_TERM = 2 THEN 1 
+		                     ELSE MEMBER_TERM + 1 
+		                  END
+		WHERE 
+		    MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 학생 등록금 초기화(학년이 올라가면 등록금 테이블에 있던 정보 제거) -->
+	<delete id="deletePay">
+		DELETE FROM PAY WHERE MEMBER_NO = #{memberNo}
+	</delete>
 	  
+	<!-- 4학년 2학기일때 진급 시 재적을 졸업으로 변경 -->
+	<update id="graduation">
+		UPDATE MEMBER SET MEMBER_STATUS = 'P'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 
-
+	<!-- 학생 세부 조회 -->
+	<select id="studentDetail" resultMap="student_rm">
+		<![CDATA[
+			SELECT 
+			    M.MEMBER_NO, 
+			    MEMBER_NAME, 
+			    TO_CHAR(MEMBER_DATE, 'YYYY-MM-DD') AS MEMBER_DATE,
+			    MEMBER_GRADE, 
+			    MEMBER_TERM,
+			    MEMBER_STATUS,
+			    NVL(SUM(CASE WHEN L.LECTURE_POINT >= 1 THEN CLASS_POINT ELSE 0 END), 0) AS CLASS_POINT,
+			    CASE 
+			          WHEN (SELECT COUNT(*) FROM PAY WHERE MEMBER_NO = #{memberNo}) = 1 THEN '1'
+			          ELSE '0'
+			    END AS PAY,
+			    REQUEST_TYPE,
+			    REQUEST_REASON
+			FROM
+			    MEMBER M, LECTURE L, CLASS C, REQUEST R
+			WHERE 
+			    L.MEMBER_NO(+) = M.MEMBER_NO
+			    AND C.CLASS_NO(+) = L.CLASS_NO
+			    AND R.MEMBER_NO(+) = M.MEMBER_NO
+			    AND M.MEMBER_NO = #{memberNo}
+			GROUP BY 
+			    M.MEMBER_NO, 
+			    MEMBER_NAME, 
+			    MEMBER_DATE, 
+			    MEMBER_GRADE, 
+			    MEMBER_TERM,
+			    MEMBER_STATUS,
+			    REQUEST_TYPE,
+			    REQUEST_REASON
+	    ]]>
+	</select>
+	
+	<!-- 학생 세부 조회 - 수강 과목 조회 -->
+	<select id="stuLecture" resultMap="student_rm">
+		SELECT 
+		    CLASS_NM,
+		    CLASS_POINT,
+		    (SELECT MEMBER_NAME 
+		    FROM
+		        CLASS CL, MEMBER MB
+		    WHERE
+		        CL.MEMBER_NO = MB.MEMBER_NO
+		        AND MB.MEMBER_NO = C.MEMBER_NO
+		    GROUP BY MEMBER_NAME) AS MEMBER_NAME
+		FROM
+		    LECTURE L, MEMBER M, CLASS C
+		WHERE
+		    L.MEMBER_NO = M.MEMBER_NO
+		    AND L.CLASS_NO = C.CLASS_NO
+		    AND L.MEMBER_NO = #{memberNo}
+	</select>
+	
 </mapper>
 
 

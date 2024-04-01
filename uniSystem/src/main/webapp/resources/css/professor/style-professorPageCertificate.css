@@ -78,11 +78,22 @@
 #profileImage{
     border: 2px solid #ddd;
     width: 135px;
-    height: 185px;
+    height: 180px;
     margin-top: 2px;
+    border-radius: 5px;
 }
 
 #address{
     text-align: start;
     margin: -5px 0;
+}
+
+#logoImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 450px;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }

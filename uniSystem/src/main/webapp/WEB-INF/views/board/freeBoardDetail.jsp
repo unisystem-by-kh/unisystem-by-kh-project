@@ -24,7 +24,7 @@
         <div class="mainContainer">
 
             <div class="row1">
-                <div><a href="/board/3" style="color: crimson;">자유게시판 목록</a></div>
+                <div><a href="/board/3">자유게시판 목록</a></div>
 
                 <div>
                     <div>분류 : 자유게시판</div>
@@ -55,7 +55,6 @@
                         <%-- <c:set var="path" value="#" /> --%>
                         <%-- <img src="${path}" alt="썸네일을 등록해주세요."> --%>
                         <%-- <img src='abc.jpg' onerror="this.style.display='none'" alt='썸네일을 넣어주세요.' /> --%>
-                        asdasdasd
                     </c:if>
                     <div>
                         ${board.boardContent}
@@ -79,7 +78,12 @@
 
             <div class="row6">
                 <%-- 로그인한 회원의 프로필 이미지 넣기 --%>
-                <div><img src="/resources/images/memberImage.jpg" alt="#"></div>
+                <c:if test="${empty loginMember.memberProfile}" >
+                    <div><img src="/resources/images/background/user.png"></div>
+                </c:if>
+                <c:if test="${!empty loginMember.memberProfile}" >
+                    <div><img src="${loginMember.memberProfile}"></div>
+                </c:if>
                 <div><textarea id="replyContentInsert" cols="150" rows="3" placeholder="댓글을 입력해주세요." maxlength="100"></textarea></div>
                 <div><button id="replyAdd">작성</button></div>
             </div>
@@ -105,7 +109,12 @@
                                     <button id='deleteBtn' onclick="deleteReply(${reply.replyNo})">삭제</button>
                                 </c:if>
                             </div>
-                            <div class="profileImg-reply"><img src="/resources/images/memberImage.jpg" alt="#" class="imgProfile"></div>
+                            <c:if test="${empty reply.memberProfile}" >
+                                <div class="profileImg-reply"><img src="/resources/images/background/user.png" alt="#" class="imgProfile"></div>
+                            </c:if>
+                            <c:if test="${!empty reply.memberProfile}" >
+                                <div class="profileImg-reply"><img src="${reply.memberProfile}" alt="#" class="imgProfile"></div>
+                            </c:if>
                         </div>
                         <div class="replyMemberName">${reply.memberName}</div>
 
@@ -121,21 +130,6 @@
 
 
             </div>
-
-            <!-- 페이지네이션 영역 -->
-            <%-- <div class="paginations-area">
-                <div>&lt;</div>
-                <div id="paginations">
-                    <div class="active">1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>5</div>
-                </div>
-                <div>&gt;</div>
-            </div> --%>
-
-
 
         </div>
 

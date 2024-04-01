@@ -37,8 +37,9 @@ function selectReplyList(){
 
             const imgProfile = document.createElement('img');
             imgProfile.classList.add('imgProfile');
-            // imgProfile.setAttribute('src', reply.memberProfile); // 이미지 값으로 변경 예정
-            imgProfile.setAttribute('src', '/resources/images/memberImage.jpg'); // 이미지 기본값 넣어두기
+            imgProfile.setAttribute('src', reply.memberProfile); // 이미지 값으로 변경 예정
+            // console.log(reply.memberProfile);
+            // imgProfile.setAttribute('src', '/resources/images/memberImage.jpg'); // 이미지 기본값 넣어두기
 
             const replyMemberName = document.createElement('replyMemberName');
             replyMemberName.classList.add('replyMemberName');

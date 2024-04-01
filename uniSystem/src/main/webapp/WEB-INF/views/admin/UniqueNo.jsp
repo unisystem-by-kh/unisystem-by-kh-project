@@ -20,15 +20,15 @@
                 <h2>교번 및 학번 생성</h2>
             </div>
             <div class="checkList">
-                <label for="radio1">교번(교수)</label><br>
-                <input type="radio" id="radio1" name="radios">
                 <label for="radio3">교직원</label>
                 <input type="radio" id="radio3" name="radios">
+                <label for="radio1">교번(교수)</label>
+                <input type="radio" id="radio1" name="radios">
                 <label for="radio2">학번(학생)</label>
                 <input type="radio" id="radio2" name="radios">
             </div>
 
-            <form action="/admin/UniqueNo" method="POST" id="generateForm">
+            <form id="generateForm">
                 <div class="input-group">
                     <!-- 이름 입력 -->
                     <label for="memberName">이름</label>
@@ -40,18 +40,9 @@
                     <label for="department">학과</label>
                     <select id="department" name="department">
                         <option value="">------ 선택 ------</option>
-                        <option value="1">경영학과</option>
-                        <option value="2">경제학과</option>
-                        <option value="3">국어국문학과</option>
-                        <option value="4">영어영문학과</option>
-                        <option value="5">중어중문학과</option>
-                        <option value="6">법학과</option>
-                        <option value="7">행정학과</option>
-                        <option value="8">무역학과</option>
-                        <option value="9">미디어영상학과</option>
-                        <option value="10">컴퓨터과학과</option>
-                        <option value="11">보건환경학과</option>
-                        <!-- 다른 학과들의 옵션들 -->
+                        <c:forEach items="${deptCodeList}" var="deptCode">
+                            <option value="${deptCode.DEPARTMENT_NO}">${deptCode.DEPARTMENT_NAME}</option>
+                        </c:forEach>
                     </select>
                 </div>
 
@@ -68,12 +59,12 @@
                     <span id="completeNo"></span>
                     <!-- 복사하기 버튼 -->
                     <button id="copyBtn" onclick="copyNumber()">
-                        <img src="/resources/images/admin/copy.png" alt="복사하기 아이콘"> 복사하기
+                        <img src="/resources/images/background/user.png" alt=""> 복사하기
                     </button>
                 </div>
             </form>
 
-            <button id="generateBtn" onclick="generateNumber()">번호 생성</button>
+            <button id="generateBtn">번호 생성</button>
         </div>
 
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />

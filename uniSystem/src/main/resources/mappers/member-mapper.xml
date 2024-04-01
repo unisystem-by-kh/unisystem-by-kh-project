@@ -51,20 +51,32 @@
 		    MEMBER_GEN = #{memberGen}, 
 		    MEMBER_DATE = SYSDATE, 
 		    MEMBER_NAME = #{memberName}
+		    MEMBER_PROFILE = '/resources/images/background/user.png'
 		WHERE MEMBER_NO = #{memberNo}
 		
 	</update>
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="Member" resultMap="member_rm">
-	
-		SELECT MEMBER_NO, MEMBER_ADDR, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_GEN,
+		SELECT 
+		    M.MEMBER_NO,
+		    MEMBER_ADDR,
+		    MEMBER_EMAIL,
+		    MEMBER_PHONE,
+		    MEMBER_GEN,
 		    TO_CHAR(MEMBER_DATE, 'YYYY"년" MM"월" DD"일"') AS MEMBER_DATE,
-		    MEMBER_GRADE, MEMBER_TERM, MEMBER_STATUS, MEMBER_NAME, MEMBER_PROFILE, MEMBER_SSN, DEPARTMENT_NO
-		    ,DEPARTMENT_NAME, DEPARTMENT_PRICE
-		FROM MEMBER 
-		JOIN DEPARTMENT USING(DEPARTMENT_NO)
-		WHERE MEMBER_NO = #{memberNo}
+		    MEMBER_GRADE,
+		    MEMBER_TERM,
+		    MEMBER_STATUS,
+		    MEMBER_NAME,
+		    MEMBER_PROFILE,
+		    MEMBER_SSN,
+		    D.DEPARTMENT_NO,
+		    DEPARTMENT_NAME,
+		    DEPARTMENT_PRICE
+		FROM MEMBER M, DEPARTMENT D
+		WHERE D.DEPARTMENT_NO(+) = M.DEPARTMENT_NO
+		AND MEMBER_NO = #{memberNo}
 		AND MEMBER_PW = #{memberPw}
 	</select>
 	

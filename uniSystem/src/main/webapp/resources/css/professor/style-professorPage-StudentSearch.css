@@ -169,7 +169,7 @@
     background-color: #eee;
 }
 .student-info-value:hover{
-    background-color: rgba(236, 164, 162, 0.747);
+    background-color: rgb(130, 203, 196);
     cursor: pointer;
 }
 
@@ -306,10 +306,11 @@
     cursor: pointer;
 }
 #excelBtn:hover{
-    color: #888;
-    background-color: rgba(236, 164, 162, 0.747);
+    color: whitesmoke;
+    background-color: rgb(130, 203, 196);
     border: 3px solid gray;
 }
 #infoV{
     cursor: default;
 }
+

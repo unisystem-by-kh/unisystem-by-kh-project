@@ -32,9 +32,9 @@
 }
 /* 검색 영역 select 박스 */
 #search{
-    border-top: 1px solid crimson;
-    border-bottom: 1px solid crimson;
-    border-left: 1px solid crimson;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
     border-right: 0px solid white;
     width: 80px;
     height: 40px;
@@ -50,18 +50,18 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
-    color: crimson;
+    color: gray;
 
-    border-top: 1px solid crimson;
-    border-bottom: 1px solid crimson;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
 }
 
 /* 검색창 */
 #searchFrm > :nth-child(3) > input{
     width: 200px;
     height: 40px;
-    border-top: 1px solid crimson;
-    border-bottom: 1px solid crimson;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
     border-left: 0px solid white;
     border-right: 0px solid white;
     padding: 0 5px;
@@ -71,15 +71,15 @@
 #searchFrm > :nth-child(4) > button{
     width: 65px;
     height: 40px;
-    border-top: 1px solid crimson;
-    border-bottom: 1px solid crimson;
-    border-right: 1px solid crimson;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
     border-left: 0px solid white;
     border-radius: 0 10px 10px 0;
     padding: 0 5px;
     background-color: white;
     cursor: pointer;
-    color: crimson;
+    color: gray;
     font-size: 1.0em;
     font-weight: bold;
 }
@@ -114,7 +114,7 @@
 .object-select-area > select,
 .object-select-area-depart > select,
 .object-select-area-class > select {
-    border: 1.5px solid crimson;
+    border: 1.5px solid gray;
     width: 150px;
     height: 40px;
     border-radius: 10px;
@@ -139,7 +139,7 @@
 .object-select-area > select option,
 .object-select-area-depart > select option,
 .object-select-area-class > select option {
-    background-color: crimson;
+    background-color: gray;
     color: white;
     font-weight: bold;
 }
@@ -154,7 +154,7 @@
     width: 120px;
     height: 40px;
     border-radius: 10px;
-    background-color: crimson;
+    background-color: gray;
     color: white;
     font-weight: bold;
     font-size: 0.9em;
@@ -165,9 +165,9 @@
 
 #searchBtn:hover,
 #insertBtn:hover {
-    color: crimson;
+    color: gray;
     background-color: white;
-    border: 1px solid crimson;
+    border: 1px solid gray;
 }
 
 

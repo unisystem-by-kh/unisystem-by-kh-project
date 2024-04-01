@@ -35,8 +35,8 @@
     justify-content: center;
     align-items: center;
 
-    border-top: 1px solid crimson;
-    border-bottom: 1px solid crimson;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
 }
 
 /* select 태그 */
@@ -115,9 +115,11 @@
     width: 250px;
     height: 47px;
 
-    border-top: 1px solid crimson;
-    border-bottom: 1px solid crimson;
-    border-left: 3px solid crimson;
+    /* background-color: black; */
+
+    /* border-top: 3px solid gray; */
+    /* border-bottom: 3px solid gray; */
+    /* border-left: 3px solid gray; */
 }
 
 .board-insert-area > div > button{
@@ -132,7 +134,9 @@
     font-size: 1.0em;
     font-weight: bold;
 
-    border: none;
+    /* border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+    border: none; */
     background-color: white;
     color: gray;
 
@@ -223,7 +227,7 @@
     transition-duration: 0.3s;
 }
 .boardList-area:hover{
-    border-bottom: 1px solid crimson;
+    border-bottom: 1px solid rgb(130, 203, 196);;
 }
 
 .boardList-area > div{
@@ -251,7 +255,7 @@
     font-weight: normal;
 }
 .boardList-area > :nth-child(2) > a > div:hover{
-    color: crimson;
+    color: rgb(130, 203, 196);
     font-weight: bolder;
 }
 .boardList-area > :nth-child(2) > a > :nth-child(1){
@@ -344,9 +348,9 @@
     font-size: 1.0em;
     font-weight: bold;
 
-    border: 2px solid crimson;
+    border: 2px solid gray;
     border-radius: 15px;
-    color: crimson;
+    color: gray;
 
     margin: 0 5px;
 
@@ -355,7 +359,7 @@
     transition: background-color 0.3s ease-in-out;
 }
 .paginations-area > :nth-child(1):hover , .paginations-area > :nth-child(3):hover{
-    background-color: crimson;
+    background-color: rgb(130, 203, 196);
     color: white;
 }
 
@@ -372,9 +376,9 @@
     font-size: 1.0em;
     font-weight: bold;
 
-    border: 2px solid crimson;
+    border: 2px solid gray;
     border-radius: 15px;
-    color: crimson;
+    color: gray;
 
     margin: 0 5px;
 
@@ -384,11 +388,11 @@
 }
 /* 버튼 클릭 효과 */
 #paginations a:hover {
-    background-color: crimson;
+    background-color: rgb(130, 203, 196);
     color: white;
 }
 #paginations a.active {
-    background-color: crimson;
+    background-color: gray;
     color: white;
     border: 3px solid #ddd;
 }

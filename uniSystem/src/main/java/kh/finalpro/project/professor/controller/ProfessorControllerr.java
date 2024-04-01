@@ -371,6 +371,14 @@ public class ProfessorControllerr {
 		return result;
 	}
 	
+	// 제출된 과제 목록 페이지 이동
+	@GetMapping("/taskList")
+	public String taskList(Model model
+			,@SessionAttribute(value="loginMember", required = false) Member loginMember) {
+		
+		return "professor/taskList";
+	}
+	
 	
 	
 	

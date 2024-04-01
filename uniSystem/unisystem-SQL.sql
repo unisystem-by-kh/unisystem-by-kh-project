@@ -67,6 +67,7 @@ DROP SEQUENCE SEQ_BOARD_FILE_NO;
 DROP SEQUENCE SEQ_BOARD_FILE_CATEGORY_NO;
 DROP SEQUENCE SEQ_BOARD_FILE_CATAGORY_NO;
 DROP SEQUENCE SEQ_FILE_NO;
+DROP SEQUENCE SEQ_REQ_NO;
 --------------------------------------------------------------------------------
 -- 회원 테이블 생성
 CREATE TABLE "MEMBER" (
@@ -136,7 +137,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '970221-1234567',
     1
 );
@@ -169,7 +170,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '910516-1234567',
     2
 );
@@ -202,7 +203,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '201011-1234567',
     1
 );
@@ -235,7 +236,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '021111-1234567',
     1
 );
@@ -268,7 +269,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '001230-1234567',
     2
 );
@@ -301,7 +302,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '871230-1234567',
     3
 );
@@ -336,7 +337,7 @@ VALUES(
     NULL,
     NULL,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '970221-2345678',
     1
 );
@@ -369,7 +370,7 @@ VALUES(
     NULL,
     NULL,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '670221-2345678',
     2
 );
@@ -402,9 +403,9 @@ VALUES(
     NULL,
     NULL,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '970221-2345654',
-    1
+    NULL
 );
 -- 회원 중간 커밋
 COMMIT;
@@ -843,6 +844,27 @@ COMMENT ON COLUMN "CHATTING"."CHATTING_CREATE_DATE" IS '채팅방 최초 생성�
 COMMENT ON COLUMN "CHATTING"."MEMBER_NO" IS '처음 채팅방을 만든 1인';
 COMMIT;
 
+-- 학적요청 테이블
+CREATE TABLE "REQUEST" (
+	"REQUEST_NO"	NUMBER		NOT NULL,
+	"REQUEST_TYPE"	VARCHAR2(1)		NOT NULL,
+	"REQUEST_REASON"	VARCHAR2(150)		NOT NULL,
+	"MEMBER_NO"	VARCHAR2(11)		NOT NULL,
+	"CONFIRM_NO"	VARCHAR2(11)		NULL
+);
+
+COMMENT ON COLUMN "REQUEST"."REQUEST_NO" IS '학적 요청 번호(시퀀스)';
+
+COMMENT ON COLUMN "REQUEST"."REQUEST_TYPE" IS '학적 요청 내용(Y:휴학 / N:재학 / D:자퇴)';
+
+COMMENT ON COLUMN "REQUEST"."REQUEST_REASON" IS '학적 요청 사유(글자수 한글 기준 50자)';
+
+COMMENT ON COLUMN "REQUEST"."MEMBER_NO" IS '학생:01- / 교수:02- / 관리자:03-';
+
+COMMENT ON COLUMN "REQUEST"."CONFIRM_NO" IS '승인자';
+
+CREATE SEQUENCE SEQ_REQ_NO NOCACHE; -- 학적요청 시퀀스
+
 ---------------------- FOREIGN KEY 설정은 마지막에 처리 ---------------------------
 -- 회원 테이블과 학과 테이블 간의 외래키 설정
 ALTER TABLE "MEMBER" 
@@ -971,13 +993,13 @@ INSERT INTO "CLASS" VALUES(
     SEQ_CLASS_NO.NEXTVAL,'HTML', 3, 35, 1, 1, '화', 3, 4, 1, '02-2412345'
 );
 INSERT INTO "CLASS" VALUES(
-    SEQ_CLASS_NO.NEXTVAL,'Spring', 3, 30, 1, 1, '월', 3, 4, 1, '02-2412345'
+    SEQ_CLASS_NO.NEXTVAL,'SPRING', 3, 30, 1, 1, '월', 3, 4, 1, '02-2412345'
 );
 INSERT INTO "CLASS" VALUES(
     SEQ_CLASS_NO.NEXTVAL,'CSS', 2, 36, 1, 1, '화', 1, 2, 1, '02-2412345'
 );
 INSERT INTO "CLASS" VALUES(
-    SEQ_CLASS_NO.NEXTVAL,'React', 3, 29, 1, 1, '월', 5, 8, 1, '02-2412345'
+    SEQ_CLASS_NO.NEXTVAL,'REACT', 3, 29, 1, 1, '월', 5, 8, 1, '02-2412345'
 );
 
 COMMIT;

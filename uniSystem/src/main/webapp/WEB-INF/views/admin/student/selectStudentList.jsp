@@ -18,23 +18,34 @@
 
     <main>
 
+        <%-- <div>
+            ${studentList[0]}
+        </div> --%>
+
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
         <div class="container">
             <div class="search-area">
                 <div>
-                    <input type="text" placeholder="검색어 입력">
+                    <input type="text" placeholder="학번, 이름으로 검색" id="search">
                 </div>
                 <div>
-                    <select name="first_select">
-                        <option value="status">재적 상태</option>
-                        <option value="name">이름</option>
-                        <option value="department">학과</option>
+                    <select name="first_select" id="first_select">
+                        <option disabled selected>재적 상태</option>
+                        <option value="N">재학중</option>
+                        <option value="Y">휴학중</option>
+                        <option value="P">졸업</option>
+                        <option value="D">중퇴</option>
+                        <option value="YY">휴학신청</option>
+                        <option value="NN">복학신청</option>
+                        <option value="DD">자퇴신청</option>
                     </select>
-                    <select name="second_select">
-                        <option value="completion">이수여부</option>
-                        <option value="completion">이수</option>
-                        <option value="incomplete">학점 미달</option>
+                    <select name="second_select" id="secondSelect">
+                        <option disabled selected>학년</option>
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4">4학년</option>
                     </select>
                     <button id="allSelect">전체 선택</button>
                     <button onclick="openModal()">일괄 진급</button>
@@ -46,6 +57,7 @@
                         <th>학번</th>
                         <th>이름</th>
                         <th>학년</th>
+                        <th>학기</th>
                         <th>학과</th>
                         <th>재적 상태</th>
                         <th>이수 여부</th>
@@ -53,74 +65,118 @@
                 </thead>
                 <div class="table-body">
                     <tbody>
-                        <tr>
-                            <td>
-                                <label>
-                                    학번1
-                                    <input type="checkbox" class="select-row">
-                                </label>
-                            </td>
-                            <td><a href="/student/selectStudentDetail">이름1</a></td>
-                            <td>학년1</td>
-                            <td>학과1</td>
-                            <td class="std-status">재학중<input type="checkbox" hidden></td>
-                            <td>이수 여부1</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    학번2
-                                    <input type="checkbox" class="select-row">
-                                </label>
-                            </td>
-                            <td><a href="/student/selectStudentDetail">이름2</a></td>
-                            <td>학년2</td>
-                            <td>학과2</td>
-                            <td class="std-status">복학신청<input type="checkbox" hidden></td>
-                            <td>이수 여부2</td>
-                        </tr>
+                        <c:forEach items="${studentList}" var="student">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <span>${student.memberNo}</span>
+                                        <input type="checkbox" class="select-row">
+                                    </label>
+                                </td>
+                                <td><a href="/admin/${student.memberNo}/selectStudentDetail">${student.memberName}</a></td>
+                                <td>${student.memberGrade}</td>
+                                <td>${student.memberTerm}</td>
+                                <td>${student.deptName}</td>
+                                <c:set var="status" value="${student.memberStatus}"/>
+                                <c:if test="${!empty student.requestType}" >
+                                    <c:choose>
+                                        <c:when test="${student.requestType == 'Y'}">
+                                                <td class="std-status" onClick="statusChange('${student.requestReason}', event)">휴학신청<input type="checkbox" hidden></td>
+                                        </c:when>
+                                        <c:when test="${student.requestType == 'N'}">
+                                                <td class="std-status" onClick="statusChange('${student.requestReason}', event)">복학신청<input type="checkbox" hidden></td>
+                                        </c:when>
+                                        <c:when test="${student.requestType == 'D'}">
+                                                <td class="std-status" onClick="statusChange('${student.requestReason}', event)">자퇴신청<input type="checkbox" hidden></td>
+                                        </c:when>
+                                        </c:choose>
+                                </c:if>
+                                <c:if test="${empty student.requestType}" >
+                                    <c:choose>
+                                    <c:when test="${status == 'Y'}">
+                                            <td>휴학중<input type="checkbox" hidden></td>
+                                    </c:when>
+                                    <c:when test="${status == 'N'}">
+                                            <td>재학중<input type="checkbox" hidden></td>
+                                    </c:when>
+                                    <c:when test="${status == 'P'}">
+                                            <td>졸업<input type="checkbox" hidden></td>
+                                    </c:when>
+                                    <c:when test="${status == 'D'}">
+                                            <td>중퇴<input type="checkbox" hidden></td>
+                                    </c:when>
+                                    </c:choose>
+                                </c:if>
+                                <td>
+                                    ${student.classPoint}&nbsp&nbsp/&nbsp
+                                    <c:if test="${student.memberTerm == 1}" >
+                                        <c:choose>
+                                            <c:when test="${student.memberGrade == 1}">
+                                                15
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 2}" >
+                                                45
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 3}" >
+                                                75
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 4}" >
+                                                105
+                                            </c:when>
+                                        </c:choose>
+                                    </c:if>
+                                    <c:if test="${student.memberTerm == 2}" >
+                                        <c:choose>
+                                            <c:when test="${student.memberGrade == 1}">
+                                                30
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 2}" >
+                                                60
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 3}" >
+                                                90
+                                            </c:when>
+                                            <c:when test="${student.memberGrade == 4}" >
+                                                120
+                                            </c:when>
+                                        </c:choose>
+                                    </c:if>
+                                </td>
+                                </tr>
+                        </c:forEach>
                         
-
-
-                        <tr>
-                            <td>
-                                <label>
-                                    test
-                                    <input type="checkbox" class="select-row">
-                                </label>
-                            </td>
-                            <td><a href="/student/selectStudentDetail">test이름</a></td>
-                            <td>test학년</td>
-                            <td>test학과</td>
-                            <td class="std-status">test 학적<input type="checkbox" hidden></td>
-                            <td>test 이수 여부</td>
-                        </tr>
                     </tbody>
                 </div>
             </table>
-
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <img src="https://via.placeholder.com/150" alt="이미지 영역">
-                        <div style="font-size: 20px;">진급 N개를 처리하시겠습니까?</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="cancel-btn" onclick="closeModal()">취소</button>
-                        <button class="approve-btn" onclick="confirmModal()">승인</button>
-                        <!-- <button class="confirm-btn" onclick="closeModal()" style="display:none">확인</button> -->
-                    </div>
-                </div>
-            </div>
 
         </div>
 
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
+
+    <script>
+        const studentArr = [];
+        let newStudent = {};
+    </script>
+    <c:forEach items="${studentList}" var="student">
+            <script>
+                newStudent = {
+                    "memberNo": "${student.memberNo}",
+                    "memberName": "${student.memberName}",
+                    "memberGrade": "${student.memberGrade}",
+                    "memberTerm": "${student.memberTerm}",
+                    "deptName": "${student.deptName}",
+                    "memberStatus": "${student.memberStatus}",
+                    "classPoint": "${student.classPoint}",
+                    "requestType": "${student.requestType}",
+                    "requestReason": "${student.requestReason}"
+                };
+                studentArr.push(newStudent);
+            </script>
+            
+            <c:if test="${!loop.last}"></c:if>
+    </c:forEach>
 
     <script src="/resources/js/header.js"></script>
     <script src="/resources/js/admin/student/selectStudentList.js"></script>
