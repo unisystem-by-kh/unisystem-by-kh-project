@@ -102,7 +102,7 @@
                     <div>성적</div>
                 </div>
 
-                <div class="content">
+                <%-- <div class="content">
                     <div class="grade-content">
                         <div>123456</div>
                         <div>홍길동</div>
@@ -112,7 +112,7 @@
                         <div>JAVA</div>
                         <div><input type="text"></div>
                     </div>
-                </div>
+                </div> --%>
             </div>
 
             <div class="object-select-area">
