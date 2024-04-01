@@ -71,8 +71,14 @@
 			    DEPARTMENT_NAME, 
 			    MEMBER_STATUS, 
 			    NVL(SUM(CASE WHEN L.LECTURE_POINT >= 1 THEN CLASS_POINT ELSE 0 END), 0) AS CLASS_POINT,
-			    REQUEST_TYPE,
-			    REQUEST_REASON
+			    CASE 
+                    WHEN R.CONFIRM_NO IS NULL THEN R.REQUEST_TYPE
+                    ELSE NULL
+                END AS REQUEST_TYPE,
+                CASE 
+                    WHEN R.CONFIRM_NO IS NULL THEN R.REQUEST_REASON
+                    ELSE NULL
+                END AS REQUEST_REASON
 			FROM 
 			    MEMBER M, LECTURE L, CLASS C, DEPARTMENT D, REQUEST R
 			WHERE 
@@ -81,8 +87,29 @@
 			    AND M.DEPARTMENT_NO = D.DEPARTMENT_NO
 			    AND M.MEMBER_NO = R.MEMBER_NO(+)
 			    AND SUBSTR(M.MEMBER_NO, 1,2) = '01'
+			    AND (CONFIRM_NO IS NULL 
+			    OR (SELECT
+			    		COUNT(*)
+			    	FROM
+			    		REQUEST
+			    	WHERE
+			    		MEMBER_NO = M.MEMBER_NO) = (SELECT
+			    										COUNT(CONFIRM_NO)
+			    									FROM
+			    										REQUEST
+			    									WHERE 
+			    										MEMBER_NO = M.MEMBER_NO
+			    										AND CONFIRM_NO IS NOT NULL))
 			GROUP BY 
-			    M.MEMBER_NO, MEMBER_NAME, MEMBER_GRADE, DEPARTMENT_NAME, MEMBER_STATUS, REQUEST_TYPE, REQUEST_REASON, MEMBER_TERM
+			    M.MEMBER_NO, 
+			    MEMBER_NAME, 
+			    MEMBER_GRADE, 
+			    DEPARTMENT_NAME, 
+			    MEMBER_STATUS, 
+			    REQUEST_TYPE, 
+			    REQUEST_REASON, 
+			    MEMBER_TERM, 
+			    CONFIRM_NO
 		]]>
 	</select>
 	
@@ -117,7 +144,7 @@
 	<select id="studentDetail" resultMap="student_rm">
 		<![CDATA[
 			SELECT 
-			    M.MEMBER_NO, 
+			    DISTINCT M.MEMBER_NO, 
 			    MEMBER_NAME, 
 			    TO_CHAR(MEMBER_DATE, 'YYYY-MM-DD') AS MEMBER_DATE,
 			    MEMBER_GRADE, 
@@ -137,6 +164,7 @@
 			    AND C.CLASS_NO(+) = L.CLASS_NO
 			    AND R.MEMBER_NO(+) = M.MEMBER_NO
 			    AND M.MEMBER_NO = #{memberNo}
+			    AND CONFIRM_NO IS NULL
 			GROUP BY 
 			    M.MEMBER_NO, 
 			    MEMBER_NAME, 
@@ -145,7 +173,8 @@
 			    MEMBER_TERM,
 			    MEMBER_STATUS,
 			    REQUEST_TYPE,
-			    REQUEST_REASON
+			    REQUEST_REASON,
+			    CONFIRM_NO
 	    ]]>
 	</select>
 	
@@ -168,6 +197,18 @@
 		    AND L.CLASS_NO = C.CLASS_NO
 		    AND L.MEMBER_NO = #{memberNo}
 	</select>
+	
+	<!-- 학생 재적 변경 -->
+	<update id="studentUpdate">
+		UPDATE MEMBER SET MEMBER_STATUS = #{memberStatus}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 재적 요청 변경 -->
+	<update id="requestUpdate">
+		UPDATE REQUEST SET CONFIRM_NO = 1
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 	
 </mapper>
 

@@ -19,41 +19,48 @@ function changeStatus(memberNo, requestType){
             }).then( ch => {
 
                 if(ch){ // 변경 버튼 클릭 시
-
-                    fetch("/admin/studentUpdate", {
-                        method : "PUT",
-                        headers : {'Content-Type': 'application/json'},
-                        body : JSON.stringify({
-                            memberNo : memberNo,
-                            memberStatus : memberStatus.value
-                        })
-                    })
-                    .then(resp => resp.text())
-                    .then(result => {
-                        if(result > 0){
-                            swal({
-                                title : "재적 변경이 완료되었습니다.",
-                                icon  : "success",
-                                closeOnClickOutside : false
-                            }).then(function(){
-                                history.go(0);
-                            });
-                        }else{
-                            swal({
-                                title : "변경 실패",
-                                icon  : "error",
-                                closeOnClickOutside : false
-                            }).then(function(){
-                                history.go(0);
-                            });
-                        }
-                    })
-                    .catch(e=>console.log(e))
+                    console.log(requestType);
+                    studentUpdate(memberNo, memberStatus.value, requestType);
                 }
 
             } );
+        }else{
+            studentUpdate(memberNo, memberStatus.value, requestType);
         }
     }
 
+}
+
+function studentUpdate(memberNo, memberStatus, requestType){
+    fetch("/admin/studentUpdate", {
+        method : "PUT",
+        headers : {'Content-Type': 'application/json'},
+        body : JSON.stringify({
+            memberNo : memberNo,
+            memberStatus : memberStatus,
+            requestType : requestType
+        })
+    })
+    .then(resp => resp.text())
+    .then(result => {
+        if(result > 0){
+            swal({
+                title : "재적 변경이 완료되었습니다.",
+                icon  : "success",
+                closeOnClickOutside : false
+            }).then(function(){
+                history.go(0);
+            });
+        }else{
+            swal({
+                title : "변경 실패",
+                icon  : "error",
+                closeOnClickOutside : false
+            }).then(function(){
+                history.go(0);
+            });
+        }
+    })
+    .catch(e=>console.log(e))
 
 }

@@ -89,10 +89,25 @@ public class AdminServiceImpl implements AdminService{
 		return student;
 	}
 
+	// 학생 세부 조회 수강 과목 조회
 	@Override
 	public List<Student> stuLecture(String memberNo) {
 		return dao.stuLecture(memberNo);
 	}
+
+	// 학생 재적 변경
+	@Override
+	public int studentUpdate(Student memberArr) {
+		
+		int result = dao.studentUpdate(memberArr);
+		if(result > 0 && memberArr.getRequestType() != null) {
+			result = dao.requestUpdate(memberArr);
+		}
+		
+		return result;
+	}
+	
+	
 	
 	
 	
