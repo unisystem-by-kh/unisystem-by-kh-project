@@ -145,7 +145,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[0].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[0].fileList}">
                                 <img src="${board[0].fileList[0].boardFilePath}${board[0].fileList[0].boardFileRename}">
@@ -158,7 +158,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[1].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[1].fileList}">
                                 <img src="${board[1].fileList[0].boardFilePath}${board[1].fileList[0].boardFileRename}">
@@ -171,7 +171,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[2].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[2].fileList}">
                                 <img src="${board[2].fileList[0].boardFilePath}${board[2].fileList[0].boardFileRename}">
@@ -184,7 +184,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[3].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[3].fileList}">
                                 <img src="${board[3].fileList[0].boardFilePath}${board[3].fileList[0].boardFileRename}">
@@ -197,7 +197,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[4].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[4].fileList}">
                                 <img src="${board[4].fileList[0].boardFilePath}${board[4].fileList[0].boardFileRename}">
