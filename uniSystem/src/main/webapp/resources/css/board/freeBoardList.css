@@ -388,7 +388,7 @@
 }
 /* 버튼 클릭 효과 */
 #paginations a:hover {
-    background-color: rgb(130, 203, 196);;
+    background-color: rgb(130, 203, 196);
     color: white;
 }
 #paginations a.active {

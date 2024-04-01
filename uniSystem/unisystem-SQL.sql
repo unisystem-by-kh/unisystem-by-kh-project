@@ -137,7 +137,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '970221-1234567',
     1
 );
@@ -170,7 +170,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '910516-1234567',
     2
 );
@@ -203,7 +203,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '201011-1234567',
     1
 );
@@ -236,7 +236,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '021111-1234567',
     1
 );
@@ -269,7 +269,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '001230-1234567',
     2
 );
@@ -302,7 +302,7 @@ VALUES(
     1,
     1,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '871230-1234567',
     3
 );
@@ -337,7 +337,7 @@ VALUES(
     NULL,
     NULL,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '970221-2345678',
     1
 );
@@ -370,7 +370,7 @@ VALUES(
     NULL,
     NULL,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '670221-2345678',
     2
 );
@@ -403,9 +403,9 @@ VALUES(
     NULL,
     NULL,
     'N',
-    NULL,
+    '/resources/images/background/user.png',
     '970221-2345654',
-    1
+    NULL
 );
 -- 회원 중간 커밋
 COMMIT;
