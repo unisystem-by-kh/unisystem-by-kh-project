@@ -56,8 +56,10 @@
                             <td>
                                 <select name="dept">
                                     <option value="-1" disabled selected>과목을 선택하세요.</option>
+                                    <c:set var="index" value="0"/>
                                     <c:forEach items="${map.classList}" var="item">
-                                        <option value="${item.classNo}" >${item.className}</option>
+                                        <option value="${index}" >${item.className}</option>
+                                        ${index = index+1}
                                     </c:forEach>
                                 </select>
                             </td>
@@ -74,32 +76,6 @@
                             </td>
                             <td><button type="button" class="del-btn">삭제</button></td>
                         </tr>
-
-                        
-                        <%-- <tr>
-                            <td>2</td>
-                            <td class='term'>2</td>
-                            <td>
-                                <select name="dept">
-                                    <option value="-1" disabled selected>과목을 선택하세요.</option>
-                                    <c:forEach items="${map.classList}" var="item">
-                                        <option value="${item.classNo}" >${item.className}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                            <td class="deptList">과목을 선택하세요</td>
-                            <td class="up-x">
-                                <label>
-                                    <i class="fa-solid fa-upload"></i>
-                                    <input type="file" name="file">
-                                </label>
-                                <i class="fa-solid fa-xmark" name="X-btn"></i>
-                            </td>
-                            <td class="date-input-container">
-                                    <input type="date" class="currentDate">
-                            </td>
-                            <td><button type="button" class="del-btn">삭제</button></td>
-                        </tr> --%>
 
                     </tbody>
                 </table>
