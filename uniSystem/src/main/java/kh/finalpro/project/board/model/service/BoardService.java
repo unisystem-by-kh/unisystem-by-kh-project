@@ -192,6 +192,9 @@ public interface BoardService {
 	int freeBoardDelete(int boardNo);
 
 
+	List<Board> selectMainBoard();
+
+
 
 
 

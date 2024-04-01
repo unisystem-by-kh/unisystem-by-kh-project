@@ -884,6 +884,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int freeBoardDelete(int boardNo) {
 		return dao.freeBoardDelete(boardNo);
+	}
+
+	@Override
+	public List<Board> selectMainBoard() {
+		return dao.selectMainBoard();
 	}	
 
 

@@ -330,6 +330,10 @@ public class BoardDAO {
 	public int freeFileInsert(BoardFile img) {
 		return sqlSession.insert("boardMapper.freeFileInsert", img);
 	}
+
+	public List<Board> selectMainBoard() {
+		return sqlSession.selectList("boardMapper.selectMainBoard");
+	}
 	
 
 	
