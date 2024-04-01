@@ -101,7 +101,7 @@
 
     <c:if test="${!empty message}">
         <script>
-            swal("${message}", "", "success");
+            swal("${message}", "", "error");
         </script>
     </c:if>
 </body>

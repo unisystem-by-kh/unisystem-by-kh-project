@@ -6,9 +6,9 @@
 }
 
 main{
-    width: 1200px;
+   /*  width: 1200px;
     min-height: 1200px;
-    margin: auto;
+    margin: auto; */
 
     display: flex;
     flex-direction: column;
@@ -200,6 +200,8 @@ footer{
 
     /* 모듈창열었을때 위치설정 가운데로  */
     transform:translateY(-50%); 
+
+    z-index: 1000;
 }
 .modal_body>h2{
     text-align: left;

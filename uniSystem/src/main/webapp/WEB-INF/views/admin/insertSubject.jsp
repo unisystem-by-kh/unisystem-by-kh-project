@@ -11,7 +11,6 @@
     
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/admin/subjectWrite.css">
-
 </head>
 <body>
 	
@@ -91,12 +90,12 @@
                     <label for="classTime">강의 시간</label>
                     <input type="text" id="classStart" name="classStart" placeholder="시작" maxlength="1">교시
                     <input type="text" id="classEnd" name="classEnd" placeholder="마치는" maxlength="1">교시
-                    <button type="button" id="checkTime">시간 체크</button>
+                    <button type="button" id="checkTime" class="submitBtn">시간 체크</button>
                 </div>
 
                 <div class="btn-area">
-                    <button type="reset">초기화</button>
-                    <button type="submit">등록</button>
+                    <button type="reset" class="submitBtn">초기화</button>
+                    <button type="submit" class="submitBtn">등록</button>
                 </div>
             </form>
         </div>
@@ -105,6 +104,7 @@
         
     </main>
     
+    <script src="/resources/js/header.js"></script>
     <script src="/resources/js/admin/insertSubject.js"></script>
     
 </body>
