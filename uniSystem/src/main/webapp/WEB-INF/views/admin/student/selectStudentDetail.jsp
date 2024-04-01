@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:set var="student" value="${map.student}"/>
+<c:set var="stuLecture" value="${map.stuLecture}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,6 +22,10 @@
     <main>
 
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
+        <div>
+            ${map.student}
+            <%-- ${stuLecture} --%>
+        </div>
 
         <table>
             <thead>
@@ -31,16 +38,16 @@
                     <th>학적</th>
                     <th>이수한 학점</th>
                     <th>등록금 납부 여부</th>
-                    <th>진급</th>
+                    <th>저장</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>01-2412345</td>
-                    <td>홍길동</td>
-                    <td>2001-01-01</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td>${student.memberNo}</td>
+                    <td>${student.memberName}</td>
+                    <td>${student.memberDate}</td>
+                    <td>${student.memberGrade}</td>
+                    <td>${student.memberTerm}</td>
                     <td>
                         <select>
                             <option value="재학중">재학중</option>
@@ -48,9 +55,49 @@
                             <option value="졸업">졸업</option>
                         </select>
                     </td>
-                    <td>10/30</td>
-                    <td>납부 완료</td>
-                    <td><button>승인</button></td>
+                    <td>${student.classPoint}
+                        <c:if test="${student.memberTerm == 1}" >
+                            <c:choose>
+                                <c:when test="${student.memberGrade == 1}">
+                                    / 15
+                                </c:when>
+                                <c:when test="${student.memberGrade == 2}" >
+                                    / 45
+                                </c:when>
+                                <c:when test="${student.memberGrade == 3}" >
+                                    / 75
+                                </c:when>
+                                <c:when test="${student.memberGrade == 4}" >
+                                    / 105
+                                </c:when>
+                            </c:choose>
+                        </c:if>
+                        <c:if test="${student.memberTerm == 2}" >
+                            <c:choose>
+                                <c:when test="${student.memberGrade == 1}">
+                                    / 30
+                                </c:when>
+                                <c:when test="${student.memberGrade == 2}" >
+                                    / 60
+                                </c:when>
+                                <c:when test="${student.memberGrade == 3}" >
+                                    / 90
+                                </c:when>
+                                <c:when test="${student.memberGrade == 4}" >
+                                    / 120
+                                </c:when>
+                            </c:choose>
+                        </c:if>
+                    </td>
+                    <td>
+                        <c:if test="${student.pay == 1}" >
+                            완료
+                        </c:if>
+                        <c:if test="${student.pay == 0}" >
+                            미완
+                        </c:if>
+                    </td>
+                    <td><button>저장</button></td>
                 </tr>
             </tbody>
         </table>
@@ -63,6 +110,13 @@
                 </tr>
             </thead>
             <tbody>
+                <c:forEach items="${stuLecture}" var="item">
+                    <tr>
+                        <td>${item.className}</td>
+                        <td>${item.classPoint}</td>
+                        <td>${item.memberName}</td>
+                    </tr>
+                </c:forEach>
                 <tr>
                     <td>JAVA</td>
                     <td>3</td>

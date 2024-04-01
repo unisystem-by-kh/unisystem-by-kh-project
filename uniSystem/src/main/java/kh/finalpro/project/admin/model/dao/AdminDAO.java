@@ -63,5 +63,10 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminmapper.studentDetail", memberNo);
 	}
 
+	// 학생 세부 조회 수강 과목 조회
+	public List<Student> stuLecture(String memberNo) {
+		return sqlSession.selectList("adminmapper.stuLecture", memberNo);
+	}
+
 
 }

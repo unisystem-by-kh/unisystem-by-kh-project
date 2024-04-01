@@ -41,6 +41,7 @@
    		<!-- 학생 새부 정보 추가 -->
    		<result property="memberDate" column="MEMBER_DATE"/>
    		<result property="pay" column="PAY"/>
+   		<result property="className" column="CLASS_NM"/>
    </resultMap>
 
 <!--    <select id="selectList" resultMap="member_rm"> -->
@@ -112,6 +113,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 
+	<!-- 학생 세부 조회 -->
 	<select id="studentDetail" resultMap="student_rm">
 		<![CDATA[
 			SELECT 
@@ -125,21 +127,46 @@
 			    CASE 
 			          WHEN (SELECT COUNT(*) FROM PAY WHERE MEMBER_NO = #{memberNo}) = 1 THEN '1'
 			          ELSE '0'
-			    END AS PAY
+			    END AS PAY,
+			    REQUEST_TYPE,
+			    REQUEST_REASON
 			FROM
-			    MEMBER M
-			LEFT JOIN LECTURE L ON L.MEMBER_NO = M.MEMBER_NO
-			LEFT JOIN CLASS C ON C.CLASS_NO = L.CLASS_NO
+			    MEMBER M, LECTURE L, CLASS C, REQUEST R
 			WHERE 
-			    M.MEMBER_NO = #{memberNo}
+			    L.MEMBER_NO(+) = M.MEMBER_NO
+			    AND C.CLASS_NO(+) = L.CLASS_NO
+			    AND R.MEMBER_NO(+) = M.MEMBER_NO
+			    AND M.MEMBER_NO = #{memberNo}
 			GROUP BY 
 			    M.MEMBER_NO, 
 			    MEMBER_NAME, 
 			    MEMBER_DATE, 
 			    MEMBER_GRADE, 
 			    MEMBER_TERM,
-			    MEMBER_STATUS
+			    MEMBER_STATUS,
+			    REQUEST_TYPE,
+			    REQUEST_REASON
 	    ]]>
+	</select>
+	
+	<!-- 학생 세부 조회 - 수강 과목 조회 -->
+	<select id="stuLecture" resultMap="student_rm">
+		SELECT 
+		    CLASS_NM,
+		    CLASS_POINT,
+		    (SELECT MEMBER_NAME 
+		    FROM
+		        CLASS CL, MEMBER MB
+		    WHERE
+		        CL.MEMBER_NO = MB.MEMBER_NO
+		        AND MB.MEMBER_NO = C.MEMBER_NO
+		    GROUP BY MEMBER_NAME) AS MEMBER_NAME
+		FROM
+		    LECTURE L, MEMBER M, CLASS C
+		WHERE
+		    L.MEMBER_NO = M.MEMBER_NO
+		    AND L.CLASS_NO = C.CLASS_NO
+		    AND L.MEMBER_NO = #{memberNo}
 	</select>
 	
 </mapper>

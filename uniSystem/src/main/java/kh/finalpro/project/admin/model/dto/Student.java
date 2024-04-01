@@ -23,4 +23,6 @@ public class Student {
 	
 	private String pay; // 등록금 납부 여부
 	private String memberDate; // 생년월일
+	
+	private String className; // 과목명
 }
