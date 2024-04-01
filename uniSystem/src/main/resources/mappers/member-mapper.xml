@@ -50,7 +50,7 @@
 		    MEMBER_PHONE = #{memberPhone},
 		    MEMBER_GEN = #{memberGen}, 
 		    MEMBER_DATE = SYSDATE, 
-		    MEMBER_NAME = #{memberName}
+		    MEMBER_NAME = #{memberName},
 		    MEMBER_PROFILE = '/resources/images/background/user.png'
 		WHERE MEMBER_NO = #{memberNo}
 		
