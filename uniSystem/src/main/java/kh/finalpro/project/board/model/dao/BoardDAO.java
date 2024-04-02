@@ -230,6 +230,7 @@ public class BoardDAO {
 	 * @return board
 	 */
 	public Board noticeDetailBoard(Map<String, Object> map) {
+		System.out.println("map3 : "+map );
 		return sqlSession.selectOne("boardMapper.noticeDetailBoard", map);
 	}
 

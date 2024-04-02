@@ -51,7 +51,8 @@ public class ReplyDAO {
 	public int update(Reply reply) {
 		return sqlSession.update("replyMapper.update", reply);
 	}
-	
+
+
 	
 	
 	

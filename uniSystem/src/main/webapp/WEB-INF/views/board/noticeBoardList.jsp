@@ -135,8 +135,9 @@
                 </ul>
                 
     <%-- 글쓰기 버튼 --%>
-     <c:if test="${!empty loginMember}">
-      <a href="/board/${categoryNo}/write" id="writeBtn"> 작   성</a>
+     <c:if test="${!empty loginMember and loginMember.memberNo.startsWith('03-')}">
+     
+        <a href="/board/${categoryNo}/write" id="writeBtn"> 작   성</a>
     
     </c:if>
 
@@ -147,9 +148,12 @@
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
+    
+   
 
     <script src="/resources/js/header.js"></script>
     <script src="/resources/js/board/noticeBoard/noticeBoardList.js"></script>
 
+    
 </body>
 </html>
