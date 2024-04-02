@@ -144,6 +144,9 @@ public class BoardController {
 	// -------------------------------------------------------------------------------
 
 	// -------------------------------상세 조회--------------------------------------
+	
+	
+	
 
 	// 자유게시판, 자료실 상세
 	@GetMapping("/{categoryNo:[3,5]{1}}/{boardNo}")
@@ -240,6 +243,39 @@ public class BoardController {
 
 
 
+	//공지사항 상세페이지
+	@GetMapping("/{categoryNo:1}/{boardNo}")
+	public String noticeDetail( @PathVariable("categoryNo") int categoryNo
+			, @PathVariable("boardNo") int boardNo
+			, Model model // 데이터 전달용 객체
+			, RedirectAttributes ra // 리다이렉트 시 데이터 전달용 객체
+			, @SessionAttribute(value="loginMember", required=false) Member loginMember
+
+			) throws ParseException  {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+		
+		// 게시글 상세 조회 서비스 호출
+		Board board = service.noticeDetailBoard(map);
+
+		String path = null;
+
+		if (board != null) { // 조회 결과가 있을 경우
+
+			path = "board/noticeBoardDetail"; // forward할 jsp 경로
+
+			model.addAttribute("board", board);
+
+		} else { // 조회 결과가 없을 경우
+			path = "redirect:/board/" + categoryNo;
+			// 게시판 첫 페이지로 리다이렉트
+
+			ra.addFlashAttribute("message", "해당 게시글이 존재하지 않습니다.");
+		}
+		return path;
+	}
 
 	// -------------------------------------------------------------------------------
 
@@ -329,7 +365,7 @@ public class BoardController {
 
 
 
-	//공지사항 작성페이지
+	//공지사항 작성페이지*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 	
 	@PostMapping("/{categoryNo:1}/write")
 	public String noticeboardWrite(
@@ -347,7 +383,7 @@ public class BoardController {
 		board.setCategoryNo(categoryNo);
 		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
 		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
-		String webPath = "/resources/images/board/";
+		String webPath = "/resources/files/notice/";
 		String filePath = session.getServletContext().getRealPath(webPath);
 
 		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 
@@ -512,6 +548,47 @@ public class BoardController {
 		return path;
 	}
 
+	// 공지사항 수정*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+		@PostMapping("/{categoryNo:1}/{boardNo}/update")
+		public String noticeBoardUpdate(
+				Board board // 커맨드 객체(name==필드 경우 필드에 파라미터 세팅
+				,@RequestParam(value="cp", required = false, defaultValue = "1") int cp // 쿼리스트링 유지
+				,@RequestParam(value="deleteList", required = false) String deleteList // 삭제할 이미지 순서
+				,@RequestParam(value="file", required = false) List<MultipartFile> file // 업로드된 파일 리스트
+				,@PathVariable("categoryNo") int categoryNo
+				,@PathVariable("boardNo") int boardNo
+				,HttpSession session // 서버 파일 저장 경로 얻어올 경로
+				,RedirectAttributes ra // 리다이렉트 시 값 전달용
+				) throws IllegalStateException, IOException {
+
+
+			// 1) boardCode, boardNo를 커맨드 객체(board)에 세팅 
+			board.setCategoryNo(categoryNo);
+			board.setBoardNo(boardNo);
+			// board(boardCode, boardNo , boardTitle, boardContent)
+
+			// 2) 이미지 웹 접근 경로, 서버 저장 경로 
+			String webPath = "/resources/files/notice/";
+			String filePath = session.getServletContext().getRealPath(webPath);
+
+			// 3) 게시글 수정 서비스 호출 
+			int rowCount = service.noticeBoardUpdate(board, file, webPath, filePath, deleteList);
+
+			// 4) 결과에 따라서 message, path 설정
+			String message = null; 
+			String path = "redirect:";
+
+			if(rowCount > 0) {
+				message = "게시글이 수정되었습니다.";
+				path += "/board/" + categoryNo + "/" + boardNo + "?cp=" + cp; // 상세조회 페이지
+			}else {
+				message = "게시글이 수정 실패.";
+				path += "update";
+			}
+
+			ra.addFlashAttribute("message",message);
+			return path;
+		}
 
 	// ----------------------------------------------------------------------------------
 
@@ -579,47 +656,29 @@ public class BoardController {
 		return "board/departmentBoardUpdate";
 	}
 	
-	
+	//공지사항 수정 화면 전환********************************
+	@GetMapping("/{categoryNo:1}/{boardNo}/update")
+	public String noticeBoardUpdate(
+			@PathVariable("categoryNo") int categoryNo
+			,@PathVariable("boardNo") int boardNo
+			,Model model // 데이터 전달용 객체 (기본 scope : requset)
+			) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		map.put("boardNo", boardNo);
+		Board board = service.noticeDetailBoard(map);
+		model.addAttribute("board", board);
+
+		return "board/noticeBoardUpdate";
+	}
 
 	// ----------------------------------------------------------------------------------
 
 
 	// ----------------------------------게시글 상세 조회--------------------------------------
 
-	//공지사항 상세페이지
-	@GetMapping("/{categoryNo:1}/{boardNo}")
-	public String noticeDetail( @PathVariable("categoryNo") int categoryNo
-			, @PathVariable("boardNo") int boardNo
-			, Model model // 데이터 전달용 객체
-			, RedirectAttributes ra // 리다이렉트 시 데이터 전달용 객체
-			, @SessionAttribute(value="loginMember", required=false) Member loginMember
 
-			) throws ParseException  {
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("categoryNo", categoryNo);
-		map.put("boardNo", boardNo);
-
-		// 게시글 상세 조회 서비스 호출
-		Board board = service.noticeDetailBoard(map);
-
-		String path = null;
-
-		if (board != null) { // 조회 결과가 있을 경우
-
-
-			path = "board/noticeBoardDetail"; // forward할 jsp 경로
-
-			model.addAttribute("board", board);
-
-		} else { // 조회 결과가 없을 경우
-			path = "redirect:/board/" + categoryNo;
-			// 게시판 첫 페이지로 리다이렉트
-
-			ra.addFlashAttribute("message", "해당 게시글이 존재하지 않습니다.");
-		}
-		return path;
-	}
 
 	/** 자료실 상세 페이지
 	 * @param boardNo
@@ -995,24 +1054,6 @@ public class BoardController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	// 1:1문의 게시글 삭제
 	@GetMapping("/{categoryNo:[2,3,4]{1}}/{boardNo}/delete")
 	public String boardDelete(@PathVariable("categoryNo") int categoryNo
@@ -1040,6 +1081,32 @@ public class BoardController {
 	}
 
 
+	// 공지사항 게시글 삭제*******************
+		@GetMapping("/{categoryNo:1}/{boardNo}/delete")
+		public String noticeBoardDelete(@PathVariable("categoryNo") int categoryNo
+				,@PathVariable("boardNo") int boardNo
+				,HttpSession session
+				,RedirectAttributes ra
+				) {
+			System.out.println("deleteNo :" + categoryNo );
+			int result = service.noticeBoardDelete(boardNo);
+			String path = "redirect:";
+			String message = null;
+			
+			System.out.println("@@@@@@@@@@@@@@ :: @@@@@@@@@@@@@ ::" +result);
+
+			if(result > 0) {
+				path += "/board/" + categoryNo;
+				message = "게시글이 삭제되었습니다.";
+			}else {
+				path += "/board/" + categoryNo + "/" + boardNo;
+				message = "게시글 삭제 실패";
+			}
+
+			ra.addFlashAttribute("message", message);
+
+			return path;
+		}
 
 
 

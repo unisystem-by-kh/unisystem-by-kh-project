@@ -195,6 +195,24 @@ public interface BoardService {
 	List<Board> selectMainBoard();
 
 
+	/** 공지사항 수정
+	 * @param board
+	 * @param file
+	 * @param webPath
+	 * @param filePath
+	 * @param deleteList
+	 * @return
+	 */
+	int noticeBoardUpdate(Board board, List<MultipartFile> file, String webPath, String filePath, String deleteList) throws IllegalStateException, IOException;
+
+
+	/** 공지사항 게시물 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	int noticeBoardDelete(int boardNo);
+
+
 
 
 

@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     // 검색 요소에 대한 참조 가져오기
     var searchForm = document.getElementById("boardSearch");

@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:forEach var="boardType" items="${boardTypeList}">
-    <c:if test="${boardType.CATEGORY_NO == categoryNo}">
-        <c:set var="boardName" value="${boardType.BOARD_NAME}"/>
-    </c:if>
-</c:forEach>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -42,8 +37,14 @@
 
         <div class="uploadFile">
             <p>첨부파일</p>
-            <img src="/resources/images/board/downloadIMG.png" width="30" height="30">
-            <span id="uploadName" value> 파일 없음</span>
+            
+            <c:if test="${!empty board.fileList}">
+				 💾<a href="${board.fileList[0].boardFilePath}${board.fileList[0].boardFileRename}"
+                    download="${board.fileList[0].boardFileOriginal}">${board.fileList[0].boardFileOriginal}</a> 
+			</c:if>
+			<c:if test="${empty board.fileList}">
+                <span id="uploadName" > 💾파일 없음</span>
+            </c:if>
         </div>
 
         <div class="comment">
@@ -53,17 +54,16 @@
         </div>
 
         <div class="noticeBtn">
-            <c:if test="${loginMember.memberNo == board.memberNo}">
+        <c:if test="${loginMember.memberNo == board.memberNo}">
                 <button id="editBtn">수정</button>
                 <button id="deleteBtn">삭제</button>
-                <button id="cancelBtn">취소</button>
-            </c:if>
-            <a href="/board/1" id="listBtn"> 목 록</a> 
+        </c:if>
+            <button id="listBtn"> 목 록</button> 
         </div>
         
     </div>
 
-    <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/> 
+    <%-- <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/>  --%>
     <!-- 오류나서 주석처리함 -->
      <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -78,14 +78,13 @@
 
         // 게시글 번호 전역 변수로 선언
         const boardNo = "${board.boardNo}";
-		console.log(boardNo)
         const categoryNo = "${board.categoryNo}";
-		console.log(categoryNo)
        
 		const boardTitle = "${board.boardTitle}"
-
+        console.log("loginMember.memberNo:", "${loginMember.memberNo}");
+        console.log("board.memberNo:", "${board}");
     </script>
-    <script src="/resources/js/header.js"></script>
+     <script src="/resources/js/board/noticeBoard/noticeBoardDetail.js"></script>
 
 </body>
 </html>

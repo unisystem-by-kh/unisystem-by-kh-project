@@ -25,7 +25,7 @@
 
         <div class="replyContent">
             <div class="replyCotent1">
-            <span id="replyId">아이디</span>
+            <span id="replyId">${loginMember.memberName}</span>
             <span id="replyTime">02.28 15:20</span>
             </div>
 
@@ -35,8 +35,8 @@
         </div>
         
         <div class="btnArea">
-            <button>수정</button>
-            <button>삭제</button>
+            <button type="button" id="replyUpBtn">수정</button>
+            <button id="replyDeBtn">삭제</button>
         </div>
 
         </div>
@@ -45,6 +45,6 @@
 </main>
 
     <script src="/resources/js/header.js"></script>
-    <script src="/resources/js/board/noticeBoard/noticeBoardDetail.js"></script>
+    <script src="/resources/js/board/noticeBoard/noticeReply.js"></script>
 </body>
 </html>
