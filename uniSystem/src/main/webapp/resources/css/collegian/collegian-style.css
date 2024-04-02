@@ -26,9 +26,9 @@ main * {
 	border: none;
 }
 
-.stu-board>table tr:nth-child(1) {
+/* .stu-board>table tr:nth-child(1) {
 	background-color: #ccc;
-}
+} */
 
 /* 좌 네비 영역 */
 .stu-nav {
