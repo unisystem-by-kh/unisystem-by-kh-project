@@ -55,6 +55,14 @@
 		DEPARTMENT ORDER BY 1
 	</select>
 	
+	<!-- 담당교수 체크 -->
+	<select id="professorCheck" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_NAME = #{professor}
+		AND DEPARTMENT_NO = #{deptCode}
+		AND MEMBER_NO LIKE '02%'
+	</select>
+	
 	<!-- 교수 강의 시간 체크 -->
 	<select id="timeCheck" resultType="_int">
 		SELECT COUNT(*) FROM CLASS
@@ -153,6 +161,13 @@
 		DELETE FROM CLASS
 		WHERE CLASS_NO = #{classNo}
 	</delete>
+	
+	<!-- 교수 시간표 조회 -->
+	<select id="professorTimeTable" resultMap="subject_rm">
+		SELECT CLASS_NM, CLASS_DAY, CLASS_START, CLASS_END 
+		FROM CLASS
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 
 
 

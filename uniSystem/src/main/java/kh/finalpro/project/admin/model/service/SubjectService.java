@@ -58,6 +58,18 @@ public interface SubjectService {
 	 */
 	int deleteSubject(int classNo);
 
+	/** 담당교수 확인
+	 * @param paramMap
+	 * @return result
+	 */
+	int professorCheck(Map<String, Object> paramMap);
+
+	/** 교수 시간표 조회
+	 * @param memberNo
+	 * @return classList
+	 */
+	List<Subject> professorTimeTable(String memberNo);
+
 
 
 }
