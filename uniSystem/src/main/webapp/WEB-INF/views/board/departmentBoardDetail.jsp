@@ -69,7 +69,7 @@
 			<h1>💬 댓글</h1>
 		</div>
 		<div class="reply-content-con">
-			<textarea id="replyWriteCon"></textarea>
+			<textarea id="replyWriteCon" placeholder="댓글을 입력하세요"></textarea>
 			<button id="addReply">등록</button>
 		</div>
 		<div id="reply-area">
