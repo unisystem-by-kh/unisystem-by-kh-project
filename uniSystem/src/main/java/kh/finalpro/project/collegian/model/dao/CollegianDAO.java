@@ -133,6 +133,18 @@ public class CollegianDAO {
 	public List<Lecture> selectScore(Member loginMember) {
 		return sqlSession.selectList("collegianMapper.selectScore",loginMember);
 	}
+
+	public int changeProfile(Member loginMember) {
+		return sqlSession.update("collegianMapper.changeProfile",loginMember);
+	}
+
+	public int deleteProfile(Member loginMember) {
+		return sqlSession.update("collegianMapper.deleteProfile",loginMember);
+	}
+
+	public int updateInfo(Member inputMember) {
+		return sqlSession.update("collegianMapper.updateInfo",inputMember);
+	}
 	
 
 }

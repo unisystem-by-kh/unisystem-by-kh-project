@@ -77,9 +77,8 @@
 							</thead>
 							<tbody>
 
-							    <c:set var = "str" value = "Hello World!"/>
 
-							<c:forEach var="i" begin='1' end='6'>
+							<c:forEach var="i" begin='1' end='8'>
 									<tr>
 										<td>${i}교시</td>
 

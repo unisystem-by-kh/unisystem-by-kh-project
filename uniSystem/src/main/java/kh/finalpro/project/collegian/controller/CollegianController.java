@@ -269,8 +269,65 @@ public class CollegianController {
 		return "/collegian/scorePage";
 	}
 	
+	// 개인 정보 수정 페이지 전환
+	@GetMapping("/info")
+	public String myInfo(Model model
+			,@SessionAttribute(value="loginMember") Member loginMember
+			
+			) {
+		return "/collegian/info";
+	}
+	
+	@PostMapping("/changeProfile")
+	public String changeProfile(
+			Model model
+			,@SessionAttribute(value="loginMember") Member loginMember,
+			@RequestParam(value="profileImg", required =false) MultipartFile file
+			, HttpSession session) throws IllegalStateException, IOException {
+		
+		System.out.println(file);
+		
+		String webPath = "/resources/files/profileImage/";
+		String filePath = session.getServletContext().getRealPath(webPath);
+		
+		int result = service.changeProfile(loginMember,file,webPath,filePath);
+		
+		if(result > 0) {
+			
+			if(file.getSize()==0) {
+				loginMember.setMemberProfile(null);
+			}else {
+				loginMember.setMemberProfile(webPath+file.getOriginalFilename());
+			}
+			
+			model.addAttribute("loginMember", loginMember);
+		}
+		
+		return "redirect:/collegian/info"; 
+	}
 	
 	
+	@PostMapping("/updateInfo")
+	public String updateInfo(
+			Model model
+			,@SessionAttribute(value="loginMember") Member loginMember,
+			Member inputMember) {
+		
+		inputMember.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.updateInfo(inputMember);
+		
+		if(result > 0) {
+			
+			loginMember.setMemberEmail(inputMember.getMemberEmail());
+			
+			loginMember.setMemberPhone(inputMember.getMemberPhone());
+			
+			loginMember.setMemberAddr(inputMember.getMemberAddr());
+		}
+		
+		return "redirect:/collegian/info";
+	}
 	
 	
 	

@@ -8,7 +8,7 @@ const submitTask = th =>{ // 모달 창 함수
 
     const inputTask = document.getElementById("task_no"); // 숨겨진 task no
 
-    nameBox.innerText = "📖 "+th.parentNode.parentNode.cells[4].innerText; // 과제 제출 과목 담기
+    nameBox.innerText = "📖 "+th.parentNode.parentNode.cells[2].innerText; // 과제 제출 과목 담기
 
     modalContainer.classList.add('show');
 }
@@ -21,6 +21,9 @@ const notShow = th =>{
 }
 
 function taskSubmitValidation() {
+
+        
+
         alert("점수를 선택해주세요");
         return false;
 }

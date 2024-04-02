@@ -244,5 +244,34 @@ public class CollegianServiceImpl implements CollegianService{
 	public List<Lecture> selectScore(Member loginMember) {
 		return dao.selectScore(loginMember);
 	}
+	
+	@Override
+	public int changeProfile(Member loginMember, MultipartFile file, String webPath, String filePath) throws IllegalStateException, IOException {
+		
+		int result = 0;
+
+		if(file.getSize() > 0) {
+			
+			String fileName = file.getOriginalFilename(); // 원본명
+			
+			loginMember.setMemberProfile(webPath+fileName);
+			
+			result = dao.changeProfile(loginMember);
+			
+			if(result > 0) {
+				file.transferTo(new File(filePath +fileName));
+			}
+		}else {
+			result = dao.deleteProfile(loginMember);
+		}
+		
+		return result;
+		
+	}
+	
+	@Override
+	public int updateInfo(Member inputMember) {
+		return dao.updateInfo(inputMember);
+	}
 
 }

@@ -68,7 +68,18 @@ public class CertificateServiceImpl implements CertificateService{
 				context.setVariable("memberNo", loginMember.getMemberNo());
 				context.setVariable("department", loginMember.getDepartmentName());
 				context.setVariable("state", state);
-				context.setVariable("profile", loginMember.getMemberProfile());
+				
+				String profile = null;
+				
+				if(loginMember.getMemberProfile() != null) {
+					
+					String[] proI = loginMember.getMemberProfile().split("/");
+					
+					profile = "../profileImage/"+proI[4];
+					
+				}
+				
+				context.setVariable("profile", profile);
 				
 				htmlContent = templateEngine.process("studentID", context); // pdfTemplate == html 양식 명
 				

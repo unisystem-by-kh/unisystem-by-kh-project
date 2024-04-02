@@ -38,5 +38,9 @@ public interface CollegianService {
 
 	List<Lecture> selectScore(Member loginMember);
 
+	int changeProfile(Member loginMember, MultipartFile file, String webPath, String filePath) throws IllegalStateException, IOException;
+
+	int updateInfo(Member inputMember);
+
 
 }

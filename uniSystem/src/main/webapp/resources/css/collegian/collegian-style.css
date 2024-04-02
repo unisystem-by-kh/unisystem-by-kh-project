@@ -35,7 +35,7 @@ main * {
 	width: 250px;
 	margin-right: 40px;
 	padding: 0;
-	border: 1px solid black;
+	border: 2px solid gray;
 	border-radius: 10px;
 	height: 490px;
 }
@@ -699,3 +699,160 @@ td>button {
 	resize: none;
 	padding: 10px;
 }
+
+
+
+
+
+
+  .info-container{
+
+    display: flex;
+	margin-top: 10px;
+
+  }
+
+  .profile-area{
+    width: 300px;
+    height: 320px;
+  }
+
+  .input-area{
+    width: 100%;
+    height: 500px;
+  }
+
+  .profile-img{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-right: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px;
+  }
+
+  .profile-img img{
+    width: 100%;
+  }
+
+  .input-area input{
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 10px;
+  }
+
+  .profile-btn-area{
+    display: flex;
+  }
+
+  .input-row{
+    height: 50px;
+    font-size: 15px;
+    word-spacing: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .input-row input{
+    height: 100%;
+  }
+
+  .adress-row{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  .adress-row input{
+    display: block;
+    margin: 5px 0;
+    height: 40px;
+  }
+
+  .adress-row >div:nth-child(1){
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .adress-row >div:nth-child(2){
+    margin-left: 15px;
+  }
+
+  .double{
+    border-bottom: 4px double #ddd;
+  }
+
+  .profile-btn-area{
+    margin-top: 5px;
+  }
+
+  .profile-btn-area button{
+    margin-top: 10px;
+    margin-left: 34px;
+    height: 30px;
+  }
+
+  .input-row button{
+    height: 30px;
+  }
+
+  #profile-input{
+    display: none;
+  }
+  .upload-area{
+    display: flex;
+    height: 40px;
+    align-items: center;
+  }
+
+  .upload-area *{
+    height: 100%;
+  }
+
+  .upload-area img{
+      width: 100%;
+      padding: 2px;
+      cursor: pointer;
+    }
+    
+ .upload-area span{
+     background-color: #42444e;
+  }
+
+  .subBtn{
+    height: 50px;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: end;
+  }
+
+  .subBtn button{
+    height: 100%;
+    width: 80px;
+  }
+  button{
+    cursor: pointer;
+	padding-left: 5px;
+	padding-right: 5px;
+  }
+
+
+
+
+
+
+
+
+
+
+
