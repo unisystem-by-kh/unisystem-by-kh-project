@@ -94,13 +94,25 @@ if(xBtn != null){
     })
 }
 
-// 포커스 아웃 시 검색결과창 닫기
-// professor.addEventListener("focusout", ()=>{
-//     if(professor.value.trim().length != 0 && resultSet.style.display != "none"){
+document.addEventListener("click", function(e) {
+    // 클릭된 요소가 결과 영역 외부에 있으면 결과 영역을 숨깁니다.
+    if (!resultSet1.contains(e.target) && !professor.contains(e.target)) {
+        resultSet.style.display = "none";
+        xBtn.style.display = "none";
+    }
+});
+
+// function removeDiv(e, rs){
+//     console.log(rs);
+//     if (!resultSet1.contains(rs) && !professor.contains(e.target)) {
 //         resultSet.style.display = "none";
 //         xBtn.style.display = "none";
-//         resultSet1.style.display = "none";
 //     }
+// }
+
+// 포커스 아웃 시 검색결과창 닫기
+// professor.addEventListener("focusout", (e)=>{
+//     removeDiv(e.target, resultSet1);
 // })
 
 // 담당 교수 change 시 존재하는 담당교수 인지 확인
@@ -170,6 +182,7 @@ function addClassToTimetable(classDay, classStart, classEnd, className) {
         const row = timetable.querySelector(`tbody tr:nth-child(${i})`); // 해당 교시의 행
         const cell = row.querySelector(`td:nth-child(${dayIndex})`); // 해당 요일의 셀
         cell.textContent = className; // 수업 이름을 셀에 표시
+       
     }
 }
 
@@ -193,12 +206,27 @@ function getDayIndex(day) {
 
 // 교수의 수업 리스트(classList)를 받아서 시간표에 추가하는 함수
 function displayClassSchedule(classList) {
-    console.log(classList);
     classList.forEach(classInfo => {
         const { classDay, classStart, classEnd, className } = classInfo;
         addClassToTimetable(classDay, classStart, classEnd, className);
     });
 }
+
+// 이전 내용을 삭제하기 위한 코드 추가
+const clearTimetable = () => {
+    const table = document.querySelector(".timetable>table");
+    const rowList = table.rows;
+
+    for (let i = 1; i < rowList.length; i++) { // thead 부분을 제외하기 위해 1부터 시작
+        const row = rowList[i];
+        const tdsNum = row.childElementCount; // 아래 for문에서 사용하기 위해 row 하위에 존재하는 td의 갯수를 구합니다.
+
+        for (let j = 2; j <= tdsNum; j++) { // 첫번째 td부분을 제외하기 위해서 2부터 시작
+            const cell = row.querySelector(`td:nth-child(${j})`);
+            cell.textContent = "";
+        }
+    }
+};
 
 checkTime.addEventListener("click", () =>{
     
@@ -217,7 +245,9 @@ checkTime.addEventListener("click", () =>{
         
         return;
 
-    }else{
+    }
+
+    if(timetable != null){ // 교과목 등록일 때 만 사용하게 조건 걸어둠
 
         // 교수의 수업 리스트를 가져오는 API 호출
         fetch("/staff/timeTable",{
@@ -227,27 +257,14 @@ checkTime.addEventListener("click", () =>{
         })
         .then( resp => resp.json())
         .then( classList => {
-            // 시간표에 수업 추가
-            if(classList.length > 0){
-                $('.timetable table tbody tr:not(:first-child)').each(function() {
-                    // Remove the content of all td elements except the first one
-                    $(this).find('td:not(:first-child)').empty();
-                });
-                
-                $('.timetable table tbody tr:not(:first-child)').each(function() {
-                    var firstTdContent = $(this).find('td:first-child').html();
-                    $(this).find('td:not(:first-child)').empty();
-                    $(this).find('td:first-child').html(firstTdContent);
-                });
-                displayClassSchedule(classList);
-            } else{
-                $('.timetable table tbody tr:not(:first-child)').each(function() {
-                    var firstTdContent = $(this).find('td:first-child').html();
-                    $(this).find('td:not(:first-child)').empty();
-                    $(this).find('td:first-child').html(firstTdContent);
-                });
-            }
 
+            if(classList.length > 0){
+                clearTimetable(); // 빈 테이블로 만드는 함수 호출 
+                // 시간표에 수업 추가
+                timetable.style.display = "block";
+                displayClassSchedule(classList);
+            } 
+                
         })
         .catch( e=> console.log(e))
 
@@ -275,6 +292,38 @@ checkTime.addEventListener("click", () =>{
         swal({
             title : "시간 체크 불가.",
             text : "마치는 교시를 입력해주세요.",
+            icon  : "warning",
+            button : "확인",
+            closeOnClickOutside : false
+        }).then(()=>{
+            classEnd.value = "";
+            classEnd.focus();
+        });
+
+        return;
+    }
+
+    const regEx = /[1-8]/;
+
+    if(!regEx.test(classStart.value)){
+        swal({
+            title : "시간 체크 불가.",
+            text : "1 ~ 8교시만 존재합니다.",
+            icon  : "warning",
+            button : "확인",
+            closeOnClickOutside : false
+        }).then(()=>{
+            classStart.value = "";
+            classStart.focus();
+        });
+
+        return;
+    }
+
+    if(!regEx.test(classEnd.value)){
+        swal({
+            title : "시간 체크 불가.",
+            text : "1 ~ 8교시만 존재합니다.",
             icon  : "warning",
             button : "확인",
             closeOnClickOutside : false
@@ -375,6 +424,9 @@ document.getElementById("insertFrm").addEventListener("submit", e=>{
             icon  : "warning",
             button : "확인",
             closeOnClickOutside : false
+        }).then(()=>{
+            professor.value = "";
+            professor.focus();
         });
 
         e.preventDefault();
@@ -526,3 +578,10 @@ document.getElementById("insertFrm").addEventListener("submit", e=>{
 
 })
 
+// 초기화 버튼 클릭 시 시간표 숨김
+const resetBtn = document.querySelector(".btn-area>button:nth-child(1)");
+if(resetBtn != null){
+    resetBtn.addEventListener("click", ()=>{
+        timetable.style.display = "none";
+    })
+}
