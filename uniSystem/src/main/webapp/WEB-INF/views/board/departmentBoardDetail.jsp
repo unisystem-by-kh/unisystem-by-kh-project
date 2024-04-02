@@ -103,6 +103,7 @@
         const categoryNo = "${board.categoryNo}";
 
 		const boardTitle = "${board.boardTitle}"
+		
 
     </script>
 

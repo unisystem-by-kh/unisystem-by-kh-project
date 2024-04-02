@@ -26,27 +26,24 @@
         </div>
 <form action="/board/${categoryNo}/write" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
         <div class="title">
-            <p>제&nbsp;&nbsp;&nbsp;목</p>
-            <input type="text"  name="inputTitle"  placeholder="제목을 입력해주세요">
+            <p>제목</p>
+            <input type="text"  name="boardTitle"  placeholder="제목을 입력해주세요">
         </div>
 
         <div class="division">
 
-            <p>구&nbsp;&nbsp;&nbsp;분</p>
-            <select>
-                <option value="1">인사공지</option>
-                <option value="2">학사공지</option>
-            </select>
+            <div>신청인</div>
+				<div>${loginMember.memberName}</div>
         </div>
 
         <div class="content">
-            <p>내&nbsp;&nbsp;&nbsp;용</p>
-            <textarea type="text" name="inputContent" placeholder="내용을 입력하세요"></textarea>
+            <p>내용</p>
+            <textarea type="text" name="boardContent" placeholder="내용을 입력하세요"></textarea>
         </div>
 
         <div class="uploadFile">
             <p>첨부파일</p>
-            <input type="file" id="file" value="파일선택">
+            <input type="file" id="file"  name="file" value="파일선택">
         </div>
 
         
