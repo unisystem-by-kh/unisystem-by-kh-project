@@ -28,7 +28,12 @@
             <p>제 목</p>
             <span id="contentTitle">${board.boardTitle}</span>
         </div>
-      
+
+        <div class="division">
+
+            <p>작성자</p>
+				<span>${loginMember.memberName}</span>
+        </div>
 
         <div class="content">
             <p>내 용</p>
@@ -47,11 +52,7 @@
             </c:if>
         </div>
 
-        <div class="comment">
-            <p>댓글쓰기</p>
-            <input type="text" name="conmment" placeholder="댓글을 입력해주세요.">
-            <button id="commentBtn">등 록</button>
-        </div>
+      
 
         <div class="noticeBtn">
         <c:if test="${loginMember.memberNo == board.memberNo}">
@@ -61,10 +62,40 @@
             <button id="listBtn"> 목 록</button> 
         </div>
         
+		<div class="reply-con">
+			<p> 댓글</p>
+		</div>
+
+		<div class="reply-content-con">
+			<textarea id="replyWriteCon"></textarea>
+			<button id="addReply">등록</button>
+		</div>
+
+		<div id="reply-area">
+
+
+			<div class="dat-info">
+
+				<div>이름 : 유저일</div>
+				|
+				<div>작성일 : 2024.02.23</div>
+			</div>
+
+			<div class="dat-con">
+
+				<div>댓글 1</div>
+			</div>
+
+			<div class="button-container">
+				<button type="button" id="replyUpBtn">수정</button>
+				<button  id="replyDeBtn">삭제</button>
+			</div>
+
+		</div>
+
     </div>
 
-    <%-- <jsp:include page="/WEB-INF/views/board/noticeReply.jsp"/>  --%>
-    <!-- 오류나서 주석처리함 -->
+   
      <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
@@ -79,11 +110,10 @@
         // 게시글 번호 전역 변수로 선언
         const boardNo = "${board.boardNo}";
         const categoryNo = "${board.categoryNo}";
-       
-		const boardTitle = "${board.boardTitle}"
-        console.log("loginMember.memberNo:", "${loginMember.memberNo}");
-        console.log("board.memberNo:", "${board}");
+		const boardTitle = "${board.boardTitle}";
+
     </script>
+    
      <script src="/resources/js/board/noticeBoard/noticeBoardDetail.js"></script>
 
 </body>

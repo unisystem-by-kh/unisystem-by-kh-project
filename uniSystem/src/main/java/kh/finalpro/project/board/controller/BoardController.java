@@ -258,8 +258,10 @@ public class BoardController {
 		map.put("boardNo", boardNo);
 		
 		// 게시글 상세 조회 서비스 호출
+		
 		Board board = service.noticeDetailBoard(map);
-
+		
+		
 		String path = null;
 
 		if (board != null) { // 조회 결과가 있을 경우
@@ -297,7 +299,6 @@ public class BoardController {
 
 		// 2. boardCode도 board에 세팅
 		board.setCategoryNo(categoryNo);
-		System.out.println(board);
 		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
 		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
 		String webPath = "/resources/images/board/";
@@ -850,7 +851,6 @@ public class BoardController {
 
 		Board board = service.selectInquiryBoard(map);
 		String path = null;
-
 		if(board != null) {
 
 			if(loginMember != null) { // 로그인 상태인 경우

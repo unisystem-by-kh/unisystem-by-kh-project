@@ -468,7 +468,7 @@ public class BoardServiceImpl implements BoardService{
 	//공지사항 게시글 상세조회
 	@Override
 	public Board noticeDetailBoard(Map<String, Object> map) {
-
+		System.out.println("map2 : " + map);
 		return dao.noticeDetailBoard(map);
 	}
 

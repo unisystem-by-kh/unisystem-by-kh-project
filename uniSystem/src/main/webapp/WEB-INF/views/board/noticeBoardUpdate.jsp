@@ -24,10 +24,10 @@
         <div class="announcement">
             <h2>공 지 사 항</h2>
         </div>
-<form action="/board/${categoryNo}/write" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
+<form action="/board/${categoryNo}/update" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
         <div class="title">
             <p>제목</p>
-            <input type="text"  name="boardTitle"  placeholder="제목을 입력해주세요">
+            <input type="text"  name="boardTitle"  value="${board.boardTitle}">
         </div>
 
         <div class="division">
@@ -38,18 +38,19 @@
 
         <div class="content">
             <p>내용</p>
-            <textarea type="text" name="boardContent" placeholder="내용을 입력하세요"></textarea>
+            <textarea type="text" name="boardContent" >${board.boardContent}</textarea>
         </div>
 
         <div class="uploadFile">
             <p>첨부파일</p>
-            <input type="file" id="file"  name="file" value="파일선택">
+              <input type="file" id="file" name="file" >
+                        ${board.fileList[0].boardFileOriginal}
         </div>
 
         
 
         <div class="saveCancle">
-            <input type="submit" id="savaBtn" value="등 록">
+            <input type="submit" id="savaBtn" value="수 정">
             <input type="button" id="goToListBtn" value="취 소">
         </div>
 
@@ -64,7 +65,7 @@
 </main>
 
     <script src="/resources/js/header.js"></script>
-    <script src="/resources/js/board/noticeBoard/noticeBoardWrite.js"></script>
+    <script src="/resources/js/board/noticeBoard/noticeBoardUpdate.js"></script>
 
 </body>
 </html>
