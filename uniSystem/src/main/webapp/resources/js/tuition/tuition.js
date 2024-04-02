@@ -17,7 +17,7 @@ var makeMerchantUid = `${hours}` + `${minutes}` + `${seconds}` + `${milliseconds
 function kakaoPay() {
     if (confirm("결제 하시겠습니까?")) { // 구매 클릭시 한번 더 확인하기
        
-
+        console.log("asdasdsadasdasdasd")
             IMP.init("imp35637705"); // 가맹점 식별코드
             IMP.request_pay({
                 pg: 'kakaopay.TC0ONETIME', // PG사 코드표에서 선택
@@ -33,7 +33,8 @@ function kakaoPay() {
                 buyer_no : loginMemberNo1
             }, async function (rsp) { // callback
                 if (rsp.success) { //결제 성공시
-					console.log(rsp)
+					console.log("ㅁㄴㅇㅁㄴㅇ"+rsp)
+                    
                     const data = {"memberNo" : loginMemberNo,
                                   "departmentPrice" : departmentPrice,
                                   "payMethod" : rsp.pay_method}
