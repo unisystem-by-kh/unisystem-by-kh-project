@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>교과목 등록</title>
     
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/style-main.css">
     <link rel="stylesheet" href="/resources/css/admin/subjectWrite.css">
 </head>
@@ -35,6 +36,7 @@
                 <div class="form-group">
                     <label for="professor">담당 교수</label>
                     <input type="text" id="teacher" name="memberName" placeholder="담당 교수님을 입력해주세요." autocomplete="off">
+                    <input type="hidden" name="deptCode" id="deptCode">
                     <div class="resultSet-area">
                         <p id="x-btn">&times;</p>
                         <ul id="resultSet" class="resultSet"></ul>
@@ -91,6 +93,88 @@
                     <input type="text" id="classStart" name="classStart" placeholder="시작" maxlength="1">교시
                     <input type="text" id="classEnd" name="classEnd" placeholder="마치는" maxlength="1">교시
                     <button type="button" id="checkTime" class="submitBtn">시간 체크</button>
+                </div>
+
+                <div class="timetable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>시간</th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 각 교시별로 시간표를 작성합니다. -->
+                            <tr>
+                                <td>1교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>5교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>6교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>7교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>8교시</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="btn-area">
