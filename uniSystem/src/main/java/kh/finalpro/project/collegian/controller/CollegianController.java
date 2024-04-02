@@ -111,6 +111,16 @@ public class CollegianController {
 		return "/collegian/myClass";
 	}
 	
+	// 수강 신청 페이지 비동기 띄우기
+	
+	@PostMapping("/myClass")
+	@ResponseBody
+	public Map<String, Object> selectMyClass(@RequestBody Map<String, Object> paramMap) {
+		
+		return service.searchLecture(paramMap);
+	}
+	
+	
 	// 수강 신청 비동기
 	@PostMapping("/insertLecture")
 	@ResponseBody

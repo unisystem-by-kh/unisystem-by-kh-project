@@ -160,13 +160,19 @@
 		
 	</select>
 	
+	
+	
+	
 	<select id="selectDepartmentList" resultMap="department_rm">
 		SELECT DEPARTMENT_NO , DEPARTMENT_NAME
 		FROM DEPARTMENT
 		ORDER BY 1
 	</select>
 	
-	<!-- 수강 신청 조회  -->
+	
+	
+	
+	<!-- 수강 신청시 과목 조회  -->
 	<select id="selectLecture" resultMap="class_rm">
 	SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM,
 		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,CLASS_MAX,
@@ -187,6 +193,52 @@
 	ORDER BY 1
 		
 	</select>
+	
+	<!-- 수강 신청 비동기 과목 조회  -->
+	<select id="selectLecture_search" resultMap="class_rm">
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM,
+		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,CLASS_MAX,
+        (SELECT COUNT(*) FROM LECTURE Z
+            WHERE A.CLASS_NO = Z.CLASS_NO) LECTURE_COUNT,
+		(SELECT COUNT(*) FROM LECTURE R
+			WHERE R.MEMBER_NO = #{memberNo}
+			AND R.CLASS_NO = A.CLASS_NO) LECTURE_FL
+		FROM CLASS A
+		JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+		JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
+		
+		WHERE A.DEPARTMENT_NO = #{departmentNo}
+		
+		AND CLASS_GRADE = (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		AND CLASS_TERM = (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		
+		<choose>
+			<when test='major != "0"'>
+				AND A.DEPARTMENT_NO = #{major}
+			</when>
+		</choose>
+
+		<if test='grade != "0"'>
+			AND CLASS_GRADE = #{grade}
+		</if>
+
+		<if test='step != "0"'>
+			AND CLASS_TERM = #{step}
+		</if>
+
+		<if test='type != "0"'>
+			AND CLASS_POINT = #{type}
+		</if>
+		
+		<if test='query != null'>
+			AND CLASS_NM LIKE '%${query}%'
+		</if>
+		ORDER BY 1	
+		
+	</select>
+	
+	
+	
 	
 	<insert id="insertMyClass" parameterType="map">
 		INSERT INTO LECTURE VALUES( #{classNo} , #{memberNo} , DEFAULT ,

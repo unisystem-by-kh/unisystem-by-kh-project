@@ -81,7 +81,7 @@ public class CollegianDAO {
 
 	public List<Class> searchLecture( Map<String, Object> paramMap) {
 		
-		return null;
+		return sqlSession.selectList("collegianMapper.selectClassList_search", paramMap);
 	}
 
 	public int insertMyClass(Map<String, Object> map) {

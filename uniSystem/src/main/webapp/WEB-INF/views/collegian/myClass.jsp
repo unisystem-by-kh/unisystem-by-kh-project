@@ -85,6 +85,7 @@
                         <th>신청 인원</th>
                     </tr>
 
+                    <tbody>
                     <c:choose>
                         <c:when test="${empty lecture}">
                             <tr>
@@ -121,6 +122,7 @@
                                 </c:forEach>
                         </c:otherwise>
                     </c:choose>
+                    </tbody>
                     
                 </table>
 
