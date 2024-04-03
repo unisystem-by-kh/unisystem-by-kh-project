@@ -153,7 +153,7 @@ const updateMyClass = th => {
 
             console.log(result);
     
-            if(result>0 && result<100){
+            if(result.success.length > 0){
                 alert("해당 과목 수강 신청이 완료되었습니다.");
 
                 row.cells[7].innerHTML =""; 
@@ -170,7 +170,7 @@ const updateMyClass = th => {
 
                 refresh();
 
-            }else if(result>=100){
+            }else if(result.fail.length > 0 ){
 
                 alert("수강 정원이 다 찼습니다.");
 
@@ -231,12 +231,15 @@ document.getElementById("class-btn").addEventListener("click", e => {
             },
             body: JSON.stringify(bodyData)
         })
-        .then(res => res.text())
+        .then(res => res.json())
         .then(result => {
             console.log(result);
-            if(result>0){
+            if(result != null){
+
                 location.reload(); // 페이지 새로 고침
-                alert("수강 과목 신청 결과" + result);
+                alert("✔수강 신청 성공 과목"+result.success.length+"개\n"
+                    +result.success+"\n❌수강 신청 실패 과목"+result.fail.length+"개\n"
+                    +result.fail);
 
             }else{
                 alert("수강 신청 실패 서버 콘솔 확인하세요");

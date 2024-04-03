@@ -28,6 +28,7 @@ import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Request;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.professor.model.dto.Lecture;
+import oracle.jdbc.proxy.annotation.Post;
 import kh.finalpro.project.collegian.model.service.CollegianService;
 
 @Controller
@@ -66,7 +67,8 @@ public class CollegianController {
 	}
 
 	// select 체크시 비동기 통신
-	@PostMapping(value = "/selectClassList", produces = "application/json; charset=UTF-8")
+	//@PostMapping(value = "/selectClassList", produces = "application/json; charset=UTF-8")
+	@PostMapping("/selectClassList")
 	@ResponseBody
 	public Map<String, Object> selectClassList(@RequestBody Map<String, Object> paramMap, 
 											@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
@@ -123,7 +125,7 @@ public class CollegianController {
 	// 수강 신청 비동기
 	@PostMapping("/insertLecture")
 	@ResponseBody
-	public int insertMyClass(@RequestBody Map<String, Object> paramMap) {
+	public Map<String, Object> insertMyClass(@RequestBody Map<String, Object> paramMap) {
 		
 		String classes = (String) paramMap.get("classes");
 		
@@ -135,9 +137,9 @@ public class CollegianController {
 
 		mem.setMemberNo((String)paramMap.get("memberNo"));
 		
-		int result = service.insertMyClass(classNoList,mem);
+		Map<String, Object> map = service.insertMyClass(classNoList,mem);
 		
-		return result;
+		return map;
 		
 	}
 	
@@ -287,6 +289,7 @@ public class CollegianController {
 		return "/collegian/info";
 	}
 	
+	// 프로필 이미지 변경
 	@PostMapping("/changeProfile")
 	public String changeProfile(
 			Model model
@@ -315,7 +318,7 @@ public class CollegianController {
 		return "redirect:/collegian/info"; 
 	}
 	
-	
+	// 개인 정보 수정
 	@PostMapping("/updateInfo")
 	public String updateInfo(
 			Model model
@@ -336,6 +339,29 @@ public class CollegianController {
 		}
 		
 		return "redirect:/collegian/info";
+	}
+	
+	@PostMapping("/insertRate")
+	public String insertRate(Model model
+			,@SessionAttribute(value="loginMember") Member loginMember
+			,String lateLike, String content, String classNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("like", lateLike);
+		map.put("memberNo", loginMember.getMemberNo());
+		map.put("content", content);
+		map.put("classNo", classNo);
+		
+		int result = service.insertRate(map);
+		
+		if(result>0) {
+			model.addAttribute("msg","평가 완료");
+		}
+		
+		
+		return "redirect:/collegian/score";
+		
 	}
 	
 	

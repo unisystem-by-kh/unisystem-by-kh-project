@@ -22,7 +22,7 @@ public interface CollegianService {
 
 	Map<String, Object> selectLecture(Member mem);
 
-	int insertMyClass(String[] classNoList, Member mem);
+	Map<String, Object> insertMyClass(String[] classNoList, Member mem);
 
 	List<Class> selectMyClasses(Member mem);
 
@@ -41,6 +41,8 @@ public interface CollegianService {
 	int changeProfile(Member loginMember, MultipartFile file, String webPath, String filePath) throws IllegalStateException, IOException;
 
 	int updateInfo(Member inputMember);
+
+	int insertRate(Map<String, Object> map);
 
 
 }

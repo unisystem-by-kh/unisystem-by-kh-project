@@ -139,6 +139,14 @@ public class CollegianDAO {
 	public int updateInfo(Member inputMember) {
 		return sqlSession.update("collegianMapper.updateInfo",inputMember);
 	}
+
+	public String selectClassName(String string) {
+		return sqlSession.selectOne("collegianMapper.selectClassName",string);
+	}
+
+	public int insertRate(Map<String, Object> map) {
+		return sqlSession.insert("collegianMapper.insertRate",map);
+	}
 	
 
 }

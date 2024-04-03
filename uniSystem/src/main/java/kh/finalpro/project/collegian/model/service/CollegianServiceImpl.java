@@ -2,6 +2,7 @@ package kh.finalpro.project.collegian.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,13 +128,17 @@ public class CollegianServiceImpl implements CollegianService{
 	// 수강 신청 서비스
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int insertMyClass(String[] classNoList, Member mem) {
+	public Map<String, Object> insertMyClass(String[] classNoList, Member mem) {
 		
 		int result = 0;
 		
+		List<String> success = new ArrayList<String>();
+		List<String> fail = new ArrayList<String>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		for(int i=0; i < classNoList.length; i++) {
 			
-			Map<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("classNo", classNoList[i]);
 			
@@ -147,14 +152,19 @@ public class CollegianServiceImpl implements CollegianService{
 				
 				if(checkNo > 0) {
 					result += (i+1); // 성공 과목 몇 번째 항목인지
+					success.add(dao.selectClassName(classNoList[i]));
 				}
 				
-			}else { // 수강 불가능
+			}else { // 수강 불가능 정원 초과
 				result += (i+1)*100; // 실패 과목 몇 번째 항목인지 구분
+				fail.add(dao.selectClassName(classNoList[i]));
+				
 			}
+			map.put("success", success);
+			map.put("fail", fail);
 			
 		}
-		return result;
+		return map;
 	}
 	
 	// 수강 신청 내역 조회 
@@ -273,5 +283,9 @@ public class CollegianServiceImpl implements CollegianService{
 	public int updateInfo(Member inputMember) {
 		return dao.updateInfo(inputMember);
 	}
-
+	
+	@Override
+	public int insertRate(Map<String, Object> map) {
+		return dao.insertRate(map);
+	}
 }

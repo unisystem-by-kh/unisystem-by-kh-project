@@ -344,7 +344,7 @@
 	<!-- 성적 조회 -->
 	<select id="selectScore" 	resultMap="lecture_rm">
 
-		SELECT LECTURE_GRADE,LECTURE_TERM,CLASS_NM,CLASS_POINT,LECTURE_POINT,
+		SELECT DISTINCT LECTURE_GRADE,LECTURE_TERM,CLASS_NM,CLASS_POINT,LECTURE_POINT,
 			(CASE CLASS_POINT
 				WHEN 3 THEN '전공'
 				ELSE '교양'
@@ -360,12 +360,14 @@
 			ELSE 'NONE'
 			END
 		) AS REAL_POINT
-		,(CASE  WHEN CLASS_RATE_NO IS NOT NULL  THEN 'Y' ELSE 'N'  END) AS RATE_FL
-		
+		, (SELECT CLASS_RATE_NO FROM CLASS_RATE R WHERE R.CLASS_NO = C.CLASS_NO) AS CLNO
+		,(CASE  WHEN (SELECT CLASS_RATE_NO FROM CLASS_RATE R WHERE R.CLASS_NO = C.CLASS_NO) IS NOT NULL  THEN 'Y' ELSE 'N'  END) AS RATE_FL
+		, C.CLASS_NO AS CLASS_NO
 		FROM LECTURE L
 		JOIN CLASS C ON (L.CLASS_NO = C.CLASS_NO)
 		LEFT JOIN CLASS_RATE R ON (L.MEMBER_NO = R.MEMBER_NO)
 		WHERE L.MEMBER_NO = #{memberNo}
+		ORDER BY CLASS_NO
 	</select>
 	
 	<!-- 학적 변동 신청 내역 조회 -->
@@ -425,6 +427,17 @@
 		,MEMBER_PHONE = #{memberPhone}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="selectClassName" resultType="String">
+		SELECT CLASS_NM
+		FROM CLASS
+		WHERE CLASS_NO = #{string}
+	</select>
+	
+	<insert id="insertRate">
+		INSERT INTO CLASS_RATE
+		VALUES(SEQ_RATE_NO.NEXTVAL,#{content},#{like},#{classNo},#{memberNo})
+	</insert>
 	
 
 </mapper>

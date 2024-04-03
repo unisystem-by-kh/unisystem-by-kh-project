@@ -114,6 +114,7 @@
         </div>
 	</main>
     <script src="/resources/js/collegian/nav.js"></script>
+    <script src="/resources/js/collegian/change.js"></script>
 
 
 
