@@ -73,7 +73,6 @@ public class AdminServiceImpl implements AdminService{
             }
 			totalResult += result;
 			
-			System.out.println(memberNo.getMemberNo());
 			
 		}
 		

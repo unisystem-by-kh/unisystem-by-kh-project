@@ -14,3 +14,11 @@ function validateForm() {
 
     return true; // 모든 입력 필드가 비어있지 않다면 유효성 검사를 통과하도록 합니다.
 }
+
+const goToListBtn = document.getElementById("goToListBtn");
+
+goToListBtn.addEventListener("click", ()=>{
+    if(confirm("작성을 취소하시겠습니까?")){
+        history.back();
+    }
+})

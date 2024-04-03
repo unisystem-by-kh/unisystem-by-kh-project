@@ -127,7 +127,6 @@ public class SubjectController {
 	@PostMapping(value = "/timeCheck", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public int timeCheck(@RequestBody Map<String, Object> map) {
-		//System.out.println(map);
 		return service.timeCheck(map);
 	}
 	

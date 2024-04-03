@@ -47,7 +47,7 @@ public class TuitionController {
 	@ResponseBody
 	@PostMapping("/tuition/insert")
 	public int tuitionInsert(@RequestBody Tuition tuition) {
-		System.out.println(tuition);
+//		System.out.println(tuition);
 		return service.tuitionInsert(tuition);
 	}
 	

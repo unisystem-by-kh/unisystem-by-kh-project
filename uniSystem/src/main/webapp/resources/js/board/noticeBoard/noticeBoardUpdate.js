@@ -35,7 +35,6 @@ goToListBtn.addEventListener("click",()=>{
     location.href = url; */
     if(confirm("수정을 취소하시겠습니까?")){
         history.back();
-
     }
 
 })

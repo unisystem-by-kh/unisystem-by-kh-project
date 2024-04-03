@@ -146,7 +146,6 @@ public class BoardDAO {
 	 * @return boardNo
 	 */
 	public int inquiryBoardWrite(Board board) {
-		System.out.println(board);
 		int result = sqlSession.insert("boardMapper.inquiryBoardWrite", board);
 		
 		if(result > 0) {
@@ -185,7 +184,7 @@ public class BoardDAO {
 	 * @return
 	 */
 	public int inquiryBoardDelete(int boardNo) {
-		System.out.println(boardNo);
+
 		return sqlSession.update("boardMapper.inquiryBoardDelete", boardNo);
 	}
 
@@ -230,7 +229,6 @@ public class BoardDAO {
 	 * @return board
 	 */
 	public Board noticeDetailBoard(Map<String, Object> map) {
-		System.out.println("map3 : "+map );
 		return sqlSession.selectOne("boardMapper.noticeDetailBoard", map);
 	}
 
@@ -337,7 +335,6 @@ public class BoardDAO {
 	 * @return 
 	 */
 	public int freeBoardUpdate(Board board) {
-		System.out.println(board);
 		return sqlSession.update("boardMapper.updateFreeBoardList", board);
 	}
 

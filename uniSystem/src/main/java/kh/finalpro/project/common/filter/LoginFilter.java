@@ -16,6 +16,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kh.finalpro.project.main.model.dto.Member;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @WebFilter(filterName = "loginFilter",
 		   urlPatterns = {"/board/*", "/admin/*", "/main", "/tuition/*", "/professor/*", "/staff/*", "/rate", "/collegian/*"})
 public class LoginFilter implements Filter{
@@ -23,14 +27,17 @@ public class LoginFilter implements Filter{
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// 서버가 켜질 때, 필터 코드가 변경 되었을 때 필터가 생성됨
 		// -> 생성 시 초기화 용도로 사용하는 메소드
-		System.out.println("--- 로그인 필터 생성 ---");
+//		System.out.println("--- 로그인 필터 생성 ---");
+		log.info("--- 로그인 필터 생성 ---");
+		
 	}
 
 	public void destroy() {
 		// 필터 코드가 변경 되었을 때
 
 		// 변경 이전 필터를 파괴하는 메소드
-		System.out.println("--- 이전 로그인 필터 파괴 ---");
+//		System.out.println("--- 이전 로그인 필터 파괴 ---");
+		log.info("--- 이전 로그인 필터 파괴 ---");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -45,11 +52,28 @@ public class LoginFilter implements Filter{
 		
 		// 3) session에서 "loginMember" key를 가진 속성을 얻어와
 		//	  null인 경우 메인페이지로 redirect 시키기
-		if(session.getAttribute("loginMember") == null) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		if(loginMember != null) {
+			
+			switch (loginMember.getMemberNo().substring(0,2)) {
+			case "01" :
+				if(req.getRequestURI().startsWith("/admin/") || req.getRequestURI().startsWith("/professor/") 
+						|| req.getRequestURI().startsWith("/professor/") || req.getRequestURI().startsWith("/professor/")) {
+					session.setAttribute("filterMessage", "접근 제한이 없습니다.");
+					resp.sendRedirect("/main");
+					return;
+				}
+				break;
+
+			default:
+				break;
+			}
+			
+			
+		} else {
 			session.setAttribute("filterMessage", "로그인 후 이용해주세요.");
 			resp.sendRedirect("/");
-		} else {
-			session.removeAttribute("filterMessage");
 		}
 
 		/* 응용
