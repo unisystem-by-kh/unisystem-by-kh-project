@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.finalpro.project.collegian.model.dto.Class;
 import kh.finalpro.project.collegian.model.dto.Request;
@@ -268,13 +270,17 @@ public class CollegianController {
 	// 학점 조회 페이지 전환
 	@GetMapping("/score")
 	public String selectScore(Model model
-			,@SessionAttribute(value="loginMember") Member loginMember) {
+			,@SessionAttribute(value="loginMember") Member loginMember) throws JsonProcessingException {
 		
 		
 		List<Lecture> score = service.selectScore(loginMember);
 		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		String json = objectMapper.writeValueAsString(score);
 		
 		model.addAttribute("score",score);
+		model.addAttribute("json",json);
 		
 		
 		return "/collegian/scorePage";

@@ -67,6 +67,7 @@
 		<result property="lectureTerm" column="LECTURE_TERM" />
 		<result property="realPoint" column="REAL_POINT" />
 		<result property="rateFlag" column="RATE_FL" />
+		<result property="memberName" column="MEMBER_NAME" />
 	
 	</resultMap>
 	
@@ -343,7 +344,6 @@
 
 	<!-- 성적 조회 -->
 	<select id="selectScore" 	resultMap="lecture_rm">
-
 		SELECT DISTINCT LECTURE_GRADE,LECTURE_TERM,CLASS_NM,CLASS_POINT,LECTURE_POINT,
 			(CASE CLASS_POINT
 				WHEN 3 THEN '전공'
@@ -360,11 +360,12 @@
 			ELSE 'NONE'
 			END
 		) AS REAL_POINT
-		, (SELECT CLASS_RATE_NO FROM CLASS_RATE R WHERE R.CLASS_NO = C.CLASS_NO) AS CLNO
 		,(CASE  WHEN (SELECT CLASS_RATE_NO FROM CLASS_RATE R WHERE R.CLASS_NO = C.CLASS_NO) IS NOT NULL  THEN 'Y' ELSE 'N'  END) AS RATE_FL
 		, C.CLASS_NO AS CLASS_NO
+		, MEMBER_NAME
 		FROM LECTURE L
 		JOIN CLASS C ON (L.CLASS_NO = C.CLASS_NO)
+		JOIN MEMBER M ON (M.MEMBER_NO = C.MEMBER_NO)
 		LEFT JOIN CLASS_RATE R ON (L.MEMBER_NO = R.MEMBER_NO)
 		WHERE L.MEMBER_NO = #{memberNo}
 		ORDER BY CLASS_NO

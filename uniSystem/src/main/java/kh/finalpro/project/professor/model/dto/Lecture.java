@@ -28,6 +28,8 @@ public class Lecture {
 	private int lectureTerm;
 
 	private String realPoint;
+	
+	private String memberName;
 
 	private String rateFlag; // 평가 여부
 
