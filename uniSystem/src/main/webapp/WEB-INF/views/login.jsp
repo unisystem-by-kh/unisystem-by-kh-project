@@ -96,6 +96,7 @@
             <script>
                 swal("${filterMessage}", "", "warning");
             </script>
+            <c:remove var="filterMessage" scope="session"/>
         </c:if>
     </c:if>
 
@@ -103,11 +104,13 @@
         <script>
             swal("${errorMessage}", "", "error");
         </script>
+        <c:remove var="errorMessage" scope="session"/>
     </c:if>
     <c:if test="${!empty message}">
         <script>
             swal("${message}", "", "success");
         </script>
+        <c:remove var="message" scope="session"/>
     </c:if>
 </body>
 </html>

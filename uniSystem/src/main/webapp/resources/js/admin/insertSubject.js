@@ -413,6 +413,15 @@ const classMax = document.getElementById("classMax");
 const grade = document.getElementById("grade");
 const semester = document.getElementById("semester");
 
+className.addEventListener("focus", ()=>{
+    if(resultSet.style.display != "none"){
+
+        resultSet.style.display = "none";
+        xBtn.style.display = "none";
+        resultSet1.style.display = "none";
+    }
+})
+
 /* form태그 제출 시 */
 document.getElementById("insertFrm").addEventListener("submit", e=>{
 

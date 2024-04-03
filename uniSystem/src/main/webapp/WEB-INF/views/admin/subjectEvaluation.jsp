@@ -62,7 +62,7 @@
 			<c:choose>
                    <c:when test="${empty lateList}">
                     <tr>
-                        <th colspan="4">평가가 존재하지 않습니다.</th>
+                        <td colspan="4">평가가 존재하지 않습니다.</td>
                     </tr>
                    </c:when>
                 

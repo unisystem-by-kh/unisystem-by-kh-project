@@ -39,3 +39,13 @@
     <c:remove var="message" scope="session"/>
 
 </c:if>
+
+<c:if test="${!empty filterMessage}">
+
+    <script>
+        swal("${filterMessage}", "", "warning");
+    </script>
+
+    <c:remove var="filterMessage" scope="session"/>
+
+</c:if>
