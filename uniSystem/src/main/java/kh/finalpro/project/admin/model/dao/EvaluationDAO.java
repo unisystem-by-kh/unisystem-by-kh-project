@@ -82,7 +82,7 @@ public class EvaluationDAO {
 	/** 평가 목록 조회(교수, 검색어)
 	 * @param pagination
 	 * @param paramMap
-	 * @return lateList
+	 * @return rateList
 	 */
 	public List<Evaluation> selectRateList(Pagination pagination, Map<String, Object> paramMap) {
 		
