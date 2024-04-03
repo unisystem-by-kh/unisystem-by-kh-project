@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="pagination" value="${map.pagination}" />
-<c:set var="lateList" value="${map.lateList}"/>
+<c:set var="lateList" value="${map.rateList}"/>
 <c:set var="classList" value="${map.classList}"/>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
 			<h1>강의 평가 목록</h1>
 		</div>
 		
-		<form class="select" action="/late" id="selectForm">
+		<form class="select" action="/rate" id="selectForm">
 			<div>
 				<select value="select" id="classSelect" name="key">
 					<option value="">과목명</option>
@@ -70,26 +70,26 @@
 
                         <c:forEach var="late" items="${lateList}" >
                             <tr>
-                                <td>${late.lateNo}</td>
+                                <td>${late.rateNo}</td>
 								
                                 <td>
-									<c:if test="${late.lateLike == 5}" >
+									<c:if test="${late.rateLike == 5}" >
 										<span title="매우 만족">☺️</span>
 									</c:if>
-									<c:if test="${late.lateLike == 4}" >
+									<c:if test="${late.rateLike == 4}" >
 										<span title="만족">🙂</span>
 									</c:if>
-									<c:if test="${late.lateLike == 3}" >
+									<c:if test="${late.rateLike == 3}" >
 										<span title="보통">😐</span>
 									</c:if>
-									<c:if test="${late.lateLike == 2}" >
+									<c:if test="${late.rateLike == 2}" >
 										<span title="불만족">😕</span>
 									</c:if>
-									<c:if test="${late.lateLike == 1}" >
+									<c:if test="${late.rateLike == 1}" >
 										<span title="매우 불만족">😠</span>
 									</c:if>
 								</td>
-                                <td>${late.lateContent}</td>
+                                <td>${late.rateContent}</td>
 								<c:if test="${fn:substring(loginMember.memberNo, 0, 2) == '03'}" >
                                 	<td>${late.memberName}</td>
 								</c:if>			

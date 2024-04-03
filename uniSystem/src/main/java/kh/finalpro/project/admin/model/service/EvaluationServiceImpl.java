@@ -26,12 +26,12 @@ public class EvaluationServiceImpl implements EvaluationService{
 		
 		Pagination pagination = new Pagination(cp, listCount);
 		
-		List<Evaluation> lateList = dao.selectRateList(pagination);
+		List<Evaluation> rateList = dao.selectRateList(pagination);
 		
 		List<Evaluation> classList = dao.selectclassList();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("lateList", lateList);
+		map.put("rateList", rateList);
 		map.put("pagination", pagination);
 		map.put("classList", classList);
 		
@@ -46,13 +46,13 @@ public class EvaluationServiceImpl implements EvaluationService{
 		
 		Pagination pagination = new Pagination(cp, listCount);
 		
-		List<Evaluation> lateList = dao.selectRateList(pagination, loginMember);
+		List<Evaluation> rateList = dao.selectRateList(pagination, loginMember);
 		
 		// 교수가 가지고 있는 과목 가져오기
 		List<Evaluation> classList = dao.selectClassList(loginMember);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("lateList", lateList);
+		map.put("rateList", rateList);
 		map.put("pagination", pagination);
 		map.put("classList", classList);
 		
@@ -67,7 +67,7 @@ public class EvaluationServiceImpl implements EvaluationService{
 		
 		Pagination pagination = new Pagination(cp, listCount);
 		
-		List<Evaluation> lateList = dao.selectRateList(pagination, paramMap);
+		List<Evaluation> rateList = dao.selectRateList(pagination, paramMap);
 		
 		List<Evaluation> classList; 
 				
@@ -82,7 +82,7 @@ public class EvaluationServiceImpl implements EvaluationService{
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("lateList", lateList);
+		map.put("rateList", rateList);
 		map.put("pagination", pagination);
 		map.put("classList", classList);
 		
