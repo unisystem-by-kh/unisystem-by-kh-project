@@ -21,22 +21,22 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @WebFilter(filterName = "loginFilter",
-		   urlPatterns = {"/board/*", "/admin/*", "/main", "/tuition/*", "/professor/*", "/staff/*", "/rate", "/collegian/*"})
+urlPatterns = {"/board/*", "/admin/*", "/main", "/tuition/*", "/professor/*", "/staff/*", "/rate", "/collegian/*"})
 public class LoginFilter implements Filter{
 
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// 서버가 켜질 때, 필터 코드가 변경 되었을 때 필터가 생성됨
 		// -> 생성 시 초기화 용도로 사용하는 메소드
-//		System.out.println("--- 로그인 필터 생성 ---");
+		//		System.out.println("--- 로그인 필터 생성 ---");
 		log.info("--- 로그인 필터 생성 ---");
-		
+
 	}
 
 	public void destroy() {
 		// 필터 코드가 변경 되었을 때
 
 		// 변경 이전 필터를 파괴하는 메소드
-//		System.out.println("--- 이전 로그인 필터 파괴 ---");
+		//		System.out.println("--- 이전 로그인 필터 파괴 ---");
 		log.info("--- 이전 로그인 필터 파괴 ---");
 	}
 
@@ -49,39 +49,58 @@ public class LoginFilter implements Filter{
 
 		// 2) HttpServletRequest를 이용해서 HttpSession 얻어오기
 		HttpSession session = req.getSession();
-		
+
 		// 3) session에서 "loginMember" key를 가진 속성을 얻어와
 		//	  null인 경우 메인페이지로 redirect 시키기
-		Member loginMember = (Member)session.getAttribute("loginMember");
-		
+
+		Member loginMember = null;
+
+		if(session.getAttribute("loginMember") == null) {
+
+			session.setAttribute("filterMessage", "로그인 후 이용해주세요.");
+			resp.sendRedirect("/");
+
+		} else {
+			loginMember = (Member)session.getAttribute("loginMember");
+			
+		}
+
+
 		if(loginMember != null) {
 			
 			switch (loginMember.getMemberNo().substring(0,2)) {
 			case "01" :
 				if(req.getRequestURI().startsWith("/admin/") || req.getRequestURI().startsWith("/professor/") 
-						|| req.getRequestURI().startsWith("/professor/") || req.getRequestURI().startsWith("/professor/")) {
+						|| req.getRequestURI().startsWith("/staff/") || req.getRequestURI().startsWith("/rate")
+						|| req.getRequestURI().startsWith("/board/2/write") || req.getRequestURI().startsWith("/board/1/write")
+						|| req.getRequestURI().matches("/board/2/\\d+/update") || req.getRequestURI().matches("/board/1/\\d+/update")) {
 					session.setAttribute("filterMessage", "접근 제한이 없습니다.");
 					resp.sendRedirect("/main");
 					return;
 				}
 				break;
-
-			default:
+				
+			case "02" :
+				if(req.getRequestURI().startsWith("/collegian/") || req.getRequestURI().startsWith("/admin/") 
+						|| req.getRequestURI().startsWith("/staff") || req.getRequestURI().startsWith("/board/1/write") 
+						|| req.getRequestURI().matches("/board/1/\\d+/update")) {
+					session.setAttribute("filterMessage", "접근 제한이 없습니다.");
+					resp.sendRedirect("/main");
+					return;
+				}
+				break;
+				
+			case "03" :
+				if(req.getRequestURI().startsWith("/collegian/") || req.getRequestURI().startsWith("/professor/") 
+						|| req.getRequestURI().startsWith("/collegian/") || req.getRequestURI().startsWith("/board/2/write") 
+						|| req.getRequestURI().matches("/board/2/\\d+/update")) {
+					session.setAttribute("filterMessage", "접근 제한이 없습니다.");
+					resp.sendRedirect("/main");
+					return;
+				}
 				break;
 			}
-			
-			
-		} else {
-			session.setAttribute("filterMessage", "로그인 후 이용해주세요.");
-			resp.sendRedirect("/");
 		}
-
-		/* 응용
-				Member loginMember = (Member)session.getAttribute("loginMember");
-				if(loginMember.getAuthority() != 2) { // 관리자가 아니면 메인페이지로
-					resp.sendRedirect("/");
-				}
-		 */
 
 		// 4) 로그인 상태인 경우 다음 필터 또는
 		//	  DispatcherServlet으로 전달

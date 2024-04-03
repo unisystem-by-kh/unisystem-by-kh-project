@@ -93,7 +93,7 @@
                 <c:if test="${fn:substring(memberNo, 0, 2) == '02'}" >
                     <a href="/professor/professorPageStudentSearch" id="studentBtn">학생</a>
                     <a href="/professor/taskList" id="taskBtn">과제</a>
-                    <a href="/late" id="professorBtn">교수</a>
+                    <a href="/rate" id="professorBtn">교수</a>
                 </c:if>
 
                 <%-- 교직원 전용 --%>
