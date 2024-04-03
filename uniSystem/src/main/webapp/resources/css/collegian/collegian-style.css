@@ -94,6 +94,7 @@ main * {
 
 .stu-header {
 	border-bottom: 2px solid #ccc;
+	position: relative;
 }
 
 .stu-header h2 {
@@ -847,6 +848,38 @@ td>button {
   }
 
 
+  .refresh-area{
+	display: flex;
+	justify-content: end;
+	position: absolute;
+	right: 0;
+	top: 95px;
+  }
+
+  .refresh-area button{
+	background: none;
+	font-size: larger;
+	border: none;
+	width: 50px;
+  }
+  .refresh-area img{
+	animation-play-state: paused;
+	width: 70%;
+  }
+
+  .refresh-area img:hover{
+	animation-play-state: running;
+  }
+
+
+  #save_btn button{
+	background: none;
+	border: none;
+	color: #fff;
+	padding: 0;
+	width: 100%;
+	font-size: 15px;
+  }
 
 
 
