@@ -50,57 +50,61 @@
             </div>
 				<h4>📣 강의 평가는 제출 후 수정이 불가 합니다.</h4>
             <div class="stu-board">
-				
                 <table>
-                    <tr>
-                        <th>학년</th>
-                        <th>학기</th>
-                        <th>과목명</th>
-                        <th>분류</th>
-                        <th>학점</th>
-                        <th>담당교수</th>
-                        <th>점수</th>
-                        <th>강의 평가</th>
-                    </tr>
-
-					<c:choose>
-					   <c:when test="${!empty score}">
-					   		<c:forEach items="${score}" var="sc">
-								<c:if test="${sc.lectureGrade == loginMember.memberGrade}" >
-									<c:if test="${sc.lectureTerm == loginMember.memberTerm}" >
-										<tr>
-											<td>${sc.lectureGrade}</td>
-											<td style="display: none;">${sc.classNo}</td>
-											<td>${sc.lectureTerm}</td>
-											<td>${sc.classNm}</td>
-											<td>${sc.classType}</td>
-											<td>${sc.classPoint}</td>
-											<td>남궁성</td>
-											<td>${sc.realPoint}</td>
-											<td>
-												<c:choose>
-												<c:when test="${sc.rateFlag == 'Y'}">
-														<button>평가완료</button>
-												</c:when>
-												<c:otherwise>
-														<button onclick="submitTask(this)">제출하기</button>
-												</c:otherwise>
-												</c:choose>
-											</td>
-										</tr>
+					<thead>
+						<tr>
+							<th>학년</th>
+							<th>학기</th>
+							<th>과목명</th>
+							<th>분류</th>
+							<th>학점</th>
+							<th>담당교수</th>
+							<th>점수</th>
+							<th>강의 평가</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+						<c:when test="${!empty score}">
+								<c:forEach items="${score}" var="sc">
+									<c:if test="${sc.lectureGrade == loginMember.memberGrade}" >
+										<c:if test="${sc.lectureTerm == loginMember.memberTerm}" >
+											<tr>
+												<td>${sc.lectureGrade}</td>
+												<td style="display: none;">${sc.classNo}</td>
+												<td>${sc.lectureTerm}</td>
+												<td>${sc.classNm}</td>
+												<td>${sc.classType}</td>
+												<td>${sc.classPoint}</td>
+												<td>${sc.memberName}</td>
+												<td>${sc.realPoint}</td>
+												<td>
+													<c:choose>
+													<c:when test="${sc.rateFlag == 'Y'}">
+															<button>평가완료</button>
+													</c:when>
+													<c:otherwise>
+															<button onclick="submitTask(this)">제출하기</button>
+													</c:otherwise>
+													</c:choose>
+												</td>
+											</tr>
+										</c:if>
 									</c:if>
-								</c:if>
-							</c:forEach>
-					   </c:when>
-					   <c:otherwise>
-					   			<tr>
-									<td colspan="10">조회할 성적 목록이 존재하지 않습니다.
-									</td>
-								</tr>
-					   </c:otherwise>
-					</c:choose>
+								</c:forEach>
+						</c:when>
+						<c:otherwise>
+									<tr>
+										<td colspan="10">조회할 성적 목록이 존재하지 않습니다.
+										</td>
+									</tr>
+						</c:otherwise>
+						</c:choose>
+					</tbody>
                 </table>
             </div>
+
+			<div class="scoreCount">총 이수 학점 : <span id="count"></span>  학점 평균 : <span id="avr"></span></div>
 			
 	</main>
     <!-- 모달 -->
@@ -138,6 +142,10 @@
                 </form>
             </div>
         </div>
+
+	<script>
+		let scoreList = JSON.parse('${json}');
+	</script>
 
     <script src="/resources/js/collegian/score.js"></script>
 	<script src="/resources/js/collegian/nav.js"></script>

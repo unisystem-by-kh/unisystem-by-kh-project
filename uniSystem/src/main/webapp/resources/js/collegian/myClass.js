@@ -88,6 +88,7 @@ const deleteClass = th => {
     const row = th.parentNode.parentNode; // 선택한 tr 반환
 
     row.remove(); // 요소 삭제
+    pointCount();
 }
 
 // 신청한 수강 과목을 삭제
@@ -122,6 +123,7 @@ const deleteMyClass = th => {
 
             // 수강 목록 리프레시
             refresh();
+            pointCount();
         }
     })
 
