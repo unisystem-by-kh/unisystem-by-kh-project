@@ -1,5 +1,3 @@
-console.log('TEST');
-
 // 전체 네비게이션 영역
 const category = document.getElementsByClassName('navigation3')[0];
 
