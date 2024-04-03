@@ -256,9 +256,9 @@
 	    JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
 	    JOIN LECTURE L ON (L.CLASS_NO = A.CLASS_NO)
 	    
-	    WHERE A.DEPARTMENT_NO = #{departmentNo}
+	    <!-- WHERE A.DEPARTMENT_NO = #{departmentNo} -->
 	    
-	    AND L.LECTURE_GRADE = #{memberGrade}
+	    WHERE L.LECTURE_GRADE = #{memberGrade}
 		AND L.LECTURE_TERM = #{memberTerm}
 		
 	    AND L.MEMBER_NO = #{memberNo}
