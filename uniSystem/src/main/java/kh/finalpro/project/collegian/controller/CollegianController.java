@@ -294,7 +294,7 @@ public class CollegianController {
 			@RequestParam(value="profileImg", required =false) MultipartFile file
 			, HttpSession session) throws IllegalStateException, IOException {
 		
-		System.out.println(file);
+		// System.out.println(file);
 		
 		String webPath = "/resources/files/profileImage/";
 		String filePath = session.getServletContext().getRealPath(webPath);

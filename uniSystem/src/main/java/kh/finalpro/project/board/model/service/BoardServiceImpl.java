@@ -227,7 +227,6 @@ public class BoardServiceImpl implements BoardService{
 
 						String rename = uploadList.get(i).getBoardFileRename();
 						
-						System.out.println("++++++++++++++++++++++++++++++++ : "+rename);
 						
 						file.get(i).transferTo(new File(filePath + rename));
 						
@@ -423,7 +422,6 @@ public class BoardServiceImpl implements BoardService{
 					map.put("img", img);
 					map.put("categoryNo", board.getCategoryNo());
 					
-					System.out.println("zxclkjnczxlhkjxcznlkjqewrwiqprnioqniqn::::::::::::::::::::::" + map);
 					
 					if(!uploadList.isEmpty()) {
 						
@@ -432,7 +430,6 @@ public class BoardServiceImpl implements BoardService{
 							
 							String rename = uploadList.get(s).getBoardFileRename();
 							
-							System.out.println("lkfdjkljgfdjklfgdkljgfdfdl ::::" + rename);
 							
 							file.get(s).transferTo(new File(filePath + rename));
 							
@@ -445,9 +442,6 @@ public class BoardServiceImpl implements BoardService{
 
 					rowCount = dao.freeFileUpdate(img);
 					
-					System.out.println("123123123123213123 ::::::::::"+rowCount);
-					System.out.println("@@@@@@@@@@@@@@@@@@@@" + uploadList);
-					System.out.println("####################" + img);
 
 					if(rowCount == 0) {
 						// 수정 실패 == DB에 이미지가 없었다.
@@ -468,7 +462,6 @@ public class BoardServiceImpl implements BoardService{
 	//공지사항 게시글 상세조회
 	@Override
 	public Board noticeDetailBoard(Map<String, Object> map) {
-		System.out.println("map2 : " + map);
 		return dao.noticeDetailBoard(map);
 	}
 
@@ -558,7 +551,6 @@ public class BoardServiceImpl implements BoardService{
 
 						String rename = uploadList.get(i).getBoardFileRename();
 						
-						System.out.println("++++++++++++++++++++++++++++++++ : "+rename);
 						
 						file.get(i).transferTo(new File(filePath + rename));
 						
@@ -596,11 +588,10 @@ public class BoardServiceImpl implements BoardService{
 				// 2) DAO호출
 				int rowCount = dao.noticeBoardUpdate(board);
 
-
 				// 2. 게시글 부분이 수정 성공 했을 때
 				if(rowCount > 0) {
 
-					if(!deleteList.equals("")) { // 삭제할 이미지가 있다면
+					if(deleteList != null) { // 삭제할 이미지가 있다면
 						// 3. deleteList에 작성된 이미지 모두 삭제
 						Map<String, Object> deleteMap = new HashMap<String, Object>();
 						deleteMap.put("boardNo", board.getBoardNo());
@@ -643,7 +634,6 @@ public class BoardServiceImpl implements BoardService{
 							map.put("img", img);
 							map.put("categoryNo", board.getCategoryNo());
 							
-							System.out.println("noticeBoard::::::::::::::::::::::" + map);
 							
 							if(!uploadList.isEmpty()) {
 								
@@ -652,7 +642,6 @@ public class BoardServiceImpl implements BoardService{
 									
 									String rename = uploadList.get(s).getBoardFileRename();
 									
-									System.out.println("noticeBoard ::::" + rename);
 									
 									file.get(s).transferTo(new File(filePath + rename));
 									
@@ -665,9 +654,6 @@ public class BoardServiceImpl implements BoardService{
 
 							rowCount = dao.freeFileUpdate(img);
 							
-							System.out.println("noticeBoard ::::::::::"+rowCount);
-							System.out.println("noticeBoard" + uploadList);
-							System.out.println("noticeBoard" + img);
 
 							if(rowCount == 0) {
 								// 수정 실패 == DB에 이미지가 없었다.

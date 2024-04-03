@@ -37,7 +37,6 @@ public class ChattingController {
 		int chattingNo = service.checkChattingNo();
 		
 		if(chattingNo == 0) {
-			System.out.println(map.get("loginMemberNo"));
 			chattingNo = service.createChattingRoom(map);
 		}
 		

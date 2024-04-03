@@ -106,7 +106,7 @@ public class ProfessorDAO {
 
 	// 과제 파일 등록
 	public int uploadTask(Task task) {
-		System.out.println(task);
+//		System.out.println(task);
 		return sqlSession.insert("professorMapper.uploadTask", task);
 	}
 

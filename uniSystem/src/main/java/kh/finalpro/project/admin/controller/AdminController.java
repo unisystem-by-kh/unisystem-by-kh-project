@@ -46,7 +46,6 @@ public class AdminController {
 	@PostMapping(value ="/UniqueNo", produces="application/json; charset=UTF-8")
 	public int saveUniqueNo(@RequestBody Admin admin,
 	                           RedirectAttributes ra) {
-		System.out.println(admin);
 
 	    return adminService.saveUniqueNo(admin);
 	}
@@ -72,7 +71,6 @@ public class AdminController {
 	public int demotion(
 			@RequestBody List<Student> memberNoArr) throws Exception {
 		
-		System.out.println(memberNoArr);
 		
 		int result = adminService.demotion(memberNoArr);
 		
@@ -82,7 +80,6 @@ public class AdminController {
 	// 학생 검색
 	@GetMapping("/selectList")
 	public List<Member> selectList(@RequestBody String input) {
-		System.out.println(input);
 		return adminService.selectList(input);
 	}
 	
@@ -105,7 +102,6 @@ public class AdminController {
 	@ResponseBody
 	public int studentUpdate(@RequestBody Student memberArr) {
 		
-		System.out.println(memberArr);
 		
 		int result = adminService.studentUpdate(memberArr);
 		

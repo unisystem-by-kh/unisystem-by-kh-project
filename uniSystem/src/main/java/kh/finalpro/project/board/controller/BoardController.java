@@ -37,7 +37,6 @@ import kh.finalpro.project.board.model.dto.Pagination;
 import kh.finalpro.project.board.model.service.BoardService;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.main.model.service.EmailService;
-import kh.finalpro.project.student.model.dto.Student;
 
 @SessionAttributes({"loginMember"})
 @RequestMapping("/board")
@@ -384,7 +383,7 @@ public class BoardController {
 		board.setCategoryNo(categoryNo);
 		// 3. 업로드된 이미지 서버에 실제로 저장되는 경로 
 		// + 웹에서 요청 시 이미지를 볼 수 있는 경로 (웹 접근 경로)
-		String webPath = "/resources/files/notice/";
+		String webPath = "/resources/images/board/";
 		String filePath = session.getServletContext().getRealPath(webPath);
 
 		// 게시글 삽입 서비스 호출 후 삽입된 게시글 번호 반환 받기 
@@ -434,7 +433,6 @@ public class BoardController {
 		String webPath = "/resources/images/board/";
 		String filePath = session.getServletContext().getRealPath(webPath);
 
-		System.out.println(board);
 		// 3) 게시글 수정 서비스 호출 
 		int rowCount = service.freeBoardUpdate(board, file, webPath, filePath, deleteList);
 
@@ -520,7 +518,6 @@ public class BoardController {
 		if(board.getShoot() == 1) {
 			
 			List<Member> memberList = service.selectMemberList(loginMember);
-			System.out.println(memberList);
 			
 			emailService.emailShoot(board,memberList);
 			
@@ -569,7 +566,7 @@ public class BoardController {
 			// board(boardCode, boardNo , boardTitle, boardContent)
 
 			// 2) 이미지 웹 접근 경로, 서버 저장 경로 
-			String webPath = "/resources/files/notice/";
+			String webPath = "/resources/images/board/";
 			String filePath = session.getServletContext().getRealPath(webPath);
 
 			// 3) 게시글 수정 서비스 호출 
@@ -618,7 +615,6 @@ public class BoardController {
 		}else {
 			path += "/boardDataUpdate";
 		}
-		System.out.println(path);
 		
 		return path;
 	}
@@ -978,7 +974,6 @@ public class BoardController {
 		String path = "redirect:";
 		String message = null;
 		
-		System.out.println("@@@@@@@@@@@@@@ :: @@@@@@@@@@@@@ ::" +result);
 
 		if(result > 0) {
 			path += "/board/" + categoryNo;
@@ -1020,7 +1015,6 @@ public class BoardController {
 		if(board.getShoot() == 1) {
 			
 			List<Member> memberList = service.selectMemberList(loginMember);
-			System.out.println(memberList);
 			
 			emailService.emailShoot(board,memberList);
 			
@@ -1088,12 +1082,10 @@ public class BoardController {
 				,HttpSession session
 				,RedirectAttributes ra
 				) {
-			System.out.println("deleteNo :" + categoryNo );
 			int result = service.noticeBoardDelete(boardNo);
 			String path = "redirect:";
 			String message = null;
 			
-			System.out.println("@@@@@@@@@@@@@@ :: @@@@@@@@@@@@@ ::" +result);
 
 			if(result > 0) {
 				path += "/board/" + categoryNo;

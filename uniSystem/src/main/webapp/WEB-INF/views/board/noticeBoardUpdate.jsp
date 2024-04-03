@@ -24,7 +24,7 @@
         <div class="announcement">
             <h2>공 지 사 항</h2>
         </div>
-<form action="/board/${categoryNo}/update" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
+    <form action="/board/${categoryNo}/${boardNo}/update" method="POST" id="boardWriteFrm"  enctype="multipart/form-data">
         <div class="title">
             <p>제목</p>
             <input type="text"  name="boardTitle"  value="${board.boardTitle}">
@@ -34,7 +34,7 @@
 
             <div>작성자</div>
 				<div>${loginMember.memberName}</div>
-        </div>
+            </div>
 
         <div class="content">
             <p>내용</p>
