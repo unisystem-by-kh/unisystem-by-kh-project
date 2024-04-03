@@ -60,11 +60,11 @@
                     <form action="/collegian/updateInfo" method="post">
                         <div class="input-row">
                             성명
-                            <input type="text" value="학생일" disabled>
+                            <input type="text" value="${loginMember.memberName}" disabled>
                             학번
-                            <input type="text" value="17-73037996" disabled>
+                            <input type="text" value="${loginMember.memberNo}" disabled>
                             학과
-                            <input type="text" value="컴퓨터과학과" disabled>
+                            <input type="text" value="${loginMember.departmentName}" disabled>
                         </div>
                         <div class="input-row double">
                             번호
