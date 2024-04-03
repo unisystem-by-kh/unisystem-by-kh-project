@@ -2,12 +2,17 @@ console.log("수강신청 js 연결")
 
 // 수강 신청 목록 담기
 const addToCart = (th) => {
+    let row = th.parentNode.parentNode.cells; // 선택한 행
+    // 정원 초과 과목 return
+    if(row[9].innerText<=row[10].innerText){
+        alert("정원 초과 과목입니다.");
+        return
+    }
 
     if(document.getElementById('noneLecture') != null){
         document.getElementById('noneLecture').parentNode.remove();
     }
 
-    let row = th.parentNode.parentNode.cells;
 
     const selectClass = document.querySelector(".select-class table");
 
@@ -71,6 +76,8 @@ const addToCart = (th) => {
 
     selectClass.append(tr);
 
+    pointCount();
+
     selectClass.scrollIntoView();
 }
 
@@ -114,7 +121,7 @@ const deleteMyClass = th => {
             row.remove(); // 해당 행 삭제
 
             // 수강 목록 리프레시
-            
+            refresh();
         }
     })
 
@@ -160,6 +167,8 @@ const updateMyClass = th => {
                 console.log(row.cells[10].innerText);
 
                 row.cells[10].innerText = parseInt(row.cells[10].innerText)+1;
+
+                refresh();
 
             }else if(result>=100){
 
@@ -273,6 +282,7 @@ for (let i of selectBoxes) {
             'grade' : gradeValue,
             'step'  : stepValue,
             'type'  : typeValue,
+            'memberNo' : memberNo
         }
 
         fetch('/collegian/myClass' , {
@@ -287,37 +297,16 @@ for (let i of selectBoxes) {
             
             history.replaceState({}, null, location.pathname); // 주소의 파라미터 값 지움
             
-            document.getElementsByName("query")[0].value = '';
+            document.getElementsByName("query")[0].value = ''; // 검색어 삭제
 
             placeholer();
 
             const lecture = searchList.lecture;
 
-            const area = document.getElementById("ajax-area");
+            const area = document.querySelector(".stu-board > table tbody");
 
-            const firstTr = document.createElement("tr");
-
-            const a = document.createElement("th");
-            a.innerText = "No.";
-            const b = document.createElement("th");
-            b.innerText = "학과명";
-            const c = document.createElement("th");
-            c.innerText = "학년";
-            const d = document.createElement("th");
-            d.innerText = "학기";
-            const e = document.createElement("th");
-            e.innerText = "과목명";
-            const f = document.createElement("th");
-            f.innerText = "분류";
-            const g = document.createElement("th");
-            g.innerText = "학점";
-            const h = document.createElement("th");
-            h.innerText = "담당교수";
-
-            firstTr.append(a,b,c,d,e,f,g,h);
-
-            area.append(firstTr);
-
+            area.innerHTML = "";
+          
             if(lecture.length == 0) {
 
                 const nullTr = document.createElement("tr");
@@ -329,7 +318,7 @@ for (let i of selectBoxes) {
                 nullTd.style.textAlign ="center";
                 nullTd.style.fontSize = "17px";
 
-                nullTd.setAttribute("colspan", '8');
+                nullTd.setAttribute("colspan", '11');
 
                 nullTr.append(nullTd);
 
@@ -358,14 +347,33 @@ for (let i of selectBoxes) {
                 classTrem.innerText = i.classTerm+"학기";
                 const className = document.createElement("td");
                 className.innerText = i.className;
-                const classPoint = document.createElement("td");
-                classPoint.innerText = i.classPoint;
                 const classType = document.createElement("td");
                 classType.innerText = classTypeText;
-                const memberName = document.createElement("td");
-                memberName.innerText = i.memberName;
+                const classPoint = document.createElement("td");
+                classPoint.innerText = i.classPoint;
 
-                tr.append(classTd,departmentName,classGrade, classTrem, className, classPoint , classType , memberName);
+                const lectureFL = document.createElement("td");
+
+                let flBtn = document.createElement("button");
+                if(i.lectureFL > 0){ // 수강한 과목
+                    flBtn.innerText="신청 완료";
+                }else{
+                    flBtn.innerText="강의 담기";
+                    flBtn.setAttribute("onclick","addToCart(this)");
+                }
+                lectureFL.append(flBtn);
+
+                const classTime = document.createElement("td");
+                classTime.innerText = i.classDay+" ("+i.classStart+"교시"+" ~ "+i.classEnd+"교시)";
+
+                const max = document.createElement("td");
+                max.innerText = i.classMax;
+
+                const count = document.createElement("td");
+                count.innerText = i.lectureCount;
+
+                tr.append(classTd,departmentName,classGrade, 
+                    classTrem, className,  classType,  classPoint ,lectureFL, classTime,max,count);
                 
                 area.append(tr);
             }
@@ -411,4 +419,155 @@ const placeholer = () => {
 }
 
 placeholer();
+
+
+function refresh(){
+    const major = document.getElementsByName("major")[0];
+        const grade = document.getElementsByName("grade")[0];
+        const step = document.getElementsByName("step")[0];
+        const type = document.getElementsByName("type")[0];
+        
+
+        const majorIndex = major.selectedIndex;
+        const majorValue = major.options[majorIndex].value;
+
+        const gradeIndex = grade.selectedIndex;
+        const gradeValue = grade.options[gradeIndex].value;
+
+        const stepIndex = step.selectedIndex;
+        const stepValue = step.options[stepIndex].value;
+
+        const typeIndex = type.selectedIndex;
+        const typeValue = type.options[typeIndex].value;
+
+        const keys = {
+            'major' : majorValue,
+            'grade' : gradeValue,
+            'step'  : stepValue,
+            'type'  : typeValue,
+            'memberNo' : memberNo
+        }
+
+        fetch('/collegian/myClass' , {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(keys)
+        })
+        .then(res => res.json())
+        .then(searchList => {
+            
+            history.replaceState({}, null, location.pathname); // 주소의 파라미터 값 지움
+            
+            document.getElementsByName("query")[0].value = ''; // 검색어 삭제
+
+            placeholer();
+
+            const lecture = searchList.lecture;
+
+            const area = document.querySelector(".stu-board > table tbody");
+
+            area.innerHTML = "";
+          
+            if(lecture.length == 0) {
+
+                const nullTr = document.createElement("tr");
+
+                const nullTd = document.createElement("td");
+
+                nullTd.innerText = "과목이 존재하지 않습니다.";
+
+                nullTd.style.textAlign ="center";
+                nullTd.style.fontSize = "17px";
+
+                nullTd.setAttribute("colspan", '11');
+
+                nullTr.append(nullTd);
+
+                area.append(nullTr);
+            }
+            
+            for (const i of lecture) {
+
+                const tr = document.createElement("tr");
+
+                let classTypeText = "";
+
+                if(i.classPoint == 3) {
+                    classTypeText = '전공';
+                }else{
+                    classTypeText = '교양';
+                }
+
+                const classTd = document.createElement("td");
+                classTd.innerText = i.classNo;
+                const departmentName = document.createElement("td");
+                departmentName.innerText = i.departmentName;
+                const classGrade = document.createElement("td");
+                classGrade.innerText = i.classGrade+"학년";
+                const classTrem = document.createElement("td");
+                classTrem.innerText = i.classTerm+"학기";
+                const className = document.createElement("td");
+                className.innerText = i.className;
+                const classType = document.createElement("td");
+                classType.innerText = classTypeText;
+                const classPoint = document.createElement("td");
+                classPoint.innerText = i.classPoint;
+
+                const lectureFL = document.createElement("td");
+
+                let flBtn = document.createElement("button");
+                if(i.lectureFL > 0){ // 수강한 과목
+                    flBtn.innerText="신청 완료";
+                }else{
+                    flBtn.innerText="강의 담기";
+                    flBtn.setAttribute("onclick","addToCart(this)");
+                }
+                lectureFL.append(flBtn);
+
+                const classTime = document.createElement("td");
+                classTime.innerText = i.classDay+" ("+i.classStart+"교시"+" ~ "+i.classEnd+"교시)";
+
+                const max = document.createElement("td");
+                max.innerText = i.classMax;
+
+                const count = document.createElement("td");
+                count.innerText = i.lectureCount;
+
+                tr.append(classTd,departmentName,classGrade, 
+                    classTrem, className,  classType,  classPoint ,lectureFL, classTime,max,count);
+                
+                area.append(tr);
+            }
+
+        } )
+        .catch(err => {console.log(err)})
+}
+
+
+function pointCount(){
+     
+    let count = 0;
+
+    let selectClass = document.querySelector(".select-class table"); // 수강 신청 화면
+    
+    for(let ro = 0; ro < selectClass.rows.length ; ro++){ // 수강 신청 내역의 테이블의 tr 요소들
+
+        if(ro != 0){ // 1번째 행은 제외
+
+            count += parseInt(selectClass.rows[ro].cells[6].innerText);
+
+        }
+    }
+
+    const countArea = document.querySelector("#count-area span");
+
+    countArea.innerText = count;
+
+}
+
+window.onload = pointCount();
+
+
 

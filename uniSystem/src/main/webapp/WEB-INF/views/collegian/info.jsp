@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="profile-btn-area">
-                        <form action="/collegian/changeProfile" method="post" enctype="multipart/form-data">
+                        <form action="/collegian/changeProfile" method="post" enctype="multipart/form-data" onsubmit="return profileValidation()">
                             <label for="profile-input" class="upload-area">
                                 <input id="route" style="padding-left: 10px" placeholder="프로필 사진을 등록해주세요" disabled>
                                 <span><img src="/resources/images/collegian/upload.png"></span>

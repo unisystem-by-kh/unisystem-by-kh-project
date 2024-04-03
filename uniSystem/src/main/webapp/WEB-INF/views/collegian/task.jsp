@@ -51,7 +51,7 @@
 
 						<c:choose>
 							<c:when test="${empty map.taskList}">
-								<td colspan='7'>제출할 과제 목록이 없습니다.</td>
+								<td colspan='11'>제출할 과제 목록이 없습니다.</td>
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${map.taskList}" var="ta">

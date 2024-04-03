@@ -33,14 +33,14 @@
 					<h2>시간표 조회</h2>
 				</div>
 
-				<div class="search-area">
+				<%-- <div class="search-area">
 					<form action="">
 						<span>학과</span> <input type="text" value="${loginMember.departmentName}" readonly>
 
 						<span>학번</span> <input type="text" value="${loginMember.memberNo}" readonly>
 
 						<span>성명</span> <input type="text" value="${loginMember.memberName}" readonly> 
-						<%--  <div class="select">
+						<div class="select">
 						<select	name="grade" id="">
 							<option value="">1학년</option>
 							<option value="">2학년</option>
@@ -54,15 +54,12 @@
 							<option value="">2학기</option>
 							<option value="">전체</option>
 						</select>
-						</div> --%>
+						</div>
 
 					</form>
-				</div>
+				</div> --%>
 
 				<div class="stu-board">
-					<div class="schedule-btn-area">
-						<button id="schedule-btn">출력</button>
-					</div>
 					<div class="schedule-area">
 						<table class="schedule" id="table">
 							<thead>

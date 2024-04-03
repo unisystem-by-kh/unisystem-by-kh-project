@@ -116,7 +116,6 @@ public class CollegianController {
 	@PostMapping("/myClass")
 	@ResponseBody
 	public Map<String, Object> selectMyClass(@RequestBody Map<String, Object> paramMap) {
-		
 		return service.searchLecture(paramMap);
 	}
 	
