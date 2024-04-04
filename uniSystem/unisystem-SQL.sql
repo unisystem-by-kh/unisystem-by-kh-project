@@ -167,7 +167,7 @@ VALUES(
     '01043214321',
     'F',
     SYSDATE,
-    1,
+    2,
     1,
     'N',
     '/resources/images/background/user.png',
@@ -840,14 +840,6 @@ COMMENT ON COLUMN "CLASS_RATE"."MEMBER_NO" IS '학생:01-';
 CREATE SEQUENCE SEQ_RATE_NO NOCACHE;
 -- 과목 평가 프라이머리키
 ALTER TABLE "CLASS_RATE" ADD CONSTRAINT "PK_CLASS_RATE" PRIMARY KEY ("CLASS_RATE_NO");
-
-INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 이해하기 쉽게 강의를 해주셔서 성적을 잘 받을 수 있었습니다. 굿굿', 5, 1, '01-2412345');
-INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '관심있는 과목이라 흥미를 가지고 열심히 배웠습니다. 감사합니다!', 4, 2, '01-2412345');
-INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '베리굿~', 3, 3, '01-2412345');
-INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 지각이 잦으셔서 그럭저럭입니다...', 2, 4, '01-2412345');
-INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '과제 폭탄인 수업입니다.. 다른 학생들에게 추천은 안할거같아요', 1, 5, '01-2412345');
-
-
 -- 과목 중간 커밋
 COMMIT;
 --------------------------------------------------------------------------------
@@ -899,7 +891,6 @@ CREATE TABLE "FILEZIP" (
    "FILE_RENAME"   VARCHAR2(300)      NOT NULL,
    "FKIND_NO"   NUMBER      NOT NULL,
    "MEMBER_NO"   VARCHAR2(11)      NOT NULL,
-   "CLASS_NO"    NUMBER            NOT NULL,
    "TASK_NO"      NUMBER         NULL
 );
 -- 파일뭉치 조건 변경
@@ -913,7 +904,6 @@ COMMENT ON COLUMN "FILEZIP"."FILE_NAME" IS '파일 원본 이름';
 COMMENT ON COLUMN "FILEZIP"."FILE_RENAME" IS '파일 변경 이름';
 COMMENT ON COLUMN "FILEZIP"."FKIND_NO" IS '파일 종류 번호';
 COMMENT ON COLUMN "FILEZIP"."MEMBER_NO" IS '학생:01- / 교수:02- / 관리자:03-';
-COMMENT ON COLUMN "FILEZIP"."CLASS_NO" IS '교과목 번호';
 COMMENT ON COLUMN "FILEZIP"."TASK_NO" IS '과제 번호';
 -- 파일뭉치 시퀀스
 CREATE SEQUENCE SEQ_FILE_NO NOCACHE;
@@ -1067,11 +1057,6 @@ ALTER TABLE "FILEZIP"
 ADD CONSTRAINT "FK_MEMBER_TO_FILEZIP_1" 
 FOREIGN KEY ("MEMBER_NO")
 REFERENCES "MEMBER" ("MEMBER_NO");
--- 파일뭉치와 교과목 테이블 간의 외래키 설정
-ALTER TABLE "FILEZIP" 
-ADD CONSTRAINT "FK_CLASS_TO_FILEZIP_1" 
-FOREIGN KEY ("CLASS_NO")
-REFERENCES "CLASS" ("CLASS_NO");
 -- 파일뭉치와 과제 테이블 간의 외래키 설정
 ALTER TABLE "FILEZIP" 
 ADD CONSTRAINT "FK_TASK_TO_FILEZIP_1" 
@@ -1119,6 +1104,15 @@ INSERT INTO "CLASS" VALUES(
 INSERT INTO "CLASS" VALUES(
     SEQ_CLASS_NO.NEXTVAL,'경제관계이론', 2, 35, 1, 1, '화', 3, 4, 2, '02-2422222'
 );
+
+
+
+
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 이해하기 쉽게 강의를 해주셔서 성적을 잘 받을 수 있었습니다. 굿굿', 5, 1, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '관심있는 과목이라 흥미를 가지고 열심히 배웠습니다. 감사합니다!', 4, 2, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '베리굿~', 3, 3, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 지각이 잦으셔서 그럭저럭입니다...', 2, 4, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '과제 폭탄인 수업입니다.. 다른 학생들에게 추천은 안할거같아요', 1, 5, '01-2412345');
 
 COMMIT;
 
