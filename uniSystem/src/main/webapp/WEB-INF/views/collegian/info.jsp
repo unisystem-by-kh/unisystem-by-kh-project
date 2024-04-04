@@ -56,7 +56,7 @@
                     </div>
                </div>
 
-               <div class="input-area">
+               <div class="input-area2">
                     <form action="/collegian/updateInfo" method="post">
                         <div class="input-row">
                             성명
@@ -130,6 +130,7 @@
         </div>
 			
 		</div>
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 			
 	</main>
 	<script src="/resources/js/collegian/nav.js"></script>

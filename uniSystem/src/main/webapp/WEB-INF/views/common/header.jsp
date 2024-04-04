@@ -127,7 +127,7 @@
                 <div class="navigation3-student" id="certificateList">
                     <a href="/collegian/certificate/1">학적 증명서</a>
                     <a href="/collegian/certificate/2">성적 증명서</a>
-                    <a href="/collegian/certificate/2">미지정</a>
+                    <%-- <a href="/collegian/certificate/2">미지정</a> --%>
                     <a href="/collegian/certificate/4">학생증</a>
                 </div>
 

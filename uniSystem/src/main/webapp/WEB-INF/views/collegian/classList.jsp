@@ -149,10 +149,13 @@
         </div>
 	 	
 	 	</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
         
     </main>
 	<script>
-		
+		let memberGrade2 = "${loginMember.memberGrade}";
+		let memberTerm2 = "${loginMember.memberTerm}";
+
 	</script>
 	<script src="/resources/js/collegian/collegian.js"></script>
 	<script src="/resources/js/collegian/nav.js"></script>
