@@ -28,7 +28,7 @@
             <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
                 <div class="navigation1-row2-professor">
                     <%-- a태그 href에 마이페이지 경로 넣기 --%>
-                    <div>${loginMember.departmentName} <a href="#">${loginMember.memberName} </a> 학생</div>
+                    <div>${loginMember.departmentName} <a href="/collegian/info">${loginMember.memberName} </a> 학생</div>
                     <div class="quickMenu">
                         <div id="quickMenu-easy"><a href="/logout">로그아웃</a></div>
                     </div>
