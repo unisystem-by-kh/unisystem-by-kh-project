@@ -204,7 +204,7 @@ VALUES(
     1,
     'N',
     '/resources/images/background/user.png',
-    '201011-1234567',
+    '991011-1234567',
     1
 );
 -- 1번학과 학생 샘플데이터 3
@@ -303,7 +303,7 @@ VALUES(
     1,
     'N',
     '/resources/images/background/user.png',
-    '871230-1234567',
+    '601230-1234567',
     3
 );
 -- 1번학과 학생 샘플데이터 4
@@ -336,7 +336,7 @@ VALUES(
     2,
     'N',
     '/resources/images/background/user.png',
-    '871230-1234567',
+    '931230-1234567',
     1
 );
 -- 1번학과 학생 샘플데이터 1
@@ -369,7 +369,7 @@ VALUES(
     2,
     'N',
     '/resources/images/background/user.png',
-    '871230-1234567',
+    '941230-1234567',
     1
 );
 -- 1번학과 학생 샘플데이터 1
@@ -402,7 +402,7 @@ VALUES(
     1,
     'N',
     '/resources/images/background/user.png',
-    '871230-1234567',
+    '901230-1234567',
     1
 );
 --------------------------------------------------------------------------------
@@ -880,10 +880,6 @@ INSERT INTO FILEZIP_CATEGORY VALUES(2,'증명서A');
 INSERT INTO FILEZIP_CATEGORY VALUES(3,'증명서B');
 INSERT INTO FILEZIP_CATEGORY VALUES(4,'증명서C');
 INSERT INTO FILEZIP_CATEGORY VALUES(5,'과제');
--- 파일뭉치
-ALTER TABLE FILEZIP MODIFY (FILE_NAME VARCHAR2(2000));
-ALTER TABLE FILEZIP MODIFY (FILE_RENAME VARCHAR2(2000));
-ALTER TABLE FILEZIP MODIFY (FILE_PATH VARCHAR2(1000));
 -- 파일뭉치 카테고리 중간 커밋
 COMMIT;
 --------------------------------------------------------------------------------
@@ -898,6 +894,10 @@ CREATE TABLE "FILEZIP" (
    "CLASS_NO"    NUMBER            NOT NULL,
    "TASK_NO"      NUMBER         NULL
 );
+-- 파일뭉치 조건 변경
+ALTER TABLE FILEZIP MODIFY (FILE_NAME VARCHAR2(2000));
+ALTER TABLE FILEZIP MODIFY (FILE_RENAME VARCHAR2(2000));
+ALTER TABLE FILEZIP MODIFY (FILE_PATH VARCHAR2(1000));
 -- 파일뭉치 코멘트 생성
 COMMENT ON COLUMN "FILEZIP"."FILE_NO" IS '파일 번호(시퀀스)';
 COMMENT ON COLUMN "FILEZIP"."FILE_PATH" IS '파일 경로';
@@ -1103,6 +1103,13 @@ INSERT INTO "CLASS" VALUES(
 );
 INSERT INTO "CLASS" VALUES(
     SEQ_CLASS_NO.NEXTVAL,'REACT', 3, 29, 1, 1, '월', 5, 8, 1, '02-2412345'
+);
+
+INSERT INTO "CLASS" VALUES(
+    SEQ_CLASS_NO.NEXTVAL,'경제학개론', 3, 45, 1, 1, '월', 1, 2, 2, '02-2422222'
+);
+INSERT INTO "CLASS" VALUES(
+    SEQ_CLASS_NO.NEXTVAL,'경제관계이론', 2, 35, 1, 1, '화', 3, 4, 2, '02-2422222'
 );
 
 COMMIT;
