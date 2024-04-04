@@ -40,5 +40,8 @@ public class Member {
 	
 	private int classNo; // 수강과목번호
 	private String classNm; // 수강과목이름
+	private int classGrade; // 수강과목이름
+	private int classTerm; // 수강과목이름
+	private int classPoint; // 수강과목이름
 
 }
