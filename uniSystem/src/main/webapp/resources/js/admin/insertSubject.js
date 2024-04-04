@@ -263,7 +263,9 @@ checkTime.addEventListener("click", () =>{
                 // 시간표에 수업 추가
                 timetable.style.display = "block";
                 displayClassSchedule(classList);
-            } 
+            }else{
+                timetable.style.display = "none";
+            }
                 
         })
         .catch( e=> console.log(e))

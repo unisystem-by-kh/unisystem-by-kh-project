@@ -153,12 +153,12 @@
         
                 <div class="form-group">
                     <label for="classPoint">강의 학점</label>
-                    <input type="text" id="classPoint" name="classPoint" placeholder="전공:3 교양:2">
+                    <input type="text" id="classPoint" name="classPoint" placeholder="전공:3 교양:2" maxlength="1">
                 </div>
         
                 <div class="form-group">
                     <label for="classMax">수강 정원</label>
-                    <input type="text" id="classMax" name="classMax" placeholder="최대 수강 인원을 입력해주세요.">
+                    <input type="text" id="classMax" name="classMax" maxlength="3" placeholder="최대 수강 인원을 입력해주세요.">
                 </div>
         
         
@@ -194,8 +194,8 @@
         
                 <div class="form-group" id="classTime-area">
                     <label for="classTime">강의 시간</label>
-                    <input type="text" id="classStart" name="classStart" placeholder="시작">교시
-                    <input type="text" id="classEnd" name="classEnd" placeholder="마치는">교시
+                    <input type="text" id="classStart" name="classStart" placeholder="시작" maxlength="1">교시
+                    <input type="text" id="classEnd" name="classEnd" placeholder="마치는" maxlength="1">교시
                     <button type="button" id="checkTime">시간 체크</button>
                 </div>
 

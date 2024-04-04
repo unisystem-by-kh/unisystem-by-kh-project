@@ -104,10 +104,10 @@
 		<div class="pagi">
 			<ul class="pagination">
                     <!-- 첫 페이지로 이동 -->
-                    <li><a href="/late?cp=1">&lt;&lt;</a></li>
+                    <li><a href="/rate?cp=1">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a href="/late?cp=${pagination.prevPage}">&lt;</a></li>
+                    <li><a href="/rate?cp=${pagination.prevPage}">&lt;</a></li>
 
                     <!-- 특정 페이지로 이동 -->
                     <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
@@ -119,17 +119,17 @@
 
                             <c:otherwise>
                                 <!-- 현재 페이지를 제외한 나머지 -->
-                                <li><a href="/late?cp=${i}">${i}</a></li>
+                                <li><a href="/rate?cp=${i}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
 
                     </c:forEach>
                     
                     <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a href="/late?cp=${pagination.nextPage}">&gt;</a></li>
+                    <li><a href="/rate?cp=${pagination.nextPage}">&gt;</a></li>
 
                     <!-- 끝 페이지로 이동 -->
-                    <li><a href="/late?cp=${pagination.maxPage}">&gt;&gt;</a></li>
+                    <li><a href="/rate?cp=${pagination.maxPage}">&gt;&gt;</a></li>
                 </ul>
 		</div>
 

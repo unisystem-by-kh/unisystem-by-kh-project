@@ -741,6 +741,14 @@ COMMENT ON COLUMN "CLASS_RATE"."MEMBER_NO" IS '학생:01-';
 CREATE SEQUENCE SEQ_RATE_NO NOCACHE;
 -- 과목 평가 프라이머리키
 ALTER TABLE "CLASS_RATE" ADD CONSTRAINT "PK_CLASS_RATE" PRIMARY KEY ("CLASS_RATE_NO");
+
+INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 이해하기 쉽게 강의를 해주셔서 성적을 잘 받을 수 있었습니다. 굿굿', 5, 1, '01-2412345');
+INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '관심있는 과목이라 흥미를 가지고 열심히 배웠습니다. 감사합니다!', 4, 2, '01-2412345');
+INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '베리굿~', 3, 3, '01-2412345');
+INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 지각이 잦으셔서 그럭저럭입니다...', 2, 4, '01-2412345');
+INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '과제 폭탄인 수업입니다.. 다른 학생들에게 추천은 안할거같아요', 1, 5, '01-2412345');
+
+
 -- 과목 중간 커밋
 COMMIT;
 --------------------------------------------------------------------------------
