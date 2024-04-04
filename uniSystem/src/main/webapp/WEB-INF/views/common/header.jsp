@@ -17,11 +17,8 @@
             <!-- 공통 -->
             <div class="navigation1-row1">
                 <a href="/comeMap">오시는길</a>
-                <a href="/board/1">공지사항</a>
+                
                 <a href="/board/5">자료실</a>
-
-                <%-- 테스트용으로 삭제 예정 --%>
-                <a href="/admin/selectStudentList">테스트용 교직원 학생 조회</a>
             </div>
 
             <%-- 로그인 헤더 조건 변수 선언 --%>
@@ -31,7 +28,7 @@
             <c:if test="${fn:substring(memberNo, 0, 2) == '01'}" >
                 <div class="navigation1-row2-professor">
                     <%-- a태그 href에 마이페이지 경로 넣기 --%>
-                    <div>${loginMember.departmentName} <a href="#">${loginMember.memberName} </a> 학생</div>
+                    <div>${loginMember.departmentName} <a href="/collegian/info">${loginMember.memberName} </a> 학생</div>
                     <div class="quickMenu">
                         <div id="quickMenu-easy"><a href="/logout">로그아웃</a></div>
                     </div>
@@ -93,7 +90,7 @@
                 <c:if test="${fn:substring(memberNo, 0, 2) == '02'}" >
                     <a href="/professor/professorPageStudentSearch" id="studentBtn">학생</a>
                     <a href="/professor/taskList" id="taskBtn">과제</a>
-                    <a href="/late" id="professorBtn">교수</a>
+                    <a href="/rate" id="professorBtn">교수</a>
                 </c:if>
 
                 <%-- 교직원 전용 --%>
@@ -110,7 +107,7 @@
 
             <%-- 소식은 고정 노출 --%>
             <div class="navigation3-home" id="newsList">
-                <a href="#">학사일정</a>
+                <a href="/board/1">공지사항</a>
                 <a href="/board/2">학과공지</a>
                 <a href="/board/3">자유게시판</a>
                 <a href="/board/4">1:1문의</a>
@@ -130,7 +127,7 @@
                 <div class="navigation3-student" id="certificateList">
                     <a href="/collegian/certificate/1">학적 증명서</a>
                     <a href="/collegian/certificate/2">성적 증명서</a>
-                    <a href="/collegian/certificate/2">미지정</a>
+                    <%-- <a href="/collegian/certificate/2">미지정</a> --%>
                     <a href="/collegian/certificate/4">학생증</a>
                 </div>
 
@@ -174,9 +171,9 @@
                 <div class="navigation3-admin" id="selectList">
                     
                     <a href="/admin/selectStudentList">학생 조회</a>
-                    <a href="/professor/professorPageStudentGrade">학생(성적) 조회</a>
-                    <a href="/professor/professorPageStudentGradeInsert">교수 조회</a>
-                    <a href="/professor/professorPageStudentGradeUpdate">교직원 조회</a>
+                    <a href="/admin/searchStudentGrade">학생(성적) 조회</a>
+                    <a href="#">교수 조회</a>
+                    <a href="#">교직원 조회</a>
                     <a href="/rate">교수 평가 조회</a>
                 </div>
 

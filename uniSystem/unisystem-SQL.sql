@@ -167,7 +167,7 @@ VALUES(
     '01043214321',
     'F',
     SYSDATE,
-    1,
+    2,
     1,
     'N',
     '/resources/images/background/user.png',
@@ -204,7 +204,7 @@ VALUES(
     1,
     'N',
     '/resources/images/background/user.png',
-    '201011-1234567',
+    '991011-1234567',
     1
 );
 -- 1번학과 학생 샘플데이터 3
@@ -303,8 +303,107 @@ VALUES(
     1,
     'N',
     '/resources/images/background/user.png',
-    '871230-1234567',
+    '601230-1234567',
     3
+);
+-- 1번학과 학생 샘플데이터 4
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412312',
+    'pass12',
+    '십이번학생',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example10@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    1,
+    2,
+    'N',
+    '/resources/images/background/user.png',
+    '931230-1234567',
+    1
+);
+-- 1번학과 학생 샘플데이터 1
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412310',
+    'pass10',
+    '십번학생',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example10@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    2,
+    2,
+    'N',
+    '/resources/images/background/user.png',
+    '941230-1234567',
+    1
+);
+-- 1번학과 학생 샘플데이터 1
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412311',
+    'pass11',
+    '십일번학생',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example10@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    4,
+    1,
+    'N',
+    '/resources/images/background/user.png',
+    '901230-1234567',
+    1
 );
 --------------------------------------------------------------------------------
 -- 교수 샘플데이터
@@ -792,9 +891,12 @@ CREATE TABLE "FILEZIP" (
    "FILE_RENAME"   VARCHAR2(300)      NOT NULL,
    "FKIND_NO"   NUMBER      NOT NULL,
    "MEMBER_NO"   VARCHAR2(11)      NOT NULL,
-   "CLASS_NO"    NUMBER            NOT NULL,
-   "TASK_NO"      NUMBER         NOT NULL
+   "TASK_NO"      NUMBER         NULL
 );
+-- 파일뭉치 조건 변경
+ALTER TABLE FILEZIP MODIFY (FILE_NAME VARCHAR2(2000));
+ALTER TABLE FILEZIP MODIFY (FILE_RENAME VARCHAR2(2000));
+ALTER TABLE FILEZIP MODIFY (FILE_PATH VARCHAR2(1000));
 -- 파일뭉치 코멘트 생성
 COMMENT ON COLUMN "FILEZIP"."FILE_NO" IS '파일 번호(시퀀스)';
 COMMENT ON COLUMN "FILEZIP"."FILE_PATH" IS '파일 경로';
@@ -802,7 +904,6 @@ COMMENT ON COLUMN "FILEZIP"."FILE_NAME" IS '파일 원본 이름';
 COMMENT ON COLUMN "FILEZIP"."FILE_RENAME" IS '파일 변경 이름';
 COMMENT ON COLUMN "FILEZIP"."FKIND_NO" IS '파일 종류 번호';
 COMMENT ON COLUMN "FILEZIP"."MEMBER_NO" IS '학생:01- / 교수:02- / 관리자:03-';
-COMMENT ON COLUMN "FILEZIP"."CLASS_NO" IS '교과목 번호';
 COMMENT ON COLUMN "FILEZIP"."TASK_NO" IS '과제 번호';
 -- 파일뭉치 시퀀스
 CREATE SEQUENCE SEQ_FILE_NO NOCACHE;
@@ -956,11 +1057,6 @@ ALTER TABLE "FILEZIP"
 ADD CONSTRAINT "FK_MEMBER_TO_FILEZIP_1" 
 FOREIGN KEY ("MEMBER_NO")
 REFERENCES "MEMBER" ("MEMBER_NO");
--- 파일뭉치와 교과목 테이블 간의 외래키 설정
-ALTER TABLE "FILEZIP" 
-ADD CONSTRAINT "FK_CLASS_TO_FILEZIP_1" 
-FOREIGN KEY ("CLASS_NO")
-REFERENCES "CLASS" ("CLASS_NO");
 -- 파일뭉치와 과제 테이블 간의 외래키 설정
 ALTER TABLE "FILEZIP" 
 ADD CONSTRAINT "FK_TASK_TO_FILEZIP_1" 
@@ -1001,6 +1097,22 @@ INSERT INTO "CLASS" VALUES(
 INSERT INTO "CLASS" VALUES(
     SEQ_CLASS_NO.NEXTVAL,'REACT', 3, 29, 1, 1, '월', 5, 8, 1, '02-2412345'
 );
+
+INSERT INTO "CLASS" VALUES(
+    SEQ_CLASS_NO.NEXTVAL,'경제학개론', 3, 45, 1, 1, '월', 1, 2, 2, '02-2422222'
+);
+INSERT INTO "CLASS" VALUES(
+    SEQ_CLASS_NO.NEXTVAL,'경제관계이론', 2, 35, 1, 1, '화', 3, 4, 2, '02-2422222'
+);
+
+
+
+
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 이해하기 쉽게 강의를 해주셔서 성적을 잘 받을 수 있었습니다. 굿굿', 5, 1, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '관심있는 과목이라 흥미를 가지고 열심히 배웠습니다. 감사합니다!', 4, 2, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '베리굿~', 3, 3, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '교수님이 지각이 잦으셔서 그럭저럭입니다...', 2, 4, '01-2412345');
+-- INSERT INTO CLASS_RATE VALUES(SEQ_RATE_NO.NEXTVAL, '과제 폭탄인 수업입니다.. 다른 학생들에게 추천은 안할거같아요', 1, 5, '01-2412345');
 
 COMMIT;
 

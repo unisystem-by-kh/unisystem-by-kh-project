@@ -70,18 +70,12 @@ public class CollegianDAO {
 
 	public List<Class> selectLecture(Member mem) {
 		
-//		// 1) offset 계산
-//		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-//
-//		// 2) RowBounds 객체 생성
-//		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		
 		return sqlSession.selectList("collegianMapper.selectLecture",mem);
 	}
 
 	public List<Class> searchLecture( Map<String, Object> paramMap) {
 		
-		return null;
+		return sqlSession.selectList("collegianMapper.selectLecture_search", paramMap);
 	}
 
 	public int insertMyClass(Map<String, Object> map) {
@@ -132,6 +126,26 @@ public class CollegianDAO {
 
 	public List<Lecture> selectScore(Member loginMember) {
 		return sqlSession.selectList("collegianMapper.selectScore",loginMember);
+	}
+
+	public int changeProfile(Member loginMember) {
+		return sqlSession.update("collegianMapper.changeProfile",loginMember);
+	}
+
+	public int deleteProfile(Member loginMember) {
+		return sqlSession.update("collegianMapper.deleteProfile",loginMember);
+	}
+
+	public int updateInfo(Member inputMember) {
+		return sqlSession.update("collegianMapper.updateInfo",inputMember);
+	}
+
+	public String selectClassName(String string) {
+		return sqlSession.selectOne("collegianMapper.selectClassName",string);
+	}
+
+	public int insertRate(Map<String, Object> map) {
+		return sqlSession.insert("collegianMapper.insertRate",map);
 	}
 	
 

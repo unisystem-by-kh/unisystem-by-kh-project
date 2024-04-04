@@ -1,4 +1,3 @@
-
 // 게시글 삭제
 if(document.getElementById("deleteBtn") != null){
     

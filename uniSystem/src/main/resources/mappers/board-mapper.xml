@@ -420,18 +420,28 @@
 
 	<!-- 공지사항 상세페이지 -->
 	<select id="noticeDetailBoard" resultMap="board_rm">
-		SELECT BOARD_TITLE,
-		MEMBER_NAME, BOARD_CONTENT, TO_CHAR(BOARD_C_DATE, 'YYYY-MM-DD') AS
-		BOARD_C_DATE, BOARD_COUNT
-		FROM BOARD
+		SELECT BOARD_NO,
+		BOARD_TITLE,
+		BOARD_CONTENT, CATEGORY_NO,
+		BOARD_COUNT, MEMBER_NAME,
+		MEMBER_NO, 
+		TO_CHAR(BOARD_C_DATE, 'YYYY"년" MM"월" DD"일"
+		') AS BOARD_C_DATE,
+		TO_CHAR(BOARD_U_DATE, 'YYYY"년" MM"월" DD"일" ') AS
+		BOARD_U_DATE,
+		(SELECT COUNT(*) FROM "REPLY" R
+		WHERE R.BOARD_NO = B.BOARD_NO
+		AND R.REPLY_ST = 'N') REPLY_COUNT
+		FROM BOARD B
 		JOIN MEMBER USING(MEMBER_NO)
-		WHERE
-		BOARD_ST = 'N'
-		AND BOARD_NO = #{boardNo}
+		WHERE (BOARD_ST = 'N' OR BOARD_ST
+		= 'D')
+		AND CATEGORY_NO = ${categoryNo}
+		AND BOARD_NO = ${boardNo}
 	</select>
 
 	<!-- 공지사항 작성 페이지 -->
-	<insert id="noticeBoardWrite" parameterType="Board"
+	<insert id="noticeboardInsert" parameterType="Board"
 		useGeneratedKeys="true">
 		<selectKey order="BEFORE" resultType="_int"
 			keyProperty="boardNo">
@@ -450,7 +460,7 @@
 	</insert>
 
 	<!-- 공지사항 파일업로드 -->
-	<insert id="uploadList">
+	<insert id="noticeBoardFile" parameterType="list">
 		INSERT INTO BOARD_FILE
 		SELECT SEQ_FILE_NO.NEXTVAL, A.*
 		FROM (
@@ -462,6 +472,7 @@
 			#{file.boardFileRename} BOARD_FILE_RENAME,
 
 			#{file.boardFileCategoryNo} CATEGORY_NO,
+			
 
 			#{file.boardNo} BOARD_NO
 			FROM DUAL
@@ -470,10 +481,41 @@
 		) A
 	</insert>
 
+	<!-- 공지사항 수정 -->
+	<update id="updateNoticeBoardList">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent},
+		BOARD_U_DATE = SYSDATE
+		WHERE BOARD_NO = #{boardNo}
+		AND CATEGORY_NO =
+		#{categoryNo}
+	</update>
 
+	<!-- 공지사항 파일 삭제 -->
+	<delete id="noticeFileDelete">
+		DELETE FROM BOARD_FILE
+		WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
+	
+	<!-- 공지사항 게시글 삭제 -->
+	<update id="noticeBoardDelete">
+		UPDATE BOARD SET BOARD_ST = 'Y'
+		WHERE BOARD_NO =
+		#{boardNo}
+	</update>
 
-
-
+ 	<!--공지사항 파일 수정  -->
+	<update id="noticeFileUpdate">
+		UPDATE BOARD_FILE SET BOARD_FILE_PATH =
+		#{boardFilePath}
+		,BOARD_FILE_ORIGINAL = #{boardFileOriginal}
+		,BOARD_FILE_RENAME = #{boardFileRename}
+		WHERE BOARD_NO = #{boardNo}
+		AND
+		BOARD_FILE_CATEGORY_NO = 1
+	</update>
 
 
 

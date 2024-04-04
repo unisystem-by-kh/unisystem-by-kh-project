@@ -48,6 +48,12 @@ memberNo.addEventListener("input" , () => {
 
 noBtn.addEventListener("click" , (e) => {
 
+    console.log(memberNo.value);
+
+    if((memberNo.value).substring(0,2) == '03'){
+        checkObj.memberCk = true;
+        return;
+    }
     fetch("/selectInfo?number=" + memberNo.value)
     .then(response => response.text()) // 응답객체 -> 파싱(parsing, 데이터 형태 변환)
     .then(result => {

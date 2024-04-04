@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kh.finalpro.project.admin.model.dto.Subject;
 import kh.finalpro.project.board.model.dto.Board;
 import kh.finalpro.project.board.model.service.BoardService;
+import kh.finalpro.project.collegian.model.dto.Class;
+import kh.finalpro.project.collegian.model.service.CollegianService;
 import kh.finalpro.project.main.model.dto.Member;
 import kh.finalpro.project.main.model.service.MemberService;
 
@@ -35,6 +38,9 @@ public class MainController {
 	
 	@Autowired
 	private BoardService serviceBoard;
+	
+	@Autowired
+	private CollegianService serviceC;
 
 	// 첫화면 (로그인 페이지)
 	@GetMapping("/")
@@ -45,14 +51,16 @@ public class MainController {
 	
 	// 메인 페이지 이동
 	@GetMapping("/main")
-	public String main(Model model) {
+	public String main(Model model, @SessionAttribute Member loginMember) {
 		
 		
 			List<Board> board = serviceBoard.selectMainBoard();
 			
 			model.addAttribute("board", board);
-		
-		
+			
+			List<Class> myClassList = serviceC.selectMyClasses(loginMember);
+			
+			model.addAttribute("myClassList", myClassList);
 		
 		return "common/main";
 	}
@@ -86,7 +94,7 @@ public class MainController {
 			
 		}else { //가입 실패
 			path += "/member/signUp"; // 회원가입페이지로 이동
-			ra.addFlashAttribute("message", "회원가입을 실패했습니다.");
+			ra.addFlashAttribute("errorMessage", "회원가입을 실패했습니다.");
 		}
 		
 		return "redirect:/";
@@ -126,7 +134,7 @@ public class MainController {
 
 		}else {
 			path += "redirect:/";
-			ra.addFlashAttribute("message", "학번 또는 비밀번호가 일치하지 않습니다.");
+			ra.addFlashAttribute("errorMessage", "학번 또는 비밀번호가 일치하지 않습니다.");
 		}
 
 

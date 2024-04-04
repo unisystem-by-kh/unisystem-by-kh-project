@@ -67,6 +67,7 @@
 		<result property="lectureTerm" column="LECTURE_TERM" />
 		<result property="realPoint" column="REAL_POINT" />
 		<result property="rateFlag" column="RATE_FL" />
+		<result property="memberName" column="MEMBER_NAME" />
 	
 	</resultMap>
 	
@@ -160,13 +161,19 @@
 		
 	</select>
 	
+	
+	
+	
 	<select id="selectDepartmentList" resultMap="department_rm">
 		SELECT DEPARTMENT_NO , DEPARTMENT_NAME
 		FROM DEPARTMENT
 		ORDER BY 1
 	</select>
 	
-	<!-- 수강 신청 조회  -->
+	
+	
+	
+	<!-- 수강 신청시 과목 조회  -->
 	<select id="selectLecture" resultMap="class_rm">
 	SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM,
 		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,CLASS_MAX,
@@ -188,6 +195,49 @@
 		
 	</select>
 	
+	<!-- 수강 신청 비동기 과목 조회  -->
+	<select id="selectLecture_search" resultMap="class_rm">
+		SELECT CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM,
+		CLASS_DAY, CLASS_START, CLASS_END, DEPARTMENT_NAME, MEMBER_NAME,CLASS_MAX,
+        (SELECT COUNT(*) FROM LECTURE Z
+            WHERE A.CLASS_NO = Z.CLASS_NO) LECTURE_COUNT,
+		(SELECT COUNT(*) FROM LECTURE R
+			WHERE R.MEMBER_NO = #{memberNo}
+			AND R.CLASS_NO = A.CLASS_NO) LECTURE_FL
+		FROM CLASS A
+		JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+		JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
+		
+		WHERE CLASS_NM IS NOT NULL
+		
+		<choose>
+			<when test='major != "0"'>
+				AND A.DEPARTMENT_NO = #{major}
+			</when>
+		</choose>
+
+		<if test='grade != "0"'>
+			AND CLASS_GRADE = #{grade}
+		</if>
+
+		<if test='step != "0"'>
+			AND CLASS_TERM = #{step}
+		</if>
+
+		<if test='type != "0"'>
+			AND CLASS_POINT = #{type}
+		</if>
+		
+		<if test='query != null'>
+			AND CLASS_NM LIKE '%${query}%'
+		</if>
+		ORDER BY 1	
+		
+	</select>
+	
+	
+	
+	
 	<insert id="insertMyClass" parameterType="map">
 		INSERT INTO LECTURE VALUES( #{classNo} , #{memberNo} , DEFAULT ,
 		 	(SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo}) ,
@@ -206,9 +256,9 @@
 	    JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
 	    JOIN LECTURE L ON (L.CLASS_NO = A.CLASS_NO)
 	    
-	    WHERE A.DEPARTMENT_NO = #{departmentNo}
+	    <!-- WHERE A.DEPARTMENT_NO = #{departmentNo} -->
 	    
-	    AND L.LECTURE_GRADE = #{memberGrade}
+	    WHERE L.LECTURE_GRADE = #{memberGrade}
 		AND L.LECTURE_TERM = #{memberTerm}
 		
 	    AND L.MEMBER_NO = #{memberNo}
@@ -239,7 +289,7 @@
 	</select>
 	
 	<select id="selectTaskList" resultMap="class_rm">
-		SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, DEPARTMENT_NAME, C.MEMBER_NAME, 
+		<!-- SELECT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, DEPARTMENT_NAME, C.MEMBER_NAME, 
         TASK_ROUTE, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, T.TASK_NO ,
         F.FILE_PATH||F.FILE_RENAME AS FILE_PATH, FILE_NAME     
 	    FROM CLASS A
@@ -250,15 +300,37 @@
         
         LEFT JOIN FILEZIP F ON (T.TASK_NO = F.TASK_NO)
 	    
-	    WHERE A.DEPARTMENT_NO = (SELECT DEPARTMENT_NO FROM MEMBER WHERE MEMBER_NO = #{memberNo})
-	    
-	    AND L.LECTURE_GRADE = (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+	    WHERE L.LECTURE_GRADE = (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo})
 		AND L.LECTURE_TERM = (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo})
 		AND L.MEMBER_NO = #{memberNo}
 	    
         AND T.TASK_NO IS NOT NULL
                 
-	    ORDER BY 1
+	    ORDER BY 1 -->
+	    
+	  SELECT DISTINCT A.CLASS_NO, CLASS_NM, CLASS_POINT, CLASS_GRADE, CLASS_TERM, DEPARTMENT_NAME, C.MEMBER_NAME, 
+		    (SELECT FILE_PATH||FILE_RENAME FROM FILEZIP Z WHERE Z.MEMBER_NO LIKE '02-%'
+		    AND Z.TASK_NO = (SELECT TASK_NO FROM TASK K WHERE A.CLASS_NO = K.CLASS_NO)
+		    AND ROWNUM = 1)AS TASK_ROUTE
+		, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, T.TASK_NO ,
+		(SELECT FILE_PATH||FILE_RENAME FROM FILEZIP Z WHERE Z.MEMBER_NO LIKE #{memberNo}
+		    AND Z.TASK_NO = (SELECT TASK_NO FROM TASK K WHERE A.CLASS_NO = K.CLASS_NO)
+		    AND ROWNUM = 1)
+		AS FILE_PATH, 
+		(SELECT FILE_NAME FROM FILEZIP Z WHERE Z.MEMBER_NO LIKE #{memberNo}
+		    AND Z.TASK_NO = (SELECT TASK_NO FROM TASK K WHERE A.CLASS_NO = K.CLASS_NO)
+		    AND ROWNUM = 1)
+		AS FILE_NAME     
+		FROM CLASS A
+		JOIN DEPARTMENT B ON ( A.DEPARTMENT_NO = B.DEPARTMENT_NO)
+		JOIN MEMBER C ON (C.MEMBER_NO = A.MEMBER_NO)
+		JOIN LECTURE L ON (L.CLASS_NO = A.CLASS_NO)
+		JOIN TASK T ON (T.CLASS_NO = A.CLASS_NO)
+		LEFT JOIN FILEZIP F ON (T.TASK_NO = F.TASK_NO)
+		
+		WHERE L.LECTURE_GRADE = (SELECT MEMBER_GRADE FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		AND L.LECTURE_TERM = (SELECT MEMBER_TERM FROM MEMBER WHERE MEMBER_NO = #{memberNo})
+		AND L.MEMBER_NO = #{memberNo}
 	
 	</select>
 	
@@ -294,8 +366,7 @@
 
 	<!-- 성적 조회 -->
 	<select id="selectScore" 	resultMap="lecture_rm">
-
-		SELECT LECTURE_GRADE,LECTURE_TERM,CLASS_NM,CLASS_POINT,LECTURE_POINT,
+		SELECT DISTINCT LECTURE_GRADE,LECTURE_TERM,CLASS_NM,CLASS_POINT,LECTURE_POINT,
 			(CASE CLASS_POINT
 				WHEN 3 THEN '전공'
 				ELSE '교양'
@@ -311,12 +382,15 @@
 			ELSE 'NONE'
 			END
 		) AS REAL_POINT
-		,(CASE  WHEN CLASS_RATE_NO IS NOT NULL  THEN 'Y' ELSE 'N'  END) AS RATE_FL
-		
+		,(CASE  WHEN (SELECT CLASS_RATE_NO FROM CLASS_RATE R WHERE R.CLASS_NO = C.CLASS_NO) IS NOT NULL  THEN 'Y' ELSE 'N'  END) AS RATE_FL
+		, C.CLASS_NO AS CLASS_NO
+		, MEMBER_NAME
 		FROM LECTURE L
 		JOIN CLASS C ON (L.CLASS_NO = C.CLASS_NO)
+		JOIN MEMBER M ON (M.MEMBER_NO = C.MEMBER_NO)
 		LEFT JOIN CLASS_RATE R ON (L.MEMBER_NO = R.MEMBER_NO)
 		WHERE L.MEMBER_NO = #{memberNo}
+		ORDER BY CLASS_NO
 	</select>
 	
 	<!-- 학적 변동 신청 내역 조회 -->
@@ -353,6 +427,40 @@
 		#{reqType},#{reqReason},#{memberNo}, NULL)
 			
 	</insert>
-
+	
+	
+	<update id="changeProfile">
+		UPDATE MEMBER
+		SET MEMBER_PROFILE = #{memberProfile}
+		WHERE MEMBER_NO = #{memberNo}
+	
+	</update>
+	
+	
+	<update id="deleteProfile">
+		UPDATE MEMBER
+		SET MEMBER_PROFILE = null
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateInfo">
+		UPDATE MEMBER
+		SET MEMBER_EMAIL = #{memberEmail}
+		,MEMBER_ADDR = #{memberAddr}
+		,MEMBER_PHONE = #{memberPhone}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<select id="selectClassName" resultType="String">
+		SELECT CLASS_NM
+		FROM CLASS
+		WHERE CLASS_NO = #{string}
+	</select>
+	
+	<insert id="insertRate">
+		INSERT INTO CLASS_RATE
+		VALUES(SEQ_RATE_NO.NEXTVAL,#{content},#{like},#{classNo},#{memberNo})
+	</insert>
+	
 
 </mapper>

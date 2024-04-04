@@ -113,11 +113,20 @@ public class SubjectController {
 		return service.searchProfessor(deptCode);
 	}
 	
+	// 실존하는 담당교수인지 체크
+	@GetMapping("/checkProfessor")
+	@ResponseBody
+	public int professorCheck(@RequestParam String professor, @RequestParam String deptCode) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("deptCode", deptCode);
+		paramMap.put("professor", professor);
+		return service.professorCheck(paramMap);
+	}
+	
 	// 강의 등록 시 교수 강의시간 체크
 	@PostMapping(value = "/timeCheck", produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public int timeCheck(@RequestBody Map<String, Object> map) {
-		//System.out.println(map);
 		return service.timeCheck(map);
 	}
 	
@@ -126,6 +135,13 @@ public class SubjectController {
 	@ResponseBody
 	public int deleteSubject(@RequestBody int classNo) {
 		return service.deleteSubject(classNo);
+	}
+	
+	// 시간표 조회
+	@PostMapping(value = "/timeTable", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Subject> professorTimeTable(@RequestBody String memberNo){
+		return service.professorTimeTable(memberNo);
 	}
 
 

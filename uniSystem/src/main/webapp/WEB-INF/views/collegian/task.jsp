@@ -51,7 +51,7 @@
 
 						<c:choose>
 							<c:when test="${empty map.taskList}">
-								<td colspan='7'>제출할 과제 목록이 없습니다.</td>
+								<td colspan='11'>제출할 과제 목록이 없습니다.</td>
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${map.taskList}" var="ta">
@@ -69,7 +69,7 @@
 										</c:if>
 										<td>${ta.classPoint}</td>
 										<td>${ta.memberName}</td>
-										<td><a>${ta.taskRoute}</a></td>
+										<td><a href="${ta.taskRoute}">${ta.className} 과제</a></td>
 										<td>
 										<button onclick= submitTask(this)>
 										<c:choose>
@@ -121,7 +121,9 @@
 
 				</div>
 			</div>
-			
+
+			</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 	</main>
 
     <!-- 모달 -->

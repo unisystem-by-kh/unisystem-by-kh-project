@@ -185,7 +185,7 @@ public class ProfessorServiceImpl implements ProfessorService{
 			
 			if(result == uploadList.size()) {
 				
-				System.out.println(uploadList.size()); // 확인용
+//				System.out.println(uploadList.size()); // 확인용
 				for(int i = 0; i < uploadList.size(); i++) {
 					
 					// 파일로 변환

@@ -112,8 +112,12 @@
                 </div>
             </div>
         </div>
+
+        </div>
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
     <script src="/resources/js/collegian/nav.js"></script>
+    <script src="/resources/js/collegian/change.js"></script>
 
 
 

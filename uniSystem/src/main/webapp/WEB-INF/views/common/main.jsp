@@ -41,7 +41,7 @@
                     </c:if>
                     
                     <div class="info-area">
-                        <div class="neon-sign"><a href="#" id="neon">${loginMember.memberName} 학생</a></div>
+                        <div class="neon-sign"><a href="/collegian/info" id="neon">${loginMember.memberName} 학생</a></div>
                         <div>학번 : ${loginMember.memberNo}</div>
                         <div>${loginMember.memberEmail}</div>
 
@@ -145,7 +145,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[0].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[0].fileList}">
                                 <img src="${board[0].fileList[0].boardFilePath}${board[0].fileList[0].boardFileRename}">
@@ -158,7 +158,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[1].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[1].fileList}">
                                 <img src="${board[1].fileList[0].boardFilePath}${board[1].fileList[0].boardFileRename}">
@@ -171,7 +171,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[2].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[2].fileList}">
                                 <img src="${board[2].fileList[0].boardFilePath}${board[2].fileList[0].boardFileRename}">
@@ -184,7 +184,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[3].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[3].fileList}">
                                 <img src="${board[3].fileList[0].boardFilePath}${board[3].fileList[0].boardFileRename}">
@@ -197,7 +197,7 @@
                         </div>
                         <div>
                             <c:if test="${empty board[4].fileList}">
-                                <img src="/resources/images/noimages.gif">
+                                <img src="/resources/images/noimage.gif">
                             </c:if>
                             <c:if test="${!empty board[4].fileList}">
                                 <img src="${board[4].fileList[0].boardFilePath}${board[4].fileList[0].boardFileRename}">
@@ -211,7 +211,97 @@
 
             <%-- 시간표 영역 --%>
             <div class="timeArea">
-                시간표 넣어주세욥
+                <div class="time-head">
+                    <h1>시간표</h1>
+                </div>
+                <div class="schedule-area">
+                    <table class="schedule" id="table">
+                        <thead>
+                            <tr>
+                                <th>교시</th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="i" begin='1' end='8'>
+                                    <tr>
+                                        <td>${i}교시</td>
+
+                                        <td>
+                                            <c:forEach items="${myClassList}" var="myC" varStatus="st">
+                                            
+                                                <c:if test="${fn:contains(myC.classDay,'월')}">
+
+                                                    <c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+                                                        ${myC.className}
+                                                    </c:if>
+                                                    
+                                                </c:if>
+
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            <c:forEach items="${myClassList}" var="myC" varStatus="st">
+                                            
+                                                <c:if test="${fn:contains(myC.classDay,'화')}">
+
+                                                    <c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+                                                        ${myC.className}
+                                                    </c:if>
+
+                                                </c:if>
+
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            <c:forEach items="${myClassList}" var="myC" varStatus="st">
+                                            
+                                                <c:if test="${fn:contains(myC.classDay,'수')}">
+
+                                                    <c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+                                                        ${myC.className}
+                                                    </c:if>
+
+                                                </c:if>
+
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            <c:forEach items="${myClassList}" var="myC" varStatus="st">
+                                            
+                                                <c:if test="${fn:contains(myC.classDay,'목')}">
+
+                                                    <c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+                                                        ${myC.className}
+                                                    </c:if>
+
+                                                </c:if>
+
+                                            </c:forEach>
+                                        </td>
+                                        <td>
+                                            <c:forEach items="${myClassList}" var="myC" varStatus="st">
+                                            
+                                                <c:if test="${fn:contains(myC.classDay,'금')}">
+
+                                                    <c:if test="${myC.classStart <= i && myC.classEnd >= i}" >
+                                                        ${myC.className}
+                                                    </c:if>
+
+                                                </c:if>
+
+                                            </c:forEach>
+                                        </td>
+                                        
+                                    </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

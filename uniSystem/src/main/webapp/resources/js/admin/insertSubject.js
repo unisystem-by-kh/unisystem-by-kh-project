@@ -26,7 +26,6 @@ professor.addEventListener("focus",  () =>{
         })
         .then( resp => resp.json())
         .then( memberList => {
-            console.log(memberList);
 
             if(memberList.length != 0){
 
@@ -40,8 +39,10 @@ professor.addEventListener("focus",  () =>{
                     const b = document.createElement("b");
                     const span = document.createElement("span");
 
-                    b.setAttribute("onclick", "setting(event)");
+                    b.setAttribute("memberNo", mem.memberNo);
+                    b.setAttribute("onclick", `setting(event)`);
                     b.innerHTML = mem.memberName 
+                    
 
                     span.innerHTML = ` - ${mem.memberNo}`;
                     li.append(b,span);
@@ -62,10 +63,14 @@ professor.addEventListener("focus",  () =>{
 
 })
 
+let saveMemberNo;
+
 function setting(event) {
     event.preventDefault();
+
     const clickedElement = event.target;
-    
+    saveMemberNo = clickedElement.getAttribute("memberNo");
+
     if (clickedElement.tagName === "B") {
         const clickedValue = clickedElement.innerText;
         
@@ -89,18 +94,142 @@ if(xBtn != null){
     })
 }
 
+document.addEventListener("click", function(e) {
+    // 클릭된 요소가 결과 영역 외부에 있으면 결과 영역을 숨깁니다.
+    if (!resultSet1.contains(e.target) && !professor.contains(e.target)) {
+        resultSet.style.display = "none";
+        xBtn.style.display = "none";
+    }
+});
+
+// function removeDiv(e, rs){
+//     console.log(rs);
+//     if (!resultSet1.contains(rs) && !professor.contains(e.target)) {
+//         resultSet.style.display = "none";
+//         xBtn.style.display = "none";
+//     }
+// }
+
+// 포커스 아웃 시 검색결과창 닫기
+// professor.addEventListener("focusout", (e)=>{
+//     removeDiv(e.target, resultSet1);
+// })
+
+// 담당 교수 change 시 존재하는 담당교수 인지 확인
+professor.addEventListener("change", ()=>{
+
+    if(resultSet.style.display != "none"){
+
+        resultSet.style.display = "none";
+        xBtn.style.display = "none";
+        resultSet1.style.display = "none";
+    }
+
+    if(professor.value.trim().length == 0){
+        swal({
+            title : "담당 교수님을 입력해주세요.",
+            icon  : "warning",
+            closeOnClickOutside : false
+        }).then(function(){
+            professor.value = "";
+            professor.focus();
+        });
+    }
+
+    fetch("/staff/checkProfessor?deptCode=" + deptName.value + "&professor=" + professor.value)
+    .then( resp => resp.text() )
+    .then( result => {
+
+        if(result == 0){
+            swal({
+                title : "담당 교수님을 확인해주세요.",
+                text : "해당 교수님의 이름으로 등록된 교수님은 없습니다.",
+                icon  : "warning",
+                closeOnClickOutside : false
+            }).then(function(){
+                professor.value = "";
+                professor.focus();
+            });
+        }
+    })
+    .catch(e => console.log(e));
+
+})
+
 
 /* 강의 시간 체크 교수는 맨 위에 선언되어있음 professor */
 const checkTime = document.getElementById("checkTime"); // 시간체크 버튼
 const classDay = document.getElementById("classDay"); // 요일
 const classStart = document.getElementById("classStart"); // 시작교시
 const classEnd = document.getElementById("classEnd"); // 마치는교시
+const timetable = document.querySelector(".timetable"); // 시간표
 let check = false;
 let savedClassStart;
 let savedClassEnd;
 
-checkTime.addEventListener("click", () =>{
+// 비동기로 불러온 해당 교수의 수업 정보를 시간표에 추가하는 함수
+function addClassToTimetable(classDay, classStart, classEnd, className) {
+    
+    // 교시가 시작하는 행과 끝나는 행을 계산
+    const startRow = classStart;
+    const endRow = classEnd;
+    
+    // 교시가 요일의 몇 번째 열에 해당하는지 인덱스를 가져옴
+    const dayIndex = getDayIndex(classDay);
+    
+    // 시작 행부터 끝 행까지 반복하여 시간표에 수업 이름을 추가
+    for (let i = startRow; i <= endRow; i++) {
+        const row = timetable.querySelector(`tbody tr:nth-child(${i})`); // 해당 교시의 행
+        const cell = row.querySelector(`td:nth-child(${dayIndex})`); // 해당 요일의 셀
+        cell.textContent = className; // 수업 이름을 셀에 표시
+       
+    }
+}
 
+// 교시가 시간표의 몇 번째 요일에 해당하는지 인덱스를 반환하는 함수
+function getDayIndex(day) {
+    switch (day) {
+        case "월":
+            return 2;
+        case "화":
+            return 3;
+        case "수":
+            return 4;
+        case "목":
+            return 5;
+        case "금":
+            return 6;
+        default:
+            return -1; // 잘못된 입력이면 -1 반환
+    }
+}
+
+// 교수의 수업 리스트(classList)를 받아서 시간표에 추가하는 함수
+function displayClassSchedule(classList) {
+    classList.forEach(classInfo => {
+        const { classDay, classStart, classEnd, className } = classInfo;
+        addClassToTimetable(classDay, classStart, classEnd, className);
+    });
+}
+
+// 이전 내용을 삭제하기 위한 코드 추가
+const clearTimetable = () => {
+    const table = document.querySelector(".timetable>table");
+    const rowList = table.rows;
+
+    for (let i = 1; i < rowList.length; i++) { // thead 부분을 제외하기 위해 1부터 시작
+        const row = rowList[i];
+        const tdsNum = row.childElementCount; // 아래 for문에서 사용하기 위해 row 하위에 존재하는 td의 갯수를 구합니다.
+
+        for (let j = 2; j <= tdsNum; j++) { // 첫번째 td부분을 제외하기 위해서 2부터 시작
+            const cell = row.querySelector(`td:nth-child(${j})`);
+            cell.textContent = "";
+        }
+    }
+};
+
+checkTime.addEventListener("click", () =>{
+    
     if(professor.value.trim().length == 0){
 
         swal({
@@ -110,12 +239,39 @@ checkTime.addEventListener("click", () =>{
             button : "확인",
             closeOnClickOutside : false
         }).then(()=>{
-            // 알림창 이후 실행 할 코드 (있을때만 작성)
+            professor.focus();
+            professor.value = "";
         });
         
-        
         return;
+
     }
+
+    if(timetable != null){ // 교과목 등록일 때 만 사용하게 조건 걸어둠
+
+        // 교수의 수업 리스트를 가져오는 API 호출
+        fetch("/staff/timeTable",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : saveMemberNo
+        })
+        .then( resp => resp.json())
+        .then( classList => {
+
+            if(classList.length > 0){
+                clearTimetable(); // 빈 테이블로 만드는 함수 호출 
+                // 시간표에 수업 추가
+                timetable.style.display = "block";
+                displayClassSchedule(classList);
+            }else{
+                timetable.style.display = "none";
+            }
+                
+        })
+        .catch( e=> console.log(e))
+
+    }
+
 
     if(classStart.value.trim().length == 0){
 
@@ -138,6 +294,38 @@ checkTime.addEventListener("click", () =>{
         swal({
             title : "시간 체크 불가.",
             text : "마치는 교시를 입력해주세요.",
+            icon  : "warning",
+            button : "확인",
+            closeOnClickOutside : false
+        }).then(()=>{
+            classEnd.value = "";
+            classEnd.focus();
+        });
+
+        return;
+    }
+
+    const regEx = /[1-8]/;
+
+    if(!regEx.test(classStart.value)){
+        swal({
+            title : "시간 체크 불가.",
+            text : "1 ~ 8교시만 존재합니다.",
+            icon  : "warning",
+            button : "확인",
+            closeOnClickOutside : false
+        }).then(()=>{
+            classStart.value = "";
+            classStart.focus();
+        });
+
+        return;
+    }
+
+    if(!regEx.test(classEnd.value)){
+        swal({
+            title : "시간 체크 불가.",
+            text : "1 ~ 8교시만 존재합니다.",
             icon  : "warning",
             button : "확인",
             closeOnClickOutside : false
@@ -227,6 +415,15 @@ const classMax = document.getElementById("classMax");
 const grade = document.getElementById("grade");
 const semester = document.getElementById("semester");
 
+className.addEventListener("focus", ()=>{
+    if(resultSet.style.display != "none"){
+
+        resultSet.style.display = "none";
+        xBtn.style.display = "none";
+        resultSet1.style.display = "none";
+    }
+})
+
 /* form태그 제출 시 */
 document.getElementById("insertFrm").addEventListener("submit", e=>{
 
@@ -238,6 +435,9 @@ document.getElementById("insertFrm").addEventListener("submit", e=>{
             icon  : "warning",
             button : "확인",
             closeOnClickOutside : false
+        }).then(()=>{
+            professor.value = "";
+            professor.focus();
         });
 
         e.preventDefault();
@@ -389,3 +589,10 @@ document.getElementById("insertFrm").addEventListener("submit", e=>{
 
 })
 
+// 초기화 버튼 클릭 시 시간표 숨김
+const resetBtn = document.querySelector(".btn-area>button:nth-child(1)");
+if(resetBtn != null){
+    resetBtn.addEventListener("click", ()=>{
+        timetable.style.display = "none";
+    })
+}

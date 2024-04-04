@@ -69,7 +69,7 @@
    	<beans:bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/collegian/html/" />
 		<beans:property name="suffix" value=".html" />
-		<beans:property name="templateMode" value="HTML5" />
+		<beans:property name="templateMode" value="HTML" />
 		<beans:property name="characterEncoding" value="UTF-8" />
 		<beans:property name="cacheable" value="false" />
 		<beans:property name="order" value="1"/>

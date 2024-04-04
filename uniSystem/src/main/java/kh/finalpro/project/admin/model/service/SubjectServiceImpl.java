@@ -128,6 +128,18 @@ public class SubjectServiceImpl implements SubjectService{
 	public int deleteSubject(int classNo) {
 		return dao.deleteSubject(classNo);
 	}
+	
+	// 담당 교수 체크
+	@Override
+	public int professorCheck(Map<String, Object> paramMap) {
+		return dao.professorCheck(paramMap);
+	}
+	
+	// 교수 시간표 조회
+	@Override
+	public List<Subject> professorTimeTable(String memberNo) {
+		return dao.professorTimeTable(memberNo);
+	}
 
 
 }

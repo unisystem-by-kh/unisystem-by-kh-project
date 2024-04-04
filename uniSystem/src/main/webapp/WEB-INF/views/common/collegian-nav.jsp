@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
 	<div class="stu-nav">
             <ul>
@@ -21,13 +22,13 @@
                     <ul>
                         <a href="/collegian/certificate/1"><li>- 학적 증명서<img src="/resources/images/collegian/icons8-card1-50.png" style="width: 25px;"></li></a>
                         <a href="/collegian/certificate/2"><li>- 성적 증명서<img src="/resources/images/collegian/icons8-card2-50.png" style="width: 25px;"></li></a>
-                        <a href="/collegian/certificate/3"><li>- 등록금 납부 증명서<img src="/resources/images/collegian/icons8-card3-48.png" style="width: 25px;"></li></a>
+                        <%-- <a href="/collegian/certificate/3"><li>- 등록금 납부 증명서<img src="/resources/images/collegian/icons8-card3-48.png" style="width: 25px;"></li></a> --%>
                         <a href="/collegian/certificate/4"><li>- 학생증<img src="/resources/images/collegian/icons8-card4-80.png" style="width: 25px;"></li></a>
                     </ul>
                 </li>
                 <li>내 정보
                     <ul>
-                        <a href="#"><li>- 개인 정보 수정<img src="/resources/images/collegian/icons8-man-32.png" style="width: 25px;"></li></a>
+                        <a href="/collegian/info"><li>- 개인 정보 수정<img src="/resources/images/collegian/icons8-man-32.png" style="width: 25px;"></li></a>
                         <a href="/collegian/change"><li>- 학적 변동 신청<img src="/resources/images/collegian/icons8-study-50.png" style="width: 25px;"></li></a>
                         <a href="/collegian/score"><li>- 학점 조회<img src="/resources/images/collegian/icons8-score-50.png" style="width: 25px;"></li></a>
                     </ul>

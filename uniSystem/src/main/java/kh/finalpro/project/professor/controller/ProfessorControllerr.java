@@ -133,7 +133,7 @@ public class ProfessorControllerr {
         cell = row.createCell(10);
         cell.setCellValue("학적상태");
         
-		System.out.println("paramMap ::: "+paramMap);
+//		System.out.println("paramMap ::: "+paramMap);
 
 	    // 검색된 결과만을 가져오도록 수정
 	    Map<String, Object> map = null;
@@ -317,6 +317,7 @@ public class ProfessorControllerr {
 			, HttpSession session
 			, @RequestBody List<Task> insertTask)throws IllegalStateException, IOException {
 		
+		//System.out.println(insertTask);
 		
 		int result = service.insertTask(loginMember, insertTask);
 		String message;

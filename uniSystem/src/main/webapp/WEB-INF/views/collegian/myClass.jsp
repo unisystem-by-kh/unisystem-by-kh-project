@@ -31,35 +31,46 @@
 	        <div class="stu-container">
             <div class="stu-header">
                 <h2>수강 신청/변경</h2>
+                <div class="refresh-area"><button onclick="refresh()"><img src="/resources/images/collegian/Animation.gif"></button></div>
             </div>
-
             <div class="search-area">
                 <form action="">
                     <div class="select">
                         <select name="major" id="">
-                            <option value="">컴퓨터과학과</option>
-                            <option value="">전체</option>
+                            <c:forEach items="${department}" var="d">
+                                
+                                <c:if test="${d.departmentNo == loginMember.departmentNo}" >
+                                    <option value="${d.departmentNo}" selected>${d.departmentName}</option>
+                                </c:if>
+
+                                <c:if test="${d.departmentNo != loginMember.departmentNo}" >
+                                    <option value="${d.departmentNo}">${d.departmentName}</option>
+                                </c:if>
+                            </c:forEach>
+                            <option value=0>전체</option>
                         </select>
                     </div>
                      <div class="select">
                     <select name="grade" id="">
-                        <option value="">1학년</option>
-                        <option value="">2학년</option>
-                        <option value="">전체</option>
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4">4학년</option>
+                        <option value="0">전체</option>
                     </select>
                     </div>
                     <div class="select">
                     <select name="step" id="">
-                        <option value="">1학기</option>
-                        <option value="">2학기</option>
-                        <option value="">전체</option>
+                        <option value="1">1학기</option>
+                        <option value="2">2학기</option>
+                        <option value="0">전체</option>
                     </select>
                     </div>
                      <div class="select">
                     <select name="type" id="">
-                        <option value="">전체</option>
-                        <option value="">전공</option>
-                        <option value="">교양</option>
+                        <option value="0">전체</option>
+                        <option value="3">전공</option>
+                        <option value="2">교양</option>
                     </select>
                     </div>
                     <label for="" class="query-label">
@@ -69,22 +80,25 @@
                 </form>
             </div>
 
+
             <div class="stu-board">
                 <table>
-                    <tr>
-                        <th>No.</th>
-                        <th>학과명</th>
-                        <th>학년</th>
-                        <th>학기</th>
-                        <th>과목명</th>
-                        <th>분류</th>
-                        <th>학점</th>
-                        <th>신청 여부</th>
-                        <th>강의 시간</th>
-                        <th>수강 정원</th>
-                        <th>신청 인원</th>
-                    </tr>
-
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>학과명</th>
+                            <th>학년</th>
+                            <th>학기</th>
+                            <th>과목명</th>
+                            <th>분류</th>
+                            <th>학점</th>
+                            <th>신청 여부</th>
+                            <th>강의 시간</th>
+                            <th>수강 정원</th>
+                            <th>신청 인원</th>
+                        </tr>
+                    <thead>
+                    <tbody>
                     <c:choose>
                         <c:when test="${empty lecture}">
                             <tr>
@@ -121,20 +135,10 @@
                                 </c:forEach>
                         </c:otherwise>
                     </c:choose>
+                    </tbody>
                     
                 </table>
 
-                <%-- <div class="pagination-area">
-                    <div class="pagination">
-                        <a href="#">&laquo;</a>
-                        <a href="#">1</a>
-                        <a href="#" class="active">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">&raquo;</a>
-                    </div>
-                </div> --%>
 
             </div>
             <div class="stu-header ex1">
@@ -188,7 +192,7 @@
                     </c:choose>
                     
                 </table>
-                <div id="count-area">총 이수학점 : </div>
+                <div id="count-area">총 이수학점 : <span><span></div>
              
                 <button id="class-btn" type="button">전체 신청 하기</button>
 
@@ -199,11 +203,13 @@
 	 	
 	 	
 
-        
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     </main>
 
     <script>
         const memberNo = '${loginMember.memberNo}';
+		let memberGrade2 = "${loginMember.memberGrade}";
+		let memberTerm2 = "${loginMember.memberTerm}";
     </script>
 
 

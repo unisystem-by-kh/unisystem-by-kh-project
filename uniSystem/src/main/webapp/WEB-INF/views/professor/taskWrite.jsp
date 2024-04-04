@@ -23,7 +23,7 @@
             <%-- ${map.taskList} --%>
             <%-- ${fn:length(map.taskList)} --%>
             <%-- <hr> --%>
-            <%-- ${map.classList} --%>
+            <%-- ${map.classList.size()} --%>
         </div>
 
         <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -54,12 +54,11 @@
                             <td class='grade'>0</td>
                             <td class='term'>0</td>
                             <td>
-                                <select name="dept">
+                                <select name="dept" id="dept">
                                     <option value="-1" disabled selected>과목을 선택하세요.</option>
                                     <c:set var="index" value="0"/>
                                     <c:forEach items="${map.classList}" var="item">
-                                        <option value="${index}" >${item.className}</option>
-                                        ${index = index+1}
+                                        <option value="${item.classNo}" >${item.className}</option>
                                     </c:forEach>
                                 </select>
                             </td>
@@ -90,7 +89,7 @@
             <table class="tesk-table">
                 <thead>
                     <tr>
-                        <th>No.</th>
+                        <th>학년</th>
                         <th>학기</th>
                         <th>과목명</th>
                         <th>분류</th>
@@ -101,6 +100,7 @@
                 </thead>
                 <tbody>
 
+                ${map.taskList}
                     
                     <c:if test="${fn:length(map.taskList) != 0}" >
                         <c:forEach items="${map.taskList}" var="taskList">
@@ -151,6 +151,11 @@
         const classGrade = new Array();
         <c:forEach items="${map.classList}" var="item">
             classGrade.push("${item.classGrade}");
+        </c:forEach>
+
+        const classNo = new Array();
+        <c:forEach items="${map.classList}" var="item">
+            classNo.push("${item.classNo}");
         </c:forEach>
 
     </script>

@@ -146,7 +146,6 @@ public class BoardDAO {
 	 * @return boardNo
 	 */
 	public int inquiryBoardWrite(Board board) {
-		System.out.println(board);
 		int result = sqlSession.insert("boardMapper.inquiryBoardWrite", board);
 		
 		if(result > 0) {
@@ -185,7 +184,7 @@ public class BoardDAO {
 	 * @return
 	 */
 	public int inquiryBoardDelete(int boardNo) {
-		System.out.println(boardNo);
+
 		return sqlSession.update("boardMapper.inquiryBoardDelete", boardNo);
 	}
 
@@ -254,8 +253,34 @@ public class BoardDAO {
 	 * @return
 	 */
 	public int noticeBoardFile(List<BoardFile> uploadList) {
-		return sqlSession.insert("boardMapper.insertFileList", uploadList);
+		return sqlSession.insert("boardMapper.noticeBoardFile", uploadList);
 	}
+	
+	
+	/** 공지사항 수정 
+	 * @param board
+	 * @return
+	 */
+	public int noticeBoardUpdate(Board board) {
+		 return sqlSession.update("boardMapper.updateNoticeBoardList", board);
+	}
+	
+	
+	public int noticeFileDelete(Map<String, Object> deleteMap) {
+		return sqlSession.delete("boardMapper.freeBoardDelete", deleteMap);
+	}
+	
+	public int noticeBoardFileUpdate(BoardFile img) {
+		 return sqlSession.update("boardMapper.noticeFileUpdate", img);
+	}
+		 
+	 public int noticeBoardDelete(int boardNo) {
+				
+		return sqlSession.delete("boardMapper.noticeBoardDelete", boardNo);
+
+	}
+	
+	
 
 	/** 1:1문의 비밀번호 확인
 	 * @param map
@@ -310,7 +335,6 @@ public class BoardDAO {
 	 * @return 
 	 */
 	public int freeBoardUpdate(Board board) {
-		System.out.println(board);
 		return sqlSession.update("boardMapper.updateFreeBoardList", board);
 	}
 
@@ -334,6 +358,14 @@ public class BoardDAO {
 	public List<Board> selectMainBoard() {
 		return sqlSession.selectList("boardMapper.selectMainBoard");
 	}
+
+	
+
+	
+
+	
+
+	
 	
 
 	

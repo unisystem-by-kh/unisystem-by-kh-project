@@ -128,5 +128,21 @@ public class SubjectDAO {
 		return sqlSession.delete("subjectMapper.deleteSubject", classNo);
 	}
 
+	/** 담당 교수 확인 DAO
+	 * @param paramMap
+	 * @return result
+	 */
+	public int professorCheck(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("subjectMapper.professorCheck", paramMap);
+	}
+
+	/** 교수 시간표 조회 DAO
+	 * @param memberNo
+	 * @return classList
+	 */
+	public List<Subject> professorTimeTable(String memberNo) {
+		return sqlSession.selectList("subjectMapper.professorTimeTable", memberNo);
+	}
+
 
 }

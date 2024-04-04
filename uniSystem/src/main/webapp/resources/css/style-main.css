@@ -2,7 +2,7 @@
 @font-face {
 	font-family: 'Pretendard-Regular';
 	src:
-		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff');
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
 		format('woff');
 	font-weight: 400;
 	font-style: normal;
@@ -603,15 +603,15 @@ animation-iteration-count: infinite;
     padding: 10px;
 }
 /* 시간표영역 */
+
 .timeArea{
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 
     width: 700px;
     height: 300px;
 
-    background-color: aqua;
     margin-top: -207px;
     margin-bottom: -23px;
 
@@ -639,6 +639,95 @@ animation-iteration-count: infinite;
 .img-title a:hover{
     color: gray;
 }
+
+/* 시간표 테이블*/
+
+.timeArea table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.timeArea th, td {
+	padding: 6px 6px;
+	text-align: center;
+}
+
+.timeArea th {
+	border-right: 1px solid #c6c9cc;
+	border-bottom: 1px solid #c6c9cc;
+	background: #42444e;
+	color: #fff;
+}
+
+.timeArea tr:first-child th:first-child {
+	border-top-left-radius: 6px;
+}
+
+.timeArea tr:first-child th:last-child {
+	border-top-right-radius: 6px;
+}
+
+.timeArea td {
+	border-right: 1px solid #c6c9cc;
+	text-align: center;
+}
+
+.timeArea td:first-child {
+	border-left: 1px solid #c6c9cc;
+}
+
+tr:nth-child(even) td {
+	background: #eaeaed;
+}
+
+.timeArea tr:last-child td:first-child {
+	border-bottom-left-radius: 6px;
+}
+
+.timeArea tr:last-child td:last-child {
+	border-bottom-right-radius: 6px;
+}
+
+.timeArea tr:last-child td {
+	border-bottom: 1px solid #c6c9cc;
+}
+.schedule-area {
+	display: flex;
+	justify-content: center;
+    width: 100%;
+    height: 80%;
+    padding: 0px 10px;
+    padding-bottom: 5px;
+}
+
+.schedule {
+	width: 100%;
+    font-size: 11px;
+}
+
+.schedule th {
+	margin: 0;
+	text-align: center;
+	background: #006600;
+	border-right: 1px solid #c6c9cc;
+	font-size: 11px;
+	font-weight: lighter;
+}
+
+.schedule td {
+	text-align: center;
+	width: 18%;
+}
+
+.schedule tr td:nth-child(1) {
+	width: 10%;
+}
+
+.time-head{
+    height: 20%;
+    padding: 10px;
+}
+
 
 
 
@@ -698,11 +787,12 @@ footer span{
 .chatBtn{
     position: sticky;
     left: 100%;
-    bottom: 20px;
-    background: none;
+    bottom: 19%;
     border: 0;
+    background: none;
     cursor: pointer;
     margin-right: 10px;
+
 }
 
 .chatBtn>img{
@@ -720,7 +810,7 @@ footer span{
 .modal {
     display: none; /* Hide modal by default */
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
@@ -869,3 +959,5 @@ footer span{
 #quickMenu-easy > a:hover{
     color: rgb(130, 203, 196);
 }
+
+

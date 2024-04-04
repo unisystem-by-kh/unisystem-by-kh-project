@@ -33,14 +33,14 @@
 					<h2>시간표 조회</h2>
 				</div>
 
-				<div class="search-area">
+				<%-- <div class="search-area">
 					<form action="">
-						<span>학과</span> <input type="text" value="컴퓨터과학과" readonly>
+						<span>학과</span> <input type="text" value="${loginMember.departmentName}" readonly>
 
-						<span>학번</span> <input type="text" value="201123421" readonly>
+						<span>학번</span> <input type="text" value="${loginMember.memberNo}" readonly>
 
-						<span>성명</span> <input type="text" value="차준형" readonly> 
-						<%--  <div class="select">
+						<span>성명</span> <input type="text" value="${loginMember.memberName}" readonly> 
+						<div class="select">
 						<select	name="grade" id="">
 							<option value="">1학년</option>
 							<option value="">2학년</option>
@@ -54,15 +54,12 @@
 							<option value="">2학기</option>
 							<option value="">전체</option>
 						</select>
-						</div> --%>
+						</div>
 
 					</form>
-				</div>
+				</div> --%>
 
 				<div class="stu-board">
-					<div class="schedule-btn-area">
-						<button id="schedule-btn">출력</button>
-					</div>
 					<div class="schedule-area">
 						<table class="schedule" id="table">
 							<thead>
@@ -77,9 +74,8 @@
 							</thead>
 							<tbody>
 
-							    <c:set var = "str" value = "Hello World!"/>
 
-							<c:forEach var="i" begin='1' end='6'>
+							<c:forEach var="i" begin='1' end='8'>
 									<tr>
 										<td>${i}교시</td>
 
@@ -156,7 +152,9 @@
 					</div>
 				</div>
 			</div>
-			
+
+		</div>	
+			<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
 	<script src="/resources/js/collegian/nav.js"></script>
 

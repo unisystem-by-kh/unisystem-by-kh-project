@@ -351,12 +351,35 @@
 	
 	<!-- 등록된 과제 조회 -->
 	<select id="selectTaskList" resultMap="task_rm">
-		SELECT TASK_NO, T.CLASS_NO, CLASS_POINT, FILE_NAME, TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, CLASS_NM, CLASS_TERM, CLASS_GRADE
+		<!-- SELECT 
+			TASK_NO, 
+			T.CLASS_NO, 
+			CLASS_POINT, 
+			FILE_NAME, 
+			TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE, 
+			CLASS_NM, 
+			CLASS_TERM, 
+			CLASS_GRADE
 		FROM TASK T
 		JOIN CLASS C ON(T.CLASS_NO = C.CLASS_NO)
 		JOIN FILEZIP USING(TASK_NO)
 		WHERE FKIND_NO = 5
-		AND T.MEMBER_NO = #{memberNo}
+		AND T.MEMBER_NO = #{memberNo} -->
+		
+		SELECT 
+		T.TASK_NO,
+		 C.CLASS_NO,
+		 CLASS_POINT,
+		 FILE_NAME,
+		 TO_CHAR(TASK_DATE, 'YYYY-MM-DD') AS TASK_DATE,
+        CLASS_NM,
+        CLASS_TERM,
+        CLASS_GRADE
+		FROM CLASS C
+		JOIN TASK T ON (T.CLASS_NO = C.CLASS_NO)
+		LEFT JOIN FILEZIP F ON (T.TASK_NO = F.TASK_NO)
+		WHERE FKIND_NO = 5
+		AND F.MEMBER_NO = #{memberNo}
 	</select>
 	
 	<!-- 과제 등록 페이지에서 사용하기위해 과목명, 학기, 분류(CLASS_POINT) 조회 -->
@@ -374,14 +397,22 @@
 
 	<!-- 파일테이블에 과제 파일 삽입 -->
 	<insert id="uploadTask">
-		INSERT INTO FILEZIP VALUES(
+		<!-- INSERT INTO FILEZIP VALUES(
 		SEQ_FILE_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5, 
-		#{memberNo}, #{classNo}, 
-		    (SELECT TASK_NO FROM TASK
+		#{memberNo} ,#{classNo} 
+		    ,(SELECT TASK_NO FROM TASK
 		WHERE MEMBER_NO = #{memberNo}
 		AND CLASS_NO = #{classNo}
 		AND TASK_NO NOT IN
-		    (SELECT TASK_NO FROM FILEZIP)))
+		    (SELECT TASK_NO FROM FILEZIP))) -->
+		    
+	    INSERT INTO FILEZIP VALUES(
+		SEQ_FILE_NO.NEXTVAL, #{filePath}, #{fileName}, #{fileRename}, 5, 
+		#{memberNo} 
+		    ,(SELECT TASK_NO FROM TASK
+		WHERE MEMBER_NO = #{memberNo}
+		AND CLASS_NO = #{classNo}))
+		    
 	</insert>
 	
 	<!-- 과제 목록 지우기 -->

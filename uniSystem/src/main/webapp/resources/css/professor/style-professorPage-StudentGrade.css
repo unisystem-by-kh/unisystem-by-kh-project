@@ -209,6 +209,83 @@ body{
     background-color: gray;
     color: white;
 }
+/* 교직원 전용 학생 조회 *//* 교직원 전용 학생 조회 *//* 교직원 전용 학생 조회 *//* 교직원 전용 학생 조회 *//* 교직원 전용 학생 조회 */
+/* 교직원 전용 학생 조회 */
+.grade-titleList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    cursor: default;
+}
+/* 교직원 전용 학생 조회 */
+.grade-titleList > div{
+    width: 129px;
+    height: 30px;
+
+    border: 1px solid whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.05em;
+    font-weight: bold;
+    cursor: default;
+}
+.contentList >div:nth-child(2n){
+    /* background-color: rgb(211, 240, 240); */
+    color: darkslategray;
+    cursor: default;
+}
+.contentList >div:nth-child(n):hover{
+    background-color: rgba(199, 198, 181, 0.25);
+    cursor: default;
+}
+.row-area-admin{
+    width: 1300px;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    /* margin: auto 0; */
+    margin-top: 40px;
+}
+/* 검색 영역 */
+.search-area-admin{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    width: 1300px;
+    height: 50px;
+    margin-left: 10px;
+}
+.row-area-admin > button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    width: 225px;
+    height: 40px;
+    margin: 7.5px;
+
+    border: 2px solid darkslategray;
+    border-radius: 7px;
+    background-color: white;
+    color: darkslategray;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+.row-area-admin > button:hover{
+    background-color: darkslategray;
+    color: white;
+}
+/* /* 교직원 전용 학생 조회 *//* 교직원 전용 학생 조회 *//* 교직원 전용 학생 조회 *//* 교직원 전용 학생 조회 */
+
 /* 목차 하나씩 */
 .grade-title > div{
     width: 184.5px;

@@ -77,7 +77,7 @@
 
                             <!-- 게시글 목록 조회 결과가 비어있다면 -->
                             <tr>
-                                <th colspan="6">게시글이 존재하지 않습니다.</th>
+                                <td colspan="6">게시글이 존재하지 않습니다.</td>
                             </tr>
                         </c:when>
 
@@ -85,9 +85,9 @@
                             <!-- 게시글 목록 조회 결과가 있다면 -->
                             <c:forEach var="board" items="${boardList}">
                                 <tr>
-                                    <th><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a> [${board.replyCount}] </th>
-                                    <th>${board.memberName}</th>
-                                    <th>${board.boardCDate}</th>
+                                    <td><a href="/board/${categoryNo}/${board.boardNo}?cp=${pagination.currentPage}${sp}">${board.boardTitle}</a> [${board.replyCount}] </td>
+                                    <td>${board.memberName}</td>
+                                    <td>${board.boardCDate}</td>
                                 </tr>
                             </c:forEach>
                         </c:otherwise>
@@ -135,8 +135,9 @@
                 </ul>
                 
     <%-- 글쓰기 버튼 --%>
-     <c:if test="${!empty loginMember}">
-      <a href="/board/${categoryNo}/write" id="writeBtn"> 작   성</a>
+     <c:if test="${!empty loginMember and loginMember.memberNo.startsWith('03-')}">
+     
+        <a href="/board/${categoryNo}/write" id="writeBtn"> 작   성</a>
     
     </c:if>
 
@@ -147,9 +148,12 @@
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     </main>
+    
+   
 
     <script src="/resources/js/header.js"></script>
     <script src="/resources/js/board/noticeBoard/noticeBoardList.js"></script>
 
+    
 </body>
 </html>

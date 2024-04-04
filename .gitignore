@@ -110,3 +110,9 @@ MAINFEST.MF
 *.log
 .factorypath
 settings.json
+*.jpg
+*.pptx
+*.png
+*.txt
+*.pdf
+*.msi
