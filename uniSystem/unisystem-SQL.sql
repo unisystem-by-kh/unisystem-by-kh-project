@@ -306,6 +306,105 @@ VALUES(
     '871230-1234567',
     3
 );
+-- 1번학과 학생 샘플데이터 4
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412312',
+    'pass12',
+    '십이번학생',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example10@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    1,
+    2,
+    'N',
+    '/resources/images/background/user.png',
+    '871230-1234567',
+    1
+);
+-- 1번학과 학생 샘플데이터 1
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412310',
+    'pass10',
+    '십번학생',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example10@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    2,
+    2,
+    'N',
+    '/resources/images/background/user.png',
+    '871230-1234567',
+    1
+);
+-- 1번학과 학생 샘플데이터 1
+INSERT INTO "MEMBER" (
+    "MEMBER_NO",
+    "MEMBER_PW",
+    "MEMBER_NAME",
+    "MEMBER_ADDR",
+    "MEMBER_EMAIL",
+    "MEMBER_PHONE",
+    "MEMBER_GEN",
+    "MEMBER_DATE",
+    "MEMBER_GRADE",
+    "MEMBER_TERM",
+    "MEMBER_STATUS",
+    "MEMBER_PROFILE",
+    "MEMBER_SSN",
+    "DEPARTMENT_NO"
+)
+VALUES(
+    '01-2412311',
+    'pass11',
+    '십일번학생',
+    '주소 영역 ^^^ 상세주소 영역',
+    'example10@naver.com',
+    '01043214321',
+    'M',
+    SYSDATE,
+    4,
+    1,
+    'N',
+    '/resources/images/background/user.png',
+    '871230-1234567',
+    1
+);
 --------------------------------------------------------------------------------
 -- 교수 샘플데이터
 -- 1번 학과 교수 샘플데이터 1

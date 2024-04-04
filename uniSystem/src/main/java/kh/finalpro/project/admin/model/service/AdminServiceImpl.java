@@ -21,6 +21,8 @@ import kh.finalpro.project.admin.model.dao.AdminDAO;
 import kh.finalpro.project.admin.model.dto.Admin;
 import kh.finalpro.project.admin.model.dto.Student;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Lecture;
+import kh.finalpro.project.professor.model.dto.Professor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,6 +106,86 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		return result;
+	}
+
+	
+	// 학생 성적 조회
+	@Override
+	public Map<String, Object> selectStudentGrade() {
+
+		// 현재 수강중인 학생 수 조회
+		int listCount = dao.getListCount();
+		
+//		List<Professor> studentList = dao.selectStudent();
+		
+		// 현재 수강중인 학생 리스트 조회
+		List<Member> lectureList = dao.lectureList();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+//		map.put("studentList", studentList);
+		map.put("lectureList", lectureList);
+		
+		return map;
+		
+	}
+
+	
+	// 수강 = 1학년 1학기 학생 목록 성적 조회 비동기 AJAX
+	@Override
+	public List<Member> memberListOneAndOne() {
+		return dao.memberListOneAndOne();
+	}
+	
+	// 수강 = 1학년 2학기 학생 목록 성적 조회 비동기 AJAX
+	@Override
+	public List<Member> memberListOneAndTwo() {
+		return dao.memberListOneAndTwo();
+	}
+
+	@Override
+	public List<Member> memberListTwoAndOne() {
+		return dao.memberListTwoAndOne();
+	}
+
+	@Override
+	public List<Member> memberListTwoAndTwo() {
+		return dao.memberListTwoAndTwo();
+	}
+
+	@Override
+	public List<Member> memberListThreeAndOne() {
+		return dao.memberListThreeAndOne();
+	}
+
+	@Override
+	public List<Member> memberListThreeAndTwo() {
+		return dao.memberListThreeAndTwo();
+	}
+
+	@Override
+	public List<Member> memberListFourAndOne() {
+		return dao.memberListFourAndOne();
+	}
+
+	@Override
+	public List<Member> memberListFourAndTwo() {
+		return dao.memberListFourAndTwo();
+	}
+
+	@Override
+	public List<Member> memberListNoPoint() {
+		return dao.memberListNoPoint();
+	}
+
+	@Override
+	public List<Member> memberListStatusY() {
+		return dao.memberListStatusY();
+	}
+
+	@Override
+	public List<Member> memberListAll() {
+		return dao.memberListAll();
 	}
 	
 	

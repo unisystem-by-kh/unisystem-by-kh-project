@@ -32,6 +32,32 @@ public interface AdminService {
 	// 학생 재적 변경
 	int studentUpdate(Student memberArr);
 
+	// 학생 성적 조회
+	Map<String, Object> selectStudentGrade();
+
+	// 수강 = 1학년 1학기 학생 목록 성적 조회 비동기 AJAX
+	List<Member> memberListOneAndOne();
+
+	List<Member> memberListOneAndTwo();
+
+	List<Member> memberListTwoAndOne();
+
+	List<Member> memberListTwoAndTwo();
+
+	List<Member> memberListThreeAndOne();
+
+	List<Member> memberListThreeAndTwo();
+
+	List<Member> memberListFourAndOne();
+
+	List<Member> memberListFourAndTwo();
+
+	List<Member> memberListNoPoint();
+
+	List<Member> memberListStatusY();
+
+	List<Member> memberListAll();
+
 
 
 	// 추후 수정 예정

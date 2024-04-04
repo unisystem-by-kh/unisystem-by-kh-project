@@ -27,6 +27,7 @@ import kh.finalpro.project.admin.model.dto.Admin;
 import kh.finalpro.project.admin.model.dto.Student;
 import kh.finalpro.project.admin.model.service.AdminService;
 import kh.finalpro.project.main.model.dto.Member;
+import kh.finalpro.project.professor.model.dto.Professor;
 
 @Controller
 @RequestMapping("/admin")
@@ -108,4 +109,119 @@ public class AdminController {
 		return result;
 	}
 	
+	
+	
+	// 학생 성적 조회
+	@GetMapping("/searchStudentGrade")
+	public String searchStudentGrade(
+			Model model,
+			@RequestParam Map<String, Object> paramMap
+			){
+		
+		Map<String, Object> map = null;
+		
+		if(paramMap.get("key") == null) {
+
+			map = adminService.selectStudentGrade();
+
+			model.addAttribute("map" , map);
+
+		}else { // 검색어가 있을 때 (검색 O)
+
+			// 이후 추가 예정
+//			map = adminService.searchStudentGrade(paramMap);
+
+			model.addAttribute("map" , map);
+		}
+		
+		model.addAttribute("map" , map);
+		
+		
+		return "/admin/student/searchStudentGrade";
+	}
+	
+	
+	// 수강 = 1학년 1학기 학생 목록 성적 조회 비동기 AJAX
+	@GetMapping(value="/memberListOneAndOne" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListOneAndOne(){
+		return adminService.memberListOneAndOne();
+	}
+	
+	// 수강 = 1학년 2학기 학생 목록 성적 조회 비동기 AJAX
+	@GetMapping(value="/memberListOneAndTwo" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListOneAndTwo(){
+		return adminService.memberListOneAndTwo();
+	}
+	
+	
+	@GetMapping(value="/memberListTwoAndOne" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListTwoAndOne(){
+		return adminService.memberListTwoAndOne();
+	}
+	
+	
+	@GetMapping(value="/memberListTwoAndTwo" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListTwoAndTwo(){
+		return adminService.memberListTwoAndTwo();
+	}
+	
+	
+	@GetMapping(value="/memberListThreeAndOne" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListThreeAndOne(){
+		return adminService.memberListThreeAndOne();
+	}
+	
+	
+	@GetMapping(value="/memberListThreeAndTwo" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListThreeAndTwo(){
+		return adminService.memberListThreeAndTwo();
+	}
+	
+	
+	@GetMapping(value="/memberListFourAndOne" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListFourAndOne(){
+		return adminService.memberListFourAndOne();
+	}
+	
+	
+	@GetMapping(value="/memberListFourAndTwo" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListFourAndTwo(){
+		return adminService.memberListFourAndTwo();
+	}
+	
+	@GetMapping(value="/memberListNoPoint" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListNoPoint(){
+		return adminService.memberListNoPoint();
+	}
+	
+	@GetMapping(value="/memberListStatusY" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListStatusY(){
+		return adminService.memberListStatusY();
+	}
+	
+	@GetMapping(value="/memberListAll" , produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> memberListAll(){
+		return adminService.memberListAll();
+	}
+	
+	
+	
+	
+	
 }
+
+
+
+
+
