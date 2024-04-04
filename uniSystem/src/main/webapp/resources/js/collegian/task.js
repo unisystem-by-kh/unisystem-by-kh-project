@@ -2,6 +2,21 @@
 
 const submitTask = th =>{ // 모달 창 함수
 
+    // 주어진 기한 문자열
+    const deadlineString = th.parentNode.parentNode.cells[11].innerText;
+
+    // 현재 날짜 얻기
+    const currentDate = new Date();
+
+    // 기한을 Date 객체로 변환
+    const deadlineDate = new Date(deadlineString);
+
+    // 현재 날짜가 기한을 지났는지 여부 확인
+    if (currentDate > deadlineDate) {
+        alert('기한이 이미 지났습니다.');
+        return
+    } 
+
     const modalContainer = document.getElementById("modal");
 
     const nameBox = document.querySelector('#name_box > h2' ); // 제출 과제 명 input

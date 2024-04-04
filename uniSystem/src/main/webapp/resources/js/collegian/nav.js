@@ -1,5 +1,4 @@
 
-console.log("nav.js 연결")
 
 const navList = document.querySelectorAll('.stu-nav a'); // 네비의 모든 a태그
 window.onload = function (){
@@ -34,3 +33,19 @@ if(certNo == '4'){
 }
 
 
+const selectBoxes2 = document.querySelectorAll(".search-area select");
+
+if(selectBoxes2 != null){
+
+    const gradeSelect = document.getElementsByName("grade")[0];
+    const stepSelect = document.getElementsByName("step")[0];
+
+    for (const g of gradeSelect.options) {
+        if(g.value == memberGrade2){g.selected = true;}
+    }
+
+    for (const s of stepSelect.options) {
+        if(s.value == memberTerm2){s.selected = true;}
+    }
+
+}

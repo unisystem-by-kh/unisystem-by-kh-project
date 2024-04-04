@@ -203,11 +203,13 @@
 	 	
 	 	
 
-        
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     </main>
 
     <script>
         const memberNo = '${loginMember.memberNo}';
+		let memberGrade2 = "${loginMember.memberGrade}";
+		let memberTerm2 = "${loginMember.memberTerm}";
     </script>
 
 

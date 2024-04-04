@@ -100,6 +100,7 @@
                 </thead>
                 <tbody>
 
+                ${map.taskList}
                     
                     <c:if test="${fn:length(map.taskList) != 0}" >
                         <c:forEach items="${map.taskList}" var="taskList">

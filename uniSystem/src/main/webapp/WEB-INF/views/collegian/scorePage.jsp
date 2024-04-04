@@ -105,7 +105,12 @@
             </div>
 
 			<div class="scoreCount">총 이수 학점 : <span id="count"></span>  학점 평균 : <span id="avr"></span></div>
-			
+			</div>
+
+		</div>
+
+
+			<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</main>
     <!-- 모달 -->
         <div class="modal" id="modal">
@@ -145,7 +150,10 @@
 
 	<script>
 		let scoreList = JSON.parse('${json}');
+		let memberGrade2 = "${loginMember.memberGrade}";
+		let memberTerm2 = "${loginMember.memberTerm}";
 	</script>
+		
 
     <script src="/resources/js/collegian/score.js"></script>
 	<script src="/resources/js/collegian/nav.js"></script>

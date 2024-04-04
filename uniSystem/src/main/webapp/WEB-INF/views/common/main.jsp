@@ -41,7 +41,7 @@
                     </c:if>
                     
                     <div class="info-area">
-                        <div class="neon-sign"><a href="#" id="neon">${loginMember.memberName} 학생</a></div>
+                        <div class="neon-sign"><a href="/collegian/info" id="neon">${loginMember.memberName} 학생</a></div>
                         <div>학번 : ${loginMember.memberNo}</div>
                         <div>${loginMember.memberEmail}</div>
 

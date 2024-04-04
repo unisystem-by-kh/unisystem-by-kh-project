@@ -163,6 +163,7 @@ saveBtn.addEventListener("click", ()=>{
     for(let i=0; i<dept.length; i++){
         
         const classNo = dept[i].value;
+        console.log(classNo);
         const fileName = file[i].value;
         const taskDate = currentDate[i].value;
 
