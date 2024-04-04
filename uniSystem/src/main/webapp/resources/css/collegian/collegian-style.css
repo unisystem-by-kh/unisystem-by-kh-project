@@ -275,6 +275,8 @@ tr:last-child td {
 .stu-board {
 	margin-top: 20px;
 	min-height: 200px;
+	max-height: 300px;
+	overflow: auto;
 }
 
 .select-class th {
